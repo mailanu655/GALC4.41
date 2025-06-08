@@ -1,0 +1,2007 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="transport" name="AVQ1_RADAR_CLEARANCE" nlsid="30034" interface="1"><exportitem type="transport" name="AVQ1_RADAR_CLEARANCE" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="616296046"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="AVQ1_RADAR_CLEARANCE" inactivity_time_out="14400000" initPoolSize="1" isFIFO="true" loadAtInit="false" logEnabled="false" luw_commit_on_exception="false" luw_idle_timeout="300" luw_transaction_count_threshhold="100" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="DB" tzinfo="platform">
+		<DB defid="AVQ1_RADAR_CLEARANCE"/>
+	</TransportDefinition>
+	<DBDefinition baseURL="jdbc:db2://" dbname="PMAP1GAL" dbtype="DB2" driver="com.ibm.db2.jcc.DB2Driver" host="pmap1db" id="AVQ1_RADAR_CLEARANCE" password="$()#!%SVIv2cn6l/krMYsHdiblzg==" port="60000" type="DB" userid="pmaprad2">
+	</DBDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AVQ1_Radar_Clearance_Delete_Buffer_Header" nlsid="30033" interface="1"><exportitem type="transaction" name="AVQ1_Radar_Clearance_Delete_Buffer_Header" nlsid="30033">
+
+				<TransactionDef id="AVQ1_Radar_Clearance_Delete_Buffer_Header" version="755791862" version_mismatch="pass">
+					<Transport id="AVQ1_RADAR_CLEARANCE" type="DB"/>
+					<InputMap>
+						<Variable count="1" name="OutTime" type="TIMESTAMP"/>
+					</InputMap>
+					<SQLInfo action="D">
+						<Table name="DC_RESULTS_BUFFER_HEADER_TBX" schema="RADAR"/>
+						<body/>
+						<WhereClause>
+							<qualifier>
+								<ColInfo colname="ACTUAL_TIMESTAMP" dbtype="TIMESTAMP" name="OutTime" operator="LT" relation="AND"/>
+							</qualifier>
+						</WhereClause>
+						<OrderByClause/>
+						<GroupByClause/>
+					</SQLInfo>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/AddTime" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/AddTime" nlsid="30031">
+<Trigger name="AddTime" project="Utilities" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="SubTrigger|5~2~4~1~7~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-75"/>
+						<Node id="1" type="3" x="-25" y="75"/>
+						<Node id="2" type="3" x="-25" y="225"/>
+						<Node id="4" type="3" x="150" y="25"/>
+						<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="150" y="-50"/>
+						<Node id="5" type="3" x="-25" y="0"/>
+						<Node id="7" type="3" x="-25" y="150"/>
+						<RoutedErrors value="5.1|1.1|7.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;AddDays&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;AddHours&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;AddMinutes&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;AddSeconds&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InTime&quot; options=&quot;7&quot; type=&quot;TIMESTAMP&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;OutTime&quot; options=&quot;7&quot; type=&quot;TIMESTAMP&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="strInTime" type="STRING" length="64" options="3"/>
+  <VariableInfo name="strOutTime" type="STRING" length="64" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="5">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function calculateNewDate(inTime, addDays, addHours, addMinutes, addSeconds)&#13;&#10;&#13;&#10;local y, m, d, Hr, Min, Sec = inTime:match '(%d+)-(%d+)-(%d+) (%d+):(%d+):(%d+)'&#13;&#10;&#13;&#10;return os.date(&quot;%Y-%m-%d %H:%M:%S&quot;, os.time&#13;&#10;    { year = y, month = m, day = d,&#13;&#10;      hour = Hr, min = Min, sec = Sec } + (86400*addDays)+(3600*addHours)+(60*addMinutes)+(addSeconds))&#13;&#10;&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;OutTime&quot;] = calculateNewDate(DWInput[&quot;InTime&quot;],DWInput[&quot;AddDays&quot;],DWInput[&quot;AddHours&quot;],DWInput[&quot;AddMinutes&quot;],DWInput[&quot;AddSeconds&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;AddDays&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;AddHours&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;AddMinutes&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;AddSeconds&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;InTime&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;OutTime&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="AddDays" name="AddDays"/>
+    <EventVariable logical_name="AddHours" name="AddHours"/>
+    <EventVariable logical_name="AddMinutes" name="AddMinutes"/>
+    <EventVariable logical_name="AddSeconds" name="AddSeconds"/>
+    <LocalVariable logical_name="InTime" name="strInTime"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="OutTime" name="strOutTime"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGTIME" id="5" disabled="false">
+   <Properties>
+    <Property name="fmt_option" value="Custom"/>
+    <Property name="fmt_custom" value="%Y-%m-%d %H:%M:%S"/>
+    <Property name="append_millis" value="False"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Timestamp" name="InTime"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="strInTime"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="STRING2TIME" id="7" disabled="false">
+   <Properties>
+    <Property name="fmt_option" value="Custom"/>
+    <Property name="fmt_custom" value="%Y-%m-%d %H:%M:%S"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="strOutTime"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="Timestamp" name="OutTime"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_HEADER_MORETHAN_90DAYS" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_HEADER_MORETHAN_90DAYS" nlsid="30031">
+<Trigger name="DELETE_BUFFER_HEADER_MORETHAN_90DAYS" project="AVQ1_RADAR_CLEARANCE" max_pending="1" reporting="on">
+ <Context value="Scheduled|10~3~2~6~7~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-175" y="-200"/>
+						<Node id="10" type="3" x="-175" y="-75"/>
+						<Node id="3" type="3" x="-175" y="250"/>
+						<Node id="2" type="3" x="-175" y="175"/>
+						<Node id="6" type="3" x="-25" y="100"/>
+						<Node id="7" type="3" x="-25" y="225"/>
+						<Node id="4" type="3" x="-175" y="50"/></BuildInfo>
+ <Event type="SCHEDULE"><schedule type="3">
+							<month all="true"/>
+							<day sun="true"/>
+							<occurrence all="true"/>
+							<time sec="19800"/>
+						</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="OutTime" type="TIMESTAMP" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="10">
+  <Action type="LOGMSG" id="2" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Deleted Buffer Header more than 90 days data from : $(OutTime)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Delete_Buffer_Header"/>
+    <Property name="version" value="755791862"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Could not delete Buffer Header"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="10" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="AddTime"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="AddDays" value="-90"/>
+    <ConstantVariable logical_name="AddHours" value="0"/>
+    <ConstantVariable logical_name="AddMinutes" value="0"/>
+    <ConstantVariable logical_name="AddSeconds" value="0"/>
+    <MacroVariable logical_name="InTime" name="$EVENT_TIME"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AVQ1_Radar_Clearance_Delete_Buffer_Measurement" nlsid="30033" interface="1"><exportitem type="transaction" name="AVQ1_Radar_Clearance_Delete_Buffer_Measurement" nlsid="30033">
+
+				<TransactionDef id="AVQ1_Radar_Clearance_Delete_Buffer_Measurement" version="-469509782" version_mismatch="pass">
+					<Transport id="AVQ1_RADAR_CLEARANCE" type="DB"/>
+					<InputMap>
+						<Variable count="1" name="OutTime" type="TIMESTAMP"/>
+					</InputMap>
+					<SQLInfo action="D">
+						<Table name="DC_RESULTS_BUFFER_MEASUREMENT_TBX" schema="RADAR"/>
+						<body/>
+						<WhereClause>
+							<qualifier>
+								<ColInfo colname="ACTUAL_TIMESTAMP" dbtype="TIMESTAMP" name="OutTime" operator="LT" relation="AND"/>
+							</qualifier>
+						</WhereClause>
+						<OrderByClause/>
+						<GroupByClause/>
+					</SQLInfo>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_MEASUREMENT_MORETHAN_90DAYS" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_MEASUREMENT_MORETHAN_90DAYS" nlsid="30031">
+<Trigger name="DELETE_BUFFER_MEASUREMENT_MORETHAN_90DAYS" project="AVQ1_RADAR_CLEARANCE" max_pending="1" reporting="on">
+ <Context value="Scheduled|10~3~2~6~7~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-175" y="-200"/>
+						<Node id="10" type="3" x="-175" y="-75"/>
+						<Node id="3" type="3" x="-175" y="250"/>
+						<Node id="2" type="3" x="-175" y="175"/>
+						<Node id="6" type="3" x="-25" y="100"/>
+						<Node id="7" type="3" x="-25" y="225"/>
+						<Node id="4" type="3" x="-175" y="50"/></BuildInfo>
+ <Event type="SCHEDULE"><schedule type="3">
+							<month all="true"/>
+							<day sun="true"/>
+							<occurrence all="true"/>
+							<time sec="19800"/>
+						</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="OutTime" type="TIMESTAMP" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="10">
+  <Action type="LOGMSG" id="2" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Deleted Buffer Measurement more than 90 days data from : $(OutTime)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Delete_Buffer_Measurement"/>
+    <Property name="version" value="-469509782"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Could not delete Buffer Measurement"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="10" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="AddTime"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="AddDays" value="-90"/>
+    <ConstantVariable logical_name="AddHours" value="0"/>
+    <ConstantVariable logical_name="AddMinutes" value="0"/>
+    <ConstantVariable logical_name="AddSeconds" value="0"/>
+    <MacroVariable logical_name="InTime" name="$EVENT_TIME"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="OutTime" name="OutTime"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AVQ1_RadarClearance_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AVQ1_RadarClearance_DataCollection" nlsid="30033">
+
+				<TransactionDef id="AVQ1_RadarClearance_DataCollection" version="-1076684792" version_mismatch="pass">
+					<Transport id="GALC_DataCollectionService_Execute" type="HTTP"/>
+					<InputMap>
+						<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+						<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+						<Variable count="1" length="32" name="PRODUCT_TYPE" type="STRING"/>
+						<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+						<Variable count="1" length="32" name="SN1" type="STRING"/>
+						<Variable count="1" length="32" name="STATUS1" type="STRING"/>
+						<Variable count="1" name="VALUE1" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE1" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT1" type="STRING"/>
+						<Variable count="1" name="VALUE2" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE2" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT2" type="STRING"/>
+						<Variable count="1" name="VALUE3" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE3" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT3" type="STRING"/>
+						<Variable count="1" name="VALUE4" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE4" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT4" type="STRING"/>
+						<Variable count="1" name="VALUE5" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE5" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT5" type="STRING"/>
+						<Variable count="1" name="VALUE6" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE6" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT6" type="STRING"/>
+						<Variable count="1" name="VALUE7" type="FLOAT8"/>
+						<Variable count="1" name="ANGLE7" type="FLOAT8"/>
+						<Variable count="1" length="32" name="RESULT7" type="STRING"/>
+					</InputMap>
+					<OutputMap/>
+					<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+					<Mapping outputformat="JSON">
+						<JSONInfo rawJson="ew0KICAgICAgImNvbS5ob25kYS5nYWxjLmRhdGEuRGVmYXVsdERhdGFDb250YWluZXIiIDogew0KICAgICAgIlBST0RVQ1RfSUQiOiIiLA0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9UWVBFIjoiIiwNCiAgICAgICJQUk9DRVNTX1BPSU5UX0lEIjoiIiwNCiAgICAgICJTTjEiOiIiLA0KICAgICAgIlNUQVRVUzEiOiIiLA0KICAgICAgIlZBTFVFMSI6MC4wLA0KICAgICAgIkFOR0xFMSI6MC4wLA0KICAgICAgIlJFU1VMVDEiOiIiLA0KICAgICAgIlZBTFVFMiI6MC4wLA0KICAgICAgIkFOR0xFMiI6MC4wLA0KICAgICAgIlJFU1VMVDIiOiIiLA0KICAgICAgIlZBTFVFMyI6MC4wLA0KICAgICAgIkFOR0xFMyI6MC4wLA0KICAgICAgIlJFU1VMVDMiOiIiLA0KICAgICAgIlZBTFVFNCI6MC4wLA0KICAgICAgIkFOR0xFNCI6MC4wLA0KICAgICAgIlJFU1VMVDQiOiIiLA0KICAgICAgIlZBTFVFNSI6MC4wLA0KICAgICAgIkFOR0xFNSI6MC4wLA0KICAgICAgIlJFU1VMVDUiOiIiLA0KICAgICAgIlZBTFVFNiI6MC4wLA0KICAgICAgIkFOR0xFNiI6MC4wLA0KICAgICAgIlJFU1VMVDYiOiIiLA0KICAgICAgIlZBTFVFNyI6MC4wLA0KICAgICAgIkFOR0xFNyI6MC4wLA0KICAgICAgIlJFU1VMVDciOiIiDQogICAgICAgIH0NCn0g">
+							<JSONRequest>
+								<Structure name="JSON_Object">
+									<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_TYPE" parmname="PRODUCT_TYPE" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="SN1" parmname="SN1" type="STRING"/>
+										<Parameter dwType="16" name="STATUS1" parmname="STATUS1" type="STRING"/>
+										<Parameter dwType="10" name="VALUE1" parmname="VALUE1" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE1" parmname="ANGLE1" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT1" parmname="RESULT1" type="STRING"/>
+										<Parameter dwType="10" name="VALUE2" parmname="VALUE2" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE2" parmname="ANGLE2" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT2" parmname="RESULT2" type="STRING"/>
+										<Parameter dwType="10" name="VALUE3" parmname="VALUE3" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE3" parmname="ANGLE3" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT3" parmname="RESULT3" type="STRING"/>
+										<Parameter dwType="10" name="VALUE4" parmname="VALUE4" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE4" parmname="ANGLE4" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT4" parmname="RESULT4" type="STRING"/>
+										<Parameter dwType="10" name="VALUE5" parmname="VALUE5" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE5" parmname="ANGLE5" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT5" parmname="RESULT5" type="STRING"/>
+										<Parameter dwType="10" name="VALUE6" parmname="VALUE6" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE6" parmname="ANGLE6" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT6" parmname="RESULT6" type="STRING"/>
+										<Parameter dwType="10" name="VALUE7" parmname="VALUE7" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE7" parmname="ANGLE7" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT7" parmname="RESULT7" type="STRING"/>
+									</Structure>
+								</Structure>
+							</JSONRequest>
+						</JSONInfo>
+					</Mapping>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AVQ1_Radar_Clearance_Get_Results" nlsid="30033" interface="1"><exportitem type="transaction" name="AVQ1_Radar_Clearance_Get_Results" nlsid="30033">
+
+<TransactionDef id="AVQ1_Radar_Clearance_Get_Results" version="1486387680" version_mismatch="pass">
+	<Transport id="AVQ1_RADAR_CLEARANCE" type="DB"/>
+	<InputMap/>
+	<OutputMap>
+		<Variable count="10" length="40" name="col_out_COMPONENT_ID" type="STRING"/>
+		<Variable count="10" length="255" name="col_out_PRODUCT_ID" type="STRING"/>
+		<Variable count="10" name="col_out_ACTUAL_TIMESTAMP" type="TIMESTAMP"/>
+		<Variable count="10" length="26" name="col_out_ACUTAL_TIMESTAMP_CHAR" type="STRING"/>
+		<Variable count="10" name="col_out_INSTALLED_PART_STATUS" type="INT4"/>
+		<Variable count="10" length="32" name="col_out_DEVICE_ID" type="STRING"/>
+		<Variable count="10" name="col_out_JUDGEMENT_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_JUDGEMENT_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_TRANSVERSE_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_TRANSVERSE_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_BREADTH_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_BREADTH_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_HEIGHT_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_HEIGHT_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_PITCH_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_PITCH_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_YAW_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_YAW_STATUS" type="INT4"/>
+		<Variable count="10" name="col_out_ROLL_VALUE" type="FLOAT8"/>
+		<Variable count="10" name="col_out_ROLL_STATUS" type="INT4"/>
+	</OutputMap>
+	<SQLInfo action="S" distinct="false">
+		<Table name="VW_DC_RESULTS" schema="RADAR"/>
+		<body>
+			<ColInfo colname="COMPONENT_ID" dbtype="VARCHAR" name="col_out_COMPONENT_ID" required="0" wbRawType="12"/>
+			<ColInfo colname="PRODUCT_ID" dbtype="VARCHAR" name="col_out_PRODUCT_ID" required="0" wbRawType="12"/>
+			<ColInfo colname="ACTUAL_TIMESTAMP" dbtype="TIMESTAMP" name="col_out_ACTUAL_TIMESTAMP" required="0" wbRawType="93"/>
+			<ColInfo colname="ACUTAL_TIMESTAMP_CHAR" dbtype="CHAR" name="col_out_ACUTAL_TIMESTAMP_CHAR" required="0" wbRawType="1"/>
+			<ColInfo colname="INSTALLED_PART_STATUS" dbtype="INTEGER" name="col_out_INSTALLED_PART_STATUS" required="0" wbRawType="4"/>
+			<ColInfo colname="DEVICE_ID" dbtype="VARCHAR" default_value=" " name="col_out_DEVICE_ID" required="1" wbRawType="12"/>
+			<ColInfo colname="JUDGEMENT_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_JUDGEMENT_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="JUDGEMENT_STATUS" dbtype="INTEGER" default_value="0" name="col_out_JUDGEMENT_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="TRANSVERSE_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_TRANSVERSE_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="TRANSVERSE_STATUS" dbtype="INTEGER" default_value="0" name="col_out_TRANSVERSE_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="BREADTH_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_BREADTH_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="BREADTH_STATUS" dbtype="INTEGER" default_value="0" name="col_out_BREADTH_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="HEIGHT_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_HEIGHT_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="HEIGHT_STATUS" dbtype="INTEGER" default_value="0" name="col_out_HEIGHT_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="PITCH_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_PITCH_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="PITCH_STATUS" dbtype="INTEGER" default_value="0" name="col_out_PITCH_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="YAW_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_YAW_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="YAW_STATUS" dbtype="INTEGER" default_value="0" name="col_out_YAW_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="ROLL_VALUE" dbtype="DOUBLE" default_value="0" name="col_out_ROLL_VALUE" required="1" wbRawType="8"/>
+			<ColInfo colname="ROLL_STATUS" dbtype="INTEGER" default_value="0" name="col_out_ROLL_STATUS" required="1" wbRawType="4"/>
+		</body>
+		<WhereClause>
+			<qualifier whereRowsExpected="10">
+				<ColInfo colname="COMPONENT_ID" dbtype="VARCHAR" name="$CONSTANT" operator="=" relation="AND" value="VQ_RADAR"/>
+			</qualifier>
+		</WhereClause>
+		<OrderByClause>
+			<OrderItem name="ACTUAL_TIMESTAMP" sort="Asc"/>
+		</OrderByClause>
+		<GroupByClause/>
+	</SQLInfo>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AVQ1_Radar_Clearance_Update_TSTP" nlsid="30033" interface="1"><exportitem type="transaction" name="AVQ1_Radar_Clearance_Update_TSTP" nlsid="30033">
+
+				<TransactionDef id="AVQ1_Radar_Clearance_Update_TSTP" version="-2125295166" version_mismatch="pass">
+					<Transport id="AVQ1_RADAR_CLEARANCE" type="DB"/>
+					<InputMap>
+						<Variable count="1" length="40" name="col_COMPONENT_ID" type="STRING"/>
+						<Variable count="1" length="255" name="col_PRODUCT_ID" type="STRING"/>
+						<Variable count="1" name="col_PROCESSED_TIMESTAMP" type="TIMESTAMP"/>
+						<Variable count="1" length="32" name="col_ACTUAL_TIMESTAMP_CHAR" type="STRING"/>
+					</InputMap>
+					<SQLInfo action="U">
+						<Table name="DC_RESULTS_BUFFER_HEADER_TBX" schema="RADAR"/>
+						<body>
+							<ColInfo colname="PROCESSED_TIMESTAMP" dbtype="TIMESTAMP" name="col_PROCESSED_TIMESTAMP" required="1" wbRawType="93"/>
+						</body>
+						<WhereClause>
+							<qualifier>
+								<ColInfo colname="COMPONENT_ID" dbtype="VARCHAR" name="col_COMPONENT_ID" operator="=" relation="AND"/>
+								<ColInfo colname="PRODUCT_ID" dbtype="VARCHAR" name="col_PRODUCT_ID" operator="=" relation="AND"/>
+							</qualifier>
+						</WhereClause>
+						<OrderByClause/>
+						<GroupByClause/>
+					</SQLInfo>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA" nlsid="30031">
+<Trigger name="GET_RADAR_CLEARANCE_DATA" project="AVQ1_RADAR_CLEARANCE" max_pending="1" reporting="on" max_exec_time_warning="1000">
+ <Context value="Scheduled|2~1~4~6~7~8~9~10~11~12~13~14~15~16~17~18~19~20~21~22~23~24~25~26~28~29~30~31~36~37~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-75"/>
+						<Node id="2" type="3" x="50" y="0"/>
+						<Node id="1" type="3" x="50" y="400"/>
+						<Node id="4" type="3" x="-100" y="600"/>
+						<Node id="6" type="3" x="50" y="250"/>
+						<Node id="7" type="3" x="-400" y="75"/>
+						<Node id="8" type="3" x="-400" y="150"/>
+						<Node id="9" type="3" x="-100" y="525"/>
+						<Node id="10" type="3" x="-400" y="-25"/>
+						<Node id="11" type="3" x="-100" y="775"/>
+						<Node id="12" type="3" x="175" y="175"/>
+						<Node id="13" type="3" x="-400" y="250"/>
+						<Node id="14" type="3" x="-400" y="325"/>
+						<Node id="15" type="3" x="-400" y="400"/>
+						<Node id="16" type="3" x="-400" y="475"/>
+						<Node id="17" type="3" x="-400" y="575"/>
+						<Node id="18" type="3" x="-400" y="650"/>
+						<Node id="19" type="3" x="-250" y="125"/>
+						<Node id="20" type="3" x="-250" y="200"/>
+						<Node id="21" type="3" x="-250" y="300"/>
+						<Node id="22" type="3" x="-250" y="375"/>
+						<Node id="23" type="3" x="-250" y="475"/>
+						<Node id="24" type="3" x="-250" y="550"/>
+						<Node id="25" type="3" x="-100" y="250"/>
+						<Node id="26" type="3" x="-100" y="325"/>
+						<Node id="28" type="3" x="-100" y="425"/>
+						<Node id="29" type="3" x="-100" y="675"/>
+						<Node id="30" type="3" x="350" y="225"/>
+						<Node id="31" type="3" x="350" y="400"/>
+						<Node id="36" type="3" x="50" y="75"/>
+						<Node id="37" type="3" x="50" y="150"/>
+						<Node errorActionId="35" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="350" y="125"/>
+						<RoutedErrors value="2.1|4.1|6.1|7.1|8.1|9.1|10.1|13.1|14.1|15.1|16.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|25.1|26.1|28.1|29.1|36.2|37.1|"/></BuildInfo>
+ <Event type="SCHEDULE"><schedule type="5">
+							<periodic sec="15000"/>
+						</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="DB_YAW_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DB_BREADTH_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DC_TRANSVERSE_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="READ_COUNT" type="INT1" options="3" default="0"/>
+  <VariableInfo name="DC_DEVICE_ID" type="STRING" length="32" options="3"/>
+  <VariableInfo name="DC_JUDGEMENT_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_JUDGEMENT_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_JUDGEMENT_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DB_TRANSVERSE_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="Dc_ACTUAL_TIMESTAMP_CHAR" type="STRING" length="32" options="3"/>
+  <VariableInfo name="DB_ROLL_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_HEIGHT_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_PRODUCT_ID" type="STRING" length="17" options="3"/>
+  <VariableInfo name="DB_YAW_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_HEIGHT_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_HEIGHT_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_PART_STATUS" type="STRING" length="17" options="3"/>
+  <VariableInfo name="ARRAY_MAX" type="INT2" options="3"/>
+  <VariableInfo name="DC_HEIGHT_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_PART_STATUS" type="STRING" xdim="10" length="17" options="3"/>
+  <VariableInfo name="DC_JUDGEMENT_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_TRANSVERSE_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_PITCH_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="ROW_INDEX" type="INT2" options="3" default="2"/>
+  <VariableInfo name="DC_PITCH_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_ROLL_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_PRODUCT_ID" type="STRING" xdim="10" length="17" options="3"/>
+  <VariableInfo name="DC_ROLL_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_PITCH_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DC_YAW_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_BREADTH_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_PITCH_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DC_ROLL_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DC_BREADTH_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_DEVICE_ID" type="STRING" xdim="10" length="32" options="3"/>
+  <VariableInfo name="DC_TRANSVERSE_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_BREADTH_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_YAW_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_ACTUAL_TIMESTAMP" type="TIMESTAMP" xdim="10" options="3"/>
+  <VariableInfo name="DC_ACTUAL_TIMESTAMP" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="DB_ACTUAL_TIMESTAMP_CHAR" type="STRING" xdim="10" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="2" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Get_Results"/>
+    <Property name="version" value="-2008674505"/>
+    <Property name="use_luw" value="true"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="col_out_PRODUCT_ID" name="DB_PRODUCT_ID[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ACTUAL_TIMESTAMP" name="DB_ACTUAL_TIMESTAMP[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ACUTAL_TIMESTAMP_CHAR" name="DB_ACTUAL_TIMESTAMP_CHAR[0]" count="10"/>
+    <LocalVariable logical_name="col_out_INSTALLED_PART_STATUS" name="DB_PART_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_DEVICE_ID" name="DB_DEVICE_ID[0]" count="10"/>
+    <LocalVariable logical_name="col_out_JUDGEMENT_VALUE" name="DB_JUDGEMENT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_JUDGEMENT_STATUS" name="DB_JUDGEMENT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_TRANSVERSE_VALUE" name="DB_TRANSVERSE_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_TRANSVERSE_STATUS" name="DB_TRANSVERSE_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_BREADTH_VALUE" name="DB_BREADTH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_BREADTH_STATUS" name="DB_BREADTH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_HEIGHT_VALUE" name="DB_HEIGHT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_HEIGHT_STATUS" name="DB_HEIGHT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_PITCH_VALUE" name="DB_PITCH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_PITCH_STATUS" name="DB_PITCH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_YAW_VALUE" name="DB_YAW_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_YAW_STATUS" name="DB_YAW_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ROLL_VALUE" name="DB_ROLL_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ROLL_STATUS" name="DB_ROLL_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="resultCount" name="READ_COUNT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="1"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_RadarClearance_DataCollection"/>
+    <Property name="version" value="-1076684792"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="DC_PRODUCT_ID"/>
+    <ConstantVariable logical_name="CLIENT_ID" value="AVQ1VQ1DRADAR"/>
+    <ConstantVariable logical_name="PRODUCT_TYPE" value="FRAME"/>
+    <ConstantVariable logical_name="PROCESS_POINT_ID" value="AVQ1VQ1DRADAR"/>
+    <ConstantVariable logical_name="SN1" value=" "/>
+    <LocalVariable logical_name="STATUS1" name="DC_PART_STATUS"/>
+    <LocalVariable logical_name="VALUE1" name="DC_JUDGEMENT_VALUE"/>
+    <ConstantVariable logical_name="ANGLE1" value="0"/>
+    <LocalVariable logical_name="RESULT1" name="DC_JUDGEMENT_STATUS"/>
+    <LocalVariable logical_name="VALUE2" name="DC_TRANSVERSE_VALUE"/>
+    <ConstantVariable logical_name="ANGLE2" value="0"/>
+    <LocalVariable logical_name="RESULT2" name="DC_TRANSVERSE_STATUS"/>
+    <LocalVariable logical_name="VALUE3" name="DC_BREADTH_VALUE"/>
+    <ConstantVariable logical_name="ANGLE3" value="0"/>
+    <LocalVariable logical_name="RESULT3" name="DC_BREADTH_STATUS"/>
+    <LocalVariable logical_name="VALUE4" name="DC_HEIGHT_VALUE"/>
+    <ConstantVariable logical_name="ANGLE4" value="0"/>
+    <LocalVariable logical_name="RESULT4" name="DC_HEIGHT_STATUS"/>
+    <LocalVariable logical_name="VALUE5" name="DC_PITCH_VALUE"/>
+    <ConstantVariable logical_name="ANGLE5" value="0"/>
+    <LocalVariable logical_name="RESULT5" name="DC_PITCH_STATUS"/>
+    <LocalVariable logical_name="VALUE6" name="DC_YAW_VALUE"/>
+    <ConstantVariable logical_name="ANGLE6" value="0"/>
+    <LocalVariable logical_name="RESULT6" name="DC_YAW_STATUS"/>
+    <LocalVariable logical_name="VALUE7" name="DC_ROLL_VALUE"/>
+    <ConstantVariable logical_name="ANGLE7" value="0"/>
+    <LocalVariable logical_name="RESULT7" name="DC_ROLL_STATUS"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="1"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="6" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <LocalVariable logical_name="Final Value" name="ARRAY_MAX"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="ROW_INDEX"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="7" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PRODUCT_ID[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="8" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PART_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PART_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(Message)  PRODUCT_ID $(ID)   index $(I)   count $(cnt)  TSTP $(TSTP)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Message" name="$TRIGGER"/>
+    <LocalVariable logical_name="ID" name="DC_PRODUCT_ID"/>
+    <LocalVariable logical_name="I" name="ROW_INDEX"/>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+    <LocalVariable logical_name="TSTP" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(Message)  PRODUCT_ID  index $(i)   count $(cnt)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Message" name="$TRIGGER"/>
+    <LocalVariable logical_name="i" name="ROW_INDEX"/>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="11" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="12" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="13" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_JUDGEMENT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_JUDGEMENT_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="14" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_JUDGEMENT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_JUDGEMENT_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="15" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_TRANSVERSE_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_TRANSVERSE_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="16" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_TRANSVERSE_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_TRANSVERSE_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="17" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_BREADTH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_BREADTH_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="18" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_BREADTH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_BREADTH_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_HEIGHT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_HEIGHT_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_HEIGHT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_HEIGHT_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="21" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PITCH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PITCH_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PITCH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PITCH_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="23" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_YAW_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_YAW_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="24" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_YAW_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_YAW_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="25" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ROLL_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_ROLL_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="26" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ROLL_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_ROLL_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="28" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ACTUAL_TIMESTAMP_CHAR[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="29" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Update_TSTP"/>
+    <Property name="version" value="-2125295166"/>
+    <Property name="use_luw" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="col_COMPONENT_ID" value="VQ_RADAR"/>
+    <LocalVariable logical_name="col_PRODUCT_ID" name="DC_PRODUCT_ID"/>
+    <MacroVariable logical_name="col_PROCESSED_TIMESTAMP" name="$EVENT_TIME"/>
+    <LocalVariable logical_name="col_ACTUAL_TIMESTAMP_CHAR" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="1"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="30" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="31" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="36" disabled="false">
+   <Properties>
+    <Property name="expression" value="cnt &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="1"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="37" disabled="false">
+   <Properties>
+    <Property name="expression" value="CNT - 1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CNT" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="ARRAY_MAX"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_findByKey" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_findByKey" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-868377613"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_findByKey" inactivity_time_out="0" initPoolSize="10" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findByKey" id="GALC_FrameDao_findByKey" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_findByKey" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_findByKey" nlsid="30033">
+<TransactionDef id="GALC_FrameDao_findByKey" version="-1211325257" version_mismatch="pass">
+					<Transport id="GALC_FrameDao_findByKey" type="Http"/>
+					<InputMap>
+						<Variable count="1" length="20" name="ProductId" type="STRING"/>
+					</InputMap>
+					<OutputMap>
+						<Variable count="1" length="32" name="productId" type="STRING"/>
+						<Variable count="1" length="32" name="engineSerialNo" type="STRING"/>
+						<Variable count="1" name="straightShipPercentage" type="FLOAT8"/>
+						<Variable count="1" length="32" name="keyNo" type="STRING"/>
+						<Variable count="1" length="32" name="shortVin" type="STRING"/>
+						<Variable count="1" name="engineStatus" type="INT4"/>
+						<Variable count="1" name="afOnSequenceNumber" type="INT4"/>
+						<Variable count="1" length="32" name="missionSerialNo" type="STRING"/>
+						<Variable count="1" length="32" name="actualMissionType" type="STRING"/>
+						<Variable count="1" length="32" name="productionLot" type="STRING"/>
+						<Variable count="1" length="32" name="productSpecCode" type="STRING"/>
+						<Variable count="1" length="32" name="planOffDate" type="STRING"/>
+						<Variable count="1" length="32" name="kdLotNumber" type="STRING"/>
+						<Variable count="1" length="32" name="productionDate" type="STRING"/>
+						<Variable count="1" length="32" name="productStartDate" type="STRING"/>
+						<Variable count="1" length="32" name="actualOffDate" type="STRING"/>
+						<Variable count="1" name="autoHoldStatus" type="INT4"/>
+						<Variable count="1" length="32" name="lastPassingProcessPointId" type="STRING"/>
+						<Variable count="1" length="32" name="trackingStatus" type="STRING"/>
+						<Variable count="1" length="32" name="prodLot" type="STRING"/>
+						<Variable count="1" length="32" name="createTimestamp" type="STRING"/>
+						<Variable count="1" length="32" name="updateTimestamp" type="STRING"/>
+					</OutputMap>
+					<Response outputformat="JSON">
+						<JSONInfo rawJson="ICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICJvcGVyYXRpb25zIjogW3t9LHt9XSwNCiAgICAiY3JlYXRlVGltZXN0YW1wIjogIiIsDQogICAgInVwZGF0ZVRpbWVzdGFtcCI6ICIiDQogIH0=">
+							<JSONRequest>
+								<Structure name="JSON_Object">
+									<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+									<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+									<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+									<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+									<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+									<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+									<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+									<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+									<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+									<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+									<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+									<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+									<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+									<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+									<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+									<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+									<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+									<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+									<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+									<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+									<Table name="operations" nbrInRows="1"/>
+									<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+									<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+								</Structure>
+							</JSONRequest>
+						</JSONInfo>
+					</Response>
+					<Mapping outputformat="JSON">
+						<JSONInfo rawJson="DQogICAgeyJqYXZhLmxhbmcuU3RyaW5nIjoiIn0NCg==">
+							<JSONRequest>
+								<Structure name="JSON_Object">
+									<Parameter dwType="16" name="ProductId" parmname="java.lang.String" type="STRING"/>
+								</Structure>
+							</JSONRequest>
+						</JSONInfo>
+						<HTTPRequest method="POST">
+							<Header/>
+							<Query/>
+						</HTTPRequest>
+					</Mapping>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA_WITH_VIN_VAL" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA_WITH_VIN_VAL" nlsid="30031">
+<Trigger name="GET_RADAR_CLEARANCE_DATA_WITH_VIN_VAL" project="AVQ1_RADAR_CLEARANCE" max_pending="1" reporting="onerr,ontimeout" max_exec_time_warning="1000">
+ <Context value="Scheduled|1~5~6~4~7~8~9~10~11~12~13~14~15~16~17~18~19~20~21~22~23~24~25~26~27~28~29~30~2~3~32~33~34~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-75"/>
+		<Node id="1" type="3" x="50" y="0"/>
+		<Node id="5" type="3" x="50" y="400"/>
+		<Node id="6" type="3" x="-100" y="800"/>
+		<Node id="4" type="3" x="50" y="250"/>
+		<Node id="7" type="3" x="-400" y="75"/>
+		<Node id="8" type="3" x="-400" y="150"/>
+		<Node id="9" type="3" x="-100" y="500"/>
+		<Node id="10" type="3" x="-400" y="-25"/>
+		<Node id="11" type="3" x="-100" y="1050"/>
+		<Node id="12" type="3" x="175" y="175"/>
+		<Node id="13" type="3" x="-400" y="250"/>
+		<Node id="14" type="3" x="-400" y="325"/>
+		<Node id="15" type="3" x="-400" y="400"/>
+		<Node id="16" type="3" x="-400" y="475"/>
+		<Node id="17" type="3" x="-400" y="575"/>
+		<Node id="18" type="3" x="-400" y="650"/>
+		<Node id="19" type="3" x="-250" y="125"/>
+		<Node id="20" type="3" x="-250" y="200"/>
+		<Node id="21" type="3" x="-250" y="300"/>
+		<Node id="22" type="3" x="-250" y="375"/>
+		<Node id="23" type="3" x="-250" y="475"/>
+		<Node id="24" type="3" x="-250" y="550"/>
+		<Node id="25" type="3" x="-100" y="250"/>
+		<Node id="26" type="3" x="-100" y="325"/>
+		<Node id="27" type="3" x="-100" y="425"/>
+		<Node id="28" type="3" x="-100" y="900"/>
+		<Node id="29" type="3" x="350" y="225"/>
+		<Node id="30" type="3" x="350" y="400"/>
+		<Node id="2" type="3" x="50" y="75"/>
+		<Node id="3" type="3" x="50" y="150"/>
+		<Node id="32" type="3" x="125" y="600"/>
+		<Node id="33" type="3" x="125" y="675"/>
+		<Node id="34" type="3" x="50" y="800"/>
+		<Node errorActionId="31" errorStartIndex="29" id="600000000" text="Error Handling" type="4" x="350" y="125"/>
+		<RoutedErrors value="1.1|6.1|4.1|7.1|8.1|9.1|10.1|13.1|14.1|15.1|16.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|25.1|26.1|27.1|28.1|2.2|3.1|32.1|33.2|34.1|"/></BuildInfo>
+ <Event overview_string="Periodic: 15000 ms" type="SCHEDULE"><schedule type="5">
+			<periodic sec="15000"/>
+		</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="DB_YAW_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DB_BREADTH_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DC_TRANSVERSE_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="READ_COUNT" type="INT1" options="3" default="0"/>
+  <VariableInfo name="DC_DEVICE_ID" type="STRING" length="32" options="3"/>
+  <VariableInfo name="DC_JUDGEMENT_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_JUDGEMENT_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_JUDGEMENT_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DB_TRANSVERSE_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="Dc_ACTUAL_TIMESTAMP_CHAR" type="STRING" length="32" options="3"/>
+  <VariableInfo name="DB_ROLL_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_HEIGHT_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_PRODUCT_ID" type="STRING" length="17" options="3"/>
+  <VariableInfo name="DB_YAW_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_HEIGHT_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_HEIGHT_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_PART_STATUS" type="STRING" length="17" options="3"/>
+  <VariableInfo name="ARRAY_MAX" type="INT2" options="3"/>
+  <VariableInfo name="DC_HEIGHT_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_PART_STATUS" type="STRING" xdim="10" length="17" options="3"/>
+  <VariableInfo name="DC_JUDGEMENT_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_TRANSVERSE_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_PITCH_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="ROW_INDEX" type="INT2" options="3" default="2"/>
+  <VariableInfo name="DC_PITCH_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="FRAME_PRODUCT_ID" type="STRING" length="17" options="3"/>
+  <VariableInfo name="DB_ROLL_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DB_PRODUCT_ID" type="STRING" xdim="10" length="17" options="3"/>
+  <VariableInfo name="DC_ROLL_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_PITCH_STATUS" type="INT4" xdim="10" options="3"/>
+  <VariableInfo name="DC_YAW_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_BREADTH_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DC_PITCH_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DC_ROLL_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DC_BREADTH_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_DEVICE_ID" type="STRING" xdim="10" length="32" options="3"/>
+  <VariableInfo name="DC_TRANSVERSE_STATUS" type="INT4" options="3"/>
+  <VariableInfo name="DB_BREADTH_VALUE" type="FLOAT8" xdim="10" options="3"/>
+  <VariableInfo name="DC_YAW_VALUE" type="FLOAT8" options="3"/>
+  <VariableInfo name="DB_ACTUAL_TIMESTAMP" type="TIMESTAMP" xdim="10" options="3"/>
+  <VariableInfo name="DC_ACTUAL_TIMESTAMP" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="DB_ACTUAL_TIMESTAMP_CHAR" type="STRING" xdim="10" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="TRANSACTION" id="1" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Get_Results"/>
+    <Property name="version" value="1486387680"/>
+    <Property name="use_luw" value="true"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="col_out_PRODUCT_ID" name="DB_PRODUCT_ID[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ACTUAL_TIMESTAMP" name="DB_ACTUAL_TIMESTAMP[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ACUTAL_TIMESTAMP_CHAR" name="DB_ACTUAL_TIMESTAMP_CHAR[0]" count="10"/>
+    <LocalVariable logical_name="col_out_INSTALLED_PART_STATUS" name="DB_PART_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_DEVICE_ID" name="DB_DEVICE_ID[0]" count="10"/>
+    <LocalVariable logical_name="col_out_JUDGEMENT_VALUE" name="DB_JUDGEMENT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_JUDGEMENT_STATUS" name="DB_JUDGEMENT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_TRANSVERSE_VALUE" name="DB_TRANSVERSE_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_TRANSVERSE_STATUS" name="DB_TRANSVERSE_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_BREADTH_VALUE" name="DB_BREADTH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_BREADTH_STATUS" name="DB_BREADTH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_HEIGHT_VALUE" name="DB_HEIGHT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_HEIGHT_STATUS" name="DB_HEIGHT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_PITCH_VALUE" name="DB_PITCH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_PITCH_STATUS" name="DB_PITCH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_YAW_VALUE" name="DB_YAW_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_YAW_STATUS" name="DB_YAW_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ROLL_VALUE" name="DB_ROLL_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="col_out_ROLL_STATUS" name="DB_ROLL_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="resultCount" name="READ_COUNT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="cnt &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="5"/>
+    <Route result="2" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="CNT - 1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CNT" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="ARRAY_MAX"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="4" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <LocalVariable logical_name="Final Value" name="ARRAY_MAX"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="ROW_INDEX"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_RadarClearance_DataCollection"/>
+    <Property name="version" value="-1076684792"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="DC_PRODUCT_ID"/>
+    <ConstantVariable logical_name="CLIENT_ID" value="AVQ1ON1DRADAR" delim=""/>
+    <ConstantVariable logical_name="PRODUCT_TYPE" value="FRAME" delim=""/>
+    <ConstantVariable logical_name="PROCESS_POINT_ID" value="AVQ1ON1P00201" delim=""/>
+    <ConstantVariable logical_name="SN1" value=" " delim=""/>
+    <LocalVariable logical_name="STATUS1" name="DC_PART_STATUS"/>
+    <LocalVariable logical_name="VALUE1" name="DC_JUDGEMENT_VALUE"/>
+    <ConstantVariable logical_name="ANGLE1" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT1" name="DC_JUDGEMENT_STATUS"/>
+    <LocalVariable logical_name="VALUE2" name="DC_TRANSVERSE_VALUE"/>
+    <ConstantVariable logical_name="ANGLE2" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT2" name="DC_TRANSVERSE_STATUS"/>
+    <LocalVariable logical_name="VALUE3" name="DC_BREADTH_VALUE"/>
+    <ConstantVariable logical_name="ANGLE3" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT3" name="DC_BREADTH_STATUS"/>
+    <LocalVariable logical_name="VALUE4" name="DC_HEIGHT_VALUE"/>
+    <ConstantVariable logical_name="ANGLE4" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT4" name="DC_HEIGHT_STATUS"/>
+    <LocalVariable logical_name="VALUE5" name="DC_PITCH_VALUE"/>
+    <ConstantVariable logical_name="ANGLE5" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT5" name="DC_PITCH_STATUS"/>
+    <LocalVariable logical_name="VALUE6" name="DC_YAW_VALUE"/>
+    <ConstantVariable logical_name="ANGLE6" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT6" name="DC_YAW_STATUS"/>
+    <LocalVariable logical_name="VALUE7" name="DC_ROLL_VALUE"/>
+    <ConstantVariable logical_name="ANGLE7" value="0" delim=""/>
+    <LocalVariable logical_name="RESULT7" name="DC_ROLL_STATUS"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="7" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PRODUCT_ID[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="8" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PART_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PART_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(Message)  PRODUCT_ID $(ID)   index $(I)   count $(cnt)  TSTP $(TSTP)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Message" name="$TRIGGER"/>
+    <LocalVariable logical_name="ID" name="DC_PRODUCT_ID"/>
+    <LocalVariable logical_name="I" name="ROW_INDEX"/>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+    <LocalVariable logical_name="TSTP" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(Message)  PRODUCT_ID  index $(i)   count $(cnt)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Message" name="$TRIGGER"/>
+    <LocalVariable logical_name="i" name="ROW_INDEX"/>
+    <LocalVariable logical_name="cnt" name="READ_COUNT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="11" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="12" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="13" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_JUDGEMENT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_JUDGEMENT_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="14" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_JUDGEMENT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_JUDGEMENT_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="15" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_TRANSVERSE_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_TRANSVERSE_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="16" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_TRANSVERSE_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_TRANSVERSE_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="17" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_BREADTH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_BREADTH_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="18" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_BREADTH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_BREADTH_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_HEIGHT_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_HEIGHT_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_HEIGHT_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_HEIGHT_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="21" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PITCH_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PITCH_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_PITCH_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_PITCH_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="23" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_YAW_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_YAW_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="24" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_YAW_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_YAW_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="25" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ROLL_VALUE[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_ROLL_VALUE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="26" disabled="false">
+   <Properties>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ROLL_STATUS[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DC_ROLL_STATUS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="27" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="10"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="DB_ACTUAL_TIMESTAMP_CHAR[0]" count="10"/>
+    <LocalVariable logical_name="Index" name="ROW_INDEX"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="28" disabled="false">
+   <Properties>
+    <Property name="name" value="AVQ1_Radar_Clearance_Update_TSTP"/>
+    <Property name="version" value="-2125295166"/>
+    <Property name="use_luw" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="col_COMPONENT_ID" value="VQ_RADAR"/>
+    <LocalVariable logical_name="col_PRODUCT_ID" name="DC_PRODUCT_ID"/>
+    <MacroVariable logical_name="col_PROCESSED_TIMESTAMP" name="$EVENT_TIME"/>
+    <LocalVariable logical_name="col_ACTUAL_TIMESTAMP_CHAR" name="Dc_ACTUAL_TIMESTAMP_CHAR"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AVQ1_RADAR_CLEARANCE"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="30" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="32" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findByKey"/>
+    <Property name="version" value="-1211325257"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="DC_PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="FRAME_PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="34"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="33" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="DC_PRODUCT_ID"/>
+    <LocalVariable logical_name="Search String" name="FRAME_PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="34" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(Message)  PRODUCT_ID $(ID)  FRAME PRODUCT_ID $(FRAME_ID)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Message" name="$TRIGGER"/>
+    <LocalVariable logical_name="ID" name="DC_PRODUCT_ID"/>
+    <LocalVariable logical_name="FRAME_ID" name="FRAME_PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AVQ1_RADAR_CLEARANCE" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AVQ1_RADAR_CLEARANCE" nlsid="30032">AVQ1_RADAR_CLEARANCE</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AVQ1_RADAR_CLEARANCE" type="project">
+		<reference name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_HEADER_MORETHAN_90DAYS" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+			<reference name="AVQ1_Radar_Clearance_Delete_Buffer_Header" type="transaction">
+				<reference name="AVQ1_RADAR_CLEARANCE" type="transport"/>
+			</reference>
+			<reference name="Utilities/AddTime" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="LUA_INLINE" type="actiontype"/>
+				<reference name="STRING2TIME" type="actiontype"/>
+				<reference name="STRINGTIME" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+		</reference>
+		<reference name="AVQ1_RADAR_CLEARANCE/DELETE_BUFFER_MEASUREMENT_MORETHAN_90DAYS" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+			<reference name="AVQ1_Radar_Clearance_Delete_Buffer_Measurement" type="transaction">
+				<reference name="AVQ1_RADAR_CLEARANCE" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+			<reference name="AVQ1_RadarClearance_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AVQ1_Radar_Clearance_Get_Results" type="transaction">
+				<reference name="AVQ1_RADAR_CLEARANCE" type="transport"/>
+			</reference>
+			<reference name="AVQ1_Radar_Clearance_Update_TSTP" type="transaction">
+				<reference name="AVQ1_RADAR_CLEARANCE" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AVQ1_RADAR_CLEARANCE/GET_RADAR_CLEARANCE_DATA_WITH_VIN_VAL" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+			<reference name="AVQ1_RadarClearance_DataCollection" type="transaction"/>
+			<reference name="AVQ1_Radar_Clearance_Get_Results" type="transaction"/>
+			<reference name="AVQ1_Radar_Clearance_Update_TSTP" type="transaction"/>
+			<reference name="GALC_FrameDao_findByKey" type="transaction">
+				<reference name="GALC_FrameDao_findByKey" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

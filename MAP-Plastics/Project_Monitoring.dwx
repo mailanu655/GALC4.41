@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="Monitoring/Connection License Watcher" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Monitoring/Connection License Watcher" nlsid="30031">
+<Trigger name="Connection License Watcher" project="Monitoring" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Scheduled|1~2~3~4~5~6~7~8~9~10~11~12~13~14~15~16~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-75"/>
+		<Node id="1" type="3" x="-25" y="0"/>
+		<Node id="2" type="3" x="-25" y="300"/>
+		<Node id="3" type="3" x="-25" y="600"/>
+		<Node id="4" type="3" x="-25" y="925"/>
+		<Node id="5" type="3" x="-25" y="75"/>
+		<Node id="6" type="3" x="-175" y="75"/>
+		<Node id="7" type="3" x="-25" y="375"/>
+		<Node id="8" type="3" x="-175" y="375"/>
+		<Node id="9" type="3" x="-25" y="675"/>
+		<Node id="10" type="3" x="-175" y="675"/>
+		<Node id="11" type="3" x="-175" y="150"/>
+		<Node id="12" type="3" x="-175" y="225"/>
+		<Node id="13" type="3" x="-175" y="450"/>
+		<Node id="14" type="3" x="-175" y="525"/>
+		<Node id="15" type="3" x="-175" y="750"/>
+		<Node id="16" type="3" x="-175" y="825"/></BuildInfo>
+ <Event overview_string="Weekdays" type="SCHEDULE"><schedule type="3">
+			<month all="true"/>
+			<day daysofweek="true"/>
+			<occurrence all="true"/>
+			<time sec="18000"/>
+		</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="EmailMessage" type="STRING" length="500" options="3"/>
+  <VariableInfo name="LicenseDaysRemaining" type="INT4" options="3"/>
+  <VariableInfo name="EmergencyLicenseCount" type="INT4" options="3"/>
+  <VariableInfo name="ExpiredLicenseCount" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="CcEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="EmailSubject" type="STRING" length="200" options="3" default="Connection License Watcher"/>
+  <VariableInfo name="BccEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="ToEmailAddress" type="STRING" length="200" options="3" default="brandon_kroeger@na.honda.com,GALC_Level2_Support@na.honda.com"/>
+  <VariableInfo name="LicenseRemainDaysWarning" type="INT2" options="3" default="60"/>
+  <VariableInfo name="FromEmailAddress" type="STRING" length="32" options="3" default="device_wise@na.honda.com"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="SYSVAR_GET" id="1" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="license.expired_count"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ExpiredLicenseCount"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="SYSVAR_GET" id="2" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="license.emergency_count"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="EmergencyLicenseCount"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="SYSVAR_GET" id="3" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="license.days_remain"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LicenseDaysRemaining"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="expiredCount==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="expiredCount" name="ExpiredLicenseCount"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - $(Count) Expired Licenses Found"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Count" name="ExpiredLicenseCount"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="7" disabled="false">
+   <Properties>
+    <Property name="expression" value="emergencyCount==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="emergencyCount" name="EmergencyLicenseCount"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="8"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - $(Count) Emergency Licenses In Use"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Count" name="EmergencyLicenseCount"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="daysRemain&gt;warningDaysRemain"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="daysRemain" name="LicenseDaysRemaining"/>
+    <StaticVariable logical_name="warningDaysRemain" name="LicenseRemainDaysWarning"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - License with $(DaysRemaining) days remaining found. Warning set at $(DaysRemainingLimit) Days Remaining"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="DaysRemaining" name="LicenseDaysRemaining"/>
+    <StaticVariable logical_name="DaysRemainingLimit" name="LicenseRemainDaysWarning"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="11" disabled="false">
+   <Properties>
+    <Property name="format" value="Environment: $(Environment)&#10;Message: $(Count) Expired Licenses Found"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Environment" name="$MODULE_NAME"/>
+    <LocalVariable logical_name="Count" name="ExpiredLicenseCount"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENHANCEDEMAIL" id="12" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <StaticVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="13" disabled="false">
+   <Properties>
+    <Property name="format" value="Environment: $(Environment)&#10;Message: $(Count) Emergency Licenses In Use"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Environment" name="$MODULE_NAME"/>
+    <LocalVariable logical_name="Count" name="EmergencyLicenseCount"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENHANCEDEMAIL" id="14" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <StaticVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="15" disabled="false">
+   <Properties>
+    <Property name="format" value="Environment: $(Environment)&#10;Message: License with $(DaysRemaining) days remaining found. Warning set at $(DaysRemainingLimit) Days Remaining"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Environment" name="$MODULE_NAME"/>
+    <LocalVariable logical_name="DaysRemaining" name="LicenseDaysRemaining"/>
+    <StaticVariable logical_name="DaysRemainingLimit" name="LicenseRemainDaysWarning"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENHANCEDEMAIL" id="16" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <StaticVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Monitoring/Device License Watcher" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Monitoring/Device License Watcher" nlsid="30031">
+<Trigger name="Device License Watcher" project="Monitoring" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Scheduled|1~2~3~8~9~10~11~12~13~14~15~16~17~19~20~22~23~24~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-175"/>
+		<Node id="1" type="3" x="-100" y="-100"/>
+		<Node id="2" type="3" x="-100" y="50"/>
+		<Node id="3" type="3" x="-100" y="-25"/>
+		<Node id="8" type="3" x="200" y="25"/>
+		<Node id="9" type="3" x="-100" y="600"/>
+		<Node id="10" type="3" x="-100" y="125"/>
+		<Node id="11" type="3" x="-100" y="200"/>
+		<Node id="12" type="3" x="-250" y="225"/>
+		<Node id="13" type="3" x="-100" y="275"/>
+		<Node id="14" type="3" x="-100" y="500"/>
+		<Node id="15" type="3" x="-250" y="525"/>
+		<Node id="16" type="3" x="-250" y="450"/>
+		<Node id="17" type="3" x="-250" y="750"/>
+		<Node id="19" type="3" x="200" y="-75"/>
+		<Node id="20" type="3" x="-250" y="375"/>
+		<Node id="22" type="3" x="-250" y="300"/>
+		<Node id="23" type="3" x="-250" y="600"/>
+		<Node id="24" type="3" x="-250" y="675"/>
+		<Node errorActionId="7" errorStartIndex="19" id="600000000" text="Error Handling" type="4" x="200" y="-150"/>
+		<RoutedErrors value="1.1|2.1|3.1|10.1|11.2|12.1|13.1|14.2|15.1|20.1|22.1|23.1|24.1|"/></BuildInfo>
+ <Event overview_string="Weekdays" type="SCHEDULE"><schedule type="3">
+			<month all="true"/>
+			<day daysofweek="true"/>
+			<occurrence all="true"/>
+			<time sec="18300"/>
+		</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="PercentageResult" type="INT2" options="3"/>
+  <VariableInfo name="EmailMessage" type="STRING" length="500" options="3"/>
+  <VariableInfo name="InUseDeviceLicenses" type="INT4" options="3"/>
+  <VariableInfo name="TotalDeviceLicenses" type="INT4" options="3"/>
+  <VariableInfo name="TotalDeviceCount" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="CcEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="AvailableInUseErrorPercentage" type="INT2" options="3" default="10"/>
+  <VariableInfo name="EmailSubject" type="STRING" length="200" options="3" default="Device Listener Watcher"/>
+  <VariableInfo name="BccEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="AvailableErrorPercentage" type="INT2" options="3" default="10"/>
+  <VariableInfo name="ToEmailAddress" type="STRING" length="200" options="3" default="brandon_kroeger@ahm.honda.com"/>
+  <VariableInfo name="FromEmailAddress" type="STRING" length="32" options="3" default="device_wise@ahm.honda.com"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="SYSVAR_GET" id="1" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="device.license.total"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TotalDeviceLicenses"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="SYSVAR_GET" id="2" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="device.count"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TotalDeviceCount"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="SYSVAR_GET" id="3" disabled="false">
+   <Properties>
+    <Property name="predefine" value="True"/>
+    <Property name="system_variable" value="device.license.in_use"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="InUseDeviceLicenses"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="ceil(100-(inUseCount/totalCount)*100)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="inUseCount" name="InUseDeviceLicenses"/>
+    <LocalVariable logical_name="totalCount" name="TotalDeviceLicenses"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="PercentageResult"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="11" disabled="false">
+   <Properties>
+    <Property name="expression" value="percentageResult &gt; percentError"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="percentageResult" name="PercentageResult"/>
+    <StaticVariable logical_name="percentError" name="AvailableInUseErrorPercentage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - Available In Use Licenses ($(PercentResult)%) Below $(ErrorPercent)%"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="PercentResult" name="PercentageResult"/>
+    <StaticVariable logical_name="ErrorPercent" name="AvailableInUseErrorPercentage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="13" disabled="false">
+   <Properties>
+    <Property name="expression" value="ceil(100-(deviceCount/totalCount)*100)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="deviceCount" name="TotalDeviceCount"/>
+    <LocalVariable logical_name="totalCount" name="TotalDeviceLicenses"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="PercentageResult"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="14" disabled="false">
+   <Properties>
+    <Property name="expression" value="percentageResult &gt; percentError"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="percentageResult" name="PercentageResult"/>
+    <StaticVariable logical_name="percentError" name="AvailableErrorPercentage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - Available Licenses ($(PercentResult)%) Below $(ErrorPercent)%"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="PercentResult" name="PercentageResult"/>
+    <StaticVariable logical_name="ErrorPercent" name="AvailableErrorPercentage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="19" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Monitoring"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception $(ErrorCode) - $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENHANCEDEMAIL" id="20" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <StaticVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="22" disabled="false">
+   <Properties>
+    <Property name="format" value="Environment: $(Environment)&#10;Message: Available In Use Licenses ($(PercentResult)%) Below $(ErrorPercent)%"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Environment" name="$MODULE_NAME"/>
+    <LocalVariable logical_name="PercentResult" name="PercentageResult"/>
+    <StaticVariable logical_name="ErrorPercent" name="AvailableInUseErrorPercentage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="23" disabled="false">
+   <Properties>
+    <Property name="format" value="Environment: $(Environment)&#10;Message: Available Licenses ($(PercentResult)%) Below $(ErrorPercent)%"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Environment" name="$MODULE_NAME"/>
+    <LocalVariable logical_name="PercentResult" name="PercentageResult"/>
+    <StaticVariable logical_name="ErrorPercent" name="AvailableErrorPercentage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="ENHANCEDEMAIL" id="24" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <StaticVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Monitoring/DeviceAlerting" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="Monitoring/DeviceAlerting" nlsid="30031">
+<Trigger name="DeviceAlerting" project="Monitoring" max_pending="10" queue_size="5" reporting="off" max_exec_time_warning="5000">
+ <Context value="Device State Change|9~2~5~7~8~4~10~11~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-225"/>
+		<Node id="9" type="3" x="-125" y="-150"/>
+		<Node id="2" type="3" x="-125" y="200"/>
+		<Node id="5" type="3" x="-125" y="275"/>
+		<Node id="7" type="3" x="125" y="25"/>
+		<Node id="8" type="3" x="-125" y="125"/>
+		<Node id="4" type="3" x="-125" y="50"/>
+		<Node id="10" type="3" x="0" y="-75"/>
+		<Node id="11" type="3" x="-125" y="-75"/>
+		<Node errorActionId="6" errorStartIndex="7" id="600000000" text="Error Handling" type="4" x="125" y="-75"/>
+		<RoutedErrors value="9.2|2.1|8.1|4.1|11.2|"/></BuildInfo>
+ <Event overview_string="Filter for Device: false&#10;Fire on Device Start: true&#10;Fire on Device Stop: true&#10;Fire on Device Disable: true&#10;" type="DEVICE_STATE">
+  <Properties>
+   <Property name="filter_for_device" value="false"/>
+   <Property name="fire_on_start" value="true"/>
+   <Property name="fire_on_stop" value="true"/>
+   <Property name="fire_on_disable" value="true"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="EmailSubject" type="STRING" length="200" options="3"/>
+  <VariableInfo name="EmailMessage" type="STRING" length="500" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="CcEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="IgnoreDevices" type="STRING" length="500" options="3"/>
+  <VariableInfo name="BccEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="ToEmailAddress" type="STRING" length="200" options="3" default="brandon_kroeger@ahm.honda.com,olvin_vaz@ahm.honda.com"/>
+  <VariableInfo name="FromEmailAddress" type="STRING" length="200" options="3" default="device_wise@ahm.honda.com"/>
+ </StaticVariables>
+ <Actions first_action="9">
+  <Action type="ENHANCEDEMAIL" id="2" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <LocalVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="4" disabled="false">
+   <Properties>
+    <Property name="format" value="$(ModuleName) - Device Status Changed"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="ModuleName" name="$MODULE_NAME"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailSubject"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="8" disabled="false">
+   <Properties>
+    <Property name="format" value="THIS IS AN AUTOMATED MESSAGE PLEASE DO NOT RESPOND&#10;&#10;The State of a Device has changed in $(ModuleName)&#10;&#10;Time: $(EventTime)&#10;Device: $(DeviceName)&#10;State: $(DeviceState)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="ModuleName" name="$MODULE_NAME"/>
+    <MacroVariable logical_name="EventTime" name="$EVENT_TIME"/>
+    <EventVariable logical_name="DeviceName" name="Device Name"/>
+    <EventVariable logical_name="DeviceState" name="State"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="9" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="String" name="Device Name"/>
+    <ConstantVariable logical_name="Search String" value="test"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="11" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="IgnoreDevices"/>
+    <EventVariable logical_name="Search String" name="Device Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Monitoring/DeviceAutoRestart" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="Monitoring/DeviceAutoRestart" nlsid="30031">
+<Trigger name="DeviceAutoRestart" project="Monitoring" max_pending="10" queue_size="5" reporting="off" max_exec_time_warning="5000">
+ <Context value="Device State Change|9~2~5~7~8~4~10~11~13~14~15~16~17~18~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-225"/>
+		<Node id="9" type="3" x="-125" y="-150"/>
+		<Node id="2" type="3" x="-125" y="625"/>
+		<Node id="5" type="3" x="-125" y="700"/>
+		<Node id="7" type="3" x="125" y="25"/>
+		<Node id="8" type="3" x="-125" y="525"/>
+		<Node id="4" type="3" x="-125" y="50"/>
+		<Node id="10" type="3" x="0" y="-75"/>
+		<Node id="11" type="3" x="-125" y="-75"/>
+		<Node id="13" type="3" x="-125" y="125"/>
+		<Node id="14" type="3" x="-125" y="200"/>
+		<Node id="15" type="3" x="-300" y="525"/>
+		<Node id="16" type="3" x="-125" y="350"/>
+		<Node id="17" type="3" x="-125" y="425"/>
+		<Node id="18" type="3" x="-125" y="275"/>
+		<Node errorActionId="6" errorStartIndex="7" id="600000000" text="Error Handling" type="4" x="125" y="-75"/>
+		<RoutedErrors value="9.2|2.1|8.1|4.1|11.2|13.1|14.1|15.1|16.1|17.2|18.1|"/></BuildInfo>
+ <Event overview_string="Filter for Device: false&#10;Fire on Device Start: false&#10;Fire on Device Stop: true&#10;Fire on Device Disable: false&#10;" type="DEVICE_STATE">
+  <Properties>
+   <Property name="filter_for_device" value="false"/>
+   <Property name="fire_on_start" value="false"/>
+   <Property name="fire_on_stop" value="true"/>
+   <Property name="fire_on_disable" value="false"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="EmailSubject" type="STRING" length="200" options="3"/>
+  <VariableInfo name="DeviceState" type="UINT1" options="3"/>
+  <VariableInfo name="EmailMessage" type="STRING" length="500" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="CcEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="IgnoreDevices" type="STRING" length="500" options="3"/>
+  <VariableInfo name="BccEmailAddress" type="STRING" length="200" options="3"/>
+  <VariableInfo name="ToEmailAddress" type="STRING" length="200" options="3" default="brandon_kroeger@ahm.honda.com"/>
+  <VariableInfo name="FromEmailAddress" type="STRING" length="200" options="3" default="device_wise@ahm.honda.com"/>
+ </StaticVariables>
+ <Actions first_action="9">
+  <Action type="ENHANCEDEMAIL" id="2" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CcEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BccEmailAddress"/>
+    <LocalVariable logical_name="Subject" name="EmailSubject"/>
+    <LocalVariable logical_name="Message" name="EmailMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="4" disabled="false">
+   <Properties>
+    <Property name="format" value="$(ModuleName) - Device Auto Restart"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="ModuleName" name="$MODULE_NAME"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailSubject"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="8" disabled="false">
+   <Properties>
+    <Property name="format" value="THIS IS AN AUTOMATED MESSAGE PLEASE DO NOT RESPOND&#10;&#10;A Device has been automatically restarted in $(ModuleName)&#10;&#10;Time: $(EventTime)&#10;Device: $(DeviceName)&#10;State: $(DeviceState)&#10;&#10;1 = Started&#10;2 = Stopped&#10;3 = Disabled&#10;4 = Starting&#10;5 = Stopping"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="ModuleName" name="$MODULE_NAME"/>
+    <MacroVariable logical_name="EventTime" name="$EVENT_TIME"/>
+    <EventVariable logical_name="DeviceName" name="Device Name"/>
+    <LocalVariable logical_name="DeviceState" name="DeviceState"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="9" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="String" name="Device Name"/>
+    <ConstantVariable logical_name="Search String" value="test"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="11" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="IgnoreDevices"/>
+    <EventVariable logical_name="Search String" name="Device Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="DEVCTL" id="13" disabled="false">
+   <Properties>
+    <Property name="input_type" value="Dynamic"/>
+    <Property name="operation" value="Start Device"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Device Name" name="Device Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="14" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="15" disabled="false">
+   <Properties>
+    <Property name="format" value="THIS IS AN AUTOMATED MESSAGE PLEASE DO NOT RESPOND&#10;&#10;A Device was stopped and could NOT be automatically restarted in $(ModuleName)&#10;&#10;Time: $(EventTime)&#10;Device: $(DeviceName)&#10;State: $(DeviceState)&#10;&#10;1 = Started&#10;2 = Stopped&#10;3 = Disabled&#10;4 = Starting&#10;5 = Stopping"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="ModuleName" name="$MODULE_NAME"/>
+    <MacroVariable logical_name="EventTime" name="$EVENT_TIME"/>
+    <EventVariable logical_name="DeviceName" name="Device Name"/>
+    <LocalVariable logical_name="DeviceState" name="DeviceState"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="EmailMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="DEVGETSTATE" id="16" disabled="false">
+   <Properties>
+    <Property name="input_type" value="Dynamic"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Device Name" name="Device Name"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Device State" name="DeviceState"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="17" disabled="false">
+   <Properties>
+    <Property name="expression" value="DeviceState==1||DeviceState==4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DeviceState" name="DeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="18" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="500"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Monitoring/DeviceWiseRestartAlert" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Monitoring/DeviceWiseRestartAlert" nlsid="30031">
+<Trigger name="DeviceWiseRestartAlert" project="Monitoring" max_pending="1" queue_size="5" reporting="off" max_exec_time_warning="15000">
+ <Context value="System|3~2~4~6~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-150"/>
+		<Node id="3" type="3" x="-100" y="-75"/>
+		<Node id="2" type="3" x="-100" y="25"/>
+		<Node id="4" type="3" x="-100" y="125"/>
+		<Node id="6" type="3" x="100" y="25"/>
+		<Node errorActionId="5" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="100" y="-100"/>
+		<RoutedErrors value="3.1|2.1|"/></BuildInfo>
+ <Event overview_string="Execution Event: Node Start." type="SYSTEM">
+  <Properties>
+   <Property name="type" value="Node Start"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="Message" type="STRING" length="5000" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="BCCEmailAddress" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="CCEmailAddress" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="ToEmailAddress" type="STRING" length="1024" options="3" default="HAM_GALC_Frame_Support@ham.honda.com"/>
+  <VariableInfo name="FromEmailAddress" type="STRING" length="32" options="3" default="device_wise@ahm.honda.com"/>
+ </StaticVariables>
+ <Actions first_action="3">
+  <Action type="ENHANCEDEMAIL" id="2" disabled="false">
+   <Properties>
+    <Property name="server" value="smtpgtw1.ham.am.honda.com"/>
+    <Property name="port" value="25"/>
+    <Property name="security" value="None"/>
+    <Property name="authentication" value="No authentication"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="From" name="FromEmailAddress"/>
+    <StaticVariable logical_name="To" name="ToEmailAddress"/>
+    <StaticVariable logical_name="Cc" name="CCEmailAddress"/>
+    <StaticVariable logical_name="Bcc" name="BCCEmailAddress"/>
+    <ConstantVariable logical_name="Subject" value="DeviceWise Restart Alert!!"/>
+    <LocalVariable logical_name="Message" name="Message"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="3" disabled="false">
+   <Properties>
+    <Property name="format" value="$(Server) restarted at $(Time)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Server" name="$MODULE_NAME"/>
+    <MacroVariable logical_name="Time" name="$EVENT_TIME"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="Message"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="Monitoring" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="Monitoring" nlsid="30032">Monitoring</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="Monitoring" type="project">
+		<reference name="Monitoring/Connection License Watcher" type="trigger">
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="ENHANCEDEMAIL" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SYSVAR_GET" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+		</reference>
+		<reference name="Monitoring/Device License Watcher" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="ENHANCEDEMAIL" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SYSVAR_GET" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+		</reference>
+		<reference name="Monitoring/DeviceAlerting" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="ENHANCEDEMAIL" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="DEVICE_STATE" type="eventtype"/>
+		</reference>
+		<reference name="Monitoring/DeviceAutoRestart" type="trigger">
+			<reference name="DEVCTL" type="actiontype"/>
+			<reference name="DEVGETSTATE" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="ENHANCEDEMAIL" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="DEVICE_STATE" type="eventtype"/>
+		</reference>
+		<reference name="Monitoring/DeviceWiseRestartAlert" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="ENHANCEDEMAIL" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SYSTEM" type="eventtype"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

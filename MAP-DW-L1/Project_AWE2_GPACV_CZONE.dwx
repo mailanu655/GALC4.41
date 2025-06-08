@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="listener" name="AZZ1_AiristaListener" nlsid="30035" interface="1"><exportitem type="listener" name="AZZ1_AiristaListener" nlsid="30035">
+<Listener version="-943120879">
+					<TCP enable_staging_copy="false" logEnabled="false" maxConnections="100" maxMessageSize="2" msgTimeout="60" name="AZZ1_AiristaListener" port="4001" reply="true" termination="0x0a" type="TCP">
+						<RequestFormat>
+							<ASCII arrayDelim="|" dataDelim="," encoding="UTF-8" eventOffset="0"/>
+						</RequestFormat>
+						<AllowedAddresses>
+							<Allow address="10.0.0.0/32"/>
+						</AllowedAddresses>
+					</TCP>
+				</Listener></exportitem></exportcontent>
+
+<exportcontent type="listenerevent" name="AWE2_AiristaWECZone" nlsid="30036" interface="1"><exportitem type="listenerevent" name="AWE2_AiristaWECZone" nlsid="30036">
+
+<ListenerEventDef id="AWE2_AiristaWECZone" version="1174446574">
+	<Listener id="AZZ1_AiristaListener" type="TCP"/>
+	<NotificationMap>
+		<Variable count="1" length="32" name="VinNo" type="STRING"/>
+		<Variable count="1" length="10" name="Model" type="STRING"/>
+		<Variable count="1" name="deviceId" type="INT8"/>
+		<Variable count="1" name="itemId" type="INT8"/>
+		<Variable count="1" length="3" name="deptLine" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+		<Variable count="1" length="32" name="psuName" type="STRING"/>
+		<Variable count="1" length="64" name="ipAddress" type="STRING"/>
+		<Variable count="1" length="255" name="Args" type="STRING"/>
+		<Variable count="1" name="typeId" type="INT8"/>
+		<Variable count="1" name="sequenceNo" type="INT8"/>
+		<Variable count="1" length="32" name="type" type="STRING"/>
+	</NotificationMap>
+	<CompletionMap>
+		<Variable count="1" length="32" name="Result" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+	</CompletionMap>
+	<Mapping>
+		<InboundMap outputformat="A">
+			<Item name="transactionId" offset="1"/>
+			<Item name="deptLine" offset="2"/>
+			<Item name="VinNo" offset="3"/>
+			<Item name="Model" offset="4"/>
+			<Item name="typeId" offset="5"/>
+			<Item name="sequenceNo" offset="6"/>
+			<Item name="deviceId" offset="7"/>
+			<Item name="itemId" offset="8"/>
+			<Item name="psuName" offset="9"/>
+			<Item name="ipAddress" offset="10"/>
+			<Item name="Args" offset="11"/>
+			<Item name="type" offset="12"/>
+		</InboundMap>
+		<OutboundMap arrayDelim="|" delimiter="," outputformat="A"/>
+	</Mapping>
+</ListenerEventDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_BroadcastService_Broadcast" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_BroadcastService_Broadcast" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1700600974"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_BroadcastService_Broadcast" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/BroadcastService/broadcast" id="GALC_BroadcastService_Broadcast" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastByProcessPointMap" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastByProcessPointMap" nlsid="30033">
+
+<TransactionDef id="GALC_BroadcastByProcessPointMap" version="-537664207" version_mismatch="pass">
+	<Transport id="GALC_BroadcastService_Broadcast" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="ProcessPointID" type="STRING"/>
+		<Variable count="1" length="32" name="ProductID" type="STRING"/>
+	</InputMap>
+	<OutputMap/>
+	<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+	<Mapping lineDelimiter="crlf" outputformat="F">
+		<Item name="$CONSTANT" type="string" value="Ww0KCXsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+		<Item name="ProcessPointID"/>
+		<Item name="$CONSTANT" type="string" value="In0sDQoJeyJqYXZhLmxhbmcuU3RyaW5nIjoi"/>
+		<Item name="ProductID"/>
+		<Item name="$CONSTANT" type="string" value="In0NCl0="/>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE2_GPACV_CZONE/Broadcast_Print_Only" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE2_GPACV_CZONE/Broadcast_Print_Only" nlsid="30031">
+<Trigger name="Broadcast_Print_Only" project="AWE2_GPACV_CZONE" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Listener|6~8~12~13~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="275"/>
+		<Node id="6" type="3" x="50" y="375"/>
+		<Node id="8" type="3" x="50" y="500"/>
+		<Node id="12" type="3" x="325" y="450"/>
+		<Node id="13" type="3" x="325" y="550"/>
+		<Node errorActionId="11" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<RoutedErrors value="6.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE2_AiristaWECZone" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AWE1C02PCZONE"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AWE1C02PCZONE"/>
+ </StaticVariables>
+ <Actions first_action="6">
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastByProcessPointMap"/>
+    <Property name="version" value="-537664207"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointID" name="ProcessPointId"/>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="User APA2_PAON_VinFeed"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AWE2_GPACV_CZONE" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AWE2_GPACV_CZONE" nlsid="30032">AWE2_GPACV_CZONE</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AWE2_GPACV_CZONE" type="project">
+		<reference name="AWE2_GPACV_CZONE/Broadcast_Print_Only" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE2_AiristaWECZone" type="listenerevent">
+				<reference name="AZZ1_AiristaListener" type="listener"/>
+			</reference>
+			<reference name="GALC_BroadcastByProcessPointMap" type="transaction">
+				<reference name="GALC_BroadcastService_Broadcast" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

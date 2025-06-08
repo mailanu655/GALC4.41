@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AWE_WELD_MERGE" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AWE_WELD_MERGE" nlsid="30030">
+<DeviceDefinition name="AWE_WELD_MERGE" type="28" type_name="CJ2 CPU" state="6" options="2104"><Properties><Property name="ip_address" value="10.39.113.66"/><Property name="protocol" value="TCP"/><Property name="da1" value="0"/><Property name="timeout" value="5000"/><Property name="port" value="9600"/><Property name="sa1" value="0"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MAPProd_Tracking_Track" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MAPProd_Tracking_Track" nlsid="30034">
+<Transports>
+				<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_MAPProd_Tracking_Track" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="true" logCount="2" logEnabled="true" logMessageSize="-1" logSize="2" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="-1942010936">
+					<Proxy enabled="false" type="HTTP"/>
+				</TransportDefinition>
+				<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/TrackingService/track" id="GALC_MAPProd_Tracking_Track" password="$()#!%Q8zu3rN24haj2Ngcz7k0Kg==" type="Http" userid="GALCAdmin1"/>
+			</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_UpdateTracking_Frame_Prod" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_UpdateTracking_Frame_Prod" nlsid="30033">
+
+			<TransactionDef id="GALC_UpdateTracking_Frame_Prod" version="1594138111" version_mismatch="pass">
+				<Transport id="GALC_MAPProd_Tracking_Track" type="HTTP"/>
+				<InputMap>
+					<Variable count="1" length="32" name="ProductId" type="STRING"/>
+					<Variable count="1" length="32" name="ProcessPointId" type="STRING"/>
+					<Variable count="1" length="32" name="ProductType" type="STRING"/>
+				</InputMap>
+				<OutputMap/>
+				<Response outputformat="JSON">
+					<JSONInfo>
+						<JSONRequest>
+							<Structure name="JSON_Object"/>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="DQpbDQogIHsgImNvbS5ob25kYS5nYWxjLmRhdGEuUHJvZHVjdFR5cGUiOiJGUkFNRSIsDQogICAgImNvbS5ob25kYS5nYWxjLmVudGl0eS5wcm9kdWN0LlByb2R1Y3RSZXN1bHQiOiB7ImlkIjogew0KICAgICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICAgInByb2Nlc3NQb2ludElkIjogIiINCiAgICB9DQogIH19DQpdDQo=">
+						<JSONRequest>
+							<Table name="JSON_Array" nbrInRows="1">
+								<Parameter dwType="16" name="ProductType" parmname="com.honda.galc.data.ProductType" type="STRING"/>
+								<Structure name="com-honda-galc-entity-product-ProductResult">
+									<Structure name="id">
+										<Parameter dwType="16" name="ProductId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="ProcessPointId" parmname="processPointId" type="STRING"/>
+									</Structure>
+								</Structure>
+							</Table>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute_Prod" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute_Prod" nlsid="30034">
+<Transports>
+				<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute_Prod" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP" version="-572180160">
+					<Proxy enabled="false" type="HTTP"/>
+				</TransportDefinition>
+				<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute_Prod" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+			</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="TWE_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="TWE_DataCollection" nlsid="30033">
+
+			<TransactionDef id="TWE_DataCollection" version="-277081160" version_mismatch="pass">
+				<Transport id="GALC_DataCollectionService_Execute_Prod" type="HTTP"/>
+				<InputMap>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="32" name="TAG_LIST_Elements" type="STRING"/>
+					<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+					<Variable count="1" length="32" name="REMAIN_QTY" type="STRING"/>
+					<Variable count="1" length="32" name="TOTAL_QTY" type="STRING"/>
+					<Variable count="1" length="32" name="IS_STRAGGLER" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCTION_LOT" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KICAgICJUQUdfTElTVCI6IFsNCiAgICAgICAgIkRBVEFfQ09MTEVDVElPTl9DT01QTEVURSIsDQogICAgICAgICJJU19TVFJBR0dMRVIiLA0KICAgICAgICAiVE9UQUxfUVRZIiwNCiAgICAgICAgIlJFTUFJTl9RVFkiLA0KICAgICAgICAiUFJPRFVDVElPTl9MT1QiDQogICAgXSwgDQogICAgIkRBVEFfQ09MTEVDVElPTl9DT01QTEVURSI6ICIxIiwNCiAgICAiSVNfU1RSQUdHTEVSIjogIjAiLA0KICAgICJUT1RBTF9RVFkiOiAiMSIsDQogICAgIlJFTUFJTl9RVFkiOiAiMjkvMzAiLA0KICAgICJQUk9EVUNUSU9OX0xPVCI6ICJFTFAgMDMyMDE4MTIwNDkzMDEiDQp9">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Table name="TAG_LIST" nbrInRows="1">
+									<Parameter dwType="16" name="TAG_LIST_Elements" parmname="Elements" type="STRING"/>
+								</Table>
+								<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+								<Parameter dwType="16" name="IS_STRAGGLER" parmname="IS_STRAGGLER" type="STRING"/>
+								<Parameter dwType="16" name="TOTAL_QTY" parmname="TOTAL_QTY" type="STRING"/>
+								<Parameter dwType="16" name="REMAIN_QTY" parmname="REMAIN_QTY" type="STRING"/>
+								<Parameter dwType="16" name="PRODUCTION_LOT" parmname="PRODUCTION_LOT" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0Kew0KIkNMSUVOVF9JRCI6ICIiLA0KIlBST0NFU1NfUE9JTlRfSUQiOiAiIiwNCiJQUk9EVUNUX0lEIjogIiINCn0NCn0NCl0=">
+						<JSONRequest>
+							<Table name="JSON_Array" nbrInRows="1">
+								<Structure name="com-honda-galc-data-DataContainer">
+									<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+								</Structure>
+							</Table>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="WELD_MERGE_Accord/AWE2_Tunnel_A_Vinpresent" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="WELD_MERGE_Accord/AWE2_Tunnel_A_Vinpresent" nlsid="30031">
+<Trigger name="AWE2_Tunnel_A_Vinpresent" project="WELD_MERGE_Accord" max_pending="1" reporting="on">
+ <Context value="Data|41~11~13~14~15~9~27~29~39~10~42~44~45~49~50~51~52~54~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-175"/>
+		<Node id="41" type="3" x="50" y="-100"/>
+		<Node id="11" type="3" x="50" y="50"/>
+		<Node id="13" type="3" x="425" y="200"/>
+		<Node id="14" type="3" x="425" y="275"/>
+		<Node id="15" type="3" x="425" y="350"/>
+		<Node id="9" type="3" x="50" y="825"/>
+		<Node id="27" type="3" x="50" y="600"/>
+		<Node id="29" type="3" x="50" y="750"/>
+		<Node id="39" type="3" x="-125" y="200"/>
+		<Node id="10" type="3" x="50" y="150"/>
+		<Node id="42" type="3" x="50" y="-25"/>
+		<Node id="44" type="3" x="-150" y="25"/>
+		<Node id="45" type="3" x="-125" y="275"/>
+		<Node id="49" type="3" x="50" y="500"/>
+		<Node id="50" type="3" x="-125" y="350"/>
+		<Node id="51" type="3" x="50" y="675"/>
+		<Node id="52" type="3" x="50" y="400"/>
+		<Node id="54" type="3" x="50" y="250"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="425" y="125"/>
+		<RoutedErrors value="41.1|11.1|27.1|29.1|39.1|10.2|42.2|45.1|49.1|51.1|52.1|54.1|"/></BuildInfo>
+ <Event overview_string="Variable: AWE_WELD_MERGE.CIO[1000,0]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AWE_WELD_MERGE" name="CIO[1000,0]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="VIN_Len" type="INT4" options="3"/>
+  <VariableInfo name="Data_Ready" type="BOOL" options="3"/>
+  <VariableInfo name="Straggler" type="BOOL" options="3"/>
+  <VariableInfo name="Processpoint_ID" type="STRING" length="32" options="3" default="AWE1MR1P00101"/>
+  <VariableInfo name="SQR" type="INT4" options="3"/>
+  <VariableInfo name="Error_msg" type="STRING" length="80" options="3"/>
+  <VariableInfo name="Prod_lot" type="STRING" length="20" options="3"/>
+  <VariableInfo name="SQT" type="INT4" options="3"/>
+  <VariableInfo name="ymtoc" type="STRING" length="30" options="3"/>
+  <VariableInfo name="VIN" type="STRING" length="32" options="3"/>
+  <VariableInfo name="Device_ID" type="STRING" length="32" options="3" default="AWE1MR1D00101"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plc_DATA_READY_ACK" type="STRING" length="32" options="3" default="CIO[1000,1]"/>
+  <VariableInfo name="Prod_LOT DATA_READY" type="STRING" length="10" options="3" default="CIO[1000,2]"/>
+  <VariableInfo name="plc_SQR" type="STRING" length="40" options="3" default="DM[100]"/>
+  <VariableInfo name="plc_DATA_READY" type="STRING" length="10" options="3" default="CIO[1000,0]"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE_WELD_MERGE"/>
+  <VariableInfo name="plc_PROD_LOT" type="STRING" length="32" options="3" default="DM[1020]"/>
+  <VariableInfo name="plc_SQT" type="STRING" length="18" options="3" default="DM[101]"/>
+  <VariableInfo name="plc_STRAGGLER" type="STRING" length="32" options="3" default="DM[102]"/>
+  <VariableInfo name="plc_ERROR_CODE" type="STRING" length="10" options="3" default="DM[1050]"/>
+  <VariableInfo name="ProductID" type="STRING" length="18" options="3" default="DM[1008]"/>
+ </StaticVariables>
+ <Actions first_action="41">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VIN_Len"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="39"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Len"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="27" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;IS_Straggler&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQR&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQT&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;PROD_LOT&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:26}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="IS_Straggler Name" name="plc_STRAGGLER"/>
+    <LocalVariable logical_name="IS_Straggler" name="Straggler"/>
+    <StaticVariable logical_name="SQR Name" name="plc_SQR"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <StaticVariable logical_name="SQT Name" name="plc_SQT"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <StaticVariable logical_name="PROD_LOT Name" name="plc_PROD_LOT"/>
+    <LocalVariable logical_name="PROD_LOT" name="Prod_lot"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(Trigger) - VIN: $(VIN), PROD_LOT: $(Prod_Lot), QTY_Remain: $(SQR), QTY_Total: $(SQT), IS_Straggler: $(Isstraggler) written to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="Prod_Lot" name="Prod_lot"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <LocalVariable logical_name="Isstraggler" name="Straggler"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="39" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(Trigger) -  Invalid VIN: $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductID" name="VIN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="41" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="plc_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="42"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="42" disabled="false">
+   <Properties>
+    <Property name="expression" value="Data_Ready==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Data_Ready" name="Data_Ready"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="44"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="44" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="45" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Error_msg&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:80},&#10;&quot;Prod_Lot_Ack&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1, &quot;length&quot;:2}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Error_msg Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Error_msg" value="Invalid VIN"/>
+    <StaticVariable logical_name="Prod_Lot_Ack Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Prod_Lot_Ack" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="49" disabled="false">
+   <Properties>
+    <Property name="name" value="TWE_DataCollection"/>
+    <Property name="version" value="-277081160"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CLIENT_ID" name="Device_ID"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="Processpoint_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="REMAIN_QTY" name="SQR"/>
+    <LocalVariable logical_name="TOTAL_QTY" name="SQT"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="Straggler"/>
+    <LocalVariable logical_name="PRODUCTION_LOT" name="Prod_lot"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="27"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="50" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="51" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="52" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_UpdateTracking_Frame_Prod"/>
+    <Property name="version" value="1594138111"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+    <LocalVariable logical_name="ProcessPointId" name="Processpoint_ID"/>
+    <ConstantVariable logical_name="ProductType" value="FRAME"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="49"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="54" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_DATA_READY_ACK"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="listener" name="AZZ1_AiristaListener" nlsid="30035" interface="1"><exportitem type="listener" name="AZZ1_AiristaListener" nlsid="30035">
+<Listener version="-943120879">
+					<TCP enable_staging_copy="false" logEnabled="false" maxConnections="100" maxMessageSize="2" msgTimeout="60" name="AZZ1_AiristaListener" port="4001" reply="true" termination="0x0a" type="TCP">
+						<RequestFormat>
+							<ASCII arrayDelim="|" dataDelim="," encoding="UTF-8" eventOffset="0"/>
+						</RequestFormat>
+						<AllowedAddresses>
+							<Allow address="10.0.0.0/32"/>
+						</AllowedAddresses>
+					</TCP>
+				</Listener></exportitem></exportcontent>
+
+<exportcontent type="listenerevent" name="AWE2_AiristaWEMerge" nlsid="30036" interface="1"><exportitem type="listenerevent" name="AWE2_AiristaWEMerge" nlsid="30036">
+
+<ListenerEventDef id="AWE2_AiristaWEMerge" version="1174446574">
+	<Listener id="AZZ1_AiristaListener" type="TCP"/>
+	<NotificationMap>
+		<Variable count="1" length="32" name="VinNo" type="STRING"/>
+		<Variable count="1" length="10" name="Model" type="STRING"/>
+		<Variable count="1" name="deviceId" type="INT8"/>
+		<Variable count="1" name="itemId" type="INT8"/>
+		<Variable count="1" length="3" name="deptLine" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+		<Variable count="1" length="32" name="psuName" type="STRING"/>
+		<Variable count="1" length="64" name="ipAddress" type="STRING"/>
+		<Variable count="1" length="255" name="Args" type="STRING"/>
+		<Variable count="1" name="typeId" type="INT8"/>
+		<Variable count="1" name="sequenceNo" type="INT8"/>
+		<Variable count="1" length="32" name="type" type="STRING"/>
+	</NotificationMap>
+	<CompletionMap>
+		<Variable count="1" length="32" name="Result" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+	</CompletionMap>
+	<Mapping>
+		<InboundMap outputformat="A">
+			<Item name="transactionId" offset="1"/>
+			<Item name="deptLine" offset="2"/>
+			<Item name="VinNo" offset="3"/>
+			<Item name="Model" offset="4"/>
+			<Item name="typeId" offset="5"/>
+			<Item name="sequenceNo" offset="6"/>
+			<Item name="deviceId" offset="7"/>
+			<Item name="itemId" offset="8"/>
+			<Item name="psuName" offset="9"/>
+			<Item name="ipAddress" offset="10"/>
+			<Item name="Args" offset="11"/>
+			<Item name="type" offset="12"/>
+		</InboundMap>
+		<OutboundMap arrayDelim="|" delimiter="," outputformat="A"/>
+	</Mapping>
+</ListenerEventDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="WELD_MERGE_Accord/AWE2_Tunnel_C_Vinpresent" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="WELD_MERGE_Accord/AWE2_Tunnel_C_Vinpresent" nlsid="30031">
+<Trigger name="AWE2_Tunnel_C_Vinpresent" project="WELD_MERGE_Accord" max_pending="1" reporting="on">
+ <Context value="Listener|55~14~15~9~27~29~39~10~45~49~50~51~52~54~13~56~57~58~59~11~60~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-475"/>
+		<Node id="55" type="3" x="50" y="-400"/>
+		<Node id="14" type="3" x="425" y="275"/>
+		<Node id="15" type="3" x="425" y="350"/>
+		<Node id="9" type="3" x="50" y="825"/>
+		<Node id="27" type="3" x="50" y="600"/>
+		<Node id="29" type="3" x="50" y="750"/>
+		<Node id="39" type="3" x="-125" y="200"/>
+		<Node id="10" type="3" x="50" y="150"/>
+		<Node id="45" type="3" x="-125" y="275"/>
+		<Node id="49" type="3" x="50" y="500"/>
+		<Node id="50" type="3" x="-125" y="350"/>
+		<Node id="51" type="3" x="50" y="675"/>
+		<Node id="52" type="3" x="50" y="400"/>
+		<Node id="54" type="3" x="50" y="250"/>
+		<Node id="13" type="3" x="425" y="200"/>
+		<Node id="56" type="3" x="50" y="-325"/>
+		<Node id="57" type="3" x="50" y="-250"/>
+		<Node id="58" type="3" x="50" y="-175"/>
+		<Node id="59" type="3" x="50" y="-100"/>
+		<Node id="11" type="3" x="50" y="75"/>
+		<Node id="60" type="3" x="50" y="-25"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="425" y="125"/>
+		<RoutedErrors value="55.1|27.1|29.1|39.1|10.2|45.1|49.1|51.1|52.1|54.1|56.1|57.1|58.1|59.1|11.1|60.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE2_AiristaWEMerge" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="VIN_Len" type="INT4" options="3"/>
+  <VariableInfo name="Data_Ready" type="BOOL" options="3"/>
+  <VariableInfo name="Straggler" type="BOOL" options="3"/>
+  <VariableInfo name="Processpoint_ID" type="STRING" length="32" options="3" default="AWE1MR1P00102"/>
+  <VariableInfo name="SQR" type="INT4" options="3"/>
+  <VariableInfo name="Error_msg" type="STRING" length="80" options="3"/>
+  <VariableInfo name="Prod_lot" type="STRING" length="20" options="3"/>
+  <VariableInfo name="SQT" type="INT4" options="3"/>
+  <VariableInfo name="ymtoc" type="STRING" length="30" options="3"/>
+  <VariableInfo name="VIN" type="STRING" length="32" options="3"/>
+  <VariableInfo name="Device_ID" type="STRING" length="32" options="3" default="AWE1MR1D00102"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plc_DATA_READY_ACK" type="STRING" length="32" options="3" default="CIO[5000,1]"/>
+  <VariableInfo name="Prod_LOT DATA_READY" type="STRING" length="10" options="3" default="CIO[5000,4]"/>
+  <VariableInfo name="plc_SQR" type="STRING" length="40" options="3" default="DM[500]"/>
+  <VariableInfo name="plc_DATA_READY" type="STRING" length="10" options="3" default="CIO[5000,0]"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE_WELD_MERGE"/>
+  <VariableInfo name="plc_PROD_LOT" type="STRING" length="32" options="3" default="DM[4020]"/>
+  <VariableInfo name="plc_SQT" type="STRING" length="18" options="3" default="DM[501]"/>
+  <VariableInfo name="plc_STRAGGLER" type="STRING" length="32" options="3" default="DM[502]"/>
+  <VariableInfo name="plc_ERROR_CODE" type="STRING" length="10" options="3" default="DM[4050]"/>
+  <VariableInfo name="plcVINDataReady" type="STRING" length="32" options="3" default="CIO[5000,2]"/>
+  <VariableInfo name="plcVINDataReadyAck" type="STRING" length="32" options="3" default="CIO[5000,3]"/>
+  <VariableInfo name="plcProductID" type="STRING" length="18" options="3" default="DM[8009]"/>
+ </StaticVariables>
+ <Actions first_action="55">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VIN_Len"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="39"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Len"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="27" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;IS_Straggler&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQR&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQT&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;PROD_LOT&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:26}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="IS_Straggler Name" name="plc_STRAGGLER"/>
+    <LocalVariable logical_name="IS_Straggler" name="Straggler"/>
+    <StaticVariable logical_name="SQR Name" name="plc_SQR"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <StaticVariable logical_name="SQT Name" name="plc_SQT"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <StaticVariable logical_name="PROD_LOT Name" name="plc_PROD_LOT"/>
+    <LocalVariable logical_name="PROD_LOT" name="Prod_lot"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(Trigger) - VIN: $(VIN), PROD_LOT: $(Prod_Lot), QTY_Remain: $(SQR), QTY_Total: $(SQT), IS_Straggler: $(Isstraggler) written to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="Prod_Lot" name="Prod_lot"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <LocalVariable logical_name="Isstraggler" name="Straggler"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="39" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel Station A"/>
+    <Property name="msg" value="$(Trigger) -  Invalid VIN: $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductID" name="VIN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="45" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Error_msg&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:80},&#10;&quot;Prod_Lot_Ack&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1, &quot;length&quot;:2}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Error_msg Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Error_msg" value="Invalid VIN" delim=""/>
+    <StaticVariable logical_name="Prod_Lot_Ack Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Prod_Lot_Ack" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="49" disabled="false">
+   <Properties>
+    <Property name="name" value="TWE_DataCollection"/>
+    <Property name="version" value="-277081160"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CLIENT_ID" name="Device_ID"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="Processpoint_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="REMAIN_QTY" name="SQR"/>
+    <LocalVariable logical_name="TOTAL_QTY" name="SQT"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="Straggler"/>
+    <LocalVariable logical_name="PRODUCTION_LOT" name="Prod_lot"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="27"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="50" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="51" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="52" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_UpdateTracking_Frame_Prod"/>
+    <Property name="version" value="1594138111"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+    <LocalVariable logical_name="ProcessPointId" name="Processpoint_ID"/>
+    <ConstantVariable logical_name="ProductType" value="FRAME"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="49"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="54" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_DATA_READY_ACK"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="55" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVINDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="56" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductID"/>
+    <EventVariable logical_name="Value" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="57" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVINDataReady"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="58"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="58" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="59"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="59" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="WELD_MERGE_Acura"/>
+    <Property name="msg" value="WE1-VIN READ - Writtento PLC - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="60"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="60" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="VinNo"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="listenerevent" name="AWE1_AiristaWEMerge" nlsid="30036" interface="1"><exportitem type="listenerevent" name="AWE1_AiristaWEMerge" nlsid="30036">
+
+<ListenerEventDef id="AWE1_AiristaWEMerge" version="1174446574">
+	<Listener id="AZZ1_AiristaListener" type="TCP"/>
+	<NotificationMap>
+		<Variable count="1" length="32" name="VinNo" type="STRING"/>
+		<Variable count="1" length="10" name="Model" type="STRING"/>
+		<Variable count="1" name="deviceId" type="INT8"/>
+		<Variable count="1" name="itemId" type="INT8"/>
+		<Variable count="1" length="3" name="deptLine" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+		<Variable count="1" length="32" name="psuName" type="STRING"/>
+		<Variable count="1" length="64" name="ipAddress" type="STRING"/>
+		<Variable count="1" length="255" name="Args" type="STRING"/>
+		<Variable count="1" name="typeId" type="INT8"/>
+		<Variable count="1" name="sequenceNo" type="INT8"/>
+		<Variable count="1" length="32" name="type" type="STRING"/>
+	</NotificationMap>
+	<CompletionMap>
+		<Variable count="1" length="32" name="Result" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+	</CompletionMap>
+	<Mapping>
+		<InboundMap outputformat="A">
+			<Item name="transactionId" offset="1"/>
+			<Item name="deptLine" offset="2"/>
+			<Item name="VinNo" offset="3"/>
+			<Item name="Model" offset="4"/>
+			<Item name="typeId" offset="5"/>
+			<Item name="sequenceNo" offset="6"/>
+			<Item name="deviceId" offset="7"/>
+			<Item name="itemId" offset="8"/>
+			<Item name="psuName" offset="9"/>
+			<Item name="ipAddress" offset="10"/>
+			<Item name="Args" offset="11"/>
+			<Item name="type" offset="12"/>
+		</InboundMap>
+		<OutboundMap arrayDelim="|" delimiter="," outputformat="A"/>
+	</Mapping>
+</ListenerEventDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="WELD_MERGE_Accord/AiristaRFIDVinReadTest_AWE1" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="WELD_MERGE_Accord/AiristaRFIDVinReadTest_AWE1" nlsid="30031">
+<Trigger name="AiristaRFIDVinReadTest_AWE1" project="WELD_MERGE_Accord" max_pending="1" reporting="on">
+ <Context value="Listener|1~2~4~5~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="300"/>
+		<Node id="1" type="3" x="50" y="425"/>
+		<Node id="2" type="3" x="50" y="550"/>
+		<Node id="4" type="3" x="325" y="450"/>
+		<Node id="5" type="3" x="325" y="550"/>
+		<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="325" y="375"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE1_AiristaWEMerge" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LOGMSG" id="1" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="WELD_MERGE_Accord"/>
+    <Property name="msg" value="Product ID received from listener - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="WELD_MERGE_Accord"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="WELD_MERGE_Accord/AiristaRFIDVinRead_AWE2" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="WELD_MERGE_Accord/AiristaRFIDVinRead_AWE2" nlsid="30031">
+<Trigger name="AiristaRFIDVinRead_AWE2" project="WELD_MERGE_Accord" max_pending="1" reporting="on">
+ <Context value="Listener|9~2~4~5~1~7~8~6~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="125"/>
+		<Node id="6" type="3" x="50" y="275"/>
+		<Node id="2" type="3" x="50" y="600"/>
+		<Node id="4" type="3" x="325" y="450"/>
+		<Node id="5" type="3" x="325" y="550"/>
+		<Node id="1" type="3" x="50" y="500"/>
+		<Node id="7" type="3" x="50" y="350"/>
+		<Node id="8" type="3" x="50" y="425"/>
+		<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<Node id="9" type="3" x="50" y="200"/>
+		<RoutedErrors value="9.1|7.1|8.1|6.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE2_AiristaWEMerge" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDevice" type="STRING" length="32" options="3" default="AWE_WELD_MERGE"/>
+  <VariableInfo name="plcVINNo" type="STRING" length="32" options="3" default="DM[8009]"/>
+  <VariableInfo name="plcVINDataReady" type="STRING" length="32" options="3" default="CIO[5000,2]"/>
+  <VariableInfo name="plcVINDataReadyAck" type="STRING" length="32" options="3" default="CIO[5000,3]"/>
+ </StaticVariables>
+ <Actions first_action="9">
+  <Action type="LOGMSG" id="1" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="WELD_MERGE_Acura"/>
+    <Property name="msg" value="WE1-VIN READ - Writtento PLC - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="WELD_MERGE_Accord"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="6" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcVINNo"/>
+    <EventVariable logical_name="Value" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="7" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcVINDataReady"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="8" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcVINDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="WELD_MERGE_Accord/Tunnel_C_Barcode_Read" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="WELD_MERGE_Accord/Tunnel_C_Barcode_Read" nlsid="30031">
+<Trigger name="Tunnel_C_Barcode_Read" project="WELD_MERGE_Accord" max_pending="1" reporting="on">
+ <Context value="Data|41~11~13~14~15~9~27~29~39~10~42~44~45~49~50~51~52~54~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-175"/>
+		<Node id="41" type="3" x="50" y="-100"/>
+		<Node id="11" type="3" x="50" y="50"/>
+		<Node id="13" type="3" x="425" y="200"/>
+		<Node id="14" type="3" x="425" y="275"/>
+		<Node id="15" type="3" x="425" y="350"/>
+		<Node id="9" type="3" x="50" y="825"/>
+		<Node id="27" type="3" x="50" y="600"/>
+		<Node id="29" type="3" x="50" y="750"/>
+		<Node id="39" type="3" x="-125" y="200"/>
+		<Node id="10" type="3" x="50" y="150"/>
+		<Node id="42" type="3" x="50" y="-25"/>
+		<Node id="44" type="3" x="-150" y="25"/>
+		<Node id="45" type="3" x="-125" y="275"/>
+		<Node id="49" type="3" x="50" y="500"/>
+		<Node id="50" type="3" x="-125" y="350"/>
+		<Node id="51" type="3" x="50" y="675"/>
+		<Node id="52" type="3" x="50" y="400"/>
+		<Node id="54" type="3" x="50" y="250"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="425" y="125"/>
+		<RoutedErrors value="41.1|11.1|27.1|29.1|39.1|10.2|42.2|45.1|49.1|51.1|52.1|54.1|"/></BuildInfo>
+ <Event overview_string="Variable: AWE_WELD_MERGE.CIO[5000,11]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AWE_WELD_MERGE" name="CIO[5000,11]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="VIN_Len" type="INT4" options="3"/>
+  <VariableInfo name="Data_Ready" type="BOOL" options="3"/>
+  <VariableInfo name="Straggler" type="BOOL" options="3"/>
+  <VariableInfo name="Processpoint_ID" type="STRING" length="32" options="3" default="AWE1MR1P00101"/>
+  <VariableInfo name="SQR" type="INT4" options="3"/>
+  <VariableInfo name="Error_msg" type="STRING" length="80" options="3"/>
+  <VariableInfo name="Prod_lot" type="STRING" length="20" options="3"/>
+  <VariableInfo name="SQT" type="INT4" options="3"/>
+  <VariableInfo name="ymtoc" type="STRING" length="30" options="3"/>
+  <VariableInfo name="VIN" type="STRING" length="32" options="3"/>
+  <VariableInfo name="Device_ID" type="STRING" length="32" options="3" default="AWE1MR1D00101"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plc_DATA_READY_ACK" type="STRING" length="32" options="3" default="CIO[5000,12]"/>
+  <VariableInfo name="Prod_LOT DATA_READY" type="STRING" length="10" options="3" default="CIO[5000,4]"/>
+  <VariableInfo name="plc_SQR" type="STRING" length="40" options="3" default="DM[500]"/>
+  <VariableInfo name="plc_DATA_READY" type="STRING" length="10" options="3" default="CIO[5000,11]"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE_WELD_MERGE"/>
+  <VariableInfo name="plc_PROD_LOT" type="STRING" length="32" options="3" default="DM[4020]"/>
+  <VariableInfo name="plc_SQT" type="STRING" length="18" options="3" default="DM[501]"/>
+  <VariableInfo name="plc_STRAGGLER" type="STRING" length="32" options="3" default="DM[502]"/>
+  <VariableInfo name="plc_ERROR_CODE" type="STRING" length="10" options="3" default="DM[4050]"/>
+  <VariableInfo name="ProductID" type="STRING" length="18" options="3" default="DM[4008]"/>
+ </StaticVariables>
+ <Actions first_action="41">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VIN_Len"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="39"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Len"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Tunnel_C_Barcode_Read"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="27" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;IS_Straggler&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQR&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;SQT&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;&quot;PROD_LOT&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:26}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="IS_Straggler Name" name="plc_STRAGGLER"/>
+    <LocalVariable logical_name="IS_Straggler" name="Straggler"/>
+    <StaticVariable logical_name="SQR Name" name="plc_SQR"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <StaticVariable logical_name="SQT Name" name="plc_SQT"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <StaticVariable logical_name="PROD_LOT Name" name="plc_PROD_LOT"/>
+    <LocalVariable logical_name="PROD_LOT" name="Prod_lot"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel_C_Barcode_Read"/>
+    <Property name="msg" value="$(Trigger) - VIN: $(VIN), PROD_LOT: $(Prod_Lot), QTY_Remain: $(SQR), QTY_Total: $(SQT), IS_Straggler: $(Isstraggler) written to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="Prod_Lot" name="Prod_lot"/>
+    <LocalVariable logical_name="SQR" name="SQR"/>
+    <LocalVariable logical_name="SQT" name="SQT"/>
+    <LocalVariable logical_name="Isstraggler" name="Straggler"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="39" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Tunnel_C_Barcode_Read"/>
+    <Property name="msg" value="$(Trigger) -  Invalid VIN: $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductID" name="VIN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="41" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="plc_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="42"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="42" disabled="false">
+   <Properties>
+    <Property name="expression" value="Data_Ready==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Data_Ready" name="Data_Ready"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="44"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="44" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="45" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Error_msg&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:80},&#10;&quot;Prod_Lot_Ack&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1, &quot;length&quot;:2}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Error_msg Name" name="plc_ERROR_CODE"/>
+    <ConstantVariable logical_name="Error_msg" value="Invalid VIN"/>
+    <StaticVariable logical_name="Prod_Lot_Ack Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Prod_Lot_Ack" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="49" disabled="false">
+   <Properties>
+    <Property name="name" value="TWE_DataCollection"/>
+    <Property name="version" value="-277081160"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CLIENT_ID" name="Device_ID"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="Processpoint_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="REMAIN_QTY" name="SQR"/>
+    <LocalVariable logical_name="TOTAL_QTY" name="SQT"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="Straggler"/>
+    <LocalVariable logical_name="PRODUCTION_LOT" name="Prod_lot"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="27"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="50" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="51" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="Prod_LOT DATA_READY"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="52" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_UpdateTracking_Frame_Prod"/>
+    <Property name="version" value="1594138111"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+    <LocalVariable logical_name="ProcessPointId" name="Processpoint_ID"/>
+    <ConstantVariable logical_name="ProductType" value="FRAME"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="49"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="54" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="plc_DATA_READY_ACK"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="WELD_MERGE_Accord" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="WELD_MERGE_Accord" nlsid="30032">WELD_MERGE_Accord</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="WELD_MERGE_Accord" type="project">
+		<reference name="WELD_MERGE_Accord/AWE2_Tunnel_A_Vinpresent" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE_WELD_MERGE" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_UpdateTracking_Frame_Prod" type="transaction">
+				<reference name="GALC_MAPProd_Tracking_Track" type="transport"/>
+			</reference>
+			<reference name="TWE_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute_Prod" type="transport"/>
+			</reference>
+			<reference name="AWE_WELD_MERGE.CIO[1000,0]" type="variable"/>
+		</reference>
+		<reference name="WELD_MERGE_Accord/AWE2_Tunnel_C_Vinpresent" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE2_AiristaWEMerge" type="listenerevent">
+				<reference name="AZZ1_AiristaListener" type="listener"/>
+			</reference>
+			<reference name="GALC_UpdateTracking_Frame_Prod" type="transaction"/>
+			<reference name="TWE_DataCollection" type="transaction"/>
+		</reference>
+		<reference name="WELD_MERGE_Accord/AiristaRFIDVinReadTest_AWE1" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE1_AiristaWEMerge" type="listenerevent">
+				<reference name="AZZ1_AiristaListener" type="listener"/>
+			</reference>
+		</reference>
+		<reference name="WELD_MERGE_Accord/AiristaRFIDVinRead_AWE2" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE2_AiristaWEMerge" type="listenerevent"/>
+		</reference>
+		<reference name="WELD_MERGE_Accord/Tunnel_C_Barcode_Read" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE_WELD_MERGE" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_UpdateTracking_Frame_Prod" type="transaction"/>
+			<reference name="TWE_DataCollection" type="transaction"/>
+			<reference name="AWE_WELD_MERGE.CIO[5000,11]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

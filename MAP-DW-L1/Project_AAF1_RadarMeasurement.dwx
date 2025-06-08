@@ -1,0 +1,1465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_RadarMeasurement_Measurement_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="device" name="AAF1_RadarMeasurement_Measurement_PLC" nlsid="30030">
+<DeviceDefinition name="AAF1_RadarMeasurement_Measurement_PLC" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.87"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1281"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RadarMeasurement_Measurement_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RadarMeasurement_Measurement_DataCollection" nlsid="30033">
+
+				<TransactionDef id="AAF1_RadarMeasurement_Measurement_DataCollection" version="-1775134" version_mismatch="pass">
+					<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+					<InputMap>
+						<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+						<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+						<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+						<Variable count="1" name="FLUSH_VALUE_1" type="INT2"/>
+						<Variable count="1" name="FLUSH_VALUE_2" type="INT2"/>
+						<Variable count="1" name="FLUSH_VALUE_3" type="INT2"/>
+						<Variable count="1" name="B_MEASUREMENT_VALUE" type="INT2"/>
+						<Variable count="1" name="H_MEASUREMENT_VALUE" type="INT2"/>
+						<Variable count="1" length="32" name="RADARSET_SN" type="STRING"/>
+						<Variable count="1" length="32" name="FLUSH_RESULT_1" type="STRING"/>
+						<Variable count="1" length="32" name="FLUSH_RESULT_2" type="STRING"/>
+						<Variable count="1" length="32" name="FLUSH_RESULT_3" type="STRING"/>
+						<Variable count="1" length="32" name="B_MEASUREMENT_RESULT" type="STRING"/>
+						<Variable count="1" length="32" name="H_MEASUREMENT_RESULT" type="STRING"/>
+						<Variable count="1" length="32" name="RADARSET_STATUS" type="STRING"/>
+					</InputMap>
+					<OutputMap>
+						<Variable count="1" length="16" name="Reply_ProcessPointId" type="STRING"/>
+						<Variable count="1" length="32" name="Reply_ClientId" type="STRING"/>
+					</OutputMap>
+					<Response outputformat="JSON">
+						<JSONInfo rawJson="ew0KICAgIlBST0NFU1NfUE9JTlRfSUQiOiIiLA0KICAgIkNMSUVOVF9JRCI6IiIgDQp9">
+							<JSONRequest>
+								<Structure name="JSON_Object">
+									<Parameter dwType="16" name="Reply_ProcessPointId" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="Reply_ClientId" parmname="CLIENT_ID" type="STRING"/>
+								</Structure>
+							</JSONRequest>
+						</JSONInfo>
+					</Response>
+					<Mapping outputformat="JSON">
+						<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiRkxVU0hfVkFMVUVfMSI6ICIiLA0KICAgICAgICAiRkxVU0hfUkVTVUxUXzEiOiAiIiwNCiAgICAgICAgIkZMVVNIX1ZBTFVFXzIiOiAiIiwNCiAgICAgICAgIkZMVVNIX1JFU1VMVF8yIjogIiIsDQogICAgICAgICJGTFVTSF9WQUxVRV8zIjogIiIsDQogICAgICAgICJGTFVTSF9SRVNVTFRfMyI6ICIiLA0KICAgICAgICAiQl9NRUFTVVJFTUVOVF9WQUxVRSI6ICIiLA0KICAgICAgICAiQl9NRUFTVVJFTUVOVF9SRVNVTFQiOiAiIiwNCiAgICAgICAgIkhfTUVBU1VSRU1FTlRfVkFMVUUiOiAiIiwNCiAgICAgICAgIkhfTUVBU1VSRU1FTlRfUkVTVUxUIjogIiIsDQogICAgICAgICJSQURBUlNFVF9TTiI6ICIiLA0KICAgICAgICAiUkFEQVJTRVRfU1RBVFVTIjogIiIgICAgICAgDQoJDQoJfQ0KfSA=">
+							<JSONRequest>
+								<Structure name="JSON_Object">
+									<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_VALUE_1" parmname="FLUSH_VALUE_1" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_RESULT_1" parmname="FLUSH_RESULT_1" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_VALUE_2" parmname="FLUSH_VALUE_2" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_RESULT_2" parmname="FLUSH_RESULT_2" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_VALUE_3" parmname="FLUSH_VALUE_3" type="STRING"/>
+										<Parameter dwType="16" name="FLUSH_RESULT_3" parmname="FLUSH_RESULT_3" type="STRING"/>
+										<Parameter dwType="16" name="B_MEASUREMENT_VALUE" parmname="B_MEASUREMENT_VALUE" type="STRING"/>
+										<Parameter dwType="16" name="B_MEASUREMENT_RESULT" parmname="B_MEASUREMENT_RESULT" type="STRING"/>
+										<Parameter dwType="16" name="H_MEASUREMENT_VALUE" parmname="H_MEASUREMENT_VALUE" type="STRING"/>
+										<Parameter dwType="16" name="H_MEASUREMENT_RESULT" parmname="H_MEASUREMENT_RESULT" type="STRING"/>
+										<Parameter dwType="16" name="RADARSET_SN" parmname="RADARSET_SN" type="STRING"/>
+										<Parameter dwType="16" name="RADARSET_STATUS" parmname="RADARSET_STATUS" type="STRING"/>
+									</Structure>
+								</Structure>
+							</JSONRequest>
+						</JSONInfo>
+					</Mapping>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RadarMeasurement/DataCollection_Radar_Measurement" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RadarMeasurement/DataCollection_Radar_Measurement" nlsid="30031">
+<Trigger name="DataCollection_Radar_Measurement" project="AAF1_RadarMeasurement" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~10~7~8~3~2~11~5~12~13~14~6~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="1" type="3" x="-100" y="-25"/>
+			<Node id="10" type="3" x="100" y="150"/>
+			<Node id="7" type="3" x="-100" y="550"/>
+			<Node id="8" type="3" x="-100" y="650"/>
+			<Node id="3" type="3" x="-100" y="175"/>
+			<Node id="2" type="3" x="-100" y="50"/>
+			<Node id="11" type="3" x="-275" y="200"/>
+			<Node id="5" type="3" x="-100" y="375"/>
+			<Node id="12" type="3" x="100" y="0"/>
+			<Node id="13" type="3" x="-275" y="100"/>
+			<Node id="14" type="3" x="100" y="75"/>
+			<Node id="6" type="3" x="-100" y="475"/>
+			<Node errorActionId="9" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<RoutedErrors value="1.1|7.1|3.1|2.2|5.1|13.1|6.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AAF1_RadarMeasurement_Measurement_PLC.M[6002]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RadarMeasurement_Measurement_PLC" name="M[6002]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="FlushPlcData1" type="BOOL" length="56" options="3"/>
+  <VariableInfo name="BmeasurementPlcData" type="INT2" length="56" options="3"/>
+  <VariableInfo name="SKIP_OPERATION" type="STRING" length="255" options="3" default="TRUE"/>
+  <VariableInfo name="StepPlcData" type="INT2" length="56" options="3"/>
+  <VariableInfo name="FlushPlcData2" type="BOOL" length="56" options="3"/>
+  <VariableInfo name="RADAR_JUDGEMENT" type="BOOL" length="255" options="3"/>
+  <VariableInfo name="output" type="STRING" length="255" options="3"/>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="HmeasurementPlcData" type="INT2" length="56" options="3"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="255" options="3"/>
+  <VariableInfo name="FlushPlcData3" type="BOOL" length="56" options="3"/>
+  <VariableInfo name="JUDGEMENT" type="BOOL" length="255" options="3" default="1"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="CLIENT_ID_HLDC" type="STRING" length="32" options="3" default="AAF1WT5D00302A"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="39" options="3" default="AAF1_RadarMeasurement_Measurement_PLC"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="plcHmeasurement" type="STRING" length="32" options="3" default="D[4171]"/>
+  <VariableInfo name="plcFlush1" type="STRING" length="32" options="3" default="M[6005]"/>
+  <VariableInfo name="PROCESS_POINT_ID_HLDC" type="STRING" length="32" options="3" default="AAF1WT5P00302"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6002]"/>
+  <VariableInfo name="plcFlush2" type="STRING" length="32" options="3" default="M[6006]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+  <VariableInfo name="plcRadarset" type="STRING" length="32" options="3" default="M[6008]"/>
+  <VariableInfo name="plcJudgement" type="STRING" length="32" options="3" default="M[6009]"/>
+  <VariableInfo name="plcBmeasurement" type="STRING" length="32" options="3" default="D[4170]"/>
+  <VariableInfo name="plcFlush3" type="STRING" length="32" options="3" default="M[6007]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Comment>CFJldHJpZXZlIHRoZSBQcm9jZXNzIFJlc3VsdHM=</Comment>
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32},    &#13;&#10;    &#13;&#10;    &quot;FLUSH1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;FLUSH2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;FLUSH3&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},    &#13;&#10;    &quot;B_MEASUREMENT&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;H_MEASUREMENT&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;RADAR_JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}    &#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="FLUSH1 Name" name="plcFlush1"/>
+    <StaticVariable logical_name="FLUSH2 Name" name="plcFlush2"/>
+    <StaticVariable logical_name="FLUSH3 Name" name="plcFlush3"/>
+    <StaticVariable logical_name="B_MEASUREMENT Name" name="plcBmeasurement"/>
+    <StaticVariable logical_name="H_MEASUREMENT Name" name="plcHmeasurement"/>
+    <StaticVariable logical_name="JUDGEMENT Name" name="plcJudgement"/>
+    <StaticVariable logical_name="RADAR_JUDGEMENT Name" name="plcRadarset"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="FLUSH1" name="FlushPlcData1"/>
+    <LocalVariable logical_name="FLUSH2" name="FlushPlcData2"/>
+    <LocalVariable logical_name="FLUSH3" name="FlushPlcData3"/>
+    <LocalVariable logical_name="B_MEASUREMENT" name="BmeasurementPlcData"/>
+    <LocalVariable logical_name="H_MEASUREMENT" name="HmeasurementPlcData"/>
+    <LocalVariable logical_name="JUDGEMENT" name="JUDGEMENT"/>
+    <LocalVariable logical_name="RADAR_JUDGEMENT" name="RADAR_JUDGEMENT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="5" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RadarMeasurement_Measurement_DataCollection"/>
+    <Property name="version" value="-1775134"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID_HLDC"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID_HLDC"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="FLUSH_VALUE_1" name="FlushPlcData1"/>
+    <LocalVariable logical_name="FLUSH_VALUE_2" name="FlushPlcData2"/>
+    <LocalVariable logical_name="FLUSH_VALUE_3" name="FlushPlcData3"/>
+    <LocalVariable logical_name="B_MEASUREMENT_VALUE" name="BmeasurementPlcData"/>
+    <LocalVariable logical_name="H_MEASUREMENT_VALUE" name="HmeasurementPlcData"/>
+    <LocalVariable logical_name="RADARSET_SN" name="RADAR_JUDGEMENT"/>
+    <LocalVariable logical_name="FLUSH_RESULT_1" name="JUDGEMENT"/>
+    <LocalVariable logical_name="FLUSH_RESULT_2" name="JUDGEMENT"/>
+    <LocalVariable logical_name="FLUSH_RESULT_3" name="JUDGEMENT"/>
+    <LocalVariable logical_name="B_MEASUREMENT_RESULT" name="JUDGEMENT"/>
+    <LocalVariable logical_name="H_MEASUREMENT_RESULT" name="JUDGEMENT"/>
+    <LocalVariable logical_name="RADARSET_STATUS" name="RADAR_JUDGEMENT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="6" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &#13;&#10;    &quot;ENABLE&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <ConstantVariable logical_name="PRODUCTID" value="99999999999999999 "/>
+    <StaticVariable logical_name="ENABLE Name" name="plcEnable"/>
+    <ConstantVariable logical_name="ENABLE" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="7" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RadarMeasurement"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_RadarMeasurement_Press_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="device" name="AAF1_RadarMeasurement_Press_PLC" nlsid="30030">
+<DeviceDefinition name="AAF1_RadarMeasurement_Press_PLC" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.86"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1281"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RadarMeasurement_Press_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RadarMeasurement_Press_DataCollection" nlsid="30033">
+
+<TransactionDef id="AAF1_RadarMeasurement_Press_DataCollection" version="1211290187" version_mismatch="pass">
+	<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+		<Variable count="1" name="FORCE_VALUE_1" type="INT2"/>
+		<Variable count="1" name="FORCE_VALUE_2" type="INT2"/>
+		<Variable count="1" name="FORCE_VALUE_3" type="INT2"/>
+		<Variable count="1" name="DISTANCE_VALUE_1" type="INT2"/>
+		<Variable count="1" name="DISTANCE_VALUE_2" type="INT2"/>
+		<Variable count="1" name="DISTANCE_VALUE_3" type="INT2"/>
+		<Variable count="1" length="32" name="FORCE_RESULT_1" type="STRING"/>
+		<Variable count="1" length="32" name="FORCE_RESULT_2" type="STRING"/>
+		<Variable count="1" length="32" name="FORCE_RESULT_3" type="STRING"/>
+		<Variable count="1" length="32" name="DISTANCE_RESULT_1" type="STRING"/>
+		<Variable count="1" length="32" name="DISTANCE_RESULT_2" type="STRING"/>
+		<Variable count="1" length="32" name="DISTANCE_RESULT_3" type="STRING"/>
+		<Variable count="1" length="32" name="RADARSET_SN" type="STRING"/>
+		<Variable count="1" length="32" name="RADARSET_STATUS" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" length="16" name="Reply_ProcessPointId" type="STRING"/>
+		<Variable count="1" length="32" name="Reply_ClientId" type="STRING"/>
+	</OutputMap>
+	<Response outputformat="JSON">
+		<JSONInfo rawJson="ew0KICAgIlBST0NFU1NfUE9JTlRfSUQiOiIiLA0KICAgIkNMSUVOVF9JRCI6IiIgDQp9">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Parameter dwType="16" name="Reply_ProcessPointId" parmname="PROCESS_POINT_ID" type="STRING"/>
+					<Parameter dwType="16" name="Reply_ClientId" parmname="CLIENT_ID" type="STRING"/>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Response>
+	<Mapping outputformat="JSON">
+		<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiRk9SQ0VfVkFMVUVfMSI6ICIiLA0KICAgICAgICAiRk9SQ0VfUkVTVUxUXzEiOiAiIiwNCiAgICAgICAgIkZPUkNFX1ZBTFVFXzIiOiAiIiwNCiAgICAgICAgIkZPUkNFX1JFU1VMVF8yIjogIiIsDQogICAgICAgICJGT1JDRV9WQUxVRV8zIjogIiIsDQogICAgICAgICJGT1JDRV9SRVNVTFRfMyI6ICIiLA0KICAgICAgICAiRElTVEFOQ0VfVkFMVUVfMSI6ICIiLA0KICAgICAgICAiRElTVEFOQ0VfUkVTVUxUXzEiOiAiIiwNCiAgICAgICAgIkRJU1RBTkNFX1ZBTFVFXzIiOiAiIiwNCiAgICAgICAgIkRJU1RBTkNFX1JFU1VMVF8yIjogIiIsDQogICAgICAgICJESVNUQU5DRV9WQUxVRV8zIjogIiIsDQogICAgICAgICJESVNUQU5DRV9SRVNVTFRfMyI6ICIiLA0KICAgICAgICAiUkFEQVJTRVRfU04iOiAiIiwNCiAgICAgICAgIlJBREFSU0VUX1NUQVRVUyI6ICIiICAgIA0KCQ0KCX0NCn0g">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Structure name="com-honda-galc-data-DefaultDataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_VALUE_1" parmname="FORCE_VALUE_1" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_RESULT_1" parmname="FORCE_RESULT_1" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_VALUE_2" parmname="FORCE_VALUE_2" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_RESULT_2" parmname="FORCE_RESULT_2" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_VALUE_3" parmname="FORCE_VALUE_3" type="STRING"/>
+						<Parameter dwType="16" name="FORCE_RESULT_3" parmname="FORCE_RESULT_3" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_VALUE_1" parmname="DISTANCE_VALUE_1" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_RESULT_1" parmname="DISTANCE_RESULT_1" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_VALUE_2" parmname="DISTANCE_VALUE_2" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_RESULT_2" parmname="DISTANCE_RESULT_2" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_VALUE_3" parmname="DISTANCE_VALUE_3" type="STRING"/>
+						<Parameter dwType="16" name="DISTANCE_RESULT_3" parmname="DISTANCE_RESULT_3" type="STRING"/>
+						<Parameter dwType="16" name="RADARSET_SN" parmname="RADARSET_SN" type="STRING"/>
+						<Parameter dwType="16" name="RADARSET_STATUS" parmname="RADARSET_STATUS" type="STRING"/>
+					</Structure>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductOnService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductOnService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="998674033"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_MbpnProductOnService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductOnService/execute" id="GALC_MbpnProductOnService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_CreateUID" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_CreateUID" nlsid="30033">
+
+<TransactionDef id="GALC_CreateUID" version="517177273" version_mismatch="pass">
+	<Transport id="GALC_MbpnProductOnService_Execute" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="16" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+		<Variable count="1" length="30" name="PRODUCT_SPEC_CODE" type="STRING"/>
+		<Variable count="1" length="20" name="PRODUCTION_LOT" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="ERROR_CODE" type="STRING"/>
+		<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+	</OutputMap>
+	<Response outputformat="JSON">
+		<JSONInfo rawJson="ew0KICAgIlBST0NFU1NfUE9JTlRfSUQiOiIiLA0KICAgIkNMSUVOVF9JRCI6IiIgLA0KICAgIkVSUk9SX0NPREUiOiIiLA0KICAgIkRBVEFfQ09MTEVDVElPTl9DT01QTEVURSI6IiINCn0=">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+					<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+					<Parameter dwType="16" name="ERROR_CODE" parmname="ERROR_CODE" type="STRING"/>
+					<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Response>
+	<Mapping outputformat="JSON">
+		<JSONInfo rawJson="Ww0KICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9TUEVDX0NPREUiOiIiLA0KICAgICAgIlBST0RVQ1RJT05fTE9UIjoiIg0KICAgICAgfQ0KICAgIH0NCiAgXQ==">
+			<JSONRequest>
+				<Table name="JSON_Array" nbrInRows="1">
+					<Structure name="com-honda-galc-data-DefaultDataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_SPEC_CODE" parmname="PRODUCT_SPEC_CODE" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCTION_LOT" parmname="PRODUCTION_LOT" type="STRING"/>
+					</Structure>
+				</Table>
+			</JSONRequest>
+		</JSONInfo>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RadarMeasurement/DataCollection_Radar_Press" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RadarMeasurement/DataCollection_Radar_Press" nlsid="30031">
+<Trigger name="DataCollection_Radar_Press" project="AAF1_RadarMeasurement" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~9~10~3~7~13~14~8~6~4~5~15~2~16~17~12~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="125"/>
+			<Node id="1" type="3" x="-100" y="300"/>
+			<Node id="9" type="3" x="-100" y="1100"/>
+			<Node id="10" type="3" x="-100" y="1200"/>
+			<Node id="3" type="3" x="-100" y="525"/>
+			<Node id="7" type="3" x="-100" y="925"/>
+			<Node id="13" type="3" x="125" y="300"/>
+			<Node id="14" type="3" x="125" y="375"/>
+			<Node id="8" type="3" x="-100" y="1025"/>
+			<Node id="6" type="3" x="-100" y="825"/>
+			<Node id="4" type="3" x="-100" y="625"/>
+			<Node id="5" type="3" x="-100" y="725"/>
+			<Node id="15" type="3" x="-275" y="725"/>
+			<Node id="2" type="3" x="-100" y="400"/>
+			<Node id="16" type="3" x="-250" y="450"/>
+			<Node id="17" type="3" x="-250" y="550"/>
+			<Node id="12" type="3" x="125" y="450"/>
+			<Node errorActionId="11" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="125" y="225"/>
+			<RoutedErrors value="1.1|9.1|3.1|7.1|8.1|6.1|4.2|5.1|15.1|2.2|16.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AAF1_RadarMeasurement_Press_PLC.M[6002]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RadarMeasurement_Press_PLC" name="M[6002]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ForcePlcData" type="INT2" xdim="3" length="56" options="3"/>
+  <VariableInfo name="DistancePlcData" type="INT2" xdim="3" length="56" options="3"/>
+  <VariableInfo name="SKIP_OPERATION" type="STRING" length="255" options="3" default="TRUE"/>
+  <VariableInfo name="DATA_READY_COLLECTION" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="RADAR_JUDGEMENT" type="BOOL" options="3" default="1"/>
+  <VariableInfo name="output" type="STRING" length="255" options="3"/>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="32" options="3"/>
+  <VariableInfo name="JUDGEMENT" type="BOOL" length="255" options="3" default="1"/>
+  <VariableInfo name="PRODUCT_SPEC_CODE" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PROD_SPEC_CODE_2" type="STRING" length="32" options="3" default="36801TGZ A000"/>
+  <VariableInfo name="CLIENT_ID_HLDC" type="STRING" length="32" options="3" default="AAF1FE1D00301A"/>
+  <VariableInfo name="plcDistance" type="STRING" xdim="3" length="32" options="3" default="D[4173],D[4177],D[4181]"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="33" options="3" default="AAF1_RadarMeasurement_Press_PLC"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="PROCESS_POINT_ID_HLDC" type="STRING" length="32" options="3" default="AAF1FE1P00301"/>
+  <VariableInfo name="CLIENT_ID_HLUID" type="STRING" length="32" options="3" default="AAF1FE1D00301B"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcForce" type="STRING" xdim="3" length="32" options="3" default="D[4171],D[4175],D[4179]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+  <VariableInfo name="PROD_SPEC_CODE_1" type="STRING" length="32" options="3" default="36801TGV A000"/>
+  <VariableInfo name="plcJudgement" type="STRING" length="32" options="3" default="M[6006]"/>
+  <VariableInfo name="plcDataReadyCollection" type="STRING" length="32" options="3" default="M[6002]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyCollection"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY_COLLECTION"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY_COLLECTION"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY_COLLECTION" name="DATA_READY_COLLECTION"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="16"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Comment>CFJldHJpZXZlIHRoZSBQcm9jZXNzIFJlc3VsdHM=</Comment>
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32},    &#13;&#10;    &#13;&#10;    &quot;FORCE1&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;FORCE2&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;FORCE3&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},    &#13;&#10;    &quot;DISTANCE1&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;DISTANCE2&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;DISTANCE3&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}    &#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="FORCE1 Name" name="plcForce[0]"/>
+    <StaticVariable logical_name="FORCE2 Name" name="plcForce[1]"/>
+    <StaticVariable logical_name="FORCE3 Name" name="plcForce[2]"/>
+    <StaticVariable logical_name="DISTANCE1 Name" name="plcDistance[0]"/>
+    <StaticVariable logical_name="DISTANCE2 Name" name="plcDistance[1]"/>
+    <StaticVariable logical_name="DISTANCE3 Name" name="plcDistance[2]"/>
+    <StaticVariable logical_name="JUDGEMENT Name" name="plcJudgement"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="FORCE1" name="ForcePlcData[0]"/>
+    <LocalVariable logical_name="FORCE2" name="ForcePlcData[1]"/>
+    <LocalVariable logical_name="FORCE3" name="ForcePlcData[2]"/>
+    <LocalVariable logical_name="DISTANCE1" name="DistancePlcData[0]"/>
+    <LocalVariable logical_name="DISTANCE2" name="DistancePlcData[1]"/>
+    <LocalVariable logical_name="DISTANCE3" name="DistancePlcData[2]"/>
+    <LocalVariable logical_name="JUDGEMENT" name="JUDGEMENT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="4" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="Search String" value="TGV"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="PROD_SPEC_CODE_1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="PRODUCT_SPEC_CODE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_CreateUID"/>
+    <Property name="version" value="517177273"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID_HLUID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID_HLDC"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="PRODUCT_SPEC_CODE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RadarMeasurement_Press_DataCollection"/>
+    <Property name="version" value="1211290187"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID_HLDC"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID_HLDC"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="FORCE_VALUE_1" name="ForcePlcData[0]"/>
+    <LocalVariable logical_name="FORCE_VALUE_2" name="ForcePlcData[1]"/>
+    <LocalVariable logical_name="FORCE_VALUE_3" name="ForcePlcData[2]"/>
+    <LocalVariable logical_name="DISTANCE_VALUE_1" name="DistancePlcData[0]"/>
+    <LocalVariable logical_name="DISTANCE_VALUE_2" name="DistancePlcData[1]"/>
+    <LocalVariable logical_name="DISTANCE_VALUE_3" name="DistancePlcData[2]"/>
+    <LocalVariable logical_name="FORCE_RESULT_1" name="JUDGEMENT"/>
+    <LocalVariable logical_name="FORCE_RESULT_2" name="JUDGEMENT"/>
+    <LocalVariable logical_name="FORCE_RESULT_3" name="JUDGEMENT"/>
+    <LocalVariable logical_name="DISTANCE_RESULT_1" name="JUDGEMENT"/>
+    <LocalVariable logical_name="DISTANCE_RESULT_2" name="JUDGEMENT"/>
+    <LocalVariable logical_name="DISTANCE_RESULT_3" name="JUDGEMENT"/>
+    <LocalVariable logical_name="RADARSET_SN" name="RADAR_JUDGEMENT"/>
+    <LocalVariable logical_name="RADARSET_STATUS" name="RADAR_JUDGEMENT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="8" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &#13;&#10;    &quot;ENABLE&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <ConstantVariable logical_name="PRODUCTID" value="99999999999999999 "/>
+    <StaticVariable logical_name="ENABLE Name" name="plcEnable"/>
+    <ConstantVariable logical_name="ENABLE" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="12" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RadarMeasurement"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="15" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="PROD_SPEC_CODE_2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="PRODUCT_SPEC_CODE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="16" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Measurement" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Measurement" nlsid="30031">
+<Trigger name="DataReady_Radar_Measurement" project="AAF1_RadarMeasurement" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~6~4~2~8~9~10~5~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="1" type="3" x="-100" y="-25"/>
+			<Node id="6" type="3" x="100" y="150"/>
+			<Node id="4" type="3" x="-100" y="275"/>
+			<Node id="2" type="3" x="-100" y="50"/>
+			<Node id="8" type="3" x="-275" y="200"/>
+			<Node id="9" type="3" x="100" y="0"/>
+			<Node id="10" type="3" x="-275" y="100"/>
+			<Node id="5" type="3" x="100" y="75"/>
+			<Node id="3" type="3" x="-100" y="150"/>
+			<Node errorActionId="7" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<RoutedErrors value="1.1|2.2|10.1|3.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AAF1_RadarMeasurement_Measurement_PLC.M[6001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RadarMeasurement_Measurement_PLC" name="M[6001]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="37" options="3" default="AAF1_RadarMeasurement_Measurement_PLC"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;   &quot;ENABLED&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1},&#13;&#10;   &quot;DATAREADYACK&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="ENABLED Name" name="plcEnable"/>
+    <ConstantVariable logical_name="ENABLED" value="1"/>
+    <StaticVariable logical_name="DATAREADYACK Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="DATAREADYACK" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RadarMeasurement"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Press" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Press" nlsid="30031">
+<Trigger name="DataReady_Radar_Press" project="AAF1_RadarMeasurement" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~6~4~2~8~9~10~5~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="1" type="3" x="-100" y="-25"/>
+			<Node id="6" type="3" x="100" y="150"/>
+			<Node id="4" type="3" x="-100" y="275"/>
+			<Node id="2" type="3" x="-100" y="50"/>
+			<Node id="8" type="3" x="-275" y="200"/>
+			<Node id="9" type="3" x="100" y="0"/>
+			<Node id="10" type="3" x="-275" y="100"/>
+			<Node id="5" type="3" x="100" y="75"/>
+			<Node id="3" type="3" x="-100" y="150"/>
+			<Node errorActionId="7" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<RoutedErrors value="1.1|2.2|10.1|3.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AAF1_RadarMeasurement_Press_PLC.M[6001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RadarMeasurement_Press_PLC" name="M[6001]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="37" options="3" default="AAF1_RadarMeasurement_Press_PLC"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;   &quot;ENABLED&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1},&#13;&#10;   &quot;DATAREADYACK&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="ENABLED Name" name="plcEnable"/>
+    <ConstantVariable logical_name="ENABLED" value="1"/>
+    <StaticVariable logical_name="DATAREADYACK Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="DATAREADYACK" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RadarMeasurement"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Press_New" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RadarMeasurement/DataReady_Radar_Press_New" nlsid="30031">
+<Trigger name="DataReady_Radar_Press_New" project="AAF1_RadarMeasurement" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~6~4~2~8~9~10~5~3~11~12~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="1" type="3" x="-100" y="-25"/>
+			<Node id="6" type="3" x="100" y="150"/>
+			<Node id="4" type="3" x="-100" y="450"/>
+			<Node id="2" type="3" x="-100" y="50"/>
+			<Node id="8" type="3" x="-275" y="200"/>
+			<Node id="9" type="3" x="100" y="0"/>
+			<Node id="10" type="3" x="-275" y="100"/>
+			<Node id="5" type="3" x="100" y="75"/>
+			<Node id="3" type="3" x="-100" y="350"/>
+			<Node errorActionId="7" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<Node id="11" type="3" x="-100" y="150"/>
+			<Node id="12" type="3" x="-100" y="250"/>
+			<RoutedErrors value="1.1|2.2|10.1|3.1|11.1|12.2|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AAF1_RadarMeasurement_Press_PLC.M[6001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RadarMeasurement_Press_PLC" name="M[6001]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_RadarMeasurement_Press_PLC"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;   &quot;ENABLED&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1},&#13;&#10;   &quot;DATAREADYACK&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="ENABLED Name" name="plcEnable"/>
+    <ConstantVariable logical_name="ENABLED" value="1" delim=""/>
+    <StaticVariable logical_name="DATAREADYACK Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="DATAREADYACK" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RadarMeasurement"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="12" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="Search String" value="-TG" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_RadarMeasurement" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_RadarMeasurement" nlsid="30032">AAF1_RadarMeasurement</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_RadarMeasurement" type="project">
+		<reference name="AAF1_RadarMeasurement/DataCollection_Radar_Measurement" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RadarMeasurement_Measurement_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RadarMeasurement_Measurement_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_RadarMeasurement_Measurement_PLC.M[6002]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RadarMeasurement/DataCollection_Radar_Press" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RadarMeasurement_Press_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RadarMeasurement_Press_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="GALC_CreateUID" type="transaction">
+				<reference name="GALC_MbpnProductOnService_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_RadarMeasurement_Press_PLC.M[6002]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RadarMeasurement/DataReady_Radar_Measurement" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="AAF1_RadarMeasurement_Measurement_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RadarMeasurement_Measurement_PLC.M[6001]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RadarMeasurement/DataReady_Radar_Press" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="AAF1_RadarMeasurement_Press_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RadarMeasurement_Press_PLC.M[6001]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RadarMeasurement/DataReady_Radar_Press_New" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="AAF1_RadarMeasurement_Press_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RadarMeasurement_Press_PLC.M[6001]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_ON_DataToGALC" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_ON_DataToGALC" nlsid="30033">
+
+										<TransactionDef id="AAF1_ON_DataToGALC" version="928065346" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="UNIT_PRESENT" type="STRING"/>
+										<Variable count="1" length="32" name="OP_MODE" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJVTklUX1BSRVNFTlQiOiIiLA0KICAgICAiT1BfTU9ERSI6IiINCiB9DQogIH0NCl0=">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="UNIT_PRESENT" parmname="UNIT_PRESENT" type="STRING"/>
+										<Parameter dwType="16" name="OP_MODE" parmname="OP_MODE" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_DataToGALC" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_DataToGALC" nlsid="30031">
+<Trigger name="AAF1_AFON_DataToGALC" project="AAF1_AFON" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="10000">
+ <Context value="On-Demand|1~2~3~4~5~6~7~8~9~10~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="25"/>
+										<Node id="1" type="3" x="50" y="100"/>
+										<Node id="2" type="3" x="50" y="175"/>
+										<Node id="3" type="3" x="50" y="250"/>
+										<Node id="4" type="3" x="50" y="325"/>
+										<Node id="5" type="3" x="50" y="400"/>
+										<Node id="6" type="3" x="-75" y="400"/>
+										<Node id="7" type="3" x="50" y="475"/>
+										<Node id="8" type="3" x="50" y="550"/>
+										<Node id="9" type="3" x="175" y="100"/>
+										<Node id="10" type="3" x="175" y="175"/>
+										<Node errorActionId="11" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="175" y="25"/>
+										<RoutedErrors value="1.1|2.1|3.2|4.1|5.1|6.1|7.1|"/></BuildInfo>
+ <Event type="ONDEMAND">
+  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="unitPresent" type="BOOL" options="3"/>
+  <VariableInfo name="opMode" type="BOOL" length="8" options="3"/>
+  <VariableInfo name="productId" type="STRING" length="18" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="MEMORY_ADDRESS_UNIT_PRESENT" type="STRING" length="10" options="3" default="M[402]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_AFON"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="MEMORY_ADDRESS_OP_MODE" type="STRING" length="10" options="3" default="M[404]"/>
+  <VariableInfo name="MEMORY_ADDRESS_PRODUCT_ID" type="STRING" length="9" options="3" default="D[12000]"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="32" options="3" default="AAF1ON1D00101"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_UNIT_PRESENT)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_UNIT_PRESENT" name="MEMORY_ADDRESS_UNIT_PRESENT"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="unitPresent"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_OP_MODE)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_OP_MODE" name="MEMORY_ADDRESS_OP_MODE"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="opMode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="unitPresent == 1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="unitPresent" name="unitPresent"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_PRODUCT_ID)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_PRODUCT_ID" name="MEMORY_ADDRESS_PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="productId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="5" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_ON_DataToGALC"/>
+    <Property name="msg" value="Data to GALC: {&quot;PRODUCT_ID&quot;:&quot;$(productId)&quot;,&quot;UNIT_PRESENT&quot;:&quot;$(unitPresent)&quot;,&quot;OP_MODE&quot;:&quot;$(opMode)&quot;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productId" name="productId"/>
+    <LocalVariable logical_name="unitPresent" name="unitPresent"/>
+    <LocalVariable logical_name="opMode" name="opMode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_ON_DataToGALC"/>
+    <Property name="msg" value="Data to GALC: {&quot;PRODUCT_ID&quot;:&quot;&quot;,&quot;UNIT_PRESENT&quot;:&quot;$(unitPresent)&quot;,&quot;OP_MODE&quot;:&quot;$(opMode)&quot;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="unitPresent" name="unitPresent"/>
+    <LocalVariable logical_name="opMode" name="opMode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_ON_DataToGALC"/>
+    <Property name="version" value="928065346"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="productId"/>
+    <LocalVariable logical_name="UNIT_PRESENT" name="unitPresent"/>
+    <LocalVariable logical_name="OP_MODE" name="opMode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="TAF3_ON_UnitPresent"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_Heartbeat" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_Heartbeat" nlsid="30031">
+<Trigger name="AAF1_AFON_Heartbeat" project="AAF1_AFON" max_pending="1" queue_size="10" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Scheduled|1~2~3~4~6~7~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="25"/>
+										<Node id="1" type="3" x="50" y="100"/>
+										<Node id="2" type="3" x="50" y="175"/>
+										<Node id="3" type="3" x="50" y="250"/>
+										<Node id="4" type="3" x="50" y="325"/>
+										<Node id="6" type="3" x="175" y="100"/>
+										<Node id="7" type="3" x="175" y="175"/>
+										<Node errorActionId="5" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="175" y="25"/>
+										<RoutedErrors value="1.1|2.1|3.1|"/></BuildInfo>
+ <Event type="SCHEDULE"><schedule type="5">
+										<periodic sec="2500"/>
+										</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="heartbeatOut" type="BOOL" options="3"/>
+  <VariableInfo name="heartbeatIn" type="BOOL" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="MEMORY_ADDRESS_HEARTBEAT" type="STRING" length="10" options="3" default="M[401]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_AFON"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_HEARTBEAT)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_HEARTBEAT" name="MEMORY_ADDRESS_HEARTBEAT"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="heartbeatIn"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="1-heartbeatIn"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="heartbeatIn" name="heartbeatIn"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="heartbeatOut"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="3" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_HEARTBEAT)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_HEARTBEAT" name="MEMORY_ADDRESS_HEARTBEAT"/>
+    <LocalVariable logical_name="Value" name="heartbeatOut"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_ON_Heartbeat"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_Initialize" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_Initialize" nlsid="30031">
+<Trigger name="AAF1_AFON_Initialize" project="AAF1_AFON" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="35000">
+ <Context value="HTTP Page Listener|1~2~3~4~5~6~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-50"/>
+										<Node id="1" type="3" x="50" y="25"/>
+										<Node id="2" type="3" x="50" y="100"/>
+										<Node id="3" type="3" x="50" y="175"/>
+										<Node id="4" type="3" x="175" y="25"/>
+										<Node id="5" type="3" x="300" y="25"/>
+										<Node id="6" type="3" x="175" y="100"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/INITIALIZE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="WAIT" id="1" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="25000"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="TRIGGER_FIRE" id="2" disabled="false">
+   <Properties>
+    <Property name="dynamicnames" value="Static"/>
+    <Property name="project_name" value="AAF1_AFON"/>
+    <Property name="trigger_name" value="AAF1_AFON_DataToGALC"/>
+    <Property name="wait_for_completion" value="false"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRIGGER_FIRE" id="4" disabled="false">
+   <Properties>
+    <Property name="dynamicnames" value="Static"/>
+    <Property name="project_name" value="AAF1_AFON"/>
+    <Property name="trigger_name" value="AAF1_AFON_DataToGALC"/>
+    <Property name="wait_for_completion" value="false"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_Release" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_Release" nlsid="30031">
+<Trigger name="AAF1_AFON_Release" project="AAF1_AFON" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="10000">
+ <Context value="HTTP Page Listener|1~2~3~4~5~6~7~8~9~10~11~12~13~14~15~16~|user"/>
+ <BuildInfo><Node id="0" type="1" x="175" y="-900"/>
+										<Node id="1" type="3" x="175" y="-825"/>
+										<Node id="2" type="3" x="175" y="-750"/>
+										<Node id="3" type="3" x="175" y="-675"/>
+										<Node id="4" type="3" x="175" y="-600"/>
+										<Node id="5" type="3" x="175" y="-525"/>
+										<Node id="6" type="3" x="175" y="-450"/>
+										<Node id="7" type="3" x="175" y="-375"/>
+										<Node id="8" type="3" x="50" y="-375"/>
+										<Node id="9" type="3" x="-75" y="-375"/>
+										<Node id="10" type="3" x="175" y="-300"/>
+										<Node id="11" type="3" x="175" y="-225"/>
+										<Node id="12" type="3" x="175" y="-150"/>
+										<Node id="13" type="3" x="175" y="-75"/>
+										<Node id="14" type="3" x="300" y="-825"/>
+										<Node id="15" type="3" x="300" y="-750"/>
+										<Node id="16" type="3" x="300" y="-675"/>
+										<Node errorActionId="17" errorStartIndex="14" id="600000000" text="Error Handling" type="4" x="300" y="-900"/>
+										<RoutedErrors value="1.1|2.1|3.1|4.1|5.2|6.2|7.1|8.1|9.1|10.1|11.1|12.1|"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/RELEASE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="clientId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="httpContent" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="processPointId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="productId" type="STRING" length="18" options="3"/>
+  <VariableInfo name="unitRelease" type="BOOL" options="3"/>
+  <VariableInfo name="isError" type="BOOL" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_AFON"/>
+  <VariableInfo name="MEMORY_ADDRESS_IS_ERROR" type="STRING" length="10" options="3" default="M[400]"/>
+  <VariableInfo name="HTTP_CONTENT_TYPE_TEXT" type="STRING" length="10" options="3" default="text/plain"/>
+  <VariableInfo name="HTTP_CONTENT_TYPE_JSON" type="STRING" length="16" options="3" default="application/json"/>
+  <VariableInfo name="MEMORY_ADDRESS_UNIT_RELEASE" type="STRING" length="10" options="3" default="M[403]"/>
+  <VariableInfo name="HTTP_STATUS_CODE_OK" type="INT4" options="3" default="200"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="SET" id="1" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="HTTP_STATUS_CODE_OK"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Status Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="2" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="HTTP_CONTENT_TYPE_TEXT"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content-Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="3" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="1024"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="httpContent"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="JSON.DECODE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;CLIENT_ID&quot;:&quot;&quot;,&#13;&#10;    &quot;PROCESS_POINT_ID&quot;:&quot;&quot;,&#13;&#10;    &quot;UNIT_RELEASE&quot;:&quot;&quot;,&#13;&#10;    &quot;IS_ERROR&quot;:&quot;&quot;&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="JSON Input" name="httpContent"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CLIENT_ID" name="clientId"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="processPointId"/>
+    <LocalVariable logical_name="UNIT_RELEASE" name="unitRelease"/>
+    <LocalVariable logical_name="IS_ERROR" name="isError"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="isError"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="isError" name="isError"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="6" disabled="false">
+   <Properties>
+    <Property name="expression" value="unitRelease"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="unitRelease" name="unitRelease"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="8"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="7" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_ON_Release"/>
+    <Property name="msg" value="Data from GALC: {&quot;CLIENT_ID&quot;:&quot;$(clientId)&quot;,&quot;PROCESS_POINT_ID&quot;:&quot;$(processPointId)&quot;,&quot;UNIT_RELEASE&quot;:&quot;$(unitRelease)&quot;,&quot;IS_ERROR&quot;:&quot;$(isError)&quot;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="clientId" name="clientId"/>
+    <LocalVariable logical_name="processPointId" name="processPointId"/>
+    <LocalVariable logical_name="unitRelease" name="unitRelease"/>
+    <LocalVariable logical_name="isError" name="isError"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="AAF1_ON_Release"/>
+    <Property name="msg" value="Data from GALC: {&quot;CLIENT_ID&quot;:&quot;$(clientId)&quot;,&quot;PROCESS_POINT_ID&quot;:&quot;$(processPointId)&quot;,&quot;UNIT_RELEASE&quot;:&quot;$(unitRelease)&quot;,&quot;IS_ERROR&quot;:&quot;$(isError)&quot;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="clientId" name="clientId"/>
+    <LocalVariable logical_name="processPointId" name="processPointId"/>
+    <LocalVariable logical_name="unitRelease" name="unitRelease"/>
+    <LocalVariable logical_name="isError" name="isError"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_ON_Release"/>
+    <Property name="msg" value="Data from GALC: {&quot;CLIENT_ID&quot;:&quot;$(clientId)&quot;,&quot;PROCESS_POINT_ID&quot;:&quot;$(processPointId)&quot;,&quot;UNIT_RELEASE&quot;:&quot;$(unitRelease)&quot;,&quot;IS_ERROR&quot;:&quot;$(isError)&quot;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="clientId" name="clientId"/>
+    <LocalVariable logical_name="processPointId" name="processPointId"/>
+    <LocalVariable logical_name="unitRelease" name="unitRelease"/>
+    <LocalVariable logical_name="isError" name="isError"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_UNIT_RELEASE)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_UNIT_RELEASE" name="MEMORY_ADDRESS_UNIT_RELEASE"/>
+    <LocalVariable logical_name="Value" name="unitRelease"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(DEVICE_NAME)"/>
+    <Property name="var_name" value="$(MEMORY_ADDRESS_IS_ERROR)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DEVICE_NAME" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="MEMORY_ADDRESS_IS_ERROR" name="MEMORY_ADDRESS_IS_ERROR"/>
+    <LocalVariable logical_name="Value" name="isError"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="12" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Trigger success"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_ON_Release"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="15" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Trigger failure"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_Request" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_Request" nlsid="30031">
+<Trigger name="AAF1_AFON_Request" project="AAF1_AFON" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="10000">
+ <Context value="HTTP Page Listener|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="25"/>
+										<Node id="1" type="3" x="50" y="100"/>
+										<Node id="2" type="3" x="50" y="175"/>
+										<Node id="3" type="3" x="175" y="100"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/REQUEST"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="TRIGGER_FIRE" id="1" disabled="false">
+   <Properties>
+    <Property name="dynamicnames" value="Static"/>
+    <Property name="project_name" value="AAF1_AFON"/>
+    <Property name="trigger_name" value="AAF1_AFON_DataToGALC"/>
+    <Property name="wait_for_completion" value="false"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_AFON" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_AFON" nlsid="30030">
+<DeviceDefinition name="AAF1_AFON" type="166" type_name="RCPU (Built-in Ethernet)" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="ip_address" value="10.39.133.92"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="4096"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5016"/><Property name="sdpts" value="4096"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFON/AAF1_AFON_UnitPresent" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFON/AAF1_AFON_UnitPresent" nlsid="30031">
+<Trigger name="AAF1_AFON_UnitPresent" project="AAF1_AFON" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="10000">
+ <Context value="Data|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="25"/>
+										<Node id="1" type="3" x="50" y="100"/>
+										<Node id="2" type="3" x="50" y="175"/>
+										<Node id="3" type="3" x="175" y="100"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AAF1_AFON" name="M[402]" qos="2" type="BOOL"/>
+										<Condition deadband="0" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="TRIGGER_FIRE" id="1" disabled="false">
+   <Properties>
+    <Property name="dynamicnames" value="Static"/>
+    <Property name="project_name" value="AAF1_AFON"/>
+    <Property name="trigger_name" value="AAF1_AFON_DataToGALC"/>
+    <Property name="wait_for_completion" value="false"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_AFON" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportitem type="project" name="AAF1_AFON" nlsid="30032">AAF1_AFON</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_AFON" type="project">
+		<reference name="AAF1_AFON/AAF1_AFON_DataToGALC" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="ONDEMAND" type="eventtype"/>
+			<reference name="AAF1_ON_DataToGALC" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AAF1_AFON/AAF1_AFON_Heartbeat" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_AFON/AAF1_AFON_Initialize" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="TRIGGER_FIRE" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_AFON/AAF1_AFON_Release" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_AFON/AAF1_AFON_Request" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="TRIGGER_FIRE" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_AFON/AAF1_AFON_UnitPresent" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="TRIGGER_FIRE" type="actiontype"/>
+			<reference name="AAF1_AFON" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_AFON.M[402]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

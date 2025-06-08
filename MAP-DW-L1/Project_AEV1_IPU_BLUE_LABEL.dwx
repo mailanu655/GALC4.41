@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastResponse" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastResponse" nlsid="30033">
+<TransactionDef id="GALC_BroadcastResponse" version="1858569967" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="JUDGEMENT" type="STRING"/>
+										<Variable count="1" length="32" name="SKIP_OPERATION" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJKVURHRU1FTlQiOiAiIiwNCiAgICAgIlNLSVBfT1BFUkFUSU9OIjoiIg0KIH0NCiAgfQ0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JUDGEMENT" parmname="JUDGEMENT" type="STRING"/>
+										<Parameter dwType="16" name="SKIP_OPERATION" parmname="SKIP_OPERATION" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AEV1_IPU_BLUE_LABEL/Broadcast_IPU_BLUE_LABEL_COMPARE" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AEV1_IPU_BLUE_LABEL/Broadcast_IPU_BLUE_LABEL_COMPARE" nlsid="30031">
+<Trigger name="Broadcast_IPU_BLUE_LABEL_COMPARE" project="AEV1_IPU_BLUE_LABEL" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|4~3~1~6~29~30~41~42~43~44~45~46~47~48~49~50~54~56~57~58~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-50"/>
+			<Node id="4" type="3" x="-25" y="25"/>
+			<Node id="3" type="3" x="200" y="175"/>
+			<Node id="1" type="3" x="-300" y="625"/>
+			<Node id="6" type="3" x="200" y="100"/>
+			<Node id="29" type="3" x="-25" y="125"/>
+			<Node id="30" type="3" x="-25" y="200"/>
+			<Node id="41" type="3" x="-25" y="1000"/>
+			<Node id="42" type="3" x="-25" y="900"/>
+			<Node id="43" type="3" x="-25" y="275"/>
+			<Node id="44" type="3" x="-25" y="350"/>
+			<Node id="45" type="3" x="-300" y="525"/>
+			<Node id="46" type="3" x="-300" y="325"/>
+			<Node id="47" type="3" x="-175" y="400"/>
+			<Node id="48" type="3" x="-25" y="450"/>
+			<Node id="49" type="3" x="-25" y="525"/>
+			<Node id="50" type="3" x="-25" y="600"/>
+			<Node id="54" type="3" x="-25" y="675"/>
+			<Node id="56" type="3" x="-25" y="775"/>
+			<Node id="57" type="3" x="-200" y="900"/>
+			<Node id="58" type="3" x="-200" y="825"/>
+			<Node errorActionId="2" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="200" y="25"/>
+			<RoutedErrors value="4.1|29.1|30.2|42.1|43.1|44.2|45.1|46.1|47.1|48.1|49.1|50.1|54.1|56.2|57.1|58.1|"/></BuildInfo>
+ <Description>Receive a TCP broadcast message from GALC Client</Description>
+ <Event overview_string="Listener URL: /AEV1/IPU_BLUE_LABEL_COMPARE&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AEV1/IPU_BLUE_LABEL_COMPARE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LABEL_BARCODE_LENGTH" type="INT4" options="3"/>
+  <VariableInfo name="PRODUCT_ID_YEAR" type="STRING" length="32" options="3"/>
+  <VariableInfo name="PRODUCT_ID_DATE" type="INT4" options="3"/>
+  <VariableInfo name="LABEL_BARCODE_MONTH" type="STRING" length="2" options="3" default="0"/>
+  <VariableInfo name="LABEL_BARCODE_PROD_DATE" type="STRING" length="4" options="3"/>
+  <VariableInfo name="BLU_LABEL_BARCODE" type="STRING" length="100" options="3"/>
+  <VariableInfo name="LABEL_BARCODE_YEAR" type="STRING" length="2" options="3"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="PRODUCT_ID_PROD_DATE" type="STRING" length="4" options="3"/>
+  <VariableInfo name="VIN_LENGTH" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PostProcessPoint" type="STRING" length="32" options="3" default="AEV1PU1P00801"/>
+  <VariableInfo name="PostDeviceID" type="STRING" length="32" options="3" default="AEV1PU1D00801A"/>
+ </StaticVariables>
+ <Actions first_action="4">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="JSON.DECODE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;&quot;PRODUCT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;BLUE_LABEL_BARCODE&quot; : &quot;&quot;&#13;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="BLUE_LABEL_BARCODE" name="BLU_LABEL_BARCODE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AEV1_IPU_BLUE_LABEL"/>
+    <Property name="msg" value="$(Trigger) - Error Processing PRODUCT_ID ($(PRODUCT_ID)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="29" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_LENGTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="30" disabled="false">
+   <Properties>
+    <Property name="expression" value="VIN_LENGTH &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VIN_LENGTH" name="VIN_LENGTH"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="43"/>
+    <Route result="1" goto="46"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="41" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="42" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="PostDeviceID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PostProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="1"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="41"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="41"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="43" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BLU_LABEL_BARCODE"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="LABEL_BARCODE_LENGTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="44"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="44" disabled="false">
+   <Properties>
+    <Property name="expression" value="LABEL_LENGTH &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="LABEL_LENGTH" name="LABEL_BARCODE_LENGTH"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="47"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="45" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="PostDeviceID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PostProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="0"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="1"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="46" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AEV1_IPU_BLUE_LABEL"/>
+    <Property name="msg" value="$(Trigger) - Invalid PRODUCT ID : $(PRODUCT_ID)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="47" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AEV1_IPU_BLUE_LABEL"/>
+    <Property name="msg" value="$(Trigger) - Invalid BLUE LABEL Barcode : $(LABEL_BARCODE)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="LABEL_BARCODE" name="BLU_LABEL_BARCODE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="48" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="Start Offset" value="8"/>
+    <ConstantVariable logical_name="End Offset" value="11"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="PRODUCT_ID_PROD_DATE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="49" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BLU_LABEL_BARCODE"/>
+    <ConstantVariable logical_name="Start Offset" value="19"/>
+    <ConstantVariable logical_name="End Offset" value="20"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="LABEL_BARCODE_YEAR"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="50" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BLU_LABEL_BARCODE"/>
+    <ConstantVariable logical_name="Start Offset" value="13"/>
+    <ConstantVariable logical_name="End Offset" value="14"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="LABEL_BARCODE_MONTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="54" disabled="false">
+   <Properties>
+    <Property name="format" value="$(YEAR)$(MONTH)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="YEAR" name="LABEL_BARCODE_YEAR"/>
+    <LocalVariable logical_name="MONTH" name="LABEL_BARCODE_MONTH"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LABEL_BARCODE_PROD_DATE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="56" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LABEL_BARCODE_PROD_DATE"/>
+    <LocalVariable logical_name="Search String" name="PRODUCT_ID_PROD_DATE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="42"/>
+    <Route result="1" goto="58"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="57" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="PostDeviceID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PostProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="0"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="41"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="41"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="58" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AEV1_IPU_BLUE_LABEL"/>
+    <Property name="msg" value="$(Trigger) - PROD_DATE not Matching for PRODUCT_ID :  $(PRODUCT_ID) and LABEL_BARCODE : $(LABEL_BARCODE)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="LABEL_BARCODE" name="BLU_LABEL_BARCODE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AEV1_IPU_BLUE_LABEL" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AEV1_IPU_BLUE_LABEL" nlsid="30032">AEV1_IPU_BLUE_LABEL</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AEV1_IPU_BLUE_LABEL" type="project">
+		<reference name="AEV1_IPU_BLUE_LABEL/Broadcast_IPU_BLUE_LABEL_COMPARE" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

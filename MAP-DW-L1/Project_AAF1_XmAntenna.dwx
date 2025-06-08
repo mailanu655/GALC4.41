@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_XmAntenna" nlsid="30030" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="device" name="AAF1_XmAntenna" nlsid="30030">
+<DeviceDefinition name="AAF1_XmAntenna" type="51" type_name="Modbus Device" state="6" options="2104"><Properties><Property name="input_count" value="0"/><Property name="discrete_count" value="8"/><Property name="address" value="10.33.9.211"/><Property name="coils_count" value="8"/><Property name="timeout" value="5000"/><Property name="start_at_1" value="true"/><Property name="port" value="502"/><Property name="validate" value="Read Holding Register"/><Property name="holding_count" value="0"/><Property name="connection_type" value="Ethernet"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastResponse" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastResponse" nlsid="30033">
+<TransactionDef id="GALC_BroadcastResponse" version="1858569967" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="JUDGEMENT" type="STRING"/>
+										<Variable count="1" length="32" name="SKIP_OPERATION" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJKVURHRU1FTlQiOiAiIiwNCiAgICAgIlNLSVBfT1BFUkFUSU9OIjoiIg0KIH0NCiAgfQ0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JUDGEMENT" parmname="JUDGEMENT" type="STRING"/>
+										<Parameter dwType="16" name="SKIP_OPERATION" parmname="SKIP_OPERATION" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_XmAntenna/UnitPresent_Input4" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_XmAntenna/UnitPresent_Input4" nlsid="30031">
+<Trigger name="UnitPresent_Input4" project="AAF1_XmAntenna" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|7~6~5~8~9~11~12~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-100"/>
+										<Node id="7" type="3" x="50" y="-25"/>
+										<Node id="6" type="3" x="225" y="0"/>
+										<Node id="5" type="3" x="225" y="75"/>
+										<Node id="8" type="3" x="50" y="50"/>
+										<Node id="9" type="3" x="-75" y="100"/>
+										<Node id="11" type="3" x="50" y="200"/>
+										<Node id="12" type="3" x="50" y="125"/>
+										<Node errorActionId="4" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="225" y="-75"/>
+										<RoutedErrors value="7.1|8.2|12.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AAF1_XmAntenna" name="Discrete Inputs[10004]" qos="3" type="BOOL"/>
+										<Condition type="equalto" value="1"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UnitPresent2" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="UnitPresent1" type="BOOL" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_XmAntenna"/>
+  <VariableInfo name="plcCarrierPresent1" type="STRING" length="32" options="3" default="Discrete Inputs[10003]"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1DL1P00201"/>
+  <VariableInfo name="plcCarrierPresent2" type="STRING" length="32" options="3" default="Discrete Inputs[10004]"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="32" options="3" default="AAF1DL1D00201C"/>
+ </StaticVariables>
+ <Actions first_action="7">
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_XmAntenna"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception Code: $(ErrorCode), Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="7" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;UnitPresent1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;UnitPresent2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="UnitPresent1 Name" name="plcCarrierPresent1"/>
+    <StaticVariable logical_name="UnitPresent2 Name" name="plcCarrierPresent2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="UnitPresent1" name="UnitPresent1"/>
+    <LocalVariable logical_name="UnitPresent2" name="UnitPresent2"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="8" disabled="false">
+   <Properties>
+    <Property name="expression" value="UnitPresent1 &amp;&amp; UnitPresent2"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="UnitPresent1" name="UnitPresent1"/>
+    <LocalVariable logical_name="UnitPresent2" name="UnitPresent2"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="12" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="1"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_XmAntenna/UnitPresent_Input5" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_XmAntenna/UnitPresent_Input5" nlsid="30031">
+<Trigger name="UnitPresent_Input5" project="AAF1_XmAntenna" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|7~6~5~8~9~11~12~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="-100"/>
+		<Node id="7" type="3" x="50" y="-25"/>
+		<Node id="6" type="3" x="225" y="0"/>
+		<Node id="5" type="3" x="225" y="75"/>
+		<Node id="8" type="3" x="50" y="50"/>
+		<Node id="9" type="3" x="-75" y="100"/>
+		<Node id="11" type="3" x="50" y="200"/>
+		<Node id="12" type="3" x="50" y="125"/>
+		<Node errorActionId="4" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="225" y="-75"/>
+		<RoutedErrors value="7.1|8.2|12.1|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_XmAntenna.Discrete Inputs[10004]&#10;Condition: Equal to 1&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_XmAntenna" name="Discrete Inputs[10004]" qos="3" type="BOOL"/>
+			<Condition type="equalto" value="1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UnitPresent2" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="UnitPresent1" type="BOOL" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_XmAntenna"/>
+  <VariableInfo name="plcCarrierPresent1" type="STRING" length="32" options="3" default="Discrete Inputs[10003]"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1WT1P00801"/>
+  <VariableInfo name="plcCarrierPresent2" type="STRING" length="32" options="3" default="Discrete Inputs[10004]"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="32" options="3" default="AAF1WT1D00801C"/>
+ </StaticVariables>
+ <Actions first_action="7">
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_XmAntenna"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception Code: $(ErrorCode), Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="7" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;UnitPresent1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;UnitPresent2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="UnitPresent1 Name" name="plcCarrierPresent1"/>
+    <StaticVariable logical_name="UnitPresent2 Name" name="plcCarrierPresent2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="UnitPresent1" name="UnitPresent1"/>
+    <LocalVariable logical_name="UnitPresent2" name="UnitPresent2"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="8" disabled="false">
+   <Properties>
+    <Property name="expression" value="UnitPresent1 &amp;&amp; UnitPresent2"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="UnitPresent1" name="UnitPresent1"/>
+    <LocalVariable logical_name="UnitPresent2" name="UnitPresent2"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="12" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="1"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_XmAntenna" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_XmAntenna" nlsid="30032">AAF1_XmAntenna</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_XmAntenna" type="project">
+		<reference name="AAF1_XmAntenna/UnitPresent_Input4" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_XmAntenna" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_XmAntenna.Discrete Inputs[10004]" type="variable"/>
+		</reference>
+		<reference name="AAF1_XmAntenna/UnitPresent_Input5" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_XmAntenna" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction"/>
+			<reference name="AAF1_XmAntenna.Discrete Inputs[10004]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

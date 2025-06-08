@@ -1,0 +1,1717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="Utilities/LeftPadString" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/LeftPadString" nlsid="30031">
+<Trigger name="LeftPadString" project="Utilities" max_pending="10" reporting="onerr,ontimeout" max_exec_time_warning="2000">
+ <Context value="SubTrigger|18~4~5~6~3~9~11~13~15~7~19~20~21~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-375"/>
+										<Node id="18" type="3" x="-100" y="-300"/>
+										<Node id="4" type="3" x="-300" y="-25"/>
+										<Node id="5" type="3" x="-100" y="150"/>
+										<Node id="6" type="3" x="-100" y="225"/>
+										<Node id="3" type="3" x="-100" y="-75"/>
+										<Node id="9" type="3" x="-100" y="0"/>
+										<Node id="11" type="3" x="-100" y="75"/>
+										<Node id="13" type="3" x="-550" y="275"/>
+										<Node id="15" type="3" x="-550" y="200"/>
+										<Node id="7" type="3" x="-100" y="-150"/>
+										<Node id="19" type="3" x="-100" y="-225"/>
+										<Node id="20" type="3" x="-300" y="-175"/>
+										<Node id="21" type="3" x="-300" y="125"/>
+										<Node errorActionId="12" errorStartIndex="15" id="600000000" text="Error Handling" type="4" x="-550" y="-325"/>
+										<RoutedErrors value="18.1|4.1|5.1|3.1|9.2|11.2|7.1|19.2|20.1|21.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;30&quot; name=&quot;StringToPad&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;1&quot; name=&quot;PadChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;PaddedStringLength&quot; options=&quot;7&quot; type=&quot;INT4&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;30&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="CurrentStringLength" type="INT4" options="3"/>
+  <VariableInfo name="TempString" type="STRING" length="30" options="3"/>
+  <VariableInfo name="PadCharLength" type="INT1" options="3"/>
+  <VariableInfo name="InitialValue" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="18">
+  <Action type="STRING.LENGTH" id="3" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="CurrentStringLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="4" disabled="false">
+   <Comment>CEFkZCBwYWQgY2hhcmFjdGVyIHRvIGxlZnQgb2YgdGVtcCBzdHJpbmc=</Comment>
+   <Properties>
+    <Property name="format" value="$(PadChar)$(StringToPad)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="PadChar" name="PadChar"/>
+    <LocalVariable logical_name="StringToPad" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TempString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="StringToPad"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="TempString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="CurrentLength&gt;=PaddedLength"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CurrentLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="PaddedLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="11" disabled="false">
+   <Properties>
+    <Property name="expression" value="currentStringLength==padStringLength"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="currentStringLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="padStringLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="21"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="15" disabled="false">
+   <Comment>CERlZmF1bHQgdGhlIG91dHB1dCB0byBpbnB1dCBzdHJpbmc=</Comment>
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="StringToPad"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="18" disabled="false">
+   <Properties/>
+   <InputMap>
+    <EventVariable logical_name="String" name="PadChar"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="PadCharLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="19" disabled="false">
+   <Properties>
+    <Property name="expression" value="PadCharLength==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PadCharLength" name="PadCharLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="20"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="20" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="BP_SeamlessIP.LeftPadString"/>
+    <Property name="msg" value="Pad Char incorrect size - $(length) characters"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="length" name="PadCharLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="21" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="BP_SeamlessIP.LeftPadString"/>
+    <Property name="msg" value="String too large - $(stringLength) charcters, expected $(padLength) characters"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="stringLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="padLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/BuildStringDate" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/BuildStringDate" nlsid="30031">
+<Trigger name="BuildStringDate" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="2000">
+ <Context value="SubTrigger|3~4~5~6~7~8~11~12~13~14~15~16~17~18~22~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-275"/>
+										<Node id="3" type="3" x="-25" y="-200"/>
+										<Node id="4" type="3" x="-25" y="-50"/>
+										<Node id="5" type="3" x="-25" y="100"/>
+										<Node id="6" type="3" x="-25" y="250"/>
+										<Node id="7" type="3" x="-25" y="400"/>
+										<Node id="8" type="3" x="-25" y="550"/>
+										<Node id="11" type="3" x="-25" y="-125"/>
+										<Node id="12" type="3" x="-25" y="25"/>
+										<Node id="13" type="3" x="-25" y="175"/>
+										<Node id="14" type="3" x="-25" y="325"/>
+										<Node id="15" type="3" x="-25" y="475"/>
+										<Node id="16" type="3" x="-25" y="625"/>
+										<Node id="17" type="3" x="-25" y="700"/>
+										<Node id="18" type="3" x="-25" y="775"/>
+										<Node id="22" type="3" x="300" y="-75"/>
+										<Node errorActionId="19" errorStartIndex="22" id="600000000" text="Error Handling" type="4" x="300" y="-175"/>
+										<RoutedErrors value="3.1|4.1|5.1|6.1|7.1|8.1|11.1|12.1|13.1|14.1|15.1|16.1|17.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;InputYear&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InputMonth&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InputDay&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InputHour&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InputMinutes&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;InputSeconds&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo desc=&quot;Date in YYYMMDDHHMMSS format&quot; length=&quot;14&quot; name=&quot;DateString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="strMinutes" type="STRING" length="2" options="3"/>
+  <VariableInfo name="strDay" type="STRING" length="2" options="3"/>
+  <VariableInfo name="strYear" type="STRING" length="4" options="3"/>
+  <VariableInfo name="strMonth" type="STRING" length="2" options="3"/>
+  <VariableInfo name="strHour" type="STRING" length="2" options="3"/>
+  <VariableInfo name="strSeconds" type="STRING" length="2" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="3">
+  <Action type="SET" id="3" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="4"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputYear"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strYear"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="4" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputMonth"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strMonth"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputDay"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strDay"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="6" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputHour"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strHour"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputMinutes"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strMinutes"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="8" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputSeconds"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="strSeconds"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="11" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strYear"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="4" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strYear"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="12" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strMonth"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strMonth"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="13" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strDay"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strDay"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="14" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strHour"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strHour"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="15" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strMinutes"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strMinutes"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="16" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="LeftPadString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringToPad" name="strSeconds"/>
+    <ConstantVariable logical_name="PadChar" value="0" delim=""/>
+    <ConstantVariable logical_name="PaddedStringLength" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strSeconds"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="17" disabled="false">
+   <Properties>
+    <Property name="format" value="$(year)$(month)$(day)$(hour)$(minutes)$(seconds)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="year" name="strYear"/>
+    <LocalVariable logical_name="month" name="strMonth"/>
+    <LocalVariable logical_name="day" name="strDay"/>
+    <LocalVariable logical_name="hour" name="strHour"/>
+    <LocalVariable logical_name="minutes" name="strMinutes"/>
+    <LocalVariable logical_name="seconds" name="strSeconds"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="Output" name="DateString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="18" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="22" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/CheckForNonNumericValue" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/CheckForNonNumericValue" nlsid="30031">
+<Trigger name="CheckForNonNumericValue" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|11~6~7~8~9~14~15~16~17~19~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-125"/>
+										<Node id="11" type="3" x="-25" y="-50"/>
+										<Node id="6" type="3" x="-150" y="100"/>
+										<Node id="7" type="3" x="125" y="100"/>
+										<Node id="8" type="3" x="125" y="175"/>
+										<Node id="9" type="3" x="-25" y="425"/>
+										<Node id="14" type="3" x="-25" y="100"/>
+										<Node id="15" type="3" x="-25" y="275"/>
+										<Node id="16" type="3" x="-150" y="175"/>
+										<Node id="17" type="3" x="-25" y="175"/>
+										<Node id="19" type="3" x="-25" y="25"/>
+										<Node errorActionId="4" errorStartIndex="7" id="600000000" text="Error Handling" type="4" x="125" y="25"/>
+										<RoutedErrors value="11.1|6.1|14.1|16.1|17.1|19.2|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo desc=&quot;Value to check for numeric value&quot; name=&quot;InputValue&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Name of string to check&quot; length=&quot;50&quot; name=&quot;FieldName&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Starting value for NotNumeric variable.  If field is not numeric, set this field to true&quot; name=&quot;InputNotNumeric&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Needed for reporting which product id has non-numeric fields&quot; length=&quot;17&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo desc=&quot;Value to pass back, either input value or -1&quot; name=&quot;OutputValue&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Boolean to tell if value was non-numeric&quot; name=&quot;OutputNonNumeric&quot; options=&quot;7&quot; type=&quot;BOOL&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="InputString" type="STRING" length="10" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="XFalse" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="NonNumericString" type="STRING" length="3" options="3" default="NAN"/>
+  <VariableInfo name="DefaultFloatValue" type="FLOAT4" options="3" default="-1"/>
+  <VariableInfo name="XTrue" type="BOOL" options="3" default="1"/>
+ </StaticVariables>
+ <Actions first_action="11">
+  <Action type="SET" id="6" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputNotNumeric"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputNonNumeric"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XTrue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputNonNumeric"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="8" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="DefaultFloatValue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputValue"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="11" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="10"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputValue"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="InputString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="14" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XTrue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputNonNumeric"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="$(Trigger): Product ID ($(ProductId)) has field ($(FieldName)) with non-numeric value ($(inputValue))"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Trigger" name="Parent Trigger Name"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <EventVariable logical_name="FieldName" name="FieldName"/>
+    <EventVariable logical_name="inputValue" name="InputValue"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="16" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="InputValue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputValue"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="DefaultFloatValue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="OutputValue"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="19" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="InputString"/>
+    <StaticVariable logical_name="Search String" name="NonNumericString"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="6"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductDao_findByKey" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductDao_findByKey" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1737751183"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_MbpnProductDao_findByKey" inactivity_time_out="0" initPoolSize="10" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductDao/findByKey" id="GALC_MbpnProductDao_findByKey" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_MbpnProductDao_findByKey" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_MbpnProductDao_findByKey" nlsid="30033">
+
+										<TransactionDef id="GALC_MbpnProductDao_findByKey" version="193024926" version_mismatch="pass">
+										<Transport id="GALC_MbpnProductDao_findByKey" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="20" name="ProductId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="productId" type="STRING"/>
+										<Variable count="1" length="32" name="currentProductSpecCode" type="STRING"/>
+										<Variable count="1" length="32" name="currentOrderNo" type="STRING"/>
+										<Variable count="1" length="32" name="trackingSeq" type="STRING"/>
+										<Variable count="1" name="holdStatusId" type="INT4"/>
+										<Variable count="1" name="productStatusId" type="INT4"/>
+										<Variable count="1" length="32" name="containerId" type="STRING"/>
+										<Variable count="1" name="containerPos" type="INT4"/>
+										<Variable count="1" name="defectStatus" type="INT4"/>
+										<Variable count="1" length="32" name="cellZone" type="STRING"/>
+										<Variable count="1" length="32" name="product" type="STRING"/>
+										<Variable count="1" length="32" name="sn" type="STRING"/>
+										<Variable count="1" name="plan" type="INT4"/>
+										<Variable count="1" name="actual" type="INT4"/>
+										<Variable count="1" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="1" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="1" length="32" name="prodLot" type="STRING"/>
+										<Variable count="1" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="1" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJjdXJyZW50UHJvZHVjdFNwZWNDb2RlIjogIiIsDQogICAgImN1cnJlbnRPcmRlck5vIjogIiIsDQogICAgInRyYWNraW5nU2VxIjogIiIsDQogICAgImhvbGRTdGF0dXNJZCI6IDAsDQogICAgInByb2R1Y3RTdGF0dXNJZCI6IDAsDQogICAgImNvbnRhaW5lcklkIjoiIiwNCiAgICAiY29udGFpbmVyUG9zIjogMCwNCiAgICAiZGVmZWN0U3RhdHVzIjogMCwNCiAgICAiY2VsbFpvbmUiOiAiIiwNCiAgICAicHJvZHVjdCI6ICIiLA0KICAgICJzbiI6ICIiLA0KICAgICJwbGFuIjogMCwNCiAgICAiYWN0dWFsIjogMCwNCiAgICAibGFzdFBhc3NpbmdQcm9jZXNzUG9pbnRJZCI6ICIiLA0KICAgICJ0cmFja2luZ1N0YXR1cyI6ICIiLCAgICANCiAgICAicHJvZExvdCI6IHt9LA0KICAgICJvcGVyYXRpb25zIjogW3t9LHt9XSwNCiAgICAiY3JlYXRlVGltZXN0YW1wIjogIiIsDQogICAgInVwZGF0ZVRpbWVzdGFtcCI6ICIiDQogIH0=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="currentProductSpecCode" parmname="currentProductSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="currentOrderNo" parmname="currentOrderNo" type="STRING"/>
+										<Parameter dwType="16" name="trackingSeq" parmname="trackingSeq" type="STRING"/>
+										<Parameter dwType="3" name="holdStatusId" parmname="holdStatusId" type="INTEGER"/>
+										<Parameter dwType="3" name="productStatusId" parmname="productStatusId" type="INTEGER"/>
+										<Parameter dwType="16" name="containerId" parmname="containerId" type="STRING"/>
+										<Parameter dwType="3" name="containerPos" parmname="containerPos" type="INTEGER"/>
+										<Parameter dwType="3" name="defectStatus" parmname="defectStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="cellZone" parmname="cellZone" type="STRING"/>
+										<Parameter dwType="16" name="product" parmname="product" type="STRING"/>
+										<Parameter dwType="16" name="sn" parmname="sn" type="STRING"/>
+										<Parameter dwType="3" name="plan" parmname="plan" type="INTEGER"/>
+										<Parameter dwType="3" name="actual" parmname="actual" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Structure name="prodLot"/>
+										<Table name="operations" nbrInRows="1"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="DQogICAgeyJqYXZhLmxhbmcuU3RyaW5nIjoiIn0NCg==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="ProductId" parmname="java.lang.String" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										<HTTPRequest method="POST">
+										<Header/>
+										<Query/>
+										</HTTPRequest>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/GetLastProcessPoint" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/GetLastProcessPoint" nlsid="30031">
+<Trigger name="GetLastProcessPoint" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~4~5~6~7~9~10~12~14~15~17~19~21~23~24~25~27~28~29~30~31~32~33~34~35~36~37~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-150"/>
+										<Node id="1" type="3" x="-25" y="-75"/>
+										<Node id="2" type="3" x="-25" y="0"/>
+										<Node id="3" type="3" x="-25" y="75"/>
+										<Node id="4" type="3" x="-175" y="175"/>
+										<Node id="5" type="3" x="-175" y="100"/>
+										<Node id="6" type="3" x="-175" y="250"/>
+										<Node id="7" type="3" x="100" y="225"/>
+										<Node id="9" type="3" x="100" y="150"/>
+										<Node id="10" type="3" x="100" y="400"/>
+										<Node id="12" type="3" x="-25" y="400"/>
+										<Node id="14" type="3" x="-150" y="550"/>
+										<Node id="15" type="3" x="-150" y="400"/>
+										<Node id="17" type="3" x="-275" y="550"/>
+										<Node id="19" type="3" x="-275" y="400"/>
+										<Node id="21" type="3" x="-400" y="400"/>
+										<Node id="23" type="3" x="-525" y="400"/>
+										<Node id="24" type="3" x="-650" y="400"/>
+										<Node id="25" type="3" x="-175" y="700"/>
+										<Node id="27" type="3" x="-350" y="175"/>
+										<Node id="28" type="3" x="-350" y="100"/>
+										<Node id="29" type="3" x="-350" y="25"/>
+										<Node id="30" type="3" x="-350" y="-50"/>
+										<Node id="31" type="3" x="100" y="325"/>
+										<Node id="32" type="3" x="-25" y="325"/>
+										<Node id="33" type="3" x="-150" y="325"/>
+										<Node id="34" type="3" x="-275" y="325"/>
+										<Node id="35" type="3" x="-400" y="325"/>
+										<Node id="36" type="3" x="-525" y="325"/>
+										<Node id="37" type="3" x="-150" y="475"/>
+										<Node errorActionId="26" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-350" y="-125"/>
+										<RoutedErrors value="1.1|2.1|3.2|4.1|5.1|7.1|9.1|10.1|12.1|14.1|15.1|17.1|19.1|21.1|23.1|24.1|31.2|32.2|33.2|34.2|35.2|36.2|37.2|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;LastProcessPoint&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;LastProcessPointCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProcessCode" type="STRING" length="1" options="3"/>
+  <VariableInfo name="LineCode" type="STRING" length="2" options="3"/>
+  <VariableInfo name="ProcessPointLength" type="INT4" options="3"/>
+  <VariableInfo name="LastProcessPoint" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="InjectionCode" type="STRING" length="2" options="3" default="IN"/>
+  <VariableInfo name="HingeVWCode" type="STRING" length="2" options="3" default="VW"/>
+  <VariableInfo name="FoundationOvenCode" type="STRING" length="2" options="3" default="PH"/>
+  <VariableInfo name="USKCode" type="STRING" length="2" options="3" default="UK"/>
+  <VariableInfo name="TestOvenCode" type="STRING" length="2" options="3" default="PT"/>
+  <VariableInfo name="CrushPadCode" type="STRING" length="2" options="3" default="CP"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="TRANSACTION" id="1" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_MbpnProductDao_findByKey"/>
+    <Property name="version" value="193024926"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="lastPassingProcessPointId" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="2" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="ProcessPointLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="processpointlength&gt;0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="processpointlength" name="ProcessPointLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="5"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="4" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="NONE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Unknown"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="7" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="LineCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="9" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="LastProcessPoint"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="INJ"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="12" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="FDOven"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="14" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="CP"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="15" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+    <ConstantVariable logical_name="Start Offset" value="11"/>
+    <ConstantVariable logical_name="End Offset" value="12"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="ProcessCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="CPTrim"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="19" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="TO"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="21" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="USK"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="23" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="HVW"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="24" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="UKNWN"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="25" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="27" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="27"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="29" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="NONE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="30" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="UKNWN"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="31" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="InjectionCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="32"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="32" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="FoundationOvenCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="33"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="33" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="CrushPadCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="34" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="TestOvenCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="35" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="USKCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="36"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="HingeVWCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="37" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="String" value="1"/>
+    <LocalVariable logical_name="Search String" name="ProcessCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_TrackingService_track" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_TrackingService_track" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_TrackingService_track" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="27286114">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/TrackingService/track" id="GALC_TrackingService_track" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_UpdateTracking" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_UpdateTracking" nlsid="30033">
+
+										<TransactionDef id="GALC_UpdateTracking" version="1904849380" version_mismatch="pass">
+										<Transport id="GALC_TrackingService_track" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="17" name="ProductId" type="STRING"/>
+										<Variable count="1" length="16" name="ProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response outputformat="JSON">
+										<JSONInfo>
+										<JSONRequest>
+										<Structure name="JSON_Object"/>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="DQogIHsiY29tLmhvbmRhLmdhbGMuZW50aXR5LnByb2R1Y3QuTWJwblByb2R1Y3QiOiB7DQogICAgICAicHJvZHVjdElkIjoiIn0sDQogICJqYXZhLmxhbmcuU3RyaW5nIjogIiJ9DQo=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-entity-product-MbpnProduct">
+										<Parameter dwType="16" name="ProductId" parmname="productId" type="STRING"/>
+										</Structure>
+										<Parameter dwType="16" name="ProcessPointId" parmname="java.lang.String" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/UpdateMAPTracking" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/UpdateMAPTracking" nlsid="30031">
+<Trigger name="UpdateMAPTracking" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~4~5~6~8~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-600" y="-350"/>
+										<Node id="1" type="3" x="-600" y="-275"/>
+										<Node id="2" type="3" x="-600" y="-200"/>
+										<Node id="4" type="3" x="-325" y="-200"/>
+										<Node id="5" type="3" x="-600" y="-125"/>
+										<Node id="6" type="3" x="-325" y="-100"/>
+										<Node id="8" type="3" x="-750" y="-250"/>
+										<Node errorActionId="7" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="-325" y="-300"/>
+										<RoutedErrors value="1.2|2.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;16&quot; name=&quot;ProcessPointId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;17&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;2&quot; name=&quot;TrackingStatus&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Update GALC Status&quot; name=&quot;GalcUpdate&quot; options=&quot;7&quot; type=&quot;BOOL&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;2&quot; name=&quot;ProcLocCode&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="RowCount" type="INT1" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PlantCode" type="STRING" length="32" options="3" default="A"/>
+  <VariableInfo name="AsmLine" type="STRING" length="32" options="3" default="1"/>
+  <VariableInfo name="ProcCatTyoe" type="STRING" length="2" options="3" default="SP"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="IF" id="1" disabled="false">
+   <Comment>CFVwZGF0ZSBHQUxDIHN0YXR1cyBpZiBzZXQgb24=</Comment>
+   <Properties>
+    <Property name="expression" value="UpdateGALCStatus"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="UpdateGALCStatus" name="GalcUpdate"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="8"/>
+    <Route result="2" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="2" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_UpdateTracking"/>
+    <Property name="version" value="1904849380"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <EventVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="$(Trigger) - Error Updating Tracking for Product ($(ProductId)) to Process Point ($(ProcessPoint)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <EventVariable logical_name="ProcessPoint" name="ProcessPointId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductDao_updateDefectStatus" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductDao_updateDefectStatus" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_MbpnProductDao_updateDefectStatus" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="1247268657">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductDao/updateDefectStatus" id="GALC_MbpnProductDao_updateDefectStatus" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_ScrapUnit" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_ScrapUnit" nlsid="30033">
+
+										<TransactionDef id="GALC_ScrapUnit" version="1583959116" version_mismatch="pass">
+										<Transport id="GALC_MbpnProductDao_updateDefectStatus" type="HTTP"/>
+										<InputMap>
+										<Variable count="1" length="17" name="ProductId" type="STRING"/>
+										<Variable count="1" length="30" name="DefectStatus" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response outputformat="JSON">
+										<JSONInfo>
+										<JSONRequest>
+										<Structure name="JSON_Object"/>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7ImphdmEubGFuZy5TdHJpbmciOiAiIiwgDQogICJjb20uaG9uZGEuZ2FsYy5lbnRpdHkuZW51bXR5cGUuRGVmZWN0U3RhdHVzIjogIiJ9IA0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Parameter dwType="16" name="ProductId" parmname="java.lang.String" type="STRING"/>
+										<Parameter dwType="16" name="DefectStatus" parmname="com.honda.galc.entity.enumtype.DefectStatus" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/UpdateScrapStatus" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/UpdateScrapStatus" nlsid="30031">
+<Trigger name="UpdateScrapStatus" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|33~24~4~32~3~34~35~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-600" y="-350"/>
+										<Node id="33" type="3" x="-600" y="-275"/>
+										<Node id="24" type="3" x="-325" y="-200"/>
+										<Node id="4" type="3" x="-325" y="-100"/>
+										<Node id="32" type="3" x="-600" y="-100"/>
+										<Node id="3" type="3" x="-600" y="0"/>
+										<Node id="34" type="3" x="-600" y="-200"/>
+										<Node id="35" type="3" x="-725" y="-200"/>
+										<Node errorActionId="23" errorStartIndex="24" id="600000000" text="Error Handling" type="4" x="-325" y="-300"/>
+										<RoutedErrors value="33.2|32.1|34.1|35.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;17&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Scrap Status&quot; name=&quot;ScrapStatus&quot; options=&quot;7&quot; type=&quot;INT1&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;ProcessLoc&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ScrapStatus" type="STRING" length="10" options="3"/>
+  <VariableInfo name="RowCount" type="INT1" options="3" default="0"/>
+  <VariableInfo name="ProcessStatusCode" type="STRING" length="1" options="3" default="B"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="Repaired" type="STRING" length="10" options="3" default="REPAIRED"/>
+  <VariableInfo name="NglcGoodStatus" type="STRING" length="1" options="3" default="A"/>
+  <VariableInfo name="AsmLineNo" type="STRING" length="1" options="3" default="1"/>
+  <VariableInfo name="ScrappedStatus" type="INT1" options="3" default="1"/>
+  <VariableInfo name="PlantLocCode" type="STRING" length="1" options="3" default="A"/>
+  <VariableInfo name="NglcBadStatus" type="STRING" length="1" options="3" default="B"/>
+  <VariableInfo name="Scrap" type="STRING" length="10" options="3" default="SCRAP"/>
+  <VariableInfo name="ProcessCatCode" type="STRING" length="2" options="3" default="SP"/>
+ </StaticVariables>
+ <Actions first_action="33">
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="24" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="$(Trigger) - Error Updating Scrap Status {$(ScrapStatus)} for Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <EventVariable logical_name="ScrapStatus" name="ScrapStatus"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="32" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_ScrapUnit"/>
+    <Property name="version" value="1583959116"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="DefectStatus" name="ScrapStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="33" disabled="false">
+   <Properties>
+    <Property name="expression" value="InputScrapStatus==ScrappedStatus"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="InputScrapStatus" name="ScrapStatus"/>
+    <StaticVariable logical_name="ScrappedStatus" name="ScrappedStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="34" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="10"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Scrap"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ScrapStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="35" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="10"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Repaired"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ScrapStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AIP1_Utilities" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AIP1_Utilities" nlsid="30032">AIP1_Utilities</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AIP1_Utilities" type="project">
+		<reference name="AIP1_Utilities/BuildStringDate" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+			<reference name="Utilities/LeftPadString" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="IF" type="actiontype"/>
+				<reference name="LOGMSG" type="actiontype"/>
+				<reference name="SET" type="actiontype"/>
+				<reference name="STRING.LENGTH" type="actiontype"/>
+				<reference name="STRINGBUILDER" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+		</reference>
+		<reference name="AIP1_Utilities/CheckForNonNumericValue" type="trigger">
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="AIP1_Utilities/GetLastProcessPoint" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+			<reference name="GALC_MbpnProductDao_findByKey" type="transaction">
+				<reference name="GALC_MbpnProductDao_findByKey" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AIP1_Utilities/UpdateMAPTracking" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+			<reference name="GALC_UpdateTracking" type="transaction">
+				<reference name="GALC_TrackingService_track" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AIP1_Utilities/UpdateScrapStatus" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+			<reference name="GALC_ScrapUnit" type="transaction">
+				<reference name="GALC_MbpnProductDao_updateDefectStatus" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

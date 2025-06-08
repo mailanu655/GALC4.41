@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFOFF" trigger="FRAME_SHIP_REQUEST" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743470212946" type="HTTP_LISTENER">
+		<Item count="1" name="HTTP Content Length" status="0" type="INT4"><![CDATA[393]]></Item>
+			
+			<Item count="1" name="HTTP Method" status="0" type="STRING"><![CDATA[POST]]></Item>
+				
+				<Item count="1" name="HTTP URL" status="0" type="STRING"><![CDATA[/AAF1/FRAME_SHIP_REQUEST]]></Item>
+					
+					<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "STGVAB500 NH893P    A",
+  "EVENT_DATE": "250331",
+  "MODEL_YEAR_CODE": "",
+  "SENT_FLAG": "I",
+  "EVENT_TIME": "211652",
+  "PRODUCT_ID": "19UUB5F46SA001929",
+  "INT_COLOR": "",
+  "EXT_COLOR": "",
+  "CLIENT_ID": "AAF1OF1D00101",
+  "MODEL_TYPE": "",
+  "RECORD_TYPE": "2",
+  "MODEL_OPTION": "",
+  "ENGINE_ID": "K20C62254610     ",
+  "PROCESS_POINT_ID": "AAF1OF1PQ0111"
+}]]></Item>
+						
+					</EventNotification>
+					<ActionReport id="1" seq="1" type="JSON.DECODE">
+						<Properties>
+							<Property key="rules" value="{&#10;   &quot;CLIENT_ID&quot;: &quot;&quot;,&#10;   &quot;PROCESS_POINT_ID&quot;: &quot;&quot;,&#10;   &quot;PRODUCT_SPEC_CODE&quot;:&quot;&quot;,&#10;   &quot;PRODUCT_ID&quot;: &quot;&quot;,&#10;   &quot;ENGINE_ID&quot;:&quot;&quot;,&#10;   &quot;EVENT_DATE&quot;:&quot;&quot;,&#10;   &quot;EVENT_TIME&quot;:&quot;&quot;,&#10;   &quot;MODEL_YEAR_CODE&quot;:&quot;&quot;,&#10;   &quot;MODEL_TYPE&quot;:&quot;&quot;,&#10;   &quot;EXT_COLOR&quot;:&quot;&quot;,&#10;   &quot;INT_COLOR&quot;:&quot;&quot;,&#10;   &quot;MODEL_OPTION&quot;:&quot;&quot;,&#10;   &quot;SENT_FLAG&quot;:&quot;&quot;,&#10;   &quot;RECORD_TYPE&quot;:&quot;&quot;,&#10;   &quot;CREATE_TIMESTAMP&quot;:&quot;&quot;,&#10;   &quot;UPDATE_TIMESTAMP&quot;:&quot;&quot;&#10;   }"/>
+						</Properties>
+						<Notification>
+							<Item count="1" name="JSON Input" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "STGVAB500 NH893P    A",
+  "EVENT_DATE": "250331",
+  "MODEL_YEAR_CODE": "",
+  "SENT_FLAG": "I",
+  "EVENT_TIME": "211652",
+  "PRODUCT_ID": "19UUB5F46SA001929",
+  "INT_COLOR": "",
+  "EXT_COLOR": "",
+  "CLIENT_ID": "AAF1OF1D00101",
+  "MODEL_TYPE": "",
+  "RECORD_TYPE": "2",
+  "MODEL_OPTION": "",
+  "ENGINE_ID": "K20C62254610     ",
+  "PROCESS_POINT_ID": "AAF1OF1PQ0111"
+}]]></Item>
+								
+							</Notification>
+							<LocalVariableChange>
+								<Item count="1" name="clientId" status="0" type="STRING"><![CDATA[AAF1OF1D00101]]></Item>
+									
+								</LocalVariableChange>
+								<LocalVariableChange>
+									<Item count="1" name="ProcessPointId" status="0" type="STRING"><![CDATA[AAF1OF1PQ0111]]></Item>
+										
+									</LocalVariableChange>
+									<LocalVariableChange>
+										<Item count="1" name="productSpecCode" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[19UUB5F46SA001929]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="EngineId" status="0" type="STRING"><![CDATA[K20C62254610     ]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="eventDate" status="0" type="STRING"><![CDATA[250331]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="eventTime" status="0" type="STRING"><![CDATA[211652]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="Model" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="Type" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="extColor" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="intColor" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="option" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="sentFlag" status="0" type="STRING"><![CDATA[I]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="recordType" status="0" type="STRING"><![CDATA[2]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="MODEL_TYPE" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="RECORD_TYPE" status="0" type="STRING"><![CDATA[2]]></Item>
+										
+										<Item count="1" name="SENT_FLAG" status="0" type="STRING"><![CDATA[I]]></Item>
+										
+										<Item count="1" name="EVENT_DATE" status="0" type="STRING"><![CDATA[250331]]></Item>
+										
+										<Item count="1" name="EVENT_TIME" status="0" type="STRING"><![CDATA[211652]]></Item>
+										
+										<Item count="1" name="ENGINE_ID" status="0" type="STRING"><![CDATA[K20C62254610     ]]></Item>
+										
+										<Item count="1" name="PROCESS_POINT_ID" status="0" type="STRING"><![CDATA[AAF1OF1PQ0111]]></Item>
+										
+										<Item count="1" name="MODEL_OPTION" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="resultMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="MODEL_YEAR_CODE" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="CLIENT_ID" status="0" type="STRING"><![CDATA[AAF1OF1D00101]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="INT_COLOR" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[19UUB5F46SA001929]]></Item>
+										
+										<Item count="1" name="UPDATE_TIMESTAMP" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="CREATE_TIMESTAMP" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="EXT_COLOR" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="2" seq="2" type="STRING.LENGTH">
+										<Properties>
+										<Property key="failure_empty_string" value="false"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[K20C62254610     ]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="engineLength" status="0" type="INT2"><![CDATA[17]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Length" status="0" type="INT4"><![CDATA[17]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="3" seq="3" type="IF">
+										<Properties>
+										<Property key="expression" value="engineLength &gt; 0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="engineLength" status="0" type="FLOAT8"><![CDATA[17.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="4" seq="4" type="STRING.SPLIT.SUBSTRING">
+										<Properties/>
+										<Notification>
+										<Item count="1" name="End Offset" status="0" type="UINT4"><![CDATA[4]]></Item>
+										
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="Start Offset" status="0" type="UINT4"><![CDATA[1]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="Model" status="0" type="STRING"><![CDATA[STGV]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result String" status="0" type="STRING"><![CDATA[STGV]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="5" seq="5" type="STRING.SPLIT.SUBSTRING">
+										<Properties/>
+										<Notification>
+										<Item count="1" name="End Offset" status="0" type="UINT4"><![CDATA[7]]></Item>
+										
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="Start Offset" status="0" type="UINT4"><![CDATA[5]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="Type" status="0" type="STRING"><![CDATA[AB5]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result String" status="0" type="STRING"><![CDATA[AB5]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="6" type="STRING.SPLIT.SUBSTRING">
+										<Properties/>
+										<Notification>
+										<Item count="1" name="End Offset" status="0" type="UINT4"><![CDATA[10]]></Item>
+										
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="Start Offset" status="0" type="UINT4"><![CDATA[8]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="option" status="0" type="STRING"><![CDATA[00 ]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result String" status="0" type="STRING"><![CDATA[00 ]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="7" type="STRING.SPLIT.SUBSTRING">
+										<Properties/>
+										<Notification>
+										<Item count="1" name="End Offset" status="0" type="UINT4"><![CDATA[20]]></Item>
+										
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="Start Offset" status="0" type="UINT4"><![CDATA[11]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="extColor" status="0" type="STRING"><![CDATA[NH893P    ]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result String" status="0" type="STRING"><![CDATA[NH893P    ]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="8" seq="8" type="STRING.SPLIT.SUBSTRING">
+										<Properties/>
+										<Notification>
+										<Item count="1" name="End Offset" status="0" type="UINT4"><![CDATA[21]]></Item>
+										
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[STGVAB500 NH893P    A]]></Item>
+										
+										<Item count="1" name="Start Offset" status="0" type="UINT4"><![CDATA[21]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="intColor" status="0" type="STRING"><![CDATA[A]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result String" status="0" type="STRING"><![CDATA[A]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="9" seq="9" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_FrameShipConfirmation_Save"/>
+										<Property key="version" value="-1849527674"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="extColor" status="0" type="STRING"><![CDATA[NH893P    ]]></Item>
+										
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[19UUB5F46SA001929]]></Item>
+										
+										<Item count="1" name="eventDate" status="0" type="STRING"><![CDATA[250331]]></Item>
+										
+										<Item count="1" name="EngineId" status="0" type="STRING"><![CDATA[K20C62254610     ]]></Item>
+										
+										<Item count="1" name="Model" status="0" type="STRING"><![CDATA[STGV]]></Item>
+										
+										<Item count="1" name="eventTime" status="0" type="STRING"><![CDATA[211652]]></Item>
+										
+										<Item count="1" name="ProcessPointId" status="0" type="STRING"><![CDATA[AAF1OF1PQ0111]]></Item>
+										
+										<Item count="1" name="recordType" status="0" type="STRING"><![CDATA[2]]></Item>
+										
+										<Item count="1" name="option" status="0" type="STRING"><![CDATA[00 ]]></Item>
+										
+										<Item count="1" name="Type" status="0" type="STRING"><![CDATA[AB5]]></Item>
+										
+										<Item count="1" name="sentFlag" status="0" type="STRING"><![CDATA[I]]></Item>
+										
+										<Item count="1" name="JSON_Array_rows_in" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="intColor" status="0" type="STRING"><![CDATA[A]]></Item>
+										
+										</Notification>
+										<Completion execution_time="6" exstatus="0" status="0">
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="14" seq="10" type="STRINGBUILDER">
+										<Properties>
+										<Property key="format" value="{&#10;&quot;INFO_CODE&quot;: &quot;$(ERROR_CODE)&quot;,&#10;&quot;INFO_MESSAGE&quot;: &quot;$(successMessage)&quot;&#10;}"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ERROR_CODE" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										<Item count="1" name="successMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="infoMessage" status="0" type="STRING"><![CDATA[{
+"INFO_CODE": "200",
+"INFO_MESSAGE": ""
+}]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[{
+"INFO_CODE": "200",
+"INFO_MESSAGE": ""
+}]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="15" seq="11" type="SET">
+										<Properties>
+										<Property key="dst_type" value="STRING"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[{
+"INFO_CODE": "200",
+"INFO_MESSAGE": ""
+}]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[{
+"INFO_CODE": "200",
+"INFO_MESSAGE": ""
+}]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="16" seq="12" type="SET">
+										<Properties>
+										<Property key="dst_type" value="INT4"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="17" seq="13" type="SET">
+										<Properties>
+										<Property key="dst_type" value="STRING"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[application/json]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[application/json]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="12" seq="14" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743470212953">
+										<Item count="1" name="HTTP Content-Type" status="0" type="STRING"><![CDATA[application/json]]></Item>
+										
+										<Item count="1" name="HTTP Status Code" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+"INFO_CODE": "200",
+"INFO_MESSAGE": ""
+}]]></Item>
+										
+										</EventCompletion>
+										</TriggerExecutionReport>

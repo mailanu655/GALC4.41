@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="listener" name="AZZ1_AiristaListener" nlsid="30035" interface="1"><exportitem type="listener" name="AZZ1_AiristaListener" nlsid="30035">
+<Listener version="-943120879">
+					<TCP enable_staging_copy="false" logEnabled="false" maxConnections="100" maxMessageSize="2" msgTimeout="60" name="AZZ1_AiristaListener" port="4001" reply="true" termination="0x0a" type="TCP">
+						<RequestFormat>
+							<ASCII arrayDelim="|" dataDelim="," encoding="UTF-8" eventOffset="0"/>
+						</RequestFormat>
+						<AllowedAddresses>
+							<Allow address="10.0.0.0/32"/>
+						</AllowedAddresses>
+					</TCP>
+				</Listener></exportitem></exportcontent>
+
+<exportcontent type="listenerevent" name="AWE1_AiristaWEAutoHinge" nlsid="30036" interface="1"><exportitem type="listenerevent" name="AWE1_AiristaWEAutoHinge" nlsid="30036">
+
+<ListenerEventDef id="AWE1_AiristaWEAutoHinge" version="2021000408">
+	<Listener id="AZZ1_AiristaListener" type="TCP"/>
+	<NotificationMap>
+		<Variable count="1" length="32" name="VinNo" type="STRING"/>
+		<Variable count="1" length="10" name="Model" type="STRING"/>
+		<Variable count="1" name="deviceId" type="INT8"/>
+		<Variable count="1" name="itemId" type="INT8"/>
+		<Variable count="1" length="3" name="deptLine" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+		<Variable count="1" length="32" name="psuName" type="STRING"/>
+		<Variable count="1" length="64" name="ipAddress" type="STRING"/>
+		<Variable count="1" length="255" name="Args" type="STRING"/>
+		<Variable count="1" name="typeId" type="INT8"/>
+		<Variable count="1" name="sequenceNo" type="INT8"/>
+	</NotificationMap>
+	<CompletionMap>
+		<Variable count="1" length="32" name="Result" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+	</CompletionMap>
+	<Mapping>
+		<InboundMap outputformat="A">
+			<Item name="transactionId" offset="1"/>
+			<Item name="deptLine" offset="2"/>
+			<Item name="VinNo" offset="3"/>
+			<Item name="Model" offset="4"/>
+			<Item name="typeId" offset="5"/>
+			<Item name="sequenceNo" offset="6"/>
+			<Item name="deviceId" offset="7"/>
+			<Item name="itemId" offset="8"/>
+			<Item name="psuName" offset="9"/>
+			<Item name="ipAddress" offset="10"/>
+			<Item name="Args" offset="11"/>
+		</InboundMap>
+		<OutboundMap arrayDelim="|" delimiter="," outputformat="A"/>
+	</Mapping>
+</ListenerEventDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_AUTO_HINGE/AiristaRFIDVinRead" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE1_AUTO_HINGE/AiristaRFIDVinRead" nlsid="30031">
+<Trigger name="AiristaRFIDVinRead" project="AWE1_AUTO_HINGE" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Listener|1~3~14~2~4~9~13~10~11~5~7~8~6~15~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="300"/>
+		<Node id="1" type="3" x="50" y="400"/>
+		<Node id="3" type="3" x="50" y="550"/>
+		<Node id="14" type="3" x="325" y="550"/>
+		<Node id="2" type="3" x="50" y="475"/>
+		<Node id="4" type="3" x="50" y="725"/>
+		<Node id="9" type="3" x="50" y="1100"/>
+		<Node id="13" type="3" x="325" y="450"/>
+		<Node id="10" type="3" x="-200" y="600"/>
+		<Node id="11" type="3" x="-200" y="700"/>
+		<Node id="5" type="3" x="50" y="800"/>
+		<Node id="7" type="3" x="50" y="950"/>
+		<Node id="8" type="3" x="50" y="1025"/>
+		<Node id="6" type="3" x="50" y="875"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<Node id="15" type="3" x="50" y="650"/>
+		<RoutedErrors value="1.1|3.2|2.1|4.1|10.1|5.1|7.1|8.1|6.1|15.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE1_AiristaWEAutoHinge" version="-591312302"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVinDataReady" type="STRING" length="32" options="3" default="CIO[6000,0]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AWE1_AUTO_HINGE_PLC"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3" default="DM[6000]"/>
+  <VariableInfo name="plcVinDataAck" type="STRING" length="32" options="3" default="CIO[6000,1]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVinDataAck"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcAck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVinDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcDataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="dataReady == 0 &amp;&amp; dataAck == 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVin"/>
+    <EventVariable logical_name="Value" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVinDataReady"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="6" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="7" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="3000" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="8" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVinDataReady"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="$(ProductID) received but PLC bits not in the correct state DataReady $(dataReady) Ack $(dataAck)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="14" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="Product ID received from listener - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_AUTO_HINGE/AiristaRFIDVinReadTest" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_AUTO_HINGE/AiristaRFIDVinReadTest" nlsid="30031">
+<Trigger name="AiristaRFIDVinReadTest" project="AWE1_AUTO_HINGE" max_pending="1" reporting="on">
+ <Context value="Listener|1~2~4~5~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="300"/>
+		<Node id="1" type="3" x="50" y="425"/>
+		<Node id="2" type="3" x="50" y="550"/>
+		<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<Node id="4" type="3" x="325" y="450"/>
+		<Node id="5" type="3" x="325" y="550"/>
+		<RoutedErrors value="1.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE1_AiristaWEAutoHinge" version="-591312302"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVinDataReady" type="STRING" length="32" options="3" default="CIO[6000,0]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AWE1_AUTO_HINGE_PLC"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3" default="DM[6000]"/>
+  <VariableInfo name="plcVinDataAck" type="STRING" length="32" options="3" default="CIO[6000,1]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="LOGMSG" id="1" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="Product ID received from listener - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AWE1_AUTO_HINGE_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AWE1_AUTO_HINGE_PLC" nlsid="30030">
+<DeviceDefinition name="AWE1_AUTO_HINGE_PLC" type="21" type_name="CS1 CPU" state="6" options="2104"><Properties><Property name="ip_address" value="10.39.112.80"/><Property name="protocol" value="TCP"/><Property name="da1" value="0"/><Property name="timeout" value="5000"/><Property name="port" value="9600"/><Property name="sa1" value="0"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AWE1_AutoHinge_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AWE1_AutoHinge_DataCollection" nlsid="30033">
+
+			<TransactionDef id="AWE1_AutoHinge_DataCollection" version="938657226" version_mismatch="pass">
+				<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+					<Variable count="1" name="SPINDLE1_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE1_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE1_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE2_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE2_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE2_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE3_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE3_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE3_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE4_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE4_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE4_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE5_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE5_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE5_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE6_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE6_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE6_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE7_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE7_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE7_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE8_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE8_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE8_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE9_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE9_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE9_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE10_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE10_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE10_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE11_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE11_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE11_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE12_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE12_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE12_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE13_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE13_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE13_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE14_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE14_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE14_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE15_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE15_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE15_RESULT" type="STRING"/>
+					<Variable count="1" name="SPINDLE16_TORQUE" type="FLOAT4"/>
+					<Variable count="1" name="SPINDLE16_ANGLE" type="FLOAT4"/>
+					<Variable count="1" length="32" name="SPINDLE16_RESULT" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="16" name="Reply_ProcessPointId" type="STRING"/>
+					<Variable count="1" length="32" name="Reply_ClientId" type="STRING"/>
+					<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KICAgIkRBVEFfQ09MTEVDVElPTl9DT01QTEVURSI6IiIsDQogICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAiQ0xJRU5UX0lEIjoiIiANCn0=">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+								<Parameter dwType="16" name="Reply_ProcessPointId" parmname="PROCESS_POINT_ID" type="STRING"/>
+								<Parameter dwType="16" name="Reply_ClientId" parmname="CLIENT_ID" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiU1BJTkRMRTFfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMV9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEUxX1JFU1VMVCI6IjEiLA0KDQogICAgICAgICJTUElORExFMl9UT1JRVUUiOjAuMCwNCiAgICAgICAgIlNQSU5ETEUyX0FOR0xFIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiU1BJTkRMRTJfUkVTVUxUIjoiMSIsDQoNCiAgICAgICAgIlNQSU5ETEUzX1RPUlFVRSI6MC4wLA0KICAgICAgICAiU1BJTkRMRTNfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFM19SRVNVTFQiOiIxIiwNCg0KICAgICAgICAiU1BJTkRMRTRfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFNF9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEU0X1JFU1VMVCI6IjEiLA0KDQogICAgICAgICJTUElORExFNV9UT1JRVUUiOjAuMCwNCiAgICAgICAgIlNQSU5ETEU1X0FOR0xFIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiU1BJTkRMRTVfUkVTVUxUIjoiMSIsDQoNCiAgICAgICAgIlNQSU5ETEU2X1RPUlFVRSI6MC4wLA0KICAgICAgICAiU1BJTkRMRTZfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFNl9SRVNVTFQiOiIxIiwNCg0KICAgICAgICAiU1BJTkRMRTdfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFN19BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEU3X1JFU1VMVCI6IjEiLA0KDQogICAgICAgICJTUElORExFOF9UT1JRVUUiOjAuMCwNCiAgICAgICAgIlNQSU5ETEU4X0FOR0xFIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiU1BJTkRMRThfUkVTVUxUIjoiMSIsDQoNCiAgICAgICAgIlNQSU5ETEU5X1RPUlFVRSI6MC4wLA0KICAgICAgICAiU1BJTkRMRTlfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFOV9SRVNVTFQiOiIxIiwNCg0KICAgICAgICAiU1BJTkRMRTEwX1RPUlFVRSI6MC4wLA0KICAgICAgICAiU1BJTkRMRTEwX0FOR0xFIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiU1BJTkRMRTEwX1JFU1VMVCI6IjEiLA0KDQogICAgICAgICJTUElORExFMTFfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMTFfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFMTFfUkVTVUxUIjoiMSIsDQoNCiAgICAgICAgIlNQSU5ETEUxMl9UT1JRVUUiOjAuMCwNCiAgICAgICAgIlNQSU5ETEUxMl9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEUxMl9SRVNVTFQiOiIxIiwNCgkJDQoJCSJTUElORExFMTNfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMTNfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFMTNfUkVTVUxUIjoiMSIsDQoNCiAgICAgICAgIlNQSU5ETEUxNF9UT1JRVUUiOjAuMCwNCiAgICAgICAgIlNQSU5ETEUxNF9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEUxNF9SRVNVTFQiOiIxIiwNCg0KICAgICAgICAiU1BJTkRMRTE1X1RPUlFVRSI6MC4wLA0KICAgICAgICAiU1BJTkRMRTE1X0FOR0xFIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiU1BJTkRMRTE1X1JFU1VMVCI6IjEiLA0KDQogICAgICAgICJTUElORExFMTZfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMTZfQU5HTEUiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJTUElORExFMTZfUkVTVUxUIjoiMSINCgkNCgl9DQp9IA==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Structure name="com-honda-galc-data-DefaultDataContainer">
+									<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE1_TORQUE" parmname="SPINDLE1_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE1_ANGLE" parmname="SPINDLE1_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE1_RESULT" parmname="SPINDLE1_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE2_TORQUE" parmname="SPINDLE2_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE2_ANGLE" parmname="SPINDLE2_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE2_RESULT" parmname="SPINDLE2_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE3_TORQUE" parmname="SPINDLE3_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE3_ANGLE" parmname="SPINDLE3_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE3_RESULT" parmname="SPINDLE3_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE4_TORQUE" parmname="SPINDLE4_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE4_ANGLE" parmname="SPINDLE4_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE4_RESULT" parmname="SPINDLE4_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE5_TORQUE" parmname="SPINDLE5_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE5_ANGLE" parmname="SPINDLE5_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE5_RESULT" parmname="SPINDLE5_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE6_TORQUE" parmname="SPINDLE6_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE6_ANGLE" parmname="SPINDLE6_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE6_RESULT" parmname="SPINDLE6_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE7_TORQUE" parmname="SPINDLE7_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE7_ANGLE" parmname="SPINDLE7_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE7_RESULT" parmname="SPINDLE7_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE8_TORQUE" parmname="SPINDLE8_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE8_ANGLE" parmname="SPINDLE8_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE8_RESULT" parmname="SPINDLE8_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE9_TORQUE" parmname="SPINDLE9_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE9_ANGLE" parmname="SPINDLE9_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE9_RESULT" parmname="SPINDLE9_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE10_TORQUE" parmname="SPINDLE10_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE10_ANGLE" parmname="SPINDLE10_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE10_RESULT" parmname="SPINDLE10_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE11_TORQUE" parmname="SPINDLE11_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE11_ANGLE" parmname="SPINDLE11_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE11_RESULT" parmname="SPINDLE11_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE12_TORQUE" parmname="SPINDLE12_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE12_ANGLE" parmname="SPINDLE12_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE12_RESULT" parmname="SPINDLE12_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE13_TORQUE" parmname="SPINDLE13_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE13_ANGLE" parmname="SPINDLE13_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE13_RESULT" parmname="SPINDLE13_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE14_TORQUE" parmname="SPINDLE14_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE14_ANGLE" parmname="SPINDLE14_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE14_RESULT" parmname="SPINDLE14_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE15_TORQUE" parmname="SPINDLE15_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE15_ANGLE" parmname="SPINDLE15_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE15_RESULT" parmname="SPINDLE15_RESULT" type="STRING"/>
+									<Parameter dwType="10" name="SPINDLE16_TORQUE" parmname="SPINDLE16_TORQUE" type="DOUBLE"/>
+									<Parameter dwType="10" name="SPINDLE16_ANGLE" parmname="SPINDLE16_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="SPINDLE16_RESULT" parmname="SPINDLE16_RESULT" type="STRING"/>
+								</Structure>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_AUTO_HINGE/DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE1_AUTO_HINGE/DataCollection" nlsid="30031">
+<Trigger name="DataCollection" project="AWE1_AUTO_HINGE" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~9~5~6~3~2~10~4~11~12~13~7~14~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="1" type="3" x="-100" y="-25"/>
+			<Node id="9" type="3" x="100" y="150"/>
+			<Node id="5" type="3" x="-100" y="425"/>
+			<Node id="6" type="3" x="-100" y="500"/>
+			<Node id="3" type="3" x="-100" y="125"/>
+			<Node id="2" type="3" x="-100" y="50"/>
+			<Node id="10" type="3" x="-275" y="275"/>
+			<Node id="4" type="3" x="-100" y="325"/>
+			<Node id="11" type="3" x="100" y="0"/>
+			<Node id="12" type="3" x="-275" y="175"/>
+			<Node id="13" type="3" x="100" y="75"/>
+			<Node id="7" type="3" x="-275" y="75"/>
+			<Node id="14" type="3" x="-100" y="225"/>
+			<Node errorActionId="8" errorStartIndex="11" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<RoutedErrors value="1.1|5.1|3.1|2.2|4.1|12.1|7.1|14.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event overview_string="Variable: AWE1_AUTO_HINGE_PLC.CIO[6000,2]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AWE1_AUTO_HINGE_PLC" name="CIO[6000,2]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="MEASUREMENT_TORQUE" type="FLOAT4" xdim="16" options="3"/>
+  <VariableInfo name="SKIP_OPERATION" type="STRING" length="255" options="3" default="TRUE"/>
+  <VariableInfo name="SpindlePlcData" type="STRING" xdim="16" length="32" options="3"/>
+  <VariableInfo name="MEASUREMENT_ANGLE" type="INT2" xdim="16" options="3"/>
+  <VariableInfo name="output" type="STRING" length="255" options="3"/>
+  <VariableInfo name="DATA_READY" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="255" options="3"/>
+  <VariableInfo name="JUDGEMENT" type="BOOL" length="255" options="3" default="1"/>
+  <VariableInfo name="MEASUREMENT_JUDGEMENT" type="INT2" xdim="16" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="DM[6000]"/>
+  <VariableInfo name="plcLFrDoor" type="STRING" xdim="4" length="32" options="3" default="DM[6041],DM[6045],DM[6049],DM[6053]"/>
+  <VariableInfo name="plcRRrDoor" type="STRING" xdim="4" length="32" options="3" default="DM[6025],DM[6029],DM[6033],DM[6037]"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AWE1_AUTO_HINGE_PLC"/>
+  <VariableInfo name="plcTorqueDataReady" type="STRING" length="32" options="3" default="CIO[6000,2]"/>
+  <VariableInfo name="plcRFrDoor" type="STRING" xdim="4" length="32" options="3" default="DM[6009],DM[6013],DM[6017],DM[6021]"/>
+  <VariableInfo name="plcLRrDoor" type="STRING" xdim="4" length="32" options="3" default="DM[6057],DM[6061],DM[6065],DM[6069]"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AWE1B01P00101"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="32" options="3" default="AWE1B01D00101A"/>
+  <VariableInfo name="plcJudgement" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcTorqueDataReadyAck" type="STRING" length="32" options="3" default="CIO[6000,3]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcTorqueDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="7"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Comment>CFJldHJpZXZlIHRoZSBQcm9jZXNzIFJlc3VsdHM=</Comment>
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &#13;&#10;    &quot;RS_FR_DOOR_BOLT_1&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_FR_DOOR_BOLT_2&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_FR_DOOR_BOLT_3&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_FR_DOOR_BOLT_4&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_RR_DOOR_BOLT_1&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_RR_DOOR_BOLT_2&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_RR_DOOR_BOLT_3&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;RS_RR_DOOR_BOLT_4&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_FR_DOOR_BOLT_1&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_FR_DOOR_BOLT_2&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_FR_DOOR_BOLT_3&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_FR_DOOR_BOLT_4&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_RR_DOOR_BOLT_1&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_RR_DOOR_BOLT_2&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_RR_DOOR_BOLT_3&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8},&#13;&#10;    &quot;LS_RR_DOOR_BOLT_4&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:8}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="RS_FR_DOOR_BOLT_1 Name" name="plcRFrDoor[0]"/>
+    <StaticVariable logical_name="RS_FR_DOOR_BOLT_2 Name" name="plcRFrDoor[1]"/>
+    <StaticVariable logical_name="RS_FR_DOOR_BOLT_3 Name" name="plcRFrDoor[2]"/>
+    <StaticVariable logical_name="RS_FR_DOOR_BOLT_4 Name" name="plcRFrDoor[3]"/>
+    <StaticVariable logical_name="RS_RR_DOOR_BOLT_1 Name" name="plcRRrDoor[0]"/>
+    <StaticVariable logical_name="RS_RR_DOOR_BOLT_2 Name" name="plcRRrDoor[1]"/>
+    <StaticVariable logical_name="RS_RR_DOOR_BOLT_3 Name" name="plcRRrDoor[2]"/>
+    <StaticVariable logical_name="RS_RR_DOOR_BOLT_4 Name" name="plcRRrDoor[3]"/>
+    <StaticVariable logical_name="LS_FR_DOOR_BOLT_1 Name" name="plcLFrDoor[0]"/>
+    <StaticVariable logical_name="LS_FR_DOOR_BOLT_2 Name" name="plcLFrDoor[1]"/>
+    <StaticVariable logical_name="LS_FR_DOOR_BOLT_3 Name" name="plcLFrDoor[2]"/>
+    <StaticVariable logical_name="LS_FR_DOOR_BOLT_4 Name" name="plcLFrDoor[3]"/>
+    <StaticVariable logical_name="LS_RR_DOOR_BOLT_1 Name" name="plcLRrDoor[0]"/>
+    <StaticVariable logical_name="LS_RR_DOOR_BOLT_2 Name" name="plcLRrDoor[1]"/>
+    <StaticVariable logical_name="LS_RR_DOOR_BOLT_3 Name" name="plcLRrDoor[2]"/>
+    <StaticVariable logical_name="LS_RR_DOOR_BOLT_4 Name" name="plcLRrDoor[3]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="RS_FR_DOOR_BOLT_1" name="MEASUREMENT_TORQUE[0]"/>
+    <LocalVariable logical_name="RS_FR_DOOR_BOLT_2" name="MEASUREMENT_TORQUE[1]"/>
+    <LocalVariable logical_name="RS_FR_DOOR_BOLT_3" name="MEASUREMENT_TORQUE[2]"/>
+    <LocalVariable logical_name="RS_FR_DOOR_BOLT_4" name="MEASUREMENT_TORQUE[3]"/>
+    <LocalVariable logical_name="RS_RR_DOOR_BOLT_1" name="MEASUREMENT_TORQUE[4]"/>
+    <LocalVariable logical_name="RS_RR_DOOR_BOLT_2" name="MEASUREMENT_TORQUE[5]"/>
+    <LocalVariable logical_name="RS_RR_DOOR_BOLT_3" name="MEASUREMENT_TORQUE[6]"/>
+    <LocalVariable logical_name="RS_RR_DOOR_BOLT_4" name="MEASUREMENT_TORQUE[7]"/>
+    <LocalVariable logical_name="LS_FR_DOOR_BOLT_1" name="MEASUREMENT_TORQUE[8]"/>
+    <LocalVariable logical_name="LS_FR_DOOR_BOLT_2" name="MEASUREMENT_TORQUE[9]"/>
+    <LocalVariable logical_name="LS_FR_DOOR_BOLT_3" name="MEASUREMENT_TORQUE[10]"/>
+    <LocalVariable logical_name="LS_FR_DOOR_BOLT_4" name="MEASUREMENT_TORQUE[11]"/>
+    <LocalVariable logical_name="LS_RR_DOOR_BOLT_1" name="MEASUREMENT_TORQUE[12]"/>
+    <LocalVariable logical_name="LS_RR_DOOR_BOLT_2" name="MEASUREMENT_TORQUE[13]"/>
+    <LocalVariable logical_name="LS_RR_DOOR_BOLT_3" name="MEASUREMENT_TORQUE[14]"/>
+    <LocalVariable logical_name="LS_RR_DOOR_BOLT_4" name="MEASUREMENT_TORQUE[15]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_AutoHinge_DataCollection"/>
+    <Property name="version" value="938657226"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="SPINDLE1_TORQUE" name="MEASUREMENT_TORQUE[0]"/>
+    <ConstantVariable logical_name="SPINDLE1_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE1_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE2_TORQUE" name="MEASUREMENT_TORQUE[1]"/>
+    <ConstantVariable logical_name="SPINDLE2_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE2_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE3_TORQUE" name="MEASUREMENT_TORQUE[2]"/>
+    <ConstantVariable logical_name="SPINDLE3_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE3_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE4_TORQUE" name="MEASUREMENT_TORQUE[3]"/>
+    <ConstantVariable logical_name="SPINDLE4_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE4_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE5_TORQUE" name="MEASUREMENT_TORQUE[4]"/>
+    <ConstantVariable logical_name="SPINDLE5_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE5_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE6_TORQUE" name="MEASUREMENT_TORQUE[5]"/>
+    <ConstantVariable logical_name="SPINDLE6_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE6_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE7_TORQUE" name="MEASUREMENT_TORQUE[6]"/>
+    <ConstantVariable logical_name="SPINDLE7_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE7_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE8_TORQUE" name="MEASUREMENT_TORQUE[7]"/>
+    <ConstantVariable logical_name="SPINDLE8_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE8_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE9_TORQUE" name="MEASUREMENT_TORQUE[8]"/>
+    <ConstantVariable logical_name="SPINDLE9_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE9_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE10_TORQUE" name="MEASUREMENT_TORQUE[9]"/>
+    <ConstantVariable logical_name="SPINDLE10_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE10_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE11_TORQUE" name="MEASUREMENT_TORQUE[10]"/>
+    <ConstantVariable logical_name="SPINDLE11_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE11_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE12_TORQUE" name="MEASUREMENT_TORQUE[11]"/>
+    <ConstantVariable logical_name="SPINDLE12_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE12_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE13_TORQUE" name="MEASUREMENT_TORQUE[12]"/>
+    <ConstantVariable logical_name="SPINDLE13_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE13_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE14_TORQUE" name="MEASUREMENT_TORQUE[13]"/>
+    <ConstantVariable logical_name="SPINDLE14_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE14_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE15_TORQUE" name="MEASUREMENT_TORQUE[14]"/>
+    <ConstantVariable logical_name="SPINDLE15_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE15_RESULT" value="1"/>
+    <LocalVariable logical_name="SPINDLE16_TORQUE" name="MEASUREMENT_TORQUE[15]"/>
+    <ConstantVariable logical_name="SPINDLE16_ANGLE" value="0.0"/>
+    <ConstantVariable logical_name="SPINDLE16_RESULT" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcTorqueDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="7" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18}&#13;&#10;&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <ConstantVariable logical_name="PRODUCTID" value="99999999999999999 "/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="11" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcTorqueDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcTorqueDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_AUTO_HINGE"/>
+    <Property name="msg" value="Product ID for Data Collection - $(ProductID)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductID" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AWE1_AUTO_HINGE" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AWE1_AUTO_HINGE" nlsid="30032">AWE1_AUTO_HINGE</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AWE1_AUTO_HINGE" type="project">
+		<reference name="AWE1_AUTO_HINGE/AiristaRFIDVinRead" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE1_AiristaWEAutoHinge" type="listenerevent">
+				<reference name="AZZ1_AiristaListener" type="listener"/>
+			</reference>
+		</reference>
+		<reference name="AWE1_AUTO_HINGE/AiristaRFIDVinReadTest" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE1_AiristaWEAutoHinge" type="listenerevent"/>
+		</reference>
+		<reference name="AWE1_AUTO_HINGE/DataCollection" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE1_AUTO_HINGE_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AWE1_AutoHinge_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AWE1_AUTO_HINGE_PLC.CIO[6000,2]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

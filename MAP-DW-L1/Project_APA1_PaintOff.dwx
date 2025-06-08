@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="APA1_PaintOff_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="APA1_PaintOff_PLC" nlsid="30030">
+<DeviceDefinition name="APA1_PaintOff_PLC" type="42" type_name="ControlLogix CPU" state="6" options="10296"><Properties><Property name="cpu_slot" value="0"/><Property name="ip_address" value="10.39.120.227"/><Property name="pendingpkts" value="5"/><Property name="timeout" value="5000"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="APA1_PaintOff_VinFeed" nlsid="30034" interface="1"><exportitem type="transport" name="APA1_PaintOff_VinFeed" nlsid="30034">
+<Transports>
+				<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="APA1_PaintOff_VinFeed" inactivity_time_out="0" initPoolSize="1" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="169785935">
+					<Proxy enabled="false" type="HTTP"/>
+				</TransportDefinition>
+				<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="APA1_PaintOff_VinFeed" type="Http"/>
+			</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="APA1_PaintOff_VinFeed_MAP" nlsid="30033" interface="1"><exportitem type="transaction" name="APA1_PaintOff_VinFeed_MAP" nlsid="30033">
+
+			<TransactionDef id="APA1_PaintOff_VinFeed_MAP" version="-1202182632" version_mismatch="pass">
+				<Transport id="APA1_PaintOff_VinFeed" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+				</InputMap>
+				<OutputMap/>
+				<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="Ww0KICB7ICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgIHsNCiAgICAJIkNMSUVOVF9JRCI6IiIsDQogICAgCSJQUk9DRVNTX1BPSU5UX0lEIjoiIiwNCiAgICAJIlBST0RVQ1RfSUQiOiIiDQogICAgfQ0KICB9DQpdIA0K">
+						<JSONRequest>
+							<Table name="JSON_Array" nbrInRows="1">
+								<Structure name="com-honda-galc-data-DataContainer">
+									<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+								</Structure>
+							</Table>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="APA1_PaintOff/APA1_PaintOff_VinFeed_from_PLC" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="APA1_PaintOff/APA1_PaintOff_VinFeed_from_PLC" nlsid="30031">
+<Trigger name="APA1_PaintOff_VinFeed_from_PLC" project="APA1_PaintOff" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|17~1~4~5~6~8~2~13~14~15~11~18~19~20~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-250"/>
+		<Node id="17" type="3" x="-150" y="-175"/>
+		<Node id="1" type="3" x="-150" y="450"/>
+		<Node id="4" type="3" x="100" y="-75"/>
+		<Node id="5" type="3" x="100" y="0"/>
+		<Node id="6" type="3" x="100" y="75"/>
+		<Node id="8" type="3" x="100" y="175"/>
+		<Node id="2" type="3" x="-150" y="300"/>
+		<Node id="13" type="3" x="-150" y="75"/>
+		<Node id="14" type="3" x="-150" y="200"/>
+		<Node id="15" type="3" x="-150" y="375"/>
+		<Node id="11" type="3" x="-150" y="0"/>
+		<Node id="18" type="3" x="-150" y="-100"/>
+		<Node id="19" type="3" x="-325" y="-75"/>
+		<Node id="20" type="3" x="-325" y="25"/>
+		<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="100" y="-175"/>
+		<RoutedErrors value="17.1|2.1|13.1|14.1|15.1|11.1|18.2|19.1|"/></BuildInfo>
+ <Event overview_string="Variable: APA1_PaintOff_PLC.GALC_Data_Ready&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="APA1_PaintOff_PLC" name="GALC_Data_Ready" qos="3" type="BOOL"/>
+			<Condition deadband="0" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="errorMsg" type="STRING" length="80" options="3"/>
+  <VariableInfo name="ProductIDInt" type="INT2" xdim="10" options="3"/>
+  <VariableInfo name="plcVIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="plcAck" type="BOOL" options="3"/>
+  <VariableInfo name="VinBinary" type="BINARY" length="20" options="3"/>
+  <VariableInfo name="INFO_MESSAGE" type="STRING" length="80" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3"/>
+  <VariableInfo name="bin_buf" type="BINARY" length="20" options="3"/>
+  <VariableInfo name="ProductID" type="STRING" length="20" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="APA1_PaintOff_PLC"/>
+  <VariableInfo name="plcDataAck" type="STRING" length="32" options="3" default="GALC_Data_ACK"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="GALC_Data_Ready"/>
+  <VariableInfo name="plcVIN_Data" type="STRING" length="32" options="3" default="GALC_VIN_Data[0]"/>
+ </StaticVariables>
+ <Actions first_action="17">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="2" disabled="false">
+   <Properties>
+    <Property name="name" value="APA1_PaintOff_VinFeed_MAP"/>
+    <Property name="version" value="-1202182632"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="CLIENT_ID" value="APA1OF1D00101"/>
+    <ConstantVariable logical_name="PROCESS_POINT_ID" value="APA1OF1P00101"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="APA1_PaintOff"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="5" disabled="false">
+   <Properties>
+    <Property name="format" value="DeviceWise Error:$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="errorMsg"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="6" disabled="false">
+   <Properties>
+    <Property name="format" value="{&#10;&quot;INFO_CODE&quot;: &quot;$(MSG_CODE)&quot;,&#10;&quot;INFO_MESSAGE&quot;: &quot;$(MSG_DESC)&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="MSG_CODE" value="&quot;NG&quot;"/>
+    <LocalVariable logical_name="MSG_DESC" name="errorMsg"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="INFO_MESSAGE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="10"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcVIN_Data"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductIDInt[0]" count="10"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="BINARY.SET" id="13" disabled="false">
+   <Properties>
+    <Property name="input_type" value="Static"/>
+    <Property name="bb_offset" value="0"/>
+    <Property name="type" value="UINT2"/>
+    <Property name="count" value="10"/>
+    <Property name="byteswap" value="Little Endian"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Value" name="ProductIDInt[0]" count="10"/>
+    <LocalVariable logical_name="Binary Buffer" name="bin_buf"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Binary Buffer" name="VinBinary"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="BINARY.GET" id="14" disabled="false">
+   <Properties>
+    <Property name="input_type" value="Static"/>
+    <Property name="bb_offset" value="0"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="20"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Binary Buffer" name="VinBinary"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="15" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="17" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcDataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="18" disabled="false">
+   <Properties>
+    <Property name="expression" value="dataReady == 1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="19"/>
+    <Route result="2" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="19" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="20" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="APA1_PaintOff" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="APA1_PaintOff" nlsid="30032">APA1_PaintOff</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="APA1_PaintOff" type="project">
+		<reference name="APA1_PaintOff/APA1_PaintOff_VinFeed_from_PLC" type="trigger">
+			<reference name="BINARY.GET" type="actiontype"/>
+			<reference name="BINARY.SET" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="APA1_PaintOff_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="APA1_PaintOff_VinFeed_MAP" type="transaction">
+				<reference name="APA1_PaintOff_VinFeed" type="transport"/>
+			</reference>
+			<reference name="APA1_PaintOff_PLC.GALC_Data_Ready" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

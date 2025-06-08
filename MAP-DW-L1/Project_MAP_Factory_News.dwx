@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="dbtable" name="MAP_FACTORY_NEWS_L1" nlsid="30026" interface="1"><exportitem type="dbtable" name="MAP_FACTORY_NEWS_L1" nlsid="30026">CREATE TABLE MAP_FACTORY_NEWS_L1 (Sequence TEXT(5) ,empty TEXT(2) );</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="MAP_Factory_News/BroadcastFromAfOff" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="MAP_Factory_News/BroadcastFromAfOff" nlsid="30031">
+<Trigger name="BroadcastFromAfOff" project="MAP_Factory_News" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|1~3~2~9~11~12~13~10~5~7~14~16~8~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="25" y="-100"/>
+		<Node id="1" type="3" x="25" y="-25"/>
+		<Node id="3" type="3" x="25" y="125"/>
+		<Node id="2" type="3" x="25" y="50"/>
+		<Node id="9" type="3" x="400" y="125"/>
+		<Node id="11" type="3" x="400" y="200"/>
+		<Node id="12" type="3" x="400" y="275"/>
+		<Node id="13" type="3" x="400" y="350"/>
+		<Node id="10" type="3" x="400" y="450"/>
+		<Node id="5" type="3" x="25" y="325"/>
+		<Node id="7" type="3" x="25" y="425"/>
+		<Node id="14" type="3" x="150" y="475"/>
+		<Node id="16" type="3" x="-100" y="375"/>
+		<Node id="8" type="3" x="-50" y="500"/>
+		<Node id="4" type="3" x="25" y="225"/>
+		<Node errorActionId="17" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="400" y="25"/>
+		<RoutedErrors value="1.1|3.1|2.1|16.1|4.1|"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1AFOFF/FACTORYNEWS"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="errorMsg" type="STRING" length="256" options="3"/>
+  <VariableInfo name="seq" type="STRING" length="5" options="3"/>
+  <VariableInfo name="httpContent" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="emp" type="STRING" length="5" options="3" default="0"/>
+  <VariableInfo name="message" type="STRING" length="255" options="3"/>
+  <VariableInfo name="INFO_MESSAGE" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="duplicate" type="INT2" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="24" options="3"/>
+  <VariableInfo name="HTTP_STATUS_CODE_OK" type="INT4" options="3" default="200"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="SET" id="1" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="HTTP_STATUS_CODE_OK"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Status Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="2" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="1024"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="httpContent"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="JSON.DECODE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;      &quot;PRODUCT_ID&quot;: &quot;&quot;,&#10;      &quot;SEQ_NO&quot;:&quot;&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="JSON Input" name="httpContent"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductID"/>
+    <LocalVariable logical_name="SEQ_NO" name="seq"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_COUNT" id="4" disabled="false">
+   <Properties>
+    <Property name="tablename" value="MAP_FACTORY_NEWS_L1"/>
+    <Property name="where" value="sequence = '$(seq)'"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="seq" name="seq"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result Count" name="duplicate"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="x==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="x" name="duplicate"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="16"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_INSERT" id="7" disabled="false">
+   <Properties>
+    <Property name="tablename" value="MAP_FACTORY_NEWS_L1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence" name="seq"/>
+    <LocalVariable logical_name="empty" name="emp"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Unexpected Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="11" disabled="false">
+   <Properties>
+    <Property name="format" value="DeviceWise Error:$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="errorMsg"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="12" disabled="false">
+   <Properties>
+    <Property name="format" value="{&#10;&quot;INFO_CODE&quot;: &quot;$(MSG_CODE)&quot;,&#10;&quot;INFO_MESSAGE&quot;: &quot;$(MSG_DESC)&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="MSG_CODE" value="&quot;NG&quot;"/>
+    <LocalVariable logical_name="MSG_DESC" name="errorMsg"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="INFO_MESSAGE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="13" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="INFO_MESSAGE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="14" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="16" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Duplicate AFOF Data for Sequence No:  $(seq)  Number of Empties:  $(emp)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="seq" name="seq"/>
+    <LocalVariable logical_name="emp" name="emp"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="MAP_Factory_News/SendAFOFDataToPLC" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="MAP_Factory_News/SendAFOFDataToPLC" nlsid="30031">
+<Trigger name="SendAFOFDataToPLC" project="MAP_Factory_News" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="10000">
+ <Context value="Scheduled|27~2~3~4~5~6~7~8~9~10~11~12~14~15~16~18~19~20~22~24~25~26~1~28~29~30~31~32~33~34~35~|user"/>
+ <BuildInfo><Node id="0" type="1" x="275" y="-225"/>
+		<Node id="27" type="3" x="275" y="-150"/>
+		<Node id="2" type="3" x="275" y="175"/>
+		<Node id="3" type="3" x="275" y="275"/>
+		<Node id="4" type="3" x="150" y="375"/>
+		<Node id="5" type="3" x="150" y="450"/>
+		<Node id="6" type="3" x="150" y="550"/>
+		<Node id="7" type="3" x="150" y="625"/>
+		<Node id="8" type="3" x="150" y="700"/>
+		<Node id="9" type="3" x="150" y="800"/>
+		<Node id="10" type="3" x="0" y="875"/>
+		<Node id="11" type="3" x="150" y="975"/>
+		<Node id="12" type="3" x="150" y="1050"/>
+		<Node id="14" type="3" x="150" y="1125"/>
+		<Node id="15" type="3" x="150" y="1300"/>
+		<Node id="16" type="3" x="150" y="1400"/>
+		<Node id="18" type="3" x="300" y="675"/>
+		<Node id="19" type="3" x="100" y="250"/>
+		<Node id="20" type="3" x="300" y="775"/>
+		<Node id="22" type="3" x="500" y="625"/>
+		<Node id="24" type="3" x="600" y="150"/>
+		<Node id="25" type="3" x="600" y="75"/>
+		<Node id="26" type="3" x="150" y="1475"/>
+		<Node id="1" type="3" x="275" y="75"/>
+		<Node id="28" type="3" x="275" y="-75"/>
+		<Node id="29" type="3" x="75" y="-175"/>
+		<Node id="30" type="3" x="75" y="-100"/>
+		<Node id="31" type="3" x="75" y="-25"/>
+		<Node id="32" type="3" x="75" y="50"/>
+		<Node id="33" type="3" x="75" y="125"/>
+		<Node id="34" type="3" x="-50" y="-50"/>
+		<Node id="35" type="3" x="275" y="0"/>
+		<Node errorActionId="23" errorStartIndex="25" id="600000000" text="Error Handling" type="4" x="600" y="0"/>
+		<Node id="536870913" text="Check for PLC Connection and only log the first time it loses connection" type="4" x="-75" y="-225"/>
+		<RoutedErrors value="27.1|2.2|3.1|12.1|14.1|15.1|1.1|28.2|29.1|30.2|31.1|32.1|35.1|"/></BuildInfo>
+ <Event overview_string="Periodic: 1000 ms" type="SCHEDULE"><schedule type="5">
+			<periodic sec="1000"/>
+		</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcReady" type="BOOL" options="3"/>
+  <VariableInfo name="empty" type="STRING" length="2" options="3"/>
+  <VariableInfo name="DeviceState" type="UINT1" options="3" default="0"/>
+  <VariableInfo name="seqInt" type="INT4" options="3"/>
+  <VariableInfo name="sequence" type="STRING" length="5" options="3"/>
+  <VariableInfo name="message" type="STRING" length="255" options="3"/>
+  <VariableInfo name="index" type="INT4" options="3"/>
+  <VariableInfo name="formattedEmpty" type="STRING" length="2" options="3"/>
+  <VariableInfo name="emptyInt" type="INT1" options="3" default="0"/>
+  <VariableInfo name="StoredDeviceState" type="UINT1" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcReady" type="STRING" length="32" options="3" default="M[10]"/>
+  <VariableInfo name="plcEmpty" type="STRING" length="32" options="3" default="D[13]"/>
+  <VariableInfo name="plcSendNotify" type="STRING" length="32" options="3" default="M[11]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="MAP_L1_MASTER_PLC"/>
+  <VariableInfo name="SendDelay" type="INT2" options="3" default="2000"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[10]"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="PLC_Monitor_GV"/>
+ </StaticVariables>
+ <Actions first_action="27">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="x==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="x" name="plcReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="19"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_SELECT" id="3" disabled="false">
+   <Properties>
+    <Property name="select" value="*"/>
+    <Property name="tablename" value="MAP_FACTORY_NEWS_L1"/>
+    <Property name="max_rows" value="1"/>
+    <Property name="return_as_array" value="False"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Sequence" name="sequence"/>
+    <LocalVariable logical_name="empty" name="empty"/>
+    <LocalVariable logical_name="Row Index" name="index"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="25"/>
+    <Route result="2" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="4" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="empty"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="emptyInt"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="sequence"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="seqInt"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="6" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcReady"/>
+    <ConstantVariable logical_name="Value" value="false"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="7" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcSequence"/>
+    <LocalVariable logical_name="Value" name="seqInt"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="8" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="emptyInt"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="formattedEmpty"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="x&lt;10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="x" name="emptyInt"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="10" disabled="false">
+   <Properties>
+    <Property name="format" value=" $(emp)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="emp" name="emptyInt"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="formattedEmpty"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="2"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcEmpty"/>
+    <LocalVariable logical_name="Value" name="formattedEmpty"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcSendNotify"/>
+    <ConstantVariable logical_name="Value" value="true"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Successful sending AFOF Data to $(PLC)  Sequence No:  $(seq)  Number of Empties:  $(emp)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <StaticVariable logical_name="PLC" name="plcDeviceName"/>
+    <LocalVariable logical_name="seq" name="sequence"/>
+    <LocalVariable logical_name="emp" name="empty"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_DELETE" id="15" disabled="false">
+   <Properties>
+    <Property name="tablename" value="MAP_FACTORY_NEWS_L1"/>
+    <Property name="where" value="sequence = '$(seq)'  and empty = '$(emp)' "/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="seq" name="sequence"/>
+    <LocalVariable logical_name="emp" name="empty"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="16" disabled="false">
+   <Properties/>
+   <InputMap>
+    <StaticVariable logical_name="Time To Wait(ms)" name="SendDelay"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="18" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Error sending AFOF Data to $(PLC)  Sequence No:  $(seq)  Number of Empties:  $(emp)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <StaticVariable logical_name="PLC" name="plcDeviceName"/>
+    <LocalVariable logical_name="seq" name="sequence"/>
+    <LocalVariable logical_name="emp" name="empty"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="20"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="19" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="20" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="22" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Invalid Data sending AFOF Data to $(PLC)  Sequence No:  $(seq)  Number of Empties:  $(emp)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <StaticVariable logical_name="PLC" name="plcDeviceName"/>
+    <LocalVariable logical_name="seq" name="sequence"/>
+    <LocalVariable logical_name="emp" name="empty"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="24" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="25" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception $(ErrorCode): $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="26" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEVGETSTATE" id="27" disabled="false">
+   <Properties>
+    <Property name="input_type" value="Dynamic"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Device State" name="DeviceState"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="28" disabled="false">
+   <Properties>
+    <Property name="expression" value="DeviceState==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DeviceState" name="DeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="29" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="StoredDeviceState"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="30" disabled="false">
+   <Properties>
+    <Property name="expression" value="StoredDeviceState==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StoredDeviceState" name="StoredDeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="31" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDeviceName"/>
+    <LocalVariable logical_name="Value" name="DeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="32" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Device $(DeviceName) Not Connected - Device State $(DeviceState)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <StaticVariable logical_name="DeviceName" name="plcDeviceName"/>
+    <LocalVariable logical_name="DeviceState" name="DeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="33" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="34" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="35" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDeviceName"/>
+    <LocalVariable logical_name="Value" name="DeviceState"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/CONV_STR_TO_INT" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/CONV_STR_TO_INT" nlsid="30031">
+<Trigger name="CONV_STR_TO_INT" project="Utilities" max_pending="5" queue_size="20" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|2~3~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="75" y="-75"/>
+						<Node id="2" type="3" x="75" y="0"/>
+						<Node id="3" type="3" x="25" y="125"/>
+						<Node id="4" type="3" x="200" y="75"/></BuildInfo>
+ <Event overview_string="Input Variables: &#10;Output Variables: &#10;" type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;NumString&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;Result&quot; options=&quot;7&quot; type=&quot;INT8&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="2">
+  <Action type="LUA_INLINE" id="2" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="local function convertStringToNumber(str)&#13;&#10; -- Eliminate bad cases...&#13;&#10;    pattern='[+-]?%a+'&#13;&#10;    if(str:match(pattern)) then &#13;&#10;       print(&quot;error case:&quot;, str)&#13;&#10;       out=nil;   &#13;&#10;    else&#13;&#10;  out=tonumber(str)&#13;&#10;    end&#13;&#10; return(out)&#13;&#10;end&#13;&#10;&#13;&#10;local function main(str)&#13;&#10;&#13;&#10; if (str == nil) then&#13;&#10;  return nil&#13;&#10; end&#13;&#10; &#13;&#10; intStr = convertStringToNumber(str)&#13;&#10; return intStr&#13;&#10;&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Result&quot;] = main(DWInput[&quot;NumString&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;NumString&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;Result&quot; options=&quot;7&quot; type=&quot;INT8&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="NumString" name="NumString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="Result" name="Result"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="MAP_Factory_News/SendAFONDataToPlc" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="MAP_Factory_News/SendAFONDataToPlc" nlsid="30031">
+<Trigger name="SendAFONDataToPlc" project="MAP_Factory_News" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|17~18~19~21~22~23~|user"/>
+ <BuildInfo><Node id="0" type="1" x="25" y="-75"/>
+		<Node id="17" type="3" x="25" y="25"/>
+		<Node id="18" type="3" x="25" y="225"/>
+		<Node id="19" type="3" x="25" y="125"/>
+		<Node errorActionId="20" errorStartIndex="21" id="600000000" text="Error Handling" type="4" x="250" y="-50"/>
+		<Node id="21" type="3" x="250" y="25"/>
+		<Node id="22" type="3" x="250" y="100"/>
+		<Node id="23" type="3" x="25" y="325"/>
+		<RoutedErrors value="17.1|18.1|19.1|"/></BuildInfo>
+ <Event overview_string="Listener URL: /AAF1/SEND_PLC_AFON_SEQUENCE&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/SEND_PLC_AFON_SEQUENCE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="intSequenceNumber" type="INT4" options="3"/>
+  <VariableInfo name="SequenceNumber" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="MAP_L1_MASTER_PLC"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[40]"/>
+ </StaticVariables>
+ <Actions first_action="17">
+  <Action type="JSON.DECODE" id="17" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;      &quot;PRODUCT_ID&quot;: &quot;&quot;,&#10;      &quot;SEQ_NO&quot;:&quot;&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="SEQ_NO" name="SequenceNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="18" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcSequence"/>
+    <LocalVariable logical_name="Value" name="intSequenceNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="19" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="CONV_STR_TO_INT"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="NumString" name="SequenceNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="intSequenceNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="21" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="MAP_Factory_News"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception Code: $(ErrorCode), Message $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="22" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="23" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="MAP_Factory_News" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportitem type="project" name="MAP_Factory_News" nlsid="30032">MAP_Factory_News</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="MAP_Factory_News" type="project">
+		<reference name="MAP_Factory_News/BroadcastFromAfOff" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOCALDB_COUNT" type="actiontype"/>
+			<reference name="LOCALDB_INSERT" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="MAP_FACTORY_NEWS_L1" type="dbtable"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="MAP_Factory_News/SendAFOFDataToPLC" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVGETSTATE" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOCALDB_DELETE" type="actiontype"/>
+			<reference name="LOCALDB_SELECT" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="MAP_FACTORY_NEWS_L1" type="dbtable"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+		</reference>
+		<reference name="MAP_Factory_News/SendAFONDataToPlc" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+			<reference name="Utilities/CONV_STR_TO_INT" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="LUA_INLINE" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

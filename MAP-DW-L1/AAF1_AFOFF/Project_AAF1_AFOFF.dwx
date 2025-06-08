@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="transport" name="GALC_FrameShipConfirmation_Save" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameShipConfirmation_Save" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-26320547"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameShipConfirmation_Save" inactivity_time_out="0" initPoolSize="1" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameShipConfirmationDao/insert" id="GALC_FrameShipConfirmation_Save" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameShipConfirmation_Save" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameShipConfirmation_Save" nlsid="30033">
+
+			<TransactionDef id="GALC_FrameShipConfirmation_Save" version="-1849527674" version_mismatch="pass">
+				<Transport id="GALC_FrameShipConfirmation_Save" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="ProcessPointId" type="STRING"/>
+					<Variable count="1" length="32" name="EngineId" type="STRING"/>
+					<Variable count="1" length="32" name="ProductId" type="STRING"/>
+					<Variable count="1" length="32" name="eventDate" type="STRING"/>
+					<Variable count="1" length="32" name="eventTime" type="STRING"/>
+					<Variable count="1" length="32" name="Model" type="STRING"/>
+					<Variable count="1" length="32" name="Type" type="STRING"/>
+					<Variable count="1" length="32" name="extColor" type="STRING"/>
+					<Variable count="1" length="32" name="intColor" type="STRING"/>
+					<Variable count="1" length="32" name="option" type="STRING"/>
+					<Variable count="1" length="32" name="sentFlag" type="STRING"/>
+					<Variable count="1" length="32" name="recordType" type="STRING"/>
+				</InputMap>
+				<OutputMap/>
+				<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="Ww0Kew0KICAgICJjb20uaG9uZGEuZ2FsYy5lbnRpdHkub2lmLkZyYW1lU2hpcENvbmZpcm1hdGlvbiI6DQogICAgew0KICAgICAgICAiaWQiOiB7DQogICAgICAgICAgICAicHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAgICAgICAgICJlbmdpbmVJZCI6ICIiLA0KICAgICAgICAgICAgInByb2R1Y3RJZCI6ICIiDQogICAgICAgIH0sDQogICAgICAgICJldmVudERhdGUiOiAiIiwNCiAgICAgICAgImV2ZW50VGltZSI6ICIiLA0KICAgICAgICAiZnJhbWVNb2RlbCI6ICIiLA0KICAgICAgICAiZnJhbWVUeXBlIjogIiIsDQogICAgICAgICJleHRDb2xvciI6ICIiLA0KICAgICAgICAiaW50Q29sb3IiOiAiIiwNCiAgICAgICAgImZyYW1lT3B0aW9uIjogIiIsDQogICAgICAgICJzZW50RmxhZyI6ICIiLA0KICAgICAgICAicmVjb3JkVHlwZSI6ICIiDQogICAgICANCiAgICB9DQp9DQpd">
+						<JSONRequest>
+							<Table name="JSON_Array" nbrInRows="1">
+								<Structure name="com-honda-galc-entity-oif-FrameShipConfirmation">
+									<Structure name="id">
+										<Parameter dwType="16" name="ProcessPointId" parmname="processPointId" type="STRING"/>
+										<Parameter dwType="16" name="EngineId" parmname="engineId" type="STRING"/>
+										<Parameter dwType="16" name="ProductId" parmname="productId" type="STRING"/>
+									</Structure>
+									<Parameter dwType="16" name="eventDate" parmname="eventDate" type="STRING"/>
+									<Parameter dwType="16" name="eventTime" parmname="eventTime" type="STRING"/>
+									<Parameter dwType="16" name="Model" parmname="frameModel" type="STRING"/>
+									<Parameter dwType="16" name="Type" parmname="frameType" type="STRING"/>
+									<Parameter dwType="16" name="extColor" parmname="extColor" type="STRING"/>
+									<Parameter dwType="16" name="intColor" parmname="intColor" type="STRING"/>
+									<Parameter dwType="16" name="option" parmname="frameOption" type="STRING"/>
+									<Parameter dwType="16" name="sentFlag" parmname="sentFlag" type="STRING"/>
+									<Parameter dwType="16" name="recordType" parmname="recordType" type="STRING"/>
+								</Structure>
+							</Table>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_AFOFF/FRAME_SHIP_REQUEST" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_AFOFF/FRAME_SHIP_REQUEST" nlsid="30031">
+<Trigger name="FRAME_SHIP_REQUEST" project="AAF1_AFOFF" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|1~2~3~4~5~6~7~8~9~10~11~14~15~16~17~12~13~19~|user"/>
+ <BuildInfo><Node id="0" type="1" x="1475" y="425"/>
+		<Node id="1" type="3" x="1475" y="500"/>
+		<Node id="2" type="3" x="1475" y="575"/>
+		<Node id="3" type="3" x="1475" y="650"/>
+		<Node id="4" type="3" x="1475" y="725"/>
+		<Node id="5" type="3" x="1475" y="800"/>
+		<Node id="6" type="3" x="1475" y="875"/>
+		<Node id="7" type="3" x="1475" y="950"/>
+		<Node id="8" type="3" x="1475" y="1025"/>
+		<Node id="9" type="3" x="1475" y="1100"/>
+		<Node id="10" type="3" x="1800" y="600"/>
+		<Node id="11" type="3" x="1275" y="925"/>
+		<Node id="14" type="3" x="1475" y="1250"/>
+		<Node id="15" type="3" x="1475" y="1325"/>
+		<Node id="16" type="3" x="1475" y="1400"/>
+		<Node id="17" type="3" x="1475" y="1475"/>
+		<Node id="12" type="3" x="1475" y="1550"/>
+		<Node id="13" type="3" x="1800" y="750"/>
+		<Node errorActionId="18" errorStartIndex="10" id="600000000" text="Error Handling" type="4" x="1800" y="500"/>
+		<Node id="19" type="3" x="1800" y="675"/>
+		<RoutedErrors value="1.1|2.1|3.2|4.1|5.1|6.1|7.1|8.1|9.1|11.1|14.1|15.1|16.1|17.1|19.1|"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/FRAME_SHIP_REQUEST"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="HTTP_CONTENT_TYPE" type="STRING" length="1024" options="3" default="application/json"/>
+  <VariableInfo name="infoMessage" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="extColor" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="clientId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="eventDate" type="STRING" length="32" options="3"/>
+  <VariableInfo name="EngineId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="engineLength" type="INT2" options="3"/>
+  <VariableInfo name="productSpecCode" type="STRING" length="32" options="3"/>
+  <VariableInfo name="Model" type="STRING" length="32" options="3"/>
+  <VariableInfo name="eventTime" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="updateTS" type="STRING" length="32" options="3"/>
+  <VariableInfo name="recordType" type="STRING" length="32" options="3"/>
+  <VariableInfo name="createTS" type="STRING" length="32" options="3"/>
+  <VariableInfo name="option" type="STRING" length="32" options="3"/>
+  <VariableInfo name="HTTP_STATUS_CODE" type="INT4" length="1024" options="3" default="200"/>
+  <VariableInfo name="Type" type="STRING" length="32" options="3"/>
+  <VariableInfo name="sentFlag" type="STRING" length="32" options="3"/>
+  <VariableInfo name="successMessage" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="intColor" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="JSON.DECODE" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;   &quot;CLIENT_ID&quot;: &quot;&quot;,&#10;   &quot;PROCESS_POINT_ID&quot;: &quot;&quot;,&#10;   &quot;PRODUCT_SPEC_CODE&quot;:&quot;&quot;,&#10;   &quot;PRODUCT_ID&quot;: &quot;&quot;,&#10;   &quot;ENGINE_ID&quot;:&quot;&quot;,&#10;   &quot;EVENT_DATE&quot;:&quot;&quot;,&#10;   &quot;EVENT_TIME&quot;:&quot;&quot;,&#10;   &quot;MODEL_YEAR_CODE&quot;:&quot;&quot;,&#10;   &quot;MODEL_TYPE&quot;:&quot;&quot;,&#10;   &quot;EXT_COLOR&quot;:&quot;&quot;,&#10;   &quot;INT_COLOR&quot;:&quot;&quot;,&#10;   &quot;MODEL_OPTION&quot;:&quot;&quot;,&#10;   &quot;SENT_FLAG&quot;:&quot;&quot;,&#10;   &quot;RECORD_TYPE&quot;:&quot;&quot;,&#10;   &quot;CREATE_TIMESTAMP&quot;:&quot;&quot;,&#10;   &quot;UPDATE_TIMESTAMP&quot;:&quot;&quot;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CLIENT_ID" name="clientId"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="productSpecCode"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="ENGINE_ID" name="EngineId"/>
+    <LocalVariable logical_name="EVENT_DATE" name="eventDate"/>
+    <LocalVariable logical_name="EVENT_TIME" name="eventTime"/>
+    <LocalVariable logical_name="MODEL_YEAR_CODE" name="Model"/>
+    <LocalVariable logical_name="MODEL_TYPE" name="Type"/>
+    <LocalVariable logical_name="EXT_COLOR" name="extColor"/>
+    <LocalVariable logical_name="INT_COLOR" name="intColor"/>
+    <LocalVariable logical_name="MODEL_OPTION" name="option"/>
+    <LocalVariable logical_name="SENT_FLAG" name="sentFlag"/>
+    <LocalVariable logical_name="RECORD_TYPE" name="recordType"/>
+    <LocalVariable logical_name="CREATE_TIMESTAMP" name="createTS"/>
+    <LocalVariable logical_name="UPDATE_TIMESTAMP" name="updateTS"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="2" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="EngineId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="engineLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="engineLength &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="engineLength" name="engineLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="4" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="productSpecCode"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="4"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Model"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="5" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="productSpecCode"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="6" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="productSpecCode"/>
+    <ConstantVariable logical_name="Start Offset" value="8"/>
+    <ConstantVariable logical_name="End Offset" value="10"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="option"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="7" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="productSpecCode"/>
+    <ConstantVariable logical_name="Start Offset" value="11"/>
+    <ConstantVariable logical_name="End Offset" value="20"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="extColor"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="8" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="productSpecCode"/>
+    <ConstantVariable logical_name="Start Offset" value="21"/>
+    <ConstantVariable logical_name="End Offset" value="21"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="intColor"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="9" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameShipConfirmation_Save"/>
+    <Property name="version" value="-1849527674"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+    <LocalVariable logical_name="EngineId" name="EngineId"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="eventDate" name="eventDate"/>
+    <LocalVariable logical_name="eventTime" name="eventTime"/>
+    <LocalVariable logical_name="Model" name="Model"/>
+    <LocalVariable logical_name="Type" name="Type"/>
+    <LocalVariable logical_name="extColor" name="extColor"/>
+    <LocalVariable logical_name="intColor" name="intColor"/>
+    <LocalVariable logical_name="option" name="option"/>
+    <LocalVariable logical_name="sentFlag" name="sentFlag"/>
+    <LocalVariable logical_name="recordType" name="recordType"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_AFOFF"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="11" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_AFOFF"/>
+    <Property name="msg" value="$(Trigger) - Engine Id is empty for product $(product)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="product" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="12" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="14" disabled="false">
+   <Properties>
+    <Property name="format" value="{&#10;&quot;INFO_CODE&quot;: &quot;$(ERROR_CODE)&quot;,&#10;&quot;INFO_MESSAGE&quot;: &quot;$(successMessage)&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ERROR_CODE" name="HTTP_STATUS_CODE"/>
+    <LocalVariable logical_name="successMessage" name="successMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="15" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="16" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="HTTP_STATUS_CODE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Status Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="HTTP_CONTENT_TYPE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content-Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="19" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="200"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Status Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_AFOFF" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_AFOFF" nlsid="30032">AAF1_AFOFF</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_AFOFF" type="project">
+		<reference name="AAF1_AFOFF/FRAME_SHIP_REQUEST" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+			<reference name="GALC_FrameShipConfirmation_Save" type="transaction">
+				<reference name="GALC_FrameShipConfirmation_Save" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

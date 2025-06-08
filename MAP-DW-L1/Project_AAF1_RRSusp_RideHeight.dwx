@@ -1,0 +1,3829 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_RRSUP_RideHeight" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_RRSUP_RideHeight" nlsid="30030">
+<DeviceDefinition name="AAF1_RRSUP_RideHeight" type="166" type_name="RCPU (Built-in Ethernet)" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="ip_address" value="10.39.133.140"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="4096"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5010"/><Property name="sdpts" value="4096"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RRSusp_RideHeight_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RRSusp_RideHeight_DataCollection" nlsid="30033">
+
+			<TransactionDef id="AAF1_RRSusp_RideHeight_DataCollection" version="-136397743" version_mismatch="pass">
+				<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PART1_SN" type="STRING"/>
+					<Variable count="1" length="32" name="PART1_RESULT" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KICAiREFUQV9DT0xMRUNUSU9OX0NPTVBMRVRFIjogIiIsDQogICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICJDTElFTlRfSUQiOiAiIg0KfQ==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+								<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+								<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiUEFSVDFfU04iOiIiLA0KICAgICAgICAiUEFSVDFfUkVTVUxUIjoiMSINCgl9DQp9IA==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Structure name="com-honda-galc-data-DefaultDataContainer">
+									<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PART1_SN" parmname="PART1_SN" type="STRING"/>
+									<Parameter dwType="16" name="PART1_RESULT" parmname="PART1_RESULT" type="STRING"/>
+								</Structure>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_RideHeight/DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_RideHeight/DataCollection" nlsid="30031">
+<Trigger name="DataCollection" project="AAF1_RRSusp_RideHeight" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~2~14~15~3~10~17~18~19~4~12~11~13~7~8~9~20~21~22~23~24~25~26~6~5~27~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="25" y="-100"/>
+		<Node id="1" type="3" x="25" y="0"/>
+		<Node id="2" type="3" x="25" y="100"/>
+		<Node id="14" type="3" x="-175" y="175"/>
+		<Node id="15" type="3" x="-175" y="350"/>
+		<Node id="3" type="3" x="25" y="175"/>
+		<Node id="10" type="3" x="25" y="925"/>
+		<Node id="17" type="3" x="-350" y="400"/>
+		<Node id="18" type="3" x="-350" y="475"/>
+		<Node id="19" type="3" x="-350" y="650"/>
+		<Node id="4" type="3" x="25" y="250"/>
+		<Node id="12" type="3" x="25" y="1100"/>
+		<Node id="11" type="3" x="25" y="1025"/>
+		<Node id="13" type="3" x="25" y="1200"/>
+		<Node id="7" type="3" x="25" y="625"/>
+		<Node id="8" type="3" x="25" y="750"/>
+		<Node id="9" type="3" x="25" y="825"/>
+		<Node id="20" type="3" x="-125" y="675"/>
+		<Node id="21" type="3" x="-125" y="750"/>
+		<Node id="22" type="3" x="-125" y="825"/>
+		<Node id="23" type="3" x="-250" y="750"/>
+		<Node id="24" type="3" x="-250" y="825"/>
+		<Node id="25" type="3" x="-350" y="550"/>
+		<Node id="26" type="3" x="-175" y="250"/>
+		<Node id="6" type="3" x="25" y="500"/>
+		<Node id="5" type="3" x="25" y="375"/>
+		<Node id="27" type="3" x="-150" y="525"/>
+		<Node errorActionId="16" errorStartIndex="17" id="600000000" text="Error Handling" type="4" x="-350" y="325"/>
+		<RoutedErrors value="1.1|2.2|14.1|3.1|10.1|4.1|12.1|11.1|7.2|8.1|9.1|20.2|21.1|22.1|23.1|24.1|26.1|6.2|5.1|27.1|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_RRSUP_RideHeight.M[9001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RRSUP_RideHeight" name="M[9001]" qos="3" type="BOOL"/>
+			<Condition deadband="0" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3" default="0"/>
+  <VariableInfo name="Judgement_Value" type="INT2" length="32" options="3"/>
+  <VariableInfo name="Judgement_Result" type="BOOL" length="32" options="3"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3"/>
+  <VariableInfo name="Judgement" type="STRING" length="32" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[9003]"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D01001A"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P01001"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RRSUP_RideHeight"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="plcError" type="STRING" length="32" options="3" default="M[9109]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[9001]"/>
+  <VariableInfo name="plcJudgement" type="STRING" length="32" options="3" default="D[9012]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},    &#13;&#10;    &quot;JUDGEMENT&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <StaticVariable logical_name="JUDGEMENT Name" name="plcJudgement"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="JUDGEMENT" name="Judgement_Value"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(Trigger) - Data Collection for Product Id ($(ProductId)) Started"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="5" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="6" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="27"/>
+    <Route result="2" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="7" disabled="false">
+   <Properties>
+    <Property name="expression" value="jug_Value == 1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="jug_Value" name="Judgement_Value"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="20"/>
+    <Route result="2" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="8" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Pass"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="9" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement_Result"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="10" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RRSusp_RideHeight_DataCollection"/>
+    <Property name="version" value="-136397743"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="PART1_SN" name="Judgement"/>
+    <LocalVariable logical_name="PART1_RESULT" name="Judgement_Result"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(Trigger) - Data Collection for Product Id ($(ProductId)) Judgement ($(Judgement)) Complete"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="Judgement" name="Judgement"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="17" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="18" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="19" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="20" disabled="false">
+   <Properties>
+    <Property name="expression" value="jug_Value == 9"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="jug_Value" name="Judgement_Value"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="23"/>
+    <Route result="2" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="21" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Bypass"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="22" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement_Result"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="23" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Fail"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="24" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="Judgement_Result"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="25" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="26" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="27" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(Trigger) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_RecipeDownloadService_execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_RecipeDownloadService_execute" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_RecipeDownloadService_execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="-495113148">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/RecipeDownloadService/execute" id="GALC_RecipeDownloadService_execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RIDE_HEIGHT_BuildAttributes" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RIDE_HEIGHT_BuildAttributes" nlsid="30033">
+
+<TransactionDef id="AAF1_RIDE_HEIGHT_BuildAttributes" version="-1310727635" version_mismatch="pass">
+	<Transport id="GALC_RecipeDownloadService_execute" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" length="32" name="RSUSP_RIDE_HEIGHT" type="STRING"/>
+	</OutputMap>
+	<Response outputformat="JSON">
+		<JSONInfo rawJson="ew0KICAgICJSU1VTUF9SSURFX0hFSUdIVCI6ICIxIg0KfQ==">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Parameter dwType="16" name="RSUSP_RIDE_HEIGHT" parmname="RSUSP_RIDE_HEIGHT" type="STRING"/>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Response>
+	<Mapping outputformat="JSON">
+		<JSONInfo rawJson="DQp7ImNvbS5ob25kYS5nYWxjLmRhdGEuRGF0YUNvbnRhaW5lciI6DQogICB7DQogICAgICJDTElFTlRfSUQiOiAiIiwNCiAgICAgIlBST0NFU1NfUE9JTlRfSUQiOiAiIiwNCiAgICAgIlBST0RVQ1RfSUQiOiAiIg0KIH0NCiAgfQ==">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Structure name="com-honda-galc-data-DataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+					</Structure>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1537997542"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_findAllByProductCarrier" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findAllByProductCarrier" id="GALC_FrameDao_findAllByProductCarrier" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033">
+<TransactionDef id="GALC_FrameDao_findAllByProductCarrier_20" version="-578221736" version_mismatch="pass">
+										<Transport id="GALC_FrameDao_findAllByProductCarrier" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="ProductId" type="STRING"/>
+										<Variable count="1" name="PreProcessCount" type="INT2"/>
+										<Variable count="1" name="UpcomingCount" type="INT2"/>
+										<Variable count="1" length="32" name="AfOnProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="20" length="32" name="productId" type="STRING"/>
+										<Variable count="20" length="32" name="engineSerialNo" type="STRING"/>
+										<Variable count="20" name="straightShipPercentage" type="FLOAT8"/>
+										<Variable count="20" length="32" name="keyNo" type="STRING"/>
+										<Variable count="20" length="32" name="shortVin" type="STRING"/>
+										<Variable count="20" name="engineStatus" type="INT4"/>
+										<Variable count="20" name="afOnSequenceNumber" type="INT4"/>
+										<Variable count="20" length="32" name="missionSerialNo" type="STRING"/>
+										<Variable count="20" length="32" name="actualMissionType" type="STRING"/>
+										<Variable count="20" length="32" name="productionLot" type="STRING"/>
+										<Variable count="20" length="32" name="productSpecCode" type="STRING"/>
+										<Variable count="20" length="32" name="planOffDate" type="STRING"/>
+										<Variable count="20" length="32" name="kdLotNumber" type="STRING"/>
+										<Variable count="20" length="32" name="productionDate" type="STRING"/>
+										<Variable count="20" length="32" name="productStartDate" type="STRING"/>
+										<Variable count="20" length="32" name="actualOffDate" type="STRING"/>
+										<Variable count="20" name="autoHoldStatus" type="INT4"/>
+										<Variable count="20" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="20" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="20" length="32" name="prodLot" type="STRING"/>
+										<Variable count="20" length="32" name="operations" type="STRING"/>
+										<Variable count="20" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="20" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICAib3BlcmF0aW9ucyI6ICIiLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KXQ0K">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="20">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+										<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+										<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+										<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+										<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+										<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+										<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+										<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+										<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+										<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+										<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+										<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+										<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+										<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+										<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+										<Parameter dwType="16" name="operations" parmname="operations" type="STRING"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="AfOnProcessPointId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="ProductId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLkludGVnZXIiOg=="/>
+										<Item name="PreProcessCount"/>
+										<Item name="$CONSTANT" type="string" value="fSwNCiAgICAgeyJqYXZhLmxhbmcuSW50ZWdlciI6"/>
+										<Item name="UpcomingCount"/>
+										<Item name="$CONSTANT" type="string" value="fQ0KXQ=="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP" version="6257630">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/ProductCarrierDao/findByAfOnSeqAndProcessPointId" id="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="Http"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" nlsid="30033">
+<TransactionDef id="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" version="1810904735" version_mismatch="pass">
+										<Transport id="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="Sequence" type="STRING"/>
+										<Variable count="1" length="32" name="AfOnProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="1" length="32" name="updateTimestamp" type="STRING"/>
+										<Variable count="1" length="32" name="id_productId" type="STRING"/>
+										<Variable count="1" length="32" name="id_carrierId" type="STRING"/>
+										<Variable count="1" length="32" name="id_onTimestamp" type="STRING"/>
+										<Variable count="1" length="32" name="processPointId" type="STRING"/>
+										<Variable count="1" length="32" name="offTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ew0KICAgICAgICAiaWQiOiB7DQogICAgICAgICAgICAicHJvZHVjdElkIjogIiIsDQogICAgICAgICAgICAiY2FycmllcklkIjogIiIsDQogICAgICAgICAgICAib25UaW1lc3RhbXAiOiAiIg0KICAgICAgICB9LA0KICAgICAgICAicHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAgICAgIm9mZlRpbWVzdGFtcCI6ICIiLA0KICAgICAgICAiY3JlYXRlVGltZXN0YW1wIjogIiIsDQogICAgICAgICJ1cGRhdGVUaW1lc3RhbXAiOiAiIg0KICAgIH0=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="id">
+										<Parameter dwType="16" name="id_productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="id_carrierId" parmname="carrierId" type="STRING"/>
+										<Parameter dwType="16" name="id_onTimestamp" parmname="onTimestamp" type="STRING"/>
+										</Structure>
+										<Parameter dwType="16" name="processPointId" parmname="processPointId" type="STRING"/>
+										<Parameter dwType="16" name="offTimestamp" parmname="offTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="Sequence"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="AfOnProcessPointId"/>
+										<Item name="$CONSTANT" type="string" value="In0NCl0="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request" nlsid="30031">
+<Trigger name="JobCode_Request" project="AAF1_RRSusp_RideHeight" max_pending="1" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~2~3~8~9~10~11~12~16~17~18~19~20~21~22~23~24~25~26~14~15~27~28~29~30~31~32~6~34~35~13~36~37~7~4~5~38~40~43~44~45~46~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-700"/>
+		<Node id="1" type="3" x="-25" y="-625"/>
+		<Node id="2" type="3" x="-25" y="-550"/>
+		<Node id="3" type="3" x="-25" y="-475"/>
+		<Node id="8" type="3" x="-25" y="-75"/>
+		<Node id="9" type="3" x="-25" y="0"/>
+		<Node id="10" type="3" x="-25" y="75"/>
+		<Node id="11" type="3" x="-25" y="150"/>
+		<Node id="12" type="3" x="-25" y="275"/>
+		<Node id="16" type="3" x="-150" y="350"/>
+		<Node id="17" type="3" x="-150" y="575"/>
+		<Node id="18" type="3" x="-300" y="775"/>
+		<Node id="19" type="3" x="-150" y="900"/>
+		<Node id="20" type="3" x="-150" y="975"/>
+		<Node id="21" type="3" x="-150" y="1050"/>
+		<Node id="22" type="3" x="-150" y="1125"/>
+		<Node id="23" type="3" x="-150" y="1350"/>
+		<Node id="24" type="3" x="-150" y="1500"/>
+		<Node id="25" type="3" x="-150" y="1575"/>
+		<Node id="26" type="3" x="150" y="175"/>
+		<Node id="14" type="3" x="-25" y="475"/>
+		<Node id="15" type="3" x="-25" y="575"/>
+		<Node id="27" type="3" x="-175" y="-500"/>
+		<Node id="28" type="3" x="-175" y="-425"/>
+		<Node id="29" type="3" x="-175" y="50"/>
+		<Node id="30" type="3" x="-475" y="-175"/>
+		<Node id="31" type="3" x="-375" y="0"/>
+		<Node id="32" type="3" x="-375" y="100"/>
+		<Node id="6" type="3" x="-25" y="-225"/>
+		<Node id="34" type="3" x="-150" y="1200"/>
+		<Node id="35" type="3" x="-150" y="1275"/>
+		<Node id="13" type="3" x="-25" y="375"/>
+		<Node id="36" type="3" x="-150" y="675"/>
+		<Node id="37" type="3" x="-150" y="775"/>
+		<Node id="7" type="3" x="-25" y="-150"/>
+		<Node id="4" type="3" x="-25" y="-400"/>
+		<Node id="5" type="3" x="-25" y="-325"/>
+		<Node id="38" type="3" x="-175" y="-275"/>
+		<Node id="40" type="3" x="-150" y="1425"/>
+		<Node id="43" type="3" x="-150" y="425"/>
+		<Node id="44" type="3" x="-150" y="500"/>
+		<Node id="45" type="3" x="150" y="275"/>
+		<Node id="46" type="3" x="-325" y="550"/>
+		<Node errorActionId="33" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-475" y="-250"/>
+		<Node id="536870913" text="VIN" type="4" x="-200" y="525"/>
+		<Node id="536870920" text="Sequence" type="4" x="-225" y="600"/>
+		<RoutedErrors value="1.1|2.2|3.1|8.1|9.2|10.1|11.1|12.1|16.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|14.1|27.1|29.1|6.1|34.1|35.1|13.1|36.2|37.1|7.1|4.1|5.2|38.1|40.1|43.1|44.2|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_RRSUP_RideHeight.M[9000]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RRSUP_RideHeight" name="M[9000]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LoopVINAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="infoMessage" type="STRING" length="1024" options="3" default="Written to PLC: "/>
+  <VariableInfo name="SEQUENCES" type="STRING" xdim="20" length="5" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3" default="0"/>
+  <VariableInfo name="EQDataRequest" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="LoopJobCodeData" type="INT4" options="3"/>
+  <VariableInfo name="LoopIndex" type="INT4" options="3" default="0"/>
+  <VariableInfo name="LoopSequence" type="STRING" length="5" options="3"/>
+  <VariableInfo name="CurrentSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="currentVin" type="STRING" length="18" options="3"/>
+  <VariableInfo name="LoopJobCodeAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="LoopVIN" type="STRING" length="17" options="3"/>
+  <VariableInfo name="LoopVINData" type="INT4" options="3"/>
+  <VariableInfo name="LoopJobCode" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ConvertedSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="Sequence_Length" type="INT4" options="3"/>
+  <VariableInfo name="ConvertedSEQno" type="STRING" length="6" options="3"/>
+  <VariableInfo name="LoopSeqData" type="INT4" options="3"/>
+  <VariableInfo name="StATUS" type="STRING" xdim="20" length="10" options="3"/>
+  <VariableInfo name="Loop_VIN_LENGTH" type="INT4" options="3"/>
+  <VariableInfo name="VINS" type="STRING" xdim="20" length="32" options="3" default="0"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVINStart" type="INT4" options="3" default="9103"/>
+  <VariableInfo name="preCheckDevice" type="STRING" length="32" options="3" default="AAF1RS1D01001B"/>
+  <VariableInfo name="plcSeqStart" type="INT4" length="32" options="3" default="9100"/>
+  <VariableInfo name="plcDevice" type="STRING" length="32" options="3" default="AAF1_RRSUP_RideHeight"/>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9108]"/>
+  <VariableInfo name="plcEQDataReq" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="plcJobCodeStart" type="INT4" options="3" default="9112"/>
+  <VariableInfo name="plcISDataReqAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="preCheckProcessPoint" type="STRING" length="32" options="3" default="AAF1RS1P01001"/>
+  <VariableInfo name="plcSeq" type="STRING" length="32" options="3" default="D[9000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;EQDataReady&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;Sequence&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="EQDataReady Name" name="plcEQDataReq"/>
+    <StaticVariable logical_name="Sequence Name" name="plcSeq"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="EQDataReady" name="EQDataRequest"/>
+    <LocalVariable logical_name="Sequence" name="SEQUENCES[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="EQDataRequest==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="EQDataRequest" name="EQDataRequest"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="27"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="4" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Sequence_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_SEQ_LENGTH &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_SEQ_LENGTH" name="Sequence_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="38"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="6" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatSequence(sequence)&#13;&#10;local seq =  string.gsub(sequence, &quot;%s+&quot;, &quot;&quot;)&#13;&#10;    local length = seq:len()&#13;&#10;    while (length&lt;5)&#13;&#10;        do&#13;&#10;            seq=&quot;0&quot; .. seq&#13;&#10;            length=seq:len()&#13;&#10;        end   &#13;&#10;    return seq&#13;&#10;end&#13;&#10;DWOutput[&quot;CurrentSeq&quot;] = formatSequence(DWInput[&quot;SEQ&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;6&quot; name=&quot;SEQ&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;6&quot; name=&quot;CurrentSeq&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="SEQ" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CurrentSeq" name="ConvertedSeq"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId"/>
+    <Property name="version" value="1810904735"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence" name="ConvertedSeq"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="id_productId" name="VINS[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="8" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="18"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="currentVin"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="currentVin"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0"/>
+    <ConstantVariable logical_name="UpcomingCount" value="4"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="VINS[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SEQUENCES[0]" count="20"/>
+    <LocalVariable logical_name="trackingStatus" name="StATUS[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="12" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="4"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="LoopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) :$(infoMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="16" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="VINS[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopVIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="43"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="17" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SEQUENCES[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="18" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RIDE_HEIGHT_BuildAttributes"/>
+    <Property name="version" value="-1310727635"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="preCheckDevice"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="preCheckProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RSUSP_RIDE_HEIGHT" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="19" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcSeqStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopSeqData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="20" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopSeqData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopSeqAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="21" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcJobCodeStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopJobCodeData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="22" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopJobCodeData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopJobCodeAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="23" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;VIN&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:32},&#10;&quot;Seq&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="VIN Name" name="LoopVINAddress"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq Name" name="LoopSeqAddress"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="40"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="24" disabled="false">
+   <Properties>
+    <Property name="format" value="[$(infoMessage) $(VIN), $(Seq),$(jobCode)], "/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+    <LocalVariable logical_name="jobCode" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="25" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="26" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="27" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="28" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="30" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage) $(Seq)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+    <LocalVariable logical_name="Seq" name="CurrentSeq"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="31" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="32"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="32" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="34" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcVINStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopVINData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="35" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopVINData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopVINAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="37" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="99"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="38" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Invalid Seq($(seq))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="seq" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="40" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="Variable Name" name="LoopJobCodeAddress"/>
+    <LocalVariable logical_name="Value" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="43" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Loop_VIN_LENGTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="44"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="44" disabled="false">
+   <Properties>
+    <Property name="expression" value="LOOP_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="LOOP_VIN_LENGTH" name="Loop_VIN_LENGTH"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="46"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="45" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="46" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_1" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_1" nlsid="30031">
+<Trigger name="JobCode_Request_1" project="AAF1_RRSusp_RideHeight" max_pending="1" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~2~3~8~9~10~11~12~16~17~18~19~20~21~22~23~24~25~26~14~15~27~28~29~30~31~32~6~34~35~13~36~37~7~4~5~38~40~43~44~45~46~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-700"/>
+		<Node id="1" type="3" x="-25" y="-625"/>
+		<Node id="2" type="3" x="-25" y="-550"/>
+		<Node id="3" type="3" x="-25" y="-475"/>
+		<Node id="8" type="3" x="-25" y="-75"/>
+		<Node id="9" type="3" x="-25" y="0"/>
+		<Node id="10" type="3" x="-25" y="75"/>
+		<Node id="11" type="3" x="-25" y="150"/>
+		<Node id="12" type="3" x="-25" y="275"/>
+		<Node id="16" type="3" x="-150" y="350"/>
+		<Node id="17" type="3" x="-150" y="575"/>
+		<Node id="18" type="3" x="-150" y="875"/>
+		<Node id="19" type="3" x="-150" y="975"/>
+		<Node id="20" type="3" x="-150" y="1050"/>
+		<Node id="21" type="3" x="-150" y="1125"/>
+		<Node id="22" type="3" x="-150" y="1200"/>
+		<Node id="23" type="3" x="-150" y="1425"/>
+		<Node id="24" type="3" x="-150" y="1575"/>
+		<Node id="25" type="3" x="-150" y="1675"/>
+		<Node id="26" type="3" x="150" y="175"/>
+		<Node id="14" type="3" x="-25" y="650"/>
+		<Node id="15" type="3" x="-25" y="750"/>
+		<Node id="27" type="3" x="-175" y="-500"/>
+		<Node id="28" type="3" x="-175" y="-425"/>
+		<Node id="29" type="3" x="-175" y="50"/>
+		<Node id="30" type="3" x="-475" y="75"/>
+		<Node id="31" type="3" x="-375" y="350"/>
+		<Node id="32" type="3" x="-375" y="450"/>
+		<Node id="6" type="3" x="-25" y="-225"/>
+		<Node id="34" type="3" x="-150" y="1275"/>
+		<Node id="35" type="3" x="-150" y="1350"/>
+		<Node id="13" type="3" x="-25" y="550"/>
+		<Node id="36" type="3" x="-375" y="675"/>
+		<Node id="37" type="3" x="-375" y="750"/>
+		<Node id="7" type="3" x="-25" y="-150"/>
+		<Node id="4" type="3" x="-25" y="-400"/>
+		<Node id="5" type="3" x="-25" y="-325"/>
+		<Node id="38" type="3" x="-200" y="-250"/>
+		<Node id="40" type="3" x="-150" y="1500"/>
+		<Node errorActionId="33" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-475" y="-75"/>
+		<Node id="536870913" text="VIN" type="4" x="-200" y="525"/>
+		<Node id="536870920" text="Sequence" type="4" x="-225" y="600"/>
+		<Node id="43" type="3" x="-150" y="425"/>
+		<Node id="44" type="3" x="-150" y="500"/>
+		<Node id="45" type="3" x="125" y="425"/>
+		<Node id="46" type="3" x="-325" y="550"/>
+		<RoutedErrors value="1.1|2.2|3.1|8.1|9.2|10.1|11.1|12.1|16.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|14.1|27.1|29.1|6.1|34.1|35.1|13.1|36.2|37.1|7.1|4.1|5.2|38.1|40.1|43.1|44.2|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RRSUP_RideHeight" name="M[9000]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LoopVINAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="infoMessage" type="STRING" length="1024" options="3" default="Written to PLC: "/>
+  <VariableInfo name="SEQUENCES" type="STRING" xdim="20" length="5" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3" default="0"/>
+  <VariableInfo name="EQDataRequest" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="LoopJobCodeData" type="INT4" options="3"/>
+  <VariableInfo name="LoopIndex" type="INT4" options="3" default="0"/>
+  <VariableInfo name="LoopSequence" type="STRING" length="5" options="3"/>
+  <VariableInfo name="CurrentSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="currentVin" type="STRING" length="18" options="3"/>
+  <VariableInfo name="LoopJobCodeAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="LoopVIN" type="STRING" length="17" options="3"/>
+  <VariableInfo name="LoopVINData" type="INT4" options="3"/>
+  <VariableInfo name="LoopJobCode" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ConvertedSeq" type="INT4" options="3"/>
+  <VariableInfo name="Sequence_Length" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqData" type="INT4" options="3"/>
+  <VariableInfo name="StATUS" type="STRING" xdim="20" length="10" options="3"/>
+  <VariableInfo name="Loop_VIN_LENGTH" type="INT4" options="3"/>
+  <VariableInfo name="VINS" type="STRING" xdim="20" length="32" options="3" default="0"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVINStart" type="INT4" options="3" default="9103"/>
+  <VariableInfo name="preCheckDevice" type="STRING" length="32" options="3" default="AAF1RS1D01001B"/>
+  <VariableInfo name="plcSeqStart" type="INT4" length="32" options="3" default="9100"/>
+  <VariableInfo name="plcDevice" type="STRING" length="32" options="3" default="AAF1_RRSUP_RideHeight"/>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9108]"/>
+  <VariableInfo name="plcEQDataReq" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="plcJobCodeStart" type="INT4" options="3" default="9112"/>
+  <VariableInfo name="plcISDataReqAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="preCheckProcessPoint" type="STRING" length="32" options="3" default="AAF1RS1P01001"/>
+  <VariableInfo name="plcSeq" type="STRING" length="32" options="3" default="D[9000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;EQDataReady&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;Sequence&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="EQDataReady Name" name="plcEQDataReq"/>
+    <StaticVariable logical_name="Sequence Name" name="plcSeq"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="EQDataReady" name="EQDataRequest"/>
+    <LocalVariable logical_name="Sequence" name="SEQUENCES[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="EQDataRequest==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="EQDataRequest" name="EQDataRequest"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="27"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="4" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Sequence_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_SEQ_LENGTH &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_SEQ_LENGTH" name="Sequence_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="38"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="6" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatSequence(sequence)&#13;&#10;   local num = tonumber(sequence)&#13;&#10;   &#13;&#10;    return num&#13;&#10;end&#13;&#10;DWOutput[&quot;CurrentSeq&quot;] = formatSequence(DWInput[&quot;SEQ&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;6&quot; name=&quot;SEQ&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;CurrentSeq&quot; options=&quot;7&quot; type=&quot;INT4&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="SEQ" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CurrentSeq" name="ConvertedSeq"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId"/>
+    <Property name="version" value="1810904735"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence" name="ConvertedSeq"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="id_productId" name="VINS[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="8" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="18"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="currentVin"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="currentVin"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0"/>
+    <ConstantVariable logical_name="UpcomingCount" value="4"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="VINS[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SEQUENCES[0]" count="20"/>
+    <LocalVariable logical_name="trackingStatus" name="StATUS[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="12" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0" delim=""/>
+    <ConstantVariable logical_name="Final Value" value="4" delim=""/>
+    <ConstantVariable logical_name="Increment By" value="1" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="LoopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) :$(infoMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="16" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="VINS[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopVIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="43"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="17" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SEQUENCES[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="18" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RIDE_HEIGHT_BuildAttributes"/>
+    <Property name="version" value="-1310727635"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="preCheckDevice"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="preCheckProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RSUSP_RIDE_HEIGHT" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="19" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcSeqStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopSeqData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="20" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopSeqData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopSeqAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="21" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcJobCodeStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopJobCodeData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="22" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopJobCodeData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopJobCodeAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="23" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;VIN&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:32},&#10;&quot;Seq&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="VIN Name" name="LoopVINAddress"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq Name" name="LoopSeqAddress"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="40"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="24" disabled="false">
+   <Properties>
+    <Property name="format" value="[$(infoMessage) $(VIN), $(Seq),$(jobCode)], "/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+    <LocalVariable logical_name="jobCode" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="25" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="26" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="27" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="28" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="30" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage) $(Seq)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+    <LocalVariable logical_name="Seq" name="CurrentSeq"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="31" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="32"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="32" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="34" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcVINStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopVINData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="35" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopVINData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopVINAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="37" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="99"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="38" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Invalid Seq($(seq))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="seq" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="40" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="Variable Name" name="LoopJobCodeAddress"/>
+    <LocalVariable logical_name="Value" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="43" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Loop_VIN_LENGTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="44"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="44" disabled="false">
+   <Properties>
+    <Property name="expression" value="LOOP_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="LOOP_VIN_LENGTH" name="Loop_VIN_LENGTH"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="46"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="45" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="46" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="149187833"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_FindAllByInProcessProduct" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findAllByInProcessProduct " id="GALC_FrameDao_FindAllByInProcessProduct" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30033">
+
+										<TransactionDef id="GALC_FrameDao_FindAllByInProcessProduct" version="-147031238" version_mismatch="pass">
+										<Transport id="GALC_FrameDao_FindAllByInProcessProduct" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="ProductId" type="STRING"/>
+										<Variable count="1" name="PreProcessCount" type="INT2"/>
+										<Variable count="1" name="UpcomingCount" type="INT2"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="5" length="32" name="productId" type="STRING"/>
+										<Variable count="5" length="32" name="engineSerialNo" type="STRING"/>
+										<Variable count="5" name="straightShipPercentage" type="FLOAT8"/>
+										<Variable count="5" length="32" name="keyNo" type="STRING"/>
+										<Variable count="5" length="32" name="shortVin" type="STRING"/>
+										<Variable count="5" name="engineStatus" type="INT4"/>
+										<Variable count="5" name="afOnSequenceNumber" type="INT4"/>
+										<Variable count="5" length="32" name="missionSerialNo" type="STRING"/>
+										<Variable count="5" length="32" name="actualMissionType" type="STRING"/>
+										<Variable count="5" length="32" name="productionLot" type="STRING"/>
+										<Variable count="5" length="32" name="productSpecCode" type="STRING"/>
+										<Variable count="5" length="32" name="planOffDate" type="STRING"/>
+										<Variable count="5" length="32" name="kdLotNumber" type="STRING"/>
+										<Variable count="5" length="32" name="productionDate" type="STRING"/>
+										<Variable count="5" length="32" name="productStartDate" type="STRING"/>
+										<Variable count="5" length="32" name="actualOffDate" type="STRING"/>
+										<Variable count="5" name="autoHoldStatus" type="INT4"/>
+										<Variable count="5" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="5" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="5" length="32" name="prodLot" type="STRING"/>
+										<Variable count="5" length="32" name="operations" type="STRING"/>
+										<Variable count="5" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="5" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICAib3BlcmF0aW9ucyI6ICIiLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KXQ0K">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="5">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+										<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+										<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+										<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+										<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+										<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+										<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+										<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+										<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+										<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+										<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+										<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+										<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+										<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+										<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+										<Parameter dwType="16" name="operations" parmname="operations" type="STRING"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="ProductId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLkludGVnZXIiOg=="/>
+										<Item name="PreProcessCount"/>
+										<Item name="$CONSTANT" type="string" value="fSwNCiAgICAgeyJqYXZhLmxhbmcuSW50ZWdlciI6"/>
+										<Item name="UpcomingCount"/>
+										<Item name="$CONSTANT" type="string" value="fQ0KXQ=="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_New" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_New" nlsid="30031">
+<Trigger name="JobCode_Request_New" project="AAF1_RRSusp_RideHeight" max_pending="1" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~2~3~4~5~6~7~8~9~11~13~14~15~16~17~18~19~20~21~25~26~27~28~29~30~31~32~42~35~36~45~46~47~48~49~50~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-525"/>
+		<Node id="1" type="3" x="-25" y="-450"/>
+		<Node id="2" type="3" x="-25" y="-375"/>
+		<Node id="3" type="3" x="-25" y="-300"/>
+		<Node id="4" type="3" x="-25" y="-75"/>
+		<Node id="5" type="3" x="-25" y="0"/>
+		<Node id="6" type="3" x="-25" y="75"/>
+		<Node id="7" type="3" x="-25" y="150"/>
+		<Node id="8" type="3" x="-25" y="450"/>
+		<Node id="9" type="3" x="-150" y="500"/>
+		<Node id="11" type="3" x="-150" y="575"/>
+		<Node id="13" type="3" x="-150" y="675"/>
+		<Node id="14" type="3" x="-150" y="775"/>
+		<Node id="15" type="3" x="-150" y="850"/>
+		<Node id="16" type="3" x="-150" y="925"/>
+		<Node id="17" type="3" x="-150" y="1000"/>
+		<Node id="18" type="3" x="-150" y="1225"/>
+		<Node id="19" type="3" x="-150" y="1300"/>
+		<Node id="20" type="3" x="-150" y="1375"/>
+		<Node id="21" type="3" x="175" y="350"/>
+		<Node id="25" type="3" x="-25" y="650"/>
+		<Node id="26" type="3" x="-25" y="750"/>
+		<Node id="27" type="3" x="-150" y="-325"/>
+		<Node id="28" type="3" x="-150" y="-250"/>
+		<Node id="29" type="3" x="-175" y="50"/>
+		<Node id="30" type="3" x="-475" y="75"/>
+		<Node id="31" type="3" x="-375" y="350"/>
+		<Node id="32" type="3" x="-375" y="450"/>
+		<Node id="42" type="3" x="-25" y="-225"/>
+		<Node id="35" type="3" x="-175" y="275"/>
+		<Node id="36" type="3" x="-25" y="275"/>
+		<Node id="45" type="3" x="-150" y="1075"/>
+		<Node id="46" type="3" x="-150" y="1150"/>
+		<Node id="47" type="3" x="-25" y="550"/>
+		<Node id="48" type="3" x="-375" y="600"/>
+		<Node id="49" type="3" x="-375" y="675"/>
+		<Node id="50" type="3" x="-25" y="-150"/>
+		<Node errorActionId="33" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-325" y="-75"/>
+		<Node id="536870913" text="VIN" type="4" x="-200" y="525"/>
+		<Node id="536870920" text="Sequence" type="4" x="-225" y="600"/>
+		<RoutedErrors value="1.1|2.2|3.1|4.1|5.2|6.1|7.1|8.1|9.1|11.1|13.1|14.1|15.1|16.1|17.1|18.1|19.1|25.1|27.1|29.1|42.1|35.1|36.2|45.1|46.1|47.1|48.2|49.1|50.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RRSUP_RideHeight" name="M[9000]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LoopVINAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="infoMessage" type="STRING" length="1024" options="3" default="Written to PLC: "/>
+  <VariableInfo name="SEQUENCES" type="STRING" xdim="5" length="5" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3" default="0"/>
+  <VariableInfo name="EQDataRequest" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="LoopJobCodeData" type="INT4" options="3"/>
+  <VariableInfo name="LoopIndex" type="INT4" options="3" default="0"/>
+  <VariableInfo name="LoopSequence" type="STRING" length="5" options="3"/>
+  <VariableInfo name="CurrentSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="currentVin" type="STRING" length="18" options="3"/>
+  <VariableInfo name="LoopJobCodeAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="LoopVIN" type="STRING" length="17" options="3"/>
+  <VariableInfo name="LoopVINData" type="INT4" options="3"/>
+  <VariableInfo name="LoopJobCode" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ConvertedSeq" type="INT4" options="3"/>
+  <VariableInfo name="Sequence_Length" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqData" type="INT4" options="3"/>
+  <VariableInfo name="StATUS" type="STRING" xdim="5" length="10" options="3"/>
+  <VariableInfo name="VINS" type="STRING" xdim="5" length="32" options="3" default="0"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVINStart" type="INT4" options="3" default="9103"/>
+  <VariableInfo name="preCheckDevice" type="STRING" length="32" options="3" default="AAF1RS1D01001B"/>
+  <VariableInfo name="plcSeqStart" type="INT4" length="32" options="3" default="9100"/>
+  <VariableInfo name="plcDevice" type="STRING" length="32" options="3" default="AAF1_RRSUP_RideHeight"/>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9108]"/>
+  <VariableInfo name="plcEQDataReq" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="plcJobCodeStart" type="INT4" options="3" default="9112"/>
+  <VariableInfo name="plcISDataReqAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="preCheckProcessPoint" type="STRING" length="32" options="3" default="AAF1RS1P01001"/>
+  <VariableInfo name="plcSeq" type="STRING" length="32" options="3" default="D[9000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;EQDataReady&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;Sequence&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="EQDataReady Name" name="plcEQDataReq"/>
+    <StaticVariable logical_name="Sequence Name" name="plcSeq"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="EQDataReady" name="EQDataRequest"/>
+    <LocalVariable logical_name="Sequence" name="SEQUENCES[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="EQDataRequest==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="EQDataRequest" name="EQDataRequest"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="27"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="42"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="4" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="6" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="18"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="currentVin"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_FindAllByInProcessProduct"/>
+    <Property name="version" value="-147031238"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="currentVin"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0" delim=""/>
+    <ConstantVariable logical_name="UpcomingCount" value="4" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="VINS[0]" count="5"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SEQUENCES[0]" count="5"/>
+    <LocalVariable logical_name="trackingStatus" name="StATUS[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="8" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="4"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="LoopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="47"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="9" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="VINS[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopVIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="11" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SEQUENCES[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="13" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RIDE_HEIGHT_BuildAttributes"/>
+    <Property name="version" value="-1615114263"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="preCheckDevice"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="preCheckProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="AF_EQUIPMENT_JOB_CODE" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="14" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcSeqStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopSeqData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="15" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopSeqData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopSeqAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="16" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcJobCodeStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopJobCodeData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="17" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopJobCodeData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopJobCodeAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="18" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;VIN&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:32},&#10;&quot;Seq&quot;:{&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#10;&quot;JobCode&quot;:{&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="VIN Name" name="LoopVINAddress"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq Name" name="LoopSeqAddress"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+    <LocalVariable logical_name="JobCode Name" name="LoopJobCodeAddress"/>
+    <LocalVariable logical_name="JobCode" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="19" disabled="false">
+   <Properties>
+    <Property name="format" value="[$(infoMessage) $(VIN), $(Seq),$(jobCode)], "/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+    <LocalVariable logical_name="jobCode" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="20" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="21" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="25" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) :$(infoMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="26" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="27" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="28" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="30" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage) $(Seq)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+    <LocalVariable logical_name="Seq" name="CurrentSeq"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="31" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="32"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="32" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="35" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Status mismatch for VIN $(Actual) - $(status)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="Actual" name="VINS[0]"/>
+    <LocalVariable logical_name="status" name="StATUS[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="StATUS[0]"/>
+    <ConstantVariable logical_name="Search String" value="AAF1ON1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="42" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatSequence(sequence)&#13;&#10;   local num = tonumber(sequence)&#13;&#10;   &#13;&#10;    return num&#13;&#10;end&#13;&#10;DWOutput[&quot;CurrentSeq&quot;] = formatSequence(DWInput[&quot;SEQ&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;6&quot; name=&quot;SEQ&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;CurrentSeq&quot; options=&quot;7&quot; type=&quot;INT4&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="SEQ" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CurrentSeq" name="ConvertedSeq"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="45" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcVINStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopVINData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="46" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopVINData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopVINAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="47" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="48" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="49" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="99"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="50" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId"/>
+    <Property name="version" value="1810904735"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence" name="ConvertedSeq"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="id_productId" name="VINS[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="4"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_New_1" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RRSusp_RideHeight/JobCode_Request_New_1" nlsid="30031">
+<Trigger name="JobCode_Request_New_1" project="AAF1_RRSusp_RideHeight" max_pending="1" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~2~3~8~9~10~11~12~16~17~18~19~20~21~22~23~24~25~26~14~15~27~28~29~30~31~32~6~34~35~13~36~37~7~4~5~38~40~43~44~45~46~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-700"/>
+		<Node id="1" type="3" x="-25" y="-625"/>
+		<Node id="2" type="3" x="-25" y="-550"/>
+		<Node id="3" type="3" x="-25" y="-475"/>
+		<Node id="8" type="3" x="-25" y="-75"/>
+		<Node id="9" type="3" x="-25" y="0"/>
+		<Node id="10" type="3" x="-25" y="75"/>
+		<Node id="11" type="3" x="-25" y="150"/>
+		<Node id="12" type="3" x="-25" y="275"/>
+		<Node id="16" type="3" x="-150" y="350"/>
+		<Node id="17" type="3" x="-150" y="575"/>
+		<Node id="18" type="3" x="-300" y="775"/>
+		<Node id="19" type="3" x="-150" y="900"/>
+		<Node id="20" type="3" x="-150" y="975"/>
+		<Node id="21" type="3" x="-150" y="1050"/>
+		<Node id="22" type="3" x="-150" y="1125"/>
+		<Node id="23" type="3" x="-150" y="1350"/>
+		<Node id="24" type="3" x="-150" y="1500"/>
+		<Node id="25" type="3" x="-150" y="1575"/>
+		<Node id="26" type="3" x="150" y="175"/>
+		<Node id="14" type="3" x="-25" y="475"/>
+		<Node id="15" type="3" x="-25" y="575"/>
+		<Node id="27" type="3" x="-175" y="-500"/>
+		<Node id="28" type="3" x="-175" y="-425"/>
+		<Node id="29" type="3" x="-175" y="50"/>
+		<Node id="30" type="3" x="-475" y="-175"/>
+		<Node id="31" type="3" x="-375" y="0"/>
+		<Node id="32" type="3" x="-375" y="100"/>
+		<Node id="6" type="3" x="-25" y="-225"/>
+		<Node id="34" type="3" x="-150" y="1200"/>
+		<Node id="35" type="3" x="-150" y="1275"/>
+		<Node id="13" type="3" x="-25" y="375"/>
+		<Node id="36" type="3" x="-150" y="675"/>
+		<Node id="37" type="3" x="-150" y="775"/>
+		<Node id="7" type="3" x="-25" y="-150"/>
+		<Node id="4" type="3" x="-25" y="-400"/>
+		<Node id="5" type="3" x="-25" y="-325"/>
+		<Node id="38" type="3" x="-175" y="-275"/>
+		<Node id="40" type="3" x="-150" y="1425"/>
+		<Node id="43" type="3" x="-150" y="425"/>
+		<Node id="44" type="3" x="-150" y="500"/>
+		<Node id="45" type="3" x="150" y="275"/>
+		<Node id="46" type="3" x="-325" y="550"/>
+		<Node errorActionId="33" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-475" y="-250"/>
+		<Node id="536870913" text="VIN" type="4" x="-200" y="525"/>
+		<Node id="536870920" text="Sequence" type="4" x="-225" y="600"/>
+		<RoutedErrors value="1.1|2.2|3.1|8.1|9.2|10.1|11.1|12.1|16.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|14.1|27.1|29.1|6.1|34.1|35.1|13.1|36.2|37.1|7.1|4.1|5.2|38.1|40.1|43.1|44.2|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RRSUP_RideHeight" name="M[9000]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LoopVINAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="infoMessage" type="STRING" length="1024" options="3" default="Written to PLC: "/>
+  <VariableInfo name="SEQUENCES" type="STRING" xdim="20" length="5" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3" default="0"/>
+  <VariableInfo name="EQDataRequest" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="LoopJobCodeData" type="INT4" options="3"/>
+  <VariableInfo name="LoopIndex" type="INT4" options="3" default="0"/>
+  <VariableInfo name="LoopSequence" type="STRING" length="5" options="3"/>
+  <VariableInfo name="CurrentSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="currentVin" type="STRING" length="18" options="3"/>
+  <VariableInfo name="LoopJobCodeAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="LoopVIN" type="STRING" length="17" options="3"/>
+  <VariableInfo name="LoopVINData" type="INT4" options="3"/>
+  <VariableInfo name="LoopJobCode" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqAddress" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ConvertedSeq" type="STRING" length="6" options="3"/>
+  <VariableInfo name="Sequence_Length" type="INT4" options="3"/>
+  <VariableInfo name="LoopSeqData" type="INT4" options="3"/>
+  <VariableInfo name="StATUS" type="STRING" xdim="20" length="10" options="3"/>
+  <VariableInfo name="Loop_VIN_LENGTH" type="INT4" options="3"/>
+  <VariableInfo name="VINS" type="STRING" xdim="20" length="32" options="3" default="0"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcVINStart" type="INT4" options="3" default="9103"/>
+  <VariableInfo name="preCheckDevice" type="STRING" length="32" options="3" default="AAF1RS1D01001B"/>
+  <VariableInfo name="plcSeqStart" type="INT4" length="32" options="3" default="9100"/>
+  <VariableInfo name="plcDevice" type="STRING" length="32" options="3" default="AAF1_RRSUP_RideHeight"/>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9108]"/>
+  <VariableInfo name="plcEQDataReq" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="plcJobCodeStart" type="INT4" options="3" default="9112"/>
+  <VariableInfo name="plcISDataReqAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="preCheckProcessPoint" type="STRING" length="32" options="3" default="AAF1RS1P01001"/>
+  <VariableInfo name="plcSeq" type="STRING" length="32" options="3" default="D[9000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;EQDataReady&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;Sequence&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="EQDataReady Name" name="plcEQDataReq"/>
+    <StaticVariable logical_name="Sequence Name" name="plcSeq"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="EQDataReady" name="EQDataRequest"/>
+    <LocalVariable logical_name="Sequence" name="SEQUENCES[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="EQDataRequest==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="EQDataRequest" name="EQDataRequest"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="27"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="4" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Sequence_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="5" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_SEQ_LENGTH &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_SEQ_LENGTH" name="Sequence_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="38"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="6" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatSequence(sequence)&#13;&#10;    local num = tonumber(sequence) &#13;&#10;    local length = num:len()&#13;&#10;    while (length&lt;6)&#13;&#10;        do&#13;&#10;            num=&quot;0&quot; .. num&#13;&#10;            length=num:len()&#13;&#10;        end   &#13;&#10;    return num&#13;&#10;end&#13;&#10;DWOutput[&quot;CurrentSeq&quot;] = formatSequence(DWInput[&quot;SEQ&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;6&quot; name=&quot;SEQ&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;6&quot; name=&quot;CurrentSeq&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="SEQ" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CurrentSeq" name="ConvertedSeq"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId"/>
+    <Property name="version" value="1810904735"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence" name="ConvertedSeq"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="id_productId" name="VINS[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="8" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="29"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="18"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="currentVin"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="currentVin"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0" delim=""/>
+    <ConstantVariable logical_name="UpcomingCount" value="4" delim=""/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="VINS[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SEQUENCES[0]" count="20"/>
+    <LocalVariable logical_name="trackingStatus" name="StATUS[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="12" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="4"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="LoopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) :$(infoMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="16" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="VINS[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopVIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="43"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="17" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="5"/>
+    <Property name="length" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SEQUENCES[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="18" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RIDE_HEIGHT_BuildAttributes"/>
+    <Property name="version" value="-1310727635"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="preCheckDevice"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="preCheckProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RSUSP_RIDE_HEIGHT" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="19" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcSeqStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopSeqData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="20" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopSeqData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopSeqAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="21" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcJobCodeStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopJobCodeData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="22" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopJobCodeData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopJobCodeAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="23" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;VIN&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:32},&#10;&quot;Seq&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="VIN Name" name="LoopVINAddress"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq Name" name="LoopSeqAddress"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="40"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="24" disabled="false">
+   <Properties>
+    <Property name="format" value="[$(infoMessage) $(VIN), $(Seq),$(jobCode)], "/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="VIN" name="LoopVIN"/>
+    <LocalVariable logical_name="Seq" name="LoopSequence"/>
+    <LocalVariable logical_name="jobCode" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="25" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="26" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="27" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Variable Name" name="plcISDataReqAck"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="28" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="VINS[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="30" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage) $(Seq)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+    <LocalVariable logical_name="Seq" name="CurrentSeq"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="31" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;&quot;Errored&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <StaticVariable logical_name="Errored Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Errored" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="32"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="32" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="34" disabled="false">
+   <Properties>
+    <Property name="expression" value="ChannelStart+loopCount*15"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ChannelStart" name="plcVINStart"/>
+    <LocalVariable logical_name="loopCount" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LoopVINData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="35" disabled="false">
+   <Properties>
+    <Property name="format" value="D[$(channel)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="channel" name="LoopVINData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="LoopVINAddress"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="37" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="99"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="LoopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="38" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RRSusp_RideHeight"/>
+    <Property name="msg" value="$(TRIGGER) - Invalid Seq($(seq))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="seq" name="SEQUENCES[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="40" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="UINT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDevice"/>
+    <LocalVariable logical_name="Variable Name" name="LoopJobCodeAddress"/>
+    <LocalVariable logical_name="Value" name="LoopJobCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="43" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LoopVIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="Loop_VIN_LENGTH"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="44"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="44" disabled="false">
+   <Properties>
+    <Property name="expression" value="LOOP_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="LOOP_VIN_LENGTH" name="Loop_VIN_LENGTH"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="46"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="45" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="46" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="45"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_RRSusp_RideHeight" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_RRSusp_RideHeight" nlsid="30032">AAF1_RRSusp_RideHeight</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_RRSusp_RideHeight" type="project">
+		<reference name="AAF1_RRSusp_RideHeight/DataCollection" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RRSUP_RideHeight" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RRSusp_RideHeight_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_RRSUP_RideHeight.M[9001]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RRSusp_RideHeight/JobCode_Request" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RRSUP_RideHeight" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RIDE_HEIGHT_BuildAttributes" type="transaction">
+				<reference name="GALC_RecipeDownloadService_execute" type="transport"/>
+			</reference>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction">
+				<reference name="GALC_FrameDao_findAllByProductCarrier" type="transport"/>
+			</reference>
+			<reference name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="transaction">
+				<reference name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="transport"/>
+			</reference>
+			<reference name="AAF1_RRSUP_RideHeight.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RRSusp_RideHeight/JobCode_Request_1" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RRSUP_RideHeight" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RIDE_HEIGHT_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction"/>
+			<reference name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="transaction"/>
+			<reference name="AAF1_RRSUP_RideHeight.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RRSusp_RideHeight/JobCode_Request_New" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RRSUP_RideHeight" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RIDE_HEIGHT_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_FindAllByInProcessProduct" type="transaction">
+				<reference name="GALC_FrameDao_FindAllByInProcessProduct" type="transport"/>
+			</reference>
+			<reference name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="transaction"/>
+			<reference name="AAF1_RRSUP_RideHeight.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RRSusp_RideHeight/JobCode_Request_New_1" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RRSUP_RideHeight" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RIDE_HEIGHT_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction"/>
+			<reference name="GALC_ProductCarrierDao_findByAfOnSeqAndProcessPointId" type="transaction"/>
+			<reference name="AAF1_RRSUP_RideHeight.M[9000]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

@@ -1,0 +1,1724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="AAF1_Engine_SpindleNutTighten/LeftSide_BroadcastFromClient" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_Engine_SpindleNutTighten/LeftSide_BroadcastFromClient" nlsid="30031">
+<Trigger name="LeftSide_BroadcastFromClient" project="AAF1_Engine_SpindleNutTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|4~3~1~6~7~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-50" y="-50"/>
+			<Node id="4" type="3" x="-50" y="50"/>
+			<Node id="3" type="3" x="200" y="175"/>
+			<Node id="1" type="3" x="-50" y="250"/>
+			<Node id="6" type="3" x="200" y="100"/>
+			<Node id="7" type="3" x="-50" y="150"/>
+			<Node errorActionId="2" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="200" y="25"/>
+			<RoutedErrors value="4.1|7.1|"/></BuildInfo>
+ <Description>Receive a TCP broadcast message from GALC Client</Description>
+ <Event overview_string="Listener URL: /AAF1/LS_SPINDLE&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/LS_SPINDLE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="FRONT_SPINDLE_JOBCODE" type="STRING" length="32" options="3"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="PRODUCT_SPEC_CODE" type="STRING" length="100" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PLCVIN" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="PLCDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="PLCDeviceName" type="STRING" length="32" options="3" default="AAF1_LSSpindleTighten"/>
+  <VariableInfo name="PLCEnabled" type="STRING" length="32" options="3" default="M[6003]"/>
+  <VariableInfo name="PLCJobcode" type="STRING" length="32" options="3" default="D[4030]"/>
+ </StaticVariables>
+ <Actions first_action="4">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="JSON.DECODE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;&quot;PRODUCT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#13;&#10;&quot;PROCESS_POINT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;FRONT_SPINDLE_JOB_CODE&quot; : &quot;&quot;,&#13;&#10;&quot;CLIENT_ID&quot; : &quot;&quot;&#13;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="PRODUCT_SPEC_CODE"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="FRONT_SPINDLE_JOB_CODE" name="FRONT_SPINDLE_JOBCODE"/>
+    <LocalVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="7" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;    &quot;JOBCODE&quot; : {&quot;type&quot;:&quot;INT2&quot;, &quot;count&quot;:1},&#13;&#10;    &quot;VIN&quot; : {&quot;type&quot;:&quot;STRING&quot;, &quot;count&quot;:1, &quot;length&quot;:18},&#13;&#10;    &quot;ENABLED&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1},&#13;&#10;    &quot;DATAREADYACK&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCDeviceName"/>
+    <StaticVariable logical_name="JOBCODE Name" name="PLCJobcode"/>
+    <LocalVariable logical_name="JOBCODE" name="FRONT_SPINDLE_JOBCODE"/>
+    <StaticVariable logical_name="VIN Name" name="PLCVIN"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <StaticVariable logical_name="ENABLED Name" name="PLCEnabled"/>
+    <ConstantVariable logical_name="ENABLED" value="1"/>
+    <StaticVariable logical_name="DATAREADYACK Name" name="PLCDataReadyAck"/>
+    <ConstantVariable logical_name="DATAREADYACK" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_LSSpindleTighten" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_LSSpindleTighten" nlsid="30030">
+<DeviceDefinition name="AAF1_LSSpindleTighten" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.11"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1281"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_LSSpindleTighten_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_LSSpindleTighten_DataCollection" nlsid="30033">
+
+										<TransactionDef id="AAF1_LSSpindleTighten_DataCollection" version="-1744366706" version_mismatch="pass">
+										<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" name="SPINDLE1_TORQUE" type="FLOAT4"/>
+										<Variable count="1" name="SPINDLE1_ANGLE" type="FLOAT4"/>
+										<Variable count="1" length="32" name="SPINDLE1_RESULT" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ew0KICAiREFUQV9DT0xMRUNUSU9OX0NPTVBMRVRFIjogIiIsDQogICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICJDTElFTlRfSUQiOiAiIg0KfQ==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiU1BJTkRMRTFfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMV9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEUxX1JFU1VMVCI6IjEiDQoJDQoJfQ0KfSA=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="10" name="SPINDLE1_TORQUE" parmname="SPINDLE1_TORQUE" type="DOUBLE"/>
+										<Parameter dwType="10" name="SPINDLE1_ANGLE" parmname="SPINDLE1_ANGLE" type="DOUBLE"/>
+										<Parameter dwType="16" name="SPINDLE1_RESULT" parmname="SPINDLE1_RESULT" type="STRING"/>
+										</Structure>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastResponse" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastResponse" nlsid="30033">
+<TransactionDef id="GALC_BroadcastResponse" version="1858569967" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="JUDGEMENT" type="STRING"/>
+										<Variable count="1" length="32" name="SKIP_OPERATION" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJKVURHRU1FTlQiOiAiIiwNCiAgICAgIlNLSVBfT1BFUkFUSU9OIjoiIg0KIH0NCiAgfQ0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JUDGEMENT" parmname="JUDGEMENT" type="STRING"/>
+										<Parameter dwType="16" name="SKIP_OPERATION" parmname="SKIP_OPERATION" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/ParseFecNutRunnerDataString" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/ParseFecNutRunnerDataString" nlsid="30031">
+<Trigger name="ParseFecNutRunnerDataString" project="Utilities" max_pending="10" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+										<Node id="1" type="3" x="-150" y="-75"/>
+										<Node id="2" type="3" x="-150" y="25"/>
+										<Node id="4" type="3" x="100" y="-50"/>
+										<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="100" y="-150"/>
+										<RoutedErrors value="1.1|"/></BuildInfo>
+ <Event overview_string="Input Variables: &#10;Output Variables: &#10;" type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;50&quot; name=&quot;FecNutRunnerDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function parseData(fecDataString)&#13;&#10;&#13;&#10;    spindle = trimString(string.sub(fecDataString, 1, 3),true,true)&#13;&#10;    finalTorque = trimString(string.sub(fecDataString, 4, 12),true,true)&#13;&#10;    finalAngle = trimString(string.sub(fecDataString, 14, 20),true,true)&#13;&#10;    torqueJudgement = trimString(string.sub(fecDataString, 41, 42),true,true)&#13;&#10;    angleJudgement = trimString(string.sub(fecDataString, 44, 45),true,true)&#13;&#10;    &#13;&#10;    if torqueJudgement == &quot;O&quot; then torqueJudgement = 1 else torqueJudgement = 0 end&#13;&#10;    if angleJudgement == &quot;O&quot; then angleJudgement = 1 else angleJudgement = 0 end&#13;&#10;&#13;&#10;    DWOutput[&quot;SpindleNumber&quot;] = spindle&#13;&#10;    DWOutput[&quot;FinalTorque&quot;] = finalTorque&#13;&#10;    DWOutput[&quot;FinalAngle&quot;] = finalAngle&#13;&#10;    DWOutput[&quot;TorqueJudgement&quot;] = torqueJudgement&#13;&#10;    DWOutput[&quot;AngleJudgement&quot;] = angleJudgement&#13;&#10;&#13;&#10;    return &quot;&quot;&#13;&#10;end&#13;&#10;&#13;&#10;function trimString(str, trimLeft, trimRight)&#13;&#10;    -- Remove all non-alphanumeric characters&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input: &quot; .. inputString)&#13;&#10;    --str = inputString:gsub('%W','')&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input Control Clear: &quot; .. str)&#13;&#10;    &#13;&#10;    if (trimLeft==true and trimRight==true) then str=str:gsub(&quot;^%s*(.-)%s*$&quot;, &quot;%1&quot;)&#13;&#10;    elseif (trimLeft==true) then str=str:gsub(&quot;^%s*&quot;, &quot;&quot;) &#13;&#10;    elseif (trimRight==true) then str=str:gsub(&quot;%s*$&quot;, &quot;&quot;) end&#13;&#10;    &#13;&#10;    return str&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;result&quot;] = parseData(DWInput[&quot;FecDataString&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;FecDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;result&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="FecDataString" name="FecNutRunnerDataString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="SpindleNumber" name="SpindleNumber"/>
+    <EventVariable logical_name="FinalTorque" name="FinalTorque"/>
+    <EventVariable logical_name="FinalAngle" name="FinalAngle"/>
+    <EventVariable logical_name="TorqueJudgement" name="TorqueJudgement"/>
+    <EventVariable logical_name="AngleJudgement" name="AngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_Engine_SpindleNutTighten/LeftSide_DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_Engine_SpindleNutTighten/LeftSide_DataCollection" nlsid="30031">
+<Trigger name="LeftSide_DataCollection" project="AAF1_Engine_SpindleNutTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~12~13~3~11~17~10~2~14~15~6~7~9~4~5~18~19~20~21~22~23~24~25~26~27~28~29~30~31~32~33~34~8~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-175"/>
+		<Node id="1" type="3" x="-25" y="-100"/>
+		<Node id="12" type="3" x="-225" y="0"/>
+		<Node id="13" type="3" x="-225" y="75"/>
+		<Node id="3" type="3" x="-25" y="50"/>
+		<Node id="11" type="3" x="0" y="725"/>
+		<Node id="17" type="3" x="175" y="125"/>
+		<Node id="10" type="3" x="0" y="650"/>
+		<Node id="2" type="3" x="-25" y="-25"/>
+		<Node id="14" type="3" x="175" y="-25"/>
+		<Node id="15" type="3" x="175" y="50"/>
+		<Node id="6" type="3" x="0" y="325"/>
+		<Node id="7" type="3" x="0" y="400"/>
+		<Node id="9" type="3" x="0" y="575"/>
+		<Node id="4" type="3" x="-25" y="125"/>
+		<Node id="5" type="3" x="-25" y="225"/>
+		<Node id="18" type="3" x="-175" y="550"/>
+		<Node id="19" type="3" x="-175" y="275"/>
+		<Node id="20" type="3" x="-175" y="625"/>
+		<Node id="21" type="3" x="-175" y="700"/>
+		<Node id="22" type="3" x="-175" y="850"/>
+		<Node id="23" type="3" x="-175" y="775"/>
+		<Node id="24" type="3" x="-300" y="850"/>
+		<Node id="25" type="3" x="-200" y="1300"/>
+		<Node id="26" type="3" x="-300" y="925"/>
+		<Node id="27" type="3" x="-200" y="1000"/>
+		<Node id="28" type="3" x="-200" y="1075"/>
+		<Node id="29" type="3" x="-200" y="1150"/>
+		<Node id="30" type="3" x="-200" y="1225"/>
+		<Node id="31" type="3" x="100" y="225"/>
+		<Node id="32" type="3" x="-175" y="350"/>
+		<Node id="33" type="3" x="-175" y="425"/>
+		<Node id="34" type="3" x="-300" y="450"/>
+		<Node id="8" type="3" x="0" y="500"/>
+		<Node errorActionId="16" errorStartIndex="14" id="600000000" text="Error Handling" type="4" x="175" y="-100"/>
+		<RoutedErrors value="1.1|12.1|3.1|10.1|2.2|6.1|7.1|9.1|4.1|5.1|18.1|19.1|20.1|21.1|22.1|23.2|24.1|26.1|27.1|28.1|29.1|30.1|33.2|8.2|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_LSSpindleTighten" name="M[6001]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="MEASUREMENT_TORQUE" type="FLOAT4" length="8" options="3" default="0"/>
+  <VariableInfo name="ProductId" type="STRING" length="17" options="3"/>
+  <VariableInfo name="loopFinalTorque" type="FLOAT4" options="3" default="0"/>
+  <VariableInfo name="SpindleNumber" type="INT2" options="3"/>
+  <VariableInfo name="loopFinalAngle" type="INT2" options="3" default="0"/>
+  <VariableInfo name="SpindlePlcData" type="STRING" length="56" options="3"/>
+  <VariableInfo name="MEASUREMENT_ANGLE" type="INT2" length="8" options="3" default="0"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="loopTorqueJudgement" type="BOOL" options="3"/>
+  <VariableInfo name="loopAngleJudgement" type="BOOL" options="3"/>
+  <VariableInfo name="JUDGEMENT" type="STRING" length="32" options="3" default="1"/>
+  <VariableInfo name="intSpindleLength" type="INT2" options="3"/>
+  <VariableInfo name="MEASUREMENT_JUDGEMENT" type="INT2" length="8" options="3" default="0"/>
+  <VariableInfo name="loopSpindleData" type="STRING" length="56" options="3"/>
+  <VariableInfo name="loopIndex" type="INT2" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ProcessPointIdResponse" type="STRING" length="32" options="3" default="AAF1EL2P00301"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1EL2D00302A"/>
+  <VariableInfo name="plcSpindleData" type="STRING" length="31" options="3" default="D[4150]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1EL2P00302"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_LSSpindleTighten"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="ClientIdResponse" type="STRING" length="32" options="3" default="AAF1EL2D00301B"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;SPINDLE1&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:56}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <StaticVariable logical_name="SPINDLE1 Name" name="plcSpindleData[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="SPINDLE1" name="SpindlePlcData[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Collecting Data for Product Id: $(ProductId)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="5" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="Initial Value" name="loopIndex"/>
+    <ConstantVariable logical_name="Final Value" value="0"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_LSSpindleTighten_DataCollection"/>
+    <Property name="version" value="-1744366706"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="SPINDLE1_TORQUE" name="MEASUREMENT_TORQUE[0]"/>
+    <LocalVariable logical_name="SPINDLE1_ANGLE" name="MEASUREMENT_ANGLE[0]"/>
+    <LocalVariable logical_name="SPINDLE1_RESULT" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientIdResponse"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointIdResponse"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="JUDGEMENT" name="JUDGEMENT"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="8" disabled="false">
+   <Properties>
+    <Property name="expression" value="Judgement==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Judgement" name="JUDGEMENT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcEnable"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="15" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="18" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="ParseFecNutRunnerDataString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="FecNutRunnerDataString" name="loopSpindleData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="SpindleNumber" name="SpindleNumber"/>
+    <LocalVariable logical_name="FinalTorque" name="loopFinalTorque"/>
+    <LocalVariable logical_name="FinalAngle" name="loopFinalAngle"/>
+    <LocalVariable logical_name="TorqueJudgement" name="loopTorqueJudgement"/>
+    <LocalVariable logical_name="AngleJudgement" name="loopAngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="56"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SpindlePlcData[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopSpindleData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_TORQUE[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <LocalVariable logical_name="Value" name="loopFinalTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_TORQUE[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="21" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_ANGLE[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <LocalVariable logical_name="Value" name="loopFinalAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_ANGLE[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="23" disabled="false">
+   <Properties>
+    <Property name="expression" value="TorqueJudgement &amp;&amp; AngleJudgement"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="AngleJudgement" name="loopAngleJudgement"/>
+    <LocalVariable logical_name="TorqueJudgement" name="loopTorqueJudgement"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="24" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="25" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="26" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="JUDGEMENT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="27" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopFinalTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="28" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopFinalAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="29" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopTorqueJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="30" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopAngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="31" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="32" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="loopSpindleData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="intSpindleLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="34"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="33" disabled="false">
+   <Properties>
+    <Property name="expression" value="splindleLength&gt;0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="splindleLength" name="intSpindleLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="34" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_Engine_SpindleNutTighten/RightSide_BroadcastFromClient" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_Engine_SpindleNutTighten/RightSide_BroadcastFromClient" nlsid="30031">
+<Trigger name="RightSide_BroadcastFromClient" project="AAF1_Engine_SpindleNutTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|4~3~1~6~7~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-50" y="-50"/>
+			<Node id="4" type="3" x="-50" y="50"/>
+			<Node id="3" type="3" x="200" y="175"/>
+			<Node id="1" type="3" x="-50" y="250"/>
+			<Node id="6" type="3" x="200" y="100"/>
+			<Node id="7" type="3" x="-50" y="150"/>
+			<Node errorActionId="2" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="200" y="25"/>
+			<RoutedErrors value="4.1|7.1|"/></BuildInfo>
+ <Description>Receive a TCP broadcast message from GALC Client</Description>
+ <Event overview_string="Listener URL: /AAF1/RS_SPINDLE&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/RS_SPINDLE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="FRONT_SPINDLE_JOBCODE" type="STRING" length="32" options="3"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="100" options="3"/>
+  <VariableInfo name="PRODUCT_SPEC_CODE" type="STRING" length="100" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PLCVIN" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="PLCDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="PLCDeviceName" type="STRING" length="32" options="3" default="AAF1_RSSpindleTighten"/>
+  <VariableInfo name="PLCEnabled" type="STRING" length="32" options="3" default="M[6003]"/>
+  <VariableInfo name="PLCJobcode" type="STRING" length="32" options="3" default="D[4030]"/>
+ </StaticVariables>
+ <Actions first_action="4">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="JSON.DECODE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;&quot;PRODUCT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#13;&#10;&quot;PROCESS_POINT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;FRONT_SPINDLE_JOB_CODE&quot; : &quot;&quot;,&#13;&#10;&quot;CLIENT_ID&quot; : &quot;&quot;&#13;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="PRODUCT_SPEC_CODE"/>
+    <LocalVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="FRONT_SPINDLE_JOB_CODE" name="FRONT_SPINDLE_JOBCODE"/>
+    <LocalVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="7" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;    &quot;JOBCODE&quot; : {&quot;type&quot;:&quot;INT2&quot;, &quot;count&quot;:1},&#13;&#10;    &quot;VIN&quot; : {&quot;type&quot;:&quot;STRING&quot;, &quot;count&quot;:1, &quot;length&quot;:18},&#13;&#10;    &quot;ENABLED&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1},&#13;&#10;    &quot;DATAREADYACK&quot; : {&quot;type&quot;:&quot;BOOL&quot;, &quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCDeviceName"/>
+    <StaticVariable logical_name="JOBCODE Name" name="PLCJobcode"/>
+    <LocalVariable logical_name="JOBCODE" name="FRONT_SPINDLE_JOBCODE"/>
+    <StaticVariable logical_name="VIN Name" name="PLCVIN"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <StaticVariable logical_name="ENABLED Name" name="PLCEnabled"/>
+    <ConstantVariable logical_name="ENABLED" value="1"/>
+    <StaticVariable logical_name="DATAREADYACK Name" name="PLCDataReadyAck"/>
+    <ConstantVariable logical_name="DATAREADYACK" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_RSSpindleTighten" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_RSSpindleTighten" nlsid="30030">
+<DeviceDefinition name="AAF1_RSSpindleTighten" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.13"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1282"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RSSpindleTighten_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RSSpindleTighten_DataCollection" nlsid="30033">
+
+										<TransactionDef id="AAF1_RSSpindleTighten_DataCollection" version="-1744366706" version_mismatch="pass">
+										<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" name="SPINDLE1_TORQUE" type="FLOAT4"/>
+										<Variable count="1" name="SPINDLE1_ANGLE" type="FLOAT4"/>
+										<Variable count="1" length="32" name="SPINDLE1_RESULT" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ew0KICAiREFUQV9DT0xMRUNUSU9OX0NPTVBMRVRFIjogIiIsDQogICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICJDTElFTlRfSUQiOiAiIg0KfQ==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiU1BJTkRMRTFfVE9SUVVFIjowLjAsDQogICAgICAgICJTUElORExFMV9BTkdMRSI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlNQSU5ETEUxX1JFU1VMVCI6IjEiDQoJDQoJfQ0KfSA=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="10" name="SPINDLE1_TORQUE" parmname="SPINDLE1_TORQUE" type="DOUBLE"/>
+										<Parameter dwType="10" name="SPINDLE1_ANGLE" parmname="SPINDLE1_ANGLE" type="DOUBLE"/>
+										<Parameter dwType="16" name="SPINDLE1_RESULT" parmname="SPINDLE1_RESULT" type="STRING"/>
+										</Structure>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_Engine_SpindleNutTighten/RightSide_DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_Engine_SpindleNutTighten/RightSide_DataCollection" nlsid="30031">
+<Trigger name="RightSide_DataCollection" project="AAF1_Engine_SpindleNutTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~12~13~3~11~17~10~2~14~15~6~7~9~4~5~18~19~20~21~22~23~24~25~26~27~28~29~30~31~32~33~34~8~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-175"/>
+		<Node id="1" type="3" x="-25" y="-100"/>
+		<Node id="12" type="3" x="-225" y="0"/>
+		<Node id="13" type="3" x="-225" y="75"/>
+		<Node id="3" type="3" x="-25" y="50"/>
+		<Node id="11" type="3" x="0" y="725"/>
+		<Node id="17" type="3" x="175" y="125"/>
+		<Node id="10" type="3" x="0" y="650"/>
+		<Node id="2" type="3" x="-25" y="-25"/>
+		<Node id="14" type="3" x="175" y="-25"/>
+		<Node id="15" type="3" x="175" y="50"/>
+		<Node id="6" type="3" x="0" y="325"/>
+		<Node id="7" type="3" x="0" y="400"/>
+		<Node id="9" type="3" x="0" y="575"/>
+		<Node id="4" type="3" x="-25" y="125"/>
+		<Node id="5" type="3" x="-25" y="225"/>
+		<Node id="18" type="3" x="-175" y="550"/>
+		<Node id="19" type="3" x="-175" y="275"/>
+		<Node id="20" type="3" x="-175" y="625"/>
+		<Node id="21" type="3" x="-175" y="700"/>
+		<Node id="22" type="3" x="-175" y="850"/>
+		<Node id="23" type="3" x="-175" y="775"/>
+		<Node id="24" type="3" x="-300" y="850"/>
+		<Node id="25" type="3" x="-200" y="1300"/>
+		<Node id="26" type="3" x="-300" y="925"/>
+		<Node id="27" type="3" x="-200" y="1000"/>
+		<Node id="28" type="3" x="-200" y="1075"/>
+		<Node id="29" type="3" x="-200" y="1150"/>
+		<Node id="30" type="3" x="-200" y="1225"/>
+		<Node id="31" type="3" x="100" y="225"/>
+		<Node id="32" type="3" x="-175" y="350"/>
+		<Node id="33" type="3" x="-175" y="425"/>
+		<Node id="34" type="3" x="-300" y="450"/>
+		<Node id="8" type="3" x="0" y="500"/>
+		<Node errorActionId="16" errorStartIndex="14" id="600000000" text="Error Handling" type="4" x="175" y="-100"/>
+		<RoutedErrors value="1.1|12.1|3.1|10.1|2.2|6.1|7.1|9.1|4.1|5.1|18.1|19.1|20.1|21.1|22.1|23.2|24.1|26.1|27.1|28.1|29.1|30.1|33.2|8.2|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_RSSpindleTighten" name="M[6001]" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="MEASUREMENT_TORQUE" type="FLOAT4" length="8" options="3" default="0"/>
+  <VariableInfo name="ProductId" type="STRING" length="17" options="3"/>
+  <VariableInfo name="loopFinalTorque" type="FLOAT4" options="3" default="0"/>
+  <VariableInfo name="SpindleNumber" type="INT2" options="3"/>
+  <VariableInfo name="loopFinalAngle" type="INT2" options="3" default="0"/>
+  <VariableInfo name="SpindlePlcData" type="STRING" length="56" options="3"/>
+  <VariableInfo name="MEASUREMENT_ANGLE" type="INT2" length="8" options="3" default="0"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="loopTorqueJudgement" type="BOOL" options="3"/>
+  <VariableInfo name="loopAngleJudgement" type="BOOL" options="3"/>
+  <VariableInfo name="JUDGEMENT" type="STRING" length="32" options="3" default="1"/>
+  <VariableInfo name="intSpindleLength" type="INT2" options="3"/>
+  <VariableInfo name="MEASUREMENT_JUDGEMENT" type="INT2" length="8" options="3" default="0"/>
+  <VariableInfo name="loopSpindleData" type="STRING" length="56" options="3"/>
+  <VariableInfo name="loopIndex" type="INT2" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ProcessPointIdResponse" type="STRING" length="32" options="3" default="AAF1EL2P00401"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[4012]"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1EL2D00402A"/>
+  <VariableInfo name="plcSpindleData" type="STRING" length="31" options="3" default="D[4150]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1EL2P00402"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSSpindleTighten"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[6004]"/>
+  <VariableInfo name="ClientIdResponse" type="STRING" length="32" options="3" default="AAF1EL2D00401B"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[6001]"/>
+  <VariableInfo name="plcEnable" type="STRING" length="32" options="3" default="M[6003]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;SPINDLE1&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:56}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <StaticVariable logical_name="SPINDLE1 Name" name="plcSpindleData[0]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="SPINDLE1" name="SpindlePlcData[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Collecting Data for Product Id: $(ProductId)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="5" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="Initial Value" name="loopIndex"/>
+    <ConstantVariable logical_name="Final Value" value="0"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RSSpindleTighten_DataCollection"/>
+    <Property name="version" value="-1744366706"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="SPINDLE1_TORQUE" name="MEASUREMENT_TORQUE[0]"/>
+    <LocalVariable logical_name="SPINDLE1_ANGLE" name="MEASUREMENT_ANGLE[0]"/>
+    <LocalVariable logical_name="SPINDLE1_RESULT" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="7" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientIdResponse"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointIdResponse"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="JUDGEMENT" name="JUDGEMENT"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="8" disabled="false">
+   <Properties>
+    <Property name="expression" value="Judgement==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Judgement" name="JUDGEMENT"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcEnable"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_Engine_SpindleTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="15" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="18" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="ParseFecNutRunnerDataString"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="FecNutRunnerDataString" name="loopSpindleData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="SpindleNumber" name="SpindleNumber"/>
+    <LocalVariable logical_name="FinalTorque" name="loopFinalTorque"/>
+    <LocalVariable logical_name="FinalAngle" name="loopFinalAngle"/>
+    <LocalVariable logical_name="TorqueJudgement" name="loopTorqueJudgement"/>
+    <LocalVariable logical_name="AngleJudgement" name="loopAngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="56"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SpindlePlcData[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopSpindleData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_TORQUE[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <LocalVariable logical_name="Value" name="loopFinalTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_TORQUE[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="21" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_ANGLE[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <LocalVariable logical_name="Value" name="loopFinalAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_ANGLE[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="23" disabled="false">
+   <Properties>
+    <Property name="expression" value="TorqueJudgement &amp;&amp; AngleJudgement"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="AngleJudgement" name="loopAngleJudgement"/>
+    <LocalVariable logical_name="TorqueJudgement" name="loopTorqueJudgement"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="24" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+    <LocalVariable logical_name="Index" name="loopIndex"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="MEASUREMENT_JUDGEMENT[0]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="25" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="26" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="JUDGEMENT"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="27" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="FLOAT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopFinalTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="28" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopFinalAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="29" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopTorqueJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="30" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopAngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="31" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="32" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="loopSpindleData"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="intSpindleLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="34"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="33" disabled="false">
+   <Properties>
+    <Property name="expression" value="splindleLength&gt;0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="splindleLength" name="intSpindleLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="34" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_Engine_SpindleNutTighten" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_Engine_SpindleNutTighten" nlsid="30032">AAF1_Engine_SpindleNutTighten</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_Engine_SpindleNutTighten" type="project">
+		<reference name="AAF1_Engine_SpindleNutTighten/LeftSide_BroadcastFromClient" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_Engine_SpindleNutTighten/LeftSide_DataCollection" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_LSSpindleTighten" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_LSSpindleTighten_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="GALC_BroadcastResponse" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+			<reference name="Utilities/ParseFecNutRunnerDataString" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="LUA_INLINE" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+			<reference name="AAF1_LSSpindleTighten.M[6001]" type="variable"/>
+		</reference>
+		<reference name="AAF1_Engine_SpindleNutTighten/RightSide_BroadcastFromClient" type="trigger">
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_Engine_SpindleNutTighten/RightSide_DataCollection" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RSSpindleTighten" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RSSpindleTighten_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="GALC_BroadcastResponse" type="transaction"/>
+			<reference name="AAF1_RSSpindleTighten.M[6001]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_Accelator_Pedal" nlsid="30030" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="device" name="AAF1_Accelator_Pedal" nlsid="30030">
+<DeviceDefinition name="AAF1_Accelator_Pedal" type="51" type_name="Modbus Device" state="6" options="2104"><Properties><Property name="input_count" value="0"/><Property name="discrete_count" value="8"/><Property name="address" value="10.39.131.92"/><Property name="coils_count" value="8"/><Property name="timeout" value="5000"/><Property name="start_at_1" value="true"/><Property name="port" value="502"/><Property name="validate" value="Read Holding Register"/><Property name="holding_count" value="0"/><Property name="connection_type" value="Ethernet"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastResponse" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastResponse" nlsid="30033">
+<TransactionDef id="GALC_BroadcastResponse" version="1858569967" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="JUDGEMENT" type="STRING"/>
+										<Variable count="1" length="32" name="SKIP_OPERATION" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJKVURHRU1FTlQiOiAiIiwNCiAgICAgIlNLSVBfT1BFUkFUSU9OIjoiIg0KIH0NCiAgfQ0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JUDGEMENT" parmname="JUDGEMENT" type="STRING"/>
+										<Parameter dwType="16" name="SKIP_OPERATION" parmname="SKIP_OPERATION" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_Accelerator_Pedal/Herutu_Accelerator_Pedal" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_Accelerator_Pedal/Herutu_Accelerator_Pedal" nlsid="30031">
+<Trigger name="Herutu_Accelerator_Pedal" project="AAF1_Accelerator_Pedal" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="10000">
+ <Context value="Data|13~9~10~8~15~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="25" y="0"/>
+		<Node id="13" type="3" x="25" y="100"/>
+		<Node id="9" type="3" x="175" y="25"/>
+		<Node id="10" type="3" x="175" y="100"/>
+		<Node id="8" type="3" x="25" y="200"/>
+		<Node id="15" type="3" x="-125" y="150"/>
+		<Node errorActionId="11" errorStartIndex="9" id="600000000" text="Error Handling" type="4" x="175" y="-50"/>
+		<RoutedErrors value="13.1|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_Accelator_Pedal.Discrete Inputs[10002]&#10;Condition: Equal to 1&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_Accelator_Pedal" name="Discrete Inputs[10002]" qos="3" type="BOOL"/>
+			<Condition type="equalto" value="1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UnitPresent" type="BOOL" options="3"/>
+  <VariableInfo name="ProductIDS" type="STRING" xdim="5" length="18" options="3"/>
+  <VariableInfo name="opMode" type="BOOL" options="3"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3" default="1"/>
+  <VariableInfo name="NextProductID" type="STRING" length="18" options="3"/>
+  <VariableInfo name="ProductID" type="STRING" length="18" options="3"/>
+  <VariableInfo name="product_len" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1IN4P00401"/>
+  <VariableInfo name="CLIENT_ID" type="STRING" length="32" options="3" default="AAF1IN4D00201A"/>
+ </StaticVariables>
+ <Actions first_action="13">
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF1_Accelerator_Pedal"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+      <Properties>
+          <Property name="message_type" value="INFO"/>
+          <Property name="level" value="INFO"/>
+          <Property name="component" value="AAF1_Accelerator_Pedal"/>
+          <Property name="msg" value="Discrete Inputs[10002] state: $(AAF1_Accelator_Pedal.Discrete Inputs[10002])"/>
+      </Properties>
+      <InputMap>
+          <Variable device="AAF1_Accelator_Pedal" name="Discrete Inputs[10002]" type="BOOL"/>
+      </InputMap>
+      <OutputMap/>
+      <Routes>
+          <Route result="0" goto="13"/>
+      </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="13" disabled="false">
+      <Properties>
+          <Property name="name" value="GALC_BroadcastResponse"/>
+          <Property name="version" value="1858569967"/>
+      </Properties>
+      <InputMap>
+          <StaticVariable logical_name="CLIENT_ID" name="CLIENT_ID"/>
+          <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+          <ConstantVariable logical_name="JUDGEMENT" value="1"/>
+          <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+      </InputMap>
+      <OutputMap/>
+      <Routes>
+          <Route result="0" goto="8"/>
+          <Route result="1" goto="9"/>
+          <Route result="2" goto="15"/>
+      </Routes>
+  </Action>
+  <Action type="LOGMSG" id="16" disabled="false">
+      <Properties>
+          <Property name="message_type" value="INFO"/>
+          <Property name="level" value="INFO"/>
+          <Property name="component" value="AAF1_Accelerator_Pedal"/>
+          <Property name="msg" value="Transaction result: $(LAST_ERROR) - $(LAST_ERROR_STRING)"/>
+      </Properties>
+      <InputMap>
+          <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+          <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+      </InputMap>
+      <OutputMap/>
+      <Routes>
+          <Route result="0" goto="8"/>
+          <Route result="1" goto="9"/>
+          <Route result="2" goto="15"/>
+      </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_Accelerator_Pedal" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_Accelerator_Pedal" nlsid="30032">AAF1_Accelerator_Pedal</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_Accelerator_Pedal" type="project">
+		<reference name="AAF1_Accelerator_Pedal/Herutu_Accelerator_Pedal" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_Accelator_Pedal" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_Accelator_Pedal.Discrete Inputs[10002]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

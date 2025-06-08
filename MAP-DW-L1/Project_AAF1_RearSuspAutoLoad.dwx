@@ -1,0 +1,2573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/BroadcastFromS1" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/BroadcastFromS1" nlsid="30031">
+<Trigger name="BroadcastFromS1" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|1~2~4~5~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="25"/>
+			<Node id="1" type="3" x="-25" y="175"/>
+			<Node id="2" type="3" x="-25" y="325"/>
+			<Node id="4" type="3" x="325" y="150"/>
+			<Node id="5" type="3" x="325" y="250"/>
+			<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="325" y="50"/>
+			<RoutedErrors value="1.1|"/></BuildInfo>
+ <Description>Receive a TCP broadcast message from GALC Client</Description>
+ <Event overview_string="Listener URL: /AAF1/AUTOLOAD_S1&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/AUTOLOAD_S1"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables>
+  <VariableInfo name="PLCDataComplete" type="STRING" length="32" options="3" default="M[9102]"/>
+  <VariableInfo name="PLCDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDWR" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="PLCDataComplete"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_RearSuspAutoLoad" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_RearSuspAutoLoad" nlsid="30030">
+<DeviceDefinition name="AAF1_RearSuspAutoLoad" type="166" type_name="RCPU (Built-in Ethernet)" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="ip_address" value="10.39.233.55"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="4096"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5011"/><Property name="sdpts" value="4096"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/DataCompleteStation1" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/DataCompleteStation1" nlsid="30031">
+<Trigger name="DataCompleteStation1" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~2~4~5~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="25"/>
+			<Node id="1" type="3" x="-25" y="175"/>
+			<Node id="2" type="3" x="-25" y="325"/>
+			<Node id="4" type="3" x="325" y="150"/>
+			<Node id="5" type="3" x="325" y="250"/>
+			<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="325" y="50"/>
+			<RoutedErrors value="1.1|"/></BuildInfo>
+ <Description>Receive a TCP broadcast message from GALC Client</Description>
+ <Event overview_string="Variable: AAF1_RearSuspAutoLoad.M[9005]&#10;Condition: Equal to 1&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RearSuspAutoLoad" name="M[9005]" qos="3" type="BOOL"/>
+				<Condition type="equalto" value="1"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables>
+  <VariableInfo name="PLCDataComplete" type="STRING" length="32" options="3" default="M[9002]"/>
+  <VariableInfo name="PLCDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDWR" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="PLCDataComplete"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(TRIGGER) - Unexpected Error ($(LAST_ERROR)) - $(LAST_ERROR_STRING)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="LAST_ERROR" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="LAST_ERROR_STRING" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute_woSF" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute_woSF" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-844705051"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DataCollectionService_Execute_woSF" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute_woSF" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_RS01_AUTO_LOAD_BuildAttributes" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_RS01_AUTO_LOAD_BuildAttributes" nlsid="30033">
+
+					<TransactionDef id="AAF1_RS01_AUTO_LOAD_BuildAttributes" version="-1507754594" version_mismatch="pass">
+						<Transport id="GALC_DataCollectionService_Execute_woSF" type="HTTP"/>
+						<InputMap>
+							<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+							<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+							<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+						</InputMap>
+						<OutputMap>
+							<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+							<Variable count="1" length="32" name="JOB_CODE" type="STRING"/>
+							<Variable count="1" length="32" name="IS_STRAGGLER" type="STRING"/>
+						</OutputMap>
+						<Response outputformat="JSON">
+							<JSONInfo rawJson="ewkNCiAgCSJQUk9EVUNUX0lEIjogIiIsICAgIA0KICAJIkpPQl9DT0RFIjogIiIsDQogIAkiSVNfU1RSQUdHTEVSIjogIiINCn0NCg==">
+								<JSONRequest>
+									<Structure name="JSON_Object">
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JOB_CODE" parmname="JOB_CODE" type="STRING"/>
+										<Parameter dwType="16" name="IS_STRAGGLER" parmname="IS_STRAGGLER" type="STRING"/>
+									</Structure>
+								</JSONRequest>
+							</JSONInfo>
+						</Response>
+						<Mapping outputformat="JSON">
+							<JSONInfo rawJson="Ww0KICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiINCiAgICAgIH0NCiAgICB9DQogIF0=">
+								<JSONRequest>
+									<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										</Structure>
+									</Table>
+								</JSONRequest>
+							</JSONInfo>
+							<HTTPRequest method="POST">
+								<Header/>
+								<Query/>
+							</HTTPRequest>
+						</Mapping>
+					</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1537997542"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_findAllByProductCarrier" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findAllByProductCarrier" id="GALC_FrameDao_findAllByProductCarrier" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033">
+<TransactionDef id="GALC_FrameDao_findAllByProductCarrier_20" version="-578221736" version_mismatch="pass">
+										<Transport id="GALC_FrameDao_findAllByProductCarrier" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="ProductId" type="STRING"/>
+										<Variable count="1" name="PreProcessCount" type="INT2"/>
+										<Variable count="1" name="UpcomingCount" type="INT2"/>
+										<Variable count="1" length="32" name="AfOnProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="20" length="32" name="productId" type="STRING"/>
+										<Variable count="20" length="32" name="engineSerialNo" type="STRING"/>
+										<Variable count="20" name="straightShipPercentage" type="FLOAT8"/>
+										<Variable count="20" length="32" name="keyNo" type="STRING"/>
+										<Variable count="20" length="32" name="shortVin" type="STRING"/>
+										<Variable count="20" name="engineStatus" type="INT4"/>
+										<Variable count="20" name="afOnSequenceNumber" type="INT4"/>
+										<Variable count="20" length="32" name="missionSerialNo" type="STRING"/>
+										<Variable count="20" length="32" name="actualMissionType" type="STRING"/>
+										<Variable count="20" length="32" name="productionLot" type="STRING"/>
+										<Variable count="20" length="32" name="productSpecCode" type="STRING"/>
+										<Variable count="20" length="32" name="planOffDate" type="STRING"/>
+										<Variable count="20" length="32" name="kdLotNumber" type="STRING"/>
+										<Variable count="20" length="32" name="productionDate" type="STRING"/>
+										<Variable count="20" length="32" name="productStartDate" type="STRING"/>
+										<Variable count="20" length="32" name="actualOffDate" type="STRING"/>
+										<Variable count="20" name="autoHoldStatus" type="INT4"/>
+										<Variable count="20" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="20" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="20" length="32" name="prodLot" type="STRING"/>
+										<Variable count="20" length="32" name="operations" type="STRING"/>
+										<Variable count="20" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="20" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICAib3BlcmF0aW9ucyI6ICIiLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KXQ0K">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="20">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+										<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+										<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+										<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+										<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+										<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+										<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+										<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+										<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+										<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+										<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+										<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+										<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+										<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+										<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+										<Parameter dwType="16" name="operations" parmname="operations" type="STRING"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="AfOnProcessPointId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="ProductId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLkludGVnZXIiOg=="/>
+										<Item name="PreProcessCount"/>
+										<Item name="$CONSTANT" type="string" value="fSwNCiAgICAgeyJqYXZhLmxhbmcuSW50ZWdlciI6"/>
+										<Item name="UpcomingCount"/>
+										<Item name="$CONSTANT" type="string" value="fQ0KXQ=="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_findBySeqRange" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_findBySeqRange" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="1046956704"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_findBySeqRange" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findBySeqRange" id="GALC_FrameDao_findBySeqRange" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_findBySeqRange" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_findBySeqRange" nlsid="30033">
+
+										<TransactionDef id="GALC_FrameDao_findBySeqRange" version="1939807298" version_mismatch="pass">
+										<Transport id="GALC_FrameDao_findBySeqRange" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="StartSequence" type="STRING"/>
+										<Variable count="1" length="32" name="EndSequence" type="STRING"/>
+										<Variable count="1" length="32" name="AFOnPP" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="5" length="32" name="productId" type="STRING"/>
+										<Variable count="5" length="32" name="engineSerialNo" type="STRING"/>
+										<Variable count="5" name="straightShipPercentage" type="FLOAT8"/>
+										<Variable count="5" length="32" name="keyNo" type="STRING"/>
+										<Variable count="5" length="32" name="shortVin" type="STRING"/>
+										<Variable count="5" name="engineStatus" type="INT4"/>
+										<Variable count="5" name="afOnSequenceNumber" type="INT4"/>
+										<Variable count="5" length="32" name="missionSerialNo" type="STRING"/>
+										<Variable count="5" length="32" name="actualMissionType" type="STRING"/>
+										<Variable count="5" length="32" name="productionLot" type="STRING"/>
+										<Variable count="5" length="32" name="productSpecCode" type="STRING"/>
+										<Variable count="5" length="32" name="planOffDate" type="STRING"/>
+										<Variable count="5" length="32" name="kdLotNumber" type="STRING"/>
+										<Variable count="5" length="32" name="productionDate" type="STRING"/>
+										<Variable count="5" length="32" name="productStartDate" type="STRING"/>
+										<Variable count="5" length="32" name="actualOffDate" type="STRING"/>
+										<Variable count="5" name="autoHoldStatus" type="INT4"/>
+										<Variable count="5" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="5" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="5" length="32" name="prodLot" type="STRING"/>
+										<Variable count="1" length="32" name="operations" type="STRING"/>
+										<Variable count="5" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="5" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="Ww0KIHsNCiAgICAicHJvZHVjdElkIjogIiIsDQogICAgImVuZ2luZVNlcmlhbE5vIjogIiIsDQogICAgInN0cmFpZ2h0U2hpcFBlcmNlbnRhZ2UiOiAwLjAsDQogICAgImtleU5vIjogIiIsDQogICAgInNob3J0VmluIjogIiIsDQogICAgImVuZ2luZVN0YXR1cyI6IDAsDQogICAgImFmT25TZXF1ZW5jZU51bWJlciI6MCwNCiAgICAibWlzc2lvblNlcmlhbE5vIjogIiIsDQogICAgImFjdHVhbE1pc3Npb25UeXBlIjogIiIsDQogICAgInByb2R1Y3Rpb25Mb3QiOiAiIiwNCiAgICAicHJvZHVjdFNwZWNDb2RlIjogIiIsDQogICAgInBsYW5PZmZEYXRlIjogIiIsDQogICAgImtkTG90TnVtYmVyIjogIiIsDQogICAgInByb2R1Y3Rpb25EYXRlIjogIiIsDQogICAgInByb2R1Y3RTdGFydERhdGUiOiAiIiwNCiAgICAiYWN0dWFsT2ZmRGF0ZSI6ICIiLA0KICAgICJhdXRvSG9sZFN0YXR1cyI6MCwNCiAgICAibGFzdFBhc3NpbmdQcm9jZXNzUG9pbnRJZCI6ICIiLA0KICAgICJ0cmFja2luZ1N0YXR1cyI6ICIiLA0KICAgICJwcm9kTG90IjogIiIsDQogICAgIm9wZXJhdGlvbnMiOiBbe30se31dLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KIF0=">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="5">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+										<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+										<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+										<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+										<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+										<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+										<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+										<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+										<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+										<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+										<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+										<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+										<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+										<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+										<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+										<Table name="operations" nbrInRows="1"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="StartSequence"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="EndSequence"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="AFOnPP"/>
+										<Item name="$CONSTANT" type="string" value="In0NCl0="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/ResetSequence" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/ResetSequence" nlsid="30031">
+<Trigger name="ResetSequence" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~5~15~18~4~14~3~2~21~13~6~22~23~24~25~26~27~30~31~32~34~35~36~37~38~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-400"/>
+			<Node id="1" type="3" x="-125" y="-325"/>
+			<Node id="5" type="3" x="-125" y="-25"/>
+			<Node id="15" type="3" x="-125" y="425"/>
+			<Node id="18" type="3" x="100" y="-25"/>
+			<Node id="4" type="3" x="-125" y="-100"/>
+			<Node id="14" type="3" x="-125" y="350"/>
+			<Node id="3" type="3" x="-125" y="-175"/>
+			<Node id="2" type="3" x="-125" y="-250"/>
+			<Node id="21" type="3" x="-275" y="-25"/>
+			<Node id="13" type="3" x="-125" y="275"/>
+			<Node id="6" type="3" x="-125" y="50"/>
+			<Node id="22" type="3" x="-275" y="-200"/>
+			<Node id="23" type="3" x="100" y="150"/>
+			<Node id="24" type="3" x="100" y="50"/>
+			<Node id="25" type="3" x="-125" y="150"/>
+			<Node id="26" type="3" x="-375" y="225"/>
+			<Node id="27" type="3" x="-375" y="375"/>
+			<Node id="30" type="3" x="-575" y="600"/>
+			<Node id="31" type="3" x="-375" y="600"/>
+			<Node id="32" type="3" x="-375" y="675"/>
+			<Node id="34" type="3" x="-375" y="300"/>
+			<Node id="35" type="3" x="-375" y="750"/>
+			<Node id="36" type="3" x="-375" y="450"/>
+			<Node id="37" type="3" x="-375" y="525"/>
+			<Node id="38" type="3" x="-275" y="-125"/>
+			<Node errorActionId="20" errorStartIndex="18" id="600000000" text="Error Handling" type="4" x="100" y="-100"/>
+			<RoutedErrors value="1.1|5.1|4.1|14.1|3.1|2.2|13.1|6.1|22.1|25.1|26.1|27.2|30.1|31.1|32.1|34.1|35.1|36.1|37.1|38.1|"/></BuildInfo>
+ <Description>Using a sequence number read from the PLC this trigger reads the Product Id (N0) associated with that sequence number plus the three following Product IDs (N1,N2,N3).
+The four Product Ids are put into arrays along with their build attributes.</Description>
+ <Event overview_string="Variable: AAF1_RearSuspAutoLoad.M[9000]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RearSuspAutoLoad" name="M[9000]" qos="3" type="BOOL"/>
+				<Condition deadband="0" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductIds" type="STRING" xdim="20" length="18" options="3"/>
+  <VariableInfo name="loopStraggler" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="IsStraggler" type="BOOL" xdim="5" length="32" options="3"/>
+  <VariableInfo name="loopSequence" type="STRING" length="6" options="3"/>
+  <VariableInfo name="ResetSeqFlag" type="BOOL" length="6" options="3" default="0"/>
+  <VariableInfo name="SequenceNumbers" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="loopProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="loopCounter" type="INT2" options="3" default="0"/>
+  <VariableInfo name="JobCode" type="INT2" xdim="5" length="32" options="3"/>
+  <VariableInfo name="loopJobCode" type="INT2" options="3"/>
+  <VariableInfo name="ResetSequenceNumber" type="STRING" length="6" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9109]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D01301A"/>
+  <VariableInfo name="plcResetSequence" type="STRING" length="32" options="3" default="D[9010]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P01301"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+  <VariableInfo name="JobCode" type="STRING" length="32" options="3" default="20"/>
+  <VariableInfo name="plcStragglerFlag" type="STRING" xdim="5" length="32" options="3" default="D[9025],D[9045],D[9065],D[9085],D[9105]"/>
+  <VariableInfo name="plcJobCode" type="STRING" xdim="5" length="32" options="3" default="D[9026],D[9046],D[9066],D[9086],D[9106]"/>
+  <VariableInfo name="plcResetSequenceFlag" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="plcResetSequenceFlagAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="plcSequence" type="STRING" xdim="5" length="32" options="3" default="D[9013],D[9033],D[9053],D[9073],D[9093]"/>
+  <VariableInfo name="plcProductID" type="STRING" xdim="5" length="32" options="3" default="D[9016],D[9036],D[9056],D[9076],D[9096]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Comment>CEdldCB0aGUgc2VxdWVuY2UgbnVtYmVyIGZyb20gdGhlIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlag"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ResetSeqFlag"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="ResetSequence"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ResetSequence" name="ResetSeqFlag"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="22"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="3" disabled="false">
+   <Comment>CEdldCB0aGUgc2VxdWVuY2UgbnVtYmVyIGZyb20gdGhlIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="6"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequence"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ResetSequenceNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - [Resetting Sequence To: $(Sequence)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Sequence" name="ResetSequenceNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="5" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findBySeqRange"/>
+    <Property name="version" value="1939807298"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StartSequence" name="ResetSequenceNumber"/>
+    <LocalVariable logical_name="EndSequence" name="ResetSequenceNumber"/>
+    <StaticVariable logical_name="AFOnPP" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="ProductIds[0]" count="5"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SequenceNumbers[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductIds[0]"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0"/>
+    <ConstantVariable logical_name="UpcomingCount" value="5"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="ProductIds[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SequenceNumbers[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="13" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N0_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N0_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N0_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N0_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N1_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N2_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N3_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N4_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1} &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N0_Seq Name" name="plcSequence[0]"/>
+    <LocalVariable logical_name="N0_Seq" name="SequenceNumbers[0]"/>
+    <StaticVariable logical_name="N0_ProductID Name" name="plcProductID[0]"/>
+    <LocalVariable logical_name="N0_ProductID" name="ProductIds[0]"/>
+    <StaticVariable logical_name="N0_Straggler Name" name="plcStragglerFlag[0]"/>
+    <LocalVariable logical_name="N0_Straggler" name="IsStraggler[0]"/>
+    <StaticVariable logical_name="N0_JobCode Name" name="plcJobCode[0]"/>
+    <LocalVariable logical_name="N0_JobCode" name="JobCode[0]"/>
+    <StaticVariable logical_name="N1_Seq Name" name="plcSequence[1]"/>
+    <LocalVariable logical_name="N1_Seq" name="SequenceNumbers[1]"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[1]"/>
+    <StaticVariable logical_name="N2_Seq Name" name="plcSequence[2]"/>
+    <LocalVariable logical_name="N2_Seq" name="SequenceNumbers[2]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[2]"/>
+    <StaticVariable logical_name="N3_Seq Name" name="plcSequence[3]"/>
+    <LocalVariable logical_name="N3_Seq" name="SequenceNumbers[3]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[3]"/>
+    <StaticVariable logical_name="N4_Seq Name" name="plcSequence[4]"/>
+    <LocalVariable logical_name="N4_Seq" name="SequenceNumbers[4]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[4]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlagAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="18" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception [$(ErrorCode) - $(ErrorMessage)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="21" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="22" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlagAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="38"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="23" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="24" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="23"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="25" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="4"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopCounter"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="26" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="20"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="ProductIds[0]" count="20"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="27" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="loopProductId"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="30" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RS01_AUTO_LOAD_BuildAttributes"/>
+    <Property name="version" value="-1507754594"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="loopProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="JOB_CODE" name="loopJobCode"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="loopStraggler"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="31" disabled="false">
+   <Properties>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="IsStraggler[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopStraggler"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="IsStraggler[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="32" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="JobCode[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="JobCode[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="34" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="20"/>
+    <Property name="length" value="6"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SequenceNumbers[0]" count="20"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="35" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Sending Sequence: $(Sequence), ProductId: $(ProductId), Job Code: $(JobCode), Is Straggler: $(Straggler)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Sequence" name="loopSequence"/>
+    <LocalVariable logical_name="ProductId" name="loopProductId"/>
+    <LocalVariable logical_name="JobCode" name="loopJobCode"/>
+    <LocalVariable logical_name="Straggler" name="loopStraggler"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="36" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="JobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="37" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopStraggler"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="38" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_FindAllByInProcessProduct" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="149187833"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_FindAllByInProcessProduct" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findAllByInProcessProduct " id="GALC_FrameDao_FindAllByInProcessProduct" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_FindAllByInProcessProduct_20" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_FindAllByInProcessProduct_20" nlsid="30033">
+
+				<TransactionDef id="GALC_FrameDao_FindAllByInProcessProduct_20" version="-1460432162" version_mismatch="pass">
+					<Transport id="GALC_FrameDao_FindAllByInProcessProduct" type="Http"/>
+					<InputMap>
+						<Variable count="1" length="32" name="ProductId" type="STRING"/>
+						<Variable count="1" name="PreProcessCount" type="INT2"/>
+						<Variable count="1" name="UpcomingCount" type="INT2"/>
+					</InputMap>
+					<OutputMap>
+						<Variable count="20" length="32" name="productId" type="STRING"/>
+						<Variable count="20" length="32" name="engineSerialNo" type="STRING"/>
+						<Variable count="20" name="straightShipPercentage" type="FLOAT8"/>
+						<Variable count="20" length="32" name="keyNo" type="STRING"/>
+						<Variable count="20" length="32" name="shortVin" type="STRING"/>
+						<Variable count="20" name="engineStatus" type="INT4"/>
+						<Variable count="20" name="afOnSequenceNumber" type="INT4"/>
+						<Variable count="20" length="32" name="missionSerialNo" type="STRING"/>
+						<Variable count="20" length="32" name="actualMissionType" type="STRING"/>
+						<Variable count="20" length="32" name="productionLot" type="STRING"/>
+						<Variable count="20" length="32" name="productSpecCode" type="STRING"/>
+						<Variable count="20" length="32" name="planOffDate" type="STRING"/>
+						<Variable count="20" length="32" name="kdLotNumber" type="STRING"/>
+						<Variable count="20" length="32" name="productionDate" type="STRING"/>
+						<Variable count="20" length="32" name="productStartDate" type="STRING"/>
+						<Variable count="20" length="32" name="actualOffDate" type="STRING"/>
+						<Variable count="20" name="autoHoldStatus" type="INT4"/>
+						<Variable count="20" length="32" name="lastPassingProcessPointId" type="STRING"/>
+						<Variable count="20" length="32" name="trackingStatus" type="STRING"/>
+						<Variable count="20" length="32" name="prodLot" type="STRING"/>
+						<Variable count="20" length="32" name="operations" type="STRING"/>
+						<Variable count="20" length="32" name="createTimestamp" type="STRING"/>
+						<Variable count="20" length="32" name="updateTimestamp" type="STRING"/>
+					</OutputMap>
+					<Response outputformat="JSON">
+						<JSONInfo rawJson="Ww0KICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICAib3BlcmF0aW9ucyI6ICIiLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KXQ0K">
+							<JSONRequest>
+								<Table name="JSON_Array" nbrInRows="20">
+									<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+									<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+									<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+									<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+									<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+									<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+									<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+									<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+									<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+									<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+									<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+									<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+									<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+									<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+									<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+									<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+									<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+									<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+									<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+									<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+									<Parameter dwType="16" name="operations" parmname="operations" type="STRING"/>
+									<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+									<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+								</Table>
+							</JSONRequest>
+						</JSONInfo>
+					</Response>
+					<Mapping lineDelimiter="crlf" outputformat="F">
+						<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+						<Item name="ProductId"/>
+						<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLkludGVnZXIiOg=="/>
+						<Item name="PreProcessCount"/>
+						<Item name="$CONSTANT" type="string" value="fSwNCiAgICAgeyJqYXZhLmxhbmcuSW50ZWdlciI6"/>
+						<Item name="UpcomingCount"/>
+						<Item name="$CONSTANT" type="string" value="fQ0KXQ=="/>
+					</Mapping>
+				</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/ResetSequence-new" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/ResetSequence-new" nlsid="30031">
+<Trigger name="ResetSequence-new" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~5~15~18~4~14~3~2~21~13~6~22~23~24~25~26~27~30~31~32~34~35~36~37~38~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-400"/>
+			<Node id="1" type="3" x="-125" y="-325"/>
+			<Node id="5" type="3" x="-125" y="-25"/>
+			<Node id="15" type="3" x="-125" y="425"/>
+			<Node id="18" type="3" x="100" y="-25"/>
+			<Node id="4" type="3" x="-125" y="-100"/>
+			<Node id="14" type="3" x="-125" y="350"/>
+			<Node id="3" type="3" x="-125" y="-175"/>
+			<Node id="2" type="3" x="-125" y="-250"/>
+			<Node id="21" type="3" x="-275" y="-25"/>
+			<Node id="13" type="3" x="-125" y="275"/>
+			<Node id="6" type="3" x="-125" y="50"/>
+			<Node id="22" type="3" x="-275" y="-200"/>
+			<Node id="23" type="3" x="100" y="150"/>
+			<Node id="24" type="3" x="100" y="50"/>
+			<Node id="25" type="3" x="-125" y="150"/>
+			<Node id="26" type="3" x="-375" y="225"/>
+			<Node id="27" type="3" x="-375" y="375"/>
+			<Node id="30" type="3" x="-575" y="600"/>
+			<Node id="31" type="3" x="-375" y="600"/>
+			<Node id="32" type="3" x="-375" y="675"/>
+			<Node id="34" type="3" x="-375" y="300"/>
+			<Node id="35" type="3" x="-375" y="750"/>
+			<Node id="36" type="3" x="-375" y="450"/>
+			<Node id="37" type="3" x="-375" y="525"/>
+			<Node id="38" type="3" x="-275" y="-125"/>
+			<Node errorActionId="20" errorStartIndex="18" id="600000000" text="Error Handling" type="4" x="100" y="-100"/>
+			<RoutedErrors value="1.1|5.1|4.1|14.1|3.1|2.2|13.1|6.1|22.1|25.1|26.1|27.2|30.1|31.1|32.1|34.1|35.1|36.1|37.1|38.1|"/></BuildInfo>
+ <Description>Using a sequence number read from the PLC this trigger reads the Product Id (N0) associated with that sequence number plus the three following Product IDs (N1,N2,N3).
+The four Product Ids are put into arrays along with their build attributes.</Description>
+ <Event overview_string="Variable: AAF1_RearSuspAutoLoad.M[9000]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RearSuspAutoLoad" name="M[9000]" qos="3" type="BOOL"/>
+				<Condition deadband="0" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductIds" type="STRING" xdim="20" length="18" options="3"/>
+  <VariableInfo name="loopStraggler" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="IsStraggler" type="BOOL" xdim="5" length="32" options="3"/>
+  <VariableInfo name="loopSequence" type="STRING" length="6" options="3"/>
+  <VariableInfo name="ResetSeqFlag" type="BOOL" length="6" options="3" default="0"/>
+  <VariableInfo name="SequenceNumbers" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="loopProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="loopCounter" type="INT2" options="3" default="0"/>
+  <VariableInfo name="JobCode" type="INT2" xdim="5" length="32" options="3"/>
+  <VariableInfo name="loopJobCode" type="INT2" options="3"/>
+  <VariableInfo name="ResetSequenceNumber" type="STRING" length="6" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcGALCError" type="STRING" length="32" options="3" default="M[9109]"/>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D01301A"/>
+  <VariableInfo name="plcResetSequence" type="STRING" length="32" options="3" default="D[9010]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P01301"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+  <VariableInfo name="JobCode" type="STRING" length="32" options="3" default="20"/>
+  <VariableInfo name="plcStragglerFlag" type="STRING" xdim="5" length="32" options="3" default="D[9025],D[9045],D[9065],D[9085],D[9105]"/>
+  <VariableInfo name="plcJobCode" type="STRING" xdim="5" length="32" options="3" default="D[9026],D[9046],D[9066],D[9086],D[9106]"/>
+  <VariableInfo name="plcResetSequenceFlag" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="plcResetSequenceFlagAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="plcSequence" type="STRING" xdim="5" length="32" options="3" default="D[9013],D[9033],D[9053],D[9073],D[9093]"/>
+  <VariableInfo name="plcProductID" type="STRING" xdim="5" length="32" options="3" default="D[9016],D[9036],D[9056],D[9076],D[9096]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Comment>CEdldCB0aGUgc2VxdWVuY2UgbnVtYmVyIGZyb20gdGhlIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlag"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ResetSeqFlag"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="ResetSequence"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ResetSequence" name="ResetSeqFlag"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="22"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="3" disabled="false">
+   <Comment>CEdldCB0aGUgc2VxdWVuY2UgbnVtYmVyIGZyb20gdGhlIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="6"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequence"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ResetSequenceNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - [Resetting Sequence To: $(Sequence)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Sequence" name="ResetSequenceNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="5" disabled="false">
+   <Comment>CEZpbmQgdGhlIFByb2R1Y3QgSWQgdXNpbmcgdGhlIHNlcXVlbmNlIG51bWJlcg==</Comment>
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findBySeqRange"/>
+    <Property name="version" value="1939807298"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StartSequence" name="ResetSequenceNumber"/>
+    <LocalVariable logical_name="EndSequence" name="ResetSequenceNumber"/>
+    <StaticVariable logical_name="AFOnPP" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="ProductIds[0]" count="5"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SequenceNumbers[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_FindAllByInProcessProduct_20"/>
+    <Property name="version" value="-1460432162"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductIds[0]"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0" delim=""/>
+    <ConstantVariable logical_name="UpcomingCount" value="5" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="ProductIds[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="SequenceNumbers[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="13" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N0_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N0_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N0_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N0_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N1_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N2_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N3_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N4_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1} &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N0_Seq Name" name="plcSequence[0]"/>
+    <LocalVariable logical_name="N0_Seq" name="SequenceNumbers[0]"/>
+    <StaticVariable logical_name="N0_ProductID Name" name="plcProductID[0]"/>
+    <LocalVariable logical_name="N0_ProductID" name="ProductIds[0]"/>
+    <StaticVariable logical_name="N0_Straggler Name" name="plcStragglerFlag[0]"/>
+    <LocalVariable logical_name="N0_Straggler" name="IsStraggler[0]"/>
+    <StaticVariable logical_name="N0_JobCode Name" name="plcJobCode[0]"/>
+    <LocalVariable logical_name="N0_JobCode" name="JobCode[0]"/>
+    <StaticVariable logical_name="N1_Seq Name" name="plcSequence[1]"/>
+    <LocalVariable logical_name="N1_Seq" name="SequenceNumbers[1]"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[1]"/>
+    <StaticVariable logical_name="N2_Seq Name" name="plcSequence[2]"/>
+    <LocalVariable logical_name="N2_Seq" name="SequenceNumbers[2]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[2]"/>
+    <StaticVariable logical_name="N3_Seq Name" name="plcSequence[3]"/>
+    <LocalVariable logical_name="N3_Seq" name="SequenceNumbers[3]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[3]"/>
+    <StaticVariable logical_name="N4_Seq Name" name="plcSequence[4]"/>
+    <LocalVariable logical_name="N4_Seq" name="SequenceNumbers[4]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[4]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlagAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="18" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception [$(ErrorCode) - $(ErrorMessage)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="21" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="22" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcResetSequenceFlagAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="38"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="23" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="24" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="23"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="25" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="4"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopCounter"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="26"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="26" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="20"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="ProductIds[0]" count="20"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="27" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="loopProductId"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="30" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RS01_AUTO_LOAD_BuildAttributes"/>
+    <Property name="version" value="-1507754594"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="loopProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="JOB_CODE" name="loopJobCode"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="loopStraggler"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="31" disabled="false">
+   <Properties>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="IsStraggler[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopStraggler"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="IsStraggler[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="32" disabled="false">
+   <Properties>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="5"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="JobCode[0]" count="5"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="JobCode[0]" count="5"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="34" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="20"/>
+    <Property name="length" value="6"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="SequenceNumbers[0]" count="20"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="35" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Sending Sequence: $(Sequence), ProductId: $(ProductId), Job Code: $(JobCode), Is Straggler: $(Straggler)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Sequence" name="loopSequence"/>
+    <LocalVariable logical_name="ProductId" name="loopProductId"/>
+    <LocalVariable logical_name="JobCode" name="loopJobCode"/>
+    <LocalVariable logical_name="Straggler" name="loopStraggler"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="36" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="JobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopJobCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="37" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="loopStraggler"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="38" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGALCError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/WorkComplete" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/WorkComplete" nlsid="30031">
+<Trigger name="WorkComplete" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~11~10~13~12~8~9~3~2~15~16~4~5~6~7~17~18~20~21~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-375"/>
+			<Node id="1" type="3" x="-125" y="-300"/>
+			<Node id="11" type="3" x="-300" y="400"/>
+			<Node id="10" type="3" x="-125" y="900"/>
+			<Node id="13" type="3" x="100" y="50"/>
+			<Node id="12" type="3" x="100" y="-25"/>
+			<Node id="8" type="3" x="-125" y="700"/>
+			<Node id="9" type="3" x="-125" y="800"/>
+			<Node id="3" type="3" x="-125" y="-100"/>
+			<Node id="2" type="3" x="-125" y="-200"/>
+			<Node id="15" type="3" x="-250" y="-50"/>
+			<Node id="16" type="3" x="-250" y="-150"/>
+			<Node id="4" type="3" x="-125" y="0"/>
+			<Node id="5" type="3" x="-125" y="250"/>
+			<Node id="6" type="3" x="-125" y="325"/>
+			<Node id="7" type="3" x="-125" y="400"/>
+			<Node id="17" type="3" x="-125" y="175"/>
+			<Node id="18" type="3" x="-125" y="100"/>
+			<Node id="20" type="3" x="-125" y="600"/>
+			<Node id="21" type="3" x="-125" y="525"/>
+			<Node errorActionId="14" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="100" y="-100"/>
+			<RoutedErrors value="1.1|11.1|8.1|9.1|3.1|2.2|16.1|4.1|5.2|6.1|7.1|17.1|18.1|20.1|21.1|"/></BuildInfo>
+ <Description>Using a sequence number read from the PLC this trigger reads the Product Id (N0) associated with that sequence number plus the three following Product IDs (N1,N2,N3).
+The four Product Ids are put into arrays along with their build attributes.</Description>
+ <Event overview_string="Variable: AAF1_RearSuspAutoLoad.M[9001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RearSuspAutoLoad" name="M[9001]" qos="3" type="BOOL"/>
+				<Condition deadband="0" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="nextProductId" type="STRING" xdim="20" length="32" options="3"/>
+  <VariableInfo name="ProductIds" type="STRING" xdim="20" length="32" options="3"/>
+  <VariableInfo name="nextJobCode" type="INT2" length="32" options="3"/>
+  <VariableInfo name="logMessage" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="IsStraggler" type="BOOL" xdim="5" length="32" options="3"/>
+  <VariableInfo name="nextIsStaggler" type="BOOL" length="32" options="3"/>
+  <VariableInfo name="ResetSeqFlag" type="BOOL" length="6" options="3" default="0"/>
+  <VariableInfo name="SequenceNumbers" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="WorkComplete" type="BOOL" options="3"/>
+  <VariableInfo name="nextSeqNumber" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="JobCode" type="INT2" xdim="5" length="32" options="3"/>
+  <VariableInfo name="ResetSequenceNumber" type="STRING" length="6" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D01301A"/>
+  <VariableInfo name="plcWorkCompleteAck" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P01301"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+  <VariableInfo name="EmptyJobCode" type="INT2" options="3" default="20"/>
+  <VariableInfo name="plcStragglerFlag" type="STRING" xdim="5" length="32" options="3" default="D[9025],D[9045],D[9065],D[9085],D[9105]"/>
+  <VariableInfo name="plcJobCode" type="STRING" xdim="5" length="32" options="3" default="D[9026],D[9046],D[9066],D[9086],D[9106]"/>
+  <VariableInfo name="plcSequence" type="STRING" xdim="5" length="32" options="3" default="D[9013],D[9033],D[9053],D[9073],D[9093]"/>
+  <VariableInfo name="plcWorkComplete" type="STRING" length="32" options="3" default="M[9001]"/>
+  <VariableInfo name="plcProductID" type="STRING" xdim="5" length="32" options="3" default="D[9016],D[9036],D[9056],D[9076],D[9096]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkComplete"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="WorkComplete"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="WorkComplete"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="WorkComplete" name="WorkComplete"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="16"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N1_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N1_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N2_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N3_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N4_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <StaticVariable logical_name="N1_SeqNumber Name" name="plcSequence[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <StaticVariable logical_name="N2_SeqNumber Name" name="plcSequence[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <StaticVariable logical_name="N3_SeqNumber Name" name="plcSequence[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <StaticVariable logical_name="N4_SeqNumber Name" name="plcSequence[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[0]"/>
+    <LocalVariable logical_name="N1_SeqNumber" name="SequenceNumbers[0]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[0]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[0]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[1]"/>
+    <LocalVariable logical_name="N2_SeqNumber" name="SequenceNumbers[1]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[1]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[1]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[2]"/>
+    <LocalVariable logical_name="N3_SeqNumber" name="SequenceNumbers[2]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[2]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[2]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[3]"/>
+    <LocalVariable logical_name="N4_SeqNumber" name="SequenceNumbers[3]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[3]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[3]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductIds[3]"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0"/>
+    <ConstantVariable logical_name="UpcomingCount" value="2"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AfOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="nextProductId[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="nextSeqNumber[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="5" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ProductIds[4]"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="6" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="EmptyJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="JobCode[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="IsStraggler[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="8" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N0_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N0_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N0_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N0_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N1_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N2_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N3_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N4_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}     &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N0_Seq Name" name="plcSequence[0]"/>
+    <LocalVariable logical_name="N0_Seq" name="SequenceNumbers[0]"/>
+    <StaticVariable logical_name="N0_ProductID Name" name="plcProductID[0]"/>
+    <LocalVariable logical_name="N0_ProductID" name="ProductIds[0]"/>
+    <StaticVariable logical_name="N0_Straggler Name" name="plcStragglerFlag[0]"/>
+    <LocalVariable logical_name="N0_Straggler" name="IsStraggler[0]"/>
+    <StaticVariable logical_name="N0_JobCode Name" name="plcJobCode[0]"/>
+    <LocalVariable logical_name="N0_JobCode" name="JobCode[0]"/>
+    <StaticVariable logical_name="N1_Seq Name" name="plcSequence[1]"/>
+    <LocalVariable logical_name="N1_Seq" name="SequenceNumbers[1]"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[1]"/>
+    <StaticVariable logical_name="N2_Seq Name" name="plcSequence[2]"/>
+    <LocalVariable logical_name="N2_Seq" name="SequenceNumbers[2]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[2]"/>
+    <StaticVariable logical_name="N3_Seq Name" name="plcSequence[3]"/>
+    <LocalVariable logical_name="N3_Seq" name="SequenceNumbers[3]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[3]"/>
+    <StaticVariable logical_name="N4_Seq Name" name="plcSequence[4]"/>
+    <LocalVariable logical_name="N4_Seq" name="SequenceNumbers[4]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[4]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkCompleteAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RS01_AUTO_LOAD_BuildAttributes"/>
+    <Property name="version" value="-1507754594"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductIds[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="JOB_CODE" name="JobCode[4]"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="IsStraggler[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception [$(ErrorCode) - $(ErrorMessage)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="16" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkCompleteAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="6"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="nextSeqNumber[1]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="SequenceNumbers[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="18" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="nextProductId[1]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ProductIds[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="20" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Message" name="logMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="21" disabled="false">
+   <Properties>
+    <Property name="format" value="Sent to PLC&#10;Now - Sequence: $(Sequence0), Product Id: $(ProductId0), Job Code: $(JobCode0), IsStraggler: $(Straggler0)&#10;Next 1 - Sequence: $(Sequence1), Product Id: $(ProductId1), Job Code: $(JobCode1), IsStraggler: $(Straggler1)&#10;Next 2 - Sequence: $(Sequence2), Product Id: $(ProductId2), Job Code: $(JobCode2), IsStraggler: $(Straggler2)&#10;Next 3 - Sequence: $(Sequence3), Product Id: $(ProductId3), Job Code: $(JobCode3), IsStraggler: $(Straggler3)&#10;Next 4 - Sequence: $(Sequence4), Product Id: $(ProductId4), Job Code: $(JobCode4), IsStraggler: $(Straggler4)&#10;"/>
+    <Property name="outsize" value="1024"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence0" name="SequenceNumbers[0]"/>
+    <LocalVariable logical_name="ProductId0" name="ProductIds[0]"/>
+    <LocalVariable logical_name="JobCode0" name="JobCode[0]"/>
+    <LocalVariable logical_name="Straggler0" name="IsStraggler[0]"/>
+    <LocalVariable logical_name="Sequence1" name="SequenceNumbers[1]"/>
+    <LocalVariable logical_name="ProductId1" name="ProductIds[1]"/>
+    <LocalVariable logical_name="JobCode1" name="JobCode[1]"/>
+    <LocalVariable logical_name="Straggler1" name="IsStraggler[1]"/>
+    <LocalVariable logical_name="Sequence2" name="SequenceNumbers[2]"/>
+    <LocalVariable logical_name="ProductId2" name="ProductIds[2]"/>
+    <LocalVariable logical_name="JobCode2" name="JobCode[2]"/>
+    <LocalVariable logical_name="Straggler2" name="IsStraggler[2]"/>
+    <LocalVariable logical_name="Sequence3" name="SequenceNumbers[3]"/>
+    <LocalVariable logical_name="ProductId3" name="ProductIds[3]"/>
+    <LocalVariable logical_name="JobCode3" name="JobCode[3]"/>
+    <LocalVariable logical_name="Straggler3" name="IsStraggler[3]"/>
+    <LocalVariable logical_name="Sequence4" name="SequenceNumbers[4]"/>
+    <LocalVariable logical_name="ProductId4" name="ProductIds[4]"/>
+    <LocalVariable logical_name="JobCode4" name="JobCode[4]"/>
+    <LocalVariable logical_name="Straggler4" name="IsStraggler[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="logMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RearSuspAutoLoad/WorkComplete_new" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RearSuspAutoLoad/WorkComplete_new" nlsid="30031">
+<Trigger name="WorkComplete_new" project="AAF1_RearSuspAutoLoad" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|1~11~10~13~12~8~9~3~2~15~16~4~5~6~7~17~18~20~21~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-375"/>
+			<Node id="1" type="3" x="-125" y="-300"/>
+			<Node id="11" type="3" x="-300" y="400"/>
+			<Node id="10" type="3" x="-125" y="900"/>
+			<Node id="13" type="3" x="100" y="50"/>
+			<Node id="12" type="3" x="100" y="-25"/>
+			<Node id="8" type="3" x="-125" y="700"/>
+			<Node id="9" type="3" x="-125" y="800"/>
+			<Node id="3" type="3" x="-125" y="-100"/>
+			<Node id="2" type="3" x="-125" y="-200"/>
+			<Node id="15" type="3" x="-250" y="-50"/>
+			<Node id="16" type="3" x="-250" y="-150"/>
+			<Node id="4" type="3" x="-125" y="0"/>
+			<Node id="5" type="3" x="-125" y="250"/>
+			<Node id="6" type="3" x="-125" y="325"/>
+			<Node id="7" type="3" x="-125" y="400"/>
+			<Node id="17" type="3" x="-125" y="175"/>
+			<Node id="18" type="3" x="-125" y="100"/>
+			<Node id="20" type="3" x="-125" y="600"/>
+			<Node id="21" type="3" x="-125" y="525"/>
+			<Node errorActionId="14" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="100" y="-100"/>
+			<RoutedErrors value="1.1|11.1|8.1|9.1|3.1|2.2|16.1|4.1|5.2|6.1|7.1|17.1|18.1|20.1|21.1|"/></BuildInfo>
+ <Description>Using a sequence number read from the PLC this trigger reads the Product Id (N0) associated with that sequence number plus the three following Product IDs (N1,N2,N3).
+The four Product Ids are put into arrays along with their build attributes.</Description>
+ <Event overview_string="Variable: AAF1_RearSuspAutoLoad.M[9001]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_RearSuspAutoLoad" name="M[9001]" qos="3" type="BOOL"/>
+				<Condition deadband="0" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="nextProductId" type="STRING" xdim="20" length="32" options="3"/>
+  <VariableInfo name="ProductIds" type="STRING" xdim="20" length="32" options="3"/>
+  <VariableInfo name="nextJobCode" type="INT2" length="32" options="3"/>
+  <VariableInfo name="logMessage" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="IsStraggler" type="BOOL" xdim="5" length="32" options="3"/>
+  <VariableInfo name="nextIsStaggler" type="BOOL" length="32" options="3"/>
+  <VariableInfo name="ResetSeqFlag" type="BOOL" length="6" options="3" default="0"/>
+  <VariableInfo name="SequenceNumbers" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="WorkComplete" type="BOOL" options="3"/>
+  <VariableInfo name="nextSeqNumber" type="STRING" xdim="20" length="6" options="3"/>
+  <VariableInfo name="JobCode" type="INT2" xdim="5" length="32" options="3"/>
+  <VariableInfo name="ResetSequenceNumber" type="STRING" length="6" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="AfOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D01301A"/>
+  <VariableInfo name="plcWorkCompleteAck" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P01301"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RearSuspAutoLoad"/>
+  <VariableInfo name="EmptyJobCode" type="INT2" options="3" default="20"/>
+  <VariableInfo name="plcStragglerFlag" type="STRING" xdim="5" length="32" options="3" default="D[9025],D[9045],D[9065],D[9085],D[9105]"/>
+  <VariableInfo name="plcJobCode" type="STRING" xdim="5" length="32" options="3" default="D[9026],D[9046],D[9066],D[9086],D[9106]"/>
+  <VariableInfo name="plcSequence" type="STRING" xdim="5" length="32" options="3" default="D[9013],D[9033],D[9053],D[9073],D[9093]"/>
+  <VariableInfo name="plcWorkComplete" type="STRING" length="32" options="3" default="M[9001]"/>
+  <VariableInfo name="plcProductID" type="STRING" xdim="5" length="32" options="3" default="D[9016],D[9036],D[9056],D[9076],D[9096]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkComplete"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="WorkComplete"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="WorkComplete"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="WorkComplete" name="WorkComplete"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="16"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="3" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N1_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N1_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N2_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N3_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_ProductID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_SeqNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:6},&#13;&#10;    &quot;N4_Straggler&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <StaticVariable logical_name="N1_SeqNumber Name" name="plcSequence[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <StaticVariable logical_name="N2_SeqNumber Name" name="plcSequence[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <StaticVariable logical_name="N3_SeqNumber Name" name="plcSequence[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <StaticVariable logical_name="N4_SeqNumber Name" name="plcSequence[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[0]"/>
+    <LocalVariable logical_name="N1_SeqNumber" name="SequenceNumbers[0]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[0]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[0]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[1]"/>
+    <LocalVariable logical_name="N2_SeqNumber" name="SequenceNumbers[1]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[1]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[1]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[2]"/>
+    <LocalVariable logical_name="N3_SeqNumber" name="SequenceNumbers[2]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[2]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[2]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[3]"/>
+    <LocalVariable logical_name="N4_SeqNumber" name="SequenceNumbers[3]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[3]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[3]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="4" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_FindAllByInProcessProduct_20"/>
+    <Property name="version" value="-1460432162"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductIds[3]"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0" delim=""/>
+    <ConstantVariable logical_name="UpcomingCount" value="2" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="nextProductId[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="nextSeqNumber[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="5" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ProductIds[4]"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="6" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="EmptyJobCode"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="JobCode[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="IsStraggler[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="8" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;N0_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N0_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N0_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N0_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N1_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N1_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N1_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N2_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N2_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N2_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N3_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N3_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N3_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_Seq&quot;:          {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;N4_ProductID&quot;:    {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;N4_Straggler&quot;:    {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;N4_JobCode&quot;:      {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}     &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="N0_Seq Name" name="plcSequence[0]"/>
+    <LocalVariable logical_name="N0_Seq" name="SequenceNumbers[0]"/>
+    <StaticVariable logical_name="N0_ProductID Name" name="plcProductID[0]"/>
+    <LocalVariable logical_name="N0_ProductID" name="ProductIds[0]"/>
+    <StaticVariable logical_name="N0_Straggler Name" name="plcStragglerFlag[0]"/>
+    <LocalVariable logical_name="N0_Straggler" name="IsStraggler[0]"/>
+    <StaticVariable logical_name="N0_JobCode Name" name="plcJobCode[0]"/>
+    <LocalVariable logical_name="N0_JobCode" name="JobCode[0]"/>
+    <StaticVariable logical_name="N1_Seq Name" name="plcSequence[1]"/>
+    <LocalVariable logical_name="N1_Seq" name="SequenceNumbers[1]"/>
+    <StaticVariable logical_name="N1_ProductID Name" name="plcProductID[1]"/>
+    <LocalVariable logical_name="N1_ProductID" name="ProductIds[1]"/>
+    <StaticVariable logical_name="N1_Straggler Name" name="plcStragglerFlag[1]"/>
+    <LocalVariable logical_name="N1_Straggler" name="IsStraggler[1]"/>
+    <StaticVariable logical_name="N1_JobCode Name" name="plcJobCode[1]"/>
+    <LocalVariable logical_name="N1_JobCode" name="JobCode[1]"/>
+    <StaticVariable logical_name="N2_Seq Name" name="plcSequence[2]"/>
+    <LocalVariable logical_name="N2_Seq" name="SequenceNumbers[2]"/>
+    <StaticVariable logical_name="N2_ProductID Name" name="plcProductID[2]"/>
+    <LocalVariable logical_name="N2_ProductID" name="ProductIds[2]"/>
+    <StaticVariable logical_name="N2_Straggler Name" name="plcStragglerFlag[2]"/>
+    <LocalVariable logical_name="N2_Straggler" name="IsStraggler[2]"/>
+    <StaticVariable logical_name="N2_JobCode Name" name="plcJobCode[2]"/>
+    <LocalVariable logical_name="N2_JobCode" name="JobCode[2]"/>
+    <StaticVariable logical_name="N3_Seq Name" name="plcSequence[3]"/>
+    <LocalVariable logical_name="N3_Seq" name="SequenceNumbers[3]"/>
+    <StaticVariable logical_name="N3_ProductID Name" name="plcProductID[3]"/>
+    <LocalVariable logical_name="N3_ProductID" name="ProductIds[3]"/>
+    <StaticVariable logical_name="N3_Straggler Name" name="plcStragglerFlag[3]"/>
+    <LocalVariable logical_name="N3_Straggler" name="IsStraggler[3]"/>
+    <StaticVariable logical_name="N3_JobCode Name" name="plcJobCode[3]"/>
+    <LocalVariable logical_name="N3_JobCode" name="JobCode[3]"/>
+    <StaticVariable logical_name="N4_Seq Name" name="plcSequence[4]"/>
+    <LocalVariable logical_name="N4_Seq" name="SequenceNumbers[4]"/>
+    <StaticVariable logical_name="N4_ProductID Name" name="plcProductID[4]"/>
+    <LocalVariable logical_name="N4_ProductID" name="ProductIds[4]"/>
+    <StaticVariable logical_name="N4_Straggler Name" name="plcStragglerFlag[4]"/>
+    <LocalVariable logical_name="N4_Straggler" name="IsStraggler[4]"/>
+    <StaticVariable logical_name="N4_JobCode Name" name="plcJobCode[4]"/>
+    <LocalVariable logical_name="N4_JobCode" name="JobCode[4]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="9" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkCompleteAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_RS01_AUTO_LOAD_BuildAttributes"/>
+    <Property name="version" value="-1507754594"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductIds[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="JOB_CODE" name="JobCode[4]"/>
+    <LocalVariable logical_name="IS_STRAGGLER" name="IsStraggler[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="21"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception [$(ErrorCode) - $(ErrorMessage)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="16" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcWorkCompleteAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="6"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="nextSeqNumber[1]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="SequenceNumbers[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="18" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="nextProductId[1]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ProductIds[4]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="20" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_RearSuspAutoLoad"/>
+    <Property name="msg" value="$(Trigger) - $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Message" name="logMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="21" disabled="false">
+   <Properties>
+    <Property name="format" value="Sent to PLC&#10;Now - Sequence: $(Sequence0), Product Id: $(ProductId0), Job Code: $(JobCode0), IsStraggler: $(Straggler0)&#10;Next 1 - Sequence: $(Sequence1), Product Id: $(ProductId1), Job Code: $(JobCode1), IsStraggler: $(Straggler1)&#10;Next 2 - Sequence: $(Sequence2), Product Id: $(ProductId2), Job Code: $(JobCode2), IsStraggler: $(Straggler2)&#10;Next 3 - Sequence: $(Sequence3), Product Id: $(ProductId3), Job Code: $(JobCode3), IsStraggler: $(Straggler3)&#10;Next 4 - Sequence: $(Sequence4), Product Id: $(ProductId4), Job Code: $(JobCode4), IsStraggler: $(Straggler4)&#10;"/>
+    <Property name="outsize" value="1024"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Sequence0" name="SequenceNumbers[0]"/>
+    <LocalVariable logical_name="ProductId0" name="ProductIds[0]"/>
+    <LocalVariable logical_name="JobCode0" name="JobCode[0]"/>
+    <LocalVariable logical_name="Straggler0" name="IsStraggler[0]"/>
+    <LocalVariable logical_name="Sequence1" name="SequenceNumbers[1]"/>
+    <LocalVariable logical_name="ProductId1" name="ProductIds[1]"/>
+    <LocalVariable logical_name="JobCode1" name="JobCode[1]"/>
+    <LocalVariable logical_name="Straggler1" name="IsStraggler[1]"/>
+    <LocalVariable logical_name="Sequence2" name="SequenceNumbers[2]"/>
+    <LocalVariable logical_name="ProductId2" name="ProductIds[2]"/>
+    <LocalVariable logical_name="JobCode2" name="JobCode[2]"/>
+    <LocalVariable logical_name="Straggler2" name="IsStraggler[2]"/>
+    <LocalVariable logical_name="Sequence3" name="SequenceNumbers[3]"/>
+    <LocalVariable logical_name="ProductId3" name="ProductIds[3]"/>
+    <LocalVariable logical_name="JobCode3" name="JobCode[3]"/>
+    <LocalVariable logical_name="Straggler3" name="IsStraggler[3]"/>
+    <LocalVariable logical_name="Sequence4" name="SequenceNumbers[4]"/>
+    <LocalVariable logical_name="ProductId4" name="ProductIds[4]"/>
+    <LocalVariable logical_name="JobCode4" name="JobCode[4]"/>
+    <LocalVariable logical_name="Straggler4" name="IsStraggler[4]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="logMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_RearSuspAutoLoad" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_RearSuspAutoLoad" nlsid="30032">AAF1_RearSuspAutoLoad</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_RearSuspAutoLoad" type="project">
+		<reference name="AAF1_RearSuspAutoLoad/BroadcastFromS1" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_RearSuspAutoLoad/DataCompleteStation1" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="AAF1_RearSuspAutoLoad" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RearSuspAutoLoad.M[9005]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RearSuspAutoLoad/ResetSequence" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RearSuspAutoLoad" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RS01_AUTO_LOAD_BuildAttributes" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute_woSF" type="transport"/>
+			</reference>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction">
+				<reference name="GALC_FrameDao_findAllByProductCarrier" type="transport"/>
+			</reference>
+			<reference name="GALC_FrameDao_findBySeqRange" type="transaction">
+				<reference name="GALC_FrameDao_findBySeqRange" type="transport"/>
+			</reference>
+			<reference name="AAF1_RearSuspAutoLoad.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RearSuspAutoLoad/ResetSequence-new" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RearSuspAutoLoad" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RS01_AUTO_LOAD_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_FindAllByInProcessProduct_20" type="transaction">
+				<reference name="GALC_FrameDao_FindAllByInProcessProduct" type="transport"/>
+			</reference>
+			<reference name="GALC_FrameDao_findBySeqRange" type="transaction"/>
+			<reference name="AAF1_RearSuspAutoLoad.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RearSuspAutoLoad/WorkComplete" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RearSuspAutoLoad" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RS01_AUTO_LOAD_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction"/>
+			<reference name="AAF1_RearSuspAutoLoad.M[9001]" type="variable"/>
+		</reference>
+		<reference name="AAF1_RearSuspAutoLoad/WorkComplete_new" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_RearSuspAutoLoad" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_RS01_AUTO_LOAD_BuildAttributes" type="transaction"/>
+			<reference name="GALC_FrameDao_FindAllByInProcessProduct_20" type="transaction"/>
+			<reference name="AAF1_RearSuspAutoLoad.M[9001]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

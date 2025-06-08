@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="AAF1_RRSusp_LSDamperTighten/BroadcastFromClient" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_LSDamperTighten/BroadcastFromClient" nlsid="30031">
+<Trigger name="BroadcastFromClient" project="AAF1_RRSusp_LSDamperTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|18~19~20~21~23~26~28~29~35~37~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-75" y="-200"/>
+		<Node id="18" type="3" x="-75" y="-100"/>
+		<Node id="19" type="3" x="-75" y="-25"/>
+		<Node id="20" type="3" x="-75" y="50"/>
+		<Node id="21" type="3" x="-75" y="125"/>
+		<Node id="23" type="3" x="-75" y="225"/>
+		<Node id="26" type="3" x="-75" y="500"/>
+		<Node id="28" type="3" x="175" y="-25"/>
+		<Node id="29" type="3" x="175" y="50"/>
+		<Node id="35" type="3" x="-75" y="300"/>
+		<Node id="37" type="3" x="-75" y="375"/>
+		<Node errorActionId="27" errorStartIndex="28" id="600000000" text="Error Handling" type="4" x="175" y="-100"/>
+		<RoutedErrors value="18.1|19.1|20.1|21.1|23.1|35.1|37.1|"/></BuildInfo>
+ <Event overview_string="Listener URL: /AAF1/LS_DAMPER_TIGHTEN&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/LS_DAMPER_TIGHTEN"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="tmpJobCode" type="STRING" xdim="2" length="32" options="3"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="Bypass" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ToolSequence" type="STRING" length="32" options="3"/>
+  <VariableInfo name="AFSequence" type="STRING" length="32" options="3"/>
+  <VariableInfo name="JobCode" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TypeReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="TaskSequence" type="INT2" options="3" default="0"/>
+  <VariableInfo name="TypeNumber" type="INT2" options="3" default="0"/>
+  <VariableInfo name="ProcessSequence" type="INT2" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[2303]"/>
+  <VariableInfo name="plcTaskSequence" type="STRING" length="32" options="3" default="D[2313]"/>
+  <VariableInfo name="plcBypass" type="STRING" length="32" options="3" default="M[2313]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSusp_PLC"/>
+  <VariableInfo name="plcTypeReady" type="STRING" length="32" options="3" default="M[2300]"/>
+  <VariableInfo name="plcCycleComplete" type="STRING" length="32" options="3" default="M[2301]"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[2300]"/>
+  <VariableInfo name="plcTypeNumber" type="STRING" length="32" options="3" default="D[2314]"/>
+  <VariableInfo name="tcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSusp_LSDamper_TC"/>
+  <VariableInfo name="plcProcessSequence" type="STRING" length="32" options="3" default="D[2312]"/>
+ </StaticVariables>
+ <Actions first_action="18">
+  <Action type="JSON.DECODE" id="18" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#10;    &quot;AF_SEQ_NO&quot; : &quot;&quot;,&#10;    &quot;JOB_CODE&quot; : &quot;&quot;,&#10;    &quot;TOOL_SEQUENCE&quot; : &quot;&quot;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="AF_SEQ_NO" name="AFSequence"/>
+    <LocalVariable logical_name="JOB_CODE" name="TypeNumber"/>
+    <LocalVariable logical_name="TOOL_SEQUENCE" name="ToolSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.DELIM" id="19" disabled="false">
+   <Properties>
+    <Property name="max_tokens" value="2"/>
+    <Property name="token_length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ToolSequence"/>
+    <ConstantVariable logical_name="Delimiters" value=","/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Tokens" name="tmpJobCode[0]" count="2"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="2"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="tmpJobCode[0]" count="2"/>
+    <ConstantVariable logical_name="Index" value="0"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProcessSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="21" disabled="false">
+   <Properties>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="2"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="tmpJobCode[0]" count="2"/>
+    <ConstantVariable logical_name="Index" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TaskSequence"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="23" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;AF_SEQUENCE&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;TYPE_NUMBER&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;PROCESS_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TASK_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;CYCLE_COMPLETE&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1} &#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <StaticVariable logical_name="AF_SEQUENCE Name" name="plcSequence"/>
+    <LocalVariable logical_name="AF_SEQUENCE" name="AFSequence"/>
+    <StaticVariable logical_name="TYPE_NUMBER Name" name="plcTypeNumber"/>
+    <LocalVariable logical_name="TYPE_NUMBER" name="TypeNumber"/>
+    <StaticVariable logical_name="PROCESS_SEQUENCE Name" name="plcProcessSequence"/>
+    <LocalVariable logical_name="PROCESS_SEQUENCE" name="ProcessSequence"/>
+    <StaticVariable logical_name="TASK_SEQUENCE Name" name="plcTaskSequence"/>
+    <LocalVariable logical_name="TASK_SEQUENCE" name="TaskSequence"/>
+    <StaticVariable logical_name="CYCLE_COMPLETE Name" name="plcCycleComplete"/>
+    <ConstantVariable logical_name="CYCLE_COMPLETE" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="26" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RSusp_LSDamperTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="29" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="35" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="37" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcBypass"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="Bypass"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_LSDamperTighten/CycleCancel" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_LSDamperTighten/CycleCancel" nlsid="30031">
+<Trigger name="CycleCancel" project="AAF1_RRSusp_LSDamperTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|18~26~28~29~33~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-75" y="-200"/>
+										<Node id="18" type="3" x="-75" y="-100"/>
+										<Node id="26" type="3" x="-75" y="175"/>
+										<Node id="28" type="3" x="175" y="-25"/>
+										<Node id="29" type="3" x="175" y="50"/>
+										<Node id="33" type="3" x="-75" y="75"/>
+										<Node errorActionId="27" errorStartIndex="28" id="600000000" text="Error Handling" type="4" x="175" y="-100"/>
+										<RoutedErrors value="18.1|33.1|"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/LS_DAMPER_TIGHTEN_CANCEL"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcTaskSequence" type="STRING" length="32" options="3" default="D[2313]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSusp_PLC"/>
+  <VariableInfo name="plcTypeReady" type="STRING" length="32" options="3" default="M[2300]"/>
+  <VariableInfo name="plcCycleComplete" type="STRING" length="32" options="3" default="M[2301]"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[2300]"/>
+  <VariableInfo name="plcTypeNumber" type="STRING" length="32" options="3" default="D[2314]"/>
+  <VariableInfo name="plcProcessSequence" type="STRING" length="32" options="3" default="D[2312]"/>
+ </StaticVariables>
+ <Actions first_action="18">
+  <Action type="JSON.DECODE" id="18" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="26" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RSusp_LSDamperTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="29" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="33" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_LSDamperTighten/CycleComplete" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_LSDamperTighten/CycleComplete" nlsid="30031">
+<Trigger name="CycleComplete" project="AAF1_RRSusp_LSDamperTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|18~26~28~29~31~33~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-75" y="-200"/>
+										<Node id="18" type="3" x="-75" y="-100"/>
+										<Node id="26" type="3" x="-75" y="175"/>
+										<Node id="28" type="3" x="175" y="-25"/>
+										<Node id="29" type="3" x="175" y="50"/>
+										<Node id="31" type="3" x="-75" y="-25"/>
+										<Node id="33" type="3" x="-75" y="75"/>
+										<Node errorActionId="27" errorStartIndex="28" id="600000000" text="Error Handling" type="4" x="175" y="-100"/>
+										<RoutedErrors value="18.1|31.1|33.1|"/></BuildInfo>
+ <Event type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/LS_DAMPER_TIGHTEN_COMPLETE"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcTaskSequence" type="STRING" length="32" options="3" default="D[2313]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSusp_PLC"/>
+  <VariableInfo name="plcTypeReady" type="STRING" length="32" options="3" default="M[2300]"/>
+  <VariableInfo name="plcCycleComplete" type="STRING" length="32" options="3" default="M[2301]"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[2300]"/>
+  <VariableInfo name="plcTypeNumber" type="STRING" length="32" options="3" default="D[2314]"/>
+  <VariableInfo name="plcProcessSequence" type="STRING" length="32" options="3" default="D[2312]"/>
+ </StaticVariables>
+ <Actions first_action="18">
+  <Action type="JSON.DECODE" id="18" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="26" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RSusp_LSDamperTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="29" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="31" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcCycleComplete"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="33" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_RSusp_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_RSusp_PLC" nlsid="30030">
+<DeviceDefinition name="AAF1_RSusp_PLC" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.8"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1281"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_FrameDao_findAllByProductCarrier" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1537997542"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_FrameDao_findAllByProductCarrier" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/FrameDao/findAllByProductCarrier" id="GALC_FrameDao_findAllByProductCarrier" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_FrameDao_findAllByProductCarrier_20" nlsid="30033">
+<TransactionDef id="GALC_FrameDao_findAllByProductCarrier_20" version="-578221736" version_mismatch="pass">
+										<Transport id="GALC_FrameDao_findAllByProductCarrier" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="ProductId" type="STRING"/>
+										<Variable count="1" name="PreProcessCount" type="INT2"/>
+										<Variable count="1" name="UpcomingCount" type="INT2"/>
+										<Variable count="1" length="32" name="AfOnProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="20" length="32" name="productId" type="STRING"/>
+										<Variable count="20" length="32" name="engineSerialNo" type="STRING"/>
+										<Variable count="20" name="straightShipPercentage" type="FLOAT8"/>
+										<Variable count="20" length="32" name="keyNo" type="STRING"/>
+										<Variable count="20" length="32" name="shortVin" type="STRING"/>
+										<Variable count="20" name="engineStatus" type="INT4"/>
+										<Variable count="20" name="afOnSequenceNumber" type="INT4"/>
+										<Variable count="20" length="32" name="missionSerialNo" type="STRING"/>
+										<Variable count="20" length="32" name="actualMissionType" type="STRING"/>
+										<Variable count="20" length="32" name="productionLot" type="STRING"/>
+										<Variable count="20" length="32" name="productSpecCode" type="STRING"/>
+										<Variable count="20" length="32" name="planOffDate" type="STRING"/>
+										<Variable count="20" length="32" name="kdLotNumber" type="STRING"/>
+										<Variable count="20" length="32" name="productionDate" type="STRING"/>
+										<Variable count="20" length="32" name="productStartDate" type="STRING"/>
+										<Variable count="20" length="32" name="actualOffDate" type="STRING"/>
+										<Variable count="20" name="autoHoldStatus" type="INT4"/>
+										<Variable count="20" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="20" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="20" length="32" name="prodLot" type="STRING"/>
+										<Variable count="20" length="32" name="operations" type="STRING"/>
+										<Variable count="20" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="20" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJlbmdpbmVTZXJpYWxObyI6ICIiLA0KICAgICJzdHJhaWdodFNoaXBQZXJjZW50YWdlIjogMC4wLA0KICAgICJrZXlObyI6ICIiLA0KICAgICJzaG9ydFZpbiI6ICIiLA0KICAgICJlbmdpbmVTdGF0dXMiOiAwLA0KICAgICJhZk9uU2VxdWVuY2VOdW1iZXIiOjAsDQogICAgIm1pc3Npb25TZXJpYWxObyI6ICIiLA0KICAgICJhY3R1YWxNaXNzaW9uVHlwZSI6ICIiLA0KICAgICJwcm9kdWN0aW9uTG90IjogIiIsDQogICAgInByb2R1Y3RTcGVjQ29kZSI6ICIiLA0KICAgICJwbGFuT2ZmRGF0ZSI6ICIiLA0KICAgICJrZExvdE51bWJlciI6ICIiLA0KICAgICJwcm9kdWN0aW9uRGF0ZSI6ICIiLA0KICAgICJwcm9kdWN0U3RhcnREYXRlIjogIiIsDQogICAgImFjdHVhbE9mZkRhdGUiOiAiIiwNCiAgICAiYXV0b0hvbGRTdGF0dXMiOjAsDQogICAgImxhc3RQYXNzaW5nUHJvY2Vzc1BvaW50SWQiOiAiIiwNCiAgICAidHJhY2tpbmdTdGF0dXMiOiAiIiwNCiAgICAicHJvZExvdCI6ICIiLA0KICAgICAib3BlcmF0aW9ucyI6ICIiLA0KICAgICJjcmVhdGVUaW1lc3RhbXAiOiAiIiwNCiAgICAidXBkYXRlVGltZXN0YW1wIjogIiINCiAgfQ0KXQ0K">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="20">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="engineSerialNo" parmname="engineSerialNo" type="STRING"/>
+										<Parameter dwType="10" name="straightShipPercentage" parmname="straightShipPercentage" type="DOUBLE"/>
+										<Parameter dwType="16" name="keyNo" parmname="keyNo" type="STRING"/>
+										<Parameter dwType="16" name="shortVin" parmname="shortVin" type="STRING"/>
+										<Parameter dwType="3" name="engineStatus" parmname="engineStatus" type="INTEGER"/>
+										<Parameter dwType="3" name="afOnSequenceNumber" parmname="afOnSequenceNumber" type="INTEGER"/>
+										<Parameter dwType="16" name="missionSerialNo" parmname="missionSerialNo" type="STRING"/>
+										<Parameter dwType="16" name="actualMissionType" parmname="actualMissionType" type="STRING"/>
+										<Parameter dwType="16" name="productionLot" parmname="productionLot" type="STRING"/>
+										<Parameter dwType="16" name="productSpecCode" parmname="productSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="planOffDate" parmname="planOffDate" type="STRING"/>
+										<Parameter dwType="16" name="kdLotNumber" parmname="kdLotNumber" type="STRING"/>
+										<Parameter dwType="16" name="productionDate" parmname="productionDate" type="STRING"/>
+										<Parameter dwType="16" name="productStartDate" parmname="productStartDate" type="STRING"/>
+										<Parameter dwType="16" name="actualOffDate" parmname="actualOffDate" type="STRING"/>
+										<Parameter dwType="3" name="autoHoldStatus" parmname="autoHoldStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Parameter dwType="16" name="prodLot" parmname="prodLot" type="STRING"/>
+										<Parameter dwType="16" name="operations" parmname="operations" type="STRING"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping lineDelimiter="crlf" outputformat="F">
+										<Item name="$CONSTANT" type="string" value="Ww0KICAgICB7ImphdmEubGFuZy5TdHJpbmciOiI="/>
+										<Item name="AfOnProcessPointId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+										<Item name="ProductId"/>
+										<Item name="$CONSTANT" type="string" value="In0sDQogICAgIHsiamF2YS5sYW5nLkludGVnZXIiOg=="/>
+										<Item name="PreProcessCount"/>
+										<Item name="$CONSTANT" type="string" value="fSwNCiAgICAgeyJqYXZhLmxhbmcuSW50ZWdlciI6"/>
+										<Item name="UpcomingCount"/>
+										<Item name="$CONSTANT" type="string" value="fQ0KXQ=="/>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_SendAiristaRfidMessage" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_SendAiristaRfidMessage" nlsid="30033">
+<TransactionDef id="GALC_SendAiristaRfidMessage" version="985201226" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="HTTP"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiINCiB9DQogIH0NCl0=">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_RRSusp_LSDamperTighten/PalletPresent" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_RRSusp_LSDamperTighten/PalletPresent" nlsid="30031">
+<Trigger name="PalletPresent" project="AAF1_RRSusp_LSDamperTighten" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~15~6~3~16~17~4~2~18~19~7~8~10~13~11~12~21~14~5~9~22~23~24~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-75" y="-200"/>
+										<Node id="1" type="3" x="-75" y="-125"/>
+										<Node id="15" type="3" x="-275" y="250"/>
+										<Node id="6" type="3" x="-75" y="250"/>
+										<Node id="3" type="3" x="-75" y="25"/>
+										<Node id="16" type="3" x="-225" y="400"/>
+										<Node id="17" type="3" x="-225" y="500"/>
+										<Node id="4" type="3" x="-75" y="100"/>
+										<Node id="2" type="3" x="-75" y="-50"/>
+										<Node id="18" type="3" x="150" y="-25"/>
+										<Node id="19" type="3" x="150" y="75"/>
+										<Node id="7" type="3" x="-75" y="325"/>
+										<Node id="8" type="3" x="-75" y="400"/>
+										<Node id="10" type="3" x="-75" y="550"/>
+										<Node id="13" type="3" x="-75" y="800"/>
+										<Node id="11" type="3" x="-75" y="625"/>
+										<Node id="12" type="3" x="-75" y="700"/>
+										<Node id="21" type="3" x="-200" y="725"/>
+										<Node id="14" type="3" x="-75" y="875"/>
+										<Node id="5" type="3" x="-75" y="175"/>
+										<Node id="9" type="3" x="-75" y="475"/>
+										<Node id="22" type="3" x="-275" y="150"/>
+										<Node id="23" type="3" x="-275" y="75"/>
+										<Node id="24" type="3" x="-275" y="0"/>
+										<Node errorActionId="20" errorStartIndex="18" id="600000000" text="Error Handling" type="4" x="150" y="-100"/>
+										<RoutedErrors value="1.1|6.1|3.1|16.1|4.1|2.2|7.2|8.1|10.1|13.1|11.1|12.2|21.1|5.1|9.1|22.1|23.1|24.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AAF1_RSusp_PLC" name="M[2310]" qos="3" type="BOOL"/>
+										<Condition deadband="0" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="PalletPresent" type="BOOL" options="3"/>
+  <VariableInfo name="UpcomingAFSequenceList" type="STRING" xdim="20" length="32" options="3"/>
+  <VariableInfo name="TypeReceived" type="BOOL" options="3"/>
+  <VariableInfo name="UpcomingProductIdList" type="STRING" xdim="20" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[2303]"/>
+  <VariableInfo name="plcTaskSequence" type="STRING" length="32" options="3" default="D[2313]"/>
+  <VariableInfo name="plcTypeReceived" type="STRING" length="32" options="3" default="M[2311]"/>
+  <VariableInfo name="AFOnProcessPointId" type="STRING" length="32" options="3" default="AAF1ON1P00101"/>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1RS1D00401Y"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1RS1P00401"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_RSusp_PLC"/>
+  <VariableInfo name="plcPalletPresent" type="STRING" length="32" options="3" default="M[2310]"/>
+  <VariableInfo name="plcTypeReady" type="STRING" length="32" options="3" default="M[2300]"/>
+  <VariableInfo name="plcCycleComplete" type="STRING" length="32" options="3" default="M[2301]"/>
+  <VariableInfo name="plcSequence" type="STRING" length="32" options="3" default="D[2300]"/>
+  <VariableInfo name="plcTypeNumber" type="STRING" length="32" options="3" default="D[2314]"/>
+  <VariableInfo name="plcProcessSequence" type="STRING" length="32" options="3" default="D[2312]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcPalletPresent"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="PalletPresent"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="PalletPresent"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PalletPresent" name="PalletPresent"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="3" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;AF_SEQUENCE&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;PROCESS_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TASK_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TYPE_NUMBER&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;CYCLE_COMPLETE&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <ConstantVariable logical_name="PRODUCT_ID" value="999999999999999999"/>
+    <StaticVariable logical_name="AF_SEQUENCE Name" name="plcSequence"/>
+    <ConstantVariable logical_name="AF_SEQUENCE" value="00000"/>
+    <StaticVariable logical_name="PROCESS_SEQUENCE Name" name="plcProcessSequence"/>
+    <ConstantVariable logical_name="PROCESS_SEQUENCE" value="0"/>
+    <StaticVariable logical_name="TASK_SEQUENCE Name" name="plcTaskSequence"/>
+    <ConstantVariable logical_name="TASK_SEQUENCE" value="0"/>
+    <StaticVariable logical_name="TYPE_NUMBER Name" name="plcTypeNumber"/>
+    <ConstantVariable logical_name="TYPE_NUMBER" value="0"/>
+    <StaticVariable logical_name="CYCLE_COMPLETE Name" name="plcCycleComplete"/>
+    <ConstantVariable logical_name="CYCLE_COMPLETE" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_FrameDao_findAllByProductCarrier_20"/>
+    <Property name="version" value="-578221736"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <ConstantVariable logical_name="PreProcessCount" value="0"/>
+    <ConstantVariable logical_name="UpcomingCount" value="1"/>
+    <StaticVariable logical_name="AfOnProcessPointId" name="AFOnProcessPointId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="productId" name="UpcomingProductIdList[0]" count="20"/>
+    <LocalVariable logical_name="afOnSequenceNumber" name="UpcomingAFSequenceList[0]" count="20"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="7" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Contains"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="UpcomingProductIdList[1]"/>
+    <ConstantVariable logical_name="Search String" value="EMPTY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="16"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="8" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCT_ID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},&#13;&#10;    &quot;AF_SEQUENCE&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;TYPE_NUMBER&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TYPE_READY&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCT_ID Name" name="plcProductId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="UpcomingProductIdList[1]"/>
+    <StaticVariable logical_name="AF_SEQUENCE Name" name="plcSequence"/>
+    <LocalVariable logical_name="AF_SEQUENCE" name="UpcomingAFSequenceList[1]"/>
+    <StaticVariable logical_name="TYPE_NUMBER Name" name="plcTypeNumber"/>
+    <ConstantVariable logical_name="TYPE_NUMBER" value="0"/>
+    <StaticVariable logical_name="TYPE_READY Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="TYPE_READY" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="9" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PROCESS_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TASK_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PROCESS_SEQUENCE Name" name="plcProcessSequence"/>
+    <ConstantVariable logical_name="PROCESS_SEQUENCE" value="0"/>
+    <StaticVariable logical_name="TASK_SEQUENCE Name" name="plcTaskSequence"/>
+    <ConstantVariable logical_name="TASK_SEQUENCE" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="10" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="500"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="11" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;    &quot;TYPE_RECEIVED&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="TYPE_RECEIVED Name" name="plcTypeReceived"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="TYPE_RECEIVED" name="TypeReceived"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="12" disabled="false">
+   <Properties>
+    <Property name="expression" value="TypeReceived==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TypeReceived" name="TypeReceived"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="21"/>
+    <Route result="2" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="13" disabled="false">
+   <Properties>
+    <Property name="rules" value="{    &#13;&#10;    &quot;TYPE_READY&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;CYCLE_COMPLETE&quot;: {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="TYPE_READY Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="TYPE_READY" value="0"/>
+    <StaticVariable logical_name="CYCLE_COMPLETE Name" name="plcCycleComplete"/>
+    <ConstantVariable logical_name="CYCLE_COMPLETE" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="14" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="16" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_SendAiristaRfidMessage"/>
+    <Property name="version" value="985201226"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="UpcomingProductIdList[1]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="18" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_RSusp_LSDamperTighten"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="19" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="21" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="500"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="22" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;AF_SEQUENCE&quot;: {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:6},&#13;&#10;    &quot;PROCESS_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TASK_SEQUENCE&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;TYPE_NUMBER&quot;: {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="AF_SEQUENCE Name" name="plcSequence"/>
+    <ConstantVariable logical_name="AF_SEQUENCE" value="00000"/>
+    <StaticVariable logical_name="PROCESS_SEQUENCE Name" name="plcProcessSequence"/>
+    <ConstantVariable logical_name="PROCESS_SEQUENCE" value="0"/>
+    <StaticVariable logical_name="TASK_SEQUENCE Name" name="plcTaskSequence"/>
+    <ConstantVariable logical_name="TASK_SEQUENCE" value="0"/>
+    <StaticVariable logical_name="TYPE_NUMBER Name" name="plcTypeNumber"/>
+    <ConstantVariable logical_name="TYPE_NUMBER" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="23" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcTypeReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="24" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcCycleComplete"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="18"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_RRSusp_LSDamperTighten" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_RRSusp_LSDamperTighten" nlsid="30032">AAF1_RRSusp_LSDamperTighten</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_RRSusp_LSDamperTighten" type="project">
+		<reference name="AAF1_RRSusp_LSDamperTighten/BroadcastFromClient" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.SPLIT.DELIM" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_RRSusp_LSDamperTighten/CycleCancel" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_RRSusp_LSDamperTighten/CycleComplete" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_RRSusp_LSDamperTighten/PalletPresent" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="AAF1_RSusp_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="GALC_FrameDao_findAllByProductCarrier_20" type="transaction">
+				<reference name="GALC_FrameDao_findAllByProductCarrier" type="transport"/>
+			</reference>
+			<reference name="GALC_SendAiristaRfidMessage" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_RSusp_PLC.M[2310]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

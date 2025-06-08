@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="Utilities/CONV_STR_TO_INT" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/CONV_STR_TO_INT" nlsid="30031">
+<Trigger name="CONV_STR_TO_INT" project="Utilities" max_pending="5" queue_size="20" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|2~3~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="75" y="-75"/>
+					<Node id="2" type="3" x="75" y="0"/>
+					<Node id="3" type="3" x="25" y="125"/>
+					<Node id="4" type="3" x="200" y="75"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;NumString&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;Result&quot; options=&quot;7&quot; type=&quot;INT8&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="2">
+  <Action type="LUA_INLINE" id="2" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="local function convertStringToNumber(str)&#13;&#10; -- Eliminate bad cases...&#13;&#10;    pattern='[+-]?%a+'&#13;&#10;    if(str:match(pattern)) then &#13;&#10;       print(&quot;error case:&quot;, str)&#13;&#10;       out=nil;   &#13;&#10;    else&#13;&#10;  out=tonumber(str)&#13;&#10;    end&#13;&#10; return(out)&#13;&#10;end&#13;&#10;&#13;&#10;local function main(str)&#13;&#10;&#13;&#10; if (str == nil) then&#13;&#10;  return nil&#13;&#10; end&#13;&#10; &#13;&#10; intStr = convertStringToNumber(str)&#13;&#10; return intStr&#13;&#10;&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Result&quot;] = main(DWInput[&quot;NumString&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;NumString&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;Result&quot; options=&quot;7&quot; type=&quot;INT8&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="NumString" name="NumString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="Result" name="Result"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/CheckForEmptyString" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/CheckForEmptyString" nlsid="30031">
+<Trigger name="CheckForEmptyString" project="Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="2000">
+ <Context value="SubTrigger|2~3~4~5~6~7~8~9~10~12~13~14~15~18~19~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-50" y="-125"/>
+										<Node id="2" type="3" x="-50" y="-25"/>
+										<Node id="3" type="3" x="-50" y="225"/>
+										<Node id="4" type="3" x="-50" y="625"/>
+										<Node id="5" type="3" x="-200" y="350"/>
+										<Node id="6" type="3" x="-200" y="425"/>
+										<Node id="7" type="3" x="-200" y="500"/>
+										<Node id="8" type="3" x="25" y="125"/>
+										<Node id="9" type="3" x="-50" y="425"/>
+										<Node id="10" type="3" x="-325" y="500"/>
+										<Node id="12" type="3" x="250" y="-50"/>
+										<Node id="13" type="3" x="250" y="25"/>
+										<Node id="14" type="3" x="250" y="125"/>
+										<Node id="15" type="3" x="-50" y="75"/>
+										<Node errorActionId="11" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="250" y="-125"/>
+										<Node id="18" type="3" x="-200" y="100"/>
+										<Node id="19" type="3" x="-200" y="175"/>
+										<RoutedErrors value="2.1|3.1|5.1|6.2|9.1|10.1|15.2|18.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;40&quot; name=&quot;StringToCheck&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;EmptyString&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="loopPos" type="INT4" options="3"/>
+  <VariableInfo name="stringEmpty" type="BOOL" options="3"/>
+  <VariableInfo name="CharToCheck" type="STRING" length="1" options="3"/>
+  <VariableInfo name="stringLength" type="UINT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="XFalse" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="XTrue" type="BOOL" options="3" default="1"/>
+  <VariableInfo name="blankChar" type="STRING" length="1" options="3" default=" "/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="STRING.LENGTH" id="2" disabled="false">
+   <Properties/>
+   <InputMap>
+    <EventVariable logical_name="String" name="StringToCheck"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="stringLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="3" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="1"/>
+    <LocalVariable logical_name="Final Value" name="stringLength"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopPos"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="5" disabled="false">
+   <Properties/>
+   <InputMap>
+    <EventVariable logical_name="String" name="StringToCheck"/>
+    <LocalVariable logical_name="Start Offset" name="loopPos"/>
+    <LocalVariable logical_name="End Offset" name="loopPos"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="CharToCheck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="6" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="CharToCheck"/>
+    <StaticVariable logical_name="Search String" name="blankChar"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="7" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="8" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="9" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XTrue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="EmptyString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XFalse"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="EmptyString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="12" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XTrue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="EmptyString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Utilities"/>
+    <Property name="msg" value="$(Trigger) - Error checking for empty string, error number: $(number) - $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="number" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="14" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="15" disabled="false">
+   <Properties>
+    <Property name="expression" value="StringLength&gt;0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="StringLength" name="stringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="18"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="18" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="XTrue"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="EmptyString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="19" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/Date Compare" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Date Compare" nlsid="30031">
+<Trigger name="Date Compare" project="Utilities" max_pending="5" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|3~5~6~7~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-200" y="-225"/>
+					<Node id="3" type="3" x="-200" y="-150"/>
+					<Node id="5" type="3" x="0" y="-50"/>
+					<Node id="6" type="3" x="-200" y="-50"/>
+					<Node errorActionId="4" errorStartIndex="7" id="600000000" text="Error Handling" type="4" x="0" y="-200"/>
+					<Node id="7" type="3" x="0" y="-125"/>
+					<RoutedErrors value="3.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;Time1&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;Time2&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;YearDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;MonthDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;DayDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;HourDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;MinuteDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;SecondDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;Time1Older&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="3">
+  <Action type="LUA_INLINE" id="3" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function calculateDateDiff(time1, time2)&#13;&#10;    time1year = string.sub(time1,1,4)&#13;&#10;    time1month = string.sub(time1,6,7)&#13;&#10;    time1day = string.sub(time1,9,10)&#13;&#10;    time1hour = string.sub(time1,12,13)&#13;&#10;    time1minute = string.sub(time1,15,16)&#13;&#10;    time1second = string.sub(time1,18,19)&#13;&#10;    &#13;&#10;    time2year = string.sub(time2,1,4)&#13;&#10;    time2month = string.sub(time2,6,7)&#13;&#10;    time2day = string.sub(time2,9,10)&#13;&#10;    time2hour = string.sub(time2,12,13)&#13;&#10;    time2minute = string.sub(time2,15,16)&#13;&#10;    time2second = string.sub(time2,18,19)&#13;&#10;    &#13;&#10;    DWOutput[&quot;YearDiff&quot;] = time2year - time1year&#13;&#10;    DWOutput[&quot;MonthDiff&quot;] = time2month - time1month&#13;&#10;    DWOutput[&quot;DayDiff&quot;] = time2day - time1day&#13;&#10;    DWOutput[&quot;HourDiff&quot;] = time2hour - time1hour&#13;&#10;    DWOutput[&quot;MinuteDiff&quot;] = time2minute - time1minute&#13;&#10;    DWOutput[&quot;SecondDiff&quot;] = time2second - time1second&#13;&#10;    &#13;&#10;    time1int = os.time{year=time1year, month=time1month, day=time1day, hour=time1hour, min=time1minute, sec=time1second}&#13;&#10;    time2int = os.time{year=time2year, month=time2month, day=time2day, hour=time2hour, min=time2minute, sec=time2second}&#13;&#10;    &#13;&#10;    if time1int&lt;time2int then DWOutput[&quot;Time1Older&quot;] = true else DWOutput[&quot;Time1Older&quot;] = false end &#13;&#10;    &#13;&#10;    return time1year .. &quot; &quot; .. time1month .. &quot; &quot; .. time1day .. &quot; &quot; .. time1hour .. &quot; &quot; .. time1minute .. &quot; &quot; .. time1second&#13;&#10;    &#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;DateDiff&quot;] = calculateDateDiff(DWInput[&quot;Time1&quot;],DWInput[&quot;Time2&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;Time1&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;Time2&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;255&quot; name=&quot;DateDiff&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;YearDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;MonthDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;DayDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;HourDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;MinuteDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;SecondDiff&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;Time1Older&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Time1" name="Time1"/>
+    <EventVariable logical_name="Time2" name="Time2"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="YearDiff" name="YearDiff"/>
+    <EventVariable logical_name="MonthDiff" name="MonthDiff"/>
+    <EventVariable logical_name="DayDiff" name="DayDiff"/>
+    <EventVariable logical_name="HourDiff" name="HourDiff"/>
+    <EventVariable logical_name="MinuteDiff" name="MinuteDiff"/>
+    <EventVariable logical_name="SecondDiff" name="SecondDiff"/>
+    <EventVariable logical_name="Time1Older" name="Time1Older"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="7" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="Utilities"/>
+    <Property name="msg" value="$(Trigger) - Unhandled Exception, Error Message: ($(ErrorCode)) - $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="5"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/LeftPadString" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/LeftPadString" nlsid="30031">
+<Trigger name="LeftPadString" project="Utilities" max_pending="10" reporting="onerr,ontimeout" max_exec_time_warning="2000">
+ <Context value="SubTrigger|18~4~5~6~3~9~11~13~15~7~19~20~21~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-375"/>
+										<Node id="18" type="3" x="-100" y="-300"/>
+										<Node id="4" type="3" x="-300" y="-25"/>
+										<Node id="5" type="3" x="-100" y="150"/>
+										<Node id="6" type="3" x="-100" y="225"/>
+										<Node id="3" type="3" x="-100" y="-75"/>
+										<Node id="9" type="3" x="-100" y="0"/>
+										<Node id="11" type="3" x="-100" y="75"/>
+										<Node id="13" type="3" x="-550" y="275"/>
+										<Node id="15" type="3" x="-550" y="200"/>
+										<Node id="7" type="3" x="-100" y="-150"/>
+										<Node id="19" type="3" x="-100" y="-225"/>
+										<Node id="20" type="3" x="-300" y="-175"/>
+										<Node id="21" type="3" x="-300" y="125"/>
+										<Node errorActionId="12" errorStartIndex="15" id="600000000" text="Error Handling" type="4" x="-550" y="-325"/>
+										<RoutedErrors value="18.1|4.1|5.1|3.1|9.2|11.2|7.1|19.2|20.1|21.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;30&quot; name=&quot;StringToPad&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;1&quot; name=&quot;PadChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;PaddedStringLength&quot; options=&quot;7&quot; type=&quot;INT4&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;30&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="CurrentStringLength" type="INT4" options="3"/>
+  <VariableInfo name="TempString" type="STRING" length="30" options="3"/>
+  <VariableInfo name="PadCharLength" type="INT1" options="3"/>
+  <VariableInfo name="InitialValue" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="18">
+  <Action type="STRING.LENGTH" id="3" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="CurrentStringLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="4" disabled="false">
+   <Comment>CEFkZCBwYWQgY2hhcmFjdGVyIHRvIGxlZnQgb2YgdGVtcCBzdHJpbmc=</Comment>
+   <Properties>
+    <Property name="format" value="$(PadChar)$(StringToPad)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="PadChar" name="PadChar"/>
+    <LocalVariable logical_name="StringToPad" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TempString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="TempString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="7" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="StringToPad"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="TempString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="CurrentLength&gt;=PaddedLength"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CurrentLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="PaddedLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="11" disabled="false">
+   <Properties>
+    <Property name="expression" value="currentStringLength==padStringLength"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="currentStringLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="padStringLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="21"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="15" disabled="false">
+   <Comment>CERlZmF1bHQgdGhlIG91dHB1dCB0byBpbnB1dCBzdHJpbmc=</Comment>
+   <Properties>
+    <Property name="dst_length" value="30"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="StringToPad"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="18" disabled="false">
+   <Properties/>
+   <InputMap>
+    <EventVariable logical_name="String" name="PadChar"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="PadCharLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="19" disabled="false">
+   <Properties>
+    <Property name="expression" value="PadCharLength==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PadCharLength" name="PadCharLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="20"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="20" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="BP_SeamlessIP.LeftPadString"/>
+    <Property name="msg" value="Pad Char incorrect size - $(length) characters"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="length" name="PadCharLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="21" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="BP_SeamlessIP.LeftPadString"/>
+    <Property name="msg" value="String too large - $(stringLength) charcters, expected $(padLength) characters"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="stringLength" name="CurrentStringLength"/>
+    <EventVariable logical_name="padLength" name="PaddedStringLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/LogToSplunk" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/LogToSplunk" nlsid="30031">
+<Trigger name="LogToSplunk" project="Utilities" max_pending="30" queue_size="30" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Logging Event|12~7~5~9~10~8~11~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-300"/>
+			<Node id="12" type="3" x="-25" y="-225"/>
+			<Node id="7" type="3" x="125" y="0"/>
+			<Node id="5" type="3" x="-25" y="175"/>
+			<Node id="9" type="3" x="-25" y="75"/>
+			<Node id="10" type="3" x="-150" y="125"/>
+			<Node id="8" type="3" x="-25" y="-25"/>
+			<Node id="11" type="3" x="-25" y="-125"/>
+			<Node errorActionId="6" errorStartIndex="7" id="600000000" text="Error Handling" type="4" x="125" y="-100"/>
+			<RoutedErrors value="12.1|9.2|8.1|11.1|"/></BuildInfo>
+ <Description>Trigger uses Splunk HEC to send log events from DeviceWise to Splunk Cloud via a Splunk Heavy Forwarder</Description>
+ <Event overview_string="Capturing EXCEPTION events." type="LOGGING">
+  <Properties>
+   <Property name="message_type" value="EXCEPTION"/>
+   <Property name="min_loglevel" value="FATAL"/>
+   <Property name="max_loglevel" value="INFO"/>
+   <Property name="log_component" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="httpStatus" type="INT4" options="3"/>
+  <VariableInfo name="message" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="httpResult" type="STRING" length="255" options="3"/>
+  <VariableInfo name="event" type="STRING" length="1024" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="SplunkHfToken" type="STRING" length="50" options="3" default="Splunk e05be403-08e1-4cee-9c4c-d82ac4660a36"/>
+  <VariableInfo name="sourceType" type="STRING" length="32" options="3" default="DW:Exception"/>
+  <VariableInfo name="SplunkHfUrl" type="STRING" length="255" options="3" default="https://ahmpolshf02.amerhonda.com:8088/services/collector/event"/>
+  <VariableInfo name="SplunkSite" type="STRING" length="32" options="3" default="Ohio-pmap"/>
+  <VariableInfo name="source" type="STRING" length="32" options="3" default="DeviceWise"/>
+ </StaticVariables>
+ <Actions first_action="12">
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="HTTP" id="8" disabled="false">
+   <Properties>
+    <Property name="operation" value="POST"/>
+    <Property name="url_parameters" value="&lt;Variables/&gt;"/>
+    <Property name="header_fields" value="&lt;Variables&gt;&#10;       &lt;VariableInfo length=&quot;50&quot; name=&quot;Authorization&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;/Variables&gt;"/>
+    <Property name="body" value="{&#10;   &quot;host&quot;: &quot;$(Host)&quot;,&#10;   &quot;source&quot;: &quot;$(Source)&quot;,&#10;   &quot;sourcetype&quot;: &quot;$(SourceType)&quot;,&#10;   &quot;event&quot;: &quot;$(Event)&quot;,&#10;   &quot;fields&quot;: {&#10;        &quot;timestamp&quot;:&quot;$(LogTime)&quot;,&#10;        &quot;messagetype&quot;:&quot;$(MessageType)&quot;,&#10;        &quot;component&quot;:&quot;$(Component)&quot;,&#10;        &quot;message&quot;:&quot;$(Message)&quot;,&#10;        &quot;ps_env&quot;:&quot;$(Site)&quot;&#10;   }&#10;}"/>
+    <Property name="mode" value="As String"/>
+    <Property name="show_request" value="True"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="URL" name="SplunkHfUrl"/>
+    <StaticVariable logical_name="Authorization" name="SplunkHfToken"/>
+    <MacroVariable logical_name="Host" name="$MODULE_NAME"/>
+    <StaticVariable logical_name="Source" name="source"/>
+    <StaticVariable logical_name="SourceType" name="sourceType"/>
+    <LocalVariable logical_name="Event" name="event"/>
+    <EventVariable logical_name="LogTime" name="Timestamp"/>
+    <EventVariable logical_name="MessageType" name="Level"/>
+    <EventVariable logical_name="Component" name="Component"/>
+    <LocalVariable logical_name="Message" name="message"/>
+    <StaticVariable logical_name="Site" name="SplunkSite"/>
+    <ConstantVariable logical_name="Timeout(ms)" value="10000"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="httpResult"/>
+    <LocalVariable logical_name="Result Status" name="httpStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="9" disabled="false">
+   <Properties>
+    <Property name="expression" value="httpStatus==200"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="httpStatus" name="httpStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="11" disabled="false">
+   <Properties>
+    <Property name="format" value="$(LogTime) - $(LogLevel) - $(Component) - $(Message)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="LogTime" name="Timestamp"/>
+    <EventVariable logical_name="LogLevel" name="Level"/>
+    <EventVariable logical_name="Component" name="Component"/>
+    <LocalVariable logical_name="Message" name="message"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="event"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="12" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="&#13;&#10;function messageCleanup(message)&#13;&#10;    --escape double quote&#13;&#10;    message = string.gsub(message,&quot;\&quot;&quot;,&quot;\\\&quot;&quot;)&#13;&#10;        &#13;&#10;    --remove new lines&#13;&#10;    message = string.gsub(message,&quot;\n&quot;,&quot; &quot;)&#13;&#10;    &#13;&#10;    return message&#13;&#10;&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;CleanedMessage&quot;] = messageCleanup(DWInput[&quot;Message&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;       &lt;VariableInfo length=&quot;1024&quot; name=&quot;Message&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;       &lt;VariableInfo length=&quot;1024&quot; name=&quot;CleanedMessage&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="Message" name="Message"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="CleanedMessage" name="message"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/Pad String" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Pad String" nlsid="30031">
+<Trigger name="Pad String" project="Utilities" max_pending="10" queue_size="20" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+		<Node id="1" type="3" x="-100" y="-25"/>
+		<Node id="2" type="3" x="-100" y="50"/>
+		<Node id="3" type="3" x="25" y="25"/></BuildInfo>
+ <Event overview_string="Input Variables: &#10;Output Variables: &#10;" type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;1&quot; name=&quot;PadCharacter&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;PadLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;StringLength&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;100&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function padString(inputString, padChar, totalLength, padLeft)&#13;&#10;    length=inputString:len()&#13;&#10;    &#13;&#10;    if (length &gt;= totalLength) then return inputString&#13;&#10;    else &#13;&#10;        while (length &lt; totalLength)&#13;&#10;        do&#13;&#10;            if (padLeft == true) then inputString = padChar .. inputString&#13;&#10;            else inputString = inputString .. padChar end&#13;&#10;            length = inputString:len()&#13;&#10;        end&#13;&#10;        return inputString&#13;&#10;    end&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;PaddedString&quot;] = padString(DWInput[&quot;InputString&quot;],DWInput[&quot;PadCharacter&quot;],DWInput[&quot;StringLength&quot;],DWInput[&quot;PadLeft&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;1&quot; name=&quot;PadCharacter&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;PadLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;StringLength&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="PadCharacter" name="PadCharacter"/>
+    <EventVariable logical_name="InputString" name="InputString"/>
+    <EventVariable logical_name="PadLeft" name="PadLeft"/>
+    <EventVariable logical_name="StringLength" name="StringLength"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="PaddedString" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/ParseFecNutRunnerDataString" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/ParseFecNutRunnerDataString" nlsid="30031">
+<Trigger name="ParseFecNutRunnerDataString" project="Utilities" max_pending="10" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+						<Node id="1" type="3" x="-150" y="-75"/>
+						<Node id="2" type="3" x="-150" y="25"/>
+						<Node id="4" type="3" x="100" y="-50"/>
+						<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="100" y="-150"/>
+						<RoutedErrors value="1.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;50&quot; name=&quot;FecNutRunnerDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function parseData(fecDataString)&#13;&#10;&#13;&#10;    spindle = trimString(string.sub(fecDataString, 1, 3),true,true)&#13;&#10;    finalTorque = trimString(string.sub(fecDataString, 4, 12),true,true)&#13;&#10;    finalAngle = trimString(string.sub(fecDataString, 14, 20),true,true)&#13;&#10;    torqueJudgement = trimString(string.sub(fecDataString, 41, 42),true,true)&#13;&#10;    angleJudgement = trimString(string.sub(fecDataString, 44, 45),true,true)&#13;&#10;    &#13;&#10;    if torqueJudgement == &quot;O&quot; then torqueJudgement = 1 else torqueJudgement = 0 end&#13;&#10;    if angleJudgement == &quot;O&quot; then angleJudgement = 1 else angleJudgement = 0 end&#13;&#10;&#13;&#10;    DWOutput[&quot;SpindleNumber&quot;] = spindle&#13;&#10;    DWOutput[&quot;FinalTorque&quot;] = finalTorque&#13;&#10;    DWOutput[&quot;FinalAngle&quot;] = finalAngle&#13;&#10;    DWOutput[&quot;TorqueJudgement&quot;] = torqueJudgement&#13;&#10;    DWOutput[&quot;AngleJudgement&quot;] = angleJudgement&#13;&#10;&#13;&#10;    return &quot;&quot;&#13;&#10;end&#13;&#10;&#13;&#10;function trimString(str, trimLeft, trimRight)&#13;&#10;    -- Remove all non-alphanumeric characters&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input: &quot; .. inputString)&#13;&#10;    --str = inputString:gsub('%W','')&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input Control Clear: &quot; .. str)&#13;&#10;    &#13;&#10;    if (trimLeft==true and trimRight==true) then str=str:gsub(&quot;^%s*(.-)%s*$&quot;, &quot;%1&quot;)&#13;&#10;    elseif (trimLeft==true) then str=str:gsub(&quot;^%s*&quot;, &quot;&quot;) &#13;&#10;    elseif (trimRight==true) then str=str:gsub(&quot;%s*$&quot;, &quot;&quot;) end&#13;&#10;    &#13;&#10;    return str&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;result&quot;] = parseData(DWInput[&quot;FecDataString&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;FecDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;result&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="FecDataString" name="FecNutRunnerDataString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="SpindleNumber" name="SpindleNumber"/>
+    <EventVariable logical_name="FinalTorque" name="FinalTorque"/>
+    <EventVariable logical_name="FinalAngle" name="FinalAngle"/>
+    <EventVariable logical_name="TorqueJudgement" name="TorqueJudgement"/>
+    <EventVariable logical_name="AngleJudgement" name="AngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/ParseFecNutRunnerDataString_AAF2_RRSusp" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/ParseFecNutRunnerDataString_AAF2_RRSusp" nlsid="30031">
+<Trigger name="ParseFecNutRunnerDataString_AAF2_RRSusp" project="Utilities" max_pending="10" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~4~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+		<Node id="1" type="3" x="-150" y="-75"/>
+		<Node id="2" type="3" x="-150" y="25"/>
+		<Node id="4" type="3" x="100" y="-50"/>
+		<Node errorActionId="3" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="100" y="-150"/>
+		<RoutedErrors value="1.1|"/></BuildInfo>
+ <Event overview_string="Input Variables: &#10;Output Variables: &#10;" type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;155&quot; name=&quot;FecNutRunnerDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function parseData(fecDataString)&#13;&#10;&#13;&#10;    spindle = trimString(string.sub(fecDataString, 1, 3),true,true)&#13;&#10;    finalTorque = trimString(string.sub(fecDataString, 4, 7),true,true)&#13;&#10;    finalAngle = trimString(string.sub(fecDataString, 10, 12),true,true)&#13;&#10;    torqueJudgement = trimString(string.sub(fecDataString, 124, 125),true,true)&#13;&#10;    angleJudgement = &quot;O&quot;&#13;&#10;    &#13;&#10;    if torqueJudgement == &quot;O&quot; then torqueJudgement = 1 else torqueJudgement = 0 end&#13;&#10;    if angleJudgement == &quot;O&quot; then angleJudgement = 1 else angleJudgement = 0 end&#13;&#10;&#13;&#10;    DWOutput[&quot;SpindleNumber&quot;] = spindle&#13;&#10;    DWOutput[&quot;FinalTorque&quot;] = finalTorque&#13;&#10;    DWOutput[&quot;FinalAngle&quot;] = finalAngle&#13;&#10;    DWOutput[&quot;TorqueJudgement&quot;] = torqueJudgement&#13;&#10;    DWOutput[&quot;AngleJudgement&quot;] = angleJudgement&#13;&#10;&#13;&#10;    return &quot;&quot;&#13;&#10;end&#13;&#10;&#13;&#10;function trimString(str, trimLeft, trimRight)&#13;&#10;    -- Remove all non-alphanumeric characters&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input: &quot; .. inputString)&#13;&#10;    --str = inputString:gsub('%W','')&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input Control Clear: &quot; .. str)&#13;&#10;    &#13;&#10;    if (trimLeft==true and trimRight==true) then str=str:gsub(&quot;^%s*(.-)%s*$&quot;, &quot;%1&quot;)&#13;&#10;    elseif (trimLeft==true) then str=str:gsub(&quot;^%s*&quot;, &quot;&quot;) &#13;&#10;    elseif (trimRight==true) then str=str:gsub(&quot;%s*$&quot;, &quot;&quot;) end&#13;&#10;    &#13;&#10;    return str&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;result&quot;] = parseData(DWInput[&quot;FecDataString&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;155&quot; name=&quot;FecDataString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;SpindleNumber&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;FinalTorque&quot; options=&quot;7&quot; type=&quot;FLOAT4&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;FinalAngle&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;TorqueJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo name=&quot;AngleJudgement&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo length=&quot;32&quot; name=&quot;result&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="FecDataString" name="FecNutRunnerDataString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="SpindleNumber" name="SpindleNumber"/>
+    <EventVariable logical_name="FinalTorque" name="FinalTorque"/>
+    <EventVariable logical_name="FinalAngle" name="FinalAngle"/>
+    <EventVariable logical_name="TorqueJudgement" name="TorqueJudgement"/>
+    <EventVariable logical_name="AngleJudgement" name="AngleJudgement"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/StringToInt2" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/StringToInt2" nlsid="30031">
+<Trigger name="StringToInt2" project="Utilities" max_pending="20" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|22~6~24~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-375"/>
+										<Node id="22" type="3" x="-100" y="-275"/>
+										<Node id="6" type="3" x="-100" y="-175"/>
+										<Node id="24" type="3" x="75" y="-275"/>
+										<Node errorActionId="23" errorStartIndex="24" id="600000000" text="Error Handling" type="4" x="75" y="-375"/>
+										<RoutedErrors value="22.1|"/></BuildInfo>
+ <Description>Subtrigger used to convert a string field to int2.  This is used to handle string fields with leading zeroes that can cause conversion errors if moved directly from String to Int2 field with Set command.</Description>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;4&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;OuptutInt2&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="CurrentStringLength" type="INT4" options="3"/>
+  <VariableInfo name="TempString" type="STRING" length="30" options="3"/>
+  <VariableInfo name="PadCharLength" type="INT1" options="3"/>
+  <VariableInfo name="InitialValue" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="22">
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="22" disabled="false">
+   <Properties>
+    <Property name="expression" value="InputString + 0"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="InputString" name="InputString"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="Result" name="OuptutInt2"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="24" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/Trim String" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Trim String" nlsid="30031">
+<Trigger name="Trim String" project="Utilities" max_pending="10" reporting="onerr,ontimeout">
+ <Context value="SubTrigger|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+					<Node id="1" type="3" x="-100" y="-25"/>
+					<Node id="2" type="3" x="-100" y="50"/>
+					<Node id="3" type="3" x="25" y="50"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TrimLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TrimRight&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;TrimmedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="&#13;&#10;function trimString(inputString, trimLeft, trimRight)&#13;&#10;    -- Remove all non-alphanumeric characters&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input: &quot; .. inputString)&#13;&#10;    str = inputString:gsub('%W','')&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input Control Clear: &quot; .. str)&#13;&#10;    &#13;&#10;    if (trimLeft==true and trimRight==true) then str=str:gsub(&quot;^%s*(.-)%s*$&quot;, &quot;%1&quot;)&#13;&#10;    elseif (trimLeft==true) then str=str:gsub(&quot;^%s*&quot;, &quot;&quot;) &#13;&#10;    elseif (trimRight==true) then str=str:gsub(&quot;%s*$&quot;, &quot;&quot;) end&#13;&#10;    &#13;&#10;    return str&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;TrimmedString&quot;] = trimString(DWInput[&quot;InputString&quot;],DWInput[&quot;TrimLeft&quot;],DWInput[&quot;TrimRight&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TrimLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TrimRight&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;TrimmedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="InputString" name="InputString"/>
+    <EventVariable logical_name="TrimLeft" name="TrimLeft"/>
+    <EventVariable logical_name="TrimRight" name="TrimRight"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="TrimmedString" name="TrimmedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/Trim String 2" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Trim String 2" nlsid="30031">
+<Trigger name="Trim String 2" project="Utilities" max_pending="10" reporting="onerr,ontimeout">
+ <Context value="SubTrigger|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+										<Node id="1" type="3" x="-100" y="-25"/>
+										<Node id="2" type="3" x="-100" y="50"/>
+										<Node id="3" type="3" x="25" y="50"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TrimLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;TrimRight&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;TrimmedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="&#13;&#10;function trimString(inputString, trimLeft, trimRight)&#13;&#10;    -- Remove all non-alphanumeric characters&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input: &quot; .. inputString)&#13;&#10;    str = inputString&#13;&#10;    -- dw.log.exception(&quot;INFO&quot;,&quot;Input Control Clear: &quot; .. str)&#13;&#10;    &#13;&#10;    if (trimLeft==true and trimRight==true) then str=str:gsub(&quot;^%s*(.-)%s*$&quot;, &quot;%1&quot;)&#13;&#10;    elseif (trimLeft==true) then str=str:gsub(&quot;^%s*&quot;, &quot;&quot;) &#13;&#10;    elseif (trimRight==true) then str=str:gsub(&quot;%s*$&quot;, &quot;&quot;) end&#13;&#10;    &#13;&#10;    return str&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;TrimmedString&quot;] = trimString(DWInput[&quot;InputString&quot;],DWInput[&quot;TrimLeft&quot;],DWInput[&quot;TrimRight&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TrimLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;TrimRight&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;TrimmedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="InputString" name="InputString"/>
+    <EventVariable logical_name="TrimLeft" name="TrimLeft"/>
+    <EventVariable logical_name="TrimRight" name="TrimRight"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="TrimmedString" name="TrimmedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="Utilities" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportitem type="project" name="Utilities" nlsid="30032">Utilities</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="Utilities" type="project">
+		<reference name="Utilities/CONV_STR_TO_INT" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/CheckForEmptyString" type="trigger">
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/Date Compare" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/LeftPadString" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/LogToSplunk" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="HTTP" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="LOGGING" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/Pad String" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/ParseFecNutRunnerDataString" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/ParseFecNutRunnerDataString_AAF2_RRSusp" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/StringToInt2" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/Trim String" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+		<reference name="Utilities/Trim String 2" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

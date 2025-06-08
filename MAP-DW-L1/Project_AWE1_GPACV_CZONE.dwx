@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="listener" name="AZZ1_AiristaListener" nlsid="30035" interface="1"><exportitem type="listener" name="AZZ1_AiristaListener" nlsid="30035">
+<Listener version="-943120879">
+					<TCP enable_staging_copy="false" logEnabled="false" maxConnections="100" maxMessageSize="2" msgTimeout="60" name="AZZ1_AiristaListener" port="4001" reply="true" termination="0x0a" type="TCP">
+						<RequestFormat>
+							<ASCII arrayDelim="|" dataDelim="," encoding="UTF-8" eventOffset="0"/>
+						</RequestFormat>
+						<AllowedAddresses>
+							<Allow address="10.0.0.0/32"/>
+						</AllowedAddresses>
+					</TCP>
+				</Listener></exportitem></exportcontent>
+
+<exportcontent type="listenerevent" name="AWE1_AiristaWECZone" nlsid="30036" interface="1"><exportitem type="listenerevent" name="AWE1_AiristaWECZone" nlsid="30036">
+
+<ListenerEventDef id="AWE1_AiristaWECZone" version="1174446574">
+	<Listener id="AZZ1_AiristaListener" type="TCP"/>
+	<NotificationMap>
+		<Variable count="1" length="32" name="VinNo" type="STRING"/>
+		<Variable count="1" length="10" name="Model" type="STRING"/>
+		<Variable count="1" name="deviceId" type="INT8"/>
+		<Variable count="1" name="itemId" type="INT8"/>
+		<Variable count="1" length="3" name="deptLine" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+		<Variable count="1" length="32" name="psuName" type="STRING"/>
+		<Variable count="1" length="64" name="ipAddress" type="STRING"/>
+		<Variable count="1" length="255" name="Args" type="STRING"/>
+		<Variable count="1" name="typeId" type="INT8"/>
+		<Variable count="1" name="sequenceNo" type="INT8"/>
+		<Variable count="1" length="32" name="type" type="STRING"/>
+	</NotificationMap>
+	<CompletionMap>
+		<Variable count="1" length="32" name="Result" type="STRING"/>
+		<Variable count="1" name="transactionId" type="INT8"/>
+	</CompletionMap>
+	<Mapping>
+		<InboundMap outputformat="A">
+			<Item name="transactionId" offset="1"/>
+			<Item name="deptLine" offset="2"/>
+			<Item name="VinNo" offset="3"/>
+			<Item name="Model" offset="4"/>
+			<Item name="typeId" offset="5"/>
+			<Item name="sequenceNo" offset="6"/>
+			<Item name="deviceId" offset="7"/>
+			<Item name="itemId" offset="8"/>
+			<Item name="psuName" offset="9"/>
+			<Item name="ipAddress" offset="10"/>
+			<Item name="Args" offset="11"/>
+			<Item name="type" offset="12"/>
+		</InboundMap>
+		<OutboundMap arrayDelim="|" delimiter="," outputformat="A"/>
+	</Mapping>
+</ListenerEventDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_BroadcastService_Broadcast" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_BroadcastService_Broadcast" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1700600974"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_BroadcastService_Broadcast" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/BroadcastService/broadcast" id="GALC_BroadcastService_Broadcast" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastByProcessPointMap" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastByProcessPointMap" nlsid="30033">
+
+<TransactionDef id="GALC_BroadcastByProcessPointMap" version="-537664207" version_mismatch="pass">
+	<Transport id="GALC_BroadcastService_Broadcast" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="ProcessPointID" type="STRING"/>
+		<Variable count="1" length="32" name="ProductID" type="STRING"/>
+	</InputMap>
+	<OutputMap/>
+	<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+	<Mapping lineDelimiter="crlf" outputformat="F">
+		<Item name="$CONSTANT" type="string" value="Ww0KCXsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+		<Item name="ProcessPointID"/>
+		<Item name="$CONSTANT" type="string" value="In0sDQoJeyJqYXZhLmxhbmcuU3RyaW5nIjoi"/>
+		<Item name="ProductID"/>
+		<Item name="$CONSTANT" type="string" value="In0NCl0="/>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Print" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Print" nlsid="30031">
+<Trigger name="Broadcast_Print" project="AWE1_GPACV_CZONE" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Listener|1~3~13~2~5~4~8~12~9~10~7~6~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="200"/>
+		<Node id="1" type="3" x="50" y="300"/>
+		<Node id="3" type="3" x="50" y="500"/>
+		<Node id="13" type="3" x="325" y="550"/>
+		<Node id="2" type="3" x="50" y="400"/>
+		<Node id="5" type="3" x="50" y="700"/>
+		<Node id="4" type="3" x="50" y="600"/>
+		<Node id="8" type="3" x="50" y="1000"/>
+		<Node id="12" type="3" x="325" y="450"/>
+		<Node id="9" type="3" x="-200" y="550"/>
+		<Node id="10" type="3" x="-200" y="675"/>
+		<Node id="7" type="3" x="50" y="900"/>
+		<Node id="6" type="3" x="50" y="800"/>
+		<Node errorActionId="11" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<RoutedErrors value="1.1|3.2|2.1|5.1|4.1|9.1|7.1|6.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE1_AiristaWECZone" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AWE1C01PCZONE"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AWE1C01PCZONE"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AWE1_GPACV_CZONE_PLC"/>
+  <VariableInfo name="plcDataAck" type="STRING" length="32" options="3" default="CIO[4000,0]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="CIO[3700,0]"/>
+  <VariableInfo name="plcProductID" type="STRING" length="32" options="3" default="DM[1000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataAck"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcAck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcDataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="dataReady == 0 &amp;&amp; dataAck == 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductID"/>
+    <EventVariable logical_name="Value" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastByProcessPointMap"/>
+    <Property name="version" value="-537664207"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointID" name="ProcessPointId"/>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="7" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(ProductID) received but PLC bits not in the correct state DataReady $(dataReady) Ack $(dataAck)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductID" name="ProductID"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="User APA2_PAON_VinFeed"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Print_Only" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Print_Only" nlsid="30031">
+<Trigger name="Broadcast_Print_Only" project="AWE1_GPACV_CZONE" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Listener|6~8~12~13~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="275"/>
+		<Node id="13" type="3" x="325" y="550"/>
+		<Node id="8" type="3" x="50" y="500"/>
+		<Node id="12" type="3" x="325" y="450"/>
+		<Node id="6" type="3" x="50" y="375"/>
+		<Node errorActionId="11" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<RoutedErrors value="6.1|"/></BuildInfo>
+ <Event type="LISTENER"><listener id="AWE1_AiristaWECZone" version="1174446574"/>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AWE1C01PCZONE"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AWE1C01PCZONE"/>
+ </StaticVariables>
+ <Actions first_action="6">
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastByProcessPointMap"/>
+    <Property name="version" value="-537664207"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointID" name="ProcessPointId"/>
+    <EventVariable logical_name="ProductID" name="VinNo"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="User APA2_PAON_VinFeed"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Test1" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Test1" nlsid="30031">
+<Trigger name="Broadcast_Test1" project="AWE1_GPACV_CZONE" max_pending="1" reporting="on">
+ <Context value="On-Demand|1~3~11~2~5~4~6~10~7~8~21~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="200"/>
+					<Node id="1" type="3" x="50" y="300"/>
+					<Node id="3" type="3" x="50" y="500"/>
+					<Node id="11" type="3" x="325" y="550"/>
+					<Node id="2" type="3" x="50" y="400"/>
+					<Node id="5" type="3" x="50" y="700"/>
+					<Node id="4" type="3" x="50" y="600"/>
+					<Node id="6" type="3" x="50" y="950"/>
+					<Node id="10" type="3" x="325" y="450"/>
+					<Node id="7" type="3" x="-200" y="550"/>
+					<Node id="8" type="3" x="-200" y="675"/>
+					<Node id="21" type="3" x="50" y="825"/>
+					<Node errorActionId="9" errorStartIndex="10" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+					<RoutedErrors value="1.1|3.2|2.1|5.1|4.1|7.1|21.1|"/></BuildInfo>
+ <Event type="ONDEMAND">
+  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AWE1C01P0RFID"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AWE1C01P0RFID"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AWE1_GPACV_CZONE_PLC"/>
+  <VariableInfo name="plcDataAck" type="STRING" length="32" options="3" default="CIO[4000,0]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="CIO[3700,0]"/>
+  <VariableInfo name="plcProductID" type="STRING" length="32" options="3" default="DM[1000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataAck"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcAck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcDataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="dataReady == 0 &amp;&amp; dataAck == 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="7"/>
+    <Route result="2" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductID"/>
+    <ConstantVariable logical_name="Value" value="1HGCV1F45KA140624" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="7" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(ProductID) received but PLC bits not in the correct state DataReady $(dataReady) Ack $(dataAck)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductID" name="ProductID"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="10" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="User APA2_PAON_VinFeed"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="21" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Test_Print" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_GPACV_CZONE/Broadcast_Test_Print" nlsid="30031">
+<Trigger name="Broadcast_Test_Print" project="AWE1_GPACV_CZONE" max_pending="1" reporting="on">
+ <Context value="On-Demand|1~3~13~2~5~4~8~12~9~10~7~6~|user"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="200"/>
+		<Node id="1" type="3" x="50" y="300"/>
+		<Node id="2" type="3" x="50" y="400"/>
+		<Node id="3" type="3" x="50" y="500"/>
+		<Node id="4" type="3" x="50" y="600"/>
+		<Node id="5" type="3" x="50" y="700"/>
+		<Node id="6" type="3" x="50" y="800"/>
+		<Node id="7" type="3" x="50" y="900"/>
+		<Node id="8" type="3" x="50" y="1000"/>
+		<Node id="9" type="3" x="-200" y="550"/>
+		<Node id="10" type="3" x="-200" y="675"/>
+		<Node errorActionId="11" errorStartIndex="12" id="600000000" text="Error Handling" type="4" x="325" y="375"/>
+		<Node id="12" type="3" x="325" y="450"/>
+		<Node id="13" type="3" x="325" y="550"/>
+		<RoutedErrors value="1.1|3.2|2.1|5.1|4.1|9.1|7.1|6.1|"/></BuildInfo>
+ <Event type="ONDEMAND">
+  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="plcAck" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="plcVin" type="STRING" length="32" options="3"/>
+  <VariableInfo name="plcDataReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="ProductID" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AWE1C01P0RFID"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AWE1C01P0RFID"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AWE1_GPACV_CZONE_PLC"/>
+  <VariableInfo name="plcDataAck" type="STRING" length="32" options="3" default="CIO[4000,0]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="CIO[3700,0]"/>
+  <VariableInfo name="plcProductID" type="STRING" length="32" options="3" default="DM[1000]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataAck"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcAck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="plcDataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="dataReady == 0 &amp;&amp; dataAck == 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="5" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="18"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProductID"/>
+    <ConstantVariable logical_name="Value" value="5J6RW1H88KA012345" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="6" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastByProcessPointMap"/>
+    <Property name="version" value="-195142802"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="ProcessPointID" value="AWE1C01PCZONE" delim=""/>
+    <ConstantVariable logical_name="ProductID" value="5J6RW1H88KA012345" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="12"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="7" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="9" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="User Trigger"/>
+    <Property name="msg" value="$(ProductID) received but PLC bits not in the correct state DataReady $(dataReady) Ack $(dataAck)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductID" name="ProductID"/>
+    <LocalVariable logical_name="dataReady" name="plcDataReady"/>
+    <LocalVariable logical_name="dataAck" name="plcAck"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="12" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="FATAL"/>
+    <Property name="component" value="User APA2_PAON_VinFeed"/>
+    <Property name="msg" value="$(Trigger) - Unexpecter Error ($(ErrorCode)) - $(ErrorMessage))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AWE1_GPACV_CZONE" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AWE1_GPACV_CZONE" nlsid="30032">AWE1_GPACV_CZONE</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AWE1_GPACV_CZONE" type="project">
+		<reference name="AWE1_GPACV_CZONE/Broadcast_Print" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE1_AiristaWECZone" type="listenerevent">
+				<reference name="AZZ1_AiristaListener" type="listener"/>
+			</reference>
+			<reference name="GALC_BroadcastByProcessPointMap" type="transaction">
+				<reference name="GALC_BroadcastService_Broadcast" type="transport"/>
+			</reference>
+		</reference>
+		<reference name="AWE1_GPACV_CZONE/Broadcast_Print_Only" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="LISTENER" type="eventtype"/>
+			<reference name="AWE1_AiristaWECZone" type="listenerevent"/>
+			<reference name="GALC_BroadcastByProcessPointMap" type="transaction"/>
+		</reference>
+		<reference name="AWE1_GPACV_CZONE/Broadcast_Test1" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="ONDEMAND" type="eventtype"/>
+		</reference>
+		<reference name="AWE1_GPACV_CZONE/Broadcast_Test_Print" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="ONDEMAND" type="eventtype"/>
+			<reference name="GALC_BroadcastByProcessPointMap" type="transaction"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

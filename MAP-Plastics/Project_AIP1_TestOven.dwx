@@ -1,0 +1,3224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AIP1_TestOven2_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AIP1_TestOven2_PLC" nlsid="30030">
+<DeviceDefinition name="AIP1_TestOven2_PLC" type="46" type_name="CompactLogix CPU" state="6" options="10296"><Properties><Property name="use_linkid" value="false"/><Property name="per_var_security" value="true"/><Property name="stringsasstructs" value="false"/><Property name="ip_address" value="10.39.1.81"/><Property name="enum_alias" value="false"/><Property name="enum_program" value="false"/><Property name="enum_controller" value="true"/><Property name="pendingpkts" value="20"/><Property name="create_json" value="false"/><Property name="timeout" value="5000"/><Property name="keepalive" value="60"/><Property name="parse_strings" value="false"/><Property name="port" value="44818"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP" version="-759826225">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AIP1_TestOven_DataCollection_New" nlsid="30033" interface="1"><exportitem type="transaction" name="AIP1_TestOven_DataCollection_New" nlsid="30033">
+
+<TransactionDef id="AIP1_TestOven_DataCollection_New" version="1300690609" version_mismatch="pass">
+	<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="TESTOVEN_OVENEXITTIME_SN" type="STRING"/>
+		<Variable count="1" length="32" name="TESTOVEN_OVENEXITTIME_STATUS" type="STRING"/>
+		<Variable count="1" length="32" name="ASSOCIATE_NO" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_TEMPERATURE_VALUE" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_TEMPERATURE_RESULT" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_SET_TEMPERATURE_VALUE" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_SET_TEMPERATURE_RESULT" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_CONVEYOR_SPEED_VALUE" type="STRING"/>
+		<Variable count="1" length="32" name="CP_OVEN_CONVEYOR_SPEED_RESULT" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+	</OutputMap>
+	<Response outputformat="JSON">
+		<JSONInfo rawJson="ew0KICAgICAgImNvbS5ob25kYS5nYWxjLmRhdGEuRGVmYXVsdERhdGFDb250YWluZXIiOiB7DQogICAgICAiQ0xJRU5UX0lEIjoiIiwNCiAgICAgICJQUk9DRVNTX1BPSU5UX0lEIjoiIg0KICAgICAgfQ0KfQ==">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Structure name="com-honda-galc-data-DefaultDataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+					</Structure>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Response>
+	<Mapping outputformat="JSON">
+		<JSONInfo rawJson="ICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiIsDQogICAgICAiQVNTT0NJQVRFX05PIjoiIiwNCiAgICAgIA0KICAgICAgIlRFU1RPVkVOX09WRU5FWElUVElNRS5TTiI6IiIsDQogICAgICAiVEVTVE9WRU5fT1ZFTkVYSVRUSU1FLlNUQVRVUyI6IiIsDQogICAgICANCiAgICAgICJDUF9PVkVOX1RFTVBFUkFUVVJFX1ZBTFVFIjoiIiwNCiAgICAgICJDUF9PVkVOX1RFTVBFUkFUVVJFX1JFU1VMVCI6IiIsDQogICAgICANCiAgICAgICJDUF9PVkVOX1NFVF9URU1QRVJBVFVSRV9WQUxVRSI6IiIsDQogICAgICAiQ1BfT1ZFTl9TRVRfVEVNUEVSQVRVUkVfUkVTVUxUIjoiIiwNCiAgICAgIA0KICAgICAgIkNQX09WRU5fQ09OVkVZT1JfU1BFRURfVkFMVUUiOiIiLA0KICAgICAgIkNQX09WRU5fQ09OVkVZT1JfU1BFRURfUkVTVUxUIjoiIg0KICAgICAgDQogICAgICANCiAgICAgIH0NCiAgICB9">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Structure name="com-honda-galc-data-DefaultDataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+						<Parameter dwType="16" name="ASSOCIATE_NO" parmname="ASSOCIATE_NO" type="STRING"/>
+						<Parameter dwType="16" name="TESTOVEN_OVENEXITTIME_SN" parmname="TESTOVEN_OVENEXITTIME.SN" type="STRING"/>
+						<Parameter dwType="16" name="TESTOVEN_OVENEXITTIME_STATUS" parmname="TESTOVEN_OVENEXITTIME.STATUS" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_TEMPERATURE_VALUE" parmname="CP_OVEN_TEMPERATURE_VALUE" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_TEMPERATURE_RESULT" parmname="CP_OVEN_TEMPERATURE_RESULT" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_SET_TEMPERATURE_VALUE" parmname="CP_OVEN_SET_TEMPERATURE_VALUE" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_SET_TEMPERATURE_RESULT" parmname="CP_OVEN_SET_TEMPERATURE_RESULT" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_CONVEYOR_SPEED_VALUE" parmname="CP_OVEN_CONVEYOR_SPEED_VALUE" type="STRING"/>
+						<Parameter dwType="16" name="CP_OVEN_CONVEYOR_SPEED_RESULT" parmname="CP_OVEN_CONVEYOR_SPEED_RESULT" type="STRING"/>
+					</Structure>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute_woSF" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute_woSF" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DataCollectionService_Execute_woSF" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP" version="1865781982">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute_woSF" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AIP1_TestOven_PreCheck" nlsid="30033" interface="1"><exportitem type="transaction" name="AIP1_TestOven_PreCheck" nlsid="30033">
+
+										<TransactionDef id="AIP1_TestOven_PreCheck" version="236927821" version_mismatch="pass">
+										<Transport id="GALC_DataCollectionService_Execute_woSF" type="HTTP"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="16" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="17" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_TYPE" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" name="DEFECT_STATUS" type="BOOL"/>
+										<Variable count="1" name="PRODUCT_EXIST_CHECK" type="BOOL"/>
+										<Variable count="1" name="HOLD_STATUS" type="BOOL"/>
+										<Variable count="1" name="REQUIRED_PART" type="BOOL"/>
+										<Variable count="1" name="CHECK_RESULT" type="BOOL"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" name="SCRAP_STATUS" type="BOOL"/>
+										<Variable count="1" length="32" name="ERROR_CODE" type="STRING"/>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="ERROR_MESSAGE" type="STRING"/>
+										<Variable count="1" name="AT_CHECK" type="BOOL"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="eyAgDQogICJTQ1JBUF9TVEFUVVMiOiAiIiwNCiAgIkRFRkVDVF9TVEFUVVMiOiAiIiwNCiAgIkVSUk9SX0NPREUiOiAiIiwNCiAgIkNMSUVOVF9JRCI6ICIiLA0KICAiUFJPRFVDVF9FWElTVF9DSEVDSyI6ICIiLCAgDQogICJFUlJPUl9NRVNTQUdFIjogIiIsDQogICJIT0xEX1NUQVRVUyI6ICIiLA0KICAiUkVRVUlSRURfUEFSVCI6ICIiLA0KICAiQ0hFQ0tfUkVTVUxUIjogIiIsDQogICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICJBVF9DSEVDSyI6ICIiDQp9">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="SCRAP_STATUS" parmname="SCRAP_STATUS" type="STRING"/>
+										<Parameter dwType="16" name="DEFECT_STATUS" parmname="DEFECT_STATUS" type="STRING"/>
+										<Parameter dwType="16" name="ERROR_CODE" parmname="ERROR_CODE" type="STRING"/>
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_EXIST_CHECK" parmname="PRODUCT_EXIST_CHECK" type="STRING"/>
+										<Parameter dwType="16" name="ERROR_MESSAGE" parmname="ERROR_MESSAGE" type="STRING"/>
+										<Parameter dwType="16" name="HOLD_STATUS" parmname="HOLD_STATUS" type="STRING"/>
+										<Parameter dwType="16" name="REQUIRED_PART" parmname="REQUIRED_PART" type="STRING"/>
+										<Parameter dwType="16" name="CHECK_RESULT" parmname="CHECK_RESULT" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="AT_CHECK" parmname="AT_CHECK" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9UWVBFIjoiIg0KIA0KICAgICAgfQ0KICAgIH0NCiAgXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_TYPE" parmname="PRODUCT_TYPE" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_CheckStatus" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_CheckStatus" nlsid="30031">
+<Trigger name="TestOven_CheckStatus" project="AIP1_TestOven" max_pending="20" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="SubTrigger|32~3~4~9~10~13~15~16~2~19~20~18~24~25~28~29~30~31~33~34~35~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-775" y="-475"/>
+										<Node id="32" type="3" x="-775" y="-400"/>
+										<Node id="3" type="3" x="-925" y="-225"/>
+										<Node id="4" type="3" x="-925" y="-150"/>
+										<Node id="9" type="3" x="-950" y="-375"/>
+										<Node id="10" type="3" x="-1075" y="-225"/>
+										<Node id="13" type="3" x="-1075" y="-150"/>
+										<Node id="15" type="3" x="-550" y="-325"/>
+										<Node id="16" type="3" x="-550" y="-175"/>
+										<Node id="2" type="3" x="-775" y="-325"/>
+										<Node id="19" type="3" x="-775" y="-75"/>
+										<Node id="20" type="3" x="-775" y="-150"/>
+										<Node id="18" type="3" x="-775" y="-225"/>
+										<Node id="24" type="3" x="-925" y="-75"/>
+										<Node id="25" type="3" x="-1075" y="-75"/>
+										<Node id="28" type="3" x="-925" y="150"/>
+										<Node id="29" type="3" x="-925" y="75"/>
+										<Node id="30" type="3" x="-1275" y="-100"/>
+										<Node id="31" type="3" x="-550" y="-250"/>
+										<Node id="33" type="3" x="-950" y="-300"/>
+										<Node id="34" type="3" x="-925" y="0"/>
+										<Node id="35" type="3" x="-1075" y="0"/>
+										<Node errorActionId="17" errorStartIndex="15" id="600000000" text="Error Handling" type="4" x="-550" y="-400"/>
+										<RoutedErrors value="32.1|3.2|4.2|9.1|10.1|13.1|2.2|20.1|18.2|24.2|25.1|29.1|34.2|35.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;20&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;ClientId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;ProcessPointId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductType&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo desc=&quot;Current Status of ProductId&quot; name=&quot;Status&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductExist" type="BOOL" options="3"/>
+  <VariableInfo name="HoldStatus" type="BOOL" options="3"/>
+  <VariableInfo name="RequiredPartStatus" type="BOOL" options="3"/>
+  <VariableInfo name="DefectStatus" type="BOOL" options="3"/>
+  <VariableInfo name="ScrapStatus" type="BOOL" options="3"/>
+  <VariableInfo name="AtCheck" type="BOOL" options="3"/>
+  <VariableInfo name="OverallCheckResult" type="BOOL" options="3"/>
+  <VariableInfo name="ErrorCode" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ErrorMessage" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="status_PartOnHold" type="INT1" options="3" default="2"/>
+  <VariableInfo name="Status_GoodPart" type="INT1" options="3" default="0"/>
+  <VariableInfo name="Status_InvalidTrackingStatus" type="INT1" options="3" default="5"/>
+  <VariableInfo name="Status_MissingParts" type="INT1" options="3" default="8"/>
+  <VariableInfo name="Status_Error" type="INT1" options="3" default="9"/>
+  <VariableInfo name="Status_BadCureTime" type="INT1" options="3" default="7"/>
+  <VariableInfo name="Status_PartScrapped" type="INT1" options="3" default="1"/>
+  <VariableInfo name="Status_ProductIdNotFound" type="INT1" options="3" default="4"/>
+ </StaticVariables>
+ <Actions first_action="32">
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="productExists"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productExists" name="ProductExist"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="9"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="productIsScrapped"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productIsScrapped" name="ScrapStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="4" disabled="false">
+   <Properties>
+    <Property name="expression" value="productOnHold"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productOnHold" name="HoldStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="9" disabled="false">
+   <Comment>CFNldCB0byBzdGF0dXMgNCAtIFByb2R1Y3QgSWQgZG9lcyBub3QgZXhpc3Q=</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_ProductIdNotFound"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Comment>CFBhcnQgd2FzIHByZXZpb3VzbHkgc2NyYXBwZWQ=</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_PartScrapped"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="13" disabled="false">
+   <Comment>CExhc3QgUHJvY2VzcyBub3QgdmFsaWQ=</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="status_PartOnHold"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="31"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="18" disabled="false">
+   <Properties>
+    <Property name="expression" value="checkresult"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="checkresult" name="OverallCheckResult"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="3"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="19" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="20" disabled="false">
+   <Comment>CFBhcnQgaXMgZ29vZCwgc2V0IHN0YXR1cyB0byAw</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_GoodPart"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="24" disabled="false">
+   <Properties>
+    <Property name="expression" value="requiredpartsstatus"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="requiredpartsstatus" name="RequiredPartStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="25"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="25" disabled="false">
+   <Comment>CExhc3QgUHJvY2VzcyBub3QgdmFsaWQ=</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_MissingParts"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="28" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="29" disabled="false">
+   <Comment>CFBhcnQgaXMgZ29vZCwgc2V0IHN0YXR1cyB0byAw</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_Error"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="30" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="31" disabled="false">
+   <Comment>CFBhcnQgaXMgZ29vZCwgc2V0IHN0YXR1cyB0byAw</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_Error"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="32" disabled="false">
+   <Properties>
+    <Property name="name" value="AIP1_TestOven_PreCheck"/>
+    <Property name="version" value="236927821"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <EventVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <EventVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <EventVariable logical_name="PRODUCT_TYPE" name="ProductType"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="DEFECT_STATUS" name="DefectStatus"/>
+    <LocalVariable logical_name="PRODUCT_EXIST_CHECK" name="ProductExist"/>
+    <LocalVariable logical_name="HOLD_STATUS" name="HoldStatus"/>
+    <LocalVariable logical_name="REQUIRED_PART" name="RequiredPartStatus"/>
+    <LocalVariable logical_name="CHECK_RESULT" name="OverallCheckResult"/>
+    <LocalVariable logical_name="SCRAP_STATUS" name="ScrapStatus"/>
+    <LocalVariable logical_name="ERROR_CODE" name="ErrorCode"/>
+    <LocalVariable logical_name="ERROR_MESSAGE" name="ErrorMessage"/>
+    <LocalVariable logical_name="AT_CHECK" name="AtCheck"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="33" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="34" disabled="false">
+   <Properties>
+    <Property name="expression" value="atcheck"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="atcheck" name="AtCheck"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="35" disabled="false">
+   <Comment>CExhc3QgUHJvY2VzcyBub3QgdmFsaWQ=</Comment>
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Status_InvalidTrackingStatus"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="Status"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_TrackingService_track" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_TrackingService_track" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_TrackingService_track" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="27286114">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/TrackingService/track" id="GALC_TrackingService_track" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_UpdateTracking" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_UpdateTracking" nlsid="30033">
+
+										<TransactionDef id="GALC_UpdateTracking" version="1904849380" version_mismatch="pass">
+										<Transport id="GALC_TrackingService_track" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="17" name="ProductId" type="STRING"/>
+										<Variable count="1" length="16" name="ProcessPointId" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response outputformat="JSON">
+										<JSONInfo>
+										<JSONRequest>
+										<Structure name="JSON_Object"/>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="DQogIHsiY29tLmhvbmRhLmdhbGMuZW50aXR5LnByb2R1Y3QuTWJwblByb2R1Y3QiOiB7DQogICAgICAicHJvZHVjdElkIjoiIn0sDQogICJqYXZhLmxhbmcuU3RyaW5nIjogIiJ9DQo=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-entity-product-MbpnProduct">
+										<Parameter dwType="16" name="ProductId" parmname="productId" type="STRING"/>
+										</Structure>
+										<Parameter dwType="16" name="ProcessPointId" parmname="java.lang.String" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/UpdateMAPTracking" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/UpdateMAPTracking" nlsid="30031">
+<Trigger name="UpdateMAPTracking" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~4~5~6~8~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-600" y="-350"/>
+										<Node id="1" type="3" x="-600" y="-275"/>
+										<Node id="2" type="3" x="-600" y="-200"/>
+										<Node id="4" type="3" x="-325" y="-200"/>
+										<Node id="5" type="3" x="-600" y="-125"/>
+										<Node id="6" type="3" x="-325" y="-100"/>
+										<Node id="8" type="3" x="-750" y="-250"/>
+										<Node errorActionId="7" errorStartIndex="4" id="600000000" text="Error Handling" type="4" x="-325" y="-300"/>
+										<RoutedErrors value="1.2|2.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;16&quot; name=&quot;ProcessPointId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;17&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;2&quot; name=&quot;TrackingStatus&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Update GALC Status&quot; name=&quot;GalcUpdate&quot; options=&quot;7&quot; type=&quot;BOOL&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;2&quot; name=&quot;ProcLocCode&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="RowCount" type="INT1" options="3" default="0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PlantCode" type="STRING" length="32" options="3" default="A"/>
+  <VariableInfo name="AsmLine" type="STRING" length="32" options="3" default="1"/>
+  <VariableInfo name="ProcCatTyoe" type="STRING" length="2" options="3" default="SP"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="IF" id="1" disabled="false">
+   <Comment>CFVwZGF0ZSBHQUxDIHN0YXR1cyBpZiBzZXQgb24=</Comment>
+   <Properties>
+    <Property name="expression" value="UpdateGALCStatus"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="UpdateGALCStatus" name="GalcUpdate"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="8"/>
+    <Route result="2" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="2" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_UpdateTracking"/>
+    <Property name="version" value="1904849380"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <EventVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="4"/>
+    <Route result="2" goto="5"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="4" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="$(Trigger) - Error Updating Tracking for Product ($(ProductId)) to Process Point ($(ProcessPoint)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <EventVariable logical_name="ProcessPoint" name="ProcessPointId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="8" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven2_UIDProcessing" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven2_UIDProcessing" nlsid="30031">
+<Trigger name="TestOven2_UIDProcessing" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000" apply_to_subtrigger="true">
+ <Context value="Data|2~1~3~4~5~6~8~10~11~12~13~14~15~16~17~21~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-250" y="-250"/>
+		<Node id="2" type="3" x="-250" y="-175"/>
+		<Node id="1" type="3" x="-250" y="475"/>
+		<Node id="3" type="3" x="-250" y="-100"/>
+		<Node id="4" type="3" x="-500" y="0"/>
+		<Node id="5" type="3" x="-250" y="-25"/>
+		<Node id="6" type="3" x="-250" y="325"/>
+		<Node id="8" type="3" x="-250" y="400"/>
+		<Node id="10" type="3" x="225" y="150"/>
+		<Node id="11" type="3" x="225" y="-25"/>
+		<Node id="12" type="3" x="225" y="50"/>
+		<Node id="13" type="3" x="-500" y="-100"/>
+		<Node id="14" type="3" x="-250" y="250"/>
+		<Node id="15" type="3" x="-250" y="50"/>
+		<Node id="16" type="3" x="-250" y="125"/>
+		<Node id="17" type="3" x="-475" y="175"/>
+		<Node id="21" type="3" x="-475" y="250"/>
+		<Node errorActionId="22" errorStartIndex="11" id="600000000" text="Error Handling" type="4" x="225" y="-100"/>
+		<RoutedErrors value="2.1|3.2|5.1|6.1|8.1|13.1|14.1|15.1|16.2|17.1|21.1|"/></BuildInfo>
+ <Event overview_string="Variable: AIP1_TestOven2_PLC.GALC_Collect_RDY0&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AIP1_TestOven2_PLC" name="GALC_Collect_RDY0" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UIDReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="OvenExitTimeSn" type="STRING" length="32" options="3"/>
+  <VariableInfo name="OperatorId" type="STRING" length="10" options="3" default="GALCalgn"/>
+  <VariableInfo name="ProductStatus" type="INT2" options="3" default="99"/>
+  <VariableInfo name="UID" type="STRING" length="20" options="3"/>
+  <VariableInfo name="OvenTemperature" type="FLOAT4" length="32" options="3"/>
+  <VariableInfo name="OvenConveyorSpeed" type="FLOAT4" options="3"/>
+  <VariableInfo name="CompleteStatus" type="INT1" options="3"/>
+  <VariableInfo name="OvenSetTemperature" type="FLOAT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcValidationCompleteFlag" type="STRING" length="20" options="3" default="GALC_Collect_DN0"/>
+  <VariableInfo name="plcOperatorId" type="STRING" length="32" options="3" default="GALC_ASSOC"/>
+  <VariableInfo name="plcUid" type="STRING" length="20" options="3" default="GALC_Barcode"/>
+  <VariableInfo name="ProcessPointId_PreCheck" type="STRING" length="32" options="3" default="TSTOVEN_PRECHECK"/>
+  <VariableInfo name="plcUIDStatus" type="STRING" length="32" options="3" default="GALC_UID_Status0"/>
+  <VariableInfo name="ProductType" type="STRING" length="32" options="3" default="MBPN"/>
+  <VariableInfo name="ProcessLoc" type="STRING" length="2" options="3" default="35"/>
+  <VariableInfo name="plcUidReady" type="STRING" length="32" options="3" default="GALC_Collect_RDY0"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="16" options="3" default="AIP1PT1P00201"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="20" options="3" default="AIP1_TestOven2_PLC"/>
+  <VariableInfo name="plcUIDStatusReason" type="STRING" length="32" options="3" default="GALC_UID1_Status"/>
+  <VariableInfo name="plcOvenConveyorSpeed" type="STRING" length="32" options="3" default="GALC_Conv_SPD"/>
+  <VariableInfo name="ClientId_PreCheck" type="STRING" length="32" options="3" default="AIP1PT1D00101B"/>
+  <VariableInfo name="plcOvenSetTemperature" type="STRING" length="32" options="3" default="GALC_Oven_Temp_SV"/>
+  <VariableInfo name="TrackingStatus" type="STRING" length="2" options="3" default="A"/>
+  <VariableInfo name="ClientId_DataCollection" type="STRING" length="32" options="3" default="AIP1PT1D00201A"/>
+  <VariableInfo name="GoodResult" type="STRING" length="2" options="3" default="1"/>
+  <VariableInfo name="plcOvenTemperature" type="STRING" length="32" options="3" default="GALC_Oven_Temp_PV"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUidReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="UIDReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="UIDReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="UIDReady" name="UIDReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="5" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;Uid&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:82},&#13;&#10;    &quot;OvenTemperature&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;OvenSetTemperature&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;OvenConveyorSpeed&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;AssociateNo&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:82}&#13;&#10;    &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Uid Name" name="plcUid"/>
+    <StaticVariable logical_name="OvenTemperature Name" name="plcOvenTemperature"/>
+    <StaticVariable logical_name="OvenSetTemperature Name" name="plcOvenSetTemperature"/>
+    <StaticVariable logical_name="OvenConveyorSpeed Name" name="plcOvenConveyorSpeed"/>
+    <StaticVariable logical_name="AssociateNo Name" name="plcOperatorId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Uid" name="UID"/>
+    <LocalVariable logical_name="OvenTemperature" name="OvenTemperature"/>
+    <LocalVariable logical_name="OvenSetTemperature" name="OvenSetTemperature"/>
+    <LocalVariable logical_name="OvenConveyorSpeed" name="OvenConveyorSpeed"/>
+    <LocalVariable logical_name="AssociateNo" name="OperatorId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="6" disabled="false">
+   <Properties>
+    <Property name="project_name" value="AIP1_Utilities"/>
+    <Property name="trigger_name" value="UpdateMAPTracking"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="TrackingStatus" name="TrackingStatus"/>
+    <ConstantVariable logical_name="GalcUpdate" value="1"/>
+    <StaticVariable logical_name="ProcLocCode" name="ProcessLoc"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="8" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="11" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="14" disabled="false">
+   <Properties>
+    <Property name="name" value="AIP1_TestOven_DataCollection_New"/>
+    <Property name="version" value="1300690609"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId_DataCollection"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="UID"/>
+    <MacroVariable logical_name="TESTOVEN_OVENEXITTIME_SN" name="$EVENT_TIME"/>
+    <StaticVariable logical_name="TESTOVEN_OVENEXITTIME_STATUS" name="GoodResult"/>
+    <LocalVariable logical_name="ASSOCIATE_NO" name="OperatorId"/>
+    <LocalVariable logical_name="CP_OVEN_TEMPERATURE_VALUE" name="OvenTemperature"/>
+    <StaticVariable logical_name="CP_OVEN_TEMPERATURE_RESULT" name="GoodResult"/>
+    <LocalVariable logical_name="CP_OVEN_SET_TEMPERATURE_VALUE" name="OvenSetTemperature"/>
+    <StaticVariable logical_name="CP_OVEN_SET_TEMPERATURE_RESULT" name="GoodResult"/>
+    <LocalVariable logical_name="CP_OVEN_CONVEYOR_SPEED_VALUE" name="OvenConveyorSpeed"/>
+    <StaticVariable logical_name="CP_OVEN_CONVEYOR_SPEED_RESULT" name="GoodResult"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="15" disabled="false">
+   <Properties>
+    <Property name="project_name" value="== Current Project =="/>
+    <Property name="trigger_name" value="TestOven_CheckStatus"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="ClientId" name="ClientId_PreCheck"/>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId_PreCheck"/>
+    <StaticVariable logical_name="ProductType" name="ProductType"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Status" name="ProductStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="16" disabled="false">
+   <Properties>
+    <Property name="expression" value="productstatus==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productstatus" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="17" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatus"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="21" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatusReason"/>
+    <LocalVariable logical_name="Value" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOvenHandScan_UIDProcessing" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOvenHandScan_UIDProcessing" nlsid="30031">
+<Trigger name="TestOvenHandScan_UIDProcessing" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000" apply_to_subtrigger="true">
+ <Context value="Data|2~1~3~4~5~6~8~10~11~12~13~14~15~16~17~21~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-250" y="-250"/>
+		<Node id="2" type="3" x="-250" y="-175"/>
+		<Node id="1" type="3" x="-250" y="475"/>
+		<Node id="3" type="3" x="-250" y="-100"/>
+		<Node id="4" type="3" x="-500" y="0"/>
+		<Node id="5" type="3" x="-250" y="-25"/>
+		<Node id="6" type="3" x="-250" y="325"/>
+		<Node id="8" type="3" x="-250" y="400"/>
+		<Node id="10" type="3" x="225" y="150"/>
+		<Node id="11" type="3" x="225" y="-25"/>
+		<Node id="12" type="3" x="225" y="50"/>
+		<Node id="13" type="3" x="-500" y="-100"/>
+		<Node id="14" type="3" x="-250" y="250"/>
+		<Node id="15" type="3" x="-250" y="50"/>
+		<Node id="16" type="3" x="-250" y="125"/>
+		<Node id="17" type="3" x="-475" y="175"/>
+		<Node id="21" type="3" x="-475" y="250"/>
+		<Node errorActionId="22" errorStartIndex="11" id="600000000" text="Error Handling" type="4" x="225" y="-100"/>
+		<RoutedErrors value="2.1|3.2|5.1|6.1|8.1|13.1|14.1|15.1|16.2|17.1|21.1|"/></BuildInfo>
+ <Event overview_string="Variable: AIP1_TestOven2_PLC.GALC_Collect_RDY1&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AIP1_TestOven2_PLC" name="GALC_Collect_RDY1" qos="3" type="BOOL"/>
+			<Condition deadband="0" fire_on_start="true" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UIDReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="OvenExitTimeSn" type="STRING" length="32" options="3"/>
+  <VariableInfo name="OperatorId" type="STRING" length="10" options="3" default="GALCalgn"/>
+  <VariableInfo name="ProductStatus" type="INT2" options="3" default="99"/>
+  <VariableInfo name="UID" type="STRING" length="20" options="3"/>
+  <VariableInfo name="OvenTemperature" type="FLOAT4" length="32" options="3"/>
+  <VariableInfo name="OvenConveyorSpeed" type="FLOAT4" options="3"/>
+  <VariableInfo name="CompleteStatus" type="INT1" options="3"/>
+  <VariableInfo name="OvenSetTemperature" type="FLOAT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcValidationCompleteFlag" type="STRING" length="20" options="3" default="GALC_Collect_DN1"/>
+  <VariableInfo name="plcOperatorId" type="STRING" length="32" options="3" default="GALC_ASSOC"/>
+  <VariableInfo name="plcUid" type="STRING" length="21" options="3" default="GALC_Barcode_HandScan"/>
+  <VariableInfo name="ProcessPointId_PreCheck" type="STRING" length="32" options="3" default="TSTOVEN_PRECHECK"/>
+  <VariableInfo name="plcUIDStatus" type="STRING" length="32" options="3" default="GALC_UID_Status1"/>
+  <VariableInfo name="ProductType" type="STRING" length="32" options="3" default="MBPN"/>
+  <VariableInfo name="ProcessLoc" type="STRING" length="2" options="3" default="35"/>
+  <VariableInfo name="plcUidReady" type="STRING" length="32" options="3" default="GALC_Collect_RDY1"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="16" options="3" default="AIP1PT1P00201"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="20" options="3" default="AIP1_TestOven2_PLC"/>
+  <VariableInfo name="plcUIDStatusReason" type="STRING" length="32" options="3" default="GALC_UID1_Status"/>
+  <VariableInfo name="plcOvenConveyorSpeed" type="STRING" length="32" options="3" default="GALC_Conv_SPD"/>
+  <VariableInfo name="ClientId_PreCheck" type="STRING" length="32" options="3" default="AIP1PT1D00101B"/>
+  <VariableInfo name="plcOvenSetTemperature" type="STRING" length="32" options="3" default="GALC_Oven_Temp_SV"/>
+  <VariableInfo name="TrackingStatus" type="STRING" length="2" options="3" default="A"/>
+  <VariableInfo name="ClientId_DataCollection" type="STRING" length="32" options="3" default="AIP1PT1D00201A"/>
+  <VariableInfo name="GoodResult" type="STRING" length="2" options="3" default="1"/>
+  <VariableInfo name="plcOvenTemperature" type="STRING" length="32" options="3" default="GALC_Oven_Temp_PV"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUidReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="UIDReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="UIDReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="UIDReady" name="UIDReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="5" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;Uid&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:82},&#13;&#10;    &quot;OvenTemperature&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;OvenSetTemperature&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;OvenConveyorSpeed&quot;:{&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;AssociateNo&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:82}&#13;&#10;    &#13;&#10;   }"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Uid Name" name="plcUid"/>
+    <StaticVariable logical_name="OvenTemperature Name" name="plcOvenTemperature"/>
+    <StaticVariable logical_name="OvenSetTemperature Name" name="plcOvenSetTemperature"/>
+    <StaticVariable logical_name="OvenConveyorSpeed Name" name="plcOvenConveyorSpeed"/>
+    <StaticVariable logical_name="AssociateNo Name" name="plcOperatorId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Uid" name="UID"/>
+    <LocalVariable logical_name="OvenTemperature" name="OvenTemperature"/>
+    <LocalVariable logical_name="OvenSetTemperature" name="OvenSetTemperature"/>
+    <LocalVariable logical_name="OvenConveyorSpeed" name="OvenConveyorSpeed"/>
+    <LocalVariable logical_name="AssociateNo" name="OperatorId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="6" disabled="false">
+   <Properties>
+    <Property name="project_name" value="AIP1_Utilities"/>
+    <Property name="trigger_name" value="UpdateMAPTracking"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="TrackingStatus" name="TrackingStatus"/>
+    <ConstantVariable logical_name="GalcUpdate" value="1"/>
+    <StaticVariable logical_name="ProcLocCode" name="ProcessLoc"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="8" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="11" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="14" disabled="false">
+   <Properties>
+    <Property name="name" value="AIP1_TestOven_DataCollection_New"/>
+    <Property name="version" value="1300690609"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId_DataCollection"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="UID"/>
+    <MacroVariable logical_name="TESTOVEN_OVENEXITTIME_SN" name="$EVENT_TIME"/>
+    <StaticVariable logical_name="TESTOVEN_OVENEXITTIME_STATUS" name="GoodResult"/>
+    <LocalVariable logical_name="ASSOCIATE_NO" name="OperatorId"/>
+    <LocalVariable logical_name="CP_OVEN_TEMPERATURE_VALUE" name="OvenTemperature"/>
+    <StaticVariable logical_name="CP_OVEN_TEMPERATURE_RESULT" name="GoodResult"/>
+    <LocalVariable logical_name="CP_OVEN_SET_TEMPERATURE_VALUE" name="OvenSetTemperature"/>
+    <StaticVariable logical_name="CP_OVEN_SET_TEMPERATURE_RESULT" name="GoodResult"/>
+    <LocalVariable logical_name="CP_OVEN_CONVEYOR_SPEED_VALUE" name="OvenConveyorSpeed"/>
+    <StaticVariable logical_name="CP_OVEN_CONVEYOR_SPEED_RESULT" name="GoodResult"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="15" disabled="false">
+   <Properties>
+    <Property name="project_name" value="== Current Project =="/>
+    <Property name="trigger_name" value="TestOven_CheckStatus"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="ClientId" name="ClientId_PreCheck"/>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId_PreCheck"/>
+    <StaticVariable logical_name="ProductType" name="ProductType"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Status" name="ProductStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="16" disabled="false">
+   <Properties>
+    <Property name="expression" value="productstatus==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productstatus" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="17" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatus"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="21" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatusReason"/>
+    <LocalVariable logical_name="Value" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AIP1_TESTOVEN_GOT" nlsid="30030" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="device" name="AIP1_TESTOVEN_GOT" nlsid="30030">
+<DeviceDefinition name="AIP1_TESTOVEN_GOT" type="161" type_name="GOT CPU" state="6" options="2104"><Properties><Property name="per_var_security" value="true"/><Property name="ip_address" value="10.39.2.83"/><Property name="protocol" value="UDP"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5021"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_GOT_NoScrap" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_GOT_NoScrap" nlsid="30031">
+<Trigger name="TestOven_GOT_NoScrap" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|11~5~7~8~1~12~13~4~17~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+										<Node id="11" type="3" x="-150" y="-100"/>
+										<Node id="5" type="3" x="-150" y="200"/>
+										<Node id="7" type="3" x="125" y="150"/>
+										<Node id="8" type="3" x="125" y="0"/>
+										<Node id="1" type="3" x="-150" y="50"/>
+										<Node id="12" type="3" x="-150" y="-25"/>
+										<Node id="13" type="3" x="-275" y="25"/>
+										<Node id="4" type="3" x="-150" y="125"/>
+										<Node id="17" type="3" x="125" y="75"/>
+										<Node errorActionId="16" errorStartIndex="8" id="600000000" text="Error Handling" type="4" x="125" y="-75"/>
+										<RoutedErrors value="11.1|1.1|12.2|4.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AIP1_TESTOVEN_GOT" name="M[1]" qos="3" type="BOOL"/>
+										<Condition deadband="0" fire_on_start="true" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="17" options="3"/>
+  <VariableInfo name="ScrapFlag" type="BOOL" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcScrap" type="STRING" length="32" options="3" default="M[1]"/>
+  <VariableInfo name="plcUID" type="STRING" length="32" options="3" default="D[20]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AIP1_TESTOVEN_GOT"/>
+  <VariableInfo name="ProcessLocation" type="INT2" length="32" options="3" default="40"/>
+ </StaticVariables>
+ <Actions first_action="11">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="20"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcScrap"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcScrap"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ScrapFlag"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="12" disabled="false">
+   <Properties>
+    <Property name="expression" value="ScrapFlag"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ScrapFlag" name="ScrapFlag"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="17" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcScrap"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductDao_findByKey" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductDao_findByKey" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1737751183"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_MbpnProductDao_findByKey" inactivity_time_out="0" initPoolSize="10" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductDao/findByKey" id="GALC_MbpnProductDao_findByKey" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_MbpnProductDao_findByKey" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_MbpnProductDao_findByKey" nlsid="30033">
+
+										<TransactionDef id="GALC_MbpnProductDao_findByKey" version="193024926" version_mismatch="pass">
+										<Transport id="GALC_MbpnProductDao_findByKey" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="20" name="ProductId" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="productId" type="STRING"/>
+										<Variable count="1" length="32" name="currentProductSpecCode" type="STRING"/>
+										<Variable count="1" length="32" name="currentOrderNo" type="STRING"/>
+										<Variable count="1" length="32" name="trackingSeq" type="STRING"/>
+										<Variable count="1" name="holdStatusId" type="INT4"/>
+										<Variable count="1" name="productStatusId" type="INT4"/>
+										<Variable count="1" length="32" name="containerId" type="STRING"/>
+										<Variable count="1" name="containerPos" type="INT4"/>
+										<Variable count="1" name="defectStatus" type="INT4"/>
+										<Variable count="1" length="32" name="cellZone" type="STRING"/>
+										<Variable count="1" length="32" name="product" type="STRING"/>
+										<Variable count="1" length="32" name="sn" type="STRING"/>
+										<Variable count="1" name="plan" type="INT4"/>
+										<Variable count="1" name="actual" type="INT4"/>
+										<Variable count="1" length="32" name="lastPassingProcessPointId" type="STRING"/>
+										<Variable count="1" length="32" name="trackingStatus" type="STRING"/>
+										<Variable count="1" length="32" name="prodLot" type="STRING"/>
+										<Variable count="1" length="32" name="createTimestamp" type="STRING"/>
+										<Variable count="1" length="32" name="updateTimestamp" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ICB7DQogICAgInByb2R1Y3RJZCI6ICIiLA0KICAgICJjdXJyZW50UHJvZHVjdFNwZWNDb2RlIjogIiIsDQogICAgImN1cnJlbnRPcmRlck5vIjogIiIsDQogICAgInRyYWNraW5nU2VxIjogIiIsDQogICAgImhvbGRTdGF0dXNJZCI6IDAsDQogICAgInByb2R1Y3RTdGF0dXNJZCI6IDAsDQogICAgImNvbnRhaW5lcklkIjoiIiwNCiAgICAiY29udGFpbmVyUG9zIjogMCwNCiAgICAiZGVmZWN0U3RhdHVzIjogMCwNCiAgICAiY2VsbFpvbmUiOiAiIiwNCiAgICAicHJvZHVjdCI6ICIiLA0KICAgICJzbiI6ICIiLA0KICAgICJwbGFuIjogMCwNCiAgICAiYWN0dWFsIjogMCwNCiAgICAibGFzdFBhc3NpbmdQcm9jZXNzUG9pbnRJZCI6ICIiLA0KICAgICJ0cmFja2luZ1N0YXR1cyI6ICIiLCAgICANCiAgICAicHJvZExvdCI6IHt9LA0KICAgICJvcGVyYXRpb25zIjogW3t9LHt9XSwNCiAgICAiY3JlYXRlVGltZXN0YW1wIjogIiIsDQogICAgInVwZGF0ZVRpbWVzdGFtcCI6ICIiDQogIH0=">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="productId" parmname="productId" type="STRING"/>
+										<Parameter dwType="16" name="currentProductSpecCode" parmname="currentProductSpecCode" type="STRING"/>
+										<Parameter dwType="16" name="currentOrderNo" parmname="currentOrderNo" type="STRING"/>
+										<Parameter dwType="16" name="trackingSeq" parmname="trackingSeq" type="STRING"/>
+										<Parameter dwType="3" name="holdStatusId" parmname="holdStatusId" type="INTEGER"/>
+										<Parameter dwType="3" name="productStatusId" parmname="productStatusId" type="INTEGER"/>
+										<Parameter dwType="16" name="containerId" parmname="containerId" type="STRING"/>
+										<Parameter dwType="3" name="containerPos" parmname="containerPos" type="INTEGER"/>
+										<Parameter dwType="3" name="defectStatus" parmname="defectStatus" type="INTEGER"/>
+										<Parameter dwType="16" name="cellZone" parmname="cellZone" type="STRING"/>
+										<Parameter dwType="16" name="product" parmname="product" type="STRING"/>
+										<Parameter dwType="16" name="sn" parmname="sn" type="STRING"/>
+										<Parameter dwType="3" name="plan" parmname="plan" type="INTEGER"/>
+										<Parameter dwType="3" name="actual" parmname="actual" type="INTEGER"/>
+										<Parameter dwType="16" name="lastPassingProcessPointId" parmname="lastPassingProcessPointId" type="STRING"/>
+										<Parameter dwType="16" name="trackingStatus" parmname="trackingStatus" type="STRING"/>
+										<Structure name="prodLot"/>
+										<Table name="operations" nbrInRows="1"/>
+										<Parameter dwType="16" name="createTimestamp" parmname="createTimestamp" type="STRING"/>
+										<Parameter dwType="16" name="updateTimestamp" parmname="updateTimestamp" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="DQogICAgeyJqYXZhLmxhbmcuU3RyaW5nIjoiIn0NCg==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="ProductId" parmname="java.lang.String" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										<HTTPRequest method="POST">
+										<Header/>
+										<Query/>
+										</HTTPRequest>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/GetLastProcessPoint" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/GetLastProcessPoint" nlsid="30031">
+<Trigger name="GetLastProcessPoint" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~4~5~6~7~9~10~12~14~15~17~19~21~23~24~25~27~28~29~30~31~32~33~34~35~36~37~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-150"/>
+										<Node id="1" type="3" x="-25" y="-75"/>
+										<Node id="2" type="3" x="-25" y="0"/>
+										<Node id="3" type="3" x="-25" y="75"/>
+										<Node id="4" type="3" x="-175" y="175"/>
+										<Node id="5" type="3" x="-175" y="100"/>
+										<Node id="6" type="3" x="-175" y="250"/>
+										<Node id="7" type="3" x="100" y="225"/>
+										<Node id="9" type="3" x="100" y="150"/>
+										<Node id="10" type="3" x="100" y="400"/>
+										<Node id="12" type="3" x="-25" y="400"/>
+										<Node id="14" type="3" x="-150" y="550"/>
+										<Node id="15" type="3" x="-150" y="400"/>
+										<Node id="17" type="3" x="-275" y="550"/>
+										<Node id="19" type="3" x="-275" y="400"/>
+										<Node id="21" type="3" x="-400" y="400"/>
+										<Node id="23" type="3" x="-525" y="400"/>
+										<Node id="24" type="3" x="-650" y="400"/>
+										<Node id="25" type="3" x="-175" y="700"/>
+										<Node id="27" type="3" x="-350" y="175"/>
+										<Node id="28" type="3" x="-350" y="100"/>
+										<Node id="29" type="3" x="-350" y="25"/>
+										<Node id="30" type="3" x="-350" y="-50"/>
+										<Node id="31" type="3" x="100" y="325"/>
+										<Node id="32" type="3" x="-25" y="325"/>
+										<Node id="33" type="3" x="-150" y="325"/>
+										<Node id="34" type="3" x="-275" y="325"/>
+										<Node id="35" type="3" x="-400" y="325"/>
+										<Node id="36" type="3" x="-525" y="325"/>
+										<Node id="37" type="3" x="-150" y="475"/>
+										<Node errorActionId="26" errorStartIndex="30" id="600000000" text="Error Handling" type="4" x="-350" y="-125"/>
+										<RoutedErrors value="1.1|2.1|3.2|4.1|5.1|7.1|9.1|10.1|12.1|14.1|15.1|17.1|19.1|21.1|23.1|24.1|31.2|32.2|33.2|34.2|35.2|36.2|37.2|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;LastProcessPoint&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;32&quot; name=&quot;LastProcessPointCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProcessCode" type="STRING" length="1" options="3"/>
+  <VariableInfo name="LineCode" type="STRING" length="2" options="3"/>
+  <VariableInfo name="ProcessPointLength" type="INT4" options="3"/>
+  <VariableInfo name="LastProcessPoint" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="InjectionCode" type="STRING" length="2" options="3" default="IN"/>
+  <VariableInfo name="HingeVWCode" type="STRING" length="2" options="3" default="VW"/>
+  <VariableInfo name="FoundationOvenCode" type="STRING" length="2" options="3" default="PH"/>
+  <VariableInfo name="USKCode" type="STRING" length="2" options="3" default="UK"/>
+  <VariableInfo name="TestOvenCode" type="STRING" length="2" options="3" default="PT"/>
+  <VariableInfo name="CrushPadCode" type="STRING" length="2" options="3" default="CP"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="TRANSACTION" id="1" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_MbpnProductDao_findByKey"/>
+    <Property name="version" value="193024926"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="lastPassingProcessPointId" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="30"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="2" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="ProcessPointLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="processpointlength&gt;0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="processpointlength" name="ProcessPointLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="5"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="4" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="NONE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="Unknown"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="7" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="LineCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="9" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="LastProcessPoint"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="10" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="INJ"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="12" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="FDOven"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="14" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="CP"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="15" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="LastProcessPoint"/>
+    <ConstantVariable logical_name="Start Offset" value="11"/>
+    <ConstantVariable logical_name="End Offset" value="12"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="ProcessCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="CPTrim"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="19" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="TO"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="21" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="USK"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="23" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="HVW"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="24" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="UKNWN"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="25" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="27" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="27"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="29" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="NONE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="30" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="32"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="UKNWN"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="LastProcessPoint"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="29"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="31" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="InjectionCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="32"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="32" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="FoundationOvenCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="33"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="33" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="CrushPadCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="34"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="34" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="TestOvenCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="19"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="35" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="USKCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="36"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="36" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="String" name="HingeVWCode"/>
+    <LocalVariable logical_name="Search String" name="LineCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="37" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="String" value="1"/>
+    <LocalVariable logical_name="Search String" name="ProcessCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="30"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_GOT_ProductScan" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_GOT_ProductScan" nlsid="30031">
+<Trigger name="TestOven_GOT_ProductScan" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|1~3~4~5~7~8~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+										<Node id="1" type="3" x="-150" y="-100"/>
+										<Node id="3" type="3" x="-150" y="-25"/>
+										<Node id="4" type="3" x="-150" y="50"/>
+										<Node id="5" type="3" x="-150" y="125"/>
+										<Node id="7" type="3" x="175" y="100"/>
+										<Node id="8" type="3" x="175" y="0"/>
+										<Node errorActionId="9" errorStartIndex="8" id="600000000" text="Error Handling" type="4" x="175" y="-75"/>
+										<RoutedErrors value="1.1|3.1|4.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable count="10" device="AIP1_TESTOVEN_GOT" name="D[20]" qos="3" type="INT2"/>
+										<Condition type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="17" options="3"/>
+  <VariableInfo name="ProcessPointCode" type="STRING" length="6" options="3"/>
+  <VariableInfo name="LastProcessPoint" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcUID" type="STRING" length="32" options="3" default="D[20]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AIP1_TESTOVEN_GOT"/>
+  <VariableInfo name="plcProcessPointCode" type="STRING" length="32" options="3" default="D[100]"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="20"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="3" disabled="false">
+   <Properties>
+    <Property name="project_name" value="AIP1_Utilities"/>
+    <Property name="trigger_name" value="GetLastProcessPoint"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="LastProcessPoint" name="LastProcessPoint"/>
+    <LocalVariable logical_name="LastProcessPointCode" name="ProcessPointCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="6"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcProcessPointCode"/>
+    <LocalVariable logical_name="Value" name="ProcessPointCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductDao_updateDefectStatus" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductDao_updateDefectStatus" nlsid="30034">
+<Transports>
+										<TransportDefinition connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_MbpnProductDao_updateDefectStatus" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP" version="1247268657">
+										<Proxy enabled="false" type="HTTP"/>
+										</TransportDefinition>
+										<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductDao/updateDefectStatus" id="GALC_MbpnProductDao_updateDefectStatus" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm"/>
+										</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_ScrapUnit" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_ScrapUnit" nlsid="30033">
+
+										<TransactionDef id="GALC_ScrapUnit" version="1583959116" version_mismatch="pass">
+										<Transport id="GALC_MbpnProductDao_updateDefectStatus" type="HTTP"/>
+										<InputMap>
+										<Variable count="1" length="17" name="ProductId" type="STRING"/>
+										<Variable count="1" length="30" name="DefectStatus" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response outputformat="JSON">
+										<JSONInfo>
+										<JSONRequest>
+										<Structure name="JSON_Object"/>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KICB7ImphdmEubGFuZy5TdHJpbmciOiAiIiwgDQogICJjb20uaG9uZGEuZ2FsYy5lbnRpdHkuZW51bXR5cGUuRGVmZWN0U3RhdHVzIjogIiJ9IA0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Parameter dwType="16" name="ProductId" parmname="java.lang.String" type="STRING"/>
+										<Parameter dwType="16" name="DefectStatus" parmname="com.honda.galc.entity.enumtype.DefectStatus" type="STRING"/>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_Utilities/UpdateScrapStatus" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_Utilities/UpdateScrapStatus" nlsid="30031">
+<Trigger name="UpdateScrapStatus" project="AIP1_Utilities" max_pending="20" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|33~24~4~32~3~34~35~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-600" y="-350"/>
+										<Node id="33" type="3" x="-600" y="-275"/>
+										<Node id="24" type="3" x="-325" y="-200"/>
+										<Node id="4" type="3" x="-325" y="-100"/>
+										<Node id="32" type="3" x="-600" y="-100"/>
+										<Node id="3" type="3" x="-600" y="0"/>
+										<Node id="34" type="3" x="-600" y="-200"/>
+										<Node id="35" type="3" x="-725" y="-200"/>
+										<Node errorActionId="23" errorStartIndex="24" id="600000000" text="Error Handling" type="4" x="-325" y="-300"/>
+										<RoutedErrors value="33.2|32.1|34.1|35.1|"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;17&quot; name=&quot;ProductId&quot; options=&quot;7&quot; type=&quot;STRING&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo desc=&quot;Scrap Status&quot; name=&quot;ScrapStatus&quot; options=&quot;7&quot; type=&quot;INT1&quot; xdim=&quot;1&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;ProcessLoc&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ScrapStatus" type="STRING" length="10" options="3"/>
+  <VariableInfo name="RowCount" type="INT1" options="3" default="0"/>
+  <VariableInfo name="ProcessStatusCode" type="STRING" length="1" options="3" default="B"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="Repaired" type="STRING" length="10" options="3" default="REPAIRED"/>
+  <VariableInfo name="NglcGoodStatus" type="STRING" length="1" options="3" default="A"/>
+  <VariableInfo name="AsmLineNo" type="STRING" length="1" options="3" default="1"/>
+  <VariableInfo name="ScrappedStatus" type="INT1" options="3" default="1"/>
+  <VariableInfo name="PlantLocCode" type="STRING" length="1" options="3" default="A"/>
+  <VariableInfo name="NglcBadStatus" type="STRING" length="1" options="3" default="B"/>
+  <VariableInfo name="Scrap" type="STRING" length="10" options="3" default="SCRAP"/>
+  <VariableInfo name="ProcessCatCode" type="STRING" length="2" options="3" default="SP"/>
+ </StaticVariables>
+ <Actions first_action="33">
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="24" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_Utilities"/>
+    <Property name="msg" value="$(Trigger) - Error Updating Scrap Status {$(ScrapStatus)} for Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <EventVariable logical_name="ScrapStatus" name="ScrapStatus"/>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="32" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_ScrapUnit"/>
+    <Property name="version" value="1583959116"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="DefectStatus" name="ScrapStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="24"/>
+    <Route result="2" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="33" disabled="false">
+   <Properties>
+    <Property name="expression" value="InputScrapStatus==ScrappedStatus"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="InputScrapStatus" name="ScrapStatus"/>
+    <StaticVariable logical_name="ScrappedStatus" name="ScrappedStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="35"/>
+    <Route result="2" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="34" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="10"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Scrap"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ScrapStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="35" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="10"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="key_0" name="Repaired"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="ScrapStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="24"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_GOT_Scrap" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_GOT_Scrap" nlsid="30031">
+<Trigger name="TestOven_GOT_Scrap" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|11~5~7~8~9~1~12~13~15~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-150" y="-175"/>
+										<Node id="11" type="3" x="-150" y="-100"/>
+										<Node id="5" type="3" x="-150" y="350"/>
+										<Node id="7" type="3" x="125" y="175"/>
+										<Node id="8" type="3" x="125" y="75"/>
+										<Node id="9" type="3" x="-150" y="125"/>
+										<Node id="1" type="3" x="-150" y="50"/>
+										<Node id="12" type="3" x="-150" y="-25"/>
+										<Node id="13" type="3" x="-275" y="25"/>
+										<Node id="15" type="3" x="-150" y="200"/>
+										<Node id="4" type="3" x="-150" y="275"/>
+										<Node errorActionId="16" errorStartIndex="8" id="600000000" text="Error Handling" type="4" x="125" y="0"/>
+										<RoutedErrors value="11.1|9.1|1.1|12.2|15.1|4.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AIP1_TESTOVEN_GOT" name="M[0]" qos="3" type="BOOL"/>
+										<Condition deadband="0" fire_on_start="true" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="ProductId" type="STRING" length="17" options="3"/>
+  <VariableInfo name="ScrapFlag" type="BOOL" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcScrap" type="STRING" length="32" options="3" default="M[0]"/>
+  <VariableInfo name="plcUID" type="STRING" length="32" options="3" default="D[20]"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AIP1_TESTOVEN_GOT"/>
+  <VariableInfo name="ProcessLocation" type="INT2" length="32" options="3" default="40"/>
+ </StaticVariables>
+ <Actions first_action="11">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="20"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ProductId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="4" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcScrap"/>
+    <ConstantVariable logical_name="Value" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="5" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="9" disabled="false">
+   <Properties>
+    <Property name="project_name" value="AIP1_Utilities"/>
+    <Property name="trigger_name" value="UpdateScrapStatus"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <ConstantVariable logical_name="ScrapStatus" value="1"/>
+    <StaticVariable logical_name="ProcessLoc" name="ProcessLocation"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="11" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcScrap"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="ScrapFlag"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="12" disabled="false">
+   <Properties>
+    <Property name="expression" value="ScrapFlag"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ScrapFlag" name="ScrapFlag"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="8"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Scrap Processing Product ($(ProductId)): $(ScrapStatus), was scrapped at Test Oven"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="ScrapStatus" name="ScrapFlag"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="8"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AIP1_TestOven_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AIP1_TestOven_PLC" nlsid="30030">
+<DeviceDefinition name="AIP1_TestOven_PLC" type="162" type_name="QCPU (Built-in Ethernet)" state="6" options="2104"><Properties><Property name="per_var_security" value="true"/><Property name="ip_address" value="10.39.2.81"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5018"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_Heartbeat" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_Heartbeat" nlsid="30031">
+<Trigger name="TestOven_Heartbeat" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="15000">
+ <Context value="Data|5~3~4~1~6~|user"/>
+ <BuildInfo><Node id="0" type="1" x="75" y="-75"/>
+										<Node id="5" type="3" x="75" y="0"/>
+										<Node id="3" type="3" x="375" y="125"/>
+										<Node id="4" type="3" x="75" y="175"/>
+										<Node id="1" type="3" x="75" y="75"/>
+										<Node id="6" type="3" x="375" y="50"/>
+										<Node errorActionId="7" errorStartIndex="6" id="600000000" text="Error Handling" type="4" x="375" y="-25"/>
+										<RoutedErrors value="5.1|1.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AIP1_TestOven_PLC" name="M[89]" qos="3" type="BOOL"/>
+										<Condition deadband="0" fire_on_start="true" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AIP1_TestOven_PLC"/>
+  <VariableInfo name="plcHeartbeat" type="STRING" length="32" options="3" default="M[90]"/>
+ </StaticVariables>
+ <Actions first_action="5">
+  <Action type="DEMANDWR" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcHeartbeat"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="WAIT" id="5" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Time To Wait(ms)" value="2500"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="6" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Writing to PLC [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AIP1_TestOven_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AIP1_TestOven_DataCollection" nlsid="30033">
+
+										<TransactionDef id="AIP1_TestOven_DataCollection" version="65292777" version_mismatch="pass">
+										<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="TESTOVEN_OVENEXITTIME_SN" type="STRING"/>
+										<Variable count="1" length="32" name="TESTOVEN_OVENEXITTIME_STATUS" type="STRING"/>
+										<Variable count="1" length="32" name="ASSOCIATE_NO" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ew0KICAgICAgImNvbS5ob25kYS5nYWxjLmRhdGEuRGVmYXVsdERhdGFDb250YWluZXIiOiB7DQogICAgICAiQ0xJRU5UX0lEIjoiIiwNCiAgICAgICJQUk9DRVNTX1BPSU5UX0lEIjoiIg0KICAgICAgfQ0KfQ==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										</Structure>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="ICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiIsDQogICAgICAiQVNTT0NJQVRFX05PIjoiIiwNCiAgICAgIA0KICAgICAgIlRFU1RPVkVOX09WRU5FWElUVElNRS5TTiI6IiIsDQogICAgICAiVEVTVE9WRU5fT1ZFTkVYSVRUSU1FLlNUQVRVUyI6IiINCiAgICAgIH0NCiAgICB9">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="ASSOCIATE_NO" parmname="ASSOCIATE_NO" type="STRING"/>
+										<Parameter dwType="16" name="TESTOVEN_OVENEXITTIME_SN" parmname="TESTOVEN_OVENEXITTIME.SN" type="STRING"/>
+										<Parameter dwType="16" name="TESTOVEN_OVENEXITTIME_STATUS" parmname="TESTOVEN_OVENEXITTIME.STATUS" type="STRING"/>
+										</Structure>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AIP1_TestOven/TestOven_UIDProcessing" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AIP1_TestOven/TestOven_UIDProcessing" nlsid="30031">
+<Trigger name="TestOven_UIDProcessing" project="AIP1_TestOven" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000" apply_to_subtrigger="true">
+ <Context value="Data|2~1~3~4~5~6~8~10~11~12~13~14~15~16~17~21~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-250" y="-250"/>
+										<Node id="2" type="3" x="-250" y="-175"/>
+										<Node id="1" type="3" x="-250" y="475"/>
+										<Node id="3" type="3" x="-250" y="-100"/>
+										<Node id="4" type="3" x="-500" y="0"/>
+										<Node id="5" type="3" x="-250" y="-25"/>
+										<Node id="6" type="3" x="-250" y="325"/>
+										<Node id="8" type="3" x="-250" y="400"/>
+										<Node id="10" type="3" x="225" y="150"/>
+										<Node id="11" type="3" x="225" y="-25"/>
+										<Node id="12" type="3" x="225" y="50"/>
+										<Node id="13" type="3" x="-500" y="-100"/>
+										<Node id="14" type="3" x="-250" y="250"/>
+										<Node id="15" type="3" x="-250" y="50"/>
+										<Node id="16" type="3" x="-250" y="125"/>
+										<Node id="17" type="3" x="-475" y="175"/>
+										<Node id="21" type="3" x="-475" y="250"/>
+										<Node errorActionId="22" errorStartIndex="11" id="600000000" text="Error Handling" type="4" x="225" y="-100"/>
+										<RoutedErrors value="2.1|3.2|5.1|6.1|8.1|13.1|14.1|15.1|16.2|17.1|21.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+										<Variable device="AIP1_TestOven_PLC" name="M[79]" qos="3" type="BOOL"/>
+										<Condition deadband="0" fire_on_start="true" type="onchange"/>
+										</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="UIDReady" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="OvenExitTimeSn" type="STRING" length="32" options="3"/>
+  <VariableInfo name="OperatorId" type="STRING" length="10" options="3" default="GALCalgn"/>
+  <VariableInfo name="ProductStatus" type="INT2" options="3" default="99"/>
+  <VariableInfo name="UID" type="STRING" length="20" options="3"/>
+  <VariableInfo name="CompleteStatus" type="INT1" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcValidationCompleteFlag" type="STRING" length="20" options="3" default="M[93]"/>
+  <VariableInfo name="plcOperatorId" type="STRING" length="32" options="3" default="D[150]"/>
+  <VariableInfo name="plcUid" type="STRING" length="20" options="3" default="D[7059]"/>
+  <VariableInfo name="ProcessPointId_PreCheck" type="STRING" length="32" options="3" default="TSTOVEN_PRECHECK"/>
+  <VariableInfo name="plcUIDStatus" type="STRING" length="32" options="3" default="M[91]"/>
+  <VariableInfo name="ProductType" type="STRING" length="32" options="3" default="MBPN"/>
+  <VariableInfo name="ProcessLoc" type="STRING" length="2" options="3" default="35"/>
+  <VariableInfo name="plcUidReady" type="STRING" length="32" options="3" default="M[79]"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="16" options="3" default="AIP1PT1P00101"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="20" options="3" default="AIP1_TestOven_PLC"/>
+  <VariableInfo name="plcUIDStatusReason" type="STRING" length="32" options="3" default="D[140]"/>
+  <VariableInfo name="ClientId_PreCheck" type="STRING" length="32" options="3" default="AIP1PT1D00101B"/>
+  <VariableInfo name="TrackingStatus" type="STRING" length="2" options="3" default="A"/>
+  <VariableInfo name="ClientId_DataCollection" type="STRING" length="32" options="3" default="AIP1PT1D00101A"/>
+  <VariableInfo name="GoodResult" type="STRING" length="2" options="3" default="1"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUidReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="UIDReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="UIDReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="UIDReady" name="UIDReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="4" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="5" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;Uid&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:20},&#13;&#10;    &quot;AssociateNo&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:10}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Uid Name" name="plcUid"/>
+    <StaticVariable logical_name="AssociateNo Name" name="plcOperatorId"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Uid" name="UID"/>
+    <LocalVariable logical_name="AssociateNo" name="OperatorId"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="6" disabled="false">
+   <Properties>
+    <Property name="project_name" value="AIP1_Utilities"/>
+    <Property name="trigger_name" value="UpdateMAPTracking"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="TrackingStatus" name="TrackingStatus"/>
+    <ConstantVariable logical_name="GalcUpdate" value="1" delim=""/>
+    <StaticVariable logical_name="ProcLocCode" name="ProcessLoc"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="8" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="10" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="11" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AIP1_TestOven"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Product ($(ProductId)): $(ErrorCode), $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="10"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="13" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcValidationCompleteFlag"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="14" disabled="false">
+   <Properties>
+    <Property name="name" value="AIP1_TestOven_DataCollection"/>
+    <Property name="version" value="65292777"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId_DataCollection"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="UID"/>
+    <MacroVariable logical_name="TESTOVEN_OVENEXITTIME_SN" name="$EVENT_TIME"/>
+    <StaticVariable logical_name="TESTOVEN_OVENEXITTIME_STATUS" name="GoodResult"/>
+    <LocalVariable logical_name="ASSOCIATE_NO" name="OperatorId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="11"/>
+    <Route result="2" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="15" disabled="false">
+   <Properties>
+    <Property name="project_name" value="== Current Project =="/>
+    <Property name="trigger_name" value="TestOven_CheckStatus"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="UID"/>
+    <StaticVariable logical_name="ClientId" name="ClientId_PreCheck"/>
+    <StaticVariable logical_name="ProcessPointId" name="ProcessPointId_PreCheck"/>
+    <StaticVariable logical_name="ProductType" name="ProductType"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Status" name="ProductStatus"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="16" disabled="false">
+   <Properties>
+    <Property name="expression" value="productstatus==0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="productstatus" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="17" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatus"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="21" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="INT2"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcUIDStatusReason"/>
+    <LocalVariable logical_name="Value" name="ProductStatus"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="14"/>
+    <Route result="1" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AIP1_TestOven" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AIP1_TestOven" nlsid="30032">AIP1_TestOven</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AIP1_TestOven" type="project">
+		<reference name="AIP1_TestOven/TestOven2_UIDProcessing" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AIP1_TestOven2_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_TestOven_DataCollection_New" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AIP1_TestOven/TestOven_CheckStatus" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="IF" type="actiontype"/>
+				<reference name="LOGMSG" type="actiontype"/>
+				<reference name="SET" type="actiontype"/>
+				<reference name="TRANSACTION" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+				<reference name="AIP1_TestOven_PreCheck" type="transaction">
+					<reference name="GALC_DataCollectionService_Execute_woSF" type="transport"/>
+				</reference>
+			</reference>
+			<reference name="AIP1_Utilities/UpdateMAPTracking" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="IF" type="actiontype"/>
+				<reference name="LOGMSG" type="actiontype"/>
+				<reference name="TRANSACTION" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+				<reference name="GALC_UpdateTracking" type="transaction">
+					<reference name="GALC_TrackingService_track" type="transport"/>
+				</reference>
+			</reference>
+			<reference name="AIP1_TestOven2_PLC.GALC_Collect_RDY0" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOvenHandScan_UIDProcessing" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AIP1_TestOven2_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_TestOven_DataCollection_New" type="transaction"/>
+			<reference name="AIP1_TestOven2_PLC.GALC_Collect_RDY1" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOven_GOT_NoScrap" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="AIP1_TESTOVEN_GOT" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_TESTOVEN_GOT.M[1]" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOven_GOT_ProductScan" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="AIP1_TESTOVEN_GOT" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_Utilities/GetLastProcessPoint" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="IF" type="actiontype"/>
+				<reference name="LOGMSG" type="actiontype"/>
+				<reference name="SET" type="actiontype"/>
+				<reference name="STRING.LENGTH" type="actiontype"/>
+				<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+				<reference name="STRINGCOMPARE" type="actiontype"/>
+				<reference name="TRANSACTION" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+				<reference name="GALC_MbpnProductDao_findByKey" type="transaction">
+					<reference name="GALC_MbpnProductDao_findByKey" type="transport"/>
+				</reference>
+			</reference>
+			<reference name="AIP1_TESTOVEN_GOT.D[20]" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOven_GOT_Scrap" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="AIP1_TESTOVEN_GOT" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_Utilities/UpdateScrapStatus" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="IF" type="actiontype"/>
+				<reference name="LOGMSG" type="actiontype"/>
+				<reference name="SET" type="actiontype"/>
+				<reference name="TRANSACTION" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+				<reference name="GALC_ScrapUnit" type="transaction">
+					<reference name="GALC_MbpnProductDao_updateDefectStatus" type="transport"/>
+				</reference>
+			</reference>
+			<reference name="AIP1_TESTOVEN_GOT.M[0]" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOven_Heartbeat" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="WAIT" type="actiontype"/>
+			<reference name="AIP1_TestOven_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_TestOven_PLC.M[89]" type="variable"/>
+		</reference>
+		<reference name="AIP1_TestOven/TestOven_UIDProcessing" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AIP1_TestOven_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AIP1_TestOven_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AIP1_TestOven_PLC.M[79]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

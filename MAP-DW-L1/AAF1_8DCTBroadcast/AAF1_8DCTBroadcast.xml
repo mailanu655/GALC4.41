@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TriggerExecutionReports>
+
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_8DCTBroadcast" trigger="SendLETData" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743469876183" type="SUBTRIGGER">
+		<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+			
+			<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+				
+				<Item count="1" name="UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+					
+					<Item count="1" name="Parent Project Name" status="0" type="STRING"><![CDATA[AAF1_8DCTBroadcast]]></Item>
+						
+						<Item count="1" name="Parent Trigger Name" status="0" type="STRING"><![CDATA[BroadcastFromClient_8DCT_TLX]]></Item>
+							
+							<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNH16]]></Item>
+								
+							</EventNotification>
+							<StaticVariableInitialValues>
+								<Item count="1" name="PlantCode" status="0" type="STRING"><![CDATA[A]]></Item>
+									
+									<Item count="1" name="Nglc_8DCTStrokeTaskId" status="0" type="STRING"><![CDATA[8DCTStroke]]></Item>
+										
+										<Item count="1" name="Nglc_8DCTValveTaskId" status="0" type="STRING"><![CDATA[8DCTValve]]></Item>
+										
+										<Item count="1" name="ProductType" status="0" type="STRING"><![CDATA[VIN]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="1" seq="1" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_InstalledPartService_findAllByProductIdAndPartName2"/>
+										<Property key="version" value="1655312596"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="partName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="productId" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+										
+										</Notification>
+										<Completion execution_time="8" exstatus="0" status="0">
+										<Item count="1" name="defectStatus" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="productType" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="defectName" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="updateTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="associateNo" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="pointY" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="operationRevision" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="installedPartReason" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="featureId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="firstAlarm" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="partIndex" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="defectLocation" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="pointX" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="errorCode" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="id_productId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partSerialNumber" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="processPointId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="skipped" status="-5209" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="createTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partRevision" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="id_partName" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="passTime" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="measurements_rows_out" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="installedPartStatusId" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="validPartSerialNumber" status="-5209" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="featureType" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="actualTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="secondAlarm" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="startTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="2" type="STRING.LENGTH">
+										<Properties>
+										<Property key="failure_empty_string" value="false"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="8DCT_Scan_Length" status="0" type="INT2"><![CDATA[0]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Length" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="3" type="IF">
+										<Properties>
+										<Property key="expression" value="ScanLength&gt;0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ScanLength" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="8" seq="4" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="WARN"/>
+										<Property key="component" value="AAF1_8DCTBroadcast"/>
+										<Property key="msg" value="$(Trigger) - No $(PartName) Scan Data For Product Id: $(ProductId) "/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+										
+										<Item count="1" name="PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="Trigger" status="0" type="STRING"><![CDATA[SendLETData]]></Item>
+										
+										</Notification>
+										<Completion execution_time="7" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="17" seq="5" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469876200"/>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_8DCTBroadcast" trigger="BroadcastFromClient_8DCT_TLX" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743469876183" type="HTTP_LISTENER">
+		<Item count="1" name="HTTP Content Length" status="0" type="INT4"><![CDATA[120]]></Item>
+			
+			<Item count="1" name="HTTP Method" status="0" type="STRING"><![CDATA[POST]]></Item>
+				
+				<Item count="1" name="HTTP URL" status="0" type="STRING"><![CDATA[/AAF1/8DCT_TLX]]></Item>
+					
+					<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAA900 NH932M    Z",
+  "CLIENT_ID": "AAF1EL2D00701A",
+  "PRODUCT_ID": "1HGCY2F52SA042429"
+}]]></Item>
+						
+					</EventNotification>
+					<StaticVariableInitialValues>
+						<Item count="1" name="Nglc_ValveTaskId" status="0" type="STRING"><![CDATA[8DCTValve]]></Item>
+							
+							<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+								
+								<Item count="1" name="Nglc_StrokeTaskId" status="0" type="STRING"><![CDATA[8DCTStroke]]></Item>
+									
+									<Item count="1" name="Nglc_UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+										
+										<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNH16]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="4" seq="1" type="JSON.DECODE">
+										<Properties>
+										<Property key="rules" value="{&#13;&#10;&quot;PRODUCT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;&#13;&#10; }"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="JSON Input" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAA900 NH932M    Z",
+  "CLIENT_ID": "AAF1EL2D00701A",
+  "PRODUCT_ID": "1HGCY2F52SA042429"
+}]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[S30BAA900 NH932M    Z]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="resultMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+										
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[S30BAA900 NH932M    Z]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="50" seq="2" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="== Current Project =="/>
+										<Property key="trigger_name" value="SendLETData"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F52SA042429]]></Item>
+										
+										<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+										
+										<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNH16]]></Item>
+										
+										</Notification>
+										<Completion execution_time="18" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="52" seq="3" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469876201">
+										<Item count="1" name="HTTP Content-Type" status="-5109" type="STRING"/>
+										<Item count="1" name="HTTP Status Code" status="-5109" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="HTTP Content" status="-5109" type="STRING"/>
+										</EventCompletion>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_8DCTBroadcast" trigger="SendLETData" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743469285423" type="SUBTRIGGER">
+		<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+			
+			<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+				
+				<Item count="1" name="UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+					
+					<Item count="1" name="Parent Project Name" status="0" type="STRING"><![CDATA[AAF1_8DCTBroadcast]]></Item>
+						
+						<Item count="1" name="Parent Trigger Name" status="0" type="STRING"><![CDATA[BroadcastFromClient_8DCT_ILX]]></Item>
+							
+							<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNE05]]></Item>
+								
+							</EventNotification>
+							<StaticVariableInitialValues>
+								<Item count="1" name="PlantCode" status="0" type="STRING"><![CDATA[A]]></Item>
+									
+									<Item count="1" name="Nglc_8DCTStrokeTaskId" status="0" type="STRING"><![CDATA[8DCTStroke]]></Item>
+										
+										<Item count="1" name="Nglc_8DCTValveTaskId" status="0" type="STRING"><![CDATA[8DCTValve]]></Item>
+										
+										<Item count="1" name="ProductType" status="0" type="STRING"><![CDATA[VIN]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="1" seq="1" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_InstalledPartService_findAllByProductIdAndPartName2"/>
+										<Property key="version" value="1655312596"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="partName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="productId" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+										
+										</Notification>
+										<Completion execution_time="11" exstatus="0" status="0">
+										<Item count="1" name="defectStatus" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="productType" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="defectName" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="updateTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="associateNo" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="pointY" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="operationRevision" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="installedPartReason" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="featureId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="firstAlarm" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="partIndex" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="defectLocation" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="pointX" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="errorCode" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="id_productId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partSerialNumber" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="processPointId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="skipped" status="-5209" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="createTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partRevision" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="id_partName" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="passTime" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="measurements_rows_out" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="installedPartStatusId" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="validPartSerialNumber" status="-5209" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="featureType" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="partId" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="actualTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="secondAlarm" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="startTimestamp" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="2" type="STRING.LENGTH">
+										<Properties>
+										<Property key="failure_empty_string" value="false"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="String" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="8DCT_Scan_Length" status="0" type="INT2"><![CDATA[0]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Length" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="3" type="IF">
+										<Properties>
+										<Property key="expression" value="ScanLength&gt;0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ScanLength" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="8" seq="4" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="WARN"/>
+										<Property key="component" value="AAF1_8DCTBroadcast"/>
+										<Property key="msg" value="$(Trigger) - No $(PartName) Scan Data For Product Id: $(ProductId) "/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+										
+										<Item count="1" name="PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="Trigger" status="0" type="STRING"><![CDATA[SendLETData]]></Item>
+										
+										</Notification>
+										<Completion execution_time="10" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="17" seq="5" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469285444"/>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_8DCTBroadcast" trigger="BroadcastFromClient_8DCT_ILX" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743469285423" type="HTTP_LISTENER">
+		<Item count="1" name="HTTP Content Length" status="0" type="INT4"><![CDATA[120]]></Item>
+			
+			<Item count="1" name="HTTP Method" status="0" type="STRING"><![CDATA[POST]]></Item>
+				
+				<Item count="1" name="HTTP URL" status="0" type="STRING"><![CDATA[/AAF1/8DCT_ILX]]></Item>
+					
+					<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAA900 NH932M    Z",
+  "CLIENT_ID": "AAF1EL1D00301A",
+  "PRODUCT_ID": "1HGCY2F51SA042440"
+}]]></Item>
+						
+					</EventNotification>
+					<StaticVariableInitialValues>
+						<Item count="1" name="Nglc_ValveTaskId" status="0" type="STRING"><![CDATA[8DCTValve]]></Item>
+							
+							<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+								
+								<Item count="1" name="Nglc_StrokeTaskId" status="0" type="STRING"><![CDATA[8DCTStroke]]></Item>
+									
+									<Item count="1" name="Nglc_UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+										
+										<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNE05]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="4" seq="1" type="JSON.DECODE">
+										<Properties>
+										<Property key="rules" value="{&#13;&#10;&quot;PRODUCT_ID&quot; : &quot;&quot;,&#13;&#10;&quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;&#13;&#10; }"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="JSON Input" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAA900 NH932M    Z",
+  "CLIENT_ID": "AAF1EL1D00301A",
+  "PRODUCT_ID": "1HGCY2F51SA042440"
+}]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[S30BAA900 NH932M    Z]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="resultMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+										
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[S30BAA900 NH932M    Z]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="50" seq="2" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="== Current Project =="/>
+										<Property key="trigger_name" value="SendLETData"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F51SA042440]]></Item>
+										
+										<Item count="1" name="Galc_PartName" status="0" type="STRING"><![CDATA[90705 8DCT TRANSMISSION]]></Item>
+										
+										<Item count="1" name="UserId" status="0" type="STRING"><![CDATA[GALCalgn]]></Item>
+										
+										<Item count="1" name="Nglc_NodeId" status="0" type="STRING"><![CDATA[AA1TNE05]]></Item>
+										
+										</Notification>
+										<Completion execution_time="22" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="52" seq="3" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469285445">
+										<Item count="1" name="HTTP Content-Type" status="-5109" type="STRING"/>
+										<Item count="1" name="HTTP Status Code" status="-5109" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="HTTP Content" status="-5109" type="STRING"/>
+										</EventCompletion>
+										</TriggerExecutionReport>
+</TriggerExecutionReports>

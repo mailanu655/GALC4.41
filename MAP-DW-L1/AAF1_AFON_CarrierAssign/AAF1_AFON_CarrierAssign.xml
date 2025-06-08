@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TriggerExecutionReports>
+
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON_CarrierAssign" trigger="AssignTireCarrier" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743470180012" type="SUBTRIGGER">
+		<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+			
+			<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+				
+				<Item count="1" name="Parent Project Name" status="0" type="STRING"><![CDATA[AAF1_AFON_CarrierAssign]]></Item>
+					
+					<Item count="1" name="Parent Trigger Name" status="0" type="STRING"><![CDATA[BroadcastFromAfOn]]></Item>
+						
+						<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+							
+						</EventNotification>
+						<StaticVariableInitialValues>
+							<Item count="1" name="gvResetSequence" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+								
+								<Item count="1" name="ProcessPointId" status="0" type="STRING"><![CDATA[AAF1TL1P00101]]></Item>
+									
+									<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[TIRE_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="gvDeviceName" status="0" type="STRING"><![CDATA[AAF1_TireLoad_GV]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="16" seq="1" type="DEMANDRD">
+										<Properties>
+										<Property key="dev_name" value="$(Device Name)"/>
+										<Property key="var_name" value="$(Variable Name)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Variable Name" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+										
+										<Item count="1" name="Device Name" status="0" type="STRING"><![CDATA[AAF1_TireLoad_GV]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="ResetSequence" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="17" seq="2" type="IF">
+										<Properties>
+										<Property key="expression" value="ResetSequence==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ResetSequence" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="5" seq="3" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_SequenceDao_getNextSequence_Update"/>
+										<Property key="version" value="-1524185739"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[TIRE_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="UpdateFlag" status="0" type="STRING"><![CDATA[True]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[73]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="17" exstatus="0" status="0">
+										<Item count="1" name="updateTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:15:20.049795 EDT]]></Item>
+										
+										<Item count="1" name="description" status="0" type="STRING"><![CDATA[Glass Load Front Sequence Line 1]]></Item>
+										
+										<Item count="1" name="createTimestamp" status="0" type="STRING"><![CDATA[2020-08-21 13:50:46.062182 EDT]]></Item>
+										
+										<Item count="1" name="sequenceIdName" status="0" type="STRING"><![CDATA[TIRE_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="endSeq" status="0" type="INT4"><![CDATA[88]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="incrementValue" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="startSeq" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="currentSeq" status="0" type="INT4"><![CDATA[73]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="4" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="Utilities"/>
+										<Property key="trigger_name" value="Pad String"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="InputString" status="0" type="STRING"><![CDATA[73]]></Item>
+										
+										<Item count="1" name="StringLength" status="0" type="INT2"><![CDATA[3]]></Item>
+										
+										<Item count="1" name="PadCharacter" status="0" type="STRING"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PadLeft" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[073]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="1" exstatus="0" status="0">
+										<Item count="1" name="PaddedString" status="0" type="STRING"><![CDATA[073]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="5" type="STRINGBUILDER">
+										<Properties>
+										<Property key="format" value="C$(LineNumber)$(CarrierNumber)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[073]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[C1073]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[C1073]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="14" seq="6" type="STRINGTIME">
+										<Properties>
+										<Property key="fmt_option" value="Custom"/>
+										<Property key="fmt_custom" value="%Y-%m-%d %H:%M:%S.001 %Z"/>
+										<Property key="append_millis" value="False"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Timestamp" status="0" type="TIMESTAMP"><![CDATA[2025-03-31 21:16:20 (2025-04-01 01:16:20 GMT)]]></Item>
+										
+										<Item count="1" name="Count To Parse" status="-5209" type="UINT2"><![CDATA[65535]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="OnTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:20.001 EDT]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[2025-03-31 21:16:20.001 EDT]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="8" seq="7" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_ProductCarrierDao_save"/>
+										<Property key="version" value="2046816300"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="id_carrierId" status="0" type="STRING"><![CDATA[C1073]]></Item>
+										
+										<Item count="1" name="id_onTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:20.001 EDT]]></Item>
+										
+										<Item count="1" name="id_productId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="processPointId" status="0" type="STRING"><![CDATA[AAF1TL1P00101]]></Item>
+										
+										<Item count="1" name="JSON_Array_rows_in" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										</Notification>
+										<Completion execution_time="6" exstatus="0" status="0">
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="10" seq="8" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="INFO"/>
+										<Property key="component" value="AAF1_AFON_CarrierAssign"/>
+										<Property key="msg" value="$(Trigger) - Adding Product Id: $(ProductId), Sequence: $(Sequence) to Product Carrier with Carrier Id: $(CarrierId)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Sequence" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="CarrierId" status="0" type="STRING"><![CDATA[C1073]]></Item>
+										
+										<Item count="1" name="Trigger" status="0" type="STRING"><![CDATA[AssignTireCarrier]]></Item>
+										
+										</Notification>
+										<Completion execution_time="11" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="11" seq="9" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743470180048"/>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON_CarrierAssign" trigger="AssignSeatCarrier" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743470179971" type="SUBTRIGGER">
+		<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+			
+			<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+				
+				<Item count="1" name="Parent Project Name" status="0" type="STRING"><![CDATA[AAF1_AFON_CarrierAssign]]></Item>
+					
+					<Item count="1" name="Parent Trigger Name" status="0" type="STRING"><![CDATA[BroadcastFromAfOn]]></Item>
+						
+						<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+							
+						</EventNotification>
+						<StaticVariableInitialValues>
+							<Item count="1" name="gvResetSequence" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+								
+								<Item count="1" name="ProcessPointId" status="0" type="STRING"><![CDATA[AAF1SL1P00101]]></Item>
+									
+									<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[SEAT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="gvDeviceName" status="0" type="STRING"><![CDATA[AAF1_SeatLoad_GV]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="16" seq="1" type="DEMANDRD">
+										<Properties>
+										<Property key="dev_name" value="$(Device Name)"/>
+										<Property key="var_name" value="$(Variable Name)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Variable Name" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+										
+										<Item count="1" name="Device Name" status="0" type="STRING"><![CDATA[AAF1_SeatLoad_GV]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="ResetSequence" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="17" seq="2" type="IF">
+										<Properties>
+										<Property key="expression" value="ResetSequence==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ResetSequence" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="5" seq="3" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_SequenceDao_getNextSequence_Update"/>
+										<Property key="version" value="-1524185739"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[SEAT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="UpdateFlag" status="0" type="STRING"><![CDATA[True]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[2]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="17" exstatus="0" status="0">
+										<Item count="1" name="updateTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:15:20.017787 EDT]]></Item>
+										
+										<Item count="1" name="description" status="0" type="STRING"><![CDATA[Glass Load Front Sequence Line 1]]></Item>
+										
+										<Item count="1" name="createTimestamp" status="0" type="STRING"><![CDATA[2020-08-21 13:50:46.09931 EDT]]></Item>
+										
+										<Item count="1" name="sequenceIdName" status="0" type="STRING"><![CDATA[SEAT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="endSeq" status="0" type="INT4"><![CDATA[88]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="incrementValue" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="startSeq" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="currentSeq" status="0" type="INT4"><![CDATA[2]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="4" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="Utilities"/>
+										<Property key="trigger_name" value="Pad String"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="InputString" status="0" type="STRING"><![CDATA[2]]></Item>
+										
+										<Item count="1" name="StringLength" status="0" type="INT2"><![CDATA[3]]></Item>
+										
+										<Item count="1" name="PadCharacter" status="0" type="STRING"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PadLeft" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[002]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="1" exstatus="0" status="0">
+										<Item count="1" name="PaddedString" status="0" type="STRING"><![CDATA[002]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="5" type="STRINGBUILDER">
+										<Properties>
+										<Property key="format" value="C$(LineNumber)$(CarrierNumber)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[002]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[C1002]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[C1002]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="14" seq="6" type="STRINGTIME">
+										<Properties>
+										<Property key="fmt_option" value="Custom"/>
+										<Property key="fmt_custom" value="%Y-%m-%d %H:%M:%S.001 %Z"/>
+										<Property key="append_millis" value="False"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Timestamp" status="0" type="TIMESTAMP"><![CDATA[2025-03-31 21:16:19 (2025-04-01 01:16:19 GMT)]]></Item>
+										
+										<Item count="1" name="Count To Parse" status="-5209" type="UINT2"><![CDATA[65535]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="OnTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="8" seq="7" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_ProductCarrierDao_save"/>
+										<Property key="version" value="2046816300"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="id_carrierId" status="0" type="STRING"><![CDATA[C1002]]></Item>
+										
+										<Item count="1" name="id_onTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										<Item count="1" name="id_productId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="processPointId" status="0" type="STRING"><![CDATA[AAF1SL1P00101]]></Item>
+										
+										<Item count="1" name="JSON_Array_rows_in" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										</Notification>
+										<Completion execution_time="18" exstatus="0" status="0">
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="10" seq="8" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="INFO"/>
+										<Property key="component" value="AAF1_AFON_CarrierAssign"/>
+										<Property key="msg" value="$(Trigger) - Adding Product Id: $(ProductId), Sequence: $(Sequence) to Product Carrier with Carrier Id: $(CarrierId)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Sequence" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="CarrierId" status="0" type="STRING"><![CDATA[C1002]]></Item>
+										
+										<Item count="1" name="Trigger" status="0" type="STRING"><![CDATA[AssignSeatCarrier]]></Item>
+										
+										</Notification>
+										<Completion execution_time="4" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="11" seq="9" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743470180012"/>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON_CarrierAssign" trigger="AssignGlassCarrier" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743470179937" type="SUBTRIGGER">
+		<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+			
+			<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+				
+				<Item count="1" name="Parent Project Name" status="0" type="STRING"><![CDATA[AAF1_AFON_CarrierAssign]]></Item>
+					
+					<Item count="1" name="Parent Trigger Name" status="0" type="STRING"><![CDATA[BroadcastFromAfOn]]></Item>
+						
+						<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+							
+						</EventNotification>
+						<StaticVariableInitialValues>
+							<Item count="1" name="gvResetSequence" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+								
+								<Item count="1" name="ProcessPointId" status="0" type="STRING"><![CDATA[AAF1GL1P00101]]></Item>
+									
+									<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[GLASSFRONT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="gvDeviceName" status="0" type="STRING"><![CDATA[AAF1_GlassLoad_GV]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="16" seq="1" type="DEMANDRD">
+										<Properties>
+										<Property key="dev_name" value="$(Device Name)"/>
+										<Property key="var_name" value="$(Variable Name)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Variable Name" status="0" type="STRING"><![CDATA[ResettingSequence]]></Item>
+										
+										<Item count="1" name="Device Name" status="0" type="STRING"><![CDATA[AAF1_GlassLoad_GV]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="ResetSequence" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="17" seq="2" type="IF">
+										<Properties>
+										<Property key="expression" value="ResetSequence==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ResetSequence" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="5" seq="3" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_SequenceDao_getNextSequence_Update"/>
+										<Property key="version" value="-1524185739"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SequenceName" status="0" type="STRING"><![CDATA[GLASSFRONT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="UpdateFlag" status="0" type="STRING"><![CDATA[True]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[49]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="9" exstatus="0" status="0">
+										<Item count="1" name="updateTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:15:19.938094 EDT]]></Item>
+										
+										<Item count="1" name="description" status="0" type="STRING"><![CDATA[Glass Load Front Sequence Line 1]]></Item>
+										
+										<Item count="1" name="createTimestamp" status="0" type="STRING"><![CDATA[2020-03-25 11:09:52.099392 EDT]]></Item>
+										
+										<Item count="1" name="sequenceIdName" status="0" type="STRING"><![CDATA[GLASSFRONT_1_SEQUENCE]]></Item>
+										
+										<Item count="1" name="endSeq" status="0" type="INT4"><![CDATA[88]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="incrementValue" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="startSeq" status="0" type="INT4"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="currentSeq" status="0" type="INT4"><![CDATA[49]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="6" seq="4" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="Utilities"/>
+										<Property key="trigger_name" value="Pad String"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="InputString" status="0" type="STRING"><![CDATA[49]]></Item>
+										
+										<Item count="1" name="StringLength" status="0" type="INT2"><![CDATA[3]]></Item>
+										
+										<Item count="1" name="PadCharacter" status="0" type="STRING"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PadLeft" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[049]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="2" exstatus="0" status="0">
+										<Item count="1" name="PaddedString" status="0" type="STRING"><![CDATA[049]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="7" seq="5" type="STRINGBUILDER">
+										<Properties>
+										<Property key="format" value="C$(LineNumber)$(CarrierNumber)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[049]]></Item>
+										
+										<Item count="1" name="LineNumber" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="CarrierNumber" status="0" type="STRING"><![CDATA[C1049]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[C1049]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="14" seq="6" type="STRINGTIME">
+										<Properties>
+										<Property key="fmt_option" value="Custom"/>
+										<Property key="fmt_custom" value="%Y-%m-%d %H:%M:%S.001 %Z"/>
+										<Property key="append_millis" value="False"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Timestamp" status="0" type="TIMESTAMP"><![CDATA[2025-03-31 21:16:19 (2025-04-01 01:16:19 GMT)]]></Item>
+										
+										<Item count="1" name="Count To Parse" status="-5209" type="UINT2"><![CDATA[65535]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="OnTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Output" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="8" seq="7" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="GALC_ProductCarrierDao_save"/>
+										<Property key="version" value="2046816300"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="id_carrierId" status="0" type="STRING"><![CDATA[C1049]]></Item>
+										
+										<Item count="1" name="id_onTimestamp" status="0" type="STRING"><![CDATA[2025-03-31 21:16:19.001 EDT]]></Item>
+										
+										<Item count="1" name="id_productId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="processPointId" status="0" type="STRING"><![CDATA[AAF1GL1P00101]]></Item>
+										
+										<Item count="1" name="JSON_Array_rows_in" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										</Notification>
+										<Completion execution_time="11" exstatus="0" status="0">
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="10" seq="8" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="INFO"/>
+										<Property key="component" value="AAF1_AFON_CarrierAssign"/>
+										<Property key="msg" value="$(Trigger) - Adding Product Id: $(ProductId), Sequence: $(Sequence) to Product Carrier with Carrier Id: $(CarrierId)"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="Sequence" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="CarrierId" status="0" type="STRING"><![CDATA[C1049]]></Item>
+										
+										<Item count="1" name="Trigger" status="0" type="STRING"><![CDATA[AssignGlassCarrier]]></Item>
+										
+										</Notification>
+										<Completion execution_time="11" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="11" seq="9" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743470179971"/>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON_CarrierAssign" trigger="BroadcastFromAfOn" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743470179937" type="HTTP_LISTENER">
+		<Item count="1" name="HTTP Content Length" status="0" type="INT4"><![CDATA[145]]></Item>
+			
+			<Item count="1" name="HTTP Method" status="0" type="STRING"><![CDATA[POST]]></Item>
+				
+				<Item count="1" name="HTTP URL" status="0" type="STRING"><![CDATA[/AAF1/CARRIER_ASSIGN]]></Item>
+					
+					<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAB600 NH883PX   B",
+  "CLIENT_ID": "AAF1ON1DCARRA",
+  "SEQUENCE_NO": "28956",
+  "PRODUCT_ID": "1HGCY2F69SA042517"
+}]]></Item>
+						
+					</EventNotification>
+					<StaticVariableInitialValues>
+						<Item count="1" name="SendGlassCarrier" status="0" type="BOOL"><![CDATA[true]]></Item>
+							
+							<Item count="1" name="SendTireCarrier" status="0" type="BOOL"><![CDATA[true]]></Item>
+								
+								<Item count="1" name="SendSeatCarrier" status="0" type="BOOL"><![CDATA[true]]></Item>
+									
+								</StaticVariableInitialValues>
+								<ActionReport id="1" seq="1" type="JSON.DECODE">
+									<Properties>
+										<Property key="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#10;    &quot;SEQUENCE_NO&quot; : &quot;&quot;&#10; }"/>
+									</Properties>
+									<Notification>
+										<Item count="1" name="JSON Input" status="0" type="STRING"><![CDATA[{
+  "PRODUCT_SPEC_CODE": "S30BAB600 NH883PX   B",
+  "CLIENT_ID": "AAF1ON1DCARRA",
+  "SEQUENCE_NO": "28956",
+  "PRODUCT_ID": "1HGCY2F69SA042517"
+}]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="AfOnSequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="SEQUENCE_NO" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										<Item count="1" name="resultMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="PRODUCT_SPEC_CODE" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="21" seq="2" type="IF">
+										<Properties>
+										<Property key="expression" value="SendGlassCarrier==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SendGlassCarrier" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="20" seq="3" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="== Current Project =="/>
+										<Property key="trigger_name" value="AssignGlassCarrier"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+										
+										<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										</Notification>
+										<Completion execution_time="34" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="23" seq="4" type="IF">
+										<Properties>
+										<Property key="expression" value="SendSeatCarrier==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SendSeatCarrier" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="22" seq="5" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="== Current Project =="/>
+										<Property key="trigger_name" value="AssignSeatCarrier"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+										
+										<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										</Notification>
+										<Completion execution_time="41" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="25" seq="6" type="IF">
+										<Properties>
+										<Property key="expression" value="SendTireCarrier==0"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="SendTireCarrier" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="24" seq="7" type="SUBTRIGGER">
+										<Properties>
+										<Property key="project_name" value="== Current Project =="/>
+										<Property key="trigger_name" value="AssignTireCarrier"/>
+										<Property key="wait_for_completion" value="true"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="ProductId" status="0" type="STRING"><![CDATA[1HGCY2F69SA042517]]></Item>
+										
+										<Item count="1" name="ProductSpecCode" status="0" type="STRING"><![CDATA[S30BAB600 NH883PX   B]]></Item>
+										
+										<Item count="1" name="SequenceNumber" status="0" type="STRING"><![CDATA[28956]]></Item>
+										
+										</Notification>
+										<Completion execution_time="36" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="11" seq="8" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743470180048">
+										<Item count="1" name="HTTP Content-Type" status="-5109" type="STRING"/>
+										<Item count="1" name="HTTP Status Code" status="-5109" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="HTTP Content" status="-5109" type="STRING"/>
+										</EventCompletion>
+										</TriggerExecutionReport>
+</TriggerExecutionReports>

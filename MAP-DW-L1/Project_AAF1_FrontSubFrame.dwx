@@ -1,0 +1,2142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_FUELTANK_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_FUELTANK_PLC" nlsid="30030">
+<DeviceDefinition name="AAF1_FUELTANK_PLC" type="19" type_name="QCPU" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="cpuid" value="1"/><Property name="ip_address" value="10.39.133.81"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="2048"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="max_pending" value="1"/><Property name="port" value="1282"/><Property name="sdpts" value="2048"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DataCollectionService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="963666366"  connection_time_out="10000" enableSAF="true" enable_staging_copy="false" id="GALC_DataCollectionService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="true" logCount="1" logEnabled="true" logMessageSize="-1" logSize="5" max_outstanding_messages="30720" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DataCollectionService/execute" id="GALC_DataCollectionService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_3PC_SUB__DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_3PC_SUB__DataCollection" nlsid="30033">
+
+										<TransactionDef id="AAF1_3PC_SUB__DataCollection" version="537868695" version_mismatch="pass">
+										<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" name="VALUE1" type="FLOAT4"/>
+										<Variable count="1" name="ANGLE1" type="FLOAT4"/>
+										<Variable count="1" length="32" name="RESULT1" type="STRING"/>
+										<Variable count="1" name="VALUE2" type="FLOAT4"/>
+										<Variable count="1" name="ANGLE2" type="FLOAT4"/>
+										<Variable count="1" length="32" name="RESULT2" type="STRING"/>
+										<Variable count="1" name="VALUE3" type="FLOAT4"/>
+										<Variable count="1" name="ANGLE3" type="FLOAT4"/>
+										<Variable count="1" length="32" name="RESULT3" type="STRING"/>
+										<Variable count="1" name="VALUE4" type="FLOAT4"/>
+										<Variable count="1" name="ANGLE4" type="FLOAT4"/>
+										<Variable count="1" length="32" name="RESULT4" type="STRING"/>
+										</InputMap>
+										<OutputMap>
+										<Variable count="1" length="16" name="Reply_ProcessPointId" type="STRING"/>
+										<Variable count="1" length="32" name="Reply_ClientId" type="STRING"/>
+										</OutputMap>
+										<Response outputformat="JSON">
+										<JSONInfo rawJson="ew0KICAgIlBST0NFU1NfUE9JTlRfSUQiOiIiLA0KICAgIkNMSUVOVF9JRCI6IiIgDQp9">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Parameter dwType="16" name="Reply_ProcessPointId" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="Reply_ClientId" parmname="CLIENT_ID" type="STRING"/>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Response>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoJCQ0KICAgICAgICAiVkFMVUUxIjowLjAsDQogICAgICAgICJBTkdMRTEiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJSRVNVTFQxIjoiMSIsDQoNCiAgICAgICAgIlZBTFVFMiI6MC4wLA0KICAgICAgICAiQU5HTEUyIjowLjAsICAgICAgICAgICAgICAgIA0KCQkiUkVTVUxUMiI6IjEiLA0KDQogICAgICAgICJWQUxVRTMiOjAuMCwNCiAgICAgICAgIkFOR0xFMyI6MC4wLCAgICAgICAgICAgICAgICANCgkJIlJFU1VMVDMiOiIxIiwNCg0KICAgICAgICAiVkFMVUU0IjowLjAsDQogICAgICAgICJBTkdMRTQiOjAuMCwgICAgICAgICAgICAgICAgDQoJCSJSRVNVTFQ0IjoiMSINCgkNCgl9DQp9IA==">
+										<JSONRequest>
+										<Structure name="JSON_Object">
+										<Structure name="com-honda-galc-data-DefaultDataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="10" name="VALUE1" parmname="VALUE1" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE1" parmname="ANGLE1" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT1" parmname="RESULT1" type="STRING"/>
+										<Parameter dwType="10" name="VALUE2" parmname="VALUE2" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE2" parmname="ANGLE2" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT2" parmname="RESULT2" type="STRING"/>
+										<Parameter dwType="10" name="VALUE3" parmname="VALUE3" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE3" parmname="ANGLE3" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT3" parmname="RESULT3" type="STRING"/>
+										<Parameter dwType="10" name="VALUE4" parmname="VALUE4" type="DOUBLE"/>
+										<Parameter dwType="10" name="ANGLE4" parmname="ANGLE4" type="DOUBLE"/>
+										<Parameter dwType="16" name="RESULT4" parmname="RESULT4" type="STRING"/>
+										</Structure>
+										</Structure>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_FrontSubFrame/DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_FrontSubFrame/DataCollection" nlsid="30031">
+<Trigger name="DataCollection" project="AAF1_FrontSubFrame" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|14~6~10~11~12~1~15~17~22~23~28~29~30~31~32~33~34~35~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="14" type="3" x="-100" y="-25"/>
+			<Node id="6" type="3" x="100" y="150"/>
+			<Node id="10" type="3" x="-100" y="625"/>
+			<Node id="11" type="3" x="-100" y="400"/>
+			<Node id="12" type="3" x="-100" y="700"/>
+			<Node id="1" type="3" x="-100" y="125"/>
+			<Node id="15" type="3" x="-100" y="50"/>
+			<Node id="17" type="3" x="-275" y="250"/>
+			<Node id="22" type="3" x="100" y="0"/>
+			<Node id="23" type="3" x="-275" y="100"/>
+			<Node id="28" type="3" x="100" y="75"/>
+			<Node id="29" type="3" x="-275" y="175"/>
+			<Node id="30" type="3" x="-100" y="225"/>
+			<Node id="31" type="3" x="-100" y="325"/>
+			<Node id="32" type="3" x="-375" y="375"/>
+			<Node id="33" type="3" x="-375" y="450"/>
+			<Node id="34" type="3" x="-375" y="525"/>
+			<Node id="35" type="3" x="-100" y="500"/>
+			<Node errorActionId="5" errorStartIndex="22" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<RoutedErrors value="14.1|10.1|11.1|1.1|15.2|23.1|29.1|30.1|31.2|32.1|35.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_FUELTANK_PLC" name="M[6002]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="BOLT2 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT2 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3"/>
+  <VariableInfo name="BOLT1 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT4 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT1 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT3 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT4 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT1 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT3 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT4 JUD" type="BOOL" options="3"/>
+  <VariableInfo name="DATA_READY" type="INT2" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="255" options="3"/>
+  <VariableInfo name="BOLT2 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT3 ANGLE" type="FLOAT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="DC_CLIENT_ID" type="STRING" length="32" options="3" default="AAF1FS1D00901B"/>
+  <VariableInfo name="plcbolt3trq" type="STRING" length="32" options="3" default="D[9020]"/>
+  <VariableInfo name="plcbolt4trq" type="STRING" length="32" options="3" default="D[9025]"/>
+  <VariableInfo name="plcbolt2angle" type="STRING" length="32" options="3" default="D[9016]"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[9000]"/>
+  <VariableInfo name="plcbolt2jud" type="STRING" length="32" options="3" default="M[9002]"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3" default="5020030A A000"/>
+  <VariableInfo name="UID_CLIENT_ID" type="STRING" length="32" options="3" default="AAF1FS1D00901A"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_3PC_SUB"/>
+  <VariableInfo name="plcbolt1jud" type="STRING" length="32" options="3" default="M[9001]"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="plcbolt1angle" type="STRING" length="32" options="3" default="D[9011]"/>
+  <VariableInfo name="plcError" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1FS1P00901"/>
+  <VariableInfo name="plcbolt1trq" type="STRING" length="32" options="3" default="D[9010]"/>
+  <VariableInfo name="plcbolt4angle" type="STRING" length="32" options="3" default="D[9026]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="plcbolt3jud" type="STRING" length="32" options="3" default="M[9003]"/>
+  <VariableInfo name="plcbolt3angle" type="STRING" length="32" options="3" default="D[9021]"/>
+  <VariableInfo name="plcbolt4jud" type="STRING" length="32" options="3" default="M[9004]"/>
+  <VariableInfo name="plcbolt2trq" type="STRING" length="32" options="3" default="D[9015]"/>
+ </StaticVariables>
+ <Actions first_action="14">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Comment>CFJldHJpZXZlIHRoZSBQcm9jZXNzIFJlc3VsdHM=</Comment>
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},    &#13;&#10;    &quot;BOLT1_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;    &#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="BOLT1_TRQ Name" name="plcbolt1trq"/>
+    <StaticVariable logical_name="BOLT1_ANGLE Name" name="plcbolt1angle"/>
+    <StaticVariable logical_name="BOLT1_JUD Name" name="plcbolt1jud"/>
+    <StaticVariable logical_name="BOLT2_TRQ Name" name="plcbolt2trq"/>
+    <StaticVariable logical_name="BOLT2_ANGLE Name" name="plcbolt2angle"/>
+    <StaticVariable logical_name="BOLT2_JUD Name" name="plcbolt2jud"/>
+    <StaticVariable logical_name="BOLT3_TRQ Name" name="plcbolt3trq"/>
+    <StaticVariable logical_name="BOLT3_ANGLE Name" name="plcbolt3angle"/>
+    <StaticVariable logical_name="BOLT3_JUD Name" name="plcbolt3angle"/>
+    <StaticVariable logical_name="BOLT4_TRQ Name" name="plcbolt4trq"/>
+    <StaticVariable logical_name="BOLT4_ANGLE Name" name="plcbolt4angle"/>
+    <StaticVariable logical_name="BOLT4_JUD Name" name="plcbolt4jud"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Comment>CFNlbmQgVENQIEJyb2FkY2FzdCBtZXNzYWdlIGJhY2sgdG8gR0FMQyBjbGllbnQ=</Comment>
+   <Properties>
+    <Property name="name" value="AAF1_3PC_SUB__DataCollection"/>
+    <Property name="version" value="537868695"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="DC_CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="VALUE1" name="BOLT1 TRQ"/>
+    <LocalVariable logical_name="ANGLE1" name="BOLT1 ANGLE"/>
+    <LocalVariable logical_name="RESULT1" name="BOLT1 JUD"/>
+    <LocalVariable logical_name="VALUE2" name="BOLT2 TRQ"/>
+    <LocalVariable logical_name="ANGLE2" name="BOLT2 ANGLE"/>
+    <LocalVariable logical_name="RESULT2" name="BOLT2 JUD"/>
+    <LocalVariable logical_name="VALUE3" name="BOLT3 TRQ"/>
+    <LocalVariable logical_name="ANGLE3" name="BOLT3 ANGLE"/>
+    <LocalVariable logical_name="RESULT3" name="BOLT3 JUD"/>
+    <LocalVariable logical_name="VALUE4" name="BOLT4 TRQ"/>
+    <LocalVariable logical_name="ANGLE4" name="BOLT4 ANGLE"/>
+    <LocalVariable logical_name="RESULT4" name="BOLT4 JUD"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="22"/>
+    <Route result="2" goto="35"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="12" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="15" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="23"/>
+    <Route result="2" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="22" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="23" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="28" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="29" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="30" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="31" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="32"/>
+    <Route result="2" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="32" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="33" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="34"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="34" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="35" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(TRIGGER) - Data Collected for VIN ($(vin)), Bolt1 ($(trq1),$(ang1),$(jug1)) , Bolt2 ($(trq2),$(ang2),$(jug2)), Bolt3 ($(trq3),$(ang3),$(jug3)), Bolt4 ($(trq4),$(ang4),$(jug4))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="trq1" name="BOLT1 TRQ"/>
+    <LocalVariable logical_name="ang1" name="BOLT1 ANGLE"/>
+    <LocalVariable logical_name="jug1" name="BOLT1 JUD"/>
+    <LocalVariable logical_name="trq2" name="BOLT2 TRQ"/>
+    <LocalVariable logical_name="ang2" name="BOLT2 ANGLE"/>
+    <LocalVariable logical_name="jug2" name="BOLT2 JUD"/>
+    <LocalVariable logical_name="trq3" name="BOLT3 TRQ"/>
+    <LocalVariable logical_name="ang3" name="BOLT3 ANGLE"/>
+    <LocalVariable logical_name="jug3" name="BOLT3 JUD"/>
+    <LocalVariable logical_name="trq4" name="BOLT4 TRQ"/>
+    <LocalVariable logical_name="ang4" name="BOLT4 ANGLE"/>
+    <LocalVariable logical_name="jug4" name="BOLT4 JUD"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_MbpnProductOnService_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_MbpnProductOnService_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="998674033"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_MbpnProductOnService_Execute" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/MbpnProductOnService/execute" id="GALC_MbpnProductOnService_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_CreateUID" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_CreateUID" nlsid="30033">
+
+<TransactionDef id="GALC_CreateUID" version="517177273" version_mismatch="pass">
+	<Transport id="GALC_MbpnProductOnService_Execute" type="Http"/>
+	<InputMap>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="16" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+		<Variable count="1" length="30" name="PRODUCT_SPEC_CODE" type="STRING"/>
+		<Variable count="1" length="20" name="PRODUCTION_LOT" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+		<Variable count="1" length="32" name="ERROR_CODE" type="STRING"/>
+		<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+	</OutputMap>
+	<Response outputformat="JSON">
+		<JSONInfo rawJson="ew0KICAgIlBST0NFU1NfUE9JTlRfSUQiOiIiLA0KICAgIkNMSUVOVF9JRCI6IiIgLA0KICAgIkVSUk9SX0NPREUiOiIiLA0KICAgIkRBVEFfQ09MTEVDVElPTl9DT01QTEVURSI6IiINCn0=">
+			<JSONRequest>
+				<Structure name="JSON_Object">
+					<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+					<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+					<Parameter dwType="16" name="ERROR_CODE" parmname="ERROR_CODE" type="STRING"/>
+					<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+				</Structure>
+			</JSONRequest>
+		</JSONInfo>
+	</Response>
+	<Mapping outputformat="JSON">
+		<JSONInfo rawJson="Ww0KICAgIHsNCiAgICAgICJjb20uaG9uZGEuZ2FsYy5kYXRhLkRlZmF1bHREYXRhQ29udGFpbmVyIjogew0KICAgICAgIkNMSUVOVF9JRCI6IiIsDQogICAgICAiUFJPQ0VTU19QT0lOVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9JRCI6IiIsDQogICAgICAiUFJPRFVDVF9TUEVDX0NPREUiOiIiLA0KICAgICAgIlBST0RVQ1RJT05fTE9UIjoiIg0KICAgICAgfQ0KICAgIH0NCiAgXQ==">
+			<JSONRequest>
+				<Table name="JSON_Array" nbrInRows="1">
+					<Structure name="com-honda-galc-data-DefaultDataContainer">
+						<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCT_SPEC_CODE" parmname="PRODUCT_SPEC_CODE" type="STRING"/>
+						<Parameter dwType="16" name="PRODUCTION_LOT" parmname="PRODUCTION_LOT" type="STRING"/>
+					</Structure>
+				</Table>
+			</JSONRequest>
+		</JSONInfo>
+	</Mapping>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_FrontSubFrame/Left_DataCollection" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_FrontSubFrame/Left_DataCollection" nlsid="30031">
+<Trigger name="Left_DataCollection" project="AAF1_FrontSubFrame" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Data|14~6~10~11~12~1~15~17~22~23~28~29~30~31~32~33~34~35~36~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+			<Node id="14" type="3" x="-100" y="-25"/>
+			<Node id="6" type="3" x="100" y="150"/>
+			<Node id="10" type="3" x="-100" y="750"/>
+			<Node id="11" type="3" x="-100" y="500"/>
+			<Node id="12" type="3" x="-100" y="825"/>
+			<Node id="1" type="3" x="-100" y="125"/>
+			<Node id="15" type="3" x="-100" y="50"/>
+			<Node id="17" type="3" x="-275" y="250"/>
+			<Node id="22" type="3" x="100" y="0"/>
+			<Node id="23" type="3" x="-275" y="100"/>
+			<Node id="28" type="3" x="100" y="75"/>
+			<Node id="29" type="3" x="-275" y="175"/>
+			<Node id="30" type="3" x="-100" y="225"/>
+			<Node id="31" type="3" x="-100" y="325"/>
+			<Node id="32" type="3" x="-375" y="375"/>
+			<Node id="33" type="3" x="-375" y="450"/>
+			<Node id="34" type="3" x="-375" y="525"/>
+			<Node id="35" type="3" x="-100" y="675"/>
+			<Node errorActionId="5" errorStartIndex="22" id="600000000" text="Error Handling" type="4" x="100" y="-75"/>
+			<Node id="36" type="3" x="-100" y="400"/>
+			<RoutedErrors value="14.1|10.1|11.1|1.1|15.2|23.1|29.1|30.1|31.2|32.1|35.1|36.1|"/></BuildInfo>
+ <Description>Received a process complete from PLC.  Collect data and judgement to pass back to GALC Client.</Description>
+ <Event type="DATAEVENT"><DataEvent>
+				<Variable device="AAF1_FUELTANK_PLC" name="M[6002]" qos="3" type="BOOL"/>
+				<Condition deadband="0" fire_on_start="true" type="onchange"/>
+			</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="BOLT2 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT2 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="VIN_Length" type="INT4" options="3"/>
+  <VariableInfo name="BOLT1 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT4 ANGLE" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT1 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT3 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT4 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT1 TRQ" type="FLOAT4" options="3"/>
+  <VariableInfo name="BOLT3 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT4 JUD" type="BOOL" options="3"/>
+  <VariableInfo name="DATA_READY" type="INT2" options="3" default="0"/>
+  <VariableInfo name="PRODUCT_ID" type="STRING" length="255" options="3"/>
+  <VariableInfo name="BOLT2 JUD" type="INT2" options="3"/>
+  <VariableInfo name="BOLT3 ANGLE" type="FLOAT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="DC_CLIENT_ID" type="STRING" length="32" options="3" default="AAF1FS1D00901B"/>
+  <VariableInfo name="plcbolt3trq" type="STRING" length="32" options="3" default="D[9020]"/>
+  <VariableInfo name="plcbolt4trq" type="STRING" length="32" options="3" default="D[9025]"/>
+  <VariableInfo name="plcbolt2angle" type="STRING" length="32" options="3" default="D[9016]"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[9000]"/>
+  <VariableInfo name="plcbolt2jud" type="STRING" length="32" options="3" default="M[9002]"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3" default="5020030A A000"/>
+  <VariableInfo name="UID_CLIENT_ID" type="STRING" length="32" options="3" default="AAF1FS1D00901A"/>
+  <VariableInfo name="DEVICE_NAME" type="STRING" length="32" options="3" default="AAF1_3PC_SUB"/>
+  <VariableInfo name="plcbolt1jud" type="STRING" length="32" options="3" default="M[9001]"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="plcbolt1angle" type="STRING" length="32" options="3" default="D[9011]"/>
+  <VariableInfo name="plcError" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="PROCESS_POINT_ID" type="STRING" length="32" options="3" default="AAF1FS1P00901"/>
+  <VariableInfo name="plcbolt1trq" type="STRING" length="32" options="3" default="D[9010]"/>
+  <VariableInfo name="plcbolt4angle" type="STRING" length="32" options="3" default="D[9026]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="plcbolt3jud" type="STRING" length="32" options="3" default="M[9003]"/>
+  <VariableInfo name="plcbolt3angle" type="STRING" length="32" options="3" default="D[9021]"/>
+  <VariableInfo name="plcbolt4jud" type="STRING" length="32" options="3" default="M[9004]"/>
+  <VariableInfo name="plcbolt2trq" type="STRING" length="32" options="3" default="D[9015]"/>
+ </StaticVariables>
+ <Actions first_action="14">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Comment>CFJldHJpZXZlIHRoZSBQcm9jZXNzIFJlc3VsdHM=</Comment>
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:18},    &#13;&#10;    &quot;BOLT1_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_TRQ&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_ANGLE&quot; : {&quot;type&quot;:&quot;FLOAT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4_JUD&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;    &#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="BOLT1_TRQ Name" name="plcbolt1trq"/>
+    <StaticVariable logical_name="BOLT1_ANGLE Name" name="plcbolt1angle"/>
+    <StaticVariable logical_name="BOLT1_JUD Name" name="plcbolt1jud"/>
+    <StaticVariable logical_name="BOLT2_TRQ Name" name="plcbolt2trq"/>
+    <StaticVariable logical_name="BOLT2_ANGLE Name" name="plcbolt2angle"/>
+    <StaticVariable logical_name="BOLT2_JUD Name" name="plcbolt2jud"/>
+    <StaticVariable logical_name="BOLT3_TRQ Name" name="plcbolt3trq"/>
+    <StaticVariable logical_name="BOLT3_ANGLE Name" name="plcbolt3angle"/>
+    <StaticVariable logical_name="BOLT3_JUD Name" name="plcbolt3angle"/>
+    <StaticVariable logical_name="BOLT4_TRQ Name" name="plcbolt4trq"/>
+    <StaticVariable logical_name="BOLT4_ANGLE Name" name="plcbolt4angle"/>
+    <StaticVariable logical_name="BOLT4_JUD Name" name="plcbolt4jud"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="PRODUCT_ID"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="6" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="11" disabled="false">
+   <Comment>CFNlbmQgVENQIEJyb2FkY2FzdCBtZXNzYWdlIGJhY2sgdG8gR0FMQyBjbGllbnQ=</Comment>
+   <Properties>
+    <Property name="name" value="AAF1_3PC_SUB__DataCollection"/>
+    <Property name="version" value="537868695"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="DC_CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="VALUE1" name="BOLT1 TRQ"/>
+    <LocalVariable logical_name="ANGLE1" name="BOLT1 ANGLE"/>
+    <LocalVariable logical_name="RESULT1" name="BOLT1 JUD"/>
+    <LocalVariable logical_name="VALUE2" name="BOLT2 TRQ"/>
+    <LocalVariable logical_name="ANGLE2" name="BOLT2 ANGLE"/>
+    <LocalVariable logical_name="RESULT2" name="BOLT2 JUD"/>
+    <LocalVariable logical_name="VALUE3" name="BOLT3 TRQ"/>
+    <LocalVariable logical_name="ANGLE3" name="BOLT3 ANGLE"/>
+    <LocalVariable logical_name="RESULT3" name="BOLT3 JUD"/>
+    <LocalVariable logical_name="VALUE4" name="BOLT4 TRQ"/>
+    <LocalVariable logical_name="ANGLE4" name="BOLT4 ANGLE"/>
+    <LocalVariable logical_name="RESULT4" name="BOLT4 JUD"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="22"/>
+    <Route result="2" goto="35"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="12" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="14" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DATA_READY"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="15" disabled="false">
+   <Properties>
+    <Property name="expression" value="DATA_READY"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DATA_READY" name="DATA_READY"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="23"/>
+    <Route result="2" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="17" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="22" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(Trigger) - Error Processing VIN ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="PRODUCT_ID"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="28"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="23" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="28" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="6"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="29" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="30" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VIN_Length"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="31" disabled="false">
+   <Properties>
+    <Property name="expression" value="CURRENT_VIN_LENGTH &gt;= 17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="CURRENT_VIN_LENGTH" name="VIN_Length"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="36"/>
+    <Route result="1" goto="32"/>
+    <Route result="2" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="32" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(TRIGGER) - VIN ($(vin)) not proper length"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="PRODUCT_ID"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="33" disabled="false">
+   <Comment>CFdyaXRlIERhdGEgQ29sbGVjdGlvbiBDb21wbGV0ZSBiYWNrIHRvIFBMQw==</Comment>
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="DEVICE_NAME"/>
+    <StaticVariable logical_name="Variable Name" name="plcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="34"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="34" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="35" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_3PC_SUB"/>
+    <Property name="msg" value="$(TRIGGER) - Data Collected for VIN ($(vin)), Bolt1 ($(trq1),$(ang1),$(jug1)) , Bolt2 ($(trq2),$(ang2),$(jug2)), Bolt3 ($(trq3),$(ang3),$(jug3)), Bolt4 ($(trq4),$(ang4),$(jug4))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <LocalVariable logical_name="vin" name="PRODUCT_ID"/>
+    <LocalVariable logical_name="trq1" name="BOLT1 TRQ"/>
+    <LocalVariable logical_name="ang1" name="BOLT1 ANGLE"/>
+    <LocalVariable logical_name="jug1" name="BOLT1 JUD"/>
+    <LocalVariable logical_name="trq2" name="BOLT2 TRQ"/>
+    <LocalVariable logical_name="ang2" name="BOLT2 ANGLE"/>
+    <LocalVariable logical_name="jug2" name="BOLT2 JUD"/>
+    <LocalVariable logical_name="trq3" name="BOLT3 TRQ"/>
+    <LocalVariable logical_name="ang3" name="BOLT3 ANGLE"/>
+    <LocalVariable logical_name="jug3" name="BOLT3 JUD"/>
+    <LocalVariable logical_name="trq4" name="BOLT4 TRQ"/>
+    <LocalVariable logical_name="ang4" name="BOLT4 ANGLE"/>
+    <LocalVariable logical_name="jug4" name="BOLT4 JUD"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="36" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_CreateUID"/>
+    <Property name="version" value="517177273"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="UID_CLIENT_ID"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="PROCESS_POINT_ID"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="PRODUCT_ID"/>
+    <StaticVariable logical_name="PRODUCT_SPEC_CODE" name="ProductSpecCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="22"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_FrontSubFrame" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_FrontSubFrame" nlsid="30030">
+<DeviceDefinition name="AAF1_FrontSubFrame" type="166" type_name="RCPU (Built-in Ethernet)" state="6" options="2104"><Properties><Property name="per_var_security" value="false"/><Property name="ip_address" value="10.39.233.110"/><Property name="protocol" value="TCP"/><Property name="csv_location" value=""/><Property name="smpts" value="4096"/><Property name="timeout" value="15000"/><Property name="keepalive" value="180"/><Property name="port" value="5012"/><Property name="sdpts" value="4096"/><Property name="connections" value="1"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AAF1_FrontSubframe_DataCollection" nlsid="30033" interface="1"><exportitem type="transaction" name="AAF1_FrontSubframe_DataCollection" nlsid="30033">
+
+			<TransactionDef id="AAF1_FrontSubframe_DataCollection" version="-377299126" version_mismatch="pass">
+				<Transport id="GALC_DataCollectionService_Execute" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+					<Variable count="1" name="BOLT1_MEASUREMENT" type="FLOAT8"/>
+					<Variable count="1" name="BOLT1_ANGLE" type="FLOAT8"/>
+					<Variable count="1" length="32" name="BOLT1_STATUS" type="STRING"/>
+					<Variable count="1" name="BOLT2_MEASUREMENT" type="FLOAT8"/>
+					<Variable count="1" name="BOLT2_ANGLE" type="FLOAT8"/>
+					<Variable count="1" length="32" name="BOLT2_STATUS" type="STRING"/>
+					<Variable count="1" name="BOLT3_MEASUREMENT" type="FLOAT8"/>
+					<Variable count="1" name="BOLT3_ANGLE" type="FLOAT8"/>
+					<Variable count="1" length="32" name="BOLT3_STATUS" type="STRING"/>
+					<Variable count="1" name="BOLT4_MEASUREMENT" type="FLOAT8"/>
+					<Variable count="1" name="BOLT4_ANGLE" type="FLOAT8"/>
+					<Variable count="1" length="32" name="BOLT4_STATUS" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="32" name="DATA_COLLECTION_COMPLETE" type="STRING"/>
+					<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+					<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KICAiREFUQV9DT0xMRUNUSU9OX0NPTVBMRVRFIjogIiIsDQogICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICJDTElFTlRfSUQiOiAiIg0KfQ==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="DATA_COLLECTION_COMPLETE" parmname="DATA_COLLECTION_COMPLETE" type="STRING"/>
+								<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+								<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="eyANCgkiY29tLmhvbmRhLmdhbGMuZGF0YS5EZWZhdWx0RGF0YUNvbnRhaW5lciIgOiB7IA0KCQkiQ0xJRU5UX0lEIjogIiIsDQoJCSJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQoJCSJQUk9EVUNUX0lEIjogIiIsDQoNCgkJIkJPTFQxX01FQVNVUkVNRU5UIjowLjAsDQoJCSJCT0xUMV9BTkdMRSI6MC4wLA0KCQkiQk9MVDFfU1RBVFVTIjoiMSIsDQogICAgICAgIA0KICAgICAgICAiQk9MVDJfTUVBU1VSRU1FTlQiOjAuMCwNCgkJIkJPTFQyX0FOR0xFIjowLjAsDQoJCSJCT0xUMl9TVEFUVVMiOiIxIiwNCg0KICAgICAgICAiQk9MVDNfTUVBU1VSRU1FTlQiOjAuMCwNCgkJIkJPTFQzX0FOR0xFIjowLjAsDQoJCSJCT0xUM19TVEFUVVMiOiIxIiwNCg0KICAgICAgICAiQk9MVDRfTUVBU1VSRU1FTlQiOjAuMCwNCgkJIkJPTFQ0X0FOR0xFIjowLjAsDQoJCSJCT0xUNF9TVEFUVVMiOiIxIg0KCX0NCn0g">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Structure name="com-honda-galc-data-DefaultDataContainer">
+									<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+									<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+									<Parameter dwType="10" name="BOLT1_MEASUREMENT" parmname="BOLT1_MEASUREMENT" type="DOUBLE"/>
+									<Parameter dwType="10" name="BOLT1_ANGLE" parmname="BOLT1_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="BOLT1_STATUS" parmname="BOLT1_STATUS" type="STRING"/>
+									<Parameter dwType="10" name="BOLT2_MEASUREMENT" parmname="BOLT2_MEASUREMENT" type="DOUBLE"/>
+									<Parameter dwType="10" name="BOLT2_ANGLE" parmname="BOLT2_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="BOLT2_STATUS" parmname="BOLT2_STATUS" type="STRING"/>
+									<Parameter dwType="10" name="BOLT3_MEASUREMENT" parmname="BOLT3_MEASUREMENT" type="DOUBLE"/>
+									<Parameter dwType="10" name="BOLT3_ANGLE" parmname="BOLT3_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="BOLT3_STATUS" parmname="BOLT3_STATUS" type="STRING"/>
+									<Parameter dwType="10" name="BOLT4_MEASUREMENT" parmname="BOLT4_MEASUREMENT" type="DOUBLE"/>
+									<Parameter dwType="10" name="BOLT4_ANGLE" parmname="BOLT4_ANGLE" type="DOUBLE"/>
+									<Parameter dwType="16" name="BOLT4_STATUS" parmname="BOLT4_STATUS" type="STRING"/>
+								</Structure>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Utilities/Round Value" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Round Value" nlsid="30031">
+<Trigger name="Round Value" project="Utilities" max_pending="20" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+										<Node id="1" type="3" x="-100" y="-25"/>
+										<Node id="2" type="3" x="-100" y="50"/>
+										<Node id="3" type="3" x="25" y="25"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;NumberToRound&quot; options=&quot;7&quot; type=&quot;FLOAT8&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;DecimalPlaces&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo name=&quot;RoundedValue&quot; options=&quot;7&quot; type=&quot;FLOAT8&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function round(num, numDecimalPlaces)&#13;&#10;    local mult = 10^(numDecimalPlaces or 0)&#13;&#10;    if num &gt;= 0 then return math.floor(num * mult + 0.5) / mult&#13;&#10;    else return math.ceil(num * mult - 0.5) / mult end&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;RoundedValue&quot;] = round(DWInput[&quot;NumberToRound&quot;],DWInput[&quot;DecimalPlaces&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;NumberToRound&quot; options=&quot;7&quot; type=&quot;FLOAT8&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;DecimalPlaces&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo name=&quot;RoundedValue&quot; options=&quot;7&quot; type=&quot;FLOAT8&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="NumberToRound" name="NumberToRound"/>
+    <EventVariable logical_name="DecimalPlaces" name="DecimalPlaces"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="RoundedValue" name="RoundedValue"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_FrontSubFrame/Left_DataCollection_New" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_FrontSubFrame/Left_DataCollection_New" nlsid="30031">
+<Trigger name="Left_DataCollection_New" project="AAF1_FrontSubFrame" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|2~1~3~9~10~11~12~14~15~16~17~18~19~20~21~22~23~24~25~26~27~28~29~30~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-100"/>
+		<Node id="2" type="3" x="-25" y="-25"/>
+		<Node id="1" type="3" x="-25" y="800"/>
+		<Node id="3" type="3" x="-25" y="50"/>
+		<Node id="9" type="3" x="-275" y="200"/>
+		<Node id="10" type="3" x="-275" y="50"/>
+		<Node id="11" type="3" x="-25" y="200"/>
+		<Node id="12" type="3" x="-25" y="600"/>
+		<Node id="14" type="3" x="175" y="25"/>
+		<Node id="15" type="3" x="175" y="100"/>
+		<Node id="16" type="3" x="175" y="175"/>
+		<Node id="17" type="3" x="-25" y="300"/>
+		<Node id="18" type="3" x="-250" y="475"/>
+		<Node id="19" type="3" x="-250" y="325"/>
+		<Node id="20" type="3" x="-250" y="400"/>
+		<Node id="21" type="3" x="-250" y="550"/>
+		<Node id="22" type="3" x="-250" y="775"/>
+		<Node id="23" type="3" x="-250" y="850"/>
+		<Node id="24" type="3" x="-25" y="400"/>
+		<Node id="25" type="3" x="-25" y="500"/>
+		<Node id="26" type="3" x="-250" y="625"/>
+		<Node id="27" type="3" x="-250" y="700"/>
+		<Node id="28" type="3" x="-25" y="125"/>
+		<Node id="29" type="3" x="-25" y="700"/>
+		<Node id="30" type="3" x="-275" y="125"/>
+		<Node errorActionId="13" errorStartIndex="14" id="600000000" text="Error Handling" type="4" x="175" y="-50"/>
+		<RoutedErrors value="2.1|3.2|10.1|11.1|12.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|25.1|26.1|27.1|28.1|29.1|30.1|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_FrontSubFrame.M[9000]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_FrontSubFrame" name="M[9000]" qos="3" type="BOOL"/>
+			<Condition deadband="0" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="FinalTorque" type="FLOAT8" xdim="4" options="3" default="0,0,0,0"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="loopTorque" type="FLOAT8" options="3" default="0.0"/>
+  <VariableInfo name="FinalJudgement" type="INT2" xdim="4" options="3" default="0,0,0,0"/>
+  <VariableInfo name="loopCounter" type="INT2" options="3" default="0"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3"/>
+  <VariableInfo name="loopAngle" type="FLOAT8" options="3" default="0.0"/>
+  <VariableInfo name="FinalAngle" type="FLOAT8" xdim="4" options="3" default="0,0,0,0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="GalcDataCollectionClientId" type="STRING" length="32" options="3" default="AAF1FS1D00901B"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[9000]"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3" default="5020030A A000"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_FrontSubFrame"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[9100]"/>
+  <VariableInfo name="GalcProcessPoint" type="STRING" length="32" options="3" default="AAF1FS1P00901"/>
+  <VariableInfo name="plcFinalTorque" type="STRING" xdim="4" length="32" options="3" default="D[9010],D[9015],D[9020],D[9025]"/>
+  <VariableInfo name="BoltCount" type="INT2" options="3" default="3"/>
+  <VariableInfo name="plcFinalAngle" type="STRING" xdim="4" length="32" options="3" default="D[9011],D[9016],D[9021],D[9026]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[9000]"/>
+  <VariableInfo name="plcJudgement" type="STRING" xdim="4" length="32" options="3" default="M[9001],M[9002],M[9003],M[9004]"/>
+  <VariableInfo name="plcGalcError" type="STRING" length="32" options="3" default="M[9101]"/>
+  <VariableInfo name="GalcCreateUIDClientId" type="STRING" length="32" options="3" default="AAF1FS1D00901A"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="11" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:14},&#13;&#10;    &#13;&#10;    &quot;BOLT1TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT2TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT3TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT4TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="BOLT1TORQUE Name" name="plcFinalTorque[0]"/>
+    <StaticVariable logical_name="BOLT1ANGLE Name" name="plcFinalAngle[0]"/>
+    <StaticVariable logical_name="BOLT1JUDGEMENT Name" name="plcJudgement[0]"/>
+    <StaticVariable logical_name="BOLT2TORQUE Name" name="plcFinalTorque[1]"/>
+    <StaticVariable logical_name="BOLT2ANGLE Name" name="plcFinalAngle[1]"/>
+    <StaticVariable logical_name="BOLT2JUDGEMENT Name" name="plcJudgement[1]"/>
+    <StaticVariable logical_name="BOLT3TORQUE Name" name="plcFinalTorque[2]"/>
+    <StaticVariable logical_name="BOLT3ANGLE Name" name="plcFinalAngle[2]"/>
+    <StaticVariable logical_name="BOLT3JUDGEMENT Name" name="plcJudgement[2]"/>
+    <StaticVariable logical_name="BOLT4TORQUE Name" name="plcFinalTorque[3]"/>
+    <StaticVariable logical_name="BOLT4ANGLE Name" name="plcFinalAngle[3]"/>
+    <StaticVariable logical_name="BOLT4JUDGEMENT Name" name="plcJudgement[3]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="ProductId"/>
+    <LocalVariable logical_name="BOLT1TORQUE" name="FinalTorque[0]"/>
+    <LocalVariable logical_name="BOLT1ANGLE" name="FinalAngle[0]"/>
+    <LocalVariable logical_name="BOLT1JUDGEMENT" name="FinalJudgement[0]"/>
+    <LocalVariable logical_name="BOLT2TORQUE" name="FinalTorque[1]"/>
+    <LocalVariable logical_name="BOLT2ANGLE" name="FinalAngle[1]"/>
+    <LocalVariable logical_name="BOLT2JUDGEMENT" name="FinalJudgement[1]"/>
+    <LocalVariable logical_name="BOLT3TORQUE" name="FinalTorque[2]"/>
+    <LocalVariable logical_name="BOLT3ANGLE" name="FinalAngle[2]"/>
+    <LocalVariable logical_name="BOLT3JUDGEMENT" name="FinalJudgement[2]"/>
+    <LocalVariable logical_name="BOLT4TORQUE" name="FinalTorque[3]"/>
+    <LocalVariable logical_name="BOLT4ANGLE" name="FinalAngle[3]"/>
+    <LocalVariable logical_name="BOLT4JUDGEMENT" name="FinalJudgement[3]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Subframe ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="15" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGalcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="17" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <StaticVariable logical_name="Final Value" name="BoltCount"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopCounter"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="18" disabled="false">
+   <Properties>
+    <Property name="expression" value="Torque/100"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Torque" name="loopTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="21" disabled="false">
+   <Properties>
+    <Property name="expression" value="Angle/10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Angle" name="loopAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="23" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="24" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_CreateUID"/>
+    <Property name="version" value="517177273"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="GalcCreateUIDClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="GalcProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <StaticVariable logical_name="PRODUCT_SPEC_CODE" name="ProductSpecCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="25" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_FrontSubframe_DataCollection"/>
+    <Property name="version" value="-377299126"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="GalcDataCollectionClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="GalcProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="BOLT1_MEASUREMENT" name="FinalTorque[0]"/>
+    <LocalVariable logical_name="BOLT1_ANGLE" name="FinalAngle[0]"/>
+    <LocalVariable logical_name="BOLT1_STATUS" name="FinalJudgement[0]"/>
+    <LocalVariable logical_name="BOLT2_MEASUREMENT" name="FinalTorque[1]"/>
+    <LocalVariable logical_name="BOLT2_ANGLE" name="FinalAngle[1]"/>
+    <LocalVariable logical_name="BOLT2_STATUS" name="FinalJudgement[1]"/>
+    <LocalVariable logical_name="BOLT3_MEASUREMENT" name="FinalTorque[2]"/>
+    <LocalVariable logical_name="BOLT3_ANGLE" name="FinalAngle[2]"/>
+    <LocalVariable logical_name="BOLT3_STATUS" name="FinalJudgement[2]"/>
+    <LocalVariable logical_name="BOLT4_MEASUREMENT" name="FinalTorque[3]"/>
+    <LocalVariable logical_name="BOLT4_ANGLE" name="FinalAngle[3]"/>
+    <LocalVariable logical_name="BOLT4_STATUS" name="FinalJudgement[3]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="26" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Round Value"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="NumberToRound" name="loopTorque"/>
+    <ConstantVariable logical_name="DecimalPlaces" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RoundedValue" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="27" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Round Value"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="NumberToRound" name="loopAngle"/>
+    <ConstantVariable logical_name="DecimalPlaces" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RoundedValue" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Data Ready Received"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Data Ready Complete for Product Id ($(ProductId))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="30" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGalcError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_FrontSubFrame/Right_DataCollection_New" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_FrontSubFrame/Right_DataCollection_New" nlsid="30031">
+<Trigger name="Right_DataCollection_New" project="AAF1_FrontSubFrame" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000">
+ <Context value="Data|2~1~3~9~10~11~12~14~15~16~17~18~19~20~21~22~23~24~25~26~27~28~29~30~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-100"/>
+		<Node id="2" type="3" x="-25" y="-25"/>
+		<Node id="1" type="3" x="-25" y="800"/>
+		<Node id="3" type="3" x="-25" y="50"/>
+		<Node id="9" type="3" x="-275" y="200"/>
+		<Node id="10" type="3" x="-275" y="50"/>
+		<Node id="11" type="3" x="-25" y="200"/>
+		<Node id="12" type="3" x="-25" y="600"/>
+		<Node id="14" type="3" x="175" y="25"/>
+		<Node id="15" type="3" x="175" y="100"/>
+		<Node id="16" type="3" x="175" y="175"/>
+		<Node id="17" type="3" x="-25" y="300"/>
+		<Node id="18" type="3" x="-250" y="475"/>
+		<Node id="19" type="3" x="-250" y="325"/>
+		<Node id="20" type="3" x="-250" y="400"/>
+		<Node id="21" type="3" x="-250" y="550"/>
+		<Node id="22" type="3" x="-250" y="775"/>
+		<Node id="23" type="3" x="-250" y="850"/>
+		<Node id="24" type="3" x="-25" y="400"/>
+		<Node id="25" type="3" x="-25" y="500"/>
+		<Node id="26" type="3" x="-250" y="625"/>
+		<Node id="27" type="3" x="-250" y="700"/>
+		<Node id="28" type="3" x="-25" y="125"/>
+		<Node id="29" type="3" x="-25" y="700"/>
+		<Node id="30" type="3" x="-275" y="125"/>
+		<Node errorActionId="13" errorStartIndex="14" id="600000000" text="Error Handling" type="4" x="175" y="-50"/>
+		<RoutedErrors value="2.1|3.2|10.1|11.1|12.1|17.1|18.1|19.1|20.1|21.1|22.1|23.1|24.1|25.1|26.1|27.1|28.1|29.1|30.1|"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_FrontSubFrame.M[9010]&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_FrontSubFrame" name="M[9010]" qos="3" type="BOOL"/>
+			<Condition deadband="0" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="FinalTorque" type="FLOAT8" xdim="4" options="3" default="0,0,0,0"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="loopTorque" type="FLOAT8" options="3" default="0.0"/>
+  <VariableInfo name="FinalJudgement" type="INT2" xdim="4" options="3" default="0,0,0,0"/>
+  <VariableInfo name="loopCounter" type="INT2" options="3" default="0"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3"/>
+  <VariableInfo name="loopAngle" type="FLOAT8" options="3" default="0.0"/>
+  <VariableInfo name="FinalAngle" type="FLOAT8" xdim="4" options="3" default="0,0,0,0"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="GalcDataCollectionClientId" type="STRING" length="32" options="3" default="AAF1FS1D01001B"/>
+  <VariableInfo name="plcProductId" type="STRING" length="32" options="3" default="D[9050]"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3" default="5020030A A000"/>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_FrontSubFrame"/>
+  <VariableInfo name="plcDataReadyAck" type="STRING" length="32" options="3" default="M[9110]"/>
+  <VariableInfo name="GalcProcessPoint" type="STRING" length="32" options="3" default="AAF1FS1P01001"/>
+  <VariableInfo name="plcFinalTorque" type="STRING" xdim="4" length="32" options="3" default="D[9060],D[9065],D[9070],D[9075]"/>
+  <VariableInfo name="BoltCount" type="INT2" options="3" default="3"/>
+  <VariableInfo name="plcFinalAngle" type="STRING" xdim="4" length="32" options="3" default="D[9061],D[9066],D[9071],D[9076]"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="M[9010]"/>
+  <VariableInfo name="plcJudgement" type="STRING" xdim="4" length="32" options="3" default="M[9011],M[9012],M[9013],M[9014]"/>
+  <VariableInfo name="plcGalcError" type="STRING" length="32" options="3" default="M[9111]"/>
+  <VariableInfo name="GalcCreateUIDClientId" type="STRING" length="32" options="3" default="AAF1FS1D01001A"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="2" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReady"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="DataReady"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="3" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="10"/>
+    <Route result="2" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="10" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="11" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#13;&#10;    &quot;PRODUCTID&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:14},&#13;&#10;    &#13;&#10;    &quot;BOLT1TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT1JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT2TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT2JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT3TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT3JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#13;&#10;    &#13;&#10;    &quot;BOLT4TORQUE&quot; : {&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4ANGLE&quot; : {&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1},&#13;&#10;    &quot;BOLT4JUDGEMENT&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#13;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="PRODUCTID Name" name="plcProductId"/>
+    <StaticVariable logical_name="BOLT1TORQUE Name" name="plcFinalTorque[0]"/>
+    <StaticVariable logical_name="BOLT1ANGLE Name" name="plcFinalAngle[0]"/>
+    <StaticVariable logical_name="BOLT1JUDGEMENT Name" name="plcJudgement[0]"/>
+    <StaticVariable logical_name="BOLT2TORQUE Name" name="plcFinalTorque[1]"/>
+    <StaticVariable logical_name="BOLT2ANGLE Name" name="plcFinalAngle[1]"/>
+    <StaticVariable logical_name="BOLT2JUDGEMENT Name" name="plcJudgement[1]"/>
+    <StaticVariable logical_name="BOLT3TORQUE Name" name="plcFinalTorque[2]"/>
+    <StaticVariable logical_name="BOLT3ANGLE Name" name="plcFinalAngle[2]"/>
+    <StaticVariable logical_name="BOLT3JUDGEMENT Name" name="plcJudgement[2]"/>
+    <StaticVariable logical_name="BOLT4TORQUE Name" name="plcFinalTorque[3]"/>
+    <StaticVariable logical_name="BOLT4ANGLE Name" name="plcFinalAngle[3]"/>
+    <StaticVariable logical_name="BOLT4JUDGEMENT Name" name="plcJudgement[3]"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCTID" name="ProductId"/>
+    <LocalVariable logical_name="BOLT1TORQUE" name="FinalTorque[0]"/>
+    <LocalVariable logical_name="BOLT1ANGLE" name="FinalAngle[0]"/>
+    <LocalVariable logical_name="BOLT1JUDGEMENT" name="FinalJudgement[0]"/>
+    <LocalVariable logical_name="BOLT2TORQUE" name="FinalTorque[1]"/>
+    <LocalVariable logical_name="BOLT2ANGLE" name="FinalAngle[1]"/>
+    <LocalVariable logical_name="BOLT2JUDGEMENT" name="FinalJudgement[1]"/>
+    <LocalVariable logical_name="BOLT3TORQUE" name="FinalTorque[2]"/>
+    <LocalVariable logical_name="BOLT3ANGLE" name="FinalAngle[2]"/>
+    <LocalVariable logical_name="BOLT3JUDGEMENT" name="FinalJudgement[2]"/>
+    <LocalVariable logical_name="BOLT4TORQUE" name="FinalTorque[3]"/>
+    <LocalVariable logical_name="BOLT4ANGLE" name="FinalAngle[3]"/>
+    <LocalVariable logical_name="BOLT4JUDGEMENT" name="FinalJudgement[3]"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="12" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcDataReadyAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="14" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Error Processing Subframe ($(VIN)). Code: $(ErrorCode) Message: $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="ProductId"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="15" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGalcError"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="17" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <StaticVariable logical_name="Final Value" name="BoltCount"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="loopCounter"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="19"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="18" disabled="false">
+   <Properties>
+    <Property name="expression" value="Torque/100"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Torque" name="loopTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="19" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="20"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="20" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="21" disabled="false">
+   <Properties>
+    <Property name="expression" value="Angle/10"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Angle" name="loopAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="22" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopAngle"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="FinalAngle[0]" count="4"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.SET" id="23" disabled="false">
+   <Properties>
+    <Property name="type" value="FLOAT8"/>
+    <Property name="count" value="4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+    <LocalVariable logical_name="Index" name="loopCounter"/>
+    <LocalVariable logical_name="Value" name="loopTorque"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Array" name="FinalTorque[0]" count="4"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="24" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_CreateUID"/>
+    <Property name="version" value="517177273"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="GalcCreateUIDClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="GalcProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <StaticVariable logical_name="PRODUCT_SPEC_CODE" name="ProductSpecCode"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="25"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="25" disabled="false">
+   <Properties>
+    <Property name="name" value="AAF1_FrontSubframe_DataCollection"/>
+    <Property name="version" value="-377299126"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="GalcDataCollectionClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="GalcProcessPoint"/>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="BOLT1_MEASUREMENT" name="FinalTorque[0]"/>
+    <LocalVariable logical_name="BOLT1_ANGLE" name="FinalAngle[0]"/>
+    <LocalVariable logical_name="BOLT1_STATUS" name="FinalJudgement[0]"/>
+    <LocalVariable logical_name="BOLT2_MEASUREMENT" name="FinalTorque[1]"/>
+    <LocalVariable logical_name="BOLT2_ANGLE" name="FinalAngle[1]"/>
+    <LocalVariable logical_name="BOLT2_STATUS" name="FinalJudgement[1]"/>
+    <LocalVariable logical_name="BOLT3_MEASUREMENT" name="FinalTorque[2]"/>
+    <LocalVariable logical_name="BOLT3_ANGLE" name="FinalAngle[2]"/>
+    <LocalVariable logical_name="BOLT3_STATUS" name="FinalJudgement[2]"/>
+    <LocalVariable logical_name="BOLT4_MEASUREMENT" name="FinalTorque[3]"/>
+    <LocalVariable logical_name="BOLT4_ANGLE" name="FinalAngle[3]"/>
+    <LocalVariable logical_name="BOLT4_STATUS" name="FinalJudgement[3]"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="26" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Round Value"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="NumberToRound" name="loopTorque"/>
+    <ConstantVariable logical_name="DecimalPlaces" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RoundedValue" name="loopTorque"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="27" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Round Value"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="NumberToRound" name="loopAngle"/>
+    <ConstantVariable logical_name="DecimalPlaces" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="RoundedValue" name="loopAngle"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Data Ready Received"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF2_FrontSubframe"/>
+    <Property name="msg" value="$(Trigger) - Data Ready Complete for Product Id ($(ProductId))"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="30" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="plcGalcError"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="14"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_FrontSubFrame" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_FrontSubFrame" nlsid="30032">AAF1_FrontSubFrame</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_FrontSubFrame" type="project">
+		<reference name="AAF1_FrontSubFrame/DataCollection" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_FUELTANK_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_3PC_SUB__DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_FUELTANK_PLC.M[6002]" type="variable"/>
+		</reference>
+		<reference name="AAF1_FrontSubFrame/Left_DataCollection" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_FUELTANK_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_3PC_SUB__DataCollection" type="transaction"/>
+			<reference name="GALC_CreateUID" type="transaction">
+				<reference name="GALC_MbpnProductOnService_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_FUELTANK_PLC.M[6002]" type="variable"/>
+		</reference>
+		<reference name="AAF1_FrontSubFrame/Left_DataCollection_New" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_FrontSubFrame" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_FrontSubframe_DataCollection" type="transaction">
+				<reference name="GALC_DataCollectionService_Execute" type="transport"/>
+			</reference>
+			<reference name="GALC_CreateUID" type="transaction"/>
+			<reference name="Utilities/Round Value" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="LUA_INLINE" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+			<reference name="AAF1_FrontSubFrame.M[9000]" type="variable"/>
+		</reference>
+		<reference name="AAF1_FrontSubFrame/Right_DataCollection_New" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="ARRAY.SET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_FrontSubFrame" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AAF1_FrontSubframe_DataCollection" type="transaction"/>
+			<reference name="GALC_CreateUID" type="transaction"/>
+			<reference name="AAF1_FrontSubFrame.M[9010]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

@@ -1,0 +1,1952 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="Utilities/Pad String" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Utilities/Pad String" nlsid="30031">
+<Trigger name="Pad String" project="Utilities" max_pending="10" reporting="onerr,ontimeout">
+ <Context value="SubTrigger|1~2~3~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-100" y="-100"/>
+						<Node id="1" type="3" x="-100" y="-25"/>
+						<Node id="2" type="3" x="-100" y="50"/>
+						<Node id="3" type="3" x="25" y="25"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;1&quot; name=&quot;PadCharacter&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;PadLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;     &lt;VariableInfo name=&quot;StringLength&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;     &lt;VariableInfo length=&quot;100&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;    &lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables/>
+ <Actions first_action="1">
+  <Action type="LUA_INLINE" id="1" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function padString(inputString, padChar, totalLength, padLeft)&#13;&#10;    length=inputString:len()&#13;&#10;    &#13;&#10;    if (length &gt;= totalLength) then return inputString&#13;&#10;    else &#13;&#10;        while (length &lt; totalLength)&#13;&#10;        do&#13;&#10;            if (padLeft == true) then inputString = padChar .. inputString&#13;&#10;            else inputString = inputString .. padChar end&#13;&#10;            length = inputString:len()&#13;&#10;        end&#13;&#10;        return inputString&#13;&#10;    end&#13;&#10;end&#13;&#10;&#13;&#10;DWOutput[&quot;PaddedString&quot;] = padString(DWInput[&quot;InputString&quot;],DWInput[&quot;PadCharacter&quot;],DWInput[&quot;StringLength&quot;],DWInput[&quot;PadLeft&quot;])"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;1&quot; name=&quot;PadCharacter&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;InputString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;PadLeft&quot; options=&quot;7&quot; type=&quot;BOOL&quot;/&gt;&#10;      &lt;VariableInfo name=&quot;StringLength&quot; options=&quot;7&quot; type=&quot;INT2&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;100&quot; name=&quot;PaddedString&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="PadCharacter" name="PadCharacter"/>
+    <EventVariable logical_name="InputString" name="InputString"/>
+    <EventVariable logical_name="PadLeft" name="PadLeft"/>
+    <EventVariable logical_name="StringLength" name="StringLength"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="PaddedString" name="PaddedString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="2" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/BroadcastFromClient" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_EMBLEM/BroadcastFromClient" nlsid="30031">
+<Trigger name="BroadcastFromClient" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|2~3~36~37~48~49~50~52~53~55~56~57~59~60~61~62~63~64~65~66~67~68~69~70~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="150" y="-100"/>
+		<Node id="2" type="3" x="150" y="0"/>
+		<Node id="3" type="3" x="150" y="1400"/>
+		<Node id="36" type="3" x="450" y="100"/>
+		<Node id="37" type="3" x="450" y="175"/>
+		<Node id="48" type="3" x="75" y="225"/>
+		<Node id="49" type="3" x="150" y="300"/>
+		<Node id="50" type="3" x="150" y="375"/>
+		<Node id="52" type="3" x="150" y="1175"/>
+		<Node id="53" type="3" x="150" y="825"/>
+		<Node id="55" type="3" x="150" y="525"/>
+		<Node id="56" type="3" x="150" y="1250"/>
+		<Node id="57" type="3" x="150" y="1325"/>
+		<Node id="59" type="3" x="150" y="450"/>
+		<Node id="60" type="3" x="0" y="525"/>
+		<Node id="61" type="3" x="150" y="600"/>
+		<Node id="62" type="3" x="225" y="675"/>
+		<Node id="63" type="3" x="225" y="750"/>
+		<Node id="64" type="3" x="150" y="1100"/>
+		<Node id="65" type="3" x="150" y="75"/>
+		<Node id="66" type="3" x="150" y="150"/>
+		<Node id="67" type="3" x="300" y="150"/>
+		<Node id="68" type="3" x="300" y="225"/>
+		<Node id="69" type="3" x="150" y="1025"/>
+		<Node id="70" type="3" x="150" y="900"/>
+		<Node errorActionId="34" errorStartIndex="36" id="600000000" text="Error Handling" type="4" x="450" y="25"/>
+		<RoutedErrors value="2.1|48.1|49.1|50.1|52.1|53.1|55.1|56.1|57.1|59.2|60.1|61.2|62.1|63.1|64.1|67.1|69.1|70.1|"/></BuildInfo>
+ <Event overview_string="Listener URL: /AAF1/EMBLEM&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/EMBLEM"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="TurckBlockName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckDeviceName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3"/>
+  <VariableInfo name="BinLength" type="INT4" options="3" default="0"/>
+  <VariableInfo name="TurckBlockCoil" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckBlockNumber" type="INT2" options="3"/>
+  <VariableInfo name="strOutputNumber" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckBlockCoilOutput" type="STRING" length="32" options="3"/>
+  <VariableInfo name="OutputNumber" type="INT2" options="3"/>
+  <VariableInfo name="InputNumber" type="INT2" options="3"/>
+  <VariableInfo name="SequenceNumber" type="STRING" length="32" options="3"/>
+  <VariableInfo name="BinNumber" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK"/>
+  <VariableInfo name="gvTurckOutputNumber" type="STRING" length="32" options="3" default="TurckOutputNumber"/>
+  <VariableInfo name="gvTurckDeviceName" type="STRING" length="32" options="3" default="TurckDeviceName"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="JSON.DECODE" id="2" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#10;    &quot;SEQUENCE_NO&quot; : &quot;&quot;,&#10;    &quot;EMBLEM_BIN&quot; : &quot;&quot;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="ProductSpecCode"/>
+    <LocalVariable logical_name="SEQUENCE_NO" name="SequenceNumber"/>
+    <LocalVariable logical_name="EMBLEM_BIN" name="BinNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="65"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="36" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="37"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="37" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="48" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="TurckBlockNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="49" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="InputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="50" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="3"/>
+    <ConstantVariable logical_name="End Offset" value="3"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="OutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="59"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="52" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Device Name" name="TurckBlockName"/>
+    <LocalVariable logical_name="Variable Name" name="TurckBlockCoil"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="53" disabled="false">
+   <Properties>
+    <Property name="format" value="Coils[$(InputNumber)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InputNumber" name="InputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockCoil"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="70"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="55" disabled="false">
+   <Properties>
+    <Property name="format" value="$(DeviceName)1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DeviceName" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="56" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckOutputNumber"/>
+    <LocalVariable logical_name="Value" name="TurckBlockCoilOutput"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="57" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckDeviceName"/>
+    <LocalVariable logical_name="Value" name="TurckBlockName"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="59" disabled="false">
+   <Properties>
+    <Property name="expression" value="TurckBlockNumber==1||TurckBlockNumber==2"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckBlockNumber" name="TurckBlockNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="55"/>
+    <Route result="1" goto="60"/>
+    <Route result="2" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="60" disabled="false">
+   <Properties>
+    <Property name="format" value="$(DeviceName)2"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DeviceName" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="61" disabled="false">
+   <Properties>
+    <Property name="expression" value="TurckBlockNumber==2||TurckBlockNumber==4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckBlockNumber" name="TurckBlockNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="53"/>
+    <Route result="2" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="62" disabled="false">
+   <Properties>
+    <Property name="expression" value="InputNumber+8"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InputNumber" name="InputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="InputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="63"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="63" disabled="false">
+   <Properties>
+    <Property name="expression" value="OutputNumber+8"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutputNumber" name="OutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="OutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="64" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Processing VIN: $(ProductId): Attribute: $(AttributeValue), Device: $(DeviceName), Input Number: $(inputNumber), Output Number: $(OutputNumber)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="AttributeValue" name="BinNumber"/>
+    <LocalVariable logical_name="DeviceName" name="TurckBlockName"/>
+    <LocalVariable logical_name="inputNumber" name="InputNumber"/>
+    <LocalVariable logical_name="OutputNumber" name="OutputNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="65" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="BinLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="66"/>
+    <Route result="1" goto="67"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="66" disabled="false">
+   <Properties>
+    <Property name="expression" value="BinLength&lt;3"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="BinLength" name="BinLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="67"/>
+    <Route result="1" goto="48"/>
+    <Route result="2" goto="67"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="67" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Invalid Bin Number $(BinNumber)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="BinNumber" name="BinNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="68"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="68" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="69" disabled="false">
+   <Properties>
+    <Property name="format" value="Discrete Inputs[100$(OutputNumber)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutputNumber" name="strOutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockCoilOutput"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="64"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="70" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Pad String"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="PadCharacter" value="0"/>
+    <LocalVariable logical_name="InputString" name="OutputNumber"/>
+    <ConstantVariable logical_name="PadLeft" value="1"/>
+    <ConstantVariable logical_name="StringLength" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strOutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="69"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/BroadcastFromClient_NEW" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_EMBLEM/BroadcastFromClient_NEW" nlsid="30031">
+<Trigger name="BroadcastFromClient_NEW" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="HTTP Page Listener|2~3~36~37~48~49~50~52~53~55~56~57~59~60~61~62~63~64~65~66~67~68~69~70~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="150" y="-100"/>
+		<Node id="2" type="3" x="150" y="0"/>
+		<Node id="3" type="3" x="150" y="1400"/>
+		<Node id="36" type="3" x="450" y="100"/>
+		<Node id="37" type="3" x="450" y="175"/>
+		<Node id="48" type="3" x="75" y="225"/>
+		<Node id="49" type="3" x="150" y="300"/>
+		<Node id="50" type="3" x="150" y="375"/>
+		<Node id="52" type="3" x="150" y="1175"/>
+		<Node id="53" type="3" x="150" y="825"/>
+		<Node id="55" type="3" x="150" y="525"/>
+		<Node id="56" type="3" x="150" y="1250"/>
+		<Node id="57" type="3" x="150" y="1325"/>
+		<Node id="59" type="3" x="150" y="450"/>
+		<Node id="60" type="3" x="0" y="525"/>
+		<Node id="61" type="3" x="150" y="600"/>
+		<Node id="62" type="3" x="225" y="675"/>
+		<Node id="63" type="3" x="225" y="750"/>
+		<Node id="64" type="3" x="150" y="1100"/>
+		<Node id="65" type="3" x="150" y="75"/>
+		<Node id="66" type="3" x="150" y="150"/>
+		<Node id="67" type="3" x="300" y="150"/>
+		<Node id="68" type="3" x="300" y="225"/>
+		<Node id="69" type="3" x="150" y="1025"/>
+		<Node id="70" type="3" x="150" y="900"/>
+		<Node errorActionId="34" errorStartIndex="36" id="600000000" text="Error Handling" type="4" x="450" y="25"/>
+		<RoutedErrors value="2.1|48.1|49.1|50.1|52.1|53.1|55.1|56.1|57.1|59.2|60.1|61.2|62.1|63.1|64.1|67.1|69.1|70.1|"/></BuildInfo>
+ <Event overview_string="Listener URL: /AAF1/EMBLEM1&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1/EMBLEM1"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="TurckBlockName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckDeviceName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProductId" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" length="32" options="3"/>
+  <VariableInfo name="BinLength" type="INT4" options="3" default="0"/>
+  <VariableInfo name="TurckBlockCoil" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckBlockNumber" type="INT2" options="3"/>
+  <VariableInfo name="strOutputNumber" type="STRING" length="32" options="3"/>
+  <VariableInfo name="TurckBlockCoilOutput" type="STRING" length="32" options="3"/>
+  <VariableInfo name="OutputNumber" type="INT2" options="3"/>
+  <VariableInfo name="InputNumber" type="INT2" options="3"/>
+  <VariableInfo name="SequenceNumber" type="STRING" length="32" options="3"/>
+  <VariableInfo name="BinNumber" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK"/>
+  <VariableInfo name="gvTurckOutputNumber" type="STRING" length="32" options="3" default="TurckOutputNumber"/>
+  <VariableInfo name="gvTurckDeviceName" type="STRING" length="32" options="3" default="TurckDeviceName"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="2">
+  <Action type="JSON.DECODE" id="2" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;PRODUCT_ID&quot; : &quot;&quot;,&#10;    &quot;PRODUCT_SPEC_CODE&quot; : &quot;&quot;,&#10;    &quot;SEQUENCE_NO&quot; : &quot;&quot;,&#10;    &quot;EMBLEM_BIN&quot; : &quot;&quot;&#10; }"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="JSON Input" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PRODUCT_ID" name="ProductId"/>
+    <LocalVariable logical_name="PRODUCT_SPEC_CODE" name="ProductSpecCode"/>
+    <LocalVariable logical_name="SEQUENCE_NO" name="SequenceNumber"/>
+    <LocalVariable logical_name="EMBLEM_BIN" name="BinNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="65"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="36" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Error During Data Collection [$(ErrorCode) - $(ErrorDesc)]"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorDesc" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="37"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="37" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="48" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="TurckBlockNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="49" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="InputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="50" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+    <ConstantVariable logical_name="Start Offset" value="3"/>
+    <ConstantVariable logical_name="End Offset" value="3"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="OutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="59"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="52" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Device Name" name="TurckBlockName"/>
+    <LocalVariable logical_name="Variable Name" name="TurckBlockCoil"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="53" disabled="false">
+   <Properties>
+    <Property name="format" value="Coils[$(InputNumber)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InputNumber" name="InputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockCoil"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="70"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="55" disabled="false">
+   <Properties>
+    <Property name="format" value="$(DeviceName)1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DeviceName" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="56" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckOutputNumber"/>
+    <LocalVariable logical_name="Value" name="TurckBlockCoilOutput"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="57" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckDeviceName"/>
+    <LocalVariable logical_name="Value" name="TurckBlockName"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="59" disabled="false">
+   <Properties>
+    <Property name="expression" value="TurckBlockNumber==1||TurckBlockNumber==2"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckBlockNumber" name="TurckBlockNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="55"/>
+    <Route result="1" goto="60"/>
+    <Route result="2" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="60" disabled="false">
+   <Properties>
+    <Property name="format" value="$(DeviceName)2"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="DeviceName" name="plcDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="61" disabled="false">
+   <Properties>
+    <Property name="expression" value="TurckBlockNumber==2||TurckBlockNumber==4"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckBlockNumber" name="TurckBlockNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="53"/>
+    <Route result="2" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="62" disabled="false">
+   <Properties>
+    <Property name="expression" value="InputNumber+8"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InputNumber" name="InputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="InputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="63"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="63" disabled="false">
+   <Properties>
+    <Property name="expression" value="OutputNumber+8"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutputNumber" name="OutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="OutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="64" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Processing VIN: $(ProductId): Attribute: $(AttributeValue), Device: $(DeviceName), Input Number: $(inputNumber), Output Number: $(OutputNumber)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="ProductId" name="ProductId"/>
+    <LocalVariable logical_name="AttributeValue" name="BinNumber"/>
+    <LocalVariable logical_name="DeviceName" name="TurckBlockName"/>
+    <LocalVariable logical_name="inputNumber" name="InputNumber"/>
+    <LocalVariable logical_name="OutputNumber" name="OutputNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="65" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="BinNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="BinLength"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="66"/>
+    <Route result="1" goto="67"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="66" disabled="false">
+   <Properties>
+    <Property name="expression" value="BinLength&lt;3"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="BinLength" name="BinLength"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="67"/>
+    <Route result="1" goto="48"/>
+    <Route result="2" goto="67"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="67" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Invalid Bin Number $(BinNumber)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="BinNumber" name="BinNumber"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="68"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="68" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="69" disabled="false">
+   <Properties>
+    <Property name="format" value="Discrete Inputs[100$(OutputNumber)]"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="OutputNumber" name="strOutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="TurckBlockCoilOutput"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="64"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="70" disabled="false">
+   <Properties>
+    <Property name="project_name" value="Utilities"/>
+    <Property name="trigger_name" value="Pad String"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="PadCharacter" value="0"/>
+    <LocalVariable logical_name="InputString" name="OutputNumber"/>
+    <ConstantVariable logical_name="PadLeft" value="1"/>
+    <ConstantVariable logical_name="StringLength" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="PaddedString" name="strOutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="69"/>
+    <Route result="1" goto="36"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034" interface="1"><exportitem type="transport" name="GALC_DeviceDataRouting_Execute" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-991618660"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="GALC_DeviceDataRouting_Execute" inactivity_time_out="0" initPoolSize="64" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/DeviceDataRoutingService/execute" id="GALC_DeviceDataRouting_Execute" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="GALC_BroadcastResponse" nlsid="30033" interface="1"><exportitem type="transaction" name="GALC_BroadcastResponse" nlsid="30033">
+<TransactionDef id="GALC_BroadcastResponse" version="1858569967" version_mismatch="pass">
+										<Transport id="GALC_DeviceDataRouting_Execute" type="Http"/>
+										<InputMap>
+										<Variable count="1" length="32" name="CLIENT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PROCESS_POINT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="PRODUCT_ID" type="STRING"/>
+										<Variable count="1" length="32" name="JUDGEMENT" type="STRING"/>
+										<Variable count="1" length="32" name="SKIP_OPERATION" type="STRING"/>
+										</InputMap>
+										<OutputMap/>
+										<Response arrayDelimiter="|" delimiter="," outputformat="A"/>
+										<Mapping outputformat="JSON">
+										<JSONInfo rawJson="Ww0KeyJjb20uaG9uZGEuZ2FsYy5kYXRhLkRhdGFDb250YWluZXIiOg0KICAgew0KICAgICAiQ0xJRU5UX0lEIjogIiIsDQogICAgICJQUk9DRVNTX1BPSU5UX0lEIjogIiIsDQogICAgICJQUk9EVUNUX0lEIjogIiIsDQogICAgICJKVURHRU1FTlQiOiAiIiwNCiAgICAgIlNLSVBfT1BFUkFUSU9OIjoiIg0KIH0NCiAgfQ0KXQ==">
+										<JSONRequest>
+										<Table name="JSON_Array" nbrInRows="1">
+										<Structure name="com-honda-galc-data-DataContainer">
+										<Parameter dwType="16" name="CLIENT_ID" parmname="CLIENT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PROCESS_POINT_ID" parmname="PROCESS_POINT_ID" type="STRING"/>
+										<Parameter dwType="16" name="PRODUCT_ID" parmname="PRODUCT_ID" type="STRING"/>
+										<Parameter dwType="16" name="JUDGEMENT" parmname="JUDGEMENT" type="STRING"/>
+										<Parameter dwType="16" name="SKIP_OPERATION" parmname="SKIP_OPERATION" type="STRING"/>
+										</Structure>
+										</Table>
+										</JSONRequest>
+										</JSONInfo>
+										</Mapping>
+										</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/ResetBins" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_EMBLEM/ResetBins" nlsid="30031">
+<Trigger name="ResetBins" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-175"/>
+								<Node id="1" type="3" x="-125" y="-100"/>
+								<Node id="2" type="3" x="-125" y="-25"/>
+								<Node id="3" type="3" x="-125" y="125"/>
+								<Node id="4" type="3" x="-125" y="50"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables/&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName1" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK1"/>
+  <VariableInfo name="plcDeviceName2" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK2"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.WRITE" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;BIN_1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_3&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_4&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_5&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_6&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_7&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_8&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_9&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_10&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_11&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_12&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_13&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_14&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_15&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_16&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName2"/>
+    <ConstantVariable logical_name="BIN_1 Name" value="Coils[1]"/>
+    <ConstantVariable logical_name="BIN_1" value="0"/>
+    <ConstantVariable logical_name="BIN_2 Name" value="Coils[2]"/>
+    <ConstantVariable logical_name="BIN_2" value="0"/>
+    <ConstantVariable logical_name="BIN_3 Name" value="Coils[3]"/>
+    <ConstantVariable logical_name="BIN_3" value="0"/>
+    <ConstantVariable logical_name="BIN_4 Name" value="Coils[4]"/>
+    <ConstantVariable logical_name="BIN_4" value="0"/>
+    <ConstantVariable logical_name="BIN_5 Name" value="Coils[5]"/>
+    <ConstantVariable logical_name="BIN_5" value="0"/>
+    <ConstantVariable logical_name="BIN_6 Name" value="Coils[6]"/>
+    <ConstantVariable logical_name="BIN_6" value="0"/>
+    <ConstantVariable logical_name="BIN_7 Name" value="Coils[7]"/>
+    <ConstantVariable logical_name="BIN_7" value="0"/>
+    <ConstantVariable logical_name="BIN_8 Name" value="Coils[8]"/>
+    <ConstantVariable logical_name="BIN_8" value="0"/>
+    <ConstantVariable logical_name="BIN_9 Name" value="Coils[9]"/>
+    <ConstantVariable logical_name="BIN_9" value="0"/>
+    <ConstantVariable logical_name="BIN_10 Name" value="Coils[10]"/>
+    <ConstantVariable logical_name="BIN_10" value="0"/>
+    <ConstantVariable logical_name="BIN_11 Name" value="Coils[11]"/>
+    <ConstantVariable logical_name="BIN_11" value="0"/>
+    <ConstantVariable logical_name="BIN_12 Name" value="Coils[12]"/>
+    <ConstantVariable logical_name="BIN_12" value="0"/>
+    <ConstantVariable logical_name="BIN_13 Name" value="Coils[13]"/>
+    <ConstantVariable logical_name="BIN_13" value="0"/>
+    <ConstantVariable logical_name="BIN_14 Name" value="Coils[14]"/>
+    <ConstantVariable logical_name="BIN_14" value="0"/>
+    <ConstantVariable logical_name="BIN_15 Name" value="Coils[15]"/>
+    <ConstantVariable logical_name="BIN_15" value="0"/>
+    <ConstantVariable logical_name="BIN_16 Name" value="Coils[16]"/>
+    <ConstantVariable logical_name="BIN_16" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="2" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;BIN_1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_3&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_4&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_5&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_6&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_7&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_8&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_9&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_10&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_11&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_12&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_13&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_14&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_15&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_16&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName1"/>
+    <ConstantVariable logical_name="BIN_1 Name" value="Coils[1]"/>
+    <ConstantVariable logical_name="BIN_1" value="0"/>
+    <ConstantVariable logical_name="BIN_2 Name" value="Coils[2]"/>
+    <ConstantVariable logical_name="BIN_2" value="0"/>
+    <ConstantVariable logical_name="BIN_3 Name" value="Coils[3]"/>
+    <ConstantVariable logical_name="BIN_3" value="0"/>
+    <ConstantVariable logical_name="BIN_4 Name" value="Coils[4]"/>
+    <ConstantVariable logical_name="BIN_4" value="0"/>
+    <ConstantVariable logical_name="BIN_5 Name" value="Coils[5]"/>
+    <ConstantVariable logical_name="BIN_5" value="0"/>
+    <ConstantVariable logical_name="BIN_6 Name" value="Coils[6]"/>
+    <ConstantVariable logical_name="BIN_6" value="0"/>
+    <ConstantVariable logical_name="BIN_7 Name" value="Coils[7]"/>
+    <ConstantVariable logical_name="BIN_7" value="0"/>
+    <ConstantVariable logical_name="BIN_8 Name" value="Coils[8]"/>
+    <ConstantVariable logical_name="BIN_8" value="0"/>
+    <ConstantVariable logical_name="BIN_9 Name" value="Coils[9]"/>
+    <ConstantVariable logical_name="BIN_9" value="0"/>
+    <ConstantVariable logical_name="BIN_10 Name" value="Coils[10]"/>
+    <ConstantVariable logical_name="BIN_10" value="0"/>
+    <ConstantVariable logical_name="BIN_11 Name" value="Coils[11]"/>
+    <ConstantVariable logical_name="BIN_11" value="0"/>
+    <ConstantVariable logical_name="BIN_12 Name" value="Coils[12]"/>
+    <ConstantVariable logical_name="BIN_12" value="0"/>
+    <ConstantVariable logical_name="BIN_13 Name" value="Coils[13]"/>
+    <ConstantVariable logical_name="BIN_13" value="0"/>
+    <ConstantVariable logical_name="BIN_14 Name" value="Coils[14]"/>
+    <ConstantVariable logical_name="BIN_14" value="0"/>
+    <ConstantVariable logical_name="BIN_15 Name" value="Coils[15]"/>
+    <ConstantVariable logical_name="BIN_15" value="0"/>
+    <ConstantVariable logical_name="BIN_16 Name" value="Coils[16]"/>
+    <ConstantVariable logical_name="BIN_16" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;DeviceName&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32},&#10;    &quot;OutputNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <ConstantVariable logical_name="DeviceName Name" value="TurckDeviceName"/>
+    <ConstantVariable logical_name="DeviceName" value="NONE"/>
+    <ConstantVariable logical_name="OutputNumber Name" value="TurckOutputNumber"/>
+    <ConstantVariable logical_name="OutputNumber" value="-1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_EMBLEM_TURCK1" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_EMBLEM_TURCK1" nlsid="30030">
+<DeviceDefinition name="AAF1_EMBLEM_TURCK1" type="51" type_name="Modbus Device" state="6" options="2104"><Properties><Property name="input_count" value="0"/><Property name="discrete_count" value="16"/><Property name="address" value="10.33.9.216"/><Property name="coils_count" value="16"/><Property name="timeout" value="5000"/><Property name="start_at_1" value="true"/><Property name="port" value="502"/><Property name="validate" value="Read Holding Register"/><Property name="holding_count" value="0"/><Property name="connection_type" value="Ethernet"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AAF1_EMBLEM_TURCK2" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_EMBLEM_TURCK2" nlsid="30030">
+<DeviceDefinition name="AAF1_EMBLEM_TURCK2" type="51" type_name="Modbus Device" state="6" options="2104"><Properties><Property name="input_count" value="0"/><Property name="discrete_count" value="16"/><Property name="address" value="10.33.9.210"/><Property name="coils_count" value="16"/><Property name="timeout" value="5000"/><Property name="start_at_1" value="true"/><Property name="port" value="502"/><Property name="validate" value="Read Holding Register"/><Property name="holding_count" value="0"/><Property name="connection_type" value="Ethernet"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="vargroup" name="AAF1_EMBLEM" nlsid="30046" interface="1"><exportitem type="vargroup" name="AAF1_EMBLEM" nlsid="30046">
+<VariableGroup name="AAF1_EMBLEM" id="33554443" prio="1" type="BOOL" count="0"><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10001]" key="Var_33" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10002]" key="Var_34" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10003]" key="Var_35" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10004]" key="Var_36" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10009]" key="Var_41" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10010]" key="Var_42" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10011]" key="Var_43" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK1" variable="Discrete Inputs[10012]" key="Var_44" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10001]" key="Var_49" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10002]" key="Var_50" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10003]" key="Var_51" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10004]" key="Var_52" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10009]" key="Var_57" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10010]" key="Var_58" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10011]" key="Var_59" state="1" error="-6207"/><DeviceVariable device="AAF1_EMBLEM_TURCK2" variable="Discrete Inputs[10012]" key="Var_60" state="1" error="-6207"/></VariableGroup>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/BrokenLightCurtain" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AAF1_EMBLEM/BrokenLightCurtain" nlsid="30031">
+<Trigger name="BrokenLightCurtain" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="Variable Group|6~3~4~5~1~7~8~9~11~12~13~15~16~17~18~20~21~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-100"/>
+								<Node id="6" type="3" x="-25" y="0"/>
+								<Node id="3" type="3" x="-25" y="175"/>
+								<Node id="4" type="3" x="-25" y="250"/>
+								<Node id="5" type="3" x="-25" y="425"/>
+								<Node id="1" type="3" x="-25" y="100"/>
+								<Node id="7" type="3" x="-125" y="50"/>
+								<Node id="8" type="3" x="-350" y="475"/>
+								<Node id="9" type="3" x="-350" y="550"/>
+								<Node id="11" type="3" x="-350" y="650"/>
+								<Node id="12" type="3" x="-25" y="575"/>
+								<Node id="13" type="3" x="-25" y="650"/>
+								<Node id="15" type="3" x="300" y="50"/>
+								<Node id="16" type="3" x="300" y="125"/>
+								<Node id="17" type="3" x="-350" y="375"/>
+								<Node id="18" type="3" x="-25" y="500"/>
+								<Node id="20" type="3" x="-200" y="250"/>
+								<Node id="21" type="3" x="-200" y="325"/>
+								<Node errorActionId="14" errorStartIndex="15" id="600000000" text="Error Handling" type="4" x="300" y="-25"/>
+								<RoutedErrors value="6.2|3.1|4.2|5.2|1.1|8.1|9.1|12.1|17.1|20.2|"/></BuildInfo>
+ <Event type="VARGROUP">
+  <Properties>
+   <Property name="group_name" value="AAF1_EMBLEM"/>
+   <Property name="condition" value="Value changed"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="TurckDeviceName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="WrongBinString" type="STRING" length="200" options="3"/>
+  <VariableInfo name="TurckOutputNumber" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1WT4D00101Z"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1WT4P00101"/>
+  <VariableInfo name="gvTurckOutputNumber" type="STRING" length="32" options="3" default="TurckOutputNumber"/>
+  <VariableInfo name="gvTurckDeviceName" type="STRING" length="32" options="3" default="TurckDeviceName"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="6">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TurckDeviceName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="3" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckOutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TurckOutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="4" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckDeviceName"/>
+    <EventVariable logical_name="Search String" name="Device Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="20"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="5" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckOutputNumber"/>
+    <EventVariable logical_name="Search String" name="Variable Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="6" disabled="false">
+   <Properties>
+    <Property name="expression" value="BitData==1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="BitData" name="DATA"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="7"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - $(WrongBinString)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="WrongBinString" name="WrongBinString"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="9" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="0"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="12" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="1" delim=""/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0" delim=""/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Unexpected Exception - Error Code: $(Code), Error Message: $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="Code" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="17" disabled="false">
+   <Properties>
+    <Property name="format" value="Wrong Bin, Expected $(TurckDeviceName).$(TurckOutputNumber), Actual: $(DeviceName).$(VariableName)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckDeviceName" name="TurckDeviceName"/>
+    <LocalVariable logical_name="TurckOutputNumber" name="TurckOutputNumber"/>
+    <EventVariable logical_name="DeviceName" name="Device Name"/>
+    <EventVariable logical_name="VariableName" name="Variable Name"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="WrongBinString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="18" disabled="false">
+   <Properties>
+    <Property name="project_name" value="== Current Project =="/>
+    <Property name="trigger_name" value="ResetBins"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="20" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckDeviceName"/>
+    <ConstantVariable logical_name="Search String" value="NONE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="21" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/ResetBins_NEW" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_EMBLEM/ResetBins_NEW" nlsid="30031">
+<Trigger name="ResetBins_NEW" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|1~2~3~4~|user"/>
+ <BuildInfo><Node id="0" type="1" x="-125" y="-175"/>
+								<Node id="1" type="3" x="-125" y="-100"/>
+								<Node id="2" type="3" x="-125" y="-25"/>
+								<Node id="3" type="3" x="-125" y="125"/>
+								<Node id="4" type="3" x="-125" y="50"/></BuildInfo>
+ <Event type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables/&gt;"/>
+   <Property name="variables_output" value="&lt;Variables/&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables/>
+ <StaticVariables>
+  <VariableInfo name="plcDeviceName1" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK1"/>
+  <VariableInfo name="plcDeviceName2" type="STRING" length="32" options="3" default="AAF1_EMBLEM_TURCK2"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.WRITE" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;BIN_1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_3&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_4&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_5&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_6&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_7&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_8&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_9&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_10&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_11&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_12&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_13&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_14&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_15&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_16&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName2"/>
+    <ConstantVariable logical_name="BIN_1 Name" value="Coils[1]"/>
+    <ConstantVariable logical_name="BIN_1" value="0"/>
+    <ConstantVariable logical_name="BIN_2 Name" value="Coils[2]"/>
+    <ConstantVariable logical_name="BIN_2" value="0"/>
+    <ConstantVariable logical_name="BIN_3 Name" value="Coils[3]"/>
+    <ConstantVariable logical_name="BIN_3" value="0"/>
+    <ConstantVariable logical_name="BIN_4 Name" value="Coils[4]"/>
+    <ConstantVariable logical_name="BIN_4" value="0"/>
+    <ConstantVariable logical_name="BIN_5 Name" value="Coils[5]"/>
+    <ConstantVariable logical_name="BIN_5" value="0"/>
+    <ConstantVariable logical_name="BIN_6 Name" value="Coils[6]"/>
+    <ConstantVariable logical_name="BIN_6" value="0"/>
+    <ConstantVariable logical_name="BIN_7 Name" value="Coils[7]"/>
+    <ConstantVariable logical_name="BIN_7" value="0"/>
+    <ConstantVariable logical_name="BIN_8 Name" value="Coils[8]"/>
+    <ConstantVariable logical_name="BIN_8" value="0"/>
+    <ConstantVariable logical_name="BIN_9 Name" value="Coils[9]"/>
+    <ConstantVariable logical_name="BIN_9" value="0"/>
+    <ConstantVariable logical_name="BIN_10 Name" value="Coils[10]"/>
+    <ConstantVariable logical_name="BIN_10" value="0"/>
+    <ConstantVariable logical_name="BIN_11 Name" value="Coils[11]"/>
+    <ConstantVariable logical_name="BIN_11" value="0"/>
+    <ConstantVariable logical_name="BIN_12 Name" value="Coils[12]"/>
+    <ConstantVariable logical_name="BIN_12" value="0"/>
+    <ConstantVariable logical_name="BIN_13 Name" value="Coils[13]"/>
+    <ConstantVariable logical_name="BIN_13" value="0"/>
+    <ConstantVariable logical_name="BIN_14 Name" value="Coils[14]"/>
+    <ConstantVariable logical_name="BIN_14" value="0"/>
+    <ConstantVariable logical_name="BIN_15 Name" value="Coils[15]"/>
+    <ConstantVariable logical_name="BIN_15" value="0"/>
+    <ConstantVariable logical_name="BIN_16 Name" value="Coils[16]"/>
+    <ConstantVariable logical_name="BIN_16" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="2"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="2" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;BIN_1&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_2&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_3&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_4&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_5&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_6&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_7&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_8&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_9&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_10&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_11&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_12&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_13&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_14&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_15&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;BIN_16&quot; : {&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plcDeviceName1"/>
+    <ConstantVariable logical_name="BIN_1 Name" value="Coils[1]"/>
+    <ConstantVariable logical_name="BIN_1" value="0"/>
+    <ConstantVariable logical_name="BIN_2 Name" value="Coils[2]"/>
+    <ConstantVariable logical_name="BIN_2" value="0"/>
+    <ConstantVariable logical_name="BIN_3 Name" value="Coils[3]"/>
+    <ConstantVariable logical_name="BIN_3" value="0"/>
+    <ConstantVariable logical_name="BIN_4 Name" value="Coils[4]"/>
+    <ConstantVariable logical_name="BIN_4" value="0"/>
+    <ConstantVariable logical_name="BIN_5 Name" value="Coils[5]"/>
+    <ConstantVariable logical_name="BIN_5" value="0"/>
+    <ConstantVariable logical_name="BIN_6 Name" value="Coils[6]"/>
+    <ConstantVariable logical_name="BIN_6" value="0"/>
+    <ConstantVariable logical_name="BIN_7 Name" value="Coils[7]"/>
+    <ConstantVariable logical_name="BIN_7" value="0"/>
+    <ConstantVariable logical_name="BIN_8 Name" value="Coils[8]"/>
+    <ConstantVariable logical_name="BIN_8" value="0"/>
+    <ConstantVariable logical_name="BIN_9 Name" value="Coils[9]"/>
+    <ConstantVariable logical_name="BIN_9" value="0"/>
+    <ConstantVariable logical_name="BIN_10 Name" value="Coils[10]"/>
+    <ConstantVariable logical_name="BIN_10" value="0"/>
+    <ConstantVariable logical_name="BIN_11 Name" value="Coils[11]"/>
+    <ConstantVariable logical_name="BIN_11" value="0"/>
+    <ConstantVariable logical_name="BIN_12 Name" value="Coils[12]"/>
+    <ConstantVariable logical_name="BIN_12" value="0"/>
+    <ConstantVariable logical_name="BIN_13 Name" value="Coils[13]"/>
+    <ConstantVariable logical_name="BIN_13" value="0"/>
+    <ConstantVariable logical_name="BIN_14 Name" value="Coils[14]"/>
+    <ConstantVariable logical_name="BIN_14" value="0"/>
+    <ConstantVariable logical_name="BIN_15 Name" value="Coils[15]"/>
+    <ConstantVariable logical_name="BIN_15" value="0"/>
+    <ConstantVariable logical_name="BIN_16 Name" value="Coils[16]"/>
+    <ConstantVariable logical_name="BIN_16" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="4"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="3" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.WRITE" id="4" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;DeviceName&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32},&#10;    &quot;OutputNumber&quot; : {&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1,&quot;length&quot;:32}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <ConstantVariable logical_name="DeviceName Name" value="TurckDeviceName"/>
+    <ConstantVariable logical_name="DeviceName" value="NONE"/>
+    <ConstantVariable logical_name="OutputNumber Name" value="TurckOutputNumber"/>
+    <ConstantVariable logical_name="OutputNumber" value="-1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="3"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_EMBLEM/BrokenLightCurtain_NEW" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_EMBLEM/BrokenLightCurtain_NEW" nlsid="30031">
+<Trigger name="BrokenLightCurtain_NEW" project="AAF1_EMBLEM" max_pending="1" queue_size="5" reporting="on" max_exec_time_warning="5000" apply_to_subtrigger="true">
+ <Context value="Variable Group|6~3~4~5~1~7~8~9~11~12~13~15~16~17~18~20~21~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-25" y="-100"/>
+		<Node id="6" type="3" x="-25" y="0"/>
+		<Node id="3" type="3" x="-25" y="175"/>
+		<Node id="4" type="3" x="-25" y="250"/>
+		<Node id="5" type="3" x="-25" y="425"/>
+		<Node id="1" type="3" x="-25" y="100"/>
+		<Node id="7" type="3" x="-125" y="50"/>
+		<Node id="8" type="3" x="-350" y="475"/>
+		<Node id="9" type="3" x="-350" y="550"/>
+		<Node id="11" type="3" x="-350" y="650"/>
+		<Node id="12" type="3" x="-25" y="575"/>
+		<Node id="13" type="3" x="-25" y="650"/>
+		<Node id="15" type="3" x="300" y="50"/>
+		<Node id="16" type="3" x="300" y="125"/>
+		<Node id="17" type="3" x="-350" y="375"/>
+		<Node id="18" type="3" x="-25" y="500"/>
+		<Node id="20" type="3" x="-200" y="250"/>
+		<Node id="21" type="3" x="-200" y="325"/>
+		<Node errorActionId="14" errorStartIndex="15" id="600000000" text="Error Handling" type="4" x="300" y="-25"/>
+		<RoutedErrors value="6.2|3.1|4.2|5.2|1.1|8.1|9.1|12.1|17.1|20.2|"/></BuildInfo>
+ <Event overview_string="Variable Group Name: AAF1_EMBLEM&#10;Condition: Value changed&#10;" type="VARGROUP">
+  <Properties>
+   <Property name="group_name" value="AAF1_EMBLEM"/>
+   <Property name="condition" value="Value changed"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="TurckDeviceName" type="STRING" length="32" options="3"/>
+  <VariableInfo name="WrongBinString" type="STRING" length="200" options="3"/>
+  <VariableInfo name="TurckOutputNumber" type="STRING" length="32" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ClientId" type="STRING" length="32" options="3" default="AAF1WT8D00401Z"/>
+  <VariableInfo name="ProcessPointId" type="STRING" length="32" options="3" default="AAF1WT8P00401"/>
+  <VariableInfo name="gvTurckOutputNumber" type="STRING" length="32" options="3" default="TurckOutputNumber"/>
+  <VariableInfo name="gvTurckDeviceName" type="STRING" length="32" options="3" default="TurckDeviceName"/>
+  <VariableInfo name="gvDeviceName" type="STRING" length="32" options="3" default="AAF1_EMBLEM_GV"/>
+ </StaticVariables>
+ <Actions first_action="6">
+  <Action type="DEMANDRD" id="1" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckDeviceName"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TurckDeviceName"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDRD" id="3" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="32"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="gvDeviceName"/>
+    <StaticVariable logical_name="Variable Name" name="gvTurckOutputNumber"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="TurckOutputNumber"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="4" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckDeviceName"/>
+    <EventVariable logical_name="Search String" name="Device Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="20"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="5" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckOutputNumber"/>
+    <EventVariable logical_name="Search String" name="Variable Name"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="18"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="6" disabled="false">
+   <Properties>
+    <Property name="expression" value="BitData==1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="BitData" name="DATA"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="7"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="7" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="8" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - $(WrongBinString)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="WrongBinString" name="WrongBinString"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="9" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="0"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="11" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="12" disabled="false">
+   <Properties>
+    <Property name="name" value="GALC_BroadcastResponse"/>
+    <Property name="version" value="1858569967"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="CLIENT_ID" name="ClientId"/>
+    <StaticVariable logical_name="PROCESS_POINT_ID" name="ProcessPointId"/>
+    <ConstantVariable logical_name="JUDGEMENT" value="1"/>
+    <ConstantVariable logical_name="SKIP_OPERATION" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="13"/>
+    <Route result="1" goto="15"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="13" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="15" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_EMBLEM"/>
+    <Property name="msg" value="$(Trigger) - Unexpected Exception - Error Code: $(Code), Error Message: $(Message)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <MacroVariable logical_name="Code" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="Message" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="16" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="17" disabled="false">
+   <Properties>
+    <Property name="format" value="Wrong Bin, Expected $(TurckDeviceName).$(TurckOutputNumber), Actual: $(DeviceName).$(VariableName)"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="TurckDeviceName" name="TurckDeviceName"/>
+    <LocalVariable logical_name="TurckOutputNumber" name="TurckOutputNumber"/>
+    <EventVariable logical_name="DeviceName" name="Device Name"/>
+    <EventVariable logical_name="VariableName" name="Variable Name"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="WrongBinString"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="SUBTRIGGER" id="18" disabled="false">
+   <Properties>
+    <Property name="project_name" value="== Current Project =="/>
+    <Property name="trigger_name" value="ResetBins_NEW"/>
+    <Property name="wait_for_completion" value="true"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="12"/>
+    <Route result="1" goto="12"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="20" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="true"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="TurckDeviceName"/>
+    <ConstantVariable logical_name="Search String" value="NONE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="21"/>
+    <Route result="1" goto="17"/>
+    <Route result="2" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="21" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_EMBLEM" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_EMBLEM" nlsid="30032">AAF1_EMBLEM</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_EMBLEM" type="project">
+		<reference name="AAF1_EMBLEM/BroadcastFromClient" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+			<reference name="Utilities/Pad String" type="trigger">
+				<reference name="ENDERR" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="LUA_INLINE" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+		</reference>
+		<reference name="AAF1_EMBLEM/BroadcastFromClient_NEW" type="trigger">
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JSON.DECODE" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_EMBLEM/BrokenLightCurtain" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="VARGROUP" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction">
+				<reference name="GALC_DeviceDataRouting_Execute" type="transport"/>
+			</reference>
+			<reference name="AAF1_EMBLEM/ResetBins" type="trigger">
+				<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+			<reference name="AAF1_EMBLEM" type="vargroup">
+				<reference name="AAF1_EMBLEM_TURCK1" type="device"/>
+				<reference name="AAF1_EMBLEM_TURCK2" type="device"/>
+			</reference>
+		</reference>
+		<reference name="AAF1_EMBLEM/BrokenLightCurtain_NEW" type="trigger">
+			<reference name="DEMANDRD" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="VARGROUP" type="eventtype"/>
+			<reference name="GALC_BroadcastResponse" type="transaction"/>
+			<reference name="AAF1_EMBLEM/ResetBins_NEW" type="trigger">
+				<reference name="DEMAND.MULTI.WRITE" type="actiontype"/>
+				<reference name="ENDOK" type="actiontype"/>
+				<reference name="SUBTRIGGER" type="eventtype"/>
+			</reference>
+			<reference name="AAF1_EMBLEM" type="vargroup"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

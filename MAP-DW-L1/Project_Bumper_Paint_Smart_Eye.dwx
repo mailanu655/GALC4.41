@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AAF1_Bumper_Paint" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AAF1_Bumper_Paint" nlsid="30030">
+<DeviceDefinition name="AAF1_Bumper_Paint" type="46" type_name="CompactLogix CPU" state="6" options="10296"><Properties><Property name="use_linkid" value="false"/><Property name="per_var_security" value="true"/><Property name="stringsasstructs" value="false"/><Property name="ip_address" value="10.39.20.7"/><Property name="enum_alias" value="false"/><Property name="enum_program" value="false"/><Property name="enum_controller" value="true"/><Property name="pendingpkts" value="5"/><Property name="create_json" value="false"/><Property name="timeout" value="5000"/><Property name="keepalive" value="60"/><Property name="parse_strings" value="false"/><Property name="port" value="44818"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="MAP_Bumper_Paint_PROD" nlsid="30034" interface="1"><exportitem type="transport" name="MAP_Bumper_Paint_PROD" nlsid="30034">
+<Transports>
+				<TransportDefinition connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="MAP_Bumper_Paint_PROD" inactivity_time_out="14400000" initPoolSize="1" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" luw_commit_on_exception="false" luw_idle_timeout="300" luw_transaction_count_threshhold="100" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="DB" tzinfo="platform" version="1272097192">
+					<DB defid="MAP_Bumper_Paint_PROD"/>
+				</TransportDefinition>
+				<DBDefinition baseURL="jdbc:microsoft:sqlserver://" dbname="pa_BP_Line_Control" dbtype="MSSQL" driver="com.microsoft.jdbc.sqlserver.SQLServerDriver" host="HAMPMMCWSQLV015" id="MAP_Bumper_Paint_PROD" password="$()#!%WWHYqF7busqxTTgw/N9BgQ==" port="1433" type="DB" userid="rssql_app"/>
+			</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="Delete_BP_Schedule Data_Prod" nlsid="30033" interface="1"><exportitem type="transaction" name="Delete_BP_Schedule Data_Prod" nlsid="30033">
+
+			<TransactionDef id="Delete_BP_Schedule Data_Prod" version="-896905765" version_mismatch="pass">
+				<Transport id="MAP_Bumper_Paint_PROD" type="DB"/>
+				<InputMap/>
+				<SQLInfo action="D">
+					<Table name="tblHAM_CurrentProdData" schema="dbo"/>
+					<body/>
+					<WhereClause>
+						<qualifier/>
+					</WhereClause>
+					<OrderByClause/>
+					<GroupByClause/>
+				</SQLInfo>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="Insert_BP_Schedule_Data_Prod" nlsid="30033" interface="1"><exportitem type="transaction" name="Insert_BP_Schedule_Data_Prod" nlsid="30033">
+
+			<TransactionDef id="Insert_BP_Schedule_Data_Prod" version="-957458232" version_mismatch="pass">
+				<Transport id="MAP_Bumper_Paint_PROD" type="DB"/>
+				<InputMap>
+					<Variable count="1" length="20" name="col_prod_lot_no" type="STRING"/>
+					<Variable count="1" name="col_orig_lot_qty" type="INT4"/>
+					<Variable count="1" length="22" name="col_product_spec_code" type="STRING"/>
+					<Variable count="1" length="80" name="col_proc_loc_dep_text" type="STRING"/>
+					<Variable count="1" length="26" name="col_process_tstp" type="STRING"/>
+				</InputMap>
+				<SQLInfo action="I">
+					<Table name="tblHAM_CurrentProdData" schema="dbo"/>
+					<body>
+						<ColInfo colname="prod_lot_no" dbtype="VARCHAR" name="col_prod_lot_no" required="0" wbRawType="12"/>
+						<ColInfo colname="orig_lot_qty" dbtype="INT" name="col_orig_lot_qty" required="0" wbRawType="4"/>
+						<ColInfo colname="product_spec_code" dbtype="VARCHAR" name="col_product_spec_code" required="0" wbRawType="12"/>
+						<ColInfo colname="proc_loc_dep_text" dbtype="VARCHAR" name="col_proc_loc_dep_text" required="0" wbRawType="12"/>
+						<ColInfo colname="process_tstp" dbtype="VARCHAR" name="col_process_tstp" required="0" wbRawType="12"/>
+					</body>
+				</SQLInfo>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="MAP_GALC_PROD_DB" nlsid="30034" interface="1"><exportitem type="transport" name="MAP_GALC_PROD_DB" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-1074904118"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="MAP_GALC_PROD_DB" inactivity_time_out="14400000" initPoolSize="1" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" luw_commit_on_exception="false" luw_idle_timeout="300" luw_transaction_count_threshhold="100" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="DB" tzinfo="platform">
+		<DB defid="MAP_GALC_PROD_DB"/>
+	</TransportDefinition>
+	<DBDefinition baseURL="jdbc:db2://" dbname="PMAP1QDB" dbtype="DB2" driver="com.ibm.db2.jcc.DB2Driver" host="pmap1qdb1" id="MAP_GALC_PROD_DB" password="$()#!%QqJ6hbETAYL8afto8iAKtg==" port="60002" type="DB" userid="nglcdrpt">
+	</DBDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="Select_BP_Schedule_Data_Prod" nlsid="30033" interface="1"><exportitem type="transaction" name="Select_BP_Schedule_Data_Prod" nlsid="30033">
+
+<TransactionDef id="Select_BP_Schedule_Data_Prod" version="1761811590" version_mismatch="pass">
+	<Transport id="MAP_GALC_PROD_DB" type="DB"/>
+	<InputMap>
+		<Variable count="1" name="col_Ord_no" type="INT2"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="500" length="20" name="col_out_PRODUCTION_LOT" type="STRING"/>
+		<Variable count="500" name="col_out_LOT_SIZE" type="INT4"/>
+		<Variable count="500" name="col_out_HOLD_STATUS" type="INT4"/>
+		<Variable count="500" length="20" name="col_out_NEXT_PRODUCTION_LOT" type="STRING"/>
+		<Variable count="500" length="2" name="col_out_PROCESS_LOCATION" type="STRING"/>
+		<Variable count="500" length="30" name="col_out_PRODUCT_SPEC_CODE" type="STRING"/>
+		<Variable count="500" length="11" name="col_out_PLAN_CODE" type="STRING"/>
+		<Variable count="500" length="18" name="col_out_KD_LOT_NUMBER" type="STRING"/>
+		<Variable count="500" name="col_ord_no" type="INT4"/>
+	</OutputMap>
+	<SQLInfo action="S" distinct="false">
+		<Table name="GAL212TBXV" schema="MAPQDB"/>
+		<body>
+			<ColInfo colname="PRODUCTION_LOT" dbtype="CHAR" name="col_out_PRODUCTION_LOT" required="0" wbRawType="1"/>
+			<ColInfo colname="LOT_SIZE" dbtype="INTEGER" name="col_out_LOT_SIZE" required="1" wbRawType="4"/>
+			<ColInfo colname="HOLD_STATUS" dbtype="INTEGER" name="col_out_HOLD_STATUS" required="1" wbRawType="4"/>
+			<ColInfo colname="NEXT_PRODUCTION_LOT" dbtype="CHAR" name="col_out_NEXT_PRODUCTION_LOT" required="1" wbRawType="1"/>
+			<ColInfo colname="PROCESS_LOCATION" dbtype="CHAR" name="col_out_PROCESS_LOCATION" required="1" wbRawType="1"/>
+			<ColInfo colname="PRODUCT_SPEC_CODE" dbtype="CHAR" name="col_out_PRODUCT_SPEC_CODE" required="1" wbRawType="1"/>
+			<ColInfo colname="PLAN_CODE" dbtype="CHAR" name="col_out_PLAN_CODE" required="1" wbRawType="1"/>
+			<ColInfo colname="KD_LOT_NUMBER" dbtype="CHAR" name="col_out_KD_LOT_NUMBER" required="1" wbRawType="1"/>
+			<ColInfo colname="ORD" dbtype="INTEGER" name="col_ord_no" required="1" wbRawType="4"/>
+		</body>
+		<WhereClause>
+			<qualifier whereRowsExpected="500">
+				<ColInfo colname="ORD" dbtype="INTEGER" name="col_Ord_no" operator="LT" relation="AND"/>
+				<ColInfo colname="NEXT_PRODUCTION_LOT" dbtype="CHAR" operator="is not null" relation="AND"/>
+			</qualifier>
+		</WhereClause>
+		<OrderByClause>
+			<OrderItem name="ORD" sort="Desc"/>
+		</OrderByClause>
+		<GroupByClause/>
+	</SQLInfo>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="Select_BP_Schedule_OrdNo_Prod" nlsid="30033" interface="1"><exportitem type="transaction" name="Select_BP_Schedule_OrdNo_Prod" nlsid="30033">
+
+<TransactionDef id="Select_BP_Schedule_OrdNo_Prod" version="251896585" version_mismatch="pass">
+	<Transport id="MAP_GALC_PROD_DB" type="DB"/>
+	<InputMap>
+		<Variable count="1" length="20" name="col_prod_lot_no" type="STRING"/>
+	</InputMap>
+	<OutputMap>
+		<Variable count="1" name="col_ord_no" type="INT4"/>
+	</OutputMap>
+	<SQLInfo action="S" distinct="false">
+		<Table name="GAL212TBXV" schema="MAPQDB"/>
+		<body>
+			<ColInfo colname="ORD" dbtype="INTEGER" name="col_ord_no" required="1" wbRawType="4"/>
+		</body>
+		<WhereClause>
+			<qualifier whereRowsExpected="1">
+				<ColInfo colname="PRODUCTION_LOT" dbtype="CHAR" name="col_prod_lot_no" operator="=" relation="AND"/>
+			</qualifier>
+		</WhereClause>
+		<OrderByClause/>
+		<GroupByClause/>
+	</SQLInfo>
+</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="Bumper_Paint_Smart Eye/Request_Schedule _New" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="Bumper_Paint_Smart Eye/Request_Schedule _New" nlsid="30031">
+<Trigger name="Request_Schedule _New" project="Bumper_Paint_Smart Eye" max_pending="1" reporting="on">
+ <Context value="Data|1~2~7~9~10~14~15~16~17~23~22~24~25~26~27~28~29~32~33~34~35~36~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="525" y="-100"/>
+		<Node id="1" type="3" x="525" y="-25"/>
+		<Node id="2" type="3" x="525" y="50"/>
+		<Node id="7" type="3" x="525" y="400"/>
+		<Node id="9" type="3" x="525" y="300"/>
+		<Node id="10" type="3" x="375" y="725"/>
+		<Node id="14" type="3" x="275" y="1050"/>
+		<Node id="15" type="3" x="525" y="475"/>
+		<Node id="16" type="3" x="350" y="325"/>
+		<Node id="17" type="3" x="850" y="300"/>
+		<Node id="23" type="3" x="375" y="925"/>
+		<Node id="22" type="3" x="375" y="825"/>
+		<Node id="24" type="3" x="375" y="1050"/>
+		<Node id="25" type="3" x="375" y="500"/>
+		<Node id="26" type="3" x="375" y="575"/>
+		<Node id="27" type="3" x="375" y="650"/>
+		<Node id="28" type="3" x="850" y="475"/>
+		<Node id="29" type="3" x="850" y="575"/>
+		<Node id="32" type="3" x="350" y="175"/>
+		<Node id="33" type="3" x="350" y="100"/>
+		<Node id="34" type="3" x="525" y="150"/>
+		<Node id="35" type="3" x="525" y="225"/>
+		<Node id="36" type="3" x="850" y="375"/></BuildInfo>
+ <Event overview_string="Variable: AAF1_Bumper_Paint.SC_to_GALC.request_trigger&#10;Condition: Value changed&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AAF1_Bumper_Paint" name="SC_to_GALC.request_trigger" qos="3" type="BOOL"/>
+			<Condition deadband="0" type="onchange"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="LoopProductSpecCode" type="STRING" length="30" options="3"/>
+  <VariableInfo name="Current_Production_Lot" type="STRING" length="20" options="3"/>
+  <VariableInfo name="ProductSpecCode" type="STRING" xdim="500" length="30" options="3"/>
+  <VariableInfo name="LotCount" type="INT4" options="3" default="0"/>
+  <VariableInfo name="LoopIndex" type="INT4" options="3"/>
+  <VariableInfo name="LooplotSize" type="INT4" options="3"/>
+  <VariableInfo name="ProcessLoc" type="STRING" length="32" options="3" default="AF"/>
+  <VariableInfo name="NoOfUnits" type="INT4" options="3"/>
+  <VariableInfo name="StartSendData" type="BOOL" options="3" default="0"/>
+  <VariableInfo name="LotSize" type="INT4" xdim="500" options="3"/>
+  <VariableInfo name="LoopProductionLot" type="STRING" length="20" options="3"/>
+  <VariableInfo name="DataReady" type="BOOL" options="3"/>
+  <VariableInfo name="Ord_no" type="INT2" options="3"/>
+  <VariableInfo name="Dataack" type="BOOL" options="3"/>
+  <VariableInfo name="PlanCode" type="STRING" length="32" options="3" default="MAP 014"/>
+  <VariableInfo name="ProductionLots" type="STRING" xdim="500" length="20" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="plc_Device_Name" type="STRING" length="32" options="3" default="AAF1_Bumper_Paint"/>
+  <VariableInfo name="plcNoOfLots" type="STRING" length="32" options="3" default="SC_to_GALC.request_num_units"/>
+  <VariableInfo name="plcCurrentProdLot" type="STRING" length="32" options="3" default="SC_to_GALC.last_prod_lot"/>
+  <VariableInfo name="plcAck" type="STRING" length="32" options="3" default="GALC_to_SC.request_ack"/>
+  <VariableInfo name="plcDataReady" type="STRING" length="32" options="3" default="SC_to_GALC.request_trigger"/>
+ </StaticVariables>
+ <Actions first_action="1">
+  <Action type="DEMAND.MULTI.READ" id="1" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;DataReady&quot;:{&quot;type&quot;:&quot;BOOL&quot;,&quot;count&quot;:1},&#10;    &quot;ProductionLot&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:82},&#10;    &quot;NoOfLots&quot;:{&quot;type&quot;:&quot;INT4&quot;,&quot;count&quot;:1}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plc_Device_Name"/>
+    <StaticVariable logical_name="DataReady Name" name="plcDataReady"/>
+    <StaticVariable logical_name="ProductionLot Name" name="plcCurrentProdLot"/>
+    <StaticVariable logical_name="NoOfLots Name" name="plcNoOfLots"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+    <LocalVariable logical_name="ProductionLot" name="Current_Production_Lot"/>
+    <LocalVariable logical_name="NoOfLots" name="NoOfUnits"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="2"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="2" disabled="false">
+   <Properties>
+    <Property name="expression" value="DataReady==1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="DataReady" name="DataReady"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="33"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="FOR" id="7" disabled="false">
+   <Properties/>
+   <InputMap>
+    <ConstantVariable logical_name="Initial Value" value="0"/>
+    <ConstantVariable logical_name="Final Value" value="1000"/>
+    <ConstantVariable logical_name="Increment By" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Current Value" name="LoopIndex"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="UNDEFINED"/>
+    <Route result="2" goto="25"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="9" disabled="false">
+   <Properties>
+    <Property name="name" value="Select_BP_Schedule_Data_Prod"/>
+    <Property name="version" value="1761811590"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="col_Ord_no" name="Ord_no"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="col_out_PRODUCTION_LOT" name="ProductionLots[0]" count="500"/>
+    <LocalVariable logical_name="col_out_LOT_SIZE" name="LotSize[0]" count="500"/>
+    <LocalVariable logical_name="col_out_PRODUCT_SPEC_CODE" name="ProductSpecCode[0]" count="500"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="7"/>
+    <Route result="1" goto="UNDEFINED"/>
+    <Route result="2" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="10" disabled="false">
+   <Properties>
+    <Property name="name" value="Insert_BP_Schedule_Data_Prod"/>
+    <Property name="version" value="-957458232"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="col_prod_lot_no" name="LoopProductionLot"/>
+    <LocalVariable logical_name="col_orig_lot_qty" name="LooplotSize"/>
+    <LocalVariable logical_name="col_product_spec_code" name="LoopProductSpecCode"/>
+    <ConstantVariable logical_name="col_proc_loc_dep_text" value="Test"/>
+    <MacroVariable logical_name="col_process_tstp" name="$EVENT_TIME"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="22"/>
+    <Route result="1" goto="UNDEFINED"/>
+    <Route result="2" goto="22"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="14" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="15" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="16" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="7"/>
+   </Routes>
+  </Action>
+  <Action type="CONNECTOR" id="17" disabled="false">
+   <Properties>
+    <Property name="label" value="#00ff00"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="36"/>
+   </Routes>
+  </Action>
+  <Action type="EXPRESSION" id="22" disabled="false">
+   <Properties>
+    <Property name="expression" value="A+B"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="A" name="LotCount"/>
+    <LocalVariable logical_name="B" name="LooplotSize"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result" name="LotCount"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="23"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="23" disabled="false">
+   <Properties>
+    <Property name="expression" value="LotCount &gt; NoOfUnits"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="LotCount" name="LotCount"/>
+    <LocalVariable logical_name="NoOfUnits" name="NoOfUnits"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="24"/>
+    <Route result="1" goto="14"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="JUMP" id="24" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="25" disabled="false">
+   <Properties>
+    <Property name="mode" value="Scalar"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1000"/>
+    <Property name="length" value="20"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="ProductionLots[0]" count="1000"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopProductionLot"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="26"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="26" disabled="false">
+   <Properties>
+    <Property name="mode" value="Scalar"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1000"/>
+    <Property name="length" value="30"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="ProductSpecCode[0]" count="1000"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LoopProductSpecCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="27"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ARRAY.GET" id="27" disabled="false">
+   <Properties>
+    <Property name="mode" value="Scalar"/>
+    <Property name="type" value="INT4"/>
+    <Property name="count" value="1000"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Array" name="LotSize[0]" count="1000"/>
+    <LocalVariable logical_name="Index" name="LoopIndex"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Value" name="LooplotSize"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="28" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plc_Device_Name"/>
+    <StaticVariable logical_name="Variable Name" name="plcAck"/>
+    <ConstantVariable logical_name="Value" value="1"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="29" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="32" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="33" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="BOOL"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="plc_Device_Name"/>
+    <StaticVariable logical_name="Variable Name" name="plcAck"/>
+    <ConstantVariable logical_name="Value" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="34" disabled="false">
+   <Properties>
+    <Property name="name" value="Delete_BP_Schedule Data_Prod"/>
+    <Property name="version" value="-896905765"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="35"/>
+    <Route result="1" goto="UNDEFINED"/>
+    <Route result="2" goto="35"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="35" disabled="false">
+   <Properties>
+    <Property name="name" value="Select_BP_Schedule_OrdNo_Prod"/>
+    <Property name="version" value="251896585"/>
+    <Property name="use_luw" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="col_prod_lot_no" name="Current_Production_Lot"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="col_ord_no" name="Ord_no"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="UNDEFINED"/>
+    <Route result="2" goto="9"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="36" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="Request_Schedule"/>
+    <Property name="msg" value="Schedule Data after Lot  $(PROD_LOT) Written to DB"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="PROD_LOT" name="Current_Production_Lot"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="Bumper_Paint_Smart Eye" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="Bumper_Paint_Smart Eye" nlsid="30032">Bumper_Paint_Smart Eye</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="Bumper_Paint_Smart Eye" type="project">
+		<reference name="Bumper_Paint_Smart Eye/Request_Schedule _New" type="trigger">
+			<reference name="ARRAY.GET" type="actiontype"/>
+			<reference name="CONNECTOR" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="EXPRESSION" type="actiontype"/>
+			<reference name="FOR" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="JUMP" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AAF1_Bumper_Paint" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="Delete_BP_Schedule Data_Prod" type="transaction">
+				<reference name="MAP_Bumper_Paint_PROD" type="transport"/>
+			</reference>
+			<reference name="Insert_BP_Schedule_Data_Prod" type="transaction">
+				<reference name="MAP_Bumper_Paint_PROD" type="transport"/>
+			</reference>
+			<reference name="Select_BP_Schedule_Data_Prod" type="transaction">
+				<reference name="MAP_GALC_PROD_DB" type="transport"/>
+			</reference>
+			<reference name="Select_BP_Schedule_OrdNo_Prod" type="transaction">
+				<reference name="MAP_GALC_PROD_DB" type="transport"/>
+			</reference>
+			<reference name="AAF1_Bumper_Paint.SC_to_GALC.request_trigger" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="trigger" name="PMC_Paint_Prod_Subtriggers/Buck_Load_AFB_Parser" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="PMC_Paint_Prod_Subtriggers/Buck_Load_AFB_Parser" nlsid="30031">
+<Trigger name="Buck_Load_AFB_Parser" project="PMC_Paint_Prod_Subtriggers" max_pending="64" reporting="onerr,ontimeout" max_exec_time_warning="5000">
+ <Context value="SubTrigger|25~30~31~32~33~34~38~39~40~43~44~45~46~47~49~50~51~52~53~54~63~64~65~66~67~3~68~70~71~72~73~74~75~76~77~78~79~80~81~82~83~84~85~86~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="-825" y="-275"/>
+		<Node id="25" type="3" x="-825" y="-175"/>
+		<Node id="30" type="3" x="375" y="-100"/>
+		<Node id="31" type="3" x="-600" y="-100"/>
+		<Node id="32" type="3" x="-350" y="-100"/>
+		<Node id="33" type="3" x="-75" y="-100"/>
+		<Node id="34" type="3" x="150" y="-100"/>
+		<Node id="38" type="3" x="-200" y="-200"/>
+		<Node id="39" type="3" x="-25" y="-200"/>
+		<Node id="40" type="3" x="-825" y="250"/>
+		<Node id="43" type="3" x="-600" y="250"/>
+		<Node id="44" type="3" x="-350" y="250"/>
+		<Node id="45" type="3" x="-75" y="250"/>
+		<Node id="46" type="3" x="150" y="250"/>
+		<Node id="47" type="3" x="375" y="250"/>
+		<Node id="49" type="3" x="625" y="-100"/>
+		<Node id="50" type="3" x="625" y="-25"/>
+		<Node id="51" type="3" x="625" y="50"/>
+		<Node id="52" type="3" x="625" y="125"/>
+		<Node id="53" type="3" x="625" y="200"/>
+		<Node id="54" type="3" x="625" y="275"/>
+		<Node id="63" type="3" x="-200" y="400"/>
+		<Node id="64" type="3" x="-25" y="400"/>
+		<Node id="65" type="3" x="825" y="125"/>
+		<Node id="66" type="3" x="625" y="350"/>
+		<Node id="67" type="3" x="825" y="200"/>
+		<Node id="3" type="3" x="-825" y="-100"/>
+		<Node id="68" type="3" x="-825" y="75"/>
+		<Node id="70" type="3" x="-825" y="-25"/>
+		<Node id="71" type="3" x="-825" y="175"/>
+		<Node id="72" type="3" x="-600" y="-25"/>
+		<Node id="73" type="3" x="-600" y="75"/>
+		<Node id="74" type="3" x="-600" y="175"/>
+		<Node id="75" type="3" x="-350" y="-25"/>
+		<Node id="76" type="3" x="-350" y="75"/>
+		<Node id="77" type="3" x="-350" y="175"/>
+		<Node id="78" type="3" x="-75" y="-25"/>
+		<Node id="79" type="3" x="-75" y="175"/>
+		<Node id="80" type="3" x="-75" y="75"/>
+		<Node id="81" type="3" x="150" y="-25"/>
+		<Node id="82" type="3" x="150" y="175"/>
+		<Node id="83" type="3" x="150" y="75"/>
+		<Node id="84" type="3" x="375" y="-25"/>
+		<Node id="85" type="3" x="375" y="175"/>
+		<Node id="86" type="3" x="375" y="75"/>
+		<Node id="536870913" text="Color Clear" type="4" x="300" y="-100"/>
+		<Node id="536870914" text="Color Mid" type="4" x="75" y="-100"/>
+		<Node id="536870915" text="Color Base" type="4" x="-175" y="-100"/>
+		<Node id="536870916" text="Color Prime" type="4" x="-425" y="-100"/>
+		<Node id="536870917" text="Option Code" type="4" x="-675" y="-100"/>
+		<Node id="536870918" text="Style Code" type="4" x="-925" y="-100"/>
+		<Node id="536870919" text="Need to add a space to received_#_#AFB string so that last value can_#_#be parsed with Get SubString." type="4" x="-1000" y="-175"/>
+		<Node id="536870920" text="PURPOSE:_#_#Receive string of AFB values from calling routine_#_#and breakdown string into the following PA AFB types: _#_#_#_#Example: AFB String = 070001131411_#_#- AFB_STYLE_CODE = 07_#_#- AFB_OPTION_CODE = 00_#_#- AFB_COLOR_PRIME = 01_#_#- AFB_COLOR_BASE = 13_#_#- AFB_COLOR_MID = 14_#_#- AFB_COLOR_CLEAR = 11" type="4" x="-1100" y="-25"/>
+		<Node id="536870948" text="Color Prime" type="4" x="550" y="50"/>
+		<Node id="536870949" text="Write local AFB int variables to output variables" type="4" x="625" y="-150"/>
+		<Node id="536870950" text="Color Base" type="4" x="550" y="125"/>
+		<Node id="536870951" text="Style Code" type="4" x="550" y="-100"/>
+		<Node id="536870952" text="Option Code" type="4" x="550" y="-25"/>
+		<Node id="536870953" text="Color Mid" type="4" x="550" y="200"/>
+		<Node id="536870954" text="Color Clear" type="4" x="550" y="275"/></BuildInfo>
+ <Event overview_string="Input Variables: &#10;Output Variables: &#10;" type="SUBTRIGGER">
+  <Properties>
+   <Property name="variables_input" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;AFB String from Service&quot; length=&quot;256&quot; name=&quot;AFB_Input_String&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+   <Property name="variables_output" value="&lt;Variables&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Style Code&quot; name=&quot;AFB_Style_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Option Code&quot; name=&quot;AFB_Option_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Color Prime Code&quot; name=&quot;AFB_Color_Prime_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Color Base Code&quot; name=&quot;AFB_Color_Base_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Color Mid Code&quot; name=&quot;AFB_Color_Mid_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&#9;&lt;VariableInfo desc=&quot;2 Byte AFB Color Clear Code&quot; name=&quot;AFB_Color_Clear_Code&quot; options=&quot;7&quot; type=&quot;INT1&quot;/&gt;&#10;&#9;&#9;&#9;&#9;&lt;/Variables&gt;"/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="afb_color_clear_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="afb_full_string_LOCAL" type="STRING" length="256" options="3" default="00000000000000000000"/>
+  <VariableInfo name="afb_color_base_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="check_char_second_LOCAL" type="STRING" length="1" options="3"/>
+  <VariableInfo name="check_char_first_LOCAL" type="STRING" length="1" options="3"/>
+  <VariableInfo name="afb_input_string_LOCAL" type="STRING" length="256" options="3" default="NotSet"/>
+  <VariableInfo name="afb_color_prime_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="afb_style_int_LOCAL" type="INT1" options="3" default="99"/>
+  <VariableInfo name="afb_color_mid_int_LOCAL" type="INT1" options="3" default="99"/>
+  <VariableInfo name="afb_option_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="afb_color_base_int_LOCAL" type="INT1" options="3" default="99"/>
+  <VariableInfo name="afb_style_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="afb_color_mid_string_LOCAL" type="STRING" length="2" options="3" default="xx"/>
+  <VariableInfo name="afb_option_int_LOCAL" type="INT1" options="3" default="99"/>
+  <VariableInfo name="afb_color_clear_int_LOCAL" type="INT1" options="3" default="99"/>
+  <VariableInfo name="afb_color_prime_int_LOCAL" type="INT1" options="3" default="99"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="PARSE_SPACE" type="STRING" length="1" options="3" default=" "/>
+ </StaticVariables>
+ <Actions first_action="25">
+  <Action type="STRING.SPLIT.SUBSTRING" id="3" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1" delim=""/>
+    <ConstantVariable logical_name="End Offset" value="3" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_style_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="70"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="25" disabled="false">
+   <Properties>
+    <Property name="format" value="$(afb_input_string)$(plus_space)"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="afb_input_string" name="AFB_Input_String"/>
+    <StaticVariable logical_name="plus_space" name="PARSE_SPACE"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="afb_full_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="30" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="11"/>
+    <ConstantVariable logical_name="End Offset" value="13"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_clear_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="84"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="31" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="3"/>
+    <ConstantVariable logical_name="End Offset" value="5"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_option_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="72"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="32" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_prime_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="75"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="33" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="7"/>
+    <ConstantVariable logical_name="End Offset" value="9"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_base_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="78"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="34" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_full_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="9"/>
+    <ConstantVariable logical_name="End Offset" value="11"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_mid_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="81"/>
+    <Route result="1" goto="38"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="38" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="PMC_PA_BL_AFB_Parser_SubTrigger"/>
+    <Property name="msg" value="$(Message) $(Input_String), $(style_id), $(style), $(option_id), $(option), $(color_prime_id), $(color_prime), $(color_base_id), $(color_base), $(color_mid_id), $(color_mid), $(color_clear_id), $(color_clear)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="Message" value="Error parsing AFB input string into individual variables. AFB Input String =: " delim=""/>
+    <ConstantVariable logical_name="Input_String" value="afb_input_string_LOCAL" delim=""/>
+    <ConstantVariable logical_name="style_id" value="afb_style_code=" delim=""/>
+    <LocalVariable logical_name="style" name="afb_style_string_LOCAL"/>
+    <ConstantVariable logical_name="option_id" value="afb_option_code=" delim=""/>
+    <LocalVariable logical_name="option" name="afb_option_string_LOCAL"/>
+    <ConstantVariable logical_name="color_prime_id" value="afb_color_prime=" delim=""/>
+    <LocalVariable logical_name="color_prime" name="afb_color_prime_string_LOCAL"/>
+    <ConstantVariable logical_name="color_base_id" value="afb_color_base=" delim=""/>
+    <LocalVariable logical_name="color_base" name="afb_color_base_string_LOCAL"/>
+    <ConstantVariable logical_name="color_mid_id" value="afb_color_mid=" delim=""/>
+    <LocalVariable logical_name="color_mid" name="afb_color_mid_string_LOCAL"/>
+    <ConstantVariable logical_name="color_clear_id" value="afb_color_clear=" delim=""/>
+    <LocalVariable logical_name="color_clear" name="afb_color_clear_string_LOCAL"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="39"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="39" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="40" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_style_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_style_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="31"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="43" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_option_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_option_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="32"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="44" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_prime_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_prime_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="33"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="45" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_base_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_base_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="34"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="46" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_mid_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_mid_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="30"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="47" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_clear_string_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_clear_int_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="63"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="49" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_style_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Style_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="50" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_option_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Option_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="51" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_prime_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Color_Prime_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="52"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="52" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_base_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Color_Base_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="53" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_mid_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Color_Mid_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="54" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT1"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="afb_color_clear_int_LOCAL"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="AFB_Color_Clear_Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="66"/>
+    <Route result="1" goto="65"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="63" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="PMC_PA_BL_AFB_Parser_SubTrigger"/>
+    <Property name="msg" value="$(Message), $(style_id), $(style), $(option_id), $(option), $(color_prime_id), $(color_prime), $(color_base_id), $(color_base), $(color_mid_id), $(color_mid), $(color_clear_id), $(color_clear)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="Message" value="Error converting parsed AFB input strings into int  variables: " delim=""/>
+    <ConstantVariable logical_name="style_id" value="afb_style_code=" delim=""/>
+    <LocalVariable logical_name="style" name="afb_style_int_LOCAL"/>
+    <ConstantVariable logical_name="option_id" value="afb_option_code=" delim=""/>
+    <LocalVariable logical_name="option" name="afb_option_int_LOCAL"/>
+    <ConstantVariable logical_name="color_prime_id" value="afb_color_prime=" delim=""/>
+    <LocalVariable logical_name="color_prime" name="afb_color_prime_int_LOCAL"/>
+    <ConstantVariable logical_name="color_base_id" value="afb_color_base=" delim=""/>
+    <LocalVariable logical_name="color_base" name="afb_color_base_int_LOCAL"/>
+    <ConstantVariable logical_name="color_mid_id" value="afb_color_mid=" delim=""/>
+    <LocalVariable logical_name="color_mid" name="afb_color_mid_int_LOCAL"/>
+    <ConstantVariable logical_name="color_clear_id" value="afb_color_clear=" delim=""/>
+    <LocalVariable logical_name="color_clear" name="afb_color_clear_int_LOCAL"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="64"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="64" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="65" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="WARN"/>
+    <Property name="component" value="PMC_PA_BL_AFB_Parser_SubTrigger"/>
+    <Property name="msg" value="$(Message) &lt;$(AFBString)&gt;. $(style_id), $(style), $(option_id), $(option), $(color_prime_id), $(color_prime), $(color_base_id), $(color_base), $(color_mid_id), $(color_mid), $(color_clear_id), $(color_clear)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="Message" value="Error Setting PLC AFB variables using: " delim=""/>
+    <EventVariable logical_name="AFBString" name="AFB_Input_String"/>
+    <ConstantVariable logical_name="style_id" value="afb_style_code=" delim=""/>
+    <LocalVariable logical_name="style" name="afb_style_int_LOCAL"/>
+    <ConstantVariable logical_name="option_id" value="afb_option_code=" delim=""/>
+    <LocalVariable logical_name="option" name="afb_option_int_LOCAL"/>
+    <ConstantVariable logical_name="color_prime_id" value="afb_color_prime=" delim=""/>
+    <LocalVariable logical_name="color_prime" name="afb_color_prime_int_LOCAL"/>
+    <ConstantVariable logical_name="color_base_id" value="afb_color_base=" delim=""/>
+    <LocalVariable logical_name="color_base" name="afb_color_base_int_LOCAL"/>
+    <ConstantVariable logical_name="color_mid_id" value="afb_color_mid=" delim=""/>
+    <LocalVariable logical_name="color_mid" name="afb_color_mid_int_LOCAL"/>
+    <ConstantVariable logical_name="color_clear_id" value="afb_color_clear=" delim=""/>
+    <LocalVariable logical_name="color_clear" name="afb_color_clear_int_LOCAL"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="67"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="ENDOK" id="66" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="67" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="68" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="71"/>
+    <Route result="1" goto="40"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="70" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_style_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="68"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="71" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_style_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_style_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="40"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="72" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_option_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="73"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="73" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="74"/>
+    <Route result="1" goto="43"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="74" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_option_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_option_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="43"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="75" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_prime_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="76"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="76" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="77"/>
+    <Route result="1" goto="44"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="77" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_prime_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_prime_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="44"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="78" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_base_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="80"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="79" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_base_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_base_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="80" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="79"/>
+    <Route result="1" goto="45"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="81" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_mid_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="83"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="82" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_mid_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_mid_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="83" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="82"/>
+    <Route result="1" goto="46"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="84" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_clear_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="check_char_first_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="86"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="85" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="afb_color_clear_string_LOCAL"/>
+    <ConstantVariable logical_name="Start Offset" value="2"/>
+    <ConstantVariable logical_name="End Offset" value="2"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="afb_color_clear_string_LOCAL"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="47"/>
+    <Route result="1" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="86" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="check_char_first_LOCAL"/>
+    <ConstantVariable logical_name="Search String" value="0"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="85"/>
+    <Route result="1" goto="47"/>
+    <Route result="2" goto="UNDEFINED"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="PMC_Paint_Prod_Subtriggers" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportitem type="project" name="PMC_Paint_Prod_Subtriggers" nlsid="30032">PMC_Paint_Prod_Subtriggers</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="PMC_Paint_Prod_Subtriggers" type="project">
+		<reference name="PMC_Paint_Prod_Subtriggers/Buck_Load_AFB_Parser" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="SUBTRIGGER" type="eventtype"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

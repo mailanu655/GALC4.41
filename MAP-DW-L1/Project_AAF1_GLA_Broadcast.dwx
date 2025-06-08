@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="dbtable" name="BRD_GLA_WR1" nlsid="30026" interface="1"><exportitem type="dbtable" name="BRD_GLA_WR1" nlsid="30026">CREATE TABLE BRD_GLA_WR1 (ID INTEGER  PRIMARY KEY AUTOINCREMENT,BRD_Data TEXT(1024) ,Create_TSTP TIMESTAMP );</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_Load" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_Load" nlsid="30031">
+<Trigger name="AAF1_GLA_Broadcast_Load" project="AAF1_GLA_Broadcast" max_pending="1" reporting="off">
+ <Context value="HTTP Page Listener|2~1~3~4~5~6~13~15~16~17~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="25"/>
+		<Node id="2" type="3" x="50" y="125"/>
+		<Node id="1" type="3" x="50" y="675"/>
+		<Node id="3" type="3" x="50" y="200"/>
+		<Node id="4" type="3" x="50" y="275"/>
+		<Node id="5" type="3" x="50" y="350"/>
+		<Node id="6" type="3" x="50" y="500"/>
+		<Node id="13" type="3" x="525" y="325"/>
+		<Node id="15" type="3" x="525" y="475"/>
+		<Node id="16" type="3" x="50" y="600"/>
+		<Node id="17" type="3" x="50" y="425"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="525" y="250"/>
+		<Node id="536870913" text="Insert_#_#" type="4" x="-75" y="475"/>
+		<Node id="536870914" text="GALC JSON data" type="4" x="-100" y="275"/>
+		<RoutedErrors value="2.1|3.1|4.1|5.1|6.1|16.1|17.1|"/></BuildInfo>
+ <Event overview_string="Listener URL: /AAF1_MEI&#10;Query String: &#10;Request Header: &#10;Response Header: &#10;" type="HTTP_LISTENER">
+  <Properties>
+   <Property name="listener_url" value="/AAF1_MEI"/>
+   <Property name="query_string" value=""/>
+   <Property name="request_header" value=""/>
+   <Property name="response_header" value=""/>
+  </Properties>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="Row_index" type="INT4" options="3"/>
+  <VariableInfo name="httpContent" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="CREATE_TSTP" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="Insert_Error_message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="Delete_error_message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="Select_Error_Message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="HTTP Content-Type" type="STRING" length="100" options="3"/>
+  <VariableInfo name="INFO_MESSAGE" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="Row_selected" type="INT4" options="3"/>
+  <VariableInfo name="HTTP_STATUS_CODE_OK" type="INT4" options="3" default="200"/>
+  <VariableInfo name="Rows_deleted" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="2">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="2" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="INT4"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="HTTP_STATUS_CODE_OK"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Status Code"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="3"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="3" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="1024"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="httpContent"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="4"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="4" disabled="false">
+   <Properties>
+    <Property name="format" value="{&#10;&quot;INFO_CODE&quot;: &quot;$(MSG_CODE)&quot;,&#10;&quot;INFO_MESSAGE&quot;: &quot;&quot;&#10;}"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="MSG_CODE" value="OK"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="INFO_MESSAGE"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="5"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="5" disabled="false">
+   <Properties>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="INFO_MESSAGE"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_INSERT" id="6" disabled="false">
+   <Properties>
+    <Property name="tablename" value="BRD_GLA_WR1"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Create_TSTP" name="$EVENT_TIME"/>
+    <LocalVariable logical_name="BRD_Data" name="httpContent"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Error Message" name="Insert_Error_message"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_GLA_Broadcast_Load"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="16" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_GLA_Broadcast_Load"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Message)&quot; - Load success"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Message" name="httpContent"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="17" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="100"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="key_0" name="HTTP Content-Type"/>
+   </InputMap>
+   <OutputMap>
+    <EventVariable logical_name="key_0" name="HTTP Content-Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="6"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="WMQ_MEI" nlsid="30034" interface="1"><exportitem type="transport" name="WMQ_MEI" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="-57390888"  commitFlag="false" connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="WMQ_MEI" inactivity_time_out="14400000" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="5000" type="WMQ">
+		<Queue defid="WMQ_MEI" type="peer"/>
+	</TransportDefinition>
+	<QueueDefinition channel="SYSTEM.ADMIN.SVRCONN" commitFlag="false" host="pmap1mq" id="WMQ_MEI" name="WMQ_MEI" password="$()#!%Qo3BGccipBgHW/LB2BobUw==" port="1414" qmgr="MAP_PGAL" qname="RQ.MAP.GALC.PRD" type="WMQ" userid="mapglcmq">
+		<MsgHeader expiry="-1" persistence="0">
+			<msgContext/>
+		</MsgHeader>
+	</QueueDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="WMQ_MEI" nlsid="30033" interface="1"><exportitem type="transaction" name="WMQ_MEI" nlsid="30033">
+<TransactionDef id="WMQ_MEI" version="889511813" version_mismatch="pass">
+						<Transport id="WMQ_MEI" type="WMQ"/>
+						<InputMap>
+							<Variable count="1" length="1024" name="Message" type="STRING"/>
+						</InputMap>
+						<Mapping arrayDelimiter="|" delimiter="," enclose_string_character="&quot;" enclose_strings="false" outputformat="ASCII">
+							<Item name="Message" type="string"/>
+						</Mapping>
+					</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_MQ" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_MQ" nlsid="30031">
+<Trigger name="AAF1_GLA_Broadcast_MQ" project="AAF1_GLA_Broadcast" max_pending="1" reporting="off">
+ <Context value="Scheduled|7~1~8~11~13~15~16~17~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="450"/>
+		<Node id="7" type="3" x="50" y="550"/>
+		<Node id="1" type="3" x="50" y="1175"/>
+		<Node id="8" type="3" x="50" y="775"/>
+		<Node id="11" type="3" x="50" y="1025"/>
+		<Node id="13" type="3" x="450" y="625"/>
+		<Node id="15" type="3" x="450" y="775"/>
+		<Node id="16" type="3" x="50" y="650"/>
+		<Node id="17" type="3" x="50" y="875"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="450" y="550"/>
+		<Node id="536870914" text="Select" type="4" x="-75" y="575"/>
+		<Node id="536870915" text="MQ" type="4" x="-75" y="800"/>
+		<Node id="536870916" text="Delete_#_#" type="4" x="-75" y="900"/>
+		<RoutedErrors value="7.1|8.1|11.1|16.2|17.1|"/></BuildInfo>
+ <Event overview_string="Periodic: 10000 ms" type="SCHEDULE"><schedule type="5">
+			<periodic sec="10000"/>
+		</schedule>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="Row_index" type="INT4" options="3"/>
+  <VariableInfo name="httpContent" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="CREATE_TSTP" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="Insert_Error_message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="Delete_error_message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="Select_Error_Message" type="STRING" length="128" options="3"/>
+  <VariableInfo name="Row_ID" type="INT8" options="3"/>
+  <VariableInfo name="INFO_MESSAGE" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="Row_selected" type="INT8" options="3"/>
+  <VariableInfo name="BRD_MESSAGE" type="STRING" length="1024" options="3"/>
+  <VariableInfo name="HTTP_STATUS_CODE_OK" type="INT4" options="3" default="200"/>
+  <VariableInfo name="Rows_deleted" type="INT4" options="3"/>
+ </LocalVariables>
+ <StaticVariables/>
+ <Actions first_action="7">
+  <Action type="ENDOK" id="1" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_SELECT" id="7" disabled="false">
+   <Properties>
+    <Property name="select" value="*"/>
+    <Property name="tablename" value="BRD_GLA_WR1"/>
+    <Property name="max_rows" value="1"/>
+    <Property name="return_as_array" value="False"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="ID" name="Row_ID"/>
+    <LocalVariable logical_name="BRD_Data" name="BRD_MESSAGE"/>
+    <LocalVariable logical_name="Create_TSTP" name="CREATE_TSTP"/>
+    <LocalVariable logical_name="Error Message" name="Select_Error_Message"/>
+    <LocalVariable logical_name="Rows Selected" name="Row_selected"/>
+    <LocalVariable logical_name="Row Index" name="Row_index"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="16"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="8" disabled="false">
+   <Properties>
+    <Property name="name" value="WMQ_MEI"/>
+    <Property name="version" value="889511813"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Message" name="BRD_MESSAGE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="17"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="11"/>
+   </Routes>
+  </Action>
+  <Action type="LOCALDB_DELETE" id="11" disabled="false">
+   <Properties>
+    <Property name="tablename" value="BRD_GLA_WR1"/>
+    <Property name="where" value="ID = &quot;$(Row_ID)&quot;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="Row_ID" name="Row_ID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Rows Deleted" name="Rows_deleted"/>
+    <LocalVariable logical_name="Error Message" name="Delete_error_message"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="1"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AAF1_GLA_Broadcast_MQ"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="15"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="16" disabled="false">
+   <Properties>
+    <Property name="expression" value="rows &gt; 0"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="rows" name="Row_selected"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="8"/>
+    <Route result="1" goto="1"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="17" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AAF1_GLA_Broadcast_MQ"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Message)&quot; - Sent to GLA"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Message" name="BRD_MESSAGE"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AAF1_GLA_Broadcast" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AAF1_GLA_Broadcast" nlsid="30032">AAF1_GLA_Broadcast</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AAF1_GLA_Broadcast" type="project">
+		<reference name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_Load" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="LOCALDB_INSERT" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="BRD_GLA_WR1" type="dbtable"/>
+			<reference name="HTTP_LISTENER" type="eventtype"/>
+		</reference>
+		<reference name="AAF1_GLA_Broadcast/AAF1_GLA_Broadcast_MQ" type="trigger">
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOCALDB_DELETE" type="actiontype"/>
+			<reference name="LOCALDB_SELECT" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="BRD_GLA_WR1" type="dbtable"/>
+			<reference name="SCHEDULE" type="eventtype"/>
+			<reference name="WMQ_MEI" type="transaction">
+				<reference name="WMQ_MEI" type="transport"/>
+			</reference>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                

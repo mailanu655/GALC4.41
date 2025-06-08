@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TriggerExecutionReports>
+
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON" trigger="AAF1_AFON_Release" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743469573799" type="HTTP_LISTENER">
+		<Item count="1" name="HTTP Content Length" status="0" type="INT4"><![CDATA[77]]></Item>
+			
+			<Item count="1" name="HTTP Method" status="0" type="STRING"><![CDATA[POST]]></Item>
+				
+				<Item count="1" name="HTTP URL" status="0" type="STRING"><![CDATA[/AAF1/RELEASE]]></Item>
+					
+					<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[{
+  "UNIT_RELEASE": "1",
+  "CLIENT_ID": "AAF1ON1D00101C",
+  "IS_ERROR": "0"
+}]]></Item>
+						
+					</EventNotification>
+					<StaticVariableInitialValues>
+						<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+							
+							<Item count="1" name="MEMORY_ADDRESS_IS_ERROR" status="0" type="STRING"><![CDATA[M[400]]]></Item>
+								
+								<Item count="1" name="HTTP_CONTENT_TYPE_TEXT" status="0" type="STRING"><![CDATA[text/plain]]></Item>
+									
+									<Item count="1" name="HTTP_CONTENT_TYPE_JSON" status="0" type="STRING"><![CDATA[application/json]]></Item>
+										
+										<Item count="1" name="MEMORY_ADDRESS_UNIT_RELEASE" status="0" type="STRING"><![CDATA[M[403]]]></Item>
+										
+										<Item count="1" name="HTTP_STATUS_CODE_OK" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										</StaticVariableInitialValues>
+										<ActionReport id="1" seq="1" type="SET">
+										<Properties>
+										<Property key="dst_type" value="INT4"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="2" seq="2" type="SET">
+										<Properties>
+										<Property key="dst_type" value="STRING"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[text/plain]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[text/plain]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="3" seq="3" type="SET">
+										<Properties>
+										<Property key="dst_length" value="1024"/>
+										<Property key="dst_type" value="STRING"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[{
+  "UNIT_RELEASE": "1",
+  "CLIENT_ID": "AAF1ON1D00101C",
+  "IS_ERROR": "0"
+}]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="httpContent" status="0" type="STRING"><![CDATA[{
+  "UNIT_RELEASE": "1",
+  "CLIENT_ID": "AAF1ON1D00101C",
+  "IS_ERROR": "0"
+}]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[{
+  "UNIT_RELEASE": "1",
+  "CLIENT_ID": "AAF1ON1D00101C",
+  "IS_ERROR": "0"
+}]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="4" seq="4" type="JSON.DECODE">
+										<Properties>
+										<Property key="rules" value="{&#13;&#10;    &quot;CLIENT_ID&quot;:&quot;&quot;,&#13;&#10;    &quot;PROCESS_POINT_ID&quot;:&quot;&quot;,&#13;&#10;    &quot;UNIT_RELEASE&quot;:&quot;&quot;,&#13;&#10;    &quot;IS_ERROR&quot;:&quot;&quot;&#13;&#10;}"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="JSON Input" status="0" type="STRING"><![CDATA[{
+  "UNIT_RELEASE": "1",
+  "CLIENT_ID": "AAF1ON1D00101C",
+  "IS_ERROR": "0"
+}]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="clientId" status="0" type="STRING"><![CDATA[AAF1ON1D00101C]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="unitRelease" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</LocalVariableChange>
+										<LocalVariableChange>
+										<Item count="1" name="isError" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="IS_ERROR" status="0" type="STRING"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="UNIT_RELEASE" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										<Item count="1" name="PROCESS_POINT_ID" status="-5209" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="resultMessage" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="CLIENT_ID" status="0" type="STRING"><![CDATA[AAF1ON1D00101C]]></Item>
+										
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="5" seq="5" type="IF">
+										<Properties>
+										<Property key="expression" value="isError"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="isError" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="1"/>
+										</ActionReport>
+										<ActionReport id="6" seq="6" type="IF">
+										<Properties>
+										<Property key="expression" value="unitRelease"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="unitRelease" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="7" seq="7" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="INFO"/>
+										<Property key="component" value="AAF1_ON_Release"/>
+										<Property key="msg" value="Data from GALC: {&quot;CLIENT_ID&quot;:&quot;$(clientId)&quot;,&quot;PROCESS_POINT_ID&quot;:&quot;$(processPointId)&quot;,&quot;UNIT_RELEASE&quot;:&quot;$(unitRelease)&quot;,&quot;IS_ERROR&quot;:&quot;$(isError)&quot;}"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="clientId" status="0" type="STRING"><![CDATA[AAF1ON1D00101C]]></Item>
+										
+										<Item count="1" name="processPointId" status="0" type="STRING"><![CDATA[]]></Item>
+										
+										<Item count="1" name="unitRelease" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="isError" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Notification>
+										<Completion execution_time="12" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="10" seq="8" type="DEMANDWR">
+										<Properties>
+										<Property key="dev_name" value="$(DEVICE_NAME)"/>
+										<Property key="var_name" value="$(MEMORY_ADDRESS_UNIT_RELEASE)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="MEMORY_ADDRESS_UNIT_RELEASE" status="0" type="STRING"><![CDATA[M[403]]]></Item>
+										
+										</Notification>
+										<Completion execution_time="6" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="11" seq="9" type="DEMANDWR">
+										<Properties>
+										<Property key="dev_name" value="$(DEVICE_NAME)"/>
+										<Property key="var_name" value="$(MEMORY_ADDRESS_IS_ERROR)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										<Item count="1" name="MEMORY_ADDRESS_IS_ERROR" status="0" type="STRING"><![CDATA[M[400]]]></Item>
+										
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Notification>
+										<Completion execution_time="8" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="12" seq="10" type="SET">
+										<Properties>
+										<Property key="dst_type" value="STRING"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[Trigger success]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="key_0" status="0" type="STRING"><![CDATA[Trigger success]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="13" seq="11" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469573826">
+										<Item count="1" name="HTTP Content-Type" status="0" type="STRING"><![CDATA[text/plain]]></Item>
+										
+										<Item count="1" name="HTTP Status Code" status="0" type="INT4"><![CDATA[200]]></Item>
+										
+										<Item count="1" name="HTTP Content" status="0" type="STRING"><![CDATA[Trigger success]]></Item>
+										
+										</EventCompletion>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON" trigger="AAF1_AFON_DataToGALC" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743469572902" type="ONDEMAND"/>
+	<StaticVariableInitialValues>
+		<Item count="1" name="MEMORY_ADDRESS_UNIT_PRESENT" status="0" type="STRING"><![CDATA[M[402]]]></Item>
+			
+			<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+				
+				<Item count="1" name="PROCESS_POINT_ID" status="0" type="STRING"><![CDATA[AAF1ON1P00101]]></Item>
+					
+					<Item count="1" name="MEMORY_ADDRESS_OP_MODE" status="0" type="STRING"><![CDATA[M[404]]]></Item>
+						
+						<Item count="1" name="MEMORY_ADDRESS_PRODUCT_ID" status="0" type="STRING"><![CDATA[D[12000]]]></Item>
+							
+							<Item count="1" name="CLIENT_ID" status="0" type="STRING"><![CDATA[AAF1ON1D00101]]></Item>
+								
+							</StaticVariableInitialValues>
+							<ActionReport id="1" seq="1" type="DEMANDRD">
+								<Properties>
+									<Property key="dev_name" value="$(DEVICE_NAME)"/>
+									<Property key="var_name" value="$(MEMORY_ADDRESS_UNIT_PRESENT)"/>
+									<Property key="type" value="BOOL"/>
+									<Property key="count" value="1"/>
+								</Properties>
+								<Notification>
+									<Item count="1" name="MEMORY_ADDRESS_UNIT_PRESENT" status="0" type="STRING"><![CDATA[M[402]]]></Item>
+										
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="unitPresent" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="5" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="2" seq="2" type="DEMANDRD">
+										<Properties>
+										<Property key="dev_name" value="$(DEVICE_NAME)"/>
+										<Property key="var_name" value="$(MEMORY_ADDRESS_OP_MODE)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										<Item count="1" name="MEMORY_ADDRESS_OP_MODE" status="0" type="STRING"><![CDATA[M[404]]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="opMode" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="7" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="3" seq="3" type="IF">
+										<Properties>
+										<Property key="expression" value="unitPresent == 1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="unitPresent" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Notification>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="4" seq="4" type="DEMANDRD">
+										<Properties>
+										<Property key="dev_name" value="$(DEVICE_NAME)"/>
+										<Property key="var_name" value="$(MEMORY_ADDRESS_PRODUCT_ID)"/>
+										<Property key="type" value="STRING"/>
+										<Property key="count" value="1"/>
+										<Property key="length" value="18"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										<Item count="1" name="MEMORY_ADDRESS_PRODUCT_ID" status="0" type="STRING"><![CDATA[D[12000]]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="productId" status="0" type="STRING"><![CDATA[1HGCY2F66SA042510]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="27" exstatus="0" status="0">
+										<Item count="1" name="Value" status="0" type="STRING"><![CDATA[1HGCY2F66SA042510]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="5" seq="5" type="LOGMSG">
+										<Properties>
+										<Property key="message_type" value="EXCEPTION"/>
+										<Property key="level" value="INFO"/>
+										<Property key="component" value="AAF1_ON_DataToGALC"/>
+										<Property key="msg" value="Data to GALC: {&quot;PRODUCT_ID&quot;:&quot;$(productId)&quot;,&quot;UNIT_PRESENT&quot;:&quot;$(unitPresent)&quot;,&quot;OP_MODE&quot;:&quot;$(opMode)&quot;}"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="unitPresent" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										<Item count="1" name="opMode" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+										<Item count="1" name="productId" status="0" type="STRING"><![CDATA[1HGCY2F66SA042510]]></Item>
+										
+										</Notification>
+										<Completion execution_time="5" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="7" seq="6" type="TRANSACTION">
+										<Properties>
+										<Property key="name" value="AAF1_ON_DataToGALC"/>
+										<Property key="version" value="928065346"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="PROCESS_POINT_ID" status="0" type="STRING"><![CDATA[AAF1ON1P00101]]></Item>
+										
+										<Item count="1" name="CLIENT_ID" status="0" type="STRING"><![CDATA[AAF1ON1D00101]]></Item>
+										
+										<Item count="1" name="PRODUCT_ID" status="0" type="STRING"><![CDATA[1HGCY2F66SA042510]]></Item>
+										
+										<Item count="1" name="JSON_Array_rows_in" status="-5209" type="INT4"><![CDATA[-1]]></Item>
+										
+										<Item count="1" name="OP_MODE" status="0" type="STRING"><![CDATA[0]]></Item>
+										
+										<Item count="1" name="UNIT_PRESENT" status="0" type="STRING"><![CDATA[1]]></Item>
+										
+										</Notification>
+										<Completion execution_time="160" exstatus="0" status="0">
+										<Item count="1" name="resultStatus" status="0" type="INT4"><![CDATA[0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="8" seq="7" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469573106">
+										<Item count="1" name="ResultStatus" status="-5109" type="INT4"><![CDATA[-1]]></Item>
+										
+										</EventCompletion>
+										</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON" trigger="AAF1_AFON_UnitPresent" triggerPoolTime="1">
+	<EventNotification status="0" timestamp="1743469572901" type="DATAEVENT">
+		<Item count="1" name="PREVIOUS_DATA" status="0" type="BOOL"><![CDATA[false]]></Item>
+			
+			<Item count="1" name="PREVIOUS_TIME" status="0" type="TIMESTAMP"><![CDATA[2025-03-31 21:05:24 (2025-04-01 01:05:24 GMT)]]></Item>
+				
+				<Item count="1" name="DATA" status="0" type="BOOL"><![CDATA[true]]></Item>
+					
+				</EventNotification>
+				<ActionReport id="1" seq="1" type="TRIGGER_FIRE">
+					<Properties>
+						<Property key="dynamicnames" value="Static"/>
+						<Property key="project_name" value="AAF1_AFON"/>
+						<Property key="trigger_name" value="AAF1_AFON_DataToGALC"/>
+						<Property key="wait_for_completion" value="false"/>
+					</Properties>
+					<Notification/>
+					<Completion execution_time="0" exstatus="0" status="0"/>
+				</ActionReport>
+				<ActionReport id="2" seq="2" type="ENDOK">
+					<Properties>
+						<Property key="status_code" value="0"/>
+					</Properties>
+					<Notification/>
+					<Completion execution_time="0" exstatus="0" status="0"/>
+				</ActionReport>
+				<EventCompletion execution_time="0" status="0" timestamp="1743469572902"/>
+			</TriggerExecutionReport>
+
+<TriggerExecutionReport eventCallbackTime="0" eventQueueTime="0" project="AAF1_AFON" trigger="AAF1_AFON_Heartbeat" triggerPoolTime="0">
+	<EventNotification status="0" timestamp="1743469530368" type="SCHEDULE">
+		<Item count="1" name="Scheduled Time" status="0" type="TIMESTAMP"><![CDATA[2025-03-31 21:05:30 (2025-04-01 01:05:30 GMT)]]></Item>
+			
+		</EventNotification>
+		<StaticVariableInitialValues>
+			<Item count="1" name="MEMORY_ADDRESS_HEARTBEAT" status="0" type="STRING"><![CDATA[M[401]]]></Item>
+				
+				<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+					
+				</StaticVariableInitialValues>
+				<ActionReport id="1" seq="1" type="DEMANDRD">
+					<Properties>
+						<Property key="dev_name" value="$(DEVICE_NAME)"/>
+						<Property key="var_name" value="$(MEMORY_ADDRESS_HEARTBEAT)"/>
+						<Property key="type" value="BOOL"/>
+						<Property key="count" value="1"/>
+					</Properties>
+					<Notification>
+						<Item count="1" name="MEMORY_ADDRESS_HEARTBEAT" status="0" type="STRING"><![CDATA[M[401]]]></Item>
+							
+							<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+								
+							</Notification>
+							<LocalVariableChange>
+								<Item count="1" name="heartbeatIn" status="0" type="BOOL"><![CDATA[false]]></Item>
+									
+								</LocalVariableChange>
+								<Completion execution_time="8" exstatus="0" status="0">
+									<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[false]]></Item>
+										
+									</Completion>
+								</ActionReport>
+								<ActionReport id="2" seq="2" type="EXPRESSION">
+									<Properties>
+										<Property key="expression" value="1-heartbeatIn"/>
+									</Properties>
+									<Notification>
+										<Item count="1" name="heartbeatIn" status="0" type="FLOAT8"><![CDATA[0.0]]></Item>
+										
+										</Notification>
+										<LocalVariableChange>
+										<Item count="1" name="heartbeatOut" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</LocalVariableChange>
+										<Completion execution_time="0" exstatus="0" status="0">
+										<Item count="1" name="Result" status="0" type="FLOAT8"><![CDATA[1.0]]></Item>
+										
+										</Completion>
+										</ActionReport>
+										<ActionReport id="3" seq="3" type="DEMANDWR">
+										<Properties>
+										<Property key="dev_name" value="$(DEVICE_NAME)"/>
+										<Property key="var_name" value="$(MEMORY_ADDRESS_HEARTBEAT)"/>
+										<Property key="type" value="BOOL"/>
+										<Property key="count" value="1"/>
+										</Properties>
+										<Notification>
+										<Item count="1" name="MEMORY_ADDRESS_HEARTBEAT" status="0" type="STRING"><![CDATA[M[401]]]></Item>
+										
+										<Item count="1" name="DEVICE_NAME" status="0" type="STRING"><![CDATA[AAF1_AFON]]></Item>
+										
+										<Item count="1" name="Value" status="0" type="BOOL"><![CDATA[true]]></Item>
+										
+										</Notification>
+										<Completion execution_time="9" exstatus="0" status="0"/>
+										</ActionReport>
+										<ActionReport id="4" seq="4" type="ENDOK">
+										<Properties>
+										<Property key="status_code" value="0"/>
+										</Properties>
+										<Notification/>
+										<Completion execution_time="0" exstatus="0" status="0"/>
+										</ActionReport>
+										<EventCompletion execution_time="0" status="0" timestamp="1743469530386"/>
+										</TriggerExecutionReport>
+</TriggerExecutionReports>

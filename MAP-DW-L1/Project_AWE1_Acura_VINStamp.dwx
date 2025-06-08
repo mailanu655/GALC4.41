@@ -1,0 +1,2210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export stateful="true" >
+<exportcontent type="device" name="AWE1_VINSTAMP_ACURA_PLC" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AWE1_VINSTAMP_ACURA_PLC" nlsid="30030">
+<DeviceDefinition name="AWE1_VINSTAMP_ACURA_PLC" type="21" type_name="CS1 CPU" state="6" options="2104"><Properties><Property name="ip_address" value="10.39.111.45"/><Property name="protocol" value="TCP"/><Property name="da1" value="0"/><Property name="timeout" value="5000"/><Property name="port" value="9600"/><Property name="sa1" value="0"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="AWE1_VINSTAMP_NEXTVIN" nlsid="30034" interface="1"><exportitem type="transport" name="AWE1_VINSTAMP_NEXTVIN" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="991312449"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="AWE1_VINSTAMP_NEXTVIN" inactivity_time_out="0" initPoolSize="1" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://lc-lot-sequencing-service-linectrl-lotsequencing-mapprod.apps.ocpp.ham.am.honda.com/schedule/getNextVin" id="AWE1_VINSTAMP_NEXTVIN" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AWE1_VINSTAMP_NEXTVIN" nlsid="30033" interface="1"><exportitem type="transaction" name="AWE1_VINSTAMP_NEXTVIN" nlsid="30033">
+
+			<TransactionDef id="AWE1_VINSTAMP_NEXTVIN" version="-1053013352" version_mismatch="pass">
+				<Transport id="AWE1_VINSTAMP_NEXTVIN" type="HTTP"/>
+				<InputMap>
+					<Variable count="1" length="18" name="vin" type="STRING"/>
+					<Variable count="1" length="1" name="lineSequence" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="18" name="vin" type="STRING"/>
+					<Variable count="1" length="18" name="expectedRequestVin" type="STRING"/>
+					<Variable count="1" length="1" name="borderCharacter" type="STRING"/>
+					<Variable count="1" name="requestedBefore" type="BOOL"/>
+					<Variable count="1" name="skippedVin" type="BOOL"/>
+					<Variable count="1" length="30" name="ymtoc" type="STRING"/>
+					<Variable count="1" length="2" name="infoCode" type="STRING"/>
+					<Variable count="1" length="40" name="infoMessage" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KInZpbiI6ICIiLA0KImV4cGVjdGVkUmVxdWVzdFZpbiI6ICIiLA0KImJvcmRlckNoYXJhY3RlciI6ICIiLA0KInJlcXVlc3RlZEJlZm9yZSI6IGZhbHNlLA0KInNraXBwZWRWaW4iOiBmYWxzZSwNCiJ5bXRvYyI6ICIiLA0KImluZm9Db2RlIjogIiIsDQoiaW5mb01lc3NhZ2UiOiAiIg0KIH0NCg==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="vin" parmname="vin" type="STRING"/>
+								<Parameter dwType="16" name="expectedRequestVin" parmname="expectedRequestVin" type="STRING"/>
+								<Parameter dwType="16" name="borderCharacter" parmname="borderCharacter" type="STRING"/>
+								<Parameter dwType="11" name="requestedBefore" parmname="requestedBefore" type="BOOLEAN"/>
+								<Parameter dwType="11" name="skippedVin" parmname="skippedVin" type="BOOLEAN"/>
+								<Parameter dwType="16" name="ymtoc" parmname="ymtoc" type="STRING"/>
+								<Parameter dwType="16" name="infoCode" parmname="infoCode" type="STRING"/>
+								<Parameter dwType="16" name="infoMessage" parmname="infoMessage" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="IHsNCiAgICAgInZpbiI6ICIiLA0KICAgICAibGluZVNlcXVlbmNlIjogIiINCiB9DQo=">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="vin" parmname="vin" type="STRING"/>
+								<Parameter dwType="16" name="lineSequence" parmname="lineSequence" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="AWE1_AiristaVinstamp" nlsid="30034" interface="1"><exportitem type="transport" name="AWE1_AiristaVinstamp" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="443401567"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="AWE1_AiristaVinstamp" inactivity_time_out="0" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="11000" type="WS_SOAP">
+		<Proxy enabled="false" host="null" port="0" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="https://airista.am.mds.honda.com/UVS/XWS/XpertTrackerWebService/xperttrackerwebservice.asmx?wsdl" id="AWE1_AiristaVinstamp" keystore="/Airista_KeyStore/rfid.jks" keystorePassword="$()#!%LUg1RCyjXt8ExmiG2zluiA==" truststore="/Airista_KeyStore/cacert.jks" truststorePassword="$()#!%LUg1RCyjXt8ExmiG2zluiA==" type="WS_SOAP">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AWE1_Vinstamp_Airista" nlsid="30033" interface="1"><exportitem type="transaction" name="AWE1_Vinstamp_Airista" nlsid="30033">
+<TransactionDef id="AWE1_Vinstamp_Airista" version="-2020313874" version_mismatch="pass">
+				<Transport id="AWE1_AiristaVinstamp" type="WS_SOAP"/>
+				<InputMap>
+					<Variable count="1" length="32" name="i_loggedInUsername" type="STRING"/>
+					<Variable count="1" length="32" name="i_loggedInPassword" type="STRING"/>
+					<Variable count="1" length="32" name="i_VINNumber" type="STRING"/>
+					<Variable count="1" length="32" name="i_CarType" type="STRING"/>
+					<Variable count="1" length="32" name="i_CarCategory" type="STRING"/>
+					<Variable count="1" length="32" name="i_LineNumber" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" name="o_InsertHondaCarItemResult_ItemID" type="INT4"/>
+					<Variable count="1" name="o_InsertHondaCarItemResult_Result_Count" type="INT4"/>
+					<Variable count="1" name="o_InsertHondaCarItemResult_Result_Success" type="BOOL"/>
+					<Variable count="1" length="32" name="o_InsertHondaCarItemResult_Result_Message" type="STRING"/>
+					<Variable count="1" length="32" name="o_InsertHondaCarItemResult_Result_Debug" type="STRING"/>
+				</OutputMap>
+				<WebServiceInfo>
+					<Extension>
+						<Property name="elementFormDefault" type="boolean" value="true"/>
+						<Property name="soap12" type="boolean" value="true"/>
+						<Property name="Operation" type="string" value="InsertHondaCarItem"/>
+						<Property name="outputMsg" type="string" value="InsertHondaCarItemResponse"/>
+						<Property name="attributeFormDefault" type="boolean" value="false"/>
+						<Property name="wsdl" type="string" value="C:\Users\vcc31476\Downloads\xperttrackerwebservice (1).wsdl"/>
+						<Property name="port" type="string" value="XpertTrackerWebServiceSoap"/>
+						<Property name="service" type="string" value="XpertTrackerWebService"/>
+						<Property name="tns" type="string" value="http://webservices.airista.com/XpertTracker"/>
+						<Property name="action" type="string" value="http://webservices.airista.com/XpertTracker/InsertHondaCarItem"/>
+						<Property name="inputMsg" type="string" value="InsertHondaCarItem"/>
+						<Property name="location" type="string" value="https://airista.am.mds.honda.com/uvs/xws/xperttrackerwebservice/xperttrackerwebservice.asmx"/>
+						<Property name="operation" type="string" value="InsertHondaCarItem"/>
+						<Property name="namespaceAware" type="boolean" value="true"/>
+						<Property name="Key" type="string" value="C:\Users\vcc31476\Downloads\xperttrackerwebservice (1).wsdl"/>
+					</Extension>
+					<ImportParameter>
+						<Structure localTNS="http://webservices.airista.com/XpertTracker" name="InsertHondaCarItem" parmname="InsertHondaCarItem">
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_loggedInUsername" parmname="loggedInUsername" type="STRING"/>
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_loggedInPassword" parmname="loggedInPassword" type="STRING"/>
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_VINNumber" parmname="VINNumber" type="STRING"/>
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_CarType" parmname="CarType" type="STRING"/>
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_CarCategory" parmname="CarCategory" type="STRING"/>
+							<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="i_LineNumber" parmname="LineNumber" type="STRING"/>
+						</Structure>
+					</ImportParameter>
+					<ExportParameter>
+						<Structure localTNS="http://webservices.airista.com/XpertTracker" name="InsertHondaCarItemResponse" parmname="InsertHondaCarItemResponse">
+							<Structure localTNS="http://webservices.airista.com/XpertTracker" name="InsertHondaCarItemResult" parmname=" InsertHondaCarItemResult">
+								<Parameter dwType="3" localTNS="http://webservices.airista.com/XpertTracker" name="o_InsertHondaCarItemResult_ItemID" parmname="ItemID" type="INT"/>
+								<Structure localTNS="http://webservices.airista.com/XpertTracker" name="Result" parmname="  Result">
+									<Parameter dwType="3" localTNS="http://webservices.airista.com/XpertTracker" name="o_InsertHondaCarItemResult_Result_Count" parmname="Count" type="INT"/>
+									<Parameter dwType="11" localTNS="http://webservices.airista.com/XpertTracker" name="o_InsertHondaCarItemResult_Result_Success" parmname="Success" type="BOOLEAN"/>
+									<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="o_InsertHondaCarItemResult_Result_Message" parmname="Message" type="STRING"/>
+									<Parameter dwType="16" localTNS="http://webservices.airista.com/XpertTracker" min="0" name="o_InsertHondaCarItemResult_Result_Debug" parmname="Debug" type="STRING"/>
+								</Structure>
+							</Structure>
+						</Structure>
+					</ExportParameter>
+				</WebServiceInfo>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_NextVIN" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_NextVIN" nlsid="30031">
+<Trigger name="AWE1_Acura_VINStamp_NextVIN" project="AWE1_Acura_VINStamp" max_pending="1" reporting="on">
+ <Context value="Data|41~11~13~15~16~9~29~37~10~48~49~50~51~53~54~56~57~58~61~62~63~66~69~70~71~72~73~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="75"/>
+		<Node id="41" type="3" x="50" y="150"/>
+		<Node id="11" type="3" x="50" y="225"/>
+		<Node id="13" type="3" x="275" y="175"/>
+		<Node id="15" type="3" x="275" y="250"/>
+		<Node id="16" type="3" x="50" y="375"/>
+		<Node id="9" type="3" x="0" y="1625"/>
+		<Node id="29" type="3" x="50" y="1050"/>
+		<Node id="37" type="3" x="-225" y="675"/>
+		<Node id="10" type="3" x="50" y="300"/>
+		<Node id="48" type="3" x="50" y="1425"/>
+		<Node id="49" type="3" x="50" y="800"/>
+		<Node id="50" type="3" x="50" y="875"/>
+		<Node id="51" type="3" x="50" y="950"/>
+		<Node id="53" type="3" x="50" y="475"/>
+		<Node id="54" type="3" x="50" y="625"/>
+		<Node id="56" type="3" x="50" y="1275"/>
+		<Node id="57" type="3" x="50" y="1350"/>
+		<Node id="58" type="3" x="-225" y="450"/>
+		<Node id="61" type="3" x="-225" y="525"/>
+		<Node id="62" type="3" x="-50" y="550"/>
+		<Node id="63" type="3" x="-50" y="675"/>
+		<Node id="66" type="3" x="-225" y="600"/>
+		<Node id="69" type="3" x="50" y="1125"/>
+		<Node id="70" type="3" x="50" y="1200"/>
+		<Node id="71" type="3" x="-225" y="350"/>
+		<Node id="72" type="3" x="50" y="1525"/>
+		<Node id="73" type="3" x="-125" y="1425"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="275" y="100"/>
+		<RoutedErrors value="41.1|11.1|13.1|16.1|29.1|10.2|48.1|49.1|50.1|51.1|53.2|54.1|56.1|57.1|58.1|61.1|62.2|63.1|66.1|69.1|70.2|71.1|72.1|73.1|"/></BuildInfo>
+ <Event overview_string="Variable: AWE1_VINSTAMP_ACURA_PLC.EM3[109]&#10;Condition: Equal to  1&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AWE1_VINSTAMP_ACURA_PLC" length="2" name="EM3[109]" qos="3" type="STRING"/>
+			<Condition type="equalto" value=" 1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="infoMessage" type="STRING" length="40" options="3"/>
+  <VariableInfo name="EQ_Data_Ready" type="INT2" options="3"/>
+  <VariableInfo name="borderCharacter" type="STRING" length="1" options="3" default=" "/>
+  <VariableInfo name="skippedVin" type="BOOL" length="5" options="3"/>
+  <VariableInfo name="AR_Result" type="BOOL" options="3"/>
+  <VariableInfo name="Expected_VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="requestedBefore" type="BOOL" length="5" options="3"/>
+  <VariableInfo name="BCNEXTVIN" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ymtolen" type="INT2" options="3"/>
+  <VariableInfo name="Car_Type" type="STRING" length="4" options="3"/>
+  <VariableInfo name="TimeSuffix" type="STRING" length="4" options="3" default="EST"/>
+  <VariableInfo name="VINLEN" type="INT2" options="3"/>
+  <VariableInfo name="NEXTVIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="returnData" type="STRING" length="200" options="3"/>
+  <VariableInfo name="Car_Category" type="STRING" length="4" options="3"/>
+  <VariableInfo name="Result_msg" type="STRING" length="50" options="3"/>
+  <VariableInfo name="ymtoc" type="STRING" length="30" options="3"/>
+  <VariableInfo name="Prefic" type="STRING" length="32" options="3" default=" 0 1"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="infoCode" type="STRING" length="2" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ALC_MSG" type="STRING" length="40" options="3" default="EM3[187]"/>
+  <VariableInfo name="ALC_DATA_READY" type="STRING" length="10" options="3" default="EM3[110]/0"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE1_VINSTAMP_ACURA_PLC"/>
+  <VariableInfo name="EQ_DATA_READY" type="STRING" length="10" options="3" default="EM3[109]"/>
+  <VariableInfo name="ALC_ERROR_CODE" type="STRING" length="10" options="3" default="EM3[186]"/>
+  <VariableInfo name="newinfocode" type="STRING" length="2" options="3" default="21"/>
+  <VariableInfo name="Last_ProductID" type="STRING" length="18" options="3" default="EM3[100]"/>
+  <VariableInfo name="NXT_ProductID" type="STRING" length="18" options="3" default="EM3[111]"/>
+ </StaticVariables>
+ <Actions first_action="41">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VINLEN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="71"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VINLEN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_NextVIN"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="16" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMP_NEXTVIN"/>
+    <Property name="version" value="-1053013352"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="vin" name="VIN"/>
+    <ConstantVariable logical_name="lineSequence" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="vin" name="NEXTVIN"/>
+    <LocalVariable logical_name="expectedRequestVin" name="Expected_VIN"/>
+    <LocalVariable logical_name="borderCharacter" name="borderCharacter"/>
+    <LocalVariable logical_name="requestedBefore" name="requestedBefore"/>
+    <LocalVariable logical_name="skippedVin" name="skippedVin"/>
+    <LocalVariable logical_name="ymtoc" name="ymtoc"/>
+    <LocalVariable logical_name="infoCode" name="infoCode"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="53"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_NextVIN"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="69"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="37" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="41" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="EQ_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="Last_ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="EQ_Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="48" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_Vinstamp_Airista"/>
+    <Property name="version" value="-2020313874"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="i_loggedInUsername" value="admin"/>
+    <ConstantVariable logical_name="i_loggedInPassword" value="admin"/>
+    <LocalVariable logical_name="i_VINNumber" name="NEXTVIN"/>
+    <LocalVariable logical_name="i_CarType" name="Car_Type"/>
+    <LocalVariable logical_name="i_CarCategory" name="Car_Category"/>
+    <ConstantVariable logical_name="i_LineNumber" value="WE1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="o_InsertHondaCarItemResult_Result_Success" name="AR_Result"/>
+    <LocalVariable logical_name="o_InsertHondaCarItemResult_Result_Message" name="Result_msg"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="72"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="72"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="49" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(vin,productSpec,borderchar,infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;    local returnData = &quot;&quot;&#13;&#10;    local prefix = ' 0 1'&#13;&#10;    &#13;&#10;    local BorderCharlength = borderchar:len()&#13;&#10;    while (BorderCharlength&lt;1)&#13;&#10;        do&#13;&#10;            borderchar= borderchar ..&quot; &quot;&#13;&#10;            BorderCharlength=borderchar:len()&#13;&#10;        end &#13;&#10;        &#13;&#10;    local vinlength = vin:len()&#13;&#10;    while (vinlength&lt;17)&#13;&#10;        do&#13;&#10;            vin= vin ..&quot; &quot;&#13;&#10;            vinlength=vin:len()&#13;&#10;        end&#13;&#10;    vin = borderchar..vin..borderchar&#13;&#10;    &#13;&#10;    local vinsuffix = &quot;&quot;&#13;&#10;    local vinsuffixlength = vinsuffix:len()&#13;&#10;&#13;&#10;    while (vinsuffixlength&lt;59)&#13;&#10;        do&#13;&#10;            vinsuffix=vinsuffix..&quot; &quot;&#13;&#10;            vinsuffixlength=vinsuffix:len()&#13;&#10;        end&#13;&#10;        &#13;&#10;    local ymtlength = productSpec:len()&#13;&#10;    while (ymtlength&lt;22)&#13;&#10;        do&#13;&#10;            productSpec= productSpec ..&quot; &quot;&#13;&#10;            ymtlength=productSpec:len()&#13;&#10;        end&#13;&#10;    &#13;&#10;    local ymt=productSpec:sub(1,7)&#13;&#10;    local opt = &quot;   &quot;&#13;&#10;    local extcolor=productSpec:sub(11,20)&#13;&#10;    local intcolor=productSpec:sub(21,22)&#13;&#10;    &#13;&#10;    returnData = prefix..vin..vinsuffix..ymt..opt..intcolor..extcolor&#13;&#10;&#13;&#10;    local returnDatalength = returnData:len()&#13;&#10;&#13;&#10;    while (returnDatalength&lt;154)&#13;&#10;        do&#13;&#10;            returnData=returnData..&quot; &quot;&#13;&#10;            returnDatalength=returnData:len()&#13;&#10;        end&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  returnData..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Returninfo&quot;] = formatReturndata(DWInput[&quot;VIN&quot;],DWInput[&quot;ProductSpec&quot;],DWInput[&quot;BorderChar&quot;],DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;VIN&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductSpec&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;BorderChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;200&quot; name=&quot;Returninfo&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="ProductSpec" name="ymtoc"/>
+    <LocalVariable logical_name="BorderChar" name="borderCharacter"/>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Returninfo" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="50" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="51" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="53" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="52"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="62"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="54" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="21"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="infoCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="56" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="4"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Car_Category"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="57" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Car_Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="58" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(vin,productSpec,borderchar,infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;    local returnData = &quot;&quot;&#13;&#10;    local prefix = ' 0 1'&#13;&#10;    &#13;&#10;    local BorderCharlength = borderchar:len()&#13;&#10;    while (BorderCharlength&lt;1)&#13;&#10;        do&#13;&#10;            borderchar= borderchar ..&quot; &quot;&#13;&#10;            BorderCharlength=borderchar:len()&#13;&#10;        end  &#13;&#10;     &#13;&#10;    local vinlength = vin:len()&#13;&#10;    while (vinlength&lt;17)&#13;&#10;        do&#13;&#10;            vin= vin ..&quot; &quot;&#13;&#10;            vinlength=vin:len()&#13;&#10;        end&#13;&#10;    vin = borderchar..vin..borderchar&#13;&#10;    &#13;&#10;    local vinsuffix = &quot;&quot;&#13;&#10;    local vinsuffixlength = vinsuffix:len()&#13;&#10;&#13;&#10;    while (vinsuffixlength&lt;59)&#13;&#10;        do&#13;&#10;            vinsuffix=vinsuffix..&quot; &quot;&#13;&#10;            vinsuffixlength=vinsuffix:len()&#13;&#10;        end&#13;&#10;        &#13;&#10;    local ymtlength = productSpec:len()&#13;&#10;    while (ymtlength&lt;22)&#13;&#10;        do&#13;&#10;            productSpec= productSpec ..&quot; &quot;&#13;&#10;            ymtlength=productSpec:len()&#13;&#10;        end&#13;&#10;    &#13;&#10;    local ymt=productSpec:sub(1,7)&#13;&#10;    local opt = &quot;   &quot;&#13;&#10;    local extcolor=productSpec:sub(11,20)&#13;&#10;    local intcolor=productSpec:sub(21,22)&#13;&#10;    &#13;&#10;    returnData = prefix..vin..vinsuffix..ymt..opt..intcolor..extcolor&#13;&#10;&#13;&#10;    local returnDatalength = returnData:len()&#13;&#10;&#13;&#10;    while (returnDatalength&lt;154)&#13;&#10;        do&#13;&#10;            returnData=returnData..&quot; &quot;&#13;&#10;            returnDatalength=returnData:len()&#13;&#10;        end&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  returnData..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Returninfo&quot;] = formatReturndata(DWInput[&quot;VIN&quot;],DWInput[&quot;ProductSpec&quot;],DWInput[&quot;BorderChar&quot;],DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;VIN&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductSpec&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;BorderChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;200&quot; name=&quot;Returninfo&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="ProductSpec" name="ymtoc"/>
+    <LocalVariable logical_name="BorderChar" name="borderCharacter"/>
+    <ConstantVariable logical_name="InfoCode" value="03"/>
+    <ConstantVariable logical_name="Infomsg" value="Invalid VIN Request"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Returninfo" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="61" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="66"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="62" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="31"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="63"/>
+    <Route result="1" goto="49"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="63" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="21"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="infoCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="66" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_NextVIN"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="69" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="ymtolen"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="70"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="70" disabled="false">
+   <Properties>
+    <Property name="expression" value="YMTOLEN &gt;=7"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="YMTOLEN" name="ymtolen"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="73"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="71" disabled="false">
+   <Properties>
+    <Property name="format" value="$(infomsg) $(NEXTVIN)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="infomsg" value="Invalid VIN Request"/>
+    <LocalVariable logical_name="NEXTVIN" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="58"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="72" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_NextVIN"/>
+    <Property name="msg" value="$(Trigger) -  VIN:$(NEXTVIN), Car_TYPE:$(CarType), Car_Category:$(CarCat), Result_Msg:$(resultmsg),Arista_Result:$(ARResult)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="NEXTVIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="CarType" name="Car_Type"/>
+    <LocalVariable logical_name="CarCat" name="Car_Category"/>
+    <LocalVariable logical_name="resultmsg" name="Result_msg"/>
+    <LocalVariable logical_name="ARResult" name="AR_Result"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="73" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_NextVIN"/>
+    <Property name="msg" value="$(Trigger) - Invalid VIN:$(NEXTVIN), Invalid YMTO: $(ymto)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="NEXTVIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="ymto" name="ymtoc"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="transport" name="AWE1_VINSTAMPGALCTrackingService" nlsid="30034" interface="1"><exportitem type="transport" name="AWE1_VINSTAMPGALCTrackingService" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="998035561"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="AWE1_VINSTAMPGALCTrackingService" inactivity_time_out="0" initPoolSize="50" isFIFO="true" loadAtInit="false" logCount="1" logEnabled="true" logMessageSize="-1" logSize="1" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://pmap1was.ham.am.honda.com:8005/RestWeb/VinStampingService/updateStatus" id="AWE1_VINSTAMPGALCTrackingService" password="$()#!%sbVyewH9LUGgvehD9TR7Gg==" type="Http" userid="galadm">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AWE1_VINSTAMPGALCUpdateTracking" nlsid="30033" interface="1"><exportitem type="transaction" name="AWE1_VINSTAMPGALCUpdateTracking" nlsid="30033">
+
+			<TransactionDef id="AWE1_VINSTAMPGALCUpdateTracking" version="-550094116" version_mismatch="pass">
+				<Transport id="AWE1_VINSTAMPGALCTrackingService" type="Http"/>
+				<InputMap>
+					<Variable count="1" length="32" name="ProductId" type="STRING"/>
+					<Variable count="1" length="32" name="ProcesspointId" type="STRING"/>
+					<Variable count="1" length="32" name="Timestamp" type="STRING"/>
+				</InputMap>
+				<OutputMap/>
+				<Response outputformat="JSON">
+					<JSONInfo>
+						<JSONRequest>
+							<Structure name="JSON_Object"/>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping lineDelimiter="crlf" outputformat="F">
+					<Item name="$CONSTANT" type="string" value="Ww0KICAgIHsiamF2YS5sYW5nLlN0cmluZyI6Ig=="/>
+					<Item name="ProductId"/>
+					<Item name="$CONSTANT" type="string" value="In0sDQogICAgeyAiamF2YS5zcWwuVGltZXN0YW1wIjoi"/>
+					<Item name="Timestamp"/>
+					<Item name="$CONSTANT" type="string" value="In0sDQogICAgeyJqYXZhLmxhbmcuU3RyaW5nIjoi"/>
+					<Item name="ProcesspointId"/>
+					<Item name="$CONSTANT" type="string" value="In0NCl0="/>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="transport" name="AWE1_VINSTAMP_VINRESULT" nlsid="30034" interface="1"><exportitem type="transport" name="AWE1_VINSTAMP_VINRESULT" nlsid="30034">
+
+<Transports>
+	<TransportDefinition version="164054041"  connection_time_out="10000" enableSAF="false" enable_staging_copy="false" id="AWE1_VINSTAMP_VINRESULT" inactivity_time_out="0" initPoolSize="1" isFIFO="true" loadAtInit="false" logEnabled="false" max_outstanding_messages="10240" overwriteSAF="false" timetolive="86400" transaction_time_out="10000" type="HTTP">
+		<Proxy enabled="false" type="HTTP"/>
+	</TransportDefinition>
+	<HTTPDefinition host="http://lc-lot-sequencing-service-linectrl-lotsequencing-mapprod.apps.ocpp.ham.am.honda.com/schedule/saveVinStatus" id="AWE1_VINSTAMP_VINRESULT" type="Http">
+	</HTTPDefinition>
+</Transports></exportitem></exportcontent>
+
+<exportcontent type="transaction" name="AWE1_VINSTAMP_VINRESULT" nlsid="30033" interface="1"><exportitem type="transaction" name="AWE1_VINSTAMP_VINRESULT" nlsid="30033">
+
+			<TransactionDef id="AWE1_VINSTAMP_VINRESULT" version="-10718329" version_mismatch="pass">
+				<Transport id="AWE1_VINSTAMP_VINRESULT" type="HTTP"/>
+				<InputMap>
+					<Variable count="1" length="18" name="vin" type="STRING"/>
+					<Variable count="1" length="32" name="lineSequence" type="STRING"/>
+				</InputMap>
+				<OutputMap>
+					<Variable count="1" length="2" name="infoCode" type="STRING"/>
+					<Variable count="1" length="40" name="infoMessage" type="STRING"/>
+					<Variable count="1" length="18" name="vin" type="STRING"/>
+				</OutputMap>
+				<Response outputformat="JSON">
+					<JSONInfo rawJson="ew0KInZpbiI6ICIiLA0KImluZm9Db2RlIjogIiIsDQoiaW5mb01lc3NhZ2UiOiAiIg0KIH0NCg==">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="vin" parmname="vin" type="STRING"/>
+								<Parameter dwType="16" name="infoCode" parmname="infoCode" type="STRING"/>
+								<Parameter dwType="16" name="infoMessage" parmname="infoMessage" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Response>
+				<Mapping outputformat="JSON">
+					<JSONInfo rawJson="IHsNCiAgICAgInZpbiI6ICIiLA0KICAgICAibGluZVNlcXVlbmNlIjogIiINCiB9DQo=">
+						<JSONRequest>
+							<Structure name="JSON_Object">
+								<Parameter dwType="16" name="vin" parmname="vin" type="STRING"/>
+								<Parameter dwType="16" name="lineSequence" parmname="lineSequence" type="STRING"/>
+							</Structure>
+						</JSONRequest>
+					</JSONInfo>
+				</Mapping>
+			</TransactionDef></exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_Results" nlsid="30031" interface="1"><exportproperty key="state" value="started"/><exportitem type="trigger" name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_Results" nlsid="30031">
+<Trigger name="AWE1_Acura_VINStamp_Results" project="AWE1_Acura_VINStamp" max_pending="1" reporting="on">
+ <Context value="Data|30~11~13~15~16~9~28~10~45~46~47~48~49~51~52~53~54~56~57~58~60~61~62~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="50"/>
+		<Node id="30" type="3" x="50" y="150"/>
+		<Node id="11" type="3" x="50" y="225"/>
+		<Node id="13" type="3" x="425" y="200"/>
+		<Node id="15" type="3" x="425" y="300"/>
+		<Node id="16" type="3" x="50" y="425"/>
+		<Node id="9" type="3" x="50" y="1400"/>
+		<Node id="28" type="3" x="50" y="750"/>
+		<Node id="10" type="3" x="50" y="325"/>
+		<Node id="45" type="3" x="50" y="1075"/>
+		<Node id="46" type="3" x="50" y="1000"/>
+		<Node id="47" type="3" x="50" y="525"/>
+		<Node id="48" type="3" x="50" y="600"/>
+		<Node id="49" type="3" x="50" y="675"/>
+		<Node id="51" type="3" x="50" y="825"/>
+		<Node id="52" type="3" x="-75" y="900"/>
+		<Node id="53" type="3" x="50" y="1175"/>
+		<Node id="54" type="3" x="-150" y="1175"/>
+		<Node id="56" type="3" x="-300" y="725"/>
+		<Node id="57" type="3" x="-300" y="650"/>
+		<Node id="58" type="3" x="-300" y="575"/>
+		<Node id="60" type="3" x="-300" y="425"/>
+		<Node id="61" type="3" x="-300" y="500"/>
+		<Node id="62" type="3" x="50" y="1300"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="425" y="125"/>
+		<RoutedErrors value="30.1|11.1|13.1|16.1|28.1|10.2|45.1|46.1|47.1|48.1|49.1|51.2|52.2|53.1|54.1|57.1|58.1|60.1|61.1|62.1|"/></BuildInfo>
+ <Event overview_string="Variable: AWE1_VINSTAMP_ACURA_PLC.EM3[382]&#10;Condition: Equal to  1&#10;Priority: 500" type="DATAEVENT"><DataEvent>
+			<Variable device="AWE1_VINSTAMP_ACURA_PLC" length="2" name="EM3[382]" qos="3" type="STRING"/>
+			<Condition type="equalto" value=" 1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="infoMessage" type="STRING" length="40" options="3"/>
+  <VariableInfo name="EQ_Data_Ready" type="INT2" options="3"/>
+  <VariableInfo name="CurrentTstp" type="STRING" length="32" options="3"/>
+  <VariableInfo name="VINALC" type="STRING" length="18" options="3"/>
+  <VariableInfo name="TimeSuffix" type="STRING" length="4" options="3" default="EST"/>
+  <VariableInfo name="MODELSEQUENCE" type="INT4" length="32" options="3"/>
+  <VariableInfo name="VINLEN" type="INT2" options="3"/>
+  <VariableInfo name="returnData" type="STRING" length="50" options="3"/>
+  <VariableInfo name="Timestamp" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="infoCode" type="STRING" length="2" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="VINFROMALC" type="STRING" length="18" options="3" default="EM3[322]"/>
+  <VariableInfo name="ALC_MSG" type="STRING" length="40" options="3" default="EM3[385]"/>
+  <VariableInfo name="ALC_DATA_READY" type="STRING" length="2" options="3" default="EM3[383]/0"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE1_VINSTAMP_ACURA_PLC"/>
+  <VariableInfo name="EQ_DATA_READY" type="STRING" length="8" options="3" default="EM3[382]"/>
+  <VariableInfo name="ALC_ERROR_CODE" type="STRING" length="8" options="3" default="EM3[384]"/>
+  <VariableInfo name="ProductID" type="STRING" length="18" options="3" default="EM3[308]"/>
+ </StaticVariables>
+ <Actions first_action="30">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VINLEN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="60"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VINLEN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_Results"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="16" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMP_VINRESULT"/>
+    <Property name="version" value="-10718329"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="vin" name="VIN"/>
+    <ConstantVariable logical_name="lineSequence" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="infoCode" name="infoCode"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="vin" name="VINALC"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="47"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="47"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_Results"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Returndata)&quot; Wrriten to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Returndata" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="30" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="EQ_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="EQ_Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="45" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMPGALCUpdateTracking"/>
+    <Property name="version" value="-550094116"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+    <ConstantVariable logical_name="ProcesspointId" value="AWE1ON1P00101"/>
+    <LocalVariable logical_name="Timestamp" name="CurrentTstp"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="53"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="46" disabled="false">
+   <Properties>
+    <Property name="format" value="$(Timestamp) $(Suffix)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Timestamp" name="$EVENT_TIME"/>
+    <LocalVariable logical_name="Suffix" name="TimeSuffix"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="CurrentTstp"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="47" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;  &#13;&#10;    local prefix = ' 0 1'&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  prefix..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Output&quot;] = formatReturndata(DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;Output&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="48" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="50"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="49" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="51" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="51"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="52"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="52" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="55"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="54"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="53" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_Results"/>
+    <Property name="msg" value="$(Trigger) - &quot;Updated the Tracking status for VIN $(VIN)&quot; "/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="54" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_Results"/>
+    <Property name="msg" value="$(Trigger) - Tracking status not updated for VIN $(VIN) due to &quot;$(infomsg)&quot;."/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="56" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="57" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="AWE1_Acura_VINStamp_Results"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="58" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="60" disabled="false">
+   <Properties>
+    <Property name="format" value="$(infomsg) $(NEXTVIN)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="infomsg" value="Invalid VIN Request"/>
+    <LocalVariable logical_name="NEXTVIN" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="61" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;  &#13;&#10;    local prefix = ' 0 1'&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  prefix..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Output&quot;] = formatReturndata(DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;Output&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="58"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DATE_GET" id="62" disabled="false">
+   <Properties>
+    <Property name="output_time" value="Local Timezone"/>
+    <Property name="note" value="Specifies the format of the date and time as it is stored internally in the node."/>
+    <Property name="note2" value="This relates to the internal format and not the format of the Date output variable on the Output tab."/>
+    <Property name="note3" value="In most cases, use the GMT option."/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Date" name="Timestamp"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="device" name="AWE1_VINSTAMP_PLC_New" nlsid="30030" interface="1"><exportproperty key="state" value="started"/><exportitem type="device" name="AWE1_VINSTAMP_PLC_New" nlsid="30030">
+<DeviceDefinition name="AWE1_VINSTAMP_PLC_New" type="21" type_name="CS1 CPU" state="6" options="2104"><Properties><Property name="ip_address" value="10.39.111.45"/><Property name="protocol" value="TCP"/><Property name="da1" value="0"/><Property name="timeout" value="5000"/><Property name="port" value="9600"/><Property name="sa1" value="0"/></Properties></DeviceDefinition>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_Acura_VINStamp/AWE1_VINStamp_NextVIN" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_Acura_VINStamp/AWE1_VINStamp_NextVIN" nlsid="30031">
+<Trigger name="AWE1_VINStamp_NextVIN" project="AWE1_Acura_VINStamp" max_pending="1" reporting="on">
+ <Context value="Data|41~11~13~15~16~9~29~37~10~48~49~50~51~53~54~56~57~58~61~62~63~66~69~70~71~72~73~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="75"/>
+		<Node id="41" type="3" x="50" y="150"/>
+		<Node id="11" type="3" x="50" y="225"/>
+		<Node id="13" type="3" x="275" y="175"/>
+		<Node id="15" type="3" x="275" y="250"/>
+		<Node id="16" type="3" x="50" y="375"/>
+		<Node id="9" type="3" x="0" y="1625"/>
+		<Node id="29" type="3" x="50" y="1050"/>
+		<Node id="37" type="3" x="-225" y="675"/>
+		<Node id="10" type="3" x="50" y="300"/>
+		<Node id="48" type="3" x="50" y="1425"/>
+		<Node id="49" type="3" x="50" y="800"/>
+		<Node id="50" type="3" x="50" y="875"/>
+		<Node id="51" type="3" x="50" y="950"/>
+		<Node id="53" type="3" x="50" y="475"/>
+		<Node id="54" type="3" x="50" y="625"/>
+		<Node id="56" type="3" x="50" y="1275"/>
+		<Node id="57" type="3" x="50" y="1350"/>
+		<Node id="58" type="3" x="-225" y="450"/>
+		<Node id="61" type="3" x="-225" y="525"/>
+		<Node id="62" type="3" x="-50" y="550"/>
+		<Node id="63" type="3" x="-50" y="675"/>
+		<Node id="66" type="3" x="-225" y="600"/>
+		<Node id="69" type="3" x="50" y="1125"/>
+		<Node id="70" type="3" x="50" y="1200"/>
+		<Node id="71" type="3" x="-225" y="350"/>
+		<Node id="72" type="3" x="50" y="1525"/>
+		<Node id="73" type="3" x="-125" y="1425"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="275" y="100"/>
+		<RoutedErrors value="41.1|11.1|13.1|16.1|29.1|10.2|48.1|49.1|50.1|51.1|53.2|54.1|56.1|57.1|58.1|61.1|62.2|63.1|66.1|69.1|70.2|71.1|72.1|73.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AWE1_VINSTAMP_PLC_New" length="2" name="EM3[109]" qos="3" type="STRING"/>
+			<Condition type="equalto" value=" 1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="infoMessage" type="STRING" length="40" options="3"/>
+  <VariableInfo name="EQ_Data_Ready" type="INT2" options="3"/>
+  <VariableInfo name="borderCharacter" type="STRING" length="1" options="3" default=" "/>
+  <VariableInfo name="skippedVin" type="BOOL" length="5" options="3"/>
+  <VariableInfo name="AR_Result" type="BOOL" options="3"/>
+  <VariableInfo name="Expected_VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="requestedBefore" type="BOOL" length="5" options="3"/>
+  <VariableInfo name="BCNEXTVIN" type="STRING" length="32" options="3"/>
+  <VariableInfo name="ymtolen" type="INT2" options="3"/>
+  <VariableInfo name="Car_Type" type="STRING" length="4" options="3"/>
+  <VariableInfo name="TimeSuffix" type="STRING" length="4" options="3" default="EDT"/>
+  <VariableInfo name="VINLEN" type="INT2" options="3"/>
+  <VariableInfo name="NEXTVIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="returnData" type="STRING" length="200" options="3"/>
+  <VariableInfo name="Car_Category" type="STRING" length="4" options="3"/>
+  <VariableInfo name="Result_msg" type="STRING" length="50" options="3"/>
+  <VariableInfo name="ymtoc" type="STRING" length="30" options="3"/>
+  <VariableInfo name="Prefic" type="STRING" length="32" options="3" default=" 0 1"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="infoCode" type="STRING" length="2" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="ALC_MSG" type="STRING" length="40" options="3" default="EM3[187]"/>
+  <VariableInfo name="ALC_DATA_READY" type="STRING" length="10" options="3" default="EM3[110]/0"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE1_VINSTAMP_PLC_New"/>
+  <VariableInfo name="EQ_DATA_READY" type="STRING" length="10" options="3" default="EM3[109]"/>
+  <VariableInfo name="ALC_ERROR_CODE" type="STRING" length="10" options="3" default="EM3[186]"/>
+  <VariableInfo name="newinfocode" type="STRING" length="2" options="3" default="21"/>
+  <VariableInfo name="Last_ProductID" type="STRING" length="18" options="3" default="EM3[100]"/>
+  <VariableInfo name="NXT_ProductID" type="STRING" length="18" options="3" default="EM3[111]"/>
+ </StaticVariables>
+ <Actions first_action="41">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VINLEN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="71"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VINLEN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="16" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMP_NEXTVIN"/>
+    <Property name="version" value="-1053013352"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="vin" name="VIN"/>
+    <ConstantVariable logical_name="lineSequence" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="vin" name="NEXTVIN"/>
+    <LocalVariable logical_name="expectedRequestVin" name="Expected_VIN"/>
+    <LocalVariable logical_name="borderCharacter" name="borderCharacter"/>
+    <LocalVariable logical_name="requestedBefore" name="requestedBefore"/>
+    <LocalVariable logical_name="skippedVin" name="skippedVin"/>
+    <LocalVariable logical_name="ymtoc" name="ymtoc"/>
+    <LocalVariable logical_name="infoCode" name="infoCode"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="53"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="29" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="69"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="37" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="41" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="EQ_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="Last_ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="EQ_Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="48" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_Vinstamp_Airista"/>
+    <Property name="version" value="-2020313874"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="i_loggedInUsername" value="admin" delim=""/>
+    <ConstantVariable logical_name="i_loggedInPassword" value="admin" delim=""/>
+    <LocalVariable logical_name="i_VINNumber" name="NEXTVIN"/>
+    <LocalVariable logical_name="i_CarType" name="Car_Type"/>
+    <LocalVariable logical_name="i_CarCategory" name="Car_Category"/>
+    <ConstantVariable logical_name="i_LineNumber" value="WE1" delim=""/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="o_InsertHondaCarItemResult_Result_Success" name="AR_Result"/>
+    <LocalVariable logical_name="o_InsertHondaCarItemResult_Result_Message" name="Result_msg"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="72"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="72"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="49" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(vin,productSpec,borderchar,infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;    local returnData = &quot;&quot;&#13;&#10;    local prefix = ' 0 1'&#13;&#10;    &#13;&#10;    local BorderCharlength = borderchar:len()&#13;&#10;    while (BorderCharlength&lt;1)&#13;&#10;        do&#13;&#10;            borderchar= borderchar ..&quot; &quot;&#13;&#10;            BorderCharlength=borderchar:len()&#13;&#10;        end &#13;&#10;        &#13;&#10;    local vinlength = vin:len()&#13;&#10;    while (vinlength&lt;17)&#13;&#10;        do&#13;&#10;            vin= vin ..&quot; &quot;&#13;&#10;            vinlength=vin:len()&#13;&#10;        end&#13;&#10;    vin = borderchar..vin..borderchar&#13;&#10;    &#13;&#10;    local vinsuffix = &quot;&quot;&#13;&#10;    local vinsuffixlength = vinsuffix:len()&#13;&#10;&#13;&#10;    while (vinsuffixlength&lt;59)&#13;&#10;        do&#13;&#10;            vinsuffix=vinsuffix..&quot; &quot;&#13;&#10;            vinsuffixlength=vinsuffix:len()&#13;&#10;        end&#13;&#10;        &#13;&#10;    local ymtlength = productSpec:len()&#13;&#10;    while (ymtlength&lt;22)&#13;&#10;        do&#13;&#10;            productSpec= productSpec ..&quot; &quot;&#13;&#10;            ymtlength=productSpec:len()&#13;&#10;        end&#13;&#10;    &#13;&#10;    local ymt=productSpec:sub(1,7)&#13;&#10;    local opt = &quot;   &quot;&#13;&#10;    local extcolor=productSpec:sub(11,20)&#13;&#10;    local intcolor=productSpec:sub(21,22)&#13;&#10;    &#13;&#10;    returnData = prefix..vin..vinsuffix..ymt..opt..intcolor..extcolor&#13;&#10;&#13;&#10;    local returnDatalength = returnData:len()&#13;&#10;&#13;&#10;    while (returnDatalength&lt;154)&#13;&#10;        do&#13;&#10;            returnData=returnData..&quot; &quot;&#13;&#10;            returnDatalength=returnData:len()&#13;&#10;        end&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  returnData..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Returninfo&quot;] = formatReturndata(DWInput[&quot;VIN&quot;],DWInput[&quot;ProductSpec&quot;],DWInput[&quot;BorderChar&quot;],DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;VIN&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductSpec&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;BorderChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;200&quot; name=&quot;Returninfo&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="ProductSpec" name="ymtoc"/>
+    <LocalVariable logical_name="BorderChar" name="borderCharacter"/>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Returninfo" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="50"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="50" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="51" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="29"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="53" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="52"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="54"/>
+    <Route result="1" goto="62"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="54" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="21"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="infoCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="56" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+    <ConstantVariable logical_name="Start Offset" value="1"/>
+    <ConstantVariable logical_name="End Offset" value="4"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Car_Category"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.SPLIT.SUBSTRING" id="57" disabled="false">
+   <Properties/>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+    <ConstantVariable logical_name="Start Offset" value="5"/>
+    <ConstantVariable logical_name="End Offset" value="7"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Result String" name="Car_Type"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="58" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(vin,productSpec,borderchar,infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;    local returnData = &quot;&quot;&#13;&#10;    local prefix = ' 0 1'&#13;&#10;    &#13;&#10;    local BorderCharlength = borderchar:len()&#13;&#10;    while (BorderCharlength&lt;1)&#13;&#10;        do&#13;&#10;            borderchar= borderchar ..&quot; &quot;&#13;&#10;            BorderCharlength=borderchar:len()&#13;&#10;        end  &#13;&#10;     &#13;&#10;    local vinlength = vin:len()&#13;&#10;    while (vinlength&lt;17)&#13;&#10;        do&#13;&#10;            vin= vin ..&quot; &quot;&#13;&#10;            vinlength=vin:len()&#13;&#10;        end&#13;&#10;    vin = borderchar..vin..borderchar&#13;&#10;    &#13;&#10;    local vinsuffix = &quot;&quot;&#13;&#10;    local vinsuffixlength = vinsuffix:len()&#13;&#10;&#13;&#10;    while (vinsuffixlength&lt;59)&#13;&#10;        do&#13;&#10;            vinsuffix=vinsuffix..&quot; &quot;&#13;&#10;            vinsuffixlength=vinsuffix:len()&#13;&#10;        end&#13;&#10;        &#13;&#10;    local ymtlength = productSpec:len()&#13;&#10;    while (ymtlength&lt;22)&#13;&#10;        do&#13;&#10;            productSpec= productSpec ..&quot; &quot;&#13;&#10;            ymtlength=productSpec:len()&#13;&#10;        end&#13;&#10;    &#13;&#10;    local ymt=productSpec:sub(1,7)&#13;&#10;    local opt = &quot;   &quot;&#13;&#10;    local extcolor=productSpec:sub(11,20)&#13;&#10;    local intcolor=productSpec:sub(21,22)&#13;&#10;    &#13;&#10;    returnData = prefix..vin..vinsuffix..ymt..opt..intcolor..extcolor&#13;&#10;&#13;&#10;    local returnDatalength = returnData:len()&#13;&#10;&#13;&#10;    while (returnDatalength&lt;154)&#13;&#10;        do&#13;&#10;            returnData=returnData..&quot; &quot;&#13;&#10;            returnDatalength=returnData:len()&#13;&#10;        end&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  returnData..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Returninfo&quot;] = formatReturndata(DWInput[&quot;VIN&quot;],DWInput[&quot;ProductSpec&quot;],DWInput[&quot;BorderChar&quot;],DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;VIN&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;32&quot; name=&quot;ProductSpec&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;BorderChar&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;200&quot; name=&quot;Returninfo&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="ProductSpec" name="ymtoc"/>
+    <LocalVariable logical_name="BorderChar" name="borderCharacter"/>
+    <ConstantVariable logical_name="InfoCode" value="03"/>
+    <ConstantVariable logical_name="Infomsg" value="Invalid VIN Request"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Returninfo" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="61" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="66"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="62" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="31"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="63"/>
+    <Route result="1" goto="49"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="SET" id="63" disabled="false">
+   <Properties>
+    <Property name="dst_length" value="2"/>
+    <Property name="dst_type" value="STRING"/>
+    <Property name="count" value="1"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="key_0" value="21"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="key_0" name="infoCode"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="66" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="37"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="69" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="ymtoc"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="ymtolen"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="70"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="70" disabled="false">
+   <Properties>
+    <Property name="expression" value="YMTOLEN &gt;=7"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="YMTOLEN" name="ymtolen"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="73"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="71" disabled="false">
+   <Properties>
+    <Property name="format" value="$(infomsg) $(NEXTVIN)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="infomsg" value="Invalid VIN Request"/>
+    <LocalVariable logical_name="NEXTVIN" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="58"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="72" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) -  VIN:$(NEXTVIN), Car_TYPE:$(CarType), Car_Category:$(CarCat), Result_Msg:$(resultmsg),Arista_Result:$(ARResult)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="NEXTVIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="CarType" name="Car_Type"/>
+    <LocalVariable logical_name="CarCat" name="Car_Category"/>
+    <LocalVariable logical_name="resultmsg" name="Result_msg"/>
+    <LocalVariable logical_name="ARResult" name="AR_Result"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="73" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - Invalid VIN:$(NEXTVIN), Invalid YMTO: $(ymto)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="NEXTVIN" name="NEXTVIN"/>
+    <LocalVariable logical_name="ymto" name="ymtoc"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="trigger" name="AWE1_Acura_VINStamp/AWE1_VINStamp_Results" nlsid="30031" interface="1"><exportproperty key="state" value="stopped"/><exportitem type="trigger" name="AWE1_Acura_VINStamp/AWE1_VINStamp_Results" nlsid="30031">
+<Trigger name="AWE1_VINStamp_Results" project="AWE1_Acura_VINStamp" max_pending="1" reporting="on">
+ <Context value="Data|30~11~13~15~16~9~28~10~45~46~47~48~49~51~52~53~54~56~57~58~60~61~62~|canvas"/>
+ <BuildInfo><Node id="0" type="1" x="50" y="50"/>
+		<Node id="30" type="3" x="50" y="150"/>
+		<Node id="11" type="3" x="50" y="225"/>
+		<Node id="13" type="3" x="425" y="200"/>
+		<Node id="15" type="3" x="425" y="300"/>
+		<Node id="16" type="3" x="50" y="425"/>
+		<Node id="9" type="3" x="50" y="1400"/>
+		<Node id="28" type="3" x="50" y="750"/>
+		<Node id="10" type="3" x="50" y="325"/>
+		<Node id="45" type="3" x="50" y="1075"/>
+		<Node id="46" type="3" x="50" y="1000"/>
+		<Node id="47" type="3" x="50" y="525"/>
+		<Node id="48" type="3" x="50" y="600"/>
+		<Node id="49" type="3" x="50" y="675"/>
+		<Node id="51" type="3" x="50" y="825"/>
+		<Node id="52" type="3" x="-75" y="900"/>
+		<Node id="53" type="3" x="50" y="1175"/>
+		<Node id="54" type="3" x="-150" y="1175"/>
+		<Node id="56" type="3" x="-300" y="725"/>
+		<Node id="57" type="3" x="-300" y="650"/>
+		<Node id="58" type="3" x="-300" y="575"/>
+		<Node id="60" type="3" x="-300" y="425"/>
+		<Node id="61" type="3" x="-300" y="500"/>
+		<Node errorActionId="12" errorStartIndex="13" id="600000000" text="Error Handling" type="4" x="425" y="125"/>
+		<Node id="62" type="3" x="50" y="1300"/>
+		<RoutedErrors value="30.1|11.1|13.1|16.1|28.1|10.2|45.1|46.1|47.1|48.1|49.1|51.2|52.2|53.1|54.1|57.1|58.1|60.1|61.1|62.1|"/></BuildInfo>
+ <Event type="DATAEVENT"><DataEvent>
+			<Variable device="AWE1_VINSTAMP_PLC_New" length="2" name="EM3[382]" qos="3" type="STRING"/>
+			<Condition type="equalto" value=" 1"/>
+		</DataEvent>  <Properties/>
+ </Event>
+ <LocalVariables>
+  <VariableInfo name="infoMessage" type="STRING" length="40" options="3"/>
+  <VariableInfo name="EQ_Data_Ready" type="INT2" options="3"/>
+  <VariableInfo name="CurrentTstp" type="STRING" length="32" options="3"/>
+  <VariableInfo name="VINALC" type="STRING" length="18" options="3"/>
+  <VariableInfo name="TimeSuffix" type="STRING" length="4" options="3" default="EST"/>
+  <VariableInfo name="MODELSEQUENCE" type="INT4" length="32" options="3"/>
+  <VariableInfo name="VINLEN" type="INT2" options="3"/>
+  <VariableInfo name="returnData" type="STRING" length="50" options="3"/>
+  <VariableInfo name="Timestamp" type="TIMESTAMP" options="3"/>
+  <VariableInfo name="VIN" type="STRING" length="18" options="3"/>
+  <VariableInfo name="infoCode" type="STRING" length="2" options="3"/>
+ </LocalVariables>
+ <StaticVariables>
+  <VariableInfo name="VINFROMALC" type="STRING" length="18" options="3" default="EM3[322]"/>
+  <VariableInfo name="ALC_MSG" type="STRING" length="40" options="3" default="EM3[385]"/>
+  <VariableInfo name="ALC_DATA_READY" type="STRING" length="2" options="3" default="EM3[383]/0"/>
+  <VariableInfo name="PLCName" type="STRING" length="32" options="3" default="AWE1_VINSTAMP_PLC_New"/>
+  <VariableInfo name="EQ_DATA_READY" type="STRING" length="8" options="3" default="EM3[382]"/>
+  <VariableInfo name="ALC_ERROR_CODE" type="STRING" length="8" options="3" default="EM3[384]"/>
+  <VariableInfo name="ProductID" type="STRING" length="18" options="3" default="EM3[308]"/>
+ </StaticVariables>
+ <Actions first_action="30">
+  <Action type="ENDOK" id="9" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDOK"/>
+   </Routes>
+  </Action>
+  <Action type="IF" id="10" disabled="false">
+   <Properties>
+    <Property name="expression" value="VINLEN &gt;=17"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="VINLEN" name="VINLEN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="16"/>
+    <Route result="1" goto="60"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRING.LENGTH" id="11" disabled="false">
+   <Properties>
+    <Property name="failure_empty_string" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Length" name="VINLEN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="10"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="13" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="ERROR"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(TRIGGER) - Unhandled Exception ($(ErrorCode)) $(ErrorMessage)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="TRIGGER" name="$TRIGGER"/>
+    <MacroVariable logical_name="ErrorCode" name="$LAST_ERROR"/>
+    <MacroVariable logical_name="ErrorMessage" name="$LAST_ERROR_STRING"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="15"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="15" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="16" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMP_VINRESULT"/>
+    <Property name="version" value="-10718329"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="vin" name="VIN"/>
+    <ConstantVariable logical_name="lineSequence" value="1"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="infoCode" name="infoCode"/>
+    <LocalVariable logical_name="infoMessage" name="infoMessage"/>
+    <LocalVariable logical_name="vin" name="VINALC"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="47"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="47"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="28" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Returndata)&quot; Wrriten to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Returndata" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="51"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMAND.MULTI.READ" id="30" disabled="false">
+   <Properties>
+    <Property name="rules" value="{&#10;    &quot;Data_Ready&quot;:{&quot;type&quot;:&quot;INT2&quot;,&quot;count&quot;:1},&#10;    &quot;ProductId&quot;:{&quot;type&quot;:&quot;STRING&quot;,&quot;count&quot;:1, &quot;length&quot;:18}&#10;}"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Data_Ready Name" name="EQ_DATA_READY"/>
+    <StaticVariable logical_name="ProductId Name" name="ProductID"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Data_Ready" name="EQ_Data_Ready"/>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="11"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="TRANSACTION" id="45" disabled="false">
+   <Properties>
+    <Property name="name" value="AWE1_VINSTAMPGALCUpdateTracking"/>
+    <Property name="version" value="-550094116"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="ProductId" name="VIN"/>
+    <ConstantVariable logical_name="ProcesspointId" value="AWE1ON1P00101"/>
+    <LocalVariable logical_name="Timestamp" name="CurrentTstp"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="53"/>
+    <Route result="1" goto="13"/>
+    <Route result="2" goto="53"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="46" disabled="false">
+   <Properties>
+    <Property name="format" value="$(Timestamp) $(Suffix)"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Timestamp" name="$EVENT_TIME"/>
+    <LocalVariable logical_name="Suffix" name="TimeSuffix"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="CurrentTstp"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="45"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="47" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;  &#13;&#10;    local prefix = ' 0 1'&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  prefix..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Output&quot;] = formatReturndata(DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;Output&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="48"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="48" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="50"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="49"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEVICE_COMMIT" id="49" disabled="false">
+   <Properties/>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="28"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="51" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="51"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="52"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGCOMPARE" id="52" disabled="false">
+   <Properties>
+    <Property name="compare_type" value="Exact Match"/>
+    <Property name="case_insensitive" value="false"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="String" name="infoCode"/>
+    <ConstantVariable logical_name="Search String" value="55"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="46"/>
+    <Route result="1" goto="54"/>
+    <Route result="2" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="53" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - &quot;Updated the Tracking status for VIN $(VIN)&quot; "/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="54" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - Tracking status not updated for VIN $(VIN) due to &quot;$(infomsg)&quot;."/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="VIN" name="VIN"/>
+    <LocalVariable logical_name="infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="62"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="ENDERR" id="56" disabled="false">
+   <Properties>
+    <Property name="status_code" value="0"/>
+   </Properties>
+   <InputMap/>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="ENDERR"/>
+   </Routes>
+  </Action>
+  <Action type="LOGMSG" id="57" disabled="false">
+   <Properties>
+    <Property name="message_type" value="EXCEPTION"/>
+    <Property name="level" value="INFO"/>
+    <Property name="component" value="VINSTAMP"/>
+    <Property name="msg" value="$(Trigger) - &quot;$(Return Data)&quot; - Written back to PLC"/>
+   </Properties>
+   <InputMap>
+    <MacroVariable logical_name="Trigger" name="$TRIGGER"/>
+    <LocalVariable logical_name="Return Data" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="56"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DEMANDWR" id="58" disabled="false">
+   <Properties>
+    <Property name="dev_name" value="$(Device Name)"/>
+    <Property name="var_name" value="$(Variable Name)"/>
+    <Property name="type" value="STRING"/>
+    <Property name="count" value="1"/>
+    <Property name="length" value="200"/>
+   </Properties>
+   <InputMap>
+    <StaticVariable logical_name="Device Name" name="PLCName"/>
+    <StaticVariable logical_name="Variable Name" name="EQ_DATA_READY"/>
+    <LocalVariable logical_name="Value" name="returnData"/>
+   </InputMap>
+   <OutputMap/>
+   <Routes>
+    <Route result="0" goto="57"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="STRINGBUILDER" id="60" disabled="false">
+   <Properties>
+    <Property name="format" value="$(infomsg) $(NEXTVIN)"/>
+   </Properties>
+   <InputMap>
+    <ConstantVariable logical_name="infomsg" value="Invalid VIN Request"/>
+    <LocalVariable logical_name="NEXTVIN" name="VIN"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="infoMessage"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="61"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="LUA_INLINE" id="61" disabled="false">
+   <Properties>
+    <Property name="lua_text" value="function formatReturndata(infocode,infomsg)&#13;&#10;        &#13;&#10;    &#13;&#10;  &#13;&#10;    local prefix = ' 0 1'&#13;&#10;&#13;&#10;    local infodata = infocode..infomsg&#13;&#10;&#13;&#10;    local infoDatalength = infodata:len()&#13;&#10;&#13;&#10;    while (infoDatalength&lt;42)&#13;&#10;        do&#13;&#10;            infodata= infodata..&quot; &quot;&#13;&#10;            infoDatalength=infodata:len()&#13;&#10;        end&#13;&#10;&#13;&#10; return  prefix..infodata&#13;&#10;end&#13;&#10;&#13;&#10; DWOutput[&quot;Output&quot;] = formatReturndata(DWInput[&quot;InfoCode&quot;],DWInput[&quot;Infomsg&quot;])&#13;&#10;"/>
+    <Property name="variables_input" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;2&quot; name=&quot;InfoCode&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;      &lt;VariableInfo length=&quot;45&quot; name=&quot;Infomsg&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+    <Property name="variables_output" value="&lt;Variables&gt;&#10;      &lt;VariableInfo length=&quot;50&quot; name=&quot;Output&quot; options=&quot;7&quot; type=&quot;STRING&quot;/&gt;&#10;     &lt;/Variables&gt;"/>
+   </Properties>
+   <InputMap>
+    <LocalVariable logical_name="InfoCode" name="infoCode"/>
+    <LocalVariable logical_name="Infomsg" name="infoMessage"/>
+   </InputMap>
+   <OutputMap>
+    <LocalVariable logical_name="Output" name="returnData"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="58"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+  <Action type="DATE_GET" id="62" disabled="false">
+   <Properties>
+    <Property name="output_time" value="Local Timezone"/>
+    <Property name="note" value="Specifies the format of the date and time as it is stored internally in the node."/>
+    <Property name="note2" value="This relates to the internal format and not the format of the Date output variable on the Output tab."/>
+    <Property name="note3" value="In most cases, use the GMT option."/>
+   </Properties>
+   <InputMap/>
+   <OutputMap>
+    <LocalVariable logical_name="Date" name="Timestamp"/>
+   </OutputMap>
+   <Routes>
+    <Route result="0" goto="9"/>
+    <Route result="1" goto="13"/>
+   </Routes>
+  </Action>
+ </Actions>
+</Trigger>
+</exportitem></exportcontent>
+
+<exportcontent type="project" name="AWE1_Acura_VINStamp" nlsid="30032" interface="1"><exportproperty key="state" value="started"/><exportproperty key="desc" value=""/><exportitem type="project" name="AWE1_Acura_VINStamp" nlsid="30032">AWE1_Acura_VINStamp</exportitem></exportcontent>
+
+<Dependencies unavailable="true">
+	<crossreference name="AWE1_Acura_VINStamp" type="project">
+		<reference name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_NextVIN" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE1_VINSTAMP_ACURA_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AWE1_VINSTAMP_NEXTVIN" type="transaction">
+				<reference name="AWE1_VINSTAMP_NEXTVIN" type="transport"/>
+			</reference>
+			<reference name="AWE1_Vinstamp_Airista" type="transaction">
+				<reference name="AWE1_AiristaVinstamp" type="transport"/>
+			</reference>
+			<reference name="AWE1_VINSTAMP_ACURA_PLC.EM3[109]" type="variable"/>
+		</reference>
+		<reference name="AWE1_Acura_VINStamp/AWE1_Acura_VINStamp_Results" type="trigger">
+			<reference name="DATE_GET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE1_VINSTAMP_ACURA_PLC" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AWE1_VINSTAMPGALCUpdateTracking" type="transaction">
+				<reference name="AWE1_VINSTAMPGALCTrackingService" type="transport"/>
+			</reference>
+			<reference name="AWE1_VINSTAMP_VINRESULT" type="transaction">
+				<reference name="AWE1_VINSTAMP_VINRESULT" type="transport"/>
+			</reference>
+			<reference name="AWE1_VINSTAMP_ACURA_PLC.EM3[382]" type="variable"/>
+		</reference>
+		<reference name="AWE1_Acura_VINStamp/AWE1_VINStamp_NextVIN" type="trigger">
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="SET" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRING.SPLIT.SUBSTRING" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE1_VINSTAMP_PLC_New" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AWE1_VINSTAMP_NEXTVIN" type="transaction"/>
+			<reference name="AWE1_Vinstamp_Airista" type="transaction"/>
+			<reference name="AWE1_VINSTAMP_PLC_New.EM3[109]" type="variable"/>
+		</reference>
+		<reference name="AWE1_Acura_VINStamp/AWE1_VINStamp_Results" type="trigger">
+			<reference name="DATE_GET" type="actiontype"/>
+			<reference name="DEMAND.MULTI.READ" type="actiontype"/>
+			<reference name="DEMANDWR" type="actiontype"/>
+			<reference name="DEVICE_COMMIT" type="actiontype"/>
+			<reference name="ENDERR" type="actiontype"/>
+			<reference name="ENDOK" type="actiontype"/>
+			<reference name="IF" type="actiontype"/>
+			<reference name="LOGMSG" type="actiontype"/>
+			<reference name="LUA_INLINE" type="actiontype"/>
+			<reference name="STRING.LENGTH" type="actiontype"/>
+			<reference name="STRINGBUILDER" type="actiontype"/>
+			<reference name="STRINGCOMPARE" type="actiontype"/>
+			<reference name="TRANSACTION" type="actiontype"/>
+			<reference name="AWE1_VINSTAMP_PLC_New" type="device"/>
+			<reference name="DATAEVENT" type="eventtype"/>
+			<reference name="AWE1_VINSTAMPGALCUpdateTracking" type="transaction"/>
+			<reference name="AWE1_VINSTAMP_VINRESULT" type="transaction"/>
+			<reference name="AWE1_VINSTAMP_PLC_New.EM3[382]" type="variable"/>
+		</reference>
+	</crossreference>
+</Dependencies></export>                                                                
