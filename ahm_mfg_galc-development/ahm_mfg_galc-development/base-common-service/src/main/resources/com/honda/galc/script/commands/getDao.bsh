@@ -1,0 +1,14 @@
+/**
+	Return Dao object based on input dao name.
+	<p>
+	
+	Paul Chou Apr.16-2012
+*/
+
+bsh.help.cd = "usage: getDao( daoName )";
+
+Object getDao( String daoName ) 
+{
+	return this.caller.namespace.helper.getDaoByClassName(daoName); 
+
+}

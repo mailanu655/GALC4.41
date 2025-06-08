@@ -1,0 +1,274 @@
+@CHARSET "UTF-8";
+
+/************************************
+  Horizontal Menu : Sample Style 1 
+       StyleClass : hmenu12       
+ ************************************/
+
+/*
+ * Required. Supply as the class of the <div> tag. 
+ * Defines the base name of the set of CSS classes used to style the menu.
+ * Styles the <div> tag that contains the top-level menu. 
+ * Note that <base>_1_div styles the same <div> tag.
+ */
+.hmenu12 {
+}
+
+/**************************************************  
+  Classes that apply to the menu bar of level 1
+ **************************************************/
+
+/*
+ * Required. Each menu is contained in a <div> tag. Specifies the style of the <div> tag.
+ * The following classes are given priority over this class.
+ */
+.hmenu12_1_div {
+}
+
+/*
+ * Optional. Each menu is organized into rows/columns in a <div> tag using a <table> tag.
+ * This style applies to the entire table used at this level.
+ */
+.hmenu12_1_table {
+	font-family:Verdana,sans-serif;
+	font-size:7pt;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/*
+ * Optional. The first separator can be treated distinctly.
+ */
+.hmenu12_1_separator_first {
+	width:147px;
+    height:29px;
+    background-image: url("hm_leftb.gif");
+}
+
+/*
+ * Optional. The last separator can be treated distinctly.
+ */
+.hmenu12_1_separator_last {
+	width:120px;
+    height: 29px;
+    background-image: url("hm_rightb.gif");
+}
+
+/*
+ * Optional. 
+ * If this level of menus uses separator menu items, this class styles the separator.
+ * The separator is a table cell (i.e., this styles a <td> tag).
+ */
+.hmenu12_1_separator {
+	padding:8px;
+	padding-left:18px;
+	border-width:0px;
+	text-align:center;
+    background-image: url("hm_bgb.gif");
+}
+
+/*
+ * Required. Each menu item is contained in a table cell.
+ * This style applies to all cells at this level of the menu (unless one of the following applies).
+ */
+.hmenu12_1_cell_normal {
+	padding:8px;
+	padding-left:18px;
+	padding-right:18px;
+	border-width:0px;
+	text-align:center;
+	background-image: url("hm_bgb.gif");
+}
+
+/*
+ * Same as above, but used when the mouse is over the cell.
+ * If not supplied, the selected class is used.
+ * If neither provided, the normal class is used.
+ */
+.hmenu12_1_cell_moused {
+	padding:8px;
+	padding-left:18px;
+	padding-right:18px;
+	border-width:0px;
+	text-align:center;
+	background-image: url("hm_bg_ob.gif");
+}
+
+/*
+ * Same as above, but used when the menu item is selected.
+ * Selected state happens only when "keepSelection=true".
+ * If not supplied, the moused class is used.
+ * If neither provided, the normal class is used.
+ */
+.hmenu12_1_cell_selected {
+	padding:8px;
+	padding-left:18px;
+	padding-right:18px;
+	border-width:0px;
+	text-align:center;
+	background-image: url("hm_bg_ob.gif");
+}
+
+/*
+ * Required. The class is applied to all menu items at this level.
+ * If the item already has a class (or classes) assigned to it, the class is appended to the end of the list.
+ */
+.hmenu12_1_item_normal {
+	color:#666666;
+	text-decoration: none;
+}
+
+/*
+ * As above, but moused state.
+ */
+.hmenu12_1_item_moused {
+	color:#000000;
+	text-decoration: none;
+}
+
+/*
+ * As above, but selected state.
+ */
+.hmenu12_1_item_selected {
+	color:#0000cc;
+	text-decoration: none;
+}
+
+/**************************************************  
+  Classes that apply to the menu bar of level 2
+ **************************************************/
+
+/*
+ * Required. Each menu is contained in a <div> tag. Specifies the style of the <div> tag.
+ * The following classes are given priority over this class.
+ */
+.hmenu12_2_div {
+	margin:1px;
+	border-width:1px;
+	border-style:solid;
+	border-color: #CCCCCC;
+	background-color: #EEEEEE;
+}
+
+/*
+ * Optional. Each menu is organized into rows/columns in a <div> tag using a <table> tag.
+ * This style applies to the entire table used at this level.
+ */
+.hmenu12_2_table {
+	padding-left:6px;
+	border-style:none;
+    background-image: url("hm_t_bg_top.gif");
+    font-weight: normal;
+	font-family: Verdana,sans-serif;
+	font-size:8pt;
+	text-decoration: none;
+}
+
+/*
+ * Optional. 
+ * If this level of menus uses separator menu items, this class styles the separator.
+ */
+.hmenu12_2_separator {
+	height: 21px;
+    padding-left:6px;
+	text-align: left; 
+    font-weight: bold;
+	color:#666666;
+}
+
+/*
+ * Required. Each menu item is contained in a table cell.
+ * This style applies to all cells at this level of the menu (unless one of the following applies).
+ */
+.hmenu12_2_cell_normal {
+	height: 21px;
+	padding-left:12px;
+	padding-right:20pt;
+	text-align: left;
+    background-color: #EEEEEE;
+    background-image: url("hm_t_bg_o_siverb.gif");
+}
+
+/*
+ * Same as above, but used when the mouse is over the cell.
+ * If not supplied, the selected class is used.
+ * If neither provided, the normal class is used.
+ */
+.hmenu12_2_cell_moused {
+	height: 21px;
+	padding-left:12px;
+	padding-right:20pt;
+	text-align: left;
+	background-color:#BCC1D8;
+    background-image: url("hm_t_bg_oob.gif");
+}
+
+/*
+ * Same as above, but used when the menu item is selected.
+ * Selected state happens only when "keepSelection=true".
+ * If not supplied, the moused class is used.
+ * If neither provided, the normal class is used.
+ */
+.hmenu12_2_cell_selected {
+	height: 21px;
+	padding-left:12px;
+	padding-right:20pt;
+	text-align: left;
+	background-color:#BCC1D8;
+    background-image: url("hm_t_bg_oob.gif");
+}
+
+/*
+ * Required. The class is applied to all menu items at this level.
+ * If the item already has a class (or classes) assigned to it, the class is appended to the end of the list.
+ */
+.hmenu12_2_item_normal {
+	color: black ;
+	text-decoration: none;
+}
+
+/*
+ * As above, but moused state.
+ */
+.hmenu12_2_item_moused {
+	color:black;
+	text-decoration: none;
+}
+
+/*
+ * As above, but selected state.
+ */
+.hmenu12_2_item_selected {
+	color:black;
+	text-decoration: none;
+}
+
+/*
+ * Optional.
+ * If a menu item opens a child submenu, an "arrow" is displayed at the right edge of the cell that contains the item.
+ * This style is applied to the arrow. 
+ * If the style does not specify a background image, it styles the text arrow ">" that is displayed by default. 
+ * If the style includes a background image, the text arrow is not displayed and the background image is used as the arrow.
+ */
+.hmenu12_2_arrow_normal {
+	margin-top: 4px;
+	right:3px;     
+}
+
+/*
+ * As above, but moused state.
+ * If not present, a ">>" character is used as the arrow.
+ */
+.hmenu12_2_arrow_moused {
+	margin-top: 4px;
+	right:3px;     
+}
+
+/*
+ * As above, but selected state.
+ * If not present, a ">>" character is used as the arrow.
+ */
+.hmenu12_2_arrow_selected {
+	margin-top: 4px;
+	right:3px;     
+}

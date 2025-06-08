@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="Build All" default="all" basedir=".">
+
+	<property name="server.dir" value="/build/server"/>
+	
+	<target name = "all" depends = "buildServer,buildClient,buildLogServer" description = "build all server, client, log server">
+		<tstamp/>
+		<echo> Build All Finished  ${TSTAMP} on ${TODAY}</echo>
+	</target>
+
+	<target name =  "buildServer" description="Build Server EAR">
+		 	<ant antfile ="${basedir}\BuildServer.xml"		target ="all"/>
+	</target>
+
+	<target name =  "buildClient" description="Build Client Jar">
+		 	<ant antfile ="${basedir}\BuildClient.xml"		target ="all"/>
+	</target>
+	
+	<target name =  "buildLogServer" description="Build Log Server Jar">
+			 	<ant antfile ="${basedir}\BuildLogServer.xml"		target ="all"/>
+		</target>
+		
+
+</project>

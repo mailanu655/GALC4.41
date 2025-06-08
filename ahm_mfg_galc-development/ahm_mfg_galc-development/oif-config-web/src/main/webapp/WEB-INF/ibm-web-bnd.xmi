@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webappbnd:WebAppBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:webappbnd="webappbnd.xmi" xmi:id="WebAppBinding_1199382461074" virtualHostName="galchost">
+  <webapp href="WEB-INF/web.xml#WebApp_ID"/>
+  <resRefBindings xmi:id="ResourceRefBinding_1200405545856" jndiName="wm/SchedulerWorkManager">
+    <bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1200405545856"/>
+  </resRefBindings>
+  <resRefBindings xmi:id="ResourceRefBinding_1215696389108" jndiName="jdbc/galdb-ds5">
+    <bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1215696389108"/>
+  </resRefBindings>
+  <ejbRefBindings xmi:id="EjbRefBinding_1207849638275" jndiName="com/honda/galc/oif/task/EventTask">
+    <bindingEjbRef href="WEB-INF/web.xml#EjbRef_1207849638275"/>
+  </ejbRefBindings>
+  <ejbRefBindings xmi:id="EjbRefBinding_1220007053673" jndiName="com/honda/galc/oif/EventScheduleManager">
+    <bindingEjbRef href="WEB-INF/web.xml#EjbRef_1220007053673"/>
+  </ejbRefBindings>
+</webappbnd:WebAppBinding>

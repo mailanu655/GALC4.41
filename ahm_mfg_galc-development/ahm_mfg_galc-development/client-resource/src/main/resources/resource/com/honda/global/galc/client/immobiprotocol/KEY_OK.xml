@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ImmobiMessage id="KEY_OK" version="1.0" severity="info" description="Sent KEY_OK" className="com.honda.galc.client.device.lotcontrol.immobi.ImmobiMessage">
+    <field id="01" name="LENGTH" dataType="string" length="3" value="009" />
+    <field id="02" name="COMMAND_CODE" dataType="string" length="3" value="005" />    
+    <field id="03" name="SUB_COMMAND_CODE" dataType="string" length="3" value="005" />    
+ </ImmobiMessage>

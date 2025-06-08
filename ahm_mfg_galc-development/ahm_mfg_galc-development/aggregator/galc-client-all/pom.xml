@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<artifactId>galc-client-all</artifactId>
+  	<packaging>pom</packaging>
+  	<name>galc-client-all</name>
+
+	<parent>
+		<groupId>com.honda.galc</groupId>
+		<artifactId>aggregator</artifactId>
+		<version>4.31-SNAPSHOT</version>
+	</parent>	
+
+	<dependencies>
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>vios-badge-reader</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.rxtx</groupId>
+			<artifactId>rxtx</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${galc.build.prefix}_${galc.build.version}_client</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/assembly/clientall.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

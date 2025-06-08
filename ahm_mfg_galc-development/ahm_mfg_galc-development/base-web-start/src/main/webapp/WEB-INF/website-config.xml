@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<website version="700">
+    <structure>
+        <page navroot="true" nid="31" src="#">
+            <title>Root</title>
+            <page nid="16" src="/BaseWebStart/web_start_home.jsp">
+                <title>Home</title>
+            </page>
+            <page nid="28" src="#">
+                <title>Client</title>
+                <page nid="39" src="/BaseWebStart/web_start_clients.jsp">
+                    <title>Web Start Clients</title>
+                </page>
+                <page nid="25" src="/BaseWebStart/galc_terminals.jsp">
+                    <title>GALC Terminals</title>
+                </page>
+                <page nid="41" src="/BaseWebStart/add_client.jsp">
+                    <title>Add Client</title>
+                </page>
+            </page>
+            <page nid="33" src="#">
+                <title>Build</title>
+                <page nid="42" src="/BaseWebStart/default_build.jsp">
+                    <title>Setup Default Build</title>
+                </page>
+                <page nid="36" src="/BaseWebStart/galc_builds.jsp">
+                    <title>GALC Builds</title>
+                </page>
+                <page nid="27" src="/BaseWebStart/create_new_build.jsp">
+                    <title>Create New Build</title>
+                </page>
+            </page>
+            <page nid="32" src="#">
+                <title>Web Start</title>
+                <page nid="43" src="/BaseWebStart/web_start.jsp">
+                    <title>Web Start</title>
+                </page>
+            </page>
+            <page nid="45" src="/BaseWebStart/logout.jsp">
+                <title>Logout</title>
+            </page>
+        </page>
+    </structure>
+</website>

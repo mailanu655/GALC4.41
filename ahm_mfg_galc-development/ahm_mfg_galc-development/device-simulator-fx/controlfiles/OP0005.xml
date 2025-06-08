@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<OPMessage id="OP0005" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.global.galc.client.lotcontrol.model.CommandAccepted">
+  <field id="01" name="MSG_ID" type="String" length="4" defaultValue="0000" /> 
+</OPMessage>

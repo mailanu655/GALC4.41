@@ -1,0 +1,1 @@
+alter table GALADM.PART_SHIPMENT_TBX add column ASSOCIATE_NO character(11);

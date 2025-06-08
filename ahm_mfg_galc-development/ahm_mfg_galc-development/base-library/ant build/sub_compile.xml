@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="compile" default="buildServer" basedir=".">
+
+<target name="init">
+     <tstamp/>
+     <echo>Build of GALC Application classes started at ${TSTAMP} on ${TODAY}</echo> 
+</target>
+   
+
+<target name =  "compileCommon"  depends = "init" description="compile common code">
+	<projectBuild ProjectName="base-common"  			DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-entity" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-service-interface" 	DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-common-service" 		DebugCompilation="false" 	BuildType="Full"/>
+</target>
+	
+<target name =  "compileClient"  description="compile client code">
+	<projectBuild ProjectName="base-client" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="lot-control"	 			DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="device-control"			DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="galc-qics" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="gts-client" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="team-leader" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="device-simulator" 		DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="galc-test" 				DebugCompilation="false" 	BuildType="Full"/>
+</target>
+	<target name =  "compileServer"  description="compile server code">
+	<projectBuild ProjectName="base-persistence" 		DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-service"		 		DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-web-start"		 	DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="base-web"		 			DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="config-service-web"        DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="oif-config-web"	        DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="oif-service-ejb"	        DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="rest-web"		 			DebugCompilation="false" 	BuildType="Full"/>
+	<ejbDeploy EJBProject="oif-service-ejb"/>
+		         
+</target>
+	
+<target name="createBuildLevel">
+    <filter token="DSTAMP" value="${DSTAMP}"/>
+    <filter token="TSTAMP" value="${TSTAMP}"/>
+    <filter token="TODAY" value="${TODAY}"/>
+    <filter token="plant" value="HCM"/>
+    <filter token="line" value="01"/>
+    <filter token="env" value="PROD"/>
+	<filter token="APP_NAME" value="${version}"/>
+	<filter token="build-label" value="${buildLevel}"/>
+	<echo> build level = ${buildLevel}</echo>  
+	<delete file="../../base-common/src/main/resources/com/honda/galc/buildlevel/BuildLevelUtility.properties"/>
+    <copy file="../../base-common/src/main/resources/com/honda/galc/buildlevel/BuildLevelUtility.properties.template"
+          tofile="../../base-common/src/main/resources/com/honda/galc/buildlevel/BuildLevelUtility.properties"
+          filtering="true"
+          overwrite="true"
+          failonerror="true"
+    />
+</target>
+	
+<target name =  "compileLogServer"  description="compile log server code">
+	<projectBuild ProjectName="base-common" 				DebugCompilation="false" 	BuildType="Full"/>
+	<projectBuild ProjectName="log-server"	 			DebugCompilation="false" 	BuildType="Full"/>
+</target>
+
+
+<target name = "JpaEnhancement" description = "Entity enhancement">
+	<tstamp/>
+	 <echo> JPA Entity Enhancement  at ${TSTAMP} on ${TODAY}</echo>
+	 <ant antfile = "${basedir}\enhance.xml"		target='enhance'/>
+	 <eclipse.refreshLocal resource="base-entity/bin" depth="infinite" />
+</target>
+
+<target name="buildServer" depends = "init,createBuildLevel,compileCommon,JpaEnhancement,compileServer">
+</target>
+
+<target name="buildClient" depends = "init,createBuildLevel,compileCommon,JpaEnhancement,compileClient">
+</target>	
+	
+<target name="buildLogServer" depends = "init,compileLogServer">
+</target>	
+
+	
+</project>
+

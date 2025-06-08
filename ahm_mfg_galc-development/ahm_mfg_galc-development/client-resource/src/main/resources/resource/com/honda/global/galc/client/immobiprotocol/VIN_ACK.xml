@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ImmobiMessage id="VIN_ACK" version="1.0" severity="info" description="Received VIN_ACK" className="com.honda.galc.client.device.lotcontrol.immobi.ImmobiMessage">
+    <field id="01" name="LENGTH" dataType="string" length="3" value="029" />
+    <field id="02" name="COMMAND_CODE" dataType="string" length="3" value="004" />    
+    <field id="03" name="SUB_COMMAND_CODE" dataType="string" length="3" value="001" />    
+    <field id="04" name="DATA_SEGMENT_LENGTH" dataType="string" length="3" value="020" />
+    <field id="05" name="SEGMENT_DATA" dataType="string" lengthField="DATA_SEGMENT_LENGTH" value="00000000000000000" />
+ </ImmobiMessage>
+
+  

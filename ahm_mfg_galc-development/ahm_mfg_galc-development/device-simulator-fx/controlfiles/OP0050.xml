@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0050" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.galc.openprotocol.model.VINDownloadRequest">
+    <field id="01" name="VIN"  datatype="String" length="25" defaultValue="" />
+</OPMessage>

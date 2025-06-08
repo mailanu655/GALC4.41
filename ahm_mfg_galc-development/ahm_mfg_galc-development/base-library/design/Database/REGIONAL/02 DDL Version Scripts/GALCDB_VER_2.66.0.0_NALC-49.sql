@@ -1,0 +1,9 @@
+CREATE INDEX GALADM.GAL185_I8 ON GALADM.GAL185TBX ( DEFECT_REF_ID ) ALLOW REVERSE SCANS;
+CREATE INDEX GALADM.GAL185_HIST_I7 ON GALADM.GAL185_HIST_TBX ( DEFECT_REF_ID ) ALLOW REVERSE SCANS;
+CREATE INDEX GALADM.GAL198_I3 ON GALADM.GAL198TBX ( DEFECT_REF_ID ) ALLOW REVERSE SCANS;
+CREATE INDEX GALADM.GAL198_HIST_I3 ON GALADM.GAL198_HIST_TBX ( DEFECT_REF_ID ) ALLOW REVERSE SCANS;
+
+runstats on table GALADM.GAL185TBX with distribution and detailed indexes all;
+runstats on table GALADM.GAL185_HIST_TBX  with distribution and detailed indexes all;
+runstats on table GALADM.GAL198TBX   with distribution and detailed indexes all;
+runstats on table GALADM.GAL198_HIST_TBX    with distribution and detailed indexes all;

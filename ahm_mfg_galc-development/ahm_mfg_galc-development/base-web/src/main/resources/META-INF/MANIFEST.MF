@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+UseWSFEP61ScanPolicy: true
+Class-Path: BaseCommon.jar BaseEntity.jar BasePersistence.jar BaseServ
+ ice.jar commons-lang-2.6.jar geronimo-jpa_3.0_spec-1.0.jar geronimo-j
+ ta_1.1_spec-1.1.jar openjpa-1.2.1.jar serp-1.13.1.jar spring-2.5.6.ja
+ r commons-collections-3.2.1.jar bsh-core-2.0b4.jar jsr173_api.jar sjs
+ xp.jar BaseServiceInterface.jar BaseCommonService.jar ehcache-core-2.
+ 5.2.jar slf4j-api-1.6.1.jar barcode4j.jar batik-anim.jar batik-awt-ut
+ il.jar batik-bridge.jar batik-css.jar batik-dom.jar batik-ext.jar bat
+ ik-extension.jar batik-gvt.jar batik-parser.jar batik-script.jar bati
+ k-svg-dom.jar batik-util.jar batik-xml.jar commons-beanutils-1.8.0.ja
+ r commons-digester-1.7.jar groovy-all-1.5.5.jar jasperreports-3.5.3.j
+ ar xstream-1.4.8.jar xpp3_min-1.1.4c.jar xmlpull-1.1.3.1.jar xml-apis
+ -ext.jar slf4j-log4j12-1.6.1.jar gson-2.2.3.jar log4j-1.2.15.jar
+

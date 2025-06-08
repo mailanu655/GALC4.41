@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
+<booleanAttribute key="com.ibm.debug.breakpoints.java.appendFile" value="false"/>
+<stringAttribute key="com.ibm.debug.breakpoints.java.traceFilename" value="${workspace_loc}\${launch_config_name}_${launch_timestamp}.log"/>
+<booleanAttribute key="com.ibm.debug.breakpoints.java.traceToConsole" value="true"/>
+<booleanAttribute key="com.ibm.debug.breakpoints.java.traceToFile" value="false"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/BaseTest/src/com/honda/galc/test/dao/ProductTrackerTest.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="d:\logs\ProductTrackerTest_HMIN_SBX.log"/>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
+<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.honda.galc.test.dao.ProductTrackerTest"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="BaseTest"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Denvironment=HMIN_SBX -DnumOfProducts=95 -DwaitTimeInSecs=15 -DsqlFile=ProductTrackerTest.sql -DlogSql=false"/>
+</launchConfiguration>

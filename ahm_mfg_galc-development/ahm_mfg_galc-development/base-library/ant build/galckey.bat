@@ -1,0 +1,1 @@
+keytool -genkey -dname "cn=HCM,ou=HCM,o=HCM,c=US" -alias galcfiles -storepass g2lcr0cks -keypass g2lcr0cks -keystore newkey.jks -validity 3650

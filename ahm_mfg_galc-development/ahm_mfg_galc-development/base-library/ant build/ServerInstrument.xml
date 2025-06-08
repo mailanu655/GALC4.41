@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<project name="EMMA" default="emma" basedir="." >
+
+	<property file = "serverbuild.properties"		value = "${basedir}/serverbuild.properties"/>
+
+	<!-- directory that contains emma.jar and emma_ant.jar: -->
+	<property name="emma.dir" value="../lib/emma" />
+	
+	<!-- allow to create new metadata file each time when the build runs -->
+	<property name="metadata.out.merge" value = "false" />
+
+	<!-- path element used by EMMA taskdef below: -->
+	<path id="emma.lib">
+		<pathelement location="${emma.dir}/emma.jar" />
+		<pathelement location="${emma.dir}/emma_ant.jar" />
+	</path>
+	
+	<tstamp>
+			<format property="timestamp" pattern="yyyy-MM-dd_HH-mm-ss"/>
+	</tstamp>
+	
+	<property name="metadata.file" value="${server.dir}/coverage/metadata_${timestamp}.em" />
+		
+	<!-- this loads <emma> and <emmajava> custom tasks: -->
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+
+	<property environment="env" />
+	
+	<path id = "instr.classpath">
+		 <pathelement location="../../base-common" />
+		<pathelement location="../../base-entity" />
+	    <pathelement location="../../base-service-interface" />
+	    <pathelement location="../../base-common-service" />
+		<pathelement location="../../base-persistence" />
+		<pathelement location="../../base-service" />
+	   	<pathelement location="../../base-web-start" />
+		<pathelement location="../../config-service-web" />
+		<pathelement location="../../oif-config-web" />
+		<pathelement location="../../rest-web" />
+		<pathelement location="../../oif-service-ejb/src" />
+	</path>
+	
+	
+
+	<!-- EMMA ANT tasks are implemented as pseudo-nested tasks: <emma>
+			container task can contain an arbitrary sequence of <instr>,
+            <report>, and <merge>. Both the container tag and each of the nested
+			elements support an optional boolean 'enabled' attribute: setting it
+			to 'false' will no-op the element. This is convenient for
+			sandwhiching normal build tasks between EMMA tasks such that coverage
+			instrumentation and reporting could be enabled on demand. -->
+
+	<target name="emma" description="instrument" >
+
+			<emma enabled = "true" verbosity="verbose">
+				<instr instrpathref="instr.classpath" mode="overwrite" metadatafile="${metadata.file}">
+
+				<!-- note that coverage filters can be set through nested <filter>
+				elements as well: many of EMMA setting are 'mergeable' in the
+				sense that they can be specified multiple times and the result
+				is a union of all such values. Here we are not merging several
+				filters together but merely demonstrating that it is possible:
+				
+				<filter value="${emma.filter}" />
+				-->
+				</instr>
+			</emma>
+		
+		   <copy file="${metadata.file}" tofile ="${server.dir}/serverMetadata.emma"/>
+	
+	</target>
+
+</project>

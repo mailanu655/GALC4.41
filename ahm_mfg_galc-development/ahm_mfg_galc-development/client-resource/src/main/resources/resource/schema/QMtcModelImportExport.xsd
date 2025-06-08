@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="QiMtcModelImportExportTableSummaryXmlDto">
+		<xs:annotation>
+			<xs:documentation>MTC Model Import/Export Table Summary</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="TableName" type="xs:string" minOccurs="1"/>
+			<xs:element name="RecordCount" type="xs:string" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiLocalDefectCombinationTbxXmlDto">
+		<xs:annotation>
+			<xs:documentation>QI_LOCAL_DEFECT_COMBINATION_TBX</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="localDefectCombinationId" type="xs:int" minOccurs="1"/>
+			<xs:element name="regionalDefectCombinationId" type="xs:int" minOccurs="1"/>
+			<xs:element name="entrySiteName" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryPlantName" type="xs:string" minOccurs="1"/>
+			<xs:element name="responsibleLevelId" type="xs:int" minOccurs="1"/>
+			<xs:element name="pddaResponsibilityId" type="xs:int" minOccurs="1"/>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryScreen" type="xs:string" minOccurs="1"/>
+			<xs:element name="textEntryMenu" type="xs:string" minOccurs="1"/>
+			<xs:element name="repairMethod" type="xs:string" minOccurs="1"/>
+			<xs:element name="repairMethodTime" type="xs:short" minOccurs="1"/>
+			<xs:element name="estimatedTimeToFix" type="xs:int" minOccurs="1"/>
+			<xs:element name="localTheme" type="xs:string" minOccurs="1"/>
+			<xs:element name="engineFiringFlag" type="xs:short" minOccurs="1"/>
+			<xs:element name="repairAreaName" type="xs:string" minOccurs="1"/>
+			<xs:element name="defectCategoryName" type="xs:string" minOccurs="1"/>
+			<xs:element name="reportable" type="xs:short" minOccurs="1"/>
+			<xs:element name="isUsed" type="xs:short" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiEntryScreenDefectCombinationTbxXmlDto">
+		<xs:annotation>
+			<xs:documentation>QI_ENTRY_SCREEN_DEFECT_COMBINATION_TBX</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="entryScreen" type="xs:string" minOccurs="1"/>
+			<xs:element name="regionalDefectCombinationId" type="xs:int" minOccurs="1"/>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="isUsed" type="xs:short" minOccurs="1"/>
+			<xs:element name="textEntryMenu" type="xs:string" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiTextEntryMenuTbxXmlDto">
+		<xs:annotation>
+			<xs:documentation>QI_TEXT_ENTRY_MENU_TBX</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="entryScreen" type="xs:string" minOccurs="1"/>
+			<xs:element name="textEntryMenu" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="isUsed" type="xs:short" minOccurs="1"/>
+			<xs:element name="textEntryMenuDesc" type="xs:string" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiEntryModelTbxXmlDto">
+		<xs:annotation>
+			<xs:documentation>QI_ENTRY_MODEL_TBX</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="isUsed" type="xs:short" minOccurs="1"/>
+			<xs:element name="entryModelDescription" type="xs:string" minOccurs="1"/>
+			<xs:element name="productType" type="xs:string" minOccurs="1"/>
+			<xs:element name="active" type="xs:short" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiEntryScreenTbxXmlDto">
+		<xs:annotation>
+			<xs:documentation>QI_ENTRY_SCREEN_TBX</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="entryScreen" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="isUsed" type="xs:short" minOccurs="1"/>
+			<xs:element name="entryScreenDescription" type="xs:string" minOccurs="1"/>
+			<xs:element name="isImage" type="xs:short" minOccurs="1"/>
+			<xs:element name="productType" type="xs:string" minOccurs="1"/>
+			<xs:element name="imageName" type="xs:string" minOccurs="1"/>
+			<xs:element name="active" type="xs:short" minOccurs="1"/>
+			<xs:element name="screenIsUsed" type="xs:short" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:element name="QicsMtcModelConfigurationXmlDto">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="entrySiteName" type="xs:string" minOccurs="1"/>
+				<xs:element name="entryPlantName" type="xs:string" minOccurs="1"/>
+				<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+				<xs:element name="qiMtcModelImportExportTableSummaryXmlDto" type="QiMtcModelImportExportTableSummaryXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiEnryScreens" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiLocalDefectCombinationTbxXmlDto" type="QiLocalDefectCombinationTbxXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiEntryScreenDefectCombinationTbxXmlDto" type="QiEntryScreenDefectCombinationTbxXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiTextEntryMenuTbxXmlDto" type="QiTextEntryMenuTbxXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiEntryModelTbxXmlDto" type="QiEntryModelTbxXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiEntryScreenTbxXmlDto" type="QiEntryScreenTbxXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

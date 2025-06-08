@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationbnd:ApplicationBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:applicationbnd="applicationbnd.xmi" xmi:id="ApplicationBinding_1171547934046">
+  <authorizationTable xmi:id="AuthorizationTable_1171547934046">
+    <authorizations xmi:id="RoleAssignment_1171547934046">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_AllUsers"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171549403859">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewProcessPoint"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171550254718">
+      <role href="META-INF/application.xml#SecurityRole_EditAdmin"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171550254719">
+      <role href="META-INF/application.xml#SecurityRole_ViewAdmin"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171550254720">
+      <role href="META-INF/application.xml#SecurityRole_EditProcessPoint"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171550254721">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewUsers"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171550316984">
+      <role href="META-INF/application.xml#SecurityRole_EditUsers"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+      <groups xmi:id="Group_1308856007874" name="GALC_USER_ADMIN"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551324609">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewTerminal"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551461500">
+      <role href="META-INF/application.xml#SecurityRole_EditTerminal"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+      <groups xmi:id="Group_1308856007875" name="GALC_TERMINAL_ADMIN"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551461501">
+      <role href="META-INF/application.xml#SecurityRole_EditDevice"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551557343">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewDevice"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551557344">
+      <role href="META-INF/application.xml#SecurityRole_EditApplication"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551706500">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewApplication"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551706501">
+      <role href="META-INF/application.xml#SecurityRole_EditProcess"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1171551706515">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewProcess"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1172683132625">
+      <specialSubjects xmi:type="applicationbnd:AllAuthenticatedUsers" xmi:id="AllAuthenticatedUsers_1171551557343" name="AllAuthenticatedUsers"/>
+      <role href="META-INF/application.xml#SecurityRole_ViewACL"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1172683168546">
+      <role href="META-INF/application.xml#SecurityRole_OifAdministrator"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+      <groups xmi:id="Group_1308856007873" name="GALC_CONFIG_UPDATE"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1172703807250">
+      <specialSubjects xmi:type="applicationbnd:Everyone" xmi:id="Everyone_1172703807250" name="Everyone"/>
+      <role href="META-INF/application.xml#SecurityRole_Everyone"/>
+    </authorizations>
+    <authorizations xmi:id="RoleAssignment_1203598593838">
+      <role href="META-INF/application.xml#SecurityRole_Administrator"/>
+      <groups xmi:id="Group_1308856007871" name="GALC_CONFIG_ADMIN"/>
+    </authorizations>
+  </authorizationTable>
+  <application href="META-INF/application.xml#Application_ID"/>
+</applicationbnd:ApplicationBinding>

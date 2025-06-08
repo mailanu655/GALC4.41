@@ -1,0 +1,133 @@
+<project name="targets">
+
+    <path id="cobertura.classpath">
+        <fileset dir="${cobertura.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+    <taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
+
+    <path id="crap4j.classpath">
+        <fileset dir="${crap4j.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    <taskdef name="crap4j" classname="org.crap4j.anttask.Crap4jAntTask" classpathref="crap4j.classpath"/>
+
+
+    <!-- ================================================================ -->
+    <!-- Crap4J code quality assessment                                   -->
+    <!-- ================================================================ -->
+    <target name="crap4j" depends="clean, initTest, module" description="runs code quality assessment tool">
+        <echo>
+            ****************************************
+
+            CRAP4J Testing - ready to have some fun?
+
+            ****************************************
+        </echo>
+        <mkdir dir="${test.reports.dir}/crap4j"/>
+        <crap4j projectdir="${basedir}"
+                outputDir="${test.reports.dir}/crap4j"
+                dontTest="false" debug="false">
+            <srces>
+                <pathElement location="${src.dir}"/>
+                <pathElement location="${test.src.dir}"/>
+            </srces>
+
+            <classes>
+                <pathElement location="${build.classes.dir}"/>
+            </classes>
+
+            <testClasses>
+                <pathElement location="${build.classes.dir}"/>
+            </testClasses>
+
+            <libClasspath>
+                <path refid="test.classpath"/>
+                <fileset dir="${CRAP4J_HOME}/lib/com.agitar.eclipse.api_4.2.0.401405/lib/ext">
+                    <include name="**/*.jar"/>
+                </fileset>
+
+            </libClasspath>
+        </crap4j>
+        <delete dir="${basedir}/agitar"/>
+        <delete file="${basedir}/crap_build.xml"/>
+    </target>
+
+
+    <!-- ================================================================ -->
+    <!-- Runs unit tests                                                  -->
+    <!-- ================================================================ -->
+
+    <target name="initCorbertura" depends="compile">
+        <echo>
+            **********************************
+
+            Code Coverage Testing
+
+            **********************************
+        </echo>
+        <mkdir dir="${build.dir}/instrumented-classes"/>
+        <cobertura-instrument todir="${build.dir}/instrumented-classes" datafile="${test.data.dir}/cobertura.ser">
+            <fileset dir="${build.classes.dir}">
+                <exclude name="**/*Test*"/>
+                <exclude name="**/*Exception.class"/>
+                <include name="**/*.class"/>
+            </fileset>
+        </cobertura-instrument>
+        <path id="instrumented-classes">
+            <fileset dir="${build.dir}/instrumented-classes">
+                <include name="**/*.class"/>
+            </fileset>
+        </path>
+    </target>
+
+    <target name="initTest" depends="clean, compile"/>
+
+    <target name="testWithCoverage" depends="initCorbertura">
+        <echo>Code coverage testing</echo>
+        <mkdir dir="${test.data.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+
+        <junit printsummary="yes"
+               errorProperty="test.failed"
+               failureProperty="test.failed"
+               fork="true"
+               maxmemory="256m"
+               dir="${basedir}">
+            <sysproperty key="net.sourceforge.cobertura.datafile" file="${test.data.dir}/cobertura.ser"/>
+            <classpath location="${build.dir}/instrumented-classes"/>
+            <classpath>
+                <path refid="test.classpath"/>
+                <path refid="cobertura.classpath"/>
+            </classpath>
+            <formatter type="brief" usefile="false"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="${test.data.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test.java"/>
+                    <include name="**/*Tests.java"/>
+                    <exclude name="**/Abstract*Tests.java"/>
+                    <exclude name="**/AllTests.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <!-- <cobertura-check datafile="${test.data.dir}/cobertura.ser" branchrate="0" totallinerate="0" /> -->
+
+        <cobertura-report srcdir="${src.dir}"
+                          destdir="${test.reports.dir}/coverage"
+                          datafile="${test.data.dir}/cobertura.ser"
+                          format="html"/>
+
+        <junitreport todir="${test.data.dir}">
+            <fileset dir="${test.data.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.reports.dir}"/>
+        </junitreport>
+        <fail message="Tests failed big time. Check the reports..." if="test.failed"/>
+    </target>
+
+</project>

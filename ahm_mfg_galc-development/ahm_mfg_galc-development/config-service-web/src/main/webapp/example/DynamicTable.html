@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META name="GENERATOR" content="IBM Software Development Platform">
+<META http-equiv="Content-Style-Type" content="text/css">
+<LINK href="../theme/Master.css" rel="stylesheet"
+	type="text/css">
+<TITLE>DynamicTable.html</TITLE>
+<script >
+   var popupw = null;
+   
+   function showPopup()
+   {
+      popupw = window.open("Popup.html","popupwin","width=400,height=400,status=yes,resizable=yes",true);
+      
+      
+   }
+   
+   function addRow(val1,val2,val3,val4,val5) 
+   {
+     
+      var newrow;
+      var newcol;
+      
+      var table = document.getElementById("dynamictable");
+      
+      
+      newrow = table.insertRow();
+      
+      newcol = newrow.insertCell();
+      
+      newcol.innerHTML = val1;
+
+      newcol = newrow.insertCell();
+      
+      newcol.innerHTML = val2;
+
+      newcol = newrow.insertCell();
+      
+      newcol.innerHTML = val3;
+      
+      newcol = newrow.insertCell();
+      
+      newcol.innerHTML = val4;
+      
+      newcol = newrow.insertCell();
+      
+      newcol.innerHTML = val5;
+
+   }
+   
+   function addRow2(val1,val2,val3,val4,val5) 
+   {
+      popupw.window.close();
+      var newrow;
+      var newcol;
+      var childCount = 0;
+      var recordID  = 1;
+      var hiddenfield;
+      
+      var table = document.getElementById("dynamictable");
+      var tablebody = document.getElementById("dynamicbody");
+      
+      if (tablebody != null)
+      {
+         //childCount = tablebody.childNodes.length;
+         childCount = table.rows.length;
+         recordID = childCount+1;
+      }
+      
+      newrow = document.createElement("tr");
+      
+      
+      
+      newcol = document.createElement("td");
+      
+      hiddenfield ="<input type=\"hidden\" name=\"able"+recordID+"\" value=\"" +val1 +"\">";
+      newcol.innerHTML = val1+hiddenfield;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      hiddenfield ="<input type=\"hidden\" name=\"baker"+recordID+"\" value=\"" +val2 +"\">";
+      newcol.innerHTML = val2+hiddenfield;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val3;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val4;
+      
+      newrow.appendChild(newcol);
+      
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val5;
+      
+      newrow.appendChild(newcol);
+      
+	  tablebody.appendChild(newrow);
+
+	  return false;
+   }
+   
+</script>
+</HEAD>
+<BODY>
+<form action="/ConfigService/terminalSettings.do">
+<table border="2" id="dynamictable">
+<tbody id="dynamicbody">
+<TR id="row1">
+<TD>A</TD>
+<TD>B</TD>
+<TD>C</TD>
+<TD>D</TD>
+<TD>E</TD>
+</TR>
+</tbody>
+</table>
+<INPUT type="submit" name="mysubmit"
+				value="Submit">
+</form>
+<form>
+<BUTTON onclick="showPopup();">Get popup.</BUTTON>
+
+<BUTTON onclick="addRow2('new1','new2','new3','new4','new5'); return false;">Add row</BUTTON>
+</form>
+</BODY>
+</HTML>

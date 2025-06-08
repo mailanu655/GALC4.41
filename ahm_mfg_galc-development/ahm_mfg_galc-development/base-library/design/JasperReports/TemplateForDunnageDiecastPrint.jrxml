@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DunnageExport" pageWidth="595" pageHeight="625" columnWidth="535" leftMargin="40" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PRODUCT_TYPE_NAME" class="java.lang.String"/>
+	<parameter name="DUNNAGE_NUMBER" class="java.lang.String"/>
+	<parameter name="SHIFT" class="java.lang.String"/>
+	<field name="dcSerialNumber" class="java.lang.String"/>
+	<field name="mcSerialNumber" class="java.lang.String"/>
+	<field name="productSpecCode" class="java.lang.String"/>
+	<variable name="dunnageNumber" class="java.lang.String">
+		<variableExpression><![CDATA[$P{DUNNAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="currentTime" class="java.lang.String">
+		<variableExpression><![CDATA[(new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a")).format(new Date())]]></variableExpression>
+	</variable>
+	<variable name="shift" class="java.lang.String">
+		<variableExpression><![CDATA[$P{SHIFT}]]></variableExpression>
+	</variable>
+	<variable name="sequence" class="java.lang.String">
+		<variableExpression><![CDATA[($V{dunnageNumber}).substring( $V{dunnageNumber}.length() - 2, $V{dunnageNumber}.length())]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<frame>
+				<reportElement x="384" y="70" width="151" height="30" />
+			</frame>
+			<staticText>
+				<reportElement x="0" y="80" width="72" height="20" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Type:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement x="72" y="80" width="58" height="20" />
+				<textFieldExpression><![CDATA[$P{PRODUCT_TYPE_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="150" y="80" width="91" height="20" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dunnage Number:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="241" y="80" width="127" height="20" />
+				<textFieldExpression><![CDATA[$P{DUNNAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="400" y="70" width="120" height="30" />
+				<c:Code39 xmlns:c="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<c:codeExpression><![CDATA[$P{DUNNAGE_NUMBER}]]></c:codeExpression>
+				</c:Code39>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="15" />
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="0" width="142" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DC Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="0" width="130" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MC Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="130" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Model]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isBlankWhenNull="true"  isStretchWithOverflow="true">
+				<reportElement x="54" y="0" width="142" height="11" />
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dcSerialNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true"  isStretchWithOverflow="true">
+				<reportElement x="196" y="0" width="130" height="11" />
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mcSerialNumber}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true"  isStretchWithOverflow="true">
+				<reportElement x="326" y="0" width="130" height="11" />
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productSpecCode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true" isStretchWithOverflow="true">
+				<reportElement x="3" y="0" width="54" height="11" />
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="2" width="40" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SHIFT:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="225" y="2" width="50" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{shift})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="2" width="30" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEQ:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="435" y="2" width="50" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{sequence})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="5" width="150" height="15" />
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{currentTime}]]></textFieldExpression>
+			</textField>
+			
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

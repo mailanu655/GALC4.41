@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META name="GENERATOR" content="IBM Software Development Platform">
+<META http-equiv="Content-Style-Type" content="text/css">
+
+<TITLE>GALC Webstart Login</TITLE>
+<link rel="stylesheet" type="text/css" href="css/default.css" />
+</HEAD>
+<BODY>
+<br><br>
+	<h1 align="center" style="font-size: 40px; font-family: sans-serif; color: #000000">GALC Webstart Login</h1>
+
+<FORM id="Form" action="/BaseWebStart/j_security_check" enctype="application/x-www-form-urlencoded" method="Post">
+	<center>
+	<br><br>
+	<TABLE border="0" cellspacing="10" cellpadding="10">
+		<TBODY align="center">
+		<TR>
+			<TD align="left">User name</TD>
+			<TD><INPUT type="text" name="j_username" id="j_username" size="20"></TD>
+		</TR>
+		<TR>
+			<TD align="left">Password</TD>
+			<TD><INPUT type="password" name="j_password" size="20"></TD>
+		</TR>
+		<TR>
+			<TD colspan="2" align="center">
+			<INPUT type="submit" name="Submit" value="Login">
+			</TD>
+		</TR>
+		</TBODY>
+	</TABLE>
+	</center>
+	</FORM>
+<SCRIPT>document.getElementById("j_username").focus();</SCRIPT>
+</BODY>
+</HTML>

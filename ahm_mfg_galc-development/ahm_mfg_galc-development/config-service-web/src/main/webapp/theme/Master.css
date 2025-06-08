@@ -1,0 +1,222 @@
+BODY
+{
+    BACKGROUND-COLOR: #FFFFFF;
+    FONT-FAMILY: 'Times New Roman'
+}
+H1
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+H2
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+H3
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+
+H4
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+
+H5
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+H6
+{
+    COLOR: #6666CC;
+    FONT-FAMILY: 'Times New Roman';
+    TEXT-TRANSFORM: capitalize
+}
+
+TH.settingstext {
+	color: black
+}
+
+TD.settingstext {
+	color: black
+}	
+
+BODY.settingspage {
+    BACKGROUND-COLOR: #ffffff;
+    COLOR: #000000;
+	font-size: 12pt;
+	font-family: 'Times New Roman',sans-serif;
+}
+
+FRAMESET.settingspage {
+	BACKGROUND-COLOR: #ffffff;
+    COLOR: #000000;
+	font-size: 12pt;
+	font-family: 'Times New Roman',sans-serif;
+}
+
+FRAME.settingspage {
+	BACKGROUND-COLOR: #ffffff;
+    COLOR: #000000;
+	font-size: 12pt;
+	font-family: 'Times New Roman',sans-serif;
+}
+
+H1.settingsheader {
+	COLOR: #000000;
+	TEXT-TRANSFORM: capitalize;
+	FONT-FAMILY: 'Times New Roman';
+	font-size: 14pt
+}
+
+H1.listheader {
+	COLOR: #000000;
+	TEXT-TRANSFORM: capitalize;
+	FONT-FAMILY: 'Times New Roman';
+	font-size: 14pt
+}
+
+BODY.listpage {
+    BACKGROUND-COLOR: #ffffff;
+    COLOR: #000000;
+	font-size: 12pt;
+	font-family: Arial, sans-serif;
+}
+
+FIELDSET.settingstext {
+	color: black;
+	border-width: medium;
+	border-color: black;
+	padding: 5px
+	
+}
+
+LEGEND.settingstext {
+	FONT-FAMILY: 'Times New Roman';
+	color: black;
+	font-size: 16;
+	font-weight: bold
+	
+}
+
+
+
+A.processtree {
+	
+	color: black;
+	font-size: 14;
+	font-weight: bold;
+	text-decoration: none;
+    
+	
+}
+
+A.settingslink {
+    color: black;
+    text-decoration: none;
+    font-weight: bold
+    
+}
+
+A.settingspagelink {
+    color: black;
+    font-weight: bold
+    
+}
+
+TABLE.listtable {
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	
+	
+}
+
+THEAD.listtablehead {
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	background-color: #cccccc;
+}
+
+TR.evenrow {
+	background-color: #eeeeee;
+}
+
+TR.oddrow {
+	background-color: #ffffff;
+}
+
+TD.activetab {
+	background: #cccccc
+	
+}
+
+TD.inactivetab {
+	background: #f0f0f0
+	
+}
+
+BUTTON.taskseqbutton {
+   width: 80
+}
+
+BUTTON.broadcastdestbutton {
+   width: 80
+}
+
+H2.messages {
+  color: black;
+}
+
+H2.errors {
+   color: red;
+   
+}
+
+INPUT.readonly {
+	background-color: #e9e9e9
+}
+
+th.systeminfo {
+    color: black;
+    text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	font-weight: bold
+    
+}
+
+.requiredFieldLabel {
+    color: red;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	font-style: normal;
+	padding-left: 3px
+}
+
+td.systeminfo {
+    color: black;
+    text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	font-style: normal
+}
+
+a.logout {
+    color: black;
+ 	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	font-style: normal
+    
+}

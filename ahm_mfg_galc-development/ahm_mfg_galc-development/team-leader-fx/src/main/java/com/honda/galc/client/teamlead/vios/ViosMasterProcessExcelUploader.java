@@ -1,0 +1,76 @@
+package com.honda.galc.client.teamlead.vios;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.honda.galc.common.logging.LogRecord;
+import com.honda.galc.common.logging.Logger;
+import com.honda.galc.entity.conf.MCViosMasterProcess;
+import com.honda.galc.service.ServiceFactory;
+import com.honda.galc.service.vios.ViosMaintenanceService;
+
+public class ViosMasterProcessExcelUploader extends ViosExcelUploader<MCViosMasterProcess> {
+	
+	private String viosPlatform;
+	public ViosMasterProcessExcelUploader(String viosPlatform, String userId) {
+		super(viosPlatform, userId);
+		this.viosPlatform = viosPlatform;
+	}
+
+	public String getViosPlatform() {
+		return viosPlatform;
+	}
+
+	public void setViosPlatform(String viosPlatform) {
+		this.viosPlatform = viosPlatform;
+	}
+
+
+	@Override
+	public String doUpload(List<MCViosMasterProcess> entityList) {
+		StringBuffer infoLog = new StringBuffer();
+		int recordSaved = 0;
+		int recordSkipped = 0;
+		Set<String> processPointSet = new HashSet<String>();
+		List<MCViosMasterProcess> validatedEntityList = new ArrayList<MCViosMasterProcess>();
+		for (MCViosMasterProcess entity : entityList) {
+			try {
+				
+				String validationStatus = doValidation(entity);
+				if(StringUtils.isNotBlank(validationStatus)) {
+					infoLog.append(validationStatus+"\n");
+					recordSkipped++;
+				} else {
+					processPointSet.add(entity.getProcessPointId());
+					validatedEntityList.add(entity);
+				}
+			} catch (Exception e) {
+				infoLog.append("Record skipped: " + entity.toString() + ": " + e.getMessage() + "\n");
+				recordSkipped++;
+				Logger.getLogger().error(e, new LogRecord("Record skipped: " + entity.toString()));
+			}
+		}
+		//Delete processPointSet
+		for(String processPointId : processPointSet){
+			ServiceFactory.getService(ViosMaintenanceService.class).deleteByProcessPointId(processPointId, viosPlatform);
+		}
+		
+		for (MCViosMasterProcess entity : validatedEntityList) {
+			try {
+				uploadEntity(entity);
+				recordSaved++;
+			} catch (Exception e) {
+				recordSkipped++;
+			}
+		}
+		
+		infoLog.append("\n");
+		infoLog.append("No of Records Saved: " + recordSaved + "\n");
+		infoLog.append("No of Records Skipped: " + recordSkipped + "\n");
+		return infoLog.toString();
+	}
+}

@@ -1,0 +1,4 @@
+--CREATE DB TGAL1DB on /dgal1tbs1, /dgal1tbs2, /dgal1tbs3 DBPATH ON /dgal1db;
+
+CREATE DB TENGDB on /dengtbs1, /dengtbs1, /dengtbs1 DBPATH ON /dengdb;
+

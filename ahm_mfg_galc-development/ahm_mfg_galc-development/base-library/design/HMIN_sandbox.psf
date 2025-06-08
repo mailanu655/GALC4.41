@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.tigris.subversion.subclipse.core.svnnature">
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseClient,BaseClient"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseCommon,BaseCommon"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseCommonService,BaseCommonService"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseEntity,BaseEntity"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseLibrary,BaseLibrary"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BasePersistence,BasePersistence"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseService,BaseService"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseServiceInterface,BaseServiceInterface"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseTest,BaseTest"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseWeb,BaseWeb"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseWebStart,BaseWebStart"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/BaseWebTomcat,BaseWebTomcat"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/CLIENT_RESOURCE,CLIENT_RESOURCE"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/ConfigServiceWeb,ConfigServiceWeb"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/DeviceControl,DeviceControl"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/DeviceSimulator,DeviceSimulator"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/GALC_QICS,GALC_QICS"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/trunk/GALC_Simulator,GALC_Simulator"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/Regional_GALC_Dev/GALCApplication,GALCApplication"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/GwtWeb,GwtWeb"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/Headless_Client,Headless_Client"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/HMABuild,HMABuild"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/HMINBuild,HMINBuild"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/LogServer,LogServer"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/LotControl,LotControl"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/LotControlClientSimulation,LotControlClientSimulation"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/OifConfigWeb,OifConfigWeb"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/OifServiceEJB,OifServiceEJB"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/TeamLeader,TeamLeader"/>
+<project reference="0.9.3,http://sourcecode.ham.am.honda.com/galc/branches/hmin/Galc_Lot_Control_Development/TestPlans,TestPlans"/>
+</provider>
+</psf>

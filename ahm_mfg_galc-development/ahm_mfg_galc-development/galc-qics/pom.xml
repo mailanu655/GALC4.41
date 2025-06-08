@@ -1,0 +1,69 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.honda.galc</groupId>
+	<artifactId>qics</artifactId>
+
+	<parent>
+		<groupId>com.honda.galc</groupId>
+		<artifactId>aggregator</artifactId>
+		<version>4.31-SNAPSHOT</version>
+		<relativePath>../aggregator</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-client</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-common</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-common-service</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-entity</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-service-interface</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>device-control</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>team-leader</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>lot-control</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+	</dependencies>
+</project>

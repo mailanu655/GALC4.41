@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<bottom>
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="1073.0" xmlns="http://javafx.com/javafx/2.2" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <Text layoutX="362.0" layoutY="42.0" scaleX="1.0062634758009021" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MFG CONTROL MAINTENANCE">
+      <font>
+        <Font name="Calibri Bold" size="25.0" />
+      </font>
+    </Text>
+    <Hyperlink layoutX="917.0" layoutY="764.0" text="Confluence Help Link" textFill="#0066ff" underline="false" visited="true" />
+    <TabPane layoutX="19.0" layoutY="54.0" prefHeight="710.0" prefWidth="1036.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Operation Maintenance">
+          <content>
+            <HBox prefHeight="283.0" prefWidth="274.0">
+              <children>
+                <Pane prefHeight="655.0" prefWidth="1036.0">
+                  <children>
+                    <TabPane layoutX="14.0" layoutY="284.0" prefHeight="359.0" prefWidth="1008.0" tabClosingPolicy="UNAVAILABLE">
+                      <tabs>
+                        <Tab text="MFG_CTRL_OP_PART_REV_TBX">
+                          <content>
+                            <HBox prefHeight="283.0" prefWidth="274.0" />
+                          </content>
+                        </Tab>
+                        <Tab text="MFG_CTRL_OP_MATRIX_TBX">
+                          <content>
+                            <Pane prefHeight="111.0" prefWidth="862.0" />
+                          </content>
+                        </Tab>
+                      </tabs>
+                    </TabPane>
+                    <TableView layoutX="14.0" layoutY="43.0" prefHeight="225.0" prefWidth="1008.0">
+                      <columns>
+                        <TableColumn prefWidth="75.0" text="ProductID" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                      </columns>
+                    </TableView>
+                    <Button layoutX="666.0" layoutY="7.0" mnemonicParsing="false" text="Filter" />
+                    <Button layoutX="725.0" layoutY="7.0" mnemonicParsing="false" text="Clear" />
+                    <Button layoutX="785.0" layoutY="7.0" mnemonicParsing="false" text="Hide" />
+                    <Button layoutX="888.0" layoutY="7.0" mnemonicParsing="false" text="Delete" />
+                    <Button layoutX="957.0" layoutY="7.0" mnemonicParsing="false" text="Apply" />
+                    <Label layoutX="14.0" layoutY="8.0" text="MFG_CTRL_OP_REV_TBX">
+                      <font>
+                        <Font size="20.0" fx:id="x1" />
+                      </font>
+                    </Label>
+                    <Pane layoutX="14.0" layoutY="329.0" prefHeight="300.0" prefWidth="1008.0">
+                      <children>
+                        <Button layoutX="8.0" layoutY="298.0" mnemonicParsing="false" text="Cancel" />
+                        <Button layoutX="286.0" layoutY="298.0" mnemonicParsing="false" text="Save" />
+                        <ComboBox layoutX="86.0" layoutY="298.0" prefHeight="26.951171875" prefWidth="194.0" promptText="Revision">
+                          <items>
+                            <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Item 1" />
+                              <String fx:value="Item 2" />
+                              <String fx:value="Item 3" />
+                            </FXCollections>
+                          </items>
+                        </ComboBox>
+                        <TableView layoutX="0.0" layoutY="0.0" prefHeight="286.0" prefWidth="1008.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ProductID" />
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                            <TableColumn prefWidth="75.0" text="Column X" />
+                          </columns>
+                        </TableView>
+                      </children>
+                    </Pane>
+                  </children>
+                </Pane>
+              </children>
+            </HBox>
+          </content>
+        </Tab>
+        <Tab text="Part Maintenance">
+          <content>
+            <HBox prefHeight="283.0" prefWidth="274.0">
+              <children>
+                <Pane prefHeight="246.0" prefWidth="1036.0">
+                  <children>
+                    <TabPane layoutX="14.0" layoutY="284.0" prefHeight="294.0" prefWidth="1008.0" tabClosingPolicy="UNAVAILABLE">
+                      <tabs>
+                        <Tab text="MFG_CTRL_OP_MEAS_TBX">
+                          <content>
+                            <HBox prefHeight="283.0" prefWidth="274.0">
+                              <children>
+                                <Pane prefHeight="253.0" prefWidth="1008.0" />
+                              </children>
+                            </HBox>
+                          </content>
+                        </Tab>
+                        <Tab text="MFG_CTRL_OP_PART_MATRIX_TBX">
+                          <content>
+                            <Pane prefHeight="111.0" prefWidth="862.0" />
+                          </content>
+                        </Tab>
+                      </tabs>
+                    </TabPane>
+                    <TableView layoutX="14.0" layoutY="73.0" prefHeight="195.0" prefWidth="1008.0">
+                      <columns>
+                        <TableColumn prefWidth="75.0" text="ProductID" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                      </columns>
+                    </TableView>
+                    <Button layoutX="14.0" layoutY="28.0" mnemonicParsing="false" text="Filter" />
+                    <Button layoutX="73.0" layoutY="29.0" mnemonicParsing="false" text="Clear" />
+                    <Button layoutX="133.0" layoutY="29.0" mnemonicParsing="false" text="Hide" />
+                    <Button layoutX="821.0" layoutY="30.0" mnemonicParsing="false" text="Delete" />
+                    <Button layoutX="890.0" layoutY="29.0" mnemonicParsing="false" text="Apply" />
+                    <Label font="$x1" layoutX="383.0" layoutY="29.0" text="MFG_CTRL_OP_PART_REV_TBX" />
+                    <Button layoutX="26.0" layoutY="628.0" mnemonicParsing="false" text="Cancel" />
+                    <Button layoutX="292.0" layoutY="628.0" mnemonicParsing="false" text="Save" />
+                    <ComboBox layoutX="98.0" layoutY="628.0" prefHeight="26.951171875" prefWidth="194.0" promptText="Revision">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <String fx:value="Item 1" />
+                          <String fx:value="Item 2" />
+                          <String fx:value="Item 3" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                  </children>
+                </Pane>
+              </children>
+            </HBox>
+          </content>
+        </Tab>
+        <Tab text="Structure Maintenance">
+          <content>
+            <HBox prefHeight="283.0" prefWidth="274.0">
+              <children>
+                <Pane prefHeight="246.0" prefWidth="1036.0">
+                  <children>
+                    <TabPane layoutX="14.0" layoutY="284.0" prefHeight="294.0" prefWidth="1008.0" tabClosingPolicy="UNAVAILABLE">
+                      <tabs>
+                        <Tab text="MFG_CTRL_ORDER_STRUCTURE_TBX">
+                          <content>
+                            <HBox prefHeight="283.0" prefWidth="274.0">
+                              <children>
+                                <Pane prefHeight="253.0" prefWidth="1008.0" />
+                              </children>
+                            </HBox>
+                          </content>
+                        </Tab>
+                        <Tab text="MFG_CTRL_PRODUCT_STRUCTURE_TBX">
+                          <content>
+                            <Pane prefHeight="111.0" prefWidth="862.0" />
+                          </content>
+                        </Tab>
+                      </tabs>
+                    </TabPane>
+                    <TableView layoutX="14.0" layoutY="73.0" prefHeight="195.0" prefWidth="1008.0">
+                      <columns>
+                        <TableColumn prefWidth="75.0" text="ProductID" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                      </columns>
+                    </TableView>
+                    <Button layoutX="14.0" layoutY="28.0" mnemonicParsing="false" text="Filter" />
+                    <Button layoutX="73.0" layoutY="29.0" mnemonicParsing="false" text="Clear" />
+                    <Button layoutX="133.0" layoutY="29.0" mnemonicParsing="false" text="Hide" />
+                    <Button layoutX="821.0" layoutY="30.0" mnemonicParsing="false" text="Delete" />
+                    <Button layoutX="890.0" layoutY="29.0" mnemonicParsing="false" text="Apply" />
+                    <Label font="$x1" layoutX="383.0" layoutY="29.0" text="MFG_CTRL_STRUCTURE_TBX" />
+                  </children>
+                </Pane>
+              </children>
+            </HBox>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
+</bottom>
+</fx:root>

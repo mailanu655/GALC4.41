@@ -1,0 +1,1 @@
+UPDATE GALADM.GAL489TBX SET PROPERTY_VALUE = 'com.honda.galc.client.linesidemonitor.view.LineSideMonitorLegacyPanel' WHERE PROPERTY_VALUE = 'com.honda.galc.client.linesidemonitor.view.LineSideMonitorPanel';

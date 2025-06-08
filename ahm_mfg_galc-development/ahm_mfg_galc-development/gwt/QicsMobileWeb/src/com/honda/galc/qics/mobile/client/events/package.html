@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head></head>
+<body>
+	<p>
+  		Provides an event infrastructure for the application.  This helps decouple the various parts of the 
+  		application.  This package contains the PubSubBus which provides the event bus for communications.  The 
+  		remaining classes are either Events or EventHandlers.
+  	</p>
+  	<p>
+  		For an example, the code that scans the VIN fires a "VinScannedEvent".  The  "Defects" 
+  		class listens for the event and triggers the next step in processing.  The two classes are decoupled.
+  		This allows the Defect class to control the overall UI flow by listening and responding to events. 
+  	</p>
+  	<p>
+  	    For each significant application  event you will do the following.
+  	    <ul>
+  	    	<li> Define an event class that extends AbstractEvent</li>
+  	    	<li> If your event needs to communicate more that one primitve, then you'll 
+  	    	     need to define a POJO event data class.</li>
+  	    	<li> Register listeners wherever they are needed</li>
+  	    	<li> Fire the event whenever it occurs.  	    	     
+  	    </ul>
+  	</p>
+  	<p>
+  	   Three basic event classes types: Events without data, Events with one primitive data item, 
+  	   Events with POJO data. Examples of the three types are below.
+  	   <code>
+  	   // No data example, Void is used as the EventData type
+  	   package com.honda.galc.qics.mobile.client.events;
+
+			public class ClearVinEvent extends AbstractEvent<ClearVinEvent, Void> {
+
+	              public ClearVinEvent() {
+				  }
+			}		
+  	   </code>
+  	    <code>
+  	   // Example where event data is a String
+  	   package com.honda.galc.qics.mobile.client.events;
+
+		public class VinScannedEvent extends AbstractEvent<VinScannedEvent, String> {
+			public VinScannedEvent(String vin) {
+				super(vin);
+			}
+		}
+  	  
+  	   </code>
+  	   <code>
+  	   // Example where event data is a POJO
+  	   package com.honda.galc.qics.mobile.client.events;
+
+		public class SettingsChangedEvent extends AbstractEvent<SettingsChangedEvent, SettingsChangedEventData>{
+	
+			public SettingsChangedEvent(SettingsChangedEventData settingsChangedEventData) {
+				super( settingsChangedEventData );
+			}
+		
+		}
+  	   
+  	   </code>
+  	   
+  	</p>
+  	
+  	<p>
+  	Registering events is very simple.  Example is below.  In this case, EventData is a String
+  	<code>
+  		       PubSubBus.EVENT_BUS.addHandler( VinScannedEvent.TYPE,  new VinScannedEvent.Handler<VinScannedEvent>() {
+	           @Override
+	           public void onEvent(VinScannedEvent vinScannedEvent) {
+	        	    Log.info("VIN SCANNED IS " + vinScannedEvent.getEventData() );
+		        	// more code here
+	           }
+
+	       });
+	</code>
+  	</p>
+  	
+  	<p>
+  	Firing an event is done by creating the event and putting it on the event bus.  Code example follows.
+  	<code>
+  	PubSubBus.EVENT_BUS.fireEvent( new VinScannedEvent(vinNumber));
+  	</code>
+  	</p>
+  	
+</body>
+</html>

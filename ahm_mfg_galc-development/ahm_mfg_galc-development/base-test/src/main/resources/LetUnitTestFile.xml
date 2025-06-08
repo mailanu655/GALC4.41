@@ -1,0 +1,34 @@
+<UNIT_IN_TEST VIN="19UNC1995GY990001" BuildCode="FT5R-AD9-00 "
+	TestID="" SeqStepFile="FT5R_Process_ZONE1.csv" ContStepFile="FT5R_InspectionSelect_ZONE1.csv"
+	SEQData="CA001A308" MACAddress="00:00:4C:78:C7:65" MfgID="A52"
+	Production="0" Generation="2.1" TotalStatus="Fail">
+	<PROCESS Process="CA001A001" StartTime="2013-12-12T15:32:16"
+		StartTimeUTC="2013-12-12T21:32:16" FinishTime="2013-12-12T15:32:18"
+		Cal="2013-11-06T11:38:18" DCRev="CA001A001" SWVer="5, 2, 1, 3" Status="Pass"
+		OperatorID="" Cell="C08">
+		<TESTS>
+			<TEST Test="PTRAIN_DTC_READ_01" InCycleRetestNum="1"
+				TestTime="2013-12-12T15:32:16" TestEndTime="2013-12-12T15:32:16"
+				ProcessInfo="A001:NP00XX00:0" Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="PGM-FI" Val="1" />
+					<TEST_PARAM Param="DIESEL" Val="0" />
+					<TEST_PARAM Param="MG" Val="0" />
+					<TEST_PARAM Param="EAT" Val="0" />
+					<TEST_PARAM Param="CVT" Val="1" />
+					<TEST_PARAM Param="AMT" Val="0" />
+					<TEST_PARAM Param="MOT" Val="0" />
+					<TEST_PARAM Param="GEN" Val="0" />
+					<TEST_PARAM Param="BATT" Val="0" />
+					<TEST_PARAM Param="ACM" Val="0" />
+					<TEST_PARAM Param="ESB" Val="0" />
+					<TEST_PARAM Param="RDU_LEFT" Val="0" />
+					<TEST_PARAM Param="RDU_RIGHT" Val="0" />
+					<TEST_PARAM Param="PGM-FI_PERMANENT" Val="1" />
+					<TEST_PARAM Param="CVT_PERMANENT" Val="1" />
+					<TEST_PARAM Param="$#NOREAD_PERMANENT" Val="0" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+</UNIT_IN_TEST>

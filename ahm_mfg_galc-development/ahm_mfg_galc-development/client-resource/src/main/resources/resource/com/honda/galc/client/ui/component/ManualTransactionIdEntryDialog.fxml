@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="920.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="371.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="326.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="2">
+               <children>
+                  <TableView fx:id="transactionTblView" prefHeight="379.0" prefWidth="412.0">
+                    <columns>
+                      <TableColumn fx:id="noCol" maxWidth="1000.0" prefWidth="26.0" sortable="false" text="#" />
+                      <TableColumn fx:id="transactionIdCol" prefWidth="66.0" text="Group Id" />
+                        <TableColumn fx:id="totalCol" prefWidth="43.0" text="Total" />
+                        <TableColumn fx:id="npfCol" prefWidth="40.0" text="NPF" />
+                        <TableColumn fx:id="fixedCol" prefWidth="48.0" text="Fixed" />
+                        <TableColumn fx:id="outstandingCol" prefWidth="86.0" text="Outstanding" />
+                        <TableColumn fx:id="scrappedCol" minWidth="0.0" prefWidth="63.0" text="Scrapped" />
+                        <TableColumn fx:id="notFixedScrapCol" minWidth="0.0" prefWidth="63.0" text="Not Fixed Scrapped" />
+                        <TableColumn fx:id="defectTypeNameCol" prefWidth="300.0" text="Defect Type Name" />
+                        <TableColumn fx:id="createdUserCol" prefWidth="90.0" text="Created User" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                  </TableView>
+                  <Button fx:id="selectBtn" mnemonicParsing="false" text="Select">
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <GridPane fx:id="searchGridPane" prefHeight="399.0" prefWidth="358.0" GridPane.rowSpan="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="136.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Search Option">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="transactionIdBtn" mnemonicParsing="false" style="-fx-wrap-text: TRUE;" text="Trans Id" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="userBtn" mnemonicParsing="false" selected="true" style="-fx-wrap-text: TRUE;" text="User" toggleGroup="$toggleGroup" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="defectTypeBtn" mnemonicParsing="false" style="-fx-wrap-text: TRUE;" text="Defect Type" toggleGroup="$toggleGroup" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="productIdBtn" mnemonicParsing="false" text="Product Id" toggleGroup="$toggleGroup" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="inputTxtField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <CheckBox fx:id="filterCheckBox" mnemonicParsing="false" selected="true" text="Show Only NOT FIXED Transactions" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="90.0" left="15.0" right="5.0" />
+               </GridPane.margin>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

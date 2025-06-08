@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import com.honda.galc.client.ui.component.*?>
+
+<fx:root prefHeight="147.0" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <center>
+    <TilePane minHeight="115.0" minWidth="-Infinity" prefColumns="3" prefHeight="115.0" prefRows="1" prefWidth="330.0">
+      <children>
+        <VBox alignment="CENTER" minHeight="60.0" prefHeight="60.0" prefWidth="110.0">
+          <children>
+            <StackPane>
+              <children>
+                <Rectangle id="cur" fx:id="currentCycleRect" arcHeight="5.0" arcWidth="5.0" height="80.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+                  <fill>
+                    <Color blue="0.000" green="0.400" red="0.032" fx:id="x3" />
+                  </fill>
+                </Rectangle>
+                <LoggedLabel id="currentCycle" fx:id="currentCycleValue" alignment="BOTTOM_LEFT" text="0">
+                  <font>
+                    <Font name="System Bold" size="36.0" fx:id="x2" />
+                  </font>
+                </LoggedLabel>
+              </children>
+            </StackPane>
+            <LoggedLabel text="Current">
+              <font>
+                <Font name="Arial Bold" size="14.0" fx:id="x4" />
+              </font>
+            </LoggedLabel>
+          </children>
+        </VBox>
+        <VBox alignment="CENTER" minHeight="60.0" prefWidth="110.0">
+          <children>
+            <StackPane>
+              <children>
+                <Rectangle fx:id="lineSpeedRect" arcHeight="5.0" arcWidth="5.0" fill="#00e0ff" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                <LoggedLabel id="lineSpeed" fx:id="lineSpeedValue" alignment="BOTTOM_LEFT" font="$x2" text="0" />
+              </children>
+            </StackPane>
+            <LoggedLabel text="Line Speed">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font></LoggedLabel>
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+          </padding>
+        </VBox>
+        <VBox alignment="CENTER" minHeight="60.0" padding="$x1" prefWidth="110.0">
+          <children>
+            <StackPane>
+              <children>
+                <Rectangle fx:id="runningAveRect" arcHeight="5.0" arcWidth="5.0" fill="$x3" height="80.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="100.0" />
+                <LoggedLabel id="runningAvg" fx:id="runningAvgValue" alignment="BOTTOM_LEFT" font="$x2" text="0" />
+              </children>
+            </StackPane>
+            <LoggedLabel text="Running Avg">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font></LoggedLabel>
+          </children>
+        </VBox>
+      </children>
+    </TilePane>
+  </center>
+   <top>
+      <LoggedLabel text="Process Cycle Timer  " BorderPane.alignment="CENTER" />
+   </top>
+</fx:root>

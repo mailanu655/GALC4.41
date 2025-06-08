@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webappbnd:WebAppBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:webappbnd="webappbnd.xmi" xmi:id="WebAppBinding_1268666116951" virtualHostName="galchost">
+  	<webapp href="WEB-INF/web.xml#WebApp_ID"/>
+  	<resRefBindings xmi:id="ResourceRefBinding_1268679106236" jndiName="jdbc/galdb-ds5">
+    	<bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1268679106236"/>
+  	</resRefBindings>
+  		<resRefBindings xmi:id="ResourceRefBinding_1268679345353" jndiName="jms/LotControlMQCF">
+    <bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1268679345353"/>
+    </resRefBindings>
+   
+   <resRefBindings xmi:id="ResourceRefBinding_1268679345354" jndiName="jms/LotControlMQQueue">
+    <bindingResourceRef href="WEB-INF/web.xml#ResourceRef_1268679345354"/>
+    </resRefBindings>
+</webappbnd:WebAppBinding>

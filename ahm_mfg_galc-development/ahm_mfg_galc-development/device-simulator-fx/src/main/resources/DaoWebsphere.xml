@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/aop     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            http://www.springframework.org/schema/jee     http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+            "
+       default-autowire="byName"
+        >
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/dbaccess"/>
+	</bean>
+
+	<!-- bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"-->
+        <!-- property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver"/-->
+        <!-- property name="url" value="jdbc:db2://192.168.7.205:50640/DEP103"/-->
+        <!-- property name="username" value="gbuild"/-->
+        <!-- property name="password" value="gbuild"/-->
+    <!-- /bean-->
+    	
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaVendorAdapter">
+	         <bean class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
+		           <property name="showSql" value="false" />
+	          </bean>
+	    </property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="persistenceUnitName" value="GALC_Entities"/>
+		<property name="persistenceProviderClass" value="org.apache.openjpa.persistence.PersistenceProviderImpl" />
+		
+	</bean>   
+    <bean
+        class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+    
+	<bean id="ServiceProvider" class="com.honda.galc.service.ServiceProvider"/>
+  	<bean id="NotificationServiceProvider" class="com.honda.galc.notification.ServerSideNotificationProvider"/>
+  	
+	
+	<bean id="ApplicationDao" class="com.honda.galc.dao.jpa.conf.ApplicationDaoImpl"/>
+    <bean id="ApplicationTaskDao" class="com.honda.galc.dao.jpa.conf.ApplicationTaskDaoImpl"/>
+    <bean id="DeviceDao" class="com.honda.galc.dao.jpa.conf.DeviceDaoImpl"/>
+  	<bean id="DeviceFormatDao" class="com.honda.galc.dao.jpa.conf.DeviceFormatDaoImpl"/>
+    <bean id="OpcConfigEntryDao" class="com.honda.galc.dao.jpa.conf.OpcConfigEntryDaoImpl"/>
+    <bean id="PrintAttributeFormatDao" class="com.honda.galc.dao.jpa.conf.PrintAttributeFormatDaoImpl"/>
+    
+    <bean id="AdminUserDao" class="com.honda.galc.dao.jpa.conf.AdminUserDaoImpl"/>
+    <bean id="AdminGroupDao" class="com.honda.galc.dao.jpa.conf.AdminGroupDaoImpl"/>
+    <bean id="AdminUserGroupDao" class="com.honda.galc.dao.jpa.conf.AdminUserGroupDaoImpl"/>
+    
+    <bean id="SiteDao" class="com.honda.galc.dao.jpa.conf.SiteDaoImpl"/>
+  	<bean id="PlantDao" class="com.honda.galc.dao.jpa.conf.PlantDaoImpl"/>
+  	<bean id="DivisionDao" class="com.honda.galc.dao.jpa.conf.DivisionDaoImpl"/>
+  	<bean id="LineDao" class="com.honda.galc.dao.jpa.conf.LineDaoImpl"/>
+  	<bean id="PreviousLineDao" class="com.honda.galc.dao.jpa.conf.PreviousLineDaoImpl"/>
+  	<bean id="ZoneDao" class="com.honda.galc.dao.jpa.conf.ZoneDaoImpl"/>
+  	
+  	<bean id="AccessControlEntryDao" class="com.honda.galc.dao.jpa.conf.AccessControlEntryDaoImpl"/>
+ 	<bean id="UserDao" class="com.honda.galc.dao.jpa.conf.UserDaoImpl"/>
+ 	<bean id="SecurityGroupDao" class="com.honda.galc.dao.jpa.conf.SecurityGroupDaoImpl"/>
+ 	<bean id="UserSecurityGroupDao" class="com.honda.galc.dao.jpa.conf.UserSecurityGroupDaoImpl"/>
+ 	<bean id="TerminalDao" class="com.honda.galc.dao.jpa.conf.TerminalDaoImpl"/>
+ 	<bean id="ApplicationByTerminalDao" class="com.honda.galc.dao.jpa.conf.ApplicationByTerminalDaoImpl"/>
+ 	<bean id="ApplicationMenuDao" class="com.honda.galc.dao.jpa.conf.ApplicationMenuDaoImpl"/>
+ 	<bean id="ComponentPropertyDao" class="com.honda.galc.dao.jpa.conf.ComponentPropertyDaoImpl"/>
+ 	<bean id="ProcessPointDao" class="com.honda.galc.dao.jpa.conf.ProcessPointDaoImpl"/>
+ 	<bean id="BroadcastDestinationDao" class="com.honda.galc.dao.jpa.conf.BroadcastDestinationDaoImpl"/>
+ 	<bean id="TaskSpecDao" class="com.honda.galc.dao.jpa.conf.TaskSpecDaoImpl"/>
+ 	<bean id="GpcsDivisionDao" class="com.honda.galc.dao.jpa.conf.GpcsDivisionDaoImpl"/>
+ 	
+ 	<bean id="NotificationDao" class="com.honda.galc.dao.jpa.conf.NotificationDaoImpl"/>
+ 	<bean id="NotificationProviderDao" class="com.honda.galc.dao.jpa.conf.NotificationProviderDaoImpl"/>
+ 	<bean id="NotificationSubscriberDao" class="com.honda.galc.dao.jpa.conf.NotificationSubscriberDaoImpl"/>
+ 	
+ 	<bean id="WebStartClientDao" class="com.honda.galc.dao.jpa.conf.WebStartClientDaoImpl"/>
+ 	<bean id="WebStartBuildDao" class="com.honda.galc.dao.jpa.conf.WebStartBuildDaoImpl"/>
+ 	<bean id="WebStartDefaultBuildDao" class="com.honda.galc.dao.jpa.conf.WebStartDefaultBuildDaoImpl"/>
+ 	
+ 	<bean id="HostPriorityPlanDao" class="com.honda.galc.dao.jpa.product.HostPriorityPlanDaoImpl"/>
+    <bean id="HostMtocDao" class="com.honda.galc.dao.jpa.product.HostMtocDaoImpl"/>
+    <bean id="PreProductionLotDao" class="com.honda.galc.dao.jpa.product.PreProductionLotDaoImpl"/>
+    
+    <bean id="ProductionScheduleService" class="com.honda.galc.service.productionschedule.ProductionScheduleServiceImpl" scope="prototype"/>
+    <bean id="DownloadLotSequenceDao" class="com.honda.galc.dao.jpa.product.DownloadLotSequenceDaoImpl"/>
+    
+ 	<bean id="FrameDao" class="com.honda.galc.dao.jpa.product.FrameDaoImpl"/>
+ 	<bean id="FrameSpecDao" class="com.honda.galc.dao.jpa.product.FrameSpecDaoImpl"/>
+ 	<bean id="EngineDao" class="com.honda.galc.dao.jpa.product.EngineDaoImpl"/>
+ 	<bean id="EngineSpecDao" class="com.honda.galc.dao.jpa.product.EngineSpecDaoImpl"/>
+ 	
+ 	<bean id="SubProductDao" class="com.honda.galc.dao.jpa.product.SubProductDaoImpl"/>
+ 	<bean id="PartLotDao" class="com.honda.galc.dao.jpa.product.PartLotDaoImpl"/>
+ 	<bean id="SkippedProductDao" class="com.honda.galc.dao.jpa.product.SkippedProductDaoImpl"/>
+ 	
+ 	<bean id="LotControlRuleDao" class="com.honda.galc.dao.jpa.product.LotControlRuleDaoImpl"/>
+ 	<bean id="DevicePartDetailsDao" class="com.honda.galc.dao.jpa.product.DevicePartDetailsDaoImpl"/>
+ 	<bean id="ProductionLotDao" class="com.honda.galc.dao.jpa.product.ProductionLotDaoImpl"/>
+ 	<bean id="PartDao" class="com.honda.galc.dao.jpa.product.PartDaoImpl"/>
+ 	<bean id="PartNameDao" class="com.honda.galc.dao.jpa.product.PartNameDaoImpl"/>
+ 	<bean id="InstalledPartDao" class="com.honda.galc.dao.jpa.product.InstalledPartDaoImpl"/>
+ 	<bean id="MeasurementDao" class="com.honda.galc.dao.jpa.product.MeasurementDaoImpl"/>
+ 	<bean id="ProductResultDao" class="com.honda.galc.dao.jpa.product.ProductResultDaoImpl"/>
+ 	<bean id="ExpectedProductDao" class="com.honda.galc.dao.jpa.product.ExpectedProductDaoImpl"/>
+ 	<bean id="InProcessProductDao" class="com.honda.galc.dao.jpa.product.InProcessProductDaoImpl"/>
+ 	<bean id="ProductSequenceDao" class="com.honda.galc.dao.jpa.product.ProductSequenceDaoImpl"/>
+ 	<bean id="MeasurementSpecDao" class="com.honda.galc.dao.jpa.product.MeasurementSpecDaoImpl"/>
+ 	<bean id="PartSpecDao" class="com.honda.galc.dao.jpa.product.PartSpecDaoImpl"/>
+ 	<bean id="PartByProductSpecCodeDao" class="com.honda.galc.dao.jpa.product.PartByProductSpecCodeDaoImpl"/>
+ 	<bean id="RequiredPartDao" class="com.honda.galc.dao.jpa.product.RequiredPartDaoImpl"/>
+ 	<bean id="DailyDepartmentScheduleDao" class="com.honda.galc.dao.jpa.product.DailyDepartmentScheduleDaoImpl"/>
+ 	<bean id="StandardScheduleDao" class="com.honda.galc.dao.jpa.product.StandardScheduleDaoImpl"/>
+ 	<bean id="BuildAttributeDao" class="com.honda.galc.dao.jpa.product.BuildAttributeDaoImpl"/>
+ 	<bean id="HoldResultDao" class="com.honda.galc.dao.jpa.product.HoldResultDaoImpl"/>
+ 		
+ 	<bean id="SubProductShippingDao" class="com.honda.galc.dao.jpa.product.SubProductShippingDaoImpl"/>
+ 	<bean id="SubProductShippingDetailDao" class="com.honda.galc.dao.jpa.product.SubProductShippingDetailDaoImpl"/>
+ 	
+ 	<bean id="BlockDao" class="com.honda.galc.dao.jpa.product.BlockDaoImpl"/>
+ 	<bean id="HeadDao" class="com.honda.galc.dao.jpa.product.HeadDaoImpl"/>
+ 	<bean id="BlockHistoryDao" class="com.honda.galc.dao.jpa.product.BlockHistoryDaoImpl"/>
+ 	<bean id="HeadHistoryDao" class="com.honda.galc.dao.jpa.product.HeadHistoryDaoImpl"/>
+ 	<bean id="BlockBuildResultDao" class="com.honda.galc.dao.jpa.product.BlockBuildResultDaoImpl"/>
+ 	<bean id="HeadBuildResultDao" class="com.honda.galc.dao.jpa.product.HeadBuildResultDaoImpl"/>
+
+	<bean id="TrackingService" class="com.honda.galc.service.tracking.TrackingServiceImpl" scope="prototype"/>
+  	<bean id="EngineTracker" class="com.honda.galc.service.tracking.EngineTracker" scope="prototype"/>
+  	<bean id="FrameTracker" class="com.honda.galc.service.tracking.FrameTracker" scope="prototype"/>
+  	<bean id="SubProductTracker" class="com.honda.galc.service.tracking.SubProductTracker" scope="prototype"/>
+  	<bean id="FactoryNewsUpdateService" class="com.honda.galc.service.metric.FactoryNewsUpdateServiceImpl" scope="singleton"/>
+  	
+  	<bean id="PrintingService" class="com.honda.galc.service.printing.PrintingServiceImpl" scope="prototype"/>
+  	<bean id="CounterDao" class="com.honda.galc.dao.jpa.product.CounterDaoImpl"/>
+  	<bean id="CounterByModelGroupDao" class="com.honda.galc.dao.jpa.product.CounterByModelGroupDaoImpl"/>
+  	<bean id="CounterByProductionLotDao" class="com.honda.galc.dao.jpa.product.CounterByProductionLotDaoImpl"/>
+  	<bean id="CounterByProductSpecDao" class="com.honda.galc.dao.jpa.product.CounterByProductSpecDaoImpl"/>
+  	<bean id="TemplateDao" class="com.honda.galc.dao.jpa.product.TemplateDaoImpl"/>
+  	<bean id="ProductIdMaskDao" class="com.honda.galc.dao.jpa.product.ProductIdMaskDaoImpl"/>
+  	
+  	<bean id="BlockLoadDao" class="com.honda.galc.dao.jpa.product.BlockLoadDaoImpl"/>
+  	<bean id="ProductStampingSequenceDao" class="com.honda.galc.dao.jpa.conf.ProductStampingSequenceDaoImpl"/>
+  	
+  	<bean id="PlcMemoryMapItemDao" class="com.honda.galc.dao.jpa.conf.PlcMemoryMapItemDaoImpl"/>
+ 	<bean id="AfbDataDao" class="com.honda.galc.dao.jpa.conf.AfbDataDaoImpl"/>
+ 	 	  	
+  	<bean id="MetricDao" class="com.honda.galc.dao.jpa.conf.MetricDaoImpl"/>
+  	<bean id="MetricHistoryDao" class="com.honda.galc.dao.jpa.conf.MetricHistoryDaoImpl"/>
+  	<bean id="MetricTypeDao" class="com.honda.galc.dao.jpa.conf.MetricTypeDaoImpl"/>
+  	<bean id="MetricTypeParamDao" class="com.honda.galc.dao.jpa.conf.MetricTypeParamDaoImpl"/>
+  	
+  	<bean id="MetricGroupDao" class="com.honda.galc.dao.jpa.conf.MetricGroupDaoImpl"/>
+  	<bean id="MetricGroupHistoryDao" class="com.honda.galc.dao.jpa.conf.MetricGroupHistoryDaoImpl"/>
+  	<bean id="MetricGroupTypeDao" class="com.honda.galc.dao.jpa.conf.MetricGroupTypeDaoImpl"/>
+  	<bean id="MetricGroupTypeParamDao" class="com.honda.galc.dao.jpa.conf.MetricGroupTypeParamDaoImpl"/>
+  	
+  	<bean id="MetricGroupMetricsDao" class="com.honda.galc.dao.jpa.conf.MetricGroupMetricsDaoImpl"/>
+  	<bean id="MetricGroupMetricsHistoryDao" class="com.honda.galc.dao.jpa.conf.MetricGroupMetricsHistoryDaoImpl"/>  	  	
+  	<bean id="MetricScheduleDao" class="com.honda.galc.dao.jpa.conf.MetricScheduleDaoImpl"/>
+  	<bean id="ShippingStatusDao" class="com.honda.galc.dao.jpa.conf.ShippingStatusDaoImpl"/>
+  	<bean id="InRepairAreaDao" class="com.honda.galc.dao.jpa.conf.InRepairAreaDaoImpl"/>
+  	<bean id="PrintFormDao" class="com.honda.galc.dao.jpa.conf.PrintFormDaoImpl"/>
+  	<bean id="ParkingAddressDao" class="com.honda.galc.dao.jpa.conf.ParkingAddressDaoImpl"/>
+ 	
+ 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  	<property name="corePoolSize" value="5" />
+  		<property name="maxPoolSize" value="10" />
+		<property name="queueCapacity" value="25" />
+	</bean>
+
+	<bean id="NotificationServiceExecutor" class="com.honda.galc.notification.NotificationServiceImpl">
+  		<constructor-arg ref="taskExecutor" />
+	</bean>
+	
+	<bean id="trackingTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  	<property name="corePoolSize" value="10" />
+  		<property name="maxPoolSize" value="20" />
+		<property name="queueCapacity" value="50" />
+	</bean>
+
+	<bean id="TrackingServiceExecutor" class="com.honda.galc.service.tracking.TrackingServiceExecutorImpl">
+  		<constructor-arg ref="trackingTaskExecutor" />
+	</bean>
+	
+ 	<!-- post-processors for all standard config annotations -->
+    <context:annotation-config/>
+
+  	<tx:annotation-driven transaction-manager="txManager"/>
+  	
+    <bean id="txManager" class="org.springframework.transaction.jta.WebSphereUowTransactionManager">
+    	<property name="allowCustomIsolationLevels" value="true" />
+    </bean>
+    
+</beans>

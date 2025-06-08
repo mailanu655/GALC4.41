@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<project name="moduleBuild" default="masterbuild">
+  
+    <property name="version" value="1.0"/>
+    <property name="src.dir" value="src"/>
+    <property environment="env"/>
+    <property name="jvm.dir" value="${env.JAVA_HOME}"/>
+
+    <property name="test" value="false"/>
+   
+    <import file="${workspace.dir}/../base-library/base/build.xml"/>
+
+    <import file="${workspace.dir}/../base-library/base/codeQuality.xml"/>
+
+    <path id="test.classpath">
+        <pathelement path="${test.src.dir}"/>
+        <fileset dir="${junit.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <path refid="compile.class.path"/>
+    </path>
+
+    <target name="module" depends="prepare,compile,libjar">
+        <mkdir dir="${modules.dir}"/>
+        <copy overwrite="yes" file="${build.dist.dir}/${name}.jar"
+              todir="${modules.dir}"/>
+        <echo message="NOTE:"/>
+        <echo message="${build.dist.dir}/${name}.jar has been updated!"/>
+        <echo message="Remember to check this into CVS if you commit your source changes."/>
+    </target>
+
+</project>
+

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>galc-app-was9</artifactId>
+	<packaging>ear</packaging>
+
+	<parent>
+		<groupId>com.honda.galc</groupId>
+		<artifactId>aggregator</artifactId>
+		<version>4.31-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- - By default Maven will package all war file dependencies into WEB-INF/lib 
+			for each war project, this can lead to the same jar file being included in 
+			an ear multiple times. - Setting the skinnyWars attribute to true for the 
+			maven-ear-plugin and listing the war dependency below will cause it to be 
+			moved to a shared lib directory used by all - war files. In addition setting 
+			the <addClasspath>true</addClasspath> (in parent pom) attribute on jar,war, 
+			ejb and rar plugins automatically generates the classpath entry in the MANIFEST.MF -->
+
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml</groupId>
+			<artifactId>jsr173</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.stream</groupId>
+			<artifactId>sjsxp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.honda.jp.hm</groupId>
+			<artifactId>mqft</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.perf4j</groupId>
+			<artifactId>perf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-anim</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-awt-util</artifactId>
+		</dependency>			
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-bridge</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-dom</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-ext</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-extension</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-gvt</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-parser</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-script</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-svg-dom</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-util</artifactId>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-xml</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-entity</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-persistence</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-common</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-common-service</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-service</artifactId>
+			<version>${galc.build.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-web</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>base-web-start</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>config-service-web</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>rest-web</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>jca-adaptor</artifactId>
+			<version>${galc.build.version}</version>
+			<type>rar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>jca-socket-ejb</artifactId>
+			<version>${galc.build.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>oif-config-web</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>oif-service-ejb</artifactId>
+			<version>${galc.build.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.honda.galc</groupId>
+			<artifactId>handheld-web</artifactId>
+			<version>${galc.build.version}</version>
+			<type>war</type>
+		</dependency>
+
+	</dependencies>
+
+	<!-- module names are overridden so that they match with the names in the 
+		existing application.xml -->
+
+	<build>
+		<finalName>${galc.build.prefix}_${galc.build.version}_app</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<generateApplicationXml>false</generateApplicationXml>
+					<packagingExcludes>ibmconfig/**</packagingExcludes>
+					<defaultLibBundleDir>lib/</defaultLibBundleDir>
+					<outputFileNameMapping>@{artifactId}@-@{version}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
+					<skinnyWars>true</skinnyWars>
+					<displayName>GALC New Application</displayName>
+					<modules>
+						<rarModule id="ConnectorModule_1378840475363">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>jca-adaptor</artifactId>
+							<bundleFileName>jca-adaptor.rar</bundleFileName>
+						</rarModule>
+						
+						<ejbModule id="EjbModule_1378840475332">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>jca-socket-ejb</artifactId>
+							<bundleFileName>jca-socket-ejb.jar</bundleFileName>
+						</ejbModule>
+						
+						<ejbModule id="EjbModule_1290866836243">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>oif-service-ejb</artifactId>
+							<bundleFileName>oif-service-ejb.jar</bundleFileName>
+						</ejbModule>
+
+						<webModule id="WebModule_1279797210744">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>base-web</artifactId>
+							<contextRoot>BaseWeb</contextRoot>
+							<bundleFileName>base-web.war</bundleFileName>
+						</webModule>
+
+						<webModule id="WebModule_1288034335300">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>base-web-start</artifactId>
+							<contextRoot>BaseWebStart</contextRoot>
+							<bundleFileName>base-web-start.war</bundleFileName>
+						</webModule>
+
+						<webModule id="WebModule_1288094812334">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>config-service-web</artifactId>
+							<contextRoot>ConfigService</contextRoot>
+							<bundleFileName>config-service-web.war</bundleFileName>
+						</webModule>
+
+						<webModule id="WebModule_1373281495868">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>rest-web</artifactId>
+							<contextRoot>RestWeb</contextRoot>
+							<bundleFileName>rest-web.war</bundleFileName>
+						</webModule>
+
+						<webModule id="WebModule_1290866787180">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>oif-config-web</artifactId>
+							<contextRoot>oifConfig</contextRoot>
+							<bundleFileName>oif-config-web.war</bundleFileName>
+						</webModule>
+
+						<webModule id="WebModule_1514734754355">
+							<groupId>com.honda.galc</groupId>
+							<artifactId>handheld-web</artifactId>
+							<contextRoot>Handheld</contextRoot>
+							<bundleFileName>handheld-web.war</bundleFileName>
+						</webModule>
+					</modules>
+					<security>
+						<security-role id="SecurityRole_AllUsers">
+						<description>All authenticated Users</description>
+						<role-name>AllUsers</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditAdmin">
+							<description>Edit Admin Users and Groups</description>
+							<role-name>EditAdmin</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewAdmin">
+							<description>View Admin Users and Groups</description>
+							<role-name>ViewAdmin</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditProcessPoint">
+							<description>Edit Process Point Data</description>
+							<role-name>EditProcessPoint</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewProcessPoint">
+							<description>View Process Point Data</description>
+							<role-name>ViewProcessPoint</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewUsers">
+							<description>View GALC Users</description>
+							<role-name>ViewUsers</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditUsers">
+							<description>Modify GALC Application Users</description>
+							<role-name>EditUsers</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditTerminal">
+							<description>Edit Terminal Definitions</description>
+							<role-name>EditTerminal</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewTerminal">
+							<description>View Terminal Settings</description>
+							<role-name>ViewTerminal</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditDevice">
+							<description>Edit Device Related Settings</description>
+							<role-name>EditDevice</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewDevice">
+							<description>View Device Related Configuration</description>
+							<role-name>ViewDevice</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditApplication">
+							<description>Edit Application Settings</description>
+							<role-name>EditApplication</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewApplication">
+							<description>View Application Related Settings</description>
+							<role-name>ViewApplication</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditProcess">
+							<description>Edit Site,Plant,Line,Division data</description>
+							<role-name>EditProcess</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewProcess">
+							<description>View Process-tree information</description>
+							<role-name>ViewProcess</role-name>
+						</security-role>
+						<security-role id="SecurityRole_EditACL">
+							<description>Edit Access Control List</description>
+							<role-name>EditACL</role-name>
+						</security-role>
+						<security-role id="SecurityRole_ViewACL">
+							<description>View Access Control List</description>
+							<role-name>ViewACL</role-name>
+						</security-role>
+						<security-role id="SecurityRole_Everyone">
+							<description>Unauthorized and Authorized Users </description>
+							<role-name>Everyone</role-name>
+						</security-role>
+						<security-role id="SecurityRole_Administrator">
+							<description>Administrator of the system.</description>
+							<role-name>Administrator</role-name>
+						</security-role>
+						<security-role id="SecurityRole_OifAdministrator">
+							<description>oif adminitstrator</description>
+							<role-name>OifAdministrator</role-name>
+						</security-role>
+					</security>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

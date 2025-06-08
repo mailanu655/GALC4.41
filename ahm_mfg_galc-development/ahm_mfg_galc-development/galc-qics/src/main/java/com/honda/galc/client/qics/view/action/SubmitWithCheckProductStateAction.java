@@ -1,0 +1,90 @@
+package com.honda.galc.client.qics.view.action;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.Action;
+
+import com.honda.galc.client.qics.view.screen.QicsPanel;
+
+/**
+ * <h3> Class description</h3>
+ * <h4> Description </h4>
+ * <p>
+ * <code>SubmitWithCheckProductStateAction</code> is ...
+ * </p>
+ * <h4>Usage and Example</h4>
+ * <h4>Special Notes</h4>
+ * 
+ * <h4>Change History</h4>
+ * <Table border="1" Cellpadding="3" Cellspacing="0" width="100%">
+ * <TR bgcolor="#EEEEFF" Class="TableSubHeadingColor">
+ * <TH>Update by</TH>
+ * <TH>Update date</TH>
+ * <TH>Version</TH>
+ * <TH>Mark of Update</TH>
+ * <TH>Reason</TH>
+ * </TR>
+ * <TR>
+ * <TD>Karol Wozniak</TD>
+ * <TD>Apr 22, 2008</TD>
+ * <TD>0.1</TD>
+ * <TD>(none)</TD>
+ * <TD>Initial Realse</TD>
+ * </TR>
+ * </TABLE>
+ * 
+ * @see
+ * @ver 0.1
+ * @author Karol Wozniak
+ */
+public class SubmitWithCheckProductStateAction extends SubmitOffAction {
+
+	private static final long serialVersionUID = 1L;
+
+	public SubmitWithCheckProductStateAction(QicsPanel qicsPanel) {
+		super(qicsPanel);
+		init();
+	}
+
+	protected void init() {
+		putValue(Action.NAME, "Done");
+		putValue(Action.MNEMONIC_KEY, KeyEvent.VK_O);
+	}
+
+	@Override
+	protected void execute(ActionEvent e) {
+
+		boolean returnCode = false;
+
+		returnCode = executeCheckProductState(e);
+		if (!returnCode) {
+			return;
+		}
+
+		getQicsController().setRefreshProductCheckResults(false);
+
+		if (getQicsController().getProductWarnCheckResults().isEmpty() && getQicsController().getProductItemCheckResults().isEmpty()) {
+			if (getClientConfig().isDunnageRequired()) {
+				getQicsPanel().displayDunnagePanel();
+				return;
+			} else if(getClientConfig().isRepairTracking()&&!getQicsController().getProductModel().getOutstandingDefects().isEmpty()){
+				SubmitWithRepairTracking repairInTracking=new SubmitWithRepairTracking(getQicsPanel());
+				repairInTracking.execute(e);
+				return;
+			}else {
+				super.execute(e);
+			}
+		} else {
+			getQicsPanel().displayCheckResultsPanel();
+			if (!getQicsController().getProductItemCheckResults().isEmpty()) {
+				if (getClientConfig().isOffProcessPointIdDefined()) {
+					getQicsFrame().setErrorMessage("Product will not be processed OFF");
+				} else {
+					getQicsFrame().setErrorMessage("Outstanding items exist");
+				}
+			}
+			return;
+		}
+	}
+}

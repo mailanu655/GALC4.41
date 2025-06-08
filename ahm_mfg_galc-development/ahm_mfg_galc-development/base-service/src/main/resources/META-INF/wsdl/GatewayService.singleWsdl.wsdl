@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?><wsdl:definitions name="WebserviceGateway" targetNamespace="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model"/>
+      <xs:element name="StoreSph">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sph" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="StoreSphResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="StoreSphResult" nillable="true" type="q1:ServerResponse" xmlns:q1="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowSphViewer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="serialNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="model" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="partType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ShowSphViewerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ShowSphViewerResult" nillable="true" type="q2:ServerResponse" xmlns:q2="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CloseViewer">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="CloseViewerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CloseViewerResult" nillable="true" type="q3:ServerResponse" xmlns:q3="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AutoRepairPart">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="serialNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="model" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="partType" nillable="true" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AutoRepairPartResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AutoRepairPartResult" nillable="true" type="q4:ServerResponse" xmlns:q4="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model" xmlns:tns="http://schemas.datacontract.org/2004/07/Sciemetric.QualityWorx.WebServiceGateway.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ServerResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ResponseBody" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ResponseType" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="StatusCode" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ServerResponse" nillable="true" type="tns:ServerResponse"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IWebserviceGateway_StoreSph_InputMessage">
+    <wsdl:part element="tns:StoreSph" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_StoreSph_OutputMessage">
+    <wsdl:part element="tns:StoreSphResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_ShowSphViewer_InputMessage">
+    <wsdl:part element="tns:ShowSphViewer" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_ShowSphViewer_OutputMessage">
+    <wsdl:part element="tns:ShowSphViewerResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_CloseViewer_InputMessage">
+    <wsdl:part element="tns:CloseViewer" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_CloseViewer_OutputMessage">
+    <wsdl:part element="tns:CloseViewerResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_AutoRepairPart_InputMessage">
+    <wsdl:part element="tns:AutoRepairPart" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IWebserviceGateway_AutoRepairPart_OutputMessage">
+    <wsdl:part element="tns:AutoRepairPartResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="IWebserviceGateway">
+    <wsdl:operation name="StoreSph">
+      <wsdl:input message="tns:IWebserviceGateway_StoreSph_InputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/StoreSph"/>
+      <wsdl:output message="tns:IWebserviceGateway_StoreSph_OutputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/StoreSphResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="ShowSphViewer">
+      <wsdl:input message="tns:IWebserviceGateway_ShowSphViewer_InputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/ShowSphViewer"/>
+      <wsdl:output message="tns:IWebserviceGateway_ShowSphViewer_OutputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/ShowSphViewerResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="CloseViewer">
+      <wsdl:input message="tns:IWebserviceGateway_CloseViewer_InputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/CloseViewer"/>
+      <wsdl:output message="tns:IWebserviceGateway_CloseViewer_OutputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/CloseViewerResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="AutoRepairPart">
+      <wsdl:input message="tns:IWebserviceGateway_AutoRepairPart_InputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/AutoRepairPart"/>
+      <wsdl:output message="tns:IWebserviceGateway_AutoRepairPart_OutputMessage" wsaw:Action="http://tempuri.org/IWebserviceGateway/AutoRepairPartResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWebserviceGateway" type="tns:IWebserviceGateway">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="StoreSph">
+      <soap:operation soapAction="http://tempuri.org/IWebserviceGateway/StoreSph" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ShowSphViewer">
+      <soap:operation soapAction="http://tempuri.org/IWebserviceGateway/ShowSphViewer" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseViewer">
+      <soap:operation soapAction="http://tempuri.org/IWebserviceGateway/CloseViewer" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutoRepairPart">
+      <soap:operation soapAction="http://tempuri.org/IWebserviceGateway/AutoRepairPart" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebserviceGateway">
+    <wsdl:port binding="tns:BasicHttpBinding_IWebserviceGateway" name="BasicHttpBinding_IWebserviceGateway">
+      <soap:address location="http://localhost:8080/GatewayService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejbbnd:EJBJarBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ejb="ejb.xmi" xmlns:ejbbnd="ejbbnd.xmi" xmi:id="EJBJarBinding_1193686285421">
+  <ejbJar href="META-INF/ejb-jar.xml#ejb-jar_ID"/>
+  <ejbBindings xmi:id="EnterpriseBeanBinding_1193765934708" jndiName="com/honda/galc/oif/task/EventHandler">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#EventHandler"/>
+    <resRefBindings xmi:id="ResourceRefBinding_1200327674717" jndiName="wm/SchedulerWorkManager">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_1200327674717"/>
+    </resRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_1207769435597" jndiName="com/honda/galc/oif/task/EventTask">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_1207769435597"/>
+    </ejbRefBindings>
+  </ejbBindings>
+  <ejbBindings xmi:id="EnterpriseBeanBinding_1200322803887" jndiName="com/honda/galc/oif/task/EventTask">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#EventTask"/>
+  </ejbBindings>
+  <ejbBindings xmi:id="EnterpriseBeanBinding_1207770678464" jndiName="com/honda/galc/oif/EventScheduleManager">
+    <enterpriseBean xmi:type="ejb:Session" href="META-INF/ejb-jar.xml#EventScheduleManager"/>
+    <resRefBindings xmi:id="ResourceRefBinding_1207770678464" jndiName="sched/GalcScheduler">
+      <bindingResourceRef href="META-INF/ejb-jar.xml#ResourceRef_1193757271405"/>
+    </resRefBindings>
+    <ejbRefBindings xmi:id="EjbRefBinding_1207770678464" jndiName="com/honda/galc/oif/task/EventHandler">
+      <bindingEjbRef href="META-INF/ejb-jar.xml#EjbRef_1193766186473"/>
+    </ejbRefBindings>
+  </ejbBindings>
+</ejbbnd:EJBJarBinding>

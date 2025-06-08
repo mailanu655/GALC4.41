@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+  <wsdl:definitions 
+  	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  	xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" 
+  	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+  	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+  	xmlns:tns="http://com.honda.ham/NCATCollector" 
+  	xmlns:s="http://www.w3.org/2001/XMLSchema" 
+  	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+  	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+  	targetNamespace="http://com.honda.ham/NCATCollector" 
+  	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+  	<s:schema elementFormDefault="qualified" targetNamespace="http://com.honda.ham/NCATCollector">
+  	<s:element name="HeadLightAlignmentInsert">
+  		<s:complexType>
+  			<s:sequence>
+  				<s:element minOccurs="0" maxOccurs="1" name="headLightAlignmentBE" type="tns:HeadLightAlignmentBE" />
+  			</s:sequence>
+  		</s:complexType>
+  	</s:element>
+  	<s:complexType name="HeadLightAlignmentBE">
+  		<s:sequence>
+  			<s:element minOccurs="1" maxOccurs="1" name="CollectDateTime" type="s:dateTime" />
+			<s:element minOccurs="0" maxOccurs="1" name="MachineNo" type="s:string" />
+			<s:element minOccurs="0" maxOccurs="1" name="MachineSetting" type="s:string" />
+			<s:element minOccurs="0" maxOccurs="1" name="VIN" type="s:string" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Left_HeadLight_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Left_HeadLight_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Right_HeadLight_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Right_HeadLight_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Left_Fog_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Left_Fog_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Right_Fog_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Preset_Right_Fog_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Left_HeadLight_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Left_HeadLight_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Right_HeadLight_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Right_HeadLight_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Left_Fog_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Left_Fog_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Right_Fog_Vertical_Qty" type="s:double" />
+			<s:element minOccurs="1" maxOccurs="1" name="Final_Right_Fog_Horizontal_Qty" type="s:double" />
+			<s:element minOccurs="0" maxOccurs="1" name="LocationID" type="s:string" />
+			<s:element minOccurs="0" maxOccurs="1" name="ApplicationID" type="s:string" />
+		</s:sequence>
+  	</s:complexType>
+  	<s:element name="HeadLightAlignmentInsertResponse">
+  		<s:complexType>
+  			<s:sequence>
+  				<s:element minOccurs="1" maxOccurs="1" name="HeadLightAlignmentInsertResult" type="tns:DatabaseResult" />
+  			</s:sequence>
+  		</s:complexType>
+  	</s:element>
+  	<s:simpleType name="DatabaseResult">
+  		<s:restriction base="s:string">
+  		<s:enumeration value="Success" />
+  		<s:enumeration value="NoRowsAffected" />
+  		<s:enumeration value="DuplicateKeyConstraintViolation" />
+  		<s:enumeration value="Unknown" />
+  		</s:restriction>
+  	</s:simpleType>
+  	<s:element name="KemkraftDataInsert">
+  		<s:complexType>
+  			<s:sequence>
+  				<s:element minOccurs="0" maxOccurs="1" name="kemkraftDataBE" type="tns:KemkraftDataBE" />
+  			</s:sequence>
+  		</s:complexType>
+  	</s:element>
+  	<s:complexType name="KemkraftDataBE">
+  		<s:sequence>
+  			<s:element minOccurs="1" maxOccurs="1" name="CollectDateTime" type="s:dateTime" />
+  			<s:element minOccurs="0" maxOccurs="1" name="PlantCode" type="s:string" />
+  			<s:element minOccurs="0" maxOccurs="1" name="VIN" type="s:string" />
+  			<s:element minOccurs="0" maxOccurs="1" name="MachineNo" type="s:string" />
+  			<s:element minOccurs="0" maxOccurs="1" name="ShiftNo" type="s:string" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Tool_ID" type="s:int" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Start_Time_0_Percent" type="s:dateTime" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Angle_Result_0_Percent" type="s:decimal" />
+  			<s:element minOccurs="0" maxOccurs="1" name="Angle_Status_0_Percent" type="s:string" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Force_Result_0_Percent" type="s:decimal" />
+  			<s:element minOccurs="0" maxOccurs="1" name="Force_Status_0_Percent" type="s:string" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Start_Time_3_Percent" type="s:dateTime" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Seconds_Difference" type="s:double" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Angle_Result_3_Percent" type="s:decimal" />
+  			<s:element minOccurs="0" maxOccurs="1" name="Angle_Status_3_Percent" type="s:string" />
+  			<s:element minOccurs="1" maxOccurs="1" name="Force_Result_3_Percent" type="s:decimal" />
+  			<s:element minOccurs="0" maxOccurs="1" name="Force_Status_3_Percent" type="s:string" />
+  			<s:element minOccurs="1" maxOccurs="1" name="LastUpdated_DateTime" type="s:dateTime" />
+  			<s:element minOccurs="0" maxOccurs="1" name="LocationID" type="s:string" />
+  			<s:element minOccurs="0" maxOccurs="1" name="ApplicationID" type="s:string" />
+  		</s:sequence>
+  	</s:complexType>
+  	<s:element name="KemkraftDataInsertResponse">
+  		<s:complexType>
+  			<s:sequence>
+  				<s:element minOccurs="1" maxOccurs="1" name="KemkraftDataInsertResult" type="tns:DatabaseResult" />
+  			</s:sequence>
+  		</s:complexType>
+  	</s:element>
+  	<s:element name="WheelAlignmentInsert">
+  		<s:complexType>
+  			<s:sequence>
+  				<s:element minOccurs="0" maxOccurs="1" name="wheelAlignmentBE" type="tns:WheelAlignmentBE" />
+  			</s:sequence>
+  		</s:complexType>
+  	</s:element>
+  	<s:complexType name="WheelAlignmentBE">
+  		<s:sequence>
+		  <s:element minOccurs="1" maxOccurs="1" name="YMDHNS" type="s:dateTime" />
+		  <s:element minOccurs="0" maxOccurs="1" name="MACHINE_NUM" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="CAR_IDNO" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="BAR_CODE" type="s:string" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CAM_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CAM_RFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CAM_LRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CAM_RRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CV_TOE_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_CV_TOE_RFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_TOE_LRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_TOE_RRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_ST_WHEEL_ANGLE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_SYMMETRY" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="ACCEPTED_REJECTED" type="s:boolean" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CAM_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CAM_RFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CAM_LRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CAM_RRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CV_TOE_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_CV_TOE_RFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_TOE_LRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_TOE_RRR" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_ST_WHEEL_ANGLE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_SYMMETRY" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="LFRT_TORQUE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="RFRT_TORQUE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="LRR_TORQUE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="RRR_TORQUE" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FRT_ATA_TIME" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="RR_ATA_TIME" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="TOTAL_TIME" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="TimeDriveOn" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="TimeSetup" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="TimeLeaving" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="TimeEmpty" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="RearTries" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FrontTries" type="s:double" />
+		  <s:element minOccurs="0" maxOccurs="1" name="LocationID" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="ApplicationID" type="s:string" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_WOCV_TOE_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="PRST_WOCV_TOE_RFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_WOCV_TOE_LFRT" type="s:double" />
+		  <s:element minOccurs="1" maxOccurs="1" name="FNAL_WOCV_TOE_RFRT" type="s:double" />
+		  <s:element minOccurs="0" maxOccurs="1" name="Predictor_Mode" type="s:string" />
+		  <s:element minOccurs="0" maxOccurs="1" name="FrontAuto_ReCheck" type="s:string" />
+  		</s:sequence>
+  	</s:complexType>
+  	<s:element name="WheelAlignmentInsertResponse">
+  		<s:complexType>
+		  <s:sequence>
+		  	<s:element minOccurs="1" maxOccurs="1" name="WheelAlignmentInsertResult" type="tns:DatabaseResult" />
+		  </s:sequence>
+		 </s:complexType>
+  	</s:element>
+  	</s:schema>
+  </wsdl:types>
+  <wsdl:message name="HeadLightAlignmentInsertSoapIn">
+  <wsdl:part name="parameters" element="tns:HeadLightAlignmentInsert" />
+  </wsdl:message>
+  <wsdl:message name="HeadLightAlignmentInsertSoapOut">
+  <wsdl:part name="parameters" element="tns:HeadLightAlignmentInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="KemkraftDataInsertSoapIn">
+  <wsdl:part name="parameters" element="tns:KemkraftDataInsert" />
+  </wsdl:message>
+  <wsdl:message name="KemkraftDataInsertSoapOut">
+  <wsdl:part name="parameters" element="tns:KemkraftDataInsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="WheelAlignmentInsertSoapIn">
+  <wsdl:part name="parameters" element="tns:WheelAlignmentInsert" />
+  </wsdl:message>
+  <wsdl:message name="WheelAlignmentInsertSoapOut">
+  <wsdl:part name="parameters" element="tns:WheelAlignmentInsertResponse" />
+  </wsdl:message>
+  <wsdl:portType name="NCATCollectorSoap">
+  <wsdl:operation name="HeadLightAlignmentInsert">
+  <wsdl:input message="tns:HeadLightAlignmentInsertSoapIn" />
+  <wsdl:output message="tns:HeadLightAlignmentInsertSoapOut" />
+  </wsdl:operation>
+  <wsdl:operation name="KemkraftDataInsert">
+  <wsdl:input message="tns:KemkraftDataInsertSoapIn" />
+  <wsdl:output message="tns:KemkraftDataInsertSoapOut" />
+  </wsdl:operation>
+  <wsdl:operation name="WheelAlignmentInsert">
+  <wsdl:input message="tns:WheelAlignmentInsertSoapIn" />
+  <wsdl:output message="tns:WheelAlignmentInsertSoapOut" />
+  </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NCATCollectorSoap" type="tns:NCATCollectorSoap">
+  <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+  <wsdl:operation name="HeadLightAlignmentInsert">
+  <soap:operation soapAction="http://com.honda.ham/NCATCollector/HeadLightAlignmentInsert" style="document" />
+  <wsdl:input>
+  <soap:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="KemkraftDataInsert">
+  <soap:operation soapAction="http://com.honda.ham/NCATCollector/KemkraftDataInsert" style="document" />
+  <wsdl:input>
+  <soap:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="WheelAlignmentInsert">
+  <soap:operation soapAction="http://com.honda.ham/NCATCollector/WheelAlignmentInsert" style="document" />
+  <wsdl:input>
+  <soap:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NCATCollectorSoap12" type="tns:NCATCollectorSoap">
+  <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+  <wsdl:operation name="HeadLightAlignmentInsert">
+  <soap12:operation soapAction="http://com.honda.ham/NCATCollector/HeadLightAlignmentInsert" style="document" />
+  <wsdl:input>
+  <soap12:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap12:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="KemkraftDataInsert">
+  <soap12:operation soapAction="http://com.honda.ham/NCATCollector/KemkraftDataInsert" style="document" />
+  <wsdl:input>
+  <soap12:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap12:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  <wsdl:operation name="WheelAlignmentInsert">
+  <soap12:operation soapAction="http://com.honda.ham/NCATCollector/WheelAlignmentInsert" style="document" />
+  <wsdl:input>
+  <soap12:body use="literal" />
+  </wsdl:input>
+  <wsdl:output>
+  <soap12:body use="literal" />
+  </wsdl:output>
+  </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NCATCollector">
+  <wsdl:port name="NCATCollectorSoap" binding="tns:NCATCollectorSoap">
+  <soap:address location="http://ncatcollector/ncatcollector.asmx" />
+  </wsdl:port>
+  <wsdl:port name="NCATCollectorSoap12" binding="tns:NCATCollectorSoap12">
+  <soap12:address location="http://ncatcollector/ncatcollector.asmx" />
+  </wsdl:port>
+  </wsdl:service>
+  </wsdl:definitions>

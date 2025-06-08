@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="
+               http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+               http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+               ">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" />
+
+	<bean id="MQJMS_TP_CLIENT_MQ_TCPIP"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField">
+			<value>com.ibm.mq.jms.JMSC.MQJMS_TP_CLIENT_MQ_TCPIP</value>
+		</property>
+	</bean>
+	
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" />
+
+	<bean id="connectionFactory"
+		class="com.ibm.mq.jms.MQXAQueueConnectionFactory">
+		<property name="hostName"
+			value="galchminline1mqdev.hmin.am.honda.com" />
+		<property name="port" value="1414" />
+		<property name="queueManager" value="HIN_TPIM" />
+		<property name="channel" value="HIN_TPIM.SVRCONN" />
+		<property name="transportType" ref="MQJMS_TP_CLIENT_MQ_TCPIP" />
+	</bean>
+	
+	<bean id="jasperPrinterService"
+		class="com.honda.galc.client.jasper.JasperPrintService">
+		
+	</bean>
+		
+	<jms:listener-container
+		connection-factory="connectionFactory" concurrency="1" acknowledge="transacted">
+		<jms:listener id = "JASPER" destination="AFBMPR1" ref="jasperPrinterService" />
+	</jms:listener-container>	
+	
+</beans>

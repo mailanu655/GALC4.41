@@ -1,0 +1,21 @@
+import com.honda.galc.client.audio.ClientAudioManager;
+
+/**
+ * Paul Chou -- added Apr 12, 2012
+ * This function should be called on client side ONLY!!!!
+ * This can be taken as an example to add more client commands
+ */
+ 
+  /**
+   * play sound
+   */
+   bsh.help.playSound = "usage: playSound( path)";
+
+  /**
+   * play sound on the given path
+   * @param sound
+   */
+   void playSound(String sound){
+	   ClientAudioManager audioMgr = new ClientAudioManager();
+	   audioMgr.playSound(sound);
+   }

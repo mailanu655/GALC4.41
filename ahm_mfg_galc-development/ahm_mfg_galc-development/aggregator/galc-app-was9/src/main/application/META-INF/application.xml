@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application id="Application_ID" version="1.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/application_1_4.xsd">
+<display-name>GALC New Application</display-name>
+	<module id="EjbModule_1290866836243">
+		<ejb>oif-service-ejb.jar</ejb>
+	</module>
+	<module id="EjbModule_1378840475332">
+		<ejb>jca-socket-ejb.jar</ejb>
+	</module>
+	<module id="ConnectorModule_1378840475363">
+		<connector>jca-adaptor.rar</connector>
+	</module>
+	<module id="WebModule_1279797210744">
+		<web>
+			<web-uri>base-web.war</web-uri>
+			<context-root>BaseWeb</context-root>
+		</web>
+	</module>
+	<module id="WebModule_1288034335300">
+		<web>
+			<web-uri>base-web-start.war</web-uri>
+			<context-root>BaseWebStart</context-root>
+		</web>
+	</module>
+	<module id="WebModule_1288094812334">
+		<web>
+			<web-uri>config-service-web.war</web-uri>
+			<context-root>ConfigService</context-root>
+		</web>
+	</module>
+	<module id="WebModule_1373281495868">
+		<web>
+			<web-uri>rest-web.war</web-uri>
+			<context-root>RestWeb</context-root>
+		</web>
+	</module>
+ 	<module id="WebModule_1290866787180">
+		<web>
+			<web-uri>oif-config-web.war</web-uri>
+			<context-root>oifConfig</context-root>
+		</web>
+	</module> 
+	<module id="WebModule_1514734754355">
+		<web>
+			<web-uri>handheld-web.war</web-uri>
+			<context-root>Handheld</context-root>
+		</web>
+	</module>
+	
+	<security-role id="SecurityRole_AllUsers">
+		<description>All authenticated Users</description>
+		<role-name>AllUsers</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditAdmin">
+		<description>Edit Admin Users and Groups</description>
+		<role-name>EditAdmin</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewAdmin">
+		<description>View Admin Users and Groups</description>
+		<role-name>ViewAdmin</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditProcessPoint">
+		<description>Edit Process Point Data</description>
+		<role-name>EditProcessPoint</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewProcessPoint">
+		<description>View Process Point Data</description>
+		<role-name>ViewProcessPoint</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewUsers">
+		<description>View GALC Users</description>
+		<role-name>ViewUsers</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditUsers">
+		<description>Modify GALC Application Users</description>
+		<role-name>EditUsers</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditTerminal">
+		<description>Edit Terminal Definitions</description>
+		<role-name>EditTerminal</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewTerminal">
+		<description>View Terminal Settings</description>
+		<role-name>ViewTerminal</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditDevice">
+		<description>Edit Device Related Settings</description>
+		<role-name>EditDevice</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewDevice">
+		<description>View Device Related Configuration</description>
+		<role-name>ViewDevice</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditApplication">
+		<description>Edit Application Settings</description>
+		<role-name>EditApplication</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewApplication">
+		<description>View Application Related Settings</description>
+		<role-name>ViewApplication</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditProcess">
+		<description>Edit Site,Plant,Line,Division data</description>
+		<role-name>EditProcess</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewProcess">
+		<description>View Process-tree information</description>
+		<role-name>ViewProcess</role-name>
+	</security-role>
+	<security-role id="SecurityRole_EditACL">
+		<description>Edit Access Control List</description>
+		<role-name>EditACL</role-name>
+	</security-role>
+	<security-role id="SecurityRole_ViewACL">
+		<description>View Access Control List</description>
+		<role-name>ViewACL</role-name>
+	</security-role>
+	<security-role id="SecurityRole_Everyone">
+		<description>Unauthorized and Authorized Users </description>
+		<role-name>Everyone</role-name>
+	</security-role>
+	<security-role id="SecurityRole_Administrator">
+		<description>
+		Administrator of the system.</description>
+		<role-name>Administrator</role-name>
+	</security-role>
+	<security-role id="SecurityRole_OifAdministrator">
+		<description>
+		oif adminitstrator</description>
+		<role-name>OifAdministrator</role-name>
+	</security-role>
+</application>

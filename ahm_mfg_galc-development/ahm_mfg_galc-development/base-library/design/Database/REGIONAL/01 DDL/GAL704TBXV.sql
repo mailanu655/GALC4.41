@@ -1,0 +1,21 @@
+CREATE VIEW GALADM.GAL704TBXV      ( END_TIMESTAMP, PRODUCT_ID, TEST_SEQ, INSPECTION_PGM_ID, INSPECTION_PARAM_ID,      INSPECTION_PARAM_TYPE, INSPECTION_PARAM_VALUE, INSPECTION_PARAM_UNIT, CREATE_TIMESTAMP, UPDATE_TIMESTAMP, LOW_LIMIT, HIGH_LIMIT )  AS      
+  select *         
+  from GALADM.GAL704TBX_01         
+  UNION ALL         
+  select *         
+  from GALADM.GAL704TBX_02     
+  UNION ALL         
+  select *         
+  from GALADM.GAL704TBX_03         
+  UNION ALL     
+  select *         
+  from GALADM.GAL704TBX_04         
+  UNION ALL         
+  select *     
+  from GALADM.GAL704TBX_05     
+  UNION ALL         
+  select *         
+  from GALADM.GAL704TBX_06     
+  WITH NO ROW MOVEMENT;
+
+COMMENT ON TABLE "GALADM"."GAL704TBXV" IS 'Union All of All Six 704TBX tables';

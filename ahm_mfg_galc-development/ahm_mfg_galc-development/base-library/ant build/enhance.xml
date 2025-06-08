@@ -1,0 +1,25 @@
+<project name="jpa_enhance_builder" basedir=".">
+	<path id="enhance.cp">
+		<pathelement location="../../base-entity/bin"/>
+		<pathelement location="../../base-common/bin"/>
+		<fileset dir="../lib/openjpa">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="../lib/jakarta-commons">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	<property name="cp" refid="enhance.cp"/>
+	
+	<target name="build.dir.check" unless="build.dir">
+		<fail message="Please set -Dbuild.dir in your builder configuration!" />
+	</target>
+
+	<target name="enhance">
+		<echo> EAR Creation has begun ${cp} on ${TODAY}</echo>
+		<java classname="org.apache.openjpa.enhance.PCEnhancer" fork = "true">
+			<classpath refid="enhance.cp" />
+		</java>
+	</target>
+	
+</project>

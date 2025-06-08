@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+/******************************************
+  Horizontal Bar Sample
+  Specification file: horizontal-text
+ ******************************************/
+
+/*
+ * This style applies to each item in the cell. (e.g., to the <a> tag)
+ */
+.htext_item_normal {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #006600;
+	font-weight: bold;
+    font-size: 10px;
+    padding-left: 4px;
+    padding-right: 3px;
+	text-transform: uppercase;
+    text-decoration: underline;
+}
+
+/*
+ * This style applies to the item which displays a group name. (e.g., to the <span> tag)
+ */
+.htext_item_group {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #666666;
+	font-weight: bold;
+	text-decoration: none;
+    font-size: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+	text-transform: uppercase;
+}
+

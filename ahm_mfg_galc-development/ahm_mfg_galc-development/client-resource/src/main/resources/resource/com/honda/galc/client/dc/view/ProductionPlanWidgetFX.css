@@ -1,0 +1,67 @@
+
+
+
+
+.label {
+	-fx-font-size: 28pt;
+	-fx-text-fill: black;
+	-fx-opacity: 0.6;
+}
+
+#label-value-green {
+	-fx-font-size: 28pt;
+	-fx-text-fill: black;
+	-fx-opacity: 0.6;
+	-fx-height: 20px;
+	-fx-background-color: green;
+	-fx-border-color: black;
+	-fx-border-width: 2;
+}
+
+#label-value-red {
+	-fx-font-size: 28pt;
+	-fx-text-fill: black;
+	-fx-opacity: 0.6;
+	-fx-background-color: red;
+	-fx-height: 20px;
+	-fx-border-color: black;
+	-fx-border-width: 2;
+}
+
+#label-text {
+	-fx-font-size: 14pt;
+	-fx-font-family:"System Bold";
+	-fx-text-fill: #000000;
+	-fx-font-weight:bold;
+}
+
+#value-text {
+	-fx-font-size: 18pt;
+	-fx-font-family:"System Bold";
+	-fx-text-fill: #000000;
+	-fx-font-weight:bold;
+}
+
+#prod-plan-widget {
+	/* -fx-border-color: grey; 
+	-fx-border-width: 2; */
+	
+}
+
+#red-box {
+
+-fx-background-color: red;
+}
+
+#green-box {
+
+-fx-background-color: #086600;
+
+}
+
+
+#blue-box {
+
+-fx-background-color: #99CCFF;
+
+}

@@ -1,0 +1,11 @@
+/target/
+/null/
+/ehcache/
+/build/
+/.gwt/
+/.settings/
+/.apt_generated/
+.project
+.classpath
+.compatibility
+.factorypath

@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0015" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.galc.openprotocol.model.ParamSetSelected">
+    <field id="01" name="PSET_NUMBER" type="String" length="3" defaultValue="008" />
+    <field id="02" name="DATE_LAST_CHANGED" type="String" length="19" defaultValue="" />
+</OPMessage>
+  

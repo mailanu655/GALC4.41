@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<META name="GENERATOR" content="IBM Software Development Platform">
+<META http-equiv="Content-Style-Type" content="text/css">
+<LINK href="../theme/Master.css" rel="stylesheet"
+	type="text/css">
+<TITLE>Popup.html</TITLE>
+<script>
+
+ 
+ function addRow2() 
+   {
+   
+   
+      var newrow;
+      var newcol;
+      
+      var val1,val2,val3,val4,val5;
+      
+      val1 = document.valuesform.val1.value;
+      val2 = document.valuesform.val2.value;
+      val3 = document.valuesform.val3.value;
+      val4 = document.valuesform.val4.value;
+      val5 = document.valuesform.val5.value;
+      
+      window.opener.addRow2(val1,val2,val3,val4,val5); 
+      
+      var table = window.opener.document.getElementById("dynamictable");
+      var tablebody = window.opener.document.getElementById("dynamicbody");
+      
+      newrow = document.createElement("tr");
+      
+      
+      
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val1;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val2;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val3;
+      
+      newrow.appendChild(newcol);
+
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val4;
+      
+      newrow.appendChild(newcol);
+      
+      newcol = document.createElement("td");
+      
+      newcol.innerHTML = val5;
+      
+      newrow.appendChild(newcol);
+      
+     
+	  //tablebody.appendChild(newrow);
+
+	  return false;
+   }
+</script>
+</HEAD>
+<BODY>
+
+<form name="valuesform">
+
+
+<INPUT type="text" name="val1" size="20"><br>
+<INPUT type="text" name="val2" size="20"><br>
+<INPUT type="text" name="val3" size="20"><br>
+<INPUT type="text" name="val4" size="20"><br>
+<INPUT type="text" name="val5" size="20"><br>
+<button onclick="addRow2();return false">Add row</button>
+</form>
+
+</BODY>
+</HTML>

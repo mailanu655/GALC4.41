@@ -1,0 +1,19 @@
+#!groovy
+import hudson.model.*
+node ("master") { 
+    stage('Checkout Jenkinsfile') {
+			print "=========================== code checkout =================================="
+            checkout changelog: true, 
+            poll: false,
+            scm: [$class: 'GitSCM',
+            branches: [[name: "*"]],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [],
+            submoduleCfg: [],
+            userRemoteConfigs: [[credentialsId: 'ccadmin',
+            url: 'https://hnapxlscmgit01.amerhonda.com/Line-Control/ahm_mfg_jenkinsfile.git']]]
+		    print "================================================================================"
+         
+        }
+	load ("Jenkinsfile-GALC")
+}

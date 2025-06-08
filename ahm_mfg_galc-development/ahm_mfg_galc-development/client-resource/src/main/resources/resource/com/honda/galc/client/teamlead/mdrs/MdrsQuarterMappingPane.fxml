@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="outerPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="scrollPane" prefViewportHeight="800.0" prefViewportWidth="1280.0">
+         <content>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
+               <children>
+               <!--
+                  <VBox layoutX="29.0" layoutY="61.0">
+                     <children>
+                        <Label layoutX="74.0" layoutY="45.0" text="Dept" />
+                        <ChoiceBox fx:id="deptChoiceBox" layoutX="6.0" layoutY="54.0" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+                  -->
+                  <TableView fx:id="mdrsQuartersTable" layoutX="23.0" layoutY="199.0" prefHeight="500.0" prefWidth="471.0">
+                    <columns>
+                      <TableColumn fx:id="mdrsLineColumn" prefWidth="75.0" text="Line" />
+                      <TableColumn fx:id="mdrsDeptColumn" prefWidth="79.0" text="Dept" />
+                        <TableColumn fx:id="mdrsShiftColumn" prefWidth="129.0" text="Shift" />
+                        <TableColumn fx:id="mdrsQuarterColumn" prefWidth="105.0" text="Quarter" />
+                        <TableColumn fx:id="mdrsQuarterSelectColumn" prefWidth="82.0" text="Selection" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="galcPeriodsTable" layoutX="507.0" layoutY="199.0" prefHeight="500.0" prefWidth="467.0">
+                     <columns>
+                        <TableColumn fx:id="galcLineColumn" prefWidth="74.0" text="Line" />
+                        <TableColumn fx:id="galcDeptColumn" prefWidth="69.0" text="Dept" />
+                        <TableColumn fx:id="galcShiftColumn" prefWidth="88.0" text="Shift" />
+                        <TableColumn fx:id="galcPeriodColumn" minWidth="0.0" prefWidth="70.0" text="Period" />
+                        <TableColumn fx:id="galcPeriodLabelColumn" prefWidth="82.0" text="Period Label" />
+                        <TableColumn fx:id="galcPeriodSelectColumn" prefWidth="90.0" text="Selection" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="215.0" layoutY="152.0" text="MDRS QUARTERS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="699.0" layoutY="152.0" text="GALC PERIODS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="mapButton" layoutX="523.0" layoutY="729.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="191.0" text="Map">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="23.0" layoutY="71.0" prefHeight="17.0" prefWidth="522.0" text="Select ONE MDRS Quarter and ONE OR MORE GALC Period(s), and press the Map button">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

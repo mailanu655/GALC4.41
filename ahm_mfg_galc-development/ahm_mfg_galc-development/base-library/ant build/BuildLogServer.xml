@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<project name="Log Server Build" default="all" basedir=".">
+
+	<property name="logserver.dir" value="/build/logserver"/>
+	<property name="logserver.dir.tmp" value="${logserver.dir}/tmp"/>
+	<property name="logserver.jar" value="nalogserver.jar"/>
+	<property name="logserver.jar.filepath" value="${logserver.dir}/${logserver.jar}"/>
+	<property name="src.lib" value="../../base-library/lib"/>
+	
+	<target name = "all" depends = "compile,unjar,jar" description = "Complete Server Build">
+		<tstamp/>
+		<echo> Build All Finished  ${TSTAMP} on ${TODAY}</echo>
+	</target>
+
+
+	<target name =  "compile" description="compile everything">
+		 	<ant antfile ="${basedir}\sub_compile.xml"		target ="buildLogServer"/>
+	</target>
+	
+	<target name="unjar">
+		<mkdir dir = "${logserver.dir}"/>
+		<mkdir dir = "${logserver.dir.tmp}"/>
+		<unjar src="${src.lib}/jakarta-commons/lang/2.6/commons-lang-2.6.jar" dest="${logserver.dir.tmp}" />
+		<unjar src="${src.lib}/log4j/log4j-1.2.15.jar" dest="${logserver.dir.tmp}" />
+	</target>
+	
+	<target name="jar" depends="compile,unjar" description="Aggregate JARs into fewer JARs">
+
+		<jar jarfile="${logserver.jar.filepath}" update="true" compress="true" basedir="../../log-server/bin" />
+		<jar jarfile="${logserver.jar.filepath}" update="true" compress="true" basedir="../../base-common/bin"/>
+		<jar jarfile="${logserver.jar.filepath}" update="true" compress="true" basedir="${logserver.dir.tmp}"/>
+												
+	</target>
+	
+
+</project>

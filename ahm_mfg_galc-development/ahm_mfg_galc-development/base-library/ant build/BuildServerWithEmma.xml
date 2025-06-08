@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="Server Build" default="all" basedir=".">
+
+	<property name="server.dir" value="/build/server"/>
+	
+	<target name = "all" depends = "OnlyEAR,EAR-Emma" description = "Complete Server Build">
+		<tstamp/>
+		<echo> Build All Finished  ${TSTAMP} on ${TODAY}</echo>
+	</target>
+
+	<!-- EAR and Property Only Targets -->
+	<target name = "OnlyEAR" depends ="Compile" description = "Create EAR file from current Workspace">
+		<tstamp/>
+		<echo> EAR Creation has begun ${TSTAMP} on ${TODAY}</echo>
+	 	<mkdir dir = "${server.dir}"/>
+	  	<earExport EARProjectName="GALCApplication" EARExportFile="${server.dir}\Regional_GALC_Lot_Control_${version}_${buildLevel}_GALC_Server.ear" Overwrite="true"/>
+		<tstamp/>
+		<echo> GALC new server application creation  ended at ${TSTAMP} on ${TODAY}</echo>  
+	</target>
+	
+	<target name =  "Compile" description="compile everything">
+		 	<ant antfile ="${basedir}\sub_compile.xml"		target ="buildServer"/>
+	</target>
+	
+	<target name ="EmmaInstrument"  description="Instrumentation">
+		<ant antfile ="${basedir}\ServerInstrument.xml"		target ="emma"/>
+	</target>
+	
+	<!-- EAR and Property Only Targets -->
+		<target name = "EAR-Emma" depends ="EmmaInstrument" description = "Create EAR file from current Workspace">
+			<tstamp/>
+			<echo> EAR Creation has begun ${TSTAMP} on ${TODAY}</echo>
+		 	<mkdir dir = "${server.dir}"/>
+		  	<earExport EARProjectName="GALCApplication" EARExportFile="${server.dir}\Regional_GALC_Lot_Control_${version}_${buildLevel}_GALC_Server_Emma.ear" Overwrite="true"/>
+			<tstamp/>
+			<echo> GALC new server application creation  ended at ${TSTAMP} on ${TODAY}</echo>  
+		</target>
+
+</project>

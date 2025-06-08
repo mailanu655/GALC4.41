@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>base-web</display-name>
+	
+	<context-param>
+        <param-name>parentContextKey</param-name>
+        <param-value>web.context</param-value>
+    </context-param>
+<!-- 
+    <context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+    
+    <listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+ -->    	
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    
+	<servlet>
+		<servlet-name>HttpServiceHandler</servlet-name>
+		<servlet-class>com.honda.galc.web.HttpServiceHandler</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>
+		RefreshPropertiesServlet</display-name>
+		<servlet-name>RefreshPropertiesServlet</servlet-name>
+		<servlet-class>
+		com.honda.galc.web.RefreshPropertiesServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>HttpDeviceHandler</display-name>
+		<servlet-name>HttpDeviceHandler</servlet-name>
+		<servlet-class>
+		com.honda.galc.web.HttpDeviceHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HttpServiceHandler</servlet-name>
+		<url-pattern>/HttpServiceHandler</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RefreshPropertiesServlet</servlet-name>
+		<url-pattern>RefreshProperties</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HttpDeviceHandler</servlet-name>
+		<url-pattern>/HttpDeviceHandler</url-pattern>
+	</servlet-mapping>
+	<resource-ref id="ResourceRef_1268679106236">
+		<description>
+		</description>
+		<res-ref-name>dbaccess</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Application</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref id="ResourceRef_1268679345353" >
+		<description>
+		</description>
+		<res-ref-name>mqConnectionFactory</res-ref-name>
+		<res-type>javax.jms.QueueConnectionFactory</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref  id="ResourceRef_1268679345354">
+		<description>
+		</description>
+		<res-ref-name>mqQueue</res-ref-name>
+		<res-type>javax.jms.Queue</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	
+	<resource-ref id="ResourceRef_1268679345355">
+		<description>
+		</description>
+		<res-ref-name>jms/oifCF</res-ref-name>
+		<res-type>javax.jms.QueueConnectionFactory</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref id="ResourceRef_1268679345356">
+		<description>
+		</description>
+		<res-ref-name>jms/oifQueue</res-ref-name>
+		<res-type>javax.jms.Queue</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	
+	<servlet>
+		<description>
+		</description>
+		<display-name>WebServiceDispatcherServlet</display-name>
+		<servlet-name>WebServiceDispatcherServlet</servlet-name>
+		<servlet-class>com.honda.galc.web.WebServiceDispatcherServlet</servlet-class>
+		<load-on-startup>-1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>WebServiceDispatcherServlet</servlet-name>
+		<url-pattern>*.ws</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>FactoryNews.html</welcome-file>
+		<welcome-file>LineOverview.html</welcome-file>
+		<welcome-file>TestMap.html</welcome-file>
+		<welcome-file>MobileQics.html</welcome-file>
+	</welcome-file-list>
+	
+</web-app>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="QiStationConfigurationXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element key value pairs</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="propertyKey" type="xs:string" minOccurs="1"/>
+			<xs:element name="value" type="xs:string" minOccurs="1"/>
+			<xs:element name="active" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationEntryDepartmentXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element key value pairs</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="divisionId" type="xs:string" minOccurs="1"/>
+			<xs:element name="isDefault" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationEntryScreenXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station entry screen parameters</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="divisionId" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryModel" type="xs:string" minOccurs="1"/>
+			<xs:element name="seq" type="xs:int" minOccurs="1"/>
+			<xs:element name="entryScreen" type="xs:string" minOccurs="1"/>
+			<xs:element name="orientationAngle" type="xs:int" minOccurs="1"/>
+			<xs:element name="allowScan" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationPreviousDefectXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element key value pairs</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="entryDivisionId" type="xs:string" minOccurs="1"/>
+			<xs:element name="defectStatus" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationResponsibilityXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element key value pairs</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="responsibleLevelId" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationWriteUpDepartmentXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element for write-up dept</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="site" type="xs:string" minOccurs="1"/>
+			<xs:element name="plant" type="xs:string" minOccurs="1"/>
+			<xs:element name="divisionId" type="xs:string" minOccurs="1"/>
+			<xs:element name="colorCode" type="xs:string" minOccurs="1"/>
+			<xs:element name="colorDescription" type="xs:string" minOccurs="1"/>
+			<xs:element name="isDefault" type="xs:int" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="QiStationUpcPartXmlDto">
+		<xs:annotation>
+			<xs:documentation>Station configuration element for UPC parts</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+			<xs:element name="mainPartNo" type="xs:string" minOccurs="1"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:element name="QicsEntryStationConfigurationXmlDto">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="processPointId" type="xs:string" minOccurs="1"/>
+				<xs:element name="division" type="xs:string" minOccurs="1"/>
+				<xs:element name="plant" type="xs:string" minOccurs="1"/>
+				<xs:element name="site" type="xs:string" minOccurs="1"/>
+				
+				<xs:element name="qiStationConfigurationXmlDto" type="QiStationConfigurationXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationEntryDepartmentXmlDto" type="QiStationEntryDepartmentXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationEntryScreenXmlDto" type="QiStationEntryScreenXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationPreviousDefectXmlDto" type="QiStationPreviousDefectXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationResponsibilityXmlDto" type="QiStationResponsibilityXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationWriteUpDepartmentXmlDto" type="QiStationWriteUpDepartmentXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="qiStationUpcPartXmlDto" type="QiStationUpcPartXmlDto" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OPCommandErrors version="1.0">
+	<error id="01" name="invalidData" message="Invalid data"/>
+	<error id="02" name="psetNotPresent" message="Pset number not present"/>
+	<error id="03" name="psetCannotBeSet" message="Pset {pset} can not be set"/>
+	<error id="04" name="psetNotRunning" message="Pset not running"/>
+	<error id="06" name="vinUploadSubAlreadyExists" message="VIN upload subscription already exists"/>
+	<error id="07" name="vinUploadSubDoesNotExist" message="VIN upload subscription does not exists"/>
+	<error id="08" name="vinInputSourceNotGranted" message="VIN input source not granted"/>
+	<error id="09" name="lastTighteningResultSubAlreadyExists" message="Last tightening result subscription already exists"/>
+	<error id="10" name="lastTighteningResultSubDoesNotExist" message="Last tightening result subscription does not exist"/>
+	<error id="11" name="alarmSubAlreadyExists" message="Alarm subscription already exists"/>
+	<error id="12" name="alarmSubDoesNotExist" message="Alarm subscription does not exist"/>
+	<error id="13" name="psetSelectionSubAlreadyExists" message="Parameter set selection subscription already exists"/>
+	<error id="14" name="psetSelectionSubDoesNotExist" message="Parameter set selection subscription does not exist"/>
+	<error id="15" name="tighteningIdReqNotFound" message="Tightening Id requested not found"/>
+	<error id="16" name="connRejectedProtocolBusy" message="Connection rejected protocol busy"/>
+	<error id="17" name="jobNumNotPresent" message="Job number not present"/>
+	<error id="18" name="jobInfoSubAlreadyExists" message="Job info subscription already exists"/>
+	<error id="19" name="jobInfoSubDoesNotExist" message="Job info subscription does not exist"/>
+	<error id="20" name="jobCannotBeSet" message="Job can not be set"/>
+	<error id="21" name="jobNotRunning" message="Job not running"/>
+	<error id="30" name="controllerNotASyncMaster" message="Controller is not a sync Master"/>
+	<error id="31" name="msStatusSubAlreadyExists" message="Multi spindle status subscription already exists"/>
+	<error id="32" name="msStatusSubDoesNotExist" message="Multi spindle status subscription does not exist"/>
+	<error id="33" name="msResultSubAlreadyExists" message="Multi spindle result subscription already exists"/>
+	<error id="34" name="msResultSubDoesNotExists" message="Multi spindle result subscription does not exist"/>
+	<error id="40" name="jobLineControlInfoSubAlreadyExists" message="Job line control info subscription already exists "/>
+	<error id="41" name="jobLineControlInfoSubDoesNotExist" message="Job line control info subscription does not exist"/>
+	<error id="42" name="identifierInputSourceNotGranted" message="Identifier input source not granted"/>
+	<error id="43" name="multipleIdWOSubAlreadyExists" message="Multiple identifiers work order subscription already exists"/>
+	<error id="44" name="multipleIdWOSubDoesNotExist" message="Multiple identifiers work order subscription does not exist"/>
+	<error id="50" name="statusEMISubAlreadyExists" message="Status 'external monitored inputs' subscription already exists"/>
+	<error id="51" name="statusEMISubDoesNotExist" message="Status 'external monitored inputs' subscription does not exist"/>
+	<error id="52" name="ioDeviceNotConnected" message="IO device not connected"/>
+	<error id="53" name="faultyIODeviceNumber" message="Faulty IO device number"/>
+	<error id="58" name="noAlarmPresent" message="No alarm present"/>
+	<error id="59" name="toolCurrentlyInUse" message="Tool currently in use"/>
+	<error id="60" name="noHistogramAvailable" message="No histogram available"/>
+	<error id="80" name="reserved1" message="Reserved"/>
+	<error id="81" name="reserved2" message="Reserved"/>
+	<error id="96" name="clientAlreadyConnected" message="Client already connected"/>
+	<error id="97" name="midRevisionUnSupported" message="MID revision unsupported"/>
+	<error id="98" name="controllerInternalReqTimeout" message="Controller internal request timeout"/>
+	<error id="99" name="unknownMID" message="Unknown MID"/>
+</OPCommandErrors>

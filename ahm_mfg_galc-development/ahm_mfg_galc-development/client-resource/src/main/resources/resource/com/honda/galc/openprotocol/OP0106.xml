@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0106" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="true" className="com.honda.galc.openprotocol.model.PowerMacsLastTighteningResult">
+        <field id="01" name="TOTAL_NO_OF_MESSAGES" type="String" length="2" defaultValue="01" />
+        <field id="02" name="MESSAGE_NUMBER" type="String" length="2" defaultValue="01" />
+        <field id="03" name="DATA_NO_SYSTEM" type="String" length="10" defaultValue="0000000001" />
+        <field id="04" name="STATION_NO" type="String" length="2" defaultValue="01" />
+        <field id="05" name="STATION_NAME" type="String" length="20" defaultValue="Default_Station_Name" />
+        <field id="06" name="TIME" type="String" length="19" defaultValue="2017-03-07 10:00:00" />
+        <field id="07" name="MODE_NO" type="String" length="2" defaultValue="01" />
+        <field id="08" name="MODE_NAME" type="String" length="20" defaultValue="Default_Mode_Name01" />
+        <field id="09" name="SIMPLE_STATUS" type="String" length="1" defaultValue="1" />
+        <field id="10" name="PM_STATUS" type="String" length="1" defaultValue="1" />
+        <field id="11" name="WP_ID" type="String" length="40" defaultValue="19UNC1997GY990002" />
+        <field id="12" name="NUMBER_OF_BOLTS" type="String" length="2" defaultValue="01" />
+        <field id="13" name="ORDINAL_BOLT_NUMBER" type="String" length="2" defaultValue="01" />
+        <field id="14" name="SIMPLE_BOLT_STATUS" type="String" length="1" defaultValue="1" />
+        <field id="15" name="TORQUE_STATUS" type="String" length="1" defaultValue="1" />
+        <field id="16" name="ANGLE_STATUS" type="String" length="1" defaultValue="0" />
+        <field id="17" name="BOLT_T" type="String" length="7" defaultValue="9999999" />
+        <field id="18" name="BOLT_A" type="String" length="7" defaultValue="3600000" />
+        <field id="19" name="BOLT_T_HIGH_LIMIT" type="String" length="7" defaultValue="9999999" />
+        <field id="20" name="BOLT_T_LOW_LIMIT" type="String" length="7" defaultValue="0000000" />
+        <field id="21" name="BOLT_A_HIGH_LIMIT" type="String" length="7" defaultValue="0036000" />
+        <field id="22" name="BOLT_A_LOW_LIMIT" type="String" length="7" defaultValue="0000000" />
+        <field id="23" name="NUMBER_OF_SPECIAL_VALUES" type="String" length="2" defaultValue=" 0" />
+</OPMessage>

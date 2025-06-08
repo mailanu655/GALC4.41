@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- example of a default persistence.xml -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+    <persistence-unit name="GALC_Entities_standalone">
+        <class>com.honda.galc.entity.AuditEntry</class>
+         
+        <class>com.honda.galc.entity.conf.Site</class>
+        <class>com.honda.galc.entity.conf.PlantId</class>
+        <class>com.honda.galc.entity.conf.Plant</class>
+        <class>com.honda.galc.entity.conf.Division</class>
+        <class>com.honda.galc.entity.conf.Line</class>
+        <class>com.honda.galc.entity.conf.Zone</class>
+        <class>com.honda.galc.entity.conf.User</class>
+        <class>com.honda.galc.entity.conf.SecurityGroup</class>
+        <class>com.honda.galc.entity.conf.UserSecurityGroup</class>
+        <class>com.honda.galc.entity.conf.UserSecurityGroupId</class>
+        
+        <class>com.honda.galc.entity.conf.Device</class>
+        <class>com.honda.galc.entity.conf.DeviceFormatId</class>
+        <class>com.honda.galc.entity.conf.DeviceFormat</class>
+        <class>com.honda.galc.entity.conf.OpcConfigEntry</class>
+        
+        <class>com.honda.galc.entity.conf.Terminal</class>
+        <class>com.honda.galc.entity.conf.TaskSpec</class>
+        <class>com.honda.galc.entity.conf.Application</class>
+        <class>com.honda.galc.entity.conf.ApplicationTask</class>
+        <class>com.honda.galc.entity.conf.ApplicationTaskId</class>
+        <class>com.honda.galc.entity.conf.ApplicationByTerminal</class>
+        <class>com.honda.galc.entity.conf.ApplicationByTerminalId</class>
+        <class>com.honda.galc.entity.conf.ApplicationMenuEntry</class>
+        <class>com.honda.galc.entity.conf.ApplicationMenuEntryId</class>
+        <class>com.honda.galc.entity.conf.AfbData</class>
+        <class>com.honda.galc.entity.conf.AfbDataId</class>
+        
+        <class>com.honda.galc.entity.conf.ComponentProperty</class>
+        <class>com.honda.galc.entity.conf.ComponentPropertyId</class>
+        <class>com.honda.galc.entity.conf.ComponentStatus</class>
+        <class>com.honda.galc.entity.conf.ComponentStatusId</class>
+        
+        <class>com.honda.galc.entity.conf.Notification</class>
+        <class>com.honda.galc.entity.conf.NotificationProvider</class>
+        <class>com.honda.galc.entity.conf.NotificationProviderId</class>
+        <class>com.honda.galc.entity.conf.NotificationSubscriber</class>
+        <class>com.honda.galc.entity.conf.NotificationSubscriberId</class>
+        
+        <class>com.honda.galc.entity.conf.ProcessPoint</class>
+		<class>com.honda.galc.entity.conf.BroadcastDestination</class>
+		<class>com.honda.galc.entity.conf.BroadcastDestinationId</class>
+		<class>com.honda.galc.entity.conf.GpcsDivision</class>
+		<class>com.honda.galc.entity.product.ProductStampingSequence</class>
+		<class>com.honda.galc.entity.product.ProductStampingSequenceId</class>
+		
+		<class>com.honda.galc.entity.product.BaseProduct</class>
+		<class>com.honda.galc.entity.product.Product</class>
+        <class>com.honda.galc.entity.product.Engine</class>
+        <class>com.honda.galc.entity.product.EngineSpec</class>
+        <class>com.honda.galc.entity.product.LotControlRule</class>
+        <class>com.honda.galc.entity.product.LotControlRuleId</class>
+        <class>com.honda.galc.entity.product.ProductionLot</class>
+        <class>com.honda.galc.entity.product.Part</class>
+        <class>com.honda.galc.entity.product.PartName</class>
+        <class>com.honda.galc.entity.product.PartId</class>
+        <class>com.honda.galc.entity.product.InstalledPart</class>
+        <class>com.honda.galc.entity.product.InstalledPartId</class>
+        <class>com.honda.galc.entity.product.InstalledPartHistory</class>
+        <class>com.honda.galc.entity.product.InstalledPartHistoryId</class>
+        <class>com.honda.galc.entity.product.Measurement</class>
+        <class>com.honda.galc.entity.product.MeasurementId</class>
+        <class>com.honda.galc.entity.product.MeasurementAttempts</class>
+        <class>com.honda.galc.entity.product.ProductResult</class>
+        <class>com.honda.galc.entity.product.ProductResultId</class>
+        <class>com.honda.galc.entity.product.ExpectedProduct</class>
+        <class>com.honda.galc.entity.product.InProcessProduct</class>
+        <class>com.honda.galc.entity.product.PartByProductSpecCode</class>
+        <class>com.honda.galc.entity.product.PartByProductSpecCodeId</class>
+        <class>com.honda.galc.entity.product.ProductSequence</class>
+        <class>com.honda.galc.entity.product.ProductSequenceId</class>
+        <class>com.honda.galc.entity.product.RequiredPart</class>
+        <class>com.honda.galc.entity.product.RequiredPartId</class>
+        <class>com.honda.galc.entity.product.HoldResult</class>
+        <class>com.honda.galc.entity.product.HoldResultId</class>
+		<class>com.honda.galc.entity.product.MapFeatureLocation</class>
+		<class>com.honda.galc.entity.product.MapFeatureLocationId</class>
+		<class>com.honda.galc.entity.product.Feature</class> 
+		<class>com.honda.galc.entity.product.FeaturePoint</class> 
+		<class>com.honda.galc.entity.product.FeaturePointId</class> 
+		<class>com.honda.galc.entity.product.Layer</class> 
+		<class>com.honda.galc.entity.product.LayerFeatures</class> 
+		<class>com.honda.galc.entity.product.LayerFeaturesId</class> 
+		<class>com.honda.galc.entity.product.ViewId</class> 
+		<class>com.honda.galc.entity.product.View</class> 
+		<class>com.honda.galc.entity.product.SmartEyeLabel</class>
+		
+        <class>com.honda.galc.entity.product.SubProductShipping</class>
+        <class>com.honda.galc.entity.product.SubProductShippingId</class>
+        <class>com.honda.galc.entity.product.SubProductShippingDetail</class>
+        <class>com.honda.galc.entity.product.SubProductShippingDetailId</class>
+        <class>com.honda.galc.entity.product.Counter</class>
+		<class>com.honda.galc.entity.product.CounterId</class>
+		<class>com.honda.galc.entity.product.CounterByModelGroup</class>
+		<class>com.honda.galc.entity.product.CounterByModelGroupId</class>
+		<class>com.honda.galc.entity.product.CounterByProductionLot</class>
+		<class>com.honda.galc.entity.product.CounterByProductionLotId</class>
+		<class>com.honda.galc.entity.product.CounterByProductSpec</class>
+		<class>com.honda.galc.entity.product.CounterByProductSpecId</class>
+		<class>com.honda.galc.entity.product.DailyDepartmentSchedule</class>
+		<class>com.honda.galc.entity.product.DailyDepartmentScheduleId</class>
+		<class>com.honda.galc.entity.product.AnnualCalendar</class>
+			
+		<class>com.honda.galc.entity.product.BuildAttribute</class>
+		<class>com.honda.galc.entity.product.BuildAttributeId</class>
+		<class>com.honda.galc.entity.product.SubProduct</class>
+		<class>com.honda.galc.entity.product.PreProductionLot</class>
+		<class>com.honda.galc.entity.product.PartLot</class>
+		<class>com.honda.galc.entity.product.PartLotId</class>
+		<class>com.honda.galc.entity.product.SkippedProduct</class>
+		<class>com.honda.galc.entity.product.SkippedProductId</class>
+		    
+		<class>com.honda.galc.entity.product.BlockLoad</class>
+		<class>com.honda.galc.entity.product.PurchaseContractId</class>
+		<class>com.honda.galc.entity.product.PurchaseContract</class>
+		<class>com.honda.galc.entity.product.LotTraceabilityId</class>
+		<class>com.honda.galc.entity.product.LotTraceability</class>
+		
+		<class>com.honda.galc.entity.conf.ShippingStatus</class>
+		<class>com.honda.galc.entity.conf.InRepairArea</class>
+		<class>com.honda.galc.entity.conf.ParkingAddress</class>
+		<class>com.honda.galc.entity.conf.ParkingAddressId</class>
+		<class>com.honda.galc.entity.product.ProductTypeData</class>
+		<class>com.honda.galc.entity.product.ProductSpecCode</class>
+		<class>com.honda.galc.entity.product.IPPTagId</class>    
+        <class>com.honda.galc.entity.product.IPPTag</class>  
+        <class>com.honda.galc.entity.product.ProductTypeData</class>
+		<class>com.honda.galc.entity.conf.PlcMemoryMapItem</class>
+		<class>com.honda.galc.entity.product.ProductIdMask</class>
+		<class>com.honda.galc.entity.product.ProductIdMaskId</class>
+		
+		<class>com.honda.galc.entity.product.Dunnage</class>
+        <class>com.honda.galc.entity.product.DunnageContent</class>
+        <class>com.honda.galc.entity.product.DunnageContentId</class>
+		
+        <class>com.honda.galc.entity.product.BearingSelectResult</class>
+        <class>com.honda.galc.entity.product.BearingSelectResultId</class>
+		<class>com.honda.galc.entity.bearing.BearingMatrix</class>
+		<class>com.honda.galc.entity.bearing.BearingMatrixId</class>
+		<class>com.honda.galc.entity.bearing.BearingMatrixCell</class>
+		<class>com.honda.galc.entity.bearing.BearingMatrixCellId</class>
+		<class>com.honda.galc.entity.bearing.BearingPart</class>						
+		<class>com.honda.galc.entity.bearing.BearingPartByYearModelId</class>
+		<class>com.honda.galc.entity.bearing.BearingPartByYearModel</class>
+			
+		<class>com.honda.galc.entity.qics.DefectDescription</class>
+		<class>com.honda.galc.entity.qics.DefectDescriptionId</class>
+		<class>com.honda.galc.entity.qics.DefectGroup</class>
+		<class>com.honda.galc.entity.qics.DefectRepairResult</class>
+		<class>com.honda.galc.entity.qics.DefectRepairResultId</class>
+		<class>com.honda.galc.entity.qics.DefectResult</class>
+		<class>com.honda.galc.entity.qics.DefectResultId</class>
+		<class>com.honda.galc.entity.qics.DefectActualProblem</class>
+		<class>com.honda.galc.entity.qics.DefectActualProblemId</class>
+		<class>com.honda.galc.entity.qics.DefectRepairMethod</class>
+		<class>com.honda.galc.entity.qics.DefectRepairMethodId</class>
+		<class>com.honda.galc.entity.qics.DefectType</class>
+		<class>com.honda.galc.entity.qics.DefectTypeDescription</class>
+		<class>com.honda.galc.entity.qics.DefectTypeDescriptionId</class>
+		<class>com.honda.galc.entity.qics.DefectTypeDescrition</class>
+		<class>com.honda.galc.entity.qics.DefectTypeDescritionId</class>
+		<class>com.honda.galc.entity.qics.Image</class>
+		<class>com.honda.galc.entity.qics.ImageSection</class>
+		<class>com.honda.galc.entity.qics.ImageSectionPoint</class>
+		<class>com.honda.galc.entity.qics.ImageSectionPointId</class>
+		<class>com.honda.galc.entity.qics.InspectionModel</class>
+		<class>com.honda.galc.entity.qics.InspectionModelId</class>
+		<class>com.honda.galc.entity.qics.InspectionPart</class>
+		<class>com.honda.galc.entity.qics.InspectionPartDescription</class>
+		<class>com.honda.galc.entity.qics.InspectionPartDescriptionId</class>
+		<class>com.honda.galc.entity.qics.InspectionPartLocation</class>
+		<class>com.honda.galc.entity.qics.InspectionTwoPartDescription</class>
+		<class>com.honda.galc.entity.qics.InspectionTwoPartDescriptionId</class>
+		<class>com.honda.galc.entity.qics.Iqs</class>
+		<class>com.honda.galc.entity.qics.IqsId</class>
+		<class>com.honda.galc.entity.qics.PartGroup</class>
+		<class>com.honda.galc.entity.qics.Regression</class>
+		<class>com.honda.galc.entity.qics.RepairResult</class>
+		<class>com.honda.galc.entity.qics.RepairResultId</class>
+		<class>com.honda.galc.entity.qics.ReuseProductResult</class>
+		<class>com.honda.galc.entity.qics.ReuseProductResultId</class>
+		<class>com.honda.galc.entity.qics.SecondaryPart</class>
+		<class>com.honda.galc.entity.qics.StationResult</class>
+		<class>com.honda.galc.entity.qics.StationResultId</class>
+		<class>com.honda.galc.entity.plastics.Mbpn</class>
+		<class>com.honda.galc.entity.plastics.MbpnProduct</class>
+		<class>com.honda.galc.entity.plastics.Order</class>
+		<class>com.honda.galc.entity.plastics.OrderId</class>
+		<class>com.honda.galc.entity.plastics.ProductPriorityPlan</class>
+		<class>com.honda.galc.entity.plastics.ProductPriorityPlanId</class>
+		
+		<class>com.honda.galc.entity.conf.MCOperation</class>
+		<class>com.honda.galc.entity.conf.MCOperationMatrix</class>
+		<class>com.honda.galc.entity.conf.MCOperationMatrixId</class>
+		<class>com.honda.galc.entity.conf.MCOperationMeasurement</class>
+		<class>com.honda.galc.entity.conf.MCOperationMeasurementId</class>
+		<class>com.honda.galc.entity.conf.MCOperationPart</class>
+		<class>com.honda.galc.entity.conf.MCOperationPartId</class>
+		<class>com.honda.galc.entity.conf.MCOperationPartMatrix</class>
+		<class>com.honda.galc.entity.conf.MCOperationPartMatrixId</class>
+		<class>com.honda.galc.entity.conf.MCOperationPartRevision</class>
+		<class>com.honda.galc.entity.conf.MCOperationPartRevisionId</class>
+		<class>com.honda.galc.entity.conf.MCOperationRevision</class>
+		<class>com.honda.galc.entity.conf.MCOperationRevisionId</class>  
+		<class>com.honda.galc.entity.conf.MCOrderStructure</class>
+		<class>com.honda.galc.entity.conf.MCPddaProcess</class>	
+		<class>com.honda.galc.entity.conf.MCPddaProcessId</class>
+		<class>com.honda.galc.entity.conf.MCProductStructure</class>	
+		<class>com.honda.galc.entity.conf.MCRevision</class>
+		<class>com.honda.galc.entity.conf.MCStructure</class>			
+		<class>com.honda.galc.entity.conf.MCStructureId</class>
+		<class>com.honda.galc.entity.oif.MaterialService</class>
+		<class>com.honda.galc.entity.oif.MaterialServiceId</class>
+		<class>com.honda.galc.entity.fif.FifCodeGroups</class>
+       	<class>com.honda.galc.entity.fif.FifCodeGroupsId</class>
+       	<class>com.honda.galc.entity.fif.FifCodeChoices</class>
+       	<class>com.honda.galc.entity.fif.FifCodeChoicesId</class>
+       	<class>com.honda.galc.entity.fif.SalesOrderFif</class>
+       	<class>com.honda.galc.entity.fif.SalesOrderFifId</class>
+       	<class>com.honda.galc.entity.fif.Bom</class>
+       	<class>com.honda.galc.entity.fif.BomId</class>
+	<class>com.honda.galc.entity.product.MbpnProductType</class>
+	<class>com.honda.galc.entity.product.MbpnProductTypeId</class>
+	<class>com.honda.galc.entity.product.ProductTypeToNumberDef</class>
+	<class>com.honda.galc.entity.product.ProductTypeToNumberDefId</class>
+	<class>com.honda.galc.entity.product.ProductIdNumberDef</class>
+
+       	<class>com.honda.galc.entity.product.EngineManifest</class>
+        <class>com.honda.galc.entity.product.EngineManifestId</class>
+        <class>com.honda.galc.entity.product.EngineManifestHis</class>
+        <class>com.honda.galc.entity.product.EngineManifestHisId</class>
+       	
+		
+        <properties>
+            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.DB2Dictionary"/>
+            <property name="openjpa.ConnectionDriverName" value="com.ibm.db2.jcc.DB2Driver"/>
+            <property name="openjpa.jdbc.Schema" value="GALADM"/>
+            <property name="openjpa.ConnectionProperties" value="currentSchema=GALADM"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:db2://linuxhminsb01d.hmin.am.honda.com:50000/GALCDBDV"/>
+            <property name="openjpa.ConnectionUserName" value="regional"/>
+            <property name="openjpa.ConnectionPassword" value="project"/>
+            <!--property name="openjpa.ConnectionURL" value="jdbc:db2://192.168.7.205:50640/DEP103"/>
+            <property name="openjpa.ConnectionUserName" value="gbuild"/>
+            <property name="openjpa.ConnectionPassword" value="gbuild"/-->
+            <!--  property name="openjpa.ConnectionURL" value="jdbc:db2://192.168.7.209:50544/AEP101"/>
+	        <property name="openjpa.ConnectionUserName" value="galadm"/>
+            <property name="openjpa.ConnectionPassword" value="galadm"/-->
+            <property name="openjpa.Log" value="DefaultLevel=INFO, Tool=INFO"/>
+            <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
+            <property name="openjpa.AutoDetach" value="close,nontx-read"/>
+            <property name="openjpa.DetachState" value="fetch-groups"/>
+        </properties>
+    </persistence-unit>
+    
+ </persistence>

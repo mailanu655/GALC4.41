@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ImmobiMessage id="ABORT" version="1.0" severity="error" description="Received ABORT" className="com.honda.galc.client.device.lotcontrol.immobi.ImmobiMessage">
+    <field id="01" name="LENGTH" dataType="string" length="3" value="009" />
+    <field id="02" name="COMMAND_CODE" dataType="string" length="3" value="007" />    
+    <field id="03" name="SUB_COMMAND_CODE" dataType="string" length="3" value="000" />    
+ </ImmobiMessage>
+
+  

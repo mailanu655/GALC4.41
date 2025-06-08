@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<!-- ====================================================================== -->
+<!-- Ant own build file                                                     -->
+<!-- ====================================================================== -->
+
+<project name="HeadlessTerminals" default="start" basedir=".">
+
+	<property file="../build.number" />
+	<property name="jrelib" value="/usr/java/jre/lib" />
+	
+	<path id="execute.class.path">
+		<fileset dir="${build}/${build-label}">
+			<include name="ClientLib-${build-label}.jar"/>
+			<include name="ClientMain-${build-label}.jar"/>
+		</fileset>
+		<fileset dir="${jrelib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="start">
+		<java classpathref="execute.class.path" classname="com.honda.galc.client.ClientMain" fork="true">
+			<arg value="logs" />
+			<arg value="${serverurl}" />
+			<arg value="${terminal}" />
+			<arg value="true" />
+			<arg value="-headless=true" />
+			<arg value="-user=Default_User" />
+			<jvmarg value="-Xms64m" />
+			<jvmarg value="-Xmx256m" />
+			<jvmarg value="-Xdump:Heap" />
+			<sysproperty key="MARKER" value="${basedir}" />
+			<sysproperty key="env" value="${env}" />
+		</java>
+	</target>
+
+</project>
+

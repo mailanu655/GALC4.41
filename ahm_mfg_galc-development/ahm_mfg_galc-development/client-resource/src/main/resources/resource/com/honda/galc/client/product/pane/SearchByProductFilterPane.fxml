@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="99.0" prefWidth="842.0" spacing="20.0">
+         <children>
+            <VBox spacing="10.0">
+               <children>
+                  <Label id="labelSelectProcessPoint" text="Select Plant">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="processPointComboBox" minWidth="160.0" />
+               </children>
+            </VBox>
+            <VBox spacing="10.0">
+               <children>
+                  <RadioButton fx:id="trackStsRdBtn" mnemonicParsing="false" prefWidth="150.0" text="Tracking Status">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="searchGroup" />
+                     </toggleGroup>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></RadioButton>
+                  <ComboBox id="trackingStatusComboBox" fx:id="trackingStatusComboBox" minWidth="160.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="prodLotRdBtn" mnemonicParsing="false" text="Production Lot" toggleGroup="$searchGroup">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </RadioButton>
+                  <TextField fx:id="prodLotTextField" minWidth="200.0" />
+                  <Button fx:id="searchBtn" mnemonicParsing="false" text="Search">
+                  </Button>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxSeqRange" spacing="5.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton id="vboxProductIdRange" fx:id="seqRangeRdBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Sequence Range" toggleGroup="$searchGroup">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label minWidth="50.0" text="Start" />
+                        <TextField fx:id="seqRangeTxtField1" minWidth="100.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label minWidth="50.0" text="End" />
+                        <TextField fx:id="seqRangeTxtField2" minWidth="100.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vboxProductIdRange" spacing="5.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton id="productIdRangeRdBtn" fx:id="productIdRangeRdBtn" mnemonicParsing="false" text="Product Id Range" toggleGroup="$searchGroup">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></RadioButton>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label minWidth="50.0" text="Start" />
+                        <TextField fx:id="productIdRangeTxt1" minWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label minWidth="50.0" text="End" />
+                        <TextField fx:id="productIdRangeTxt2" minWidth="200.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

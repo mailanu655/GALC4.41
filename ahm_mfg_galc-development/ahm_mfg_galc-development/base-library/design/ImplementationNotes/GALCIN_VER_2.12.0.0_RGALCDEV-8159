@@ -1,0 +1,58 @@
+Author:Ambica Gawarla
+Prod Ticket:RGALCPROD-5868
+Dev Ticket:RGALCDEV-8159
+Release Number:2.12.25.0
+
+Affected client: OIF Bom job
+
+WebSphereConfigurations Required:
+create new directory to create export file with name specified in properties and copy import utility shell script.(Please refer to confluence page for more details about shell script).
+set permissions  on the shell script to restrict readability and allow execution appropriately.
+ensure there is adequate disk space to host export file.
+
+DataBase Configurations Required:
+create new service account to connect to database with permissions to execute import command
+catalog GALC Database on all Websphere server nodes
+ DB2 environment is installed on the local server
+Embedded Auth_id has authority to connect to target DB and import to BOM_TBX table
+
+
+New Properties:
+
+DATA_UPD_DESC_TEXT		-   115,20	 
+DB_INSTANCE_NAME		-   delp1gal	 
+DC_FAM_CLASS_CODE		-   161,5	 
+DC_PART_NO				-   166,18	 
+EFF_BEG_DATE			-	81,8	 
+EFF_END_DATE			-	89,8	 
+EXPORT_FILE_NAME		-	BOM_EXPORT.txt	 
+EXPORT_FILE_PATH		-	/home/was7adm/mqft/OIF/BOM/	 
+INT_COLOR_CODE			-	80,1	 
+MESSAGE_LINE_LENGTH		-	184	 
+MTC_COLOR				-	63,11	 
+MTC_MODEL				-	59,4	 
+MTC_OPTION				-	74,3	 
+MTC_TYPE				-	77,3	 
+PART_BLOCK_CODE			-	42,1	 
+PART_COLOR_CODE			-	19,11	 
+PART_COLOR_ID_CODE		-	107,1	 
+PART_ITEM_NO			-	46,7	 
+PART_NO					-	0,18	 
+PART_PROD_CODE			-	97,1	 
+PART_QTY				-	109,6	 
+PART_SECTION_CODE		-	43,3	 
+PLANT_LOC_CODE			-	18,1	 
+PROCLOC_GP_NO			-	98,2	 
+PROCLOC_GP_SEQ_NO		-	100,2	 
+RECORDS_PER_READ		-	30000	 
+SCRIPT_FILE_NAME		-	load_bom_tbx.sh	 
+SCRIPT_FILE_PATH		-	/home/was7adm/mqft/OIF/BOM/	 
+SUPPLIER_CAT_CODE		-	108,1	 
+SUPPLIER_NO				-	30,6	 
+TARGET_MFG_DEST_NO		-	36,6	 
+TGT_MODEL_DEV_CODE		-	103,4	 
+TGT_PLANT_LOC_CODE		-	102,1	 
+TGT_SHIP_TO_CODE		-	53,6	 
+TIMESTAMP_DATE			-	135,26
+PDDA_FIF_TYPE			-	184,3
+OUTPUT_MESSAGE_LINE_LENGTH - 187

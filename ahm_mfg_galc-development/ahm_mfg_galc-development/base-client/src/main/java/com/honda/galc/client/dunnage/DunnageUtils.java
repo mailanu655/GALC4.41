@@ -1,0 +1,423 @@
+package com.honda.galc.client.dunnage;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.honda.galc.client.product.command.Command;
+import com.honda.galc.client.product.validator.AlphaNumericValidator;
+import com.honda.galc.client.product.validator.DateValidator;
+import com.honda.galc.client.product.validator.IntegerGreaterValidator;
+import com.honda.galc.client.product.validator.LengthValidator;
+import com.honda.galc.client.product.validator.NumericValidator;
+import com.honda.galc.client.product.validator.RequiredValidator;
+import com.honda.galc.client.product.validator.StringTokenValidator;
+import com.honda.galc.dao.product.DailyDepartmentScheduleDao;
+import com.honda.galc.dao.product.DunnageContentDao;
+import com.honda.galc.dao.product.ProductHistoryDao;
+import com.honda.galc.data.ProductType;
+import com.honda.galc.entity.enumtype.DefectStatus;
+import com.honda.galc.entity.product.BaseProduct;
+import com.honda.galc.entity.product.DailyDepartmentSchedule;
+import com.honda.galc.entity.product.DieCast;
+import com.honda.galc.entity.product.DunnageContent;
+import com.honda.galc.entity.product.MbpnProduct;
+import com.honda.galc.entity.product.ProductHistory;
+import com.honda.galc.property.DunnagePropertyBean;
+import com.honda.galc.service.ServiceFactory;
+import com.honda.galc.service.property.PropertyService;
+import com.honda.galc.service.utils.ProductTypeUtil;
+
+/**
+ * <h3>Class description</h3> <h4>Description</h4>
+ * <p>
+ * <code>DunnageUtils</code> is ... .
+ * </p>
+ * <h4>Usage and Example</h4> <h4>Special Notes</h4>
+ * 
+ * <h4>Change History</h4>
+ * <Table border="1" Cellpadding="3" Cellspacing="0" width="100%">
+ * <TR bgcolor="#EEEEFF" Class="TableSubHeadingColor">
+ * <TH>Update by</TH>
+ * <TH>Update date</TH>
+ * <TH>Version</TH>
+ * <TH>Mark of Update</TH>
+ * <TH>Reason</TH>
+ * </TR>
+ * <TR>
+ * <TD>&nbsp;</TD>
+ * <TD>&nbsp;</TD>
+ * <TD>0.1</TD>
+ * <TD>(none)</TD>
+ * <TD>Initial Realse</TD>
+ * </TR>
+ * </TABLE>
+ * 
+ * @see
+ * @ver 0.1
+ * @author Karol Wozniak
+ * @created Apr 18, 2013
+ */
+public class DunnageUtils {
+
+	private static final String DATE_PATTERN = "yyMMdd";
+	private static final String SEQUENCE_PATTERN = "000";
+	private static final String DUNNAGE_NUMBER_PATTERN = String.format("{0}{1,date,%s}{2,number,%s}", DATE_PATTERN, SEQUENCE_PATTERN);
+
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
+	private static final MessageFormat FORMAT = new MessageFormat(DUNNAGE_NUMBER_PATTERN);
+	private static final DateFormat OFF_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+	public static final String SHIPPABLE = "shippable";
+	public static final String SHIPPED = "shipped";
+	public static final String PRODUCT = "product";
+	public static final String DEFECT_LABEL = "defectLabel";
+	public static final String ON_HOLD_LABEL = "onHoldLabel";
+	public static final String OFFED_LABEL = "offedLabel";
+
+	public static String format(String machineId, Date productionDate, int sequence) {
+		String str = getFormat().format(new Object[] { machineId, productionDate, sequence });
+		return str;
+	}
+
+	public static Integer parseSequence(String dunnage) {
+		String str = getSequenceToken(dunnage);
+		if (str == null) {
+			return 0;
+		}
+		Integer seq = null;
+		try {
+			seq = Integer.valueOf(str);
+		} catch (Exception e) {
+		}
+		return seq;
+	}
+
+	protected static String getSequenceToken(String dunnage) {
+		if (dunnage == null) {
+			return null;
+		}
+		dunnage = dunnage.trim();
+		if (dunnage.length() < getSequenceTokenLength()) {
+			return null;
+		}
+		String token = StringUtils.right(dunnage, DunnageUtils.getSequenceTokenLength());
+		return token;
+	}
+
+	public static Date getProductionDate(String divisionId) {
+		DailyDepartmentSchedule schedule = ServiceFactory.getDao(DailyDepartmentScheduleDao.class).find(divisionId, new Timestamp(System.currentTimeMillis()));
+		if (schedule != null && schedule.getId() != null && schedule.getId().getProductionDate() != null) {
+			return schedule.getId().getProductionDate();
+		}
+		return getCurrentDate();
+	}
+
+	public static int getSequenceTokenIx() {
+		int dunnageNumberLength = getDunnageNumberLength();
+		return dunnageNumberLength - getSequenceTokenLength();
+	}
+
+	public static int getDateTokenIx() {
+		int dunnageNumberLength = getDunnageNumberLength();
+		return dunnageNumberLength - getSequenceTokenLength() - getDateTokenLength();
+	}
+
+	public static int getDunnageNumberLength() {
+		return PropertyService.getPropertyBean(DunnagePropertyBean.class).getDunnageNumberLength();
+	}
+
+	public static List<Command> getValidatorCommands(boolean autoGenerated) {
+		List<Command> validators = new ArrayList<Command>();
+		validators.add(new RequiredValidator());
+		validators.add(new AlphaNumericValidator());
+
+		if (autoGenerated) {
+			validators.add(new LengthValidator(DunnageUtils.getDunnageNumberLength()));
+			int dateIx = DunnageUtils.getDateTokenIx();
+			int dateEndIx = DunnageUtils.getDateTokenIx() + DunnageUtils.getDateTokenLength() - 1;
+			validators.add(new StringTokenValidator("Date", dateIx, dateEndIx, new NumericValidator()));
+			validators.add(new StringTokenValidator("Date", dateIx, dateEndIx, new DateValidator(false, DunnageUtils.getDatePattern())));
+			int seqIx = DunnageUtils.getSequenceTokenIx();
+			int seqEndIx = DunnageUtils.getSequenceTokenIx() + DunnageUtils.getSequenceTokenLength() - 1;
+			validators.add(new StringTokenValidator("Sequence Token", seqIx, seqEndIx, new NumericValidator()));
+			validators.add(new StringTokenValidator("Sequence Token", seqIx, seqEndIx, new IntegerGreaterValidator(0, false)));
+		}
+		return validators;
+	}
+
+	public static List<Map<String, Object>> mapDunnageMaintData(List<BaseProduct> products, ProductType productType, DunnagePropertyBean property) {
+		
+		if (ProductTypeUtil.isInstanceOf(productType, DieCast.class)) {
+			return mapDieCastData(products, productType, property);
+		} else if (ProductTypeUtil.isInstanceOf(productType, MbpnProduct.class)) {
+			return mapMbpnData(products, productType, property);
+		} else {
+			return mapProductData(products, productType, property);
+		}
+	}
+
+	private static List<Map<String, Object>> mapMbpnData(List<BaseProduct> products, ProductType productType, DunnagePropertyBean property) {
+		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+		List<String> productIds = products.stream().map(BaseProduct::getProductId).collect(Collectors.toList());
+		List<ProductHistory> histories = fetchProductHistories(productType, property, productIds);
+        List<ProductHistory> shippedHistories = fetchShippedHistories(productType, property, productIds);
+		for (BaseProduct product : products) {
+			MbpnProduct mbpnProduct = (MbpnProduct) product;
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put(PRODUCT, product);
+
+			boolean repaired = product.getDefectStatus() == null || DefectStatus.REPAIRED.equals(product.getDefectStatus());
+			boolean onHold = product.getHoldStatus() == 0 ? false : true;
+			boolean offed = false;
+
+			map.put("productId", mbpnProduct.getProductId());
+			map.put("currentProductSpecCode", mbpnProduct.getProductSpecCode());
+			map.put("currentOrderNo", mbpnProduct.getCurrentOrderNo());
+			map.put("containerId", mbpnProduct.getContainerId());
+			map.put("trackingSeq", mbpnProduct.getTrackingSeq());
+			map.put(DEFECT_LABEL, repaired ? "OK" : "NG");
+			map.put(ON_HOLD_LABEL, onHold ? "NG" : "OK");
+			addLineOffandShippingStatus(productType, property, product, map, repaired, onHold, offed, histories, shippedHistories);
+			data.add(map);
+		}
+		return data;
+	}
+
+	private static List<Map<String, Object>> mapDieCastData(List<BaseProduct> products, ProductType productType, DunnagePropertyBean property) {
+		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+		DunnageContentDao dunnageContentDao = ServiceFactory.getDao(DunnageContentDao.class);
+		List<DunnageContent> dunnageContents = new ArrayList<DunnageContent>();
+		List<String> productIds = products.stream().map(BaseProduct::getProductId).collect(Collectors.toList());
+		List<ProductHistory> histories = fetchProductHistories(productType, property, productIds);
+        List<ProductHistory> shippedHistories = fetchShippedHistories(productType, property, productIds);
+		
+		for (BaseProduct product : products) {
+			DieCast dieCastProduct = (DieCast) product;
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put(PRODUCT, product);
+
+			boolean repaired = product.getDefectStatus() == null || DefectStatus.REPAIRED.equals(product.getDefectStatus());
+			boolean onHold = product.getHoldStatus() == 0 ? false : true;
+			boolean offed = false;
+
+			map.put("machineId", product.getProductNumberDef().getLine(dieCastProduct.getDcSerialNumber()));
+			map.put("dieId", product.getProductNumberDef().getDie(dieCastProduct.getDcSerialNumber()));
+			map.put(DEFECT_LABEL, repaired ? "OK" : "NG");
+			map.put(ON_HOLD_LABEL, onHold ? "NG" : "OK");
+
+			addLineOffandShippingStatus(productType, property, product, map, repaired, onHold, offed, histories, shippedHistories);
+			
+			if (property.isInsertDunnageContent() && StringUtils.isNotBlank(product.getDunnage())) {
+				// getting the dunnage matrix from DUNNAGE_CONTENT_TBX
+				if (dunnageContents.isEmpty())
+					dunnageContents = dunnageContentDao.findAllProductsInDunnage(product.getDunnage());
+				DunnageContent dcd = dunnageContents.stream()
+						.filter(dunnageContent -> StringUtils.equals(dunnageContent.getId().getProductId(),	product.getProductId()))
+						.findFirst()
+						.orElse(null);
+
+				if (dcd != null) {
+					map.put("matrix", dcd.getDunnageRow() + "," + dcd.getDunnageColumn() + "," + dcd.getDunnageLayer());
+				}
+			}
+			data.add(map);
+		}
+
+		return data;
+	}
+
+	private static List<Map<String, Object>> mapProductData(List<BaseProduct> products, ProductType productType, DunnagePropertyBean property) {
+		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+		List<String> productIds = products.stream().map(BaseProduct::getProductId).collect(Collectors.toList());
+		List<ProductHistory> histories = fetchProductHistories(productType, property, productIds);
+        List<ProductHistory> shippedHistories = fetchShippedHistories(productType, property, productIds);
+		for (BaseProduct product : products) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put(PRODUCT, product);
+
+			boolean repaired = product.getDefectStatus() == null || DefectStatus.REPAIRED.equals(product.getDefectStatus());
+			boolean onHold = product.getHoldStatus() == 0 ? false : true;
+			boolean offed = false;
+
+			map.put(DEFECT_LABEL, repaired ? "OK" : "NG");
+			map.put(ON_HOLD_LABEL, onHold ? "NG" : "OK");
+
+			addLineOffandShippingStatus(productType, property, product, map, repaired, onHold, offed, histories, shippedHistories);
+
+			data.add(map);
+		}
+		return data;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void addLineOffandShippingStatus(ProductType productType, DunnagePropertyBean property,
+			BaseProduct product, Map<String, Object> map, boolean repaired, boolean onHold, boolean offed,
+			List<ProductHistory> histories, List<ProductHistory> shippedHistories) {
+
+		java.util.Date date;
+
+		if (property.getOffProcessPointIds() != null && property.getOffProcessPointIds().length > 0) {
+			offed = false;
+			String[] offProcessPointIds = property.getOffProcessPointIds();
+			for (String processPointId : offProcessPointIds) {
+				List<ProductHistory> processhistory = histories.stream()
+						.filter(productHistory -> (StringUtils.equalsIgnoreCase(productHistory.getProcessPointId(),
+								processPointId)
+								&& StringUtils.equalsIgnoreCase(productHistory.getProductId(), product.getProductId())))
+						.collect(Collectors.toList());
+				if (processhistory.size() > 0) {
+					offed = true;
+					date = processhistory.get(0).getActualTimestamp();
+					for (int i = 1; i < processhistory.size(); i++) {
+						if (processhistory.get(i).getActualTimestamp().after(date)) {
+							date = processhistory.get(i).getActualTimestamp();
+						}
+					}
+					map.put("offDate", OFF_DATE_FORMAT.format(date));
+					break;
+				}
+			}
+			map.put(OFFED_LABEL, offed ? "OK" : "NG");
+		}
+		if (!StringUtils.isBlank(property.getShippingProcessPointId())) {
+			ProductHistory shiphistory = shippedHistories.stream().filter(productHistory -> (StringUtils
+					.equalsIgnoreCase(productHistory.getProductId(), product.getProductId()))).findFirst().orElse(null);
+			boolean shipped = shiphistory != null ? true : false;
+			map.put("shippedLabel", shipped ? "Yes" : "No");
+			map.put(SHIPPED, shipped);
+		}
+		boolean shippable = repaired && !onHold && offed;
+		map.put(SHIPPABLE, shippable);
+	}
+	
+	private static List<ProductHistory> fetchProductHistories(ProductType productType, DunnagePropertyBean property, List<String> productIds) {
+        ProductHistoryDao<? extends ProductHistory, ?> productHistoryDao = ProductTypeUtil.getProductHistoryDao(productType);
+        if (property.getOffProcessPointIds() != null && property.getOffProcessPointIds().length > 0) {
+            return (List<ProductHistory>) productHistoryDao.findAllByProcessPointIdsAndProductIds(Arrays.asList(property.getOffProcessPointIds()), productIds);
+        }
+        return Collections.emptyList();
+    }
+
+    private static List<ProductHistory> fetchShippedHistories(ProductType productType, DunnagePropertyBean property, List<String> productIds) {
+        ProductHistoryDao<? extends ProductHistory, ?> productHistoryDao = ProductTypeUtil.getProductHistoryDao(productType);
+        if (!StringUtils.isBlank(property.getShippingProcessPointId())) {
+            return (List<ProductHistory>) productHistoryDao.findAllByProcessPointIdsAndProductIds(Arrays.asList(property.getShippingProcessPointId()), productIds);
+        }
+        return Collections.emptyList();
+    }
+
+	public static Date getCurrentDate() {
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.set(Calendar.AM_PM, Calendar.AM);
+		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date productionDate = new Date(cal.getTime().getTime());
+		return productionDate;
+	}
+
+	public static List<Map<String, Object>> filterShippable(List<Map<String, Object>> list) {
+		List<Map<String, Object>> shippableProducts = new ArrayList<Map<String, Object>>();
+		if (list == null) {
+			return shippableProducts;
+		}
+		for (Map<String, Object> map : list) {
+			Object shippable = map.get(SHIPPABLE);
+			if (Boolean.TRUE.equals(shippable)) {
+				shippableProducts.add(map);
+			}
+		}
+		return shippableProducts;
+	}
+	
+	public static List<Map<String, Object>> filterNotShipped(List<Map<String, Object>> list) {
+		List<Map<String, Object>> notShipped = new ArrayList<Map<String, Object>>();
+		if (list == null) {
+			return notShipped;
+		}
+		for (Map<String, Object> map : list) {
+			Object shipped = map.get(SHIPPED);
+			if (Boolean.TRUE.equals(shipped)) {
+				continue;
+			}
+			notShipped.add(map);
+		}
+		return notShipped;
+	}
+	
+	public static List<BaseProduct> getProducts(List<Map<String, Object>> list) {
+		List<BaseProduct> products = new ArrayList<BaseProduct>();
+		if (list == null) {
+			return products;
+		}
+		for (Map<String, Object> map : list) {
+			if (map == null) {
+				continue;
+			}
+			BaseProduct prd = (BaseProduct) map.get(PRODUCT);
+			if (prd != null) {
+				products.add(prd);
+			}
+		}
+		return products;
+	}
+	
+	
+	public static boolean isShipped(Map<String, Object> productData) {
+		if (productData == null || productData.isEmpty()) {
+			return false;
+		}
+		Object shipped = productData.get(SHIPPED);
+		if (Boolean.TRUE.equals(shipped)) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean isShipped(List<Map<String, Object>> list) {
+		if (list == null || list.isEmpty()) {
+			return false;
+		}
+		for (Map<String, Object> productData : list) {
+			if (isShipped(productData)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static int getSequenceTokenLength() {
+		return SEQUENCE_PATTERN.length();
+	}
+
+	public static int getDateTokenLength() {
+		return DATE_PATTERN.length();
+	}
+
+	public static String getDatePattern() {
+		return DATE_PATTERN;
+	}
+
+	public static MessageFormat getFormat() {
+		return FORMAT;
+	}
+
+	public static DateFormat getDateFormat() {
+		return DATE_FORMAT;
+	}
+
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.honda.galc.client.ui.component.*?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<center>
+	    <VBox fx:id="naviListVBox" onScroll="#onScroll">
+		 <children>
+		   <Label text="Item 1" />
+		   <Label text="Item 2" />
+		 </children>
+	    </VBox>
+</center>
+<right>
+		<HBox>
+			<children><ScrollBar fx:id="scrollbar" orientation="VERTICAL" /><Canvas fx:id="fastTravelMap" height="250.0" onMouseClicked="#mapClick" width="10.0" HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+</right>
+<top>
+	 <HBox>
+	  <children>
+	   <LoggedButton id="nav-search-button" fx:id="searchCriteriaButton" disable="false" mnemonicParsing="false" onAction="#searchCriteriaButton" text="Find" />
+	   <LoggedLabel id="title-label" fx:id="titleLabel" text="Repair Client" />
+	  </children>
+	 </HBox>
+</top>
+</fx:root>

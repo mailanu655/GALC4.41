@@ -1,0 +1,12 @@
+<!-- By default, http://java.sun.com/dtd/properties.dtd should be used.
+	 Since the file may not be available due to various reasons, such as
+	 firewall, network availability and etc. We use this file as a 
+	 replacement. -->
+	  
+<!-- DTD for properties -->
+
+<!ELEMENT properties (comment?, entry*)>
+<!ATTLIST properties version CDATA #FIXED "1.0">
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT entry (#PCDATA)>
+<!ATTLIST entry key CDATA #REQUIRED>

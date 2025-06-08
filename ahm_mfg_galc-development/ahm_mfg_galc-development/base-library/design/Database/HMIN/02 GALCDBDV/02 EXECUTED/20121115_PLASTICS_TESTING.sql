@@ -1,0 +1,15 @@
+SELECT * FROM "GALADM"."HOLD_STATUS_TBX";
+
+SELECT * FROM "GALADM"."ORDER_STATUS_TBX";
+
+select * from "GALADM"."PLAN_STATUS_TBX";
+
+select * from "GALADM"."PRODUCT_STATUS_TBX";
+
+select * from "GALADM"."MBPN_PRODUCT_TBX";
+
+select * from "GALADM"."MBPN_TBX";
+
+select * from "GALADM"."ORDER_TBX";
+
+select * from "GALADM"."PRODUCT_PRIORITY_PLAN_TBX";

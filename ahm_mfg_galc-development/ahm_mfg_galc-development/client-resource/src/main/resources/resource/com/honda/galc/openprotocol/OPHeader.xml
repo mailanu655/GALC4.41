@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OPHeader" version="1.0" fixedLength="true" delimiter="">
+    <field id="01" name="LENGTH" type="String" length="4" defaultValue="0001" />
+    <field id="02" name="MESSAGE_ID" type="String" length="4" defaultValue="0001" />
+    <field id="03" name="REVISION" type="String" length="3" defaultValue="" />    
+    <field id="04" name="NO_ACK_FLAG" type="String" length="1" defaultValue="" />   
+    <field id="05" name="STATION_ID" type="String" length="2" defaultValue="" />  
+    <field id="06" name="SPINDLE_ID" type="String" length="2" defaultValue="" />  
+    <field id="07" name="RESERVED_FIELD" type="String" length="4" defaultValue="" />
+ </OPMessage>

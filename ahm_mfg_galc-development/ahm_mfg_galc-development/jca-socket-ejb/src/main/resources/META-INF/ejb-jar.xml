@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar id="ejb-jar_ID" version="2.1" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<display-name>jca-socket-ejb</display-name>
+	
+  <enterprise-beans>
+
+    <!-- a message driven descriptor -->
+    <message-driven id="MessageDriven_1376492786339">
+      <display-name>SOCKET_MDB</display-name>
+      <ejb-name>SOCKET_MDB</ejb-name>
+      <ejb-class>com.honda.galc.mdb.SocketMessageDrivenBean</ejb-class>
+
+      <!-- The message listener interface -->
+      <messaging-type>com.honda.galc.jca.SocketMessageEndpoint</messaging-type>
+      <transaction-type>Container</transaction-type>
+
+    </message-driven>
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>SOCKET_MDB</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>NotSupported</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>	
+</ejb-jar>

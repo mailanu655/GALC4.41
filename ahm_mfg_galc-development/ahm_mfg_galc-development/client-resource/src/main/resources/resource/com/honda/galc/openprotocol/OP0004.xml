@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0004" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.galc.openprotocol.model.CommandError">
+    <field id="01" name="MSG_ID" type="String" length="4" defaultValue="0000" /> 
+    <field id="02" name="ERROR_CODE" type="String" length="2" defaultValue="01" />   
+</OPMessage>

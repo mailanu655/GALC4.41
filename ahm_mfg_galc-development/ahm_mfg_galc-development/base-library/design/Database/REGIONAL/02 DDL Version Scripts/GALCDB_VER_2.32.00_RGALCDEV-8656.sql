@@ -1,0 +1,1 @@
+alter table GALADM.GAL143tbx add column PURCHASE_CONTRACT_NUMBER character(7); 

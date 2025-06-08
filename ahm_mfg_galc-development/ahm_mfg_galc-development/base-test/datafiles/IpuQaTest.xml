@@ -1,0 +1,266 @@
+<UNIT_IN_TEST VIN="@TEST_ID@" BuildCode="CTX8-AA5-M  "
+	TestID="" SeqStepFile="CTX8_Process.csv" ContStepFile="CTX8_InspectionSelect.csv"
+	SEQData="CA001A007" MACAddress="00:00:4C:78:C5:D5" MfgID="J11"
+	Production="0" Generation="2.1" TotalStatus="Pass">
+	<PROCESS Process="CA001A007" StartTime="2012-03-08T22:37:21"
+		StartTimeUTC="2012-03-08T13:37:21" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="CA001A007" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="START_QUIT_INSPECTION" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:21" TestEndTime="2012-03-08T22:38:01"
+				ProcessInfo="A001-A007:NN00XX00:0" Status="Pass">
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA002A002" StartTime="2012-03-08T22:37:23"
+		StartTimeUTC="2012-03-08T13:37:23" FinishTime="2012-03-08T22:37:26"
+		Cal="2012-02-09T21:37:35" DCRev="SA002A002" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_ISOLATION_PLUS" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:23" TestEndTime="2012-03-08T22:37:26"
+				ProcessInfo="S002:NN00XX01:0" Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#IntervalTime" Val="0" Unit="sec" />
+					<TEST_PARAM Param="Plus Resistance" Val="O.F.  "
+						LoLimit="10.0000" Unit="mOhm" />
+					<TEST_PARAM Param="!F_OK_PLUS_ISOLATION" Val="-1" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA002A002" StartTime="2012-03-08T22:37:26"
+		StartTimeUTC="2012-03-08T13:37:26" FinishTime="2012-03-08T22:37:30"
+		Cal="2012-02-09T21:37:35" DCRev="SA002A002" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_ISOLATION_MINUS" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:27" TestEndTime="2012-03-08T22:37:30"
+				ProcessInfo="S002:NN00XX02:0" Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#IntervalTime" Val="0" Unit="sec" />
+					<TEST_PARAM Param="Minus Resistance" Val="O.F.  "
+						LoLimit="10.0000" Unit="mOhm" />
+					<TEST_PARAM Param="!F_OK_MINUS_ISOLATION" Val="-1" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA002A002" StartTime="2012-03-08T22:37:30"
+		StartTimeUTC="2012-03-08T13:37:30" FinishTime="2012-03-08T22:37:39"
+		Cal="2012-02-09T21:37:35" DCRev="SA002A002" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_ISOLATION_UVW" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:30" TestEndTime="2012-03-08T22:37:39"
+				ProcessInfo="S002:NN00XX03:0" Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#IntervalTime" Val="0" Unit="sec" />
+					<TEST_PARAM Param="U Resistance" Val="O.F.  " LoLimit="10.0000"
+						Unit="mOhm" />
+					<TEST_PARAM Param="V Resistance" Val="O.F.  " LoLimit="10.0000"
+						Unit="mOhm" />
+					<TEST_PARAM Param="W Resistance" Val="O.F.  " LoLimit="10.0000"
+						Unit="mOhm" />
+					<TEST_PARAM Param="!F_OK_U_ISOLATION" Val="-1" />
+					<TEST_PARAM Param="!F_OK_V_ISOLATION" Val="-1" />
+					<TEST_PARAM Param="!F_OK_W_ISOLATION" Val="-1" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA005A005" StartTime="2012-03-08T22:37:41"
+		StartTimeUTC="2012-03-08T13:37:41" FinishTime="2012-03-08T22:37:45"
+		Cal="2012-02-09T21:37:35" DCRev="SA005A005" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_FAN" InCycleRetestNum="1" TestTime="2012-03-08T22:37:41"
+				TestEndTime="2012-03-08T22:37:45" ProcessInfo="S005:NN00XX01:0"
+				Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#TimeLimit" Val="10" Unit="sec" />
+					<TEST_PARAM Param="$#ControlSpeed" Val="4" />
+					<TEST_PARAM Param="$#FanSpeed" Val="2500" Unit="rpm" />
+					<TEST_PARAM Param="NFIMA@FanSpeed" Val="2538.0" LoLimit="2500.0"
+						Unit="rpm" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA005A005" StartTime="2012-03-08T22:37:45"
+		StartTimeUTC="2012-03-08T13:37:45" FinishTime="2012-03-08T22:37:46"
+		Cal="2012-02-09T21:37:35" DCRev="SA005A005" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_BATT_VOLTAGE" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:46" TestEndTime="2012-03-08T22:37:46"
+				ProcessInfo="S005:NN00XX02:0" Status="Pass">
+				<TEST_ATTRIBUTES>
+					<TEST_ATTRIBUTE Att="BATTERY" Val="Li" />
+					<TEST_ATTRIBUTE Att="VBC1" Val="3.5356" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC2" Val="3.5340" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC3" Val="3.5326" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC4" Val="3.5340" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC5" Val="3.5340" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC6" Val="3.5326" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC7" Val="3.5340" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC8" Val="3.5340" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC9" Val="3.5326" ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC10" Val="3.5340"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC11" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC12" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC13" Val="3.5280"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC14" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC15" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC16" Val="3.5280"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC17" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC18" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC19" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC20" Val="3.5280"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC21" Val="3.5326"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC22" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC23" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC24" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC25" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC26" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC27" Val="3.5326"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC28" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC29" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC30" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC31" Val="3.5310"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC32" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC33" Val="3.5266"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC34" Val="3.5280"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC35" Val="3.5266"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC36" Val="3.5296"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC37" Val="3.5266"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC38" Val="3.5266"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC39" Val="3.5266"
+						ExpectedVal="V" />
+					<TEST_ATTRIBUTE Att="VBC40" Val="3.5280"
+						ExpectedVal="V" />
+				</TEST_ATTRIBUTES>
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#Cell_Max_V_Diff" Val="0.0140" Unit="V" />
+					<TEST_PARAM Param="$#Cell_Min_V" Val="3.4900" Unit="V" />
+					<TEST_PARAM Param="VBCMIN" Val="3.5266" LoLimit="3.4900"
+						Unit="V" />
+					<TEST_PARAM Param="VBCDIFF" Val="0.0090" HiLimit="0.0140"
+						Unit="V" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA006A006" StartTime="2012-03-08T22:37:46"
+		StartTimeUTC="2012-03-08T13:37:46" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="SA006A006" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_AC_INV" InCycleRetestNum="1" TestTime="2012-03-08T22:37:46"
+				TestEndTime="2012-03-08T22:37:56" ProcessInfo="S006:NN00XX01:0"
+				Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#IntervalTime" Val="15" Unit="sec" />
+					<TEST_PARAM Param="$#ID_1_CAN_Type" Val="2" />
+					<TEST_PARAM Param="$#ID_1_CAN_ID" Val="2FC" />
+					<TEST_PARAM Param="$#ID_1_ChkByte" Val="1" />
+					<TEST_PARAM Param="$#ID_1_ChkBit" Val="2" />
+					<TEST_PARAM Param="$#ID_1_OK_Val" Val="0" />
+				</TEST_PARAMS>
+				<TEST_ATTRIBUTES>
+					<TEST_ATTRIBUTE Att="!F_ID_1_OK_CHK_BIT_VALUE" Val="0" />
+				</TEST_ATTRIBUTES>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA007A007" StartTime="2012-03-08T22:37:56"
+		StartTimeUTC="2012-03-08T13:37:56" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="SA007A007" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_DTC_READ" InCycleRetestNum="1" TestTime="2012-03-08T22:37:56"
+				TestEndTime="2012-03-08T22:37:56" ProcessInfo="S007:NN00XX01:0"
+				Status="Pass">
+				<TEST_PARAMS>
+					<TEST_PARAM Param="$#IntervalTime" Val="15" Unit="sec" />
+					<TEST_PARAM Param="!F_BAT_ECU" Val="-1" />
+					<TEST_PARAM Param="!F_MOT_ECU" Val="-1" />
+				</TEST_PARAMS>
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="CA004A007" StartTime="2012-03-08T22:37:40"
+		StartTimeUTC="2012-03-08T13:37:40" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="CA004A007" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_SUPPLY12V" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:40" TestEndTime="2012-03-08T22:37:57"
+				ProcessInfo="A004-A007:NP00XX00:0" Status="Pass">
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="CA003A007" StartTime="2012-03-08T22:37:39"
+		StartTimeUTC="2012-03-08T13:37:39" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="CA003A007" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="11BIT_DUMMY_F_CAN" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:39" TestEndTime="2012-03-08T22:37:56"
+				ProcessInfo="A003-A007:NP00XX00:0" Status="Pass">
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="CA003A007" StartTime="2012-03-08T22:37:39"
+		StartTimeUTC="2012-03-08T13:37:39" FinishTime="2012-03-08T22:37:56"
+		Cal="2012-02-09T21:37:35" DCRev="CA003A007" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="11BIT_DUMMY_IMA_CAN" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:39" TestEndTime="2012-03-08T22:37:56"
+				ProcessInfo="A003-A007:NP00XX00:0" Status="Pass">
+			</TEST>
+		</TESTS>
+	</PROCESS>
+	<PROCESS Process="SA001A001" StartTime="2012-03-08T22:37:21"
+		StartTimeUTC="2012-03-08T13:37:21" FinishTime="2012-03-08T22:37:21"
+		Cal="2012-02-09T21:37:35" DCRev="SA001A001" SWVer="5, 0, 0, 6" Status="Pass"
+		OperatorID="" Cell="T01">
+		<TESTS>
+			<TEST Test="IPU_INS_START" InCycleRetestNum="1"
+				TestTime="2012-03-08T22:37:21" TestEndTime="2012-03-08T22:37:23"
+				ProcessInfo="S001:NN00XX01:0" Status="Pass">
+			</TEST>
+		</TESTS>
+	</PROCESS>
+</UNIT_IN_TEST>

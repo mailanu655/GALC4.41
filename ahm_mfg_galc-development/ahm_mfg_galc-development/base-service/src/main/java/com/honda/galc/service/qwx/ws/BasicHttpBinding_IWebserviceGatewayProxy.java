@@ -1,0 +1,111 @@
+package com.honda.galc.service.qwx.ws;
+
+import java.net.URL;
+
+import javax.xml.namespace.QName;
+import javax.xml.transform.Source;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.Dispatch;
+import javax.xml.ws.Service;
+import javax.xml.ws.soap.SOAPBinding;
+
+public class BasicHttpBinding_IWebserviceGatewayProxy{
+
+    protected Descriptor _descriptor;
+
+    public class Descriptor {
+        private com.honda.galc.service.qwx.ws.WebserviceGateway _service = null;
+        private com.honda.galc.service.qwx.ws.IWebserviceGateway _proxy = null;
+        private Dispatch<Source> _dispatch = null;
+
+        public Descriptor() {
+            init();
+        }
+
+        public Descriptor(URL wsdlLocation, QName serviceName) {
+            _service = new com.honda.galc.service.qwx.ws.WebserviceGateway(wsdlLocation, serviceName);
+            initCommon();
+        }
+
+        public void init() {
+            _service = null;
+            _proxy = null;
+            _dispatch = null;
+            _service = new com.honda.galc.service.qwx.ws.WebserviceGateway();
+            initCommon();
+        }
+
+        private void initCommon() {
+            _proxy = _service.getBasicHttpBindingIWebserviceGateway();
+        }
+
+        public com.honda.galc.service.qwx.ws.IWebserviceGateway getProxy() {
+            return _proxy;
+        }
+
+        public Dispatch<Source> getDispatch() {
+            if (_dispatch == null ) {
+                QName portQName = new QName("http://tempuri.org/", "BasicHttpBinding_IWebserviceGateway");
+                _dispatch = _service.createDispatch(portQName, Source.class, Service.Mode.MESSAGE);
+
+                String proxyEndpointUrl = getEndpoint();
+                BindingProvider bp = (BindingProvider) _dispatch;
+                String dispatchEndpointUrl = (String) bp.getRequestContext().get(BindingProvider.ENDPOINT_ADDRESS_PROPERTY);
+                if (!dispatchEndpointUrl.equals(proxyEndpointUrl))
+                    bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, proxyEndpointUrl);
+            }
+            return _dispatch;
+        }
+
+        public String getEndpoint() {
+            BindingProvider bp = (BindingProvider) _proxy;
+            return (String) bp.getRequestContext().get(BindingProvider.ENDPOINT_ADDRESS_PROPERTY);
+        }
+
+        public void setEndpoint(String endpointUrl) {
+            BindingProvider bp = (BindingProvider) _proxy;
+            bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpointUrl);
+
+            if (_dispatch != null ) {
+                bp = (BindingProvider) _dispatch;
+                bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpointUrl);
+            }
+        }
+
+        public void setMTOMEnabled(boolean enable) {
+            SOAPBinding binding = (SOAPBinding) ((BindingProvider) _proxy).getBinding();
+            binding.setMTOMEnabled(enable);
+        }
+    }
+
+    public BasicHttpBinding_IWebserviceGatewayProxy() {
+        _descriptor = new Descriptor();
+        _descriptor.setMTOMEnabled(false);
+    }
+
+    public BasicHttpBinding_IWebserviceGatewayProxy(URL wsdlLocation, QName serviceName) {
+        _descriptor = new Descriptor(wsdlLocation, serviceName);
+        _descriptor.setMTOMEnabled(false);
+    }
+
+    public Descriptor _getDescriptor() {
+        return _descriptor;
+    }
+
+    public ServerResponse storeSph(String sph) {
+        return _getDescriptor().getProxy().storeSph(sph);
+    }
+
+    public ServerResponse showSphViewer(String serialNumber, String model, String partType) {
+        return _getDescriptor().getProxy().showSphViewer(serialNumber,model,partType);
+    }
+
+    public ServerResponse closeViewer() {
+        return _getDescriptor().getProxy().closeViewer();
+    }
+
+    public ServerResponse autoRepairPart(String serialNumber, String model, String partType) {
+        return _getDescriptor().getProxy().autoRepairPart(serialNumber,model,partType);
+    }
+
+}

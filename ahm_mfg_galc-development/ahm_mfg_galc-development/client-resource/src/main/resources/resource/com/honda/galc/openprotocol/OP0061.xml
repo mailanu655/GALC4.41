@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0061" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="true" className="com.honda.galc.openprotocol.model.LastTighteningResult">
+    <field id="01" name="CELL_ID" type="String" length="4" defaultValue="0001" />
+    <field id="02" name="CHANNEL_ID" type="String" length="2" defaultValue="01" />
+    <field id="03" name="CONTROLLER_NAME" type="String" length="25" defaultValue="DummyDevice" />    
+    <field id="04" name="VIN_NUMBER" type="String" length="25" defaultValue="" />    
+    <field id="05" name="JOB_NUMBER" type="Integer" length="2" defaultValue="00" />
+    <field id="06" name="PSET_NUMBER" type="Integer" length="3" defaultValue="008" />
+    <field id="07" name="BATCH_SIZE" type="Integer" length="4" defaultValue="0001" />    
+    <field id="08" name="BATCH_COUNTER" type="Integer" length="4" defaultValue="0001" />   
+    <field id="09" name="TIGHTENING_STATUS" type="String" length="1" defaultValue="1" />
+    <field id="10" name="TORQUE_STATUS" type="Integer" length="1" defaultValue="1" />
+    <field id="11" name="ANGLE_STATUS" type="Integer" length="1" defaultValue="1" />    
+    <field id="12" name="TORQUE_MIN_LIMIT" type="String" length="6" defaultValue="000000" />   
+    <field id="13" name="TORQUE_MAX_LIMIT" type="String" length="6" defaultValue="000012" />
+    <field id="14" name="TORQUE_FINAL_TARGET" type="String" length="6" defaultValue="000000" />
+    <field id="15" name="TORQUE" type="String" length="6" defaultValue="000099" />    
+    <field id="16" name="ANGLE_MIN" type="String" length="5" defaultValue="00000" />   
+    <field id="17" name="ANGLE_MAX" type="String" length="5" defaultValue="09999" />
+    <field id="18" name="FINAL_ANGLE_TARGET" type="String" length="5" defaultValue="05000" />
+    <field id="19" name="ANGLE" type="String" length="5" defaultValue="00328" />    
+    <field id="20" name="TIME_STAMP" type="String" length="19" defaultValue="2008-04-15:04:25:57" />   
+    <field id="21" name="LAST_PSET_CHANGE" type="String" length="19" defaultValue="" />
+    <field id="22" name="BATCH_STATUS" type="Integer" length="1" defaultValue="0" />
+    <field id="23" name="TIGHTENING_ID" type="String" length="10" defaultValue="0000000001" />
+</OPMessage>
+
+  

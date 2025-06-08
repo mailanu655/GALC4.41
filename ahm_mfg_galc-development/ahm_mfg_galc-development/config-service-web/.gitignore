@@ -1,0 +1,11 @@
+/target/
+/null/
+/ehcache/
+/build/
+/.settings/
+/.apt_generated/
+.project
+.classpath
+.compatibility
+.factorypath
+/.apt_generated_tests/

@@ -1,0 +1,157 @@
+.root {
+    -fx-font-family: "System";
+    -fx-font-size: 12px;
+    -fx-base: #D0D0D0;
+    -fx-background: #F4F4F4;
+    -fx-focus-color: #0093FF;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-inner-border: linear-gradient(to bottom, derive(-fx-color,78.0%) 0%, derive(-fx-color,34.0%) 100%);
+    -fx-body-color: linear-gradient( to bottom, derive(-fx-color, 45.0%) 0%, derive(-fx-color, 34.0%) 50%, derive(-fx-color, 5.0%) 50.5%, derive(-fx-color, -10.0%) 100%);
+}
+.button, .toggle-button, .choice-box {
+    -fx-background-radius: 9, 9, 8, 7;
+    -fx-padding: 5px 12px 5px 12px;
+}
+.menu-button {
+    -fx-background-radius: 2, 2, 2, 2;
+}
+
+/*
+.menu-button .label {
+    -fx-padding: 5px 20px 5px 12px;
+    -fx-label-padding: 5px;
+}
+*/
+
+.menu-button .arrow-button {
+    -fx-padding: 5px 8px 5px 0px;
+}
+.choice-box {
+    -fx-padding: 0 8px 0 0;
+}
+.choice-box .label {
+    -fx-padding: 5px 6px 5px 8px;
+}
+.choice-box .open-button {
+    -fx-padding: 1 0 0 10px;
+}
+.combo-box-base:editable .text-field, .combo-box-base .arrow-button, .combo-box .list-cell {
+    -fx-padding: 5px 8px 5px 8px;
+}
+.check-box .box {
+    -fx-padding: 0.3333333333333333em;
+}
+.radio-button .radio {
+    -fx-padding: 0.4166663333333333em;
+}
+.label, .check-box, .radio-button {
+    -fx-text-fill: -fx-text-background-color;
+}
+.button, .toggle-button, .check-box .box, .radio-button .radio, .choice-box, .menu-button, .tab, .combo-box-base {
+    -fx-background-insets: 0 0 -1 0, 0, 3, 4;
+}
+
+.button, .toggle-button, .check-box .box, .radio-button .radio, .choice-box, .combo-box-base {
+      -fx-font-size: 20px;
+}
+
+.button:focused, .toggle-button:focused, .check-box:focused .box, .radio-button:focused .radio, .choice-box:focused, .menu-button:focused, .combo-box-base:focused {
+    -fx-background-insets: -1.4, 0, 3, 4;
+}
+.combo-box-base .arrow-button {
+    -fx-background-insets: 0, 3, 4;
+}
+.choice-box .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
+}
+.menu-button .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
+}
+
+/* custom styles */
+#status-pane {
+   -fx-border-color: black;
+   -fx-border-insets: 1;
+   -fx-border-width: 1;
+   -fx-border-style: solid;
+}
+
+
+#status-error-message {
+   -fx-fill: black;
+   -fx-background-color: red;
+   -fx-font-weight: bold;
+   -fx-font-size: 10;
+   
+   
+    -fx-border-color: black;
+   -fx-border-insets: 1;
+   -fx-border-width: 1;
+   -fx-border-style: solid;
+}
+
+#status-message {
+   -fx-fill: black;
+   -fx-background-color: transparent;
+   -fx-font-weight: normal;
+   -fx-font-size: 10;
+   
+   -fx-border-color: black;
+   -fx-border-insets: 1;
+   -fx-border-width: 1;
+   -fx-border-style: solid;
+}
+
+/*  custom styles for com.honda.galc.client.ui.component.TextFieldState */
+
+.text-field-state-disabled {
+	-fx-text-fill: gray;
+	-fx-background-color: lightgray;
+}
+
+.text-field-state-edit {
+	-fx-text-fill: black;
+	-fx-background-color: gainsboro;
+}
+
+.text-field-state-read-only {
+	-fx-text-fill: black;
+	-fx-background-color: lightgrey;
+}
+
+.text-field-state-error {
+	-fx-text-fill: black;
+	-fx-background-color: red;
+}
+
+.text-field-state-error-read-only {
+	-fx-text-fill: black;
+	-fx-background-color: white;
+}
+
+
+/* custom styles for the com.honda.galc.client.ui.component.FXOptionPane */
+#fxoption-pane {
+   -fx-font-size: 20px;
+}
+
+
+/* width of scroll bar will be proportional to width of font, large enough for touch screen monitor */
+.scroll-bar .increment-button {
+  -fx-padding: 1.5em;
+}
+
+.scroll-bar .decrement-button {
+  -fx-padding: 1.5em;
+}
+/*mfg control maint screen */
+.tabheading {
+
+  -fx-font-size: 16px;
+
+}
+
+
+.scroll-bar .decrement-button {
+  -fx-padding: 1.5em;
+}

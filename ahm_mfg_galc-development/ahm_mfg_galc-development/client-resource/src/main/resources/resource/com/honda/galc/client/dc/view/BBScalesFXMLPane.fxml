@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import com.honda.galc.client.ui.component.*?>
+
+<!-- <fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml"> -->
+<fx:root type="javafx.scene.layout.BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<center>
+<GridPane id="bbgrid_01" xmlns:fx="http://javafx.com/fxml"
+          hgap="10" vgap="10" >
+<padding><Insets top="25" right="25" bottom="10" left="15"/></padding>
+    <LoggedLabel id="vin-label" styleClass="vin_label" text="VIN" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+    <LoggedTextField fx:id="vin" editable="true" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="4" />
+    <LoggedLabel text="LFrt Max:" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="100" />
+    <LoggedTextField fx:id="LFrt_max" editable="false" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="50" />
+
+    <LoggedLabel text="LFrt Min:" GridPane.columnIndex="0" GridPane.rowIndex="1" maxWidth="100" />
+    <LoggedTextField fx:id="LFrt_min" editable="false" 
+                    GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="50" />
+
+    <LoggedTextField fx:id="LFrt_val" editable="false" styleClass="scaleweight" 
+                    GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2" maxWidth="100"  minHeight="40"   />
+
+    <ImageView id="cc_car_img" fitHeight="150" fitWidth="220" GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.rowSpan="4" preserveRatio="true" cache="" >
+        <image>
+            <Image url="resource/images/bbscales/green_nsx.png" />
+        </image>
+    </ImageView>
+    <LoggedTextField fx:id="RFrt_val" editable="false"  styleClass="scaleweight" 
+                     GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.rowSpan="2" maxWidth="100" minHeight="40"  />
+    <LoggedLabel text="RFrt Max:" GridPane.columnIndex="6" GridPane.rowIndex="0"  maxWidth="100"/>
+    <LoggedTextField fx:id="RFrt_max" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="0" maxWidth="50"/>
+
+    <LoggedLabel text="RFrt Min:" GridPane.columnIndex="6" GridPane.rowIndex="1" maxWidth="100" />
+    <LoggedTextField fx:id="RFrt_min" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="1" maxWidth="50"/>
+
+    <LoggedLabel text="LRr Max:" GridPane.columnIndex="0" GridPane.rowIndex="4" maxWidth="100" />
+    <LoggedTextField fx:id="LRr_max" editable="false" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="50" />
+
+    <LoggedLabel text="LRr Min:" GridPane.columnIndex="0" GridPane.rowIndex="5" maxWidth="100" />
+    <LoggedTextField fx:id="LRr_min" editable="false" 
+                    GridPane.columnIndex="1" GridPane.rowIndex="5" maxWidth="50" />
+
+    <LoggedTextField fx:id="LRr_val" editable="false"  styleClass="scaleweight" 
+                    GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="2" maxWidth="100"  minHeight="40"   />
+
+    <LoggedTextField fx:id="RRr_val" editable="false"  styleClass="scaleweight" 
+                    GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.rowSpan="2" maxWidth="100"  minHeight="40"   />
+    <LoggedLabel text="RRr Max:" GridPane.columnIndex="6" GridPane.rowIndex="4"  maxWidth="100"/>
+    <LoggedTextField fx:id="RRr_max" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="4" maxWidth="50"/>
+
+    <LoggedLabel text="RRr Min:" GridPane.columnIndex="6" GridPane.rowIndex="5" maxWidth="100" />
+    <LoggedTextField fx:id="RRr_min" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="5" maxWidth="50"/>    
+    <!--
+    <LoggedLabel text="LCr Max:" GridPane.columnIndex="0" GridPane.rowIndex="7" maxWidth="100" />
+    <LoggedTextField fx:id="LCr_max" editable="false" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="7" maxWidth="50" />
+
+    <LoggedLabel text="LCr Min:" GridPane.columnIndex="0" GridPane.rowIndex="8" maxWidth="100" />
+    <LoggedTextField fx:id="LCr_min" editable="false" 
+                    GridPane.columnIndex="1" GridPane.rowIndex="8" maxWidth="50" />
+
+    <LoggedTextField fx:id="LCr_val" editable="false" 
+                    GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.rowSpan="2" maxWidth="100"  minHeight="40"  />
+    -->
+	<VBox spacing="2" alignment="center" 
+		GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.columnSpan="2">
+		<LoggedLabel text="Left cross" styleClass="label_u"/>     
+		<LoggedTextField fx:id="LCr_val" editable="false" maxWidth="100"/>
+		<HBox spacing="2" alignment="center">
+			<LoggedLabel text="min/max:" styleClass="range_label"/>
+			<LoggedLabel id="lbl_lcr_min" text="min" />
+			<LoggedLabel id="lbl_lcr_separator" text="/" />
+			<LoggedLabel id="lbl_lcr_max" text="max" />
+		</HBox>
+	</VBox>
+
+	<VBox spacing="2" alignment="center" 
+		GridPane.columnIndex="3" GridPane.rowIndex="7" GridPane.rowSpan="2">
+		<LoggedLabel text="Cross diff" styleClass="label_u"/>     
+		<LoggedTextField fx:id="Cr_diff" editable="false" maxWidth="100"/>
+		<HBox spacing="2" alignment="center">
+			<LoggedLabel text="min/max:" styleClass="range_label"/>
+			<LoggedLabel id="lbl_crdiff_min" text="min" />
+			<LoggedLabel id="lbl_crdiff_separator" text="/" />
+			<LoggedLabel id="lbl_crdiff_max" text="max" />
+		</HBox>
+	</VBox>
+
+	<!--
+    <LoggedTextField fx:id="RCr_val" editable="false" 
+                    GridPane.columnIndex="4" GridPane.rowIndex="7" GridPane.rowSpan="2" maxWidth="100"  minHeight="40"  />
+    <LoggedLabel text="RCr Max:" GridPane.columnIndex="6" GridPane.rowIndex="7"  maxWidth="100"/>
+    <LoggedTextField fx:id="RCr_max" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="7" maxWidth="50"/>
+
+    <LoggedLabel text="RCr Min:" GridPane.columnIndex="6" GridPane.rowIndex="8" maxWidth="100" />
+    <LoggedTextField fx:id="RCr_min" editable="false" 
+                    GridPane.columnIndex="5" GridPane.rowIndex="8" maxWidth="50"/>
+    -->
+
+	<VBox spacing="2" alignment="center" 
+		GridPane.columnIndex="5" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.columnSpan="2">
+		<LoggedLabel text="Right cross" styleClass="label_u"/>     
+		<LoggedTextField fx:id="RCr_val" editable="false" maxWidth="100"/>
+		<HBox spacing="2" alignment="center">
+			<LoggedLabel text="min/max:" styleClass="range_label"/>
+			<LoggedLabel id="lbl_rcr_min" text="min" />
+			<LoggedLabel id="lbl_rcr_separator" text="/" />
+			<LoggedLabel id="lbl_rcr_max" text="max" />
+		</HBox>
+	</VBox>
+
+	<!-- 
+	<LoggedLabel text="Tot Min:" GridPane.columnIndex="1" GridPane.rowIndex="9" maxWidth="100" />
+    <LoggedTextField fx:id="Tot_min" editable="false" 
+                   GridPane.columnIndex="2" GridPane.rowIndex="9" maxWidth="50" />
+	-->
+	<VBox spacing="2" alignment="center" 
+		GridPane.columnIndex="3" GridPane.rowIndex="9" GridPane.rowSpan="2">
+		<LoggedLabel text="Total"  styleClass="label_u"/>     
+		<LoggedTextField fx:id="Tot_val" editable="false" maxWidth="125"/>
+		<HBox spacing="2" alignment="center">
+			<LoggedLabel text="min/max:" styleClass="range_label"/>
+			<LoggedLabel id="lbl_tot_min" text="min" />
+			<LoggedLabel id="lbl_tot_separator" text="/" />
+			<LoggedLabel id="lbl_tot_max" text="max" />
+		</HBox>
+	</VBox>
+
+	<!--
+    <LoggedLabel text="Tot Max:" GridPane.columnIndex="5" GridPane.rowIndex="9" maxWidth="100"/>
+    <LoggedTextField fx:id="Tot_max" editable="false" 
+                    GridPane.columnIndex="4" GridPane.rowIndex="9" maxWidth="50" />
+    -->                
+	<LoggedButton fx:id="cMode" text="Mode" GridPane.columnIndex="0" GridPane.rowIndex="9"
+					onAction="#handleButtonAction">
+			<graphic>
+			<ImageView fx:id="cMode_icon"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+				<Image fx:id="cMode_img" smooth="false" url="resource/images/bbscales/Check-icon.png" />
+			</ImageView>
+			</graphic>
+	</LoggedButton>
+
+	<LoggedButton fx:id="clear" text="Clear" GridPane.columnIndex="6" GridPane.rowIndex="9"
+		onAction="#handleButtonAction">
+			<graphic>
+			<ImageView xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+				<Image smooth="false" url="resource/images/bbscales/X-icon.png" />
+			</ImageView>
+			</graphic>					
+	</LoggedButton>
+ 
+<stylesheets><URL value="@bbscales.css"/></stylesheets>
+</GridPane>
+</center>
+</fx:root>
+
+

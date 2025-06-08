@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- This bean is the parent ApplicationContext for the WebApplicationContexts defined in the WARs. 
+         The context files listed here should contain beans that are used by all WARs, 
+         for example Services and DAO's. 
+         constructor-arg = Dao.xml for tomcat, DaoWebsphere.xml for websphere
+         -->
+    <bean id="web.context" class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+            <list>
+                <value>DaoWebsphere.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>

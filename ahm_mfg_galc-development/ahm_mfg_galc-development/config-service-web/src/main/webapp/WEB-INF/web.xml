@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_ID">
+	<display-name>config-service-web</display-name>
+	
+	<context-param>
+        <param-name>parentContextKey</param-name>
+        <param-value>web.context</param-value>
+    </context-param>
+    
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+	
+	<servlet>
+		<servlet-name>JMXStatusServlet</servlet-name>
+		<display-name>JMXStatusServlet</display-name>
+		<servlet-class>com.honda.galc.web.JMXStatusServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+		org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>validate</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>JMXStatusServlet</servlet-name>
+		<url-pattern>/JMXStatusServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-bean.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-html.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-html.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-logic.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-nested.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-nested.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-template.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-template.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>/WEB-INF/struts-tiles.tld</taglib-uri>
+		<taglib-location>/WEB-INF/struts-tiles.tld</taglib-location>
+	</taglib>
+	<security-constraint>
+		<display-name>AllPages</display-name>
+		<web-resource-collection>
+			<web-resource-name>AllPages</web-resource-name>
+			<description>Controls access to all pages and servlets</description>
+			<url-pattern>*.do</url-pattern>
+			<url-pattern>*.jsp</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>PUT</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>All authenticated users</description>
+			<role-name>AllUsers</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<display-name>StylePages</display-name>
+		<web-resource-collection>
+			<web-resource-name>StylePages</web-resource-name>
+			<description>CSS and other style items</description>
+			<url-pattern>theme/*</url-pattern>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<web-resource-collection>
+			<web-resource-name>index.html</web-resource-name>
+			<description></description>
+			<url-pattern>index.html</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>Authorized and Unauthorized</description>
+			<role-name>Everyone</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login/LoginPage.html</form-login-page>
+			<form-error-page>/login/LoginFailedPage.html</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-role>
+		<description>All Authenticated Users</description>
+		<role-name>AllUsers</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Admin Users and Groups</description>
+		<role-name>EditAdmin</role-name>
+	</security-role>
+	<security-role>
+		<description>View Admin Users and Groups</description>
+		<role-name>ViewAdmin</role-name>
+	</security-role>
+	<security-role>
+		<description>View Terminal Settings</description>
+		<role-name>ViewTerminal</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Terminal Settings</description>
+		<role-name>EditTerminal</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit GALC Users</description>
+		<role-name>EditUsers</role-name>
+	</security-role>
+	<security-role>
+		<description>View GALC User information</description>
+		<role-name>ViewUsers</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Device Related Settings</description>
+		<role-name>EditDevice</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Process Point Settings</description>
+		<role-name>EditProcessPoint</role-name>
+	</security-role>
+	<security-role>
+		<description>View Process Point Settings</description>
+		<role-name>ViewProcessPoint</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Process-tree related settings</description>
+		<role-name>EditProcess</role-name>
+	</security-role>
+	<security-role>
+		<description>View process-tree related settings</description>
+		<role-name>ViewProcessTree</role-name>
+	</security-role>
+	<security-role>
+		<description>Edit Access Control List</description>
+		<role-name>EditACL</role-name>
+	</security-role>
+	<security-role>
+		<description>View Access Control List</description>
+		<role-name>ViewACL</role-name>
+	</security-role>
+	<security-role>
+		<description>Authorized and Unauthorized</description>
+		<role-name>Everyone</role-name>
+	</security-role>
+
+</web-app>

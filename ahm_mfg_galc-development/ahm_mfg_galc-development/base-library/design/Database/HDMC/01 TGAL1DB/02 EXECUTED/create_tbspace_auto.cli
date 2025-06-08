@@ -1,0 +1,41 @@
+--DROP TABLESPACE GALTBSDAT1;
+--DROP TABLESPACE GALTBSDAT2;
+--DROP TABLESPACE GALTBSDAT3;
+--DROP TABLESPACE GALTBSDAT4;
+--DROP TABLESPACE GALTBSDAT5;
+--DROP TABLESPACE GALTBSDAT6;
+--DROP TABLESPACE GALTBSDAT7;
+--DROP TABLESPACE GALTBSDAT8;
+--DROP TABLESPACE GALTBSDAT9;
+--DROP TABLESPACE GALTBSDAT10;
+--DROP TABLESPACE GALTBSREF11;
+--DROP TABLESPACE GALTBSREF12;
+--DROP TABLESPACE GALTBSIDX1;
+--DROP TABLESPACE GALTBSIDX2;
+--DROP TABLESPACE GALTBSIDX3;
+--DROP TABLESPACE GALTBSIDX4;
+--DROP TABLESPACE GALTBS8K1;
+--DROP TABLESPACE GALTBS16K1;
+--DROP TABLESPACE GALTBS32K1;
+
+
+create tablespace galtbsdat1 initialsize 400 M MAXSIZE 5 G bufferpool GALBP1;
+create tablespace galtbsdat2 initialsize 400 M MAXSIZE 4 G bufferpool GALBP1;
+create tablespace galtbsdat3 initialsize 400 M MAXSIZE 4 G bufferpool GALBP1;
+create tablespace galtbsdat4 initialsize 50 M MAXSIZE 3 G bufferpool GALBP2;
+create tablespace galtbsdat5 initialsize 50 M MAXSIZE 3 G bufferpool GALBP2;
+create tablespace galtbsdat6 initialsize 50 M MAXSIZE 4 G bufferpool GALBP2;
+create tablespace galtbsdat7 initialsize 50 M MAXSIZE 2 G bufferpool GALBP3;
+create tablespace galtbsdat8 initialsize 50 M MAXSIZE 2 G bufferpool GALBP3;
+create tablespace galtbsdat9 initialsize 50 M MAXSIZE 1 G bufferpool GALBP3;
+create tablespace galtbsdat10 initialsize 50 M MAXSIZE 1 G bufferpool GALBP3;
+create tablespace galtbsref11 initialsize 50 M MAXSIZE 1 G bufferpool GALBP4;
+create tablespace galtbsref12 initialsize 50 M MAXSIZE 1 G bufferpool GALBP4;
+create tablespace galtbsidx1 initialsize 50 M MAXSIZE 4 G bufferpool GALBPIDX;
+create tablespace galtbsidx2 initialsize 50 M MAXSIZE 4 G bufferpool GALBPIDX;
+create tablespace galtbsidx3 initialsize 50 M MAXSIZE 4 G bufferpool GALBPIDX;
+create tablespace galtbsidx4 initialsize 50 M MAXSIZE 1 G bufferpool GALBPIDX;
+create tablespace galtbs8k1 pagesize 8K initialsize 50 M MAXSIZE 200 M bufferpool GALBP5;
+create tablespace galtbs16k1 pagesize 16K initialsize 50 M maxsize 500 M bufferpool GALBP16K;
+create tablespace galtbs32k1 pagesize 32K initialsize 50 M maxsize 1 G bufferpool GALBP32K;
+

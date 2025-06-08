@@ -1,0 +1,1284 @@
+<UNIT_IN_TEST VIN="@VIN@" BuildCode="@BUILD_CODE@" TestID="" SeqStepFile="9SVK_Process.csv" ContStepFile="9SVK_InspectionSelect.csv" SEQData="CA005Z000" Production="0" Generation="2.1" TotalStatus="Pass">
+<PROCESS Process="CA005Z000" StartTime="@TODAY@T12:17:17" StartTimeUTC="@TODAY@T16:17:17Z" FinishTime="@TODAY@T12:25:57" Cal="2009-04-28T09:51:24" DCRev="CA005Z000" SWVer="3, 3, 7, 0" Status="Pass" MACAddress="00:00:4C:78:C2:09" OperatorID="@OPERATOR_ID@" MfgID="A61" Cell="X07">
+<TESTS>
+<TEST Test="VSP_TRIGGER" InCycleRetestNum="1" TestTime="@TODAY@T12:17:28" TestEndTime="@TODAY@T12:18:04" ProcessInfo="S005" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!SPEED_KM_OR_MILE" Val="0" />
+<TEST_PARAM Param="!F_VSPOVER" Val="-1" />
+<TEST_PARAM Param="!VSP_OVER" Val="1" LoLimit="1" Unit="mph" />
+<TEST_PARAM Param="!VSP_UNDER" Val="1" HiLimit="100" Unit="mph" />
+<TEST_PARAM Param="F_OK" Val="-1" />
+<TEST_PARAM Param="F_TIMEOUT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MICU_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:18:20" TestEndTime="@TODAY@T12:18:22" ProcessInfo="S035L499" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="MICU_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="MICU_DWG" Val="38800SNAA350M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MICU_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:18:20" TestEndTime="@TODAY@T12:18:22" ProcessInfo="S035" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="HM_MICU_SERIAL" Val="91462317" />
+<TEST_ATTRIBUTE Att="SUPPLIER_MICU_SERIAL" Val="3AU01V91A   " />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_MICU_HM_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_NO_MICU_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_HM_MICU_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_MICU_NOT_SUPPORT" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="METER_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:18:27" TestEndTime="@TODAY@T12:18:30" ProcessInfo="S045" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="METER_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="METER_DWG" Val="78200SNAA141M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="BCAN_DTC_CLEAR" InCycleRetestNum="1" TestTime="@TODAY@T12:18:31" TestEndTime="@TODAY@T12:18:34" ProcessInfo="S050" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="AC" Val="0" />
+<TEST_PARAM Param="AFS" Val="0" />
+<TEST_PARAM Param="AUTO_LIGHT" Val="0" />
+<TEST_PARAM Param="C_PANEL" Val="0" />
+<TEST_PARAM Param="COMBI_SW" Val="0" />
+<TEST_PARAM Param="DDE" Val="0" />
+<TEST_PARAM Param="HANDS_FREE" Val="0" />
+<TEST_PARAM Param="HIP" Val="0" />
+<TEST_PARAM Param="IMMOBI" Val="1" />
+<TEST_PARAM Param="MEM_SEAT" Val="0" />
+<TEST_PARAM Param="METER" Val="1" />
+<TEST_PARAM Param="SDL" Val="0" />
+<TEST_PARAM Param="SDR" Val="0" />
+<TEST_PARAM Param="P_TAIL" Val="0" />
+<TEST_PARAM Param="PTRUNK" Val="0" />
+<TEST_PARAM Param="P_WIND" Val="0" />
+<TEST_PARAM Param="RLS" Val="0" />
+<TEST_PARAM Param="RAIN" Val="0" />
+<TEST_PARAM Param="RJU" Val="0" />
+<TEST_PARAM Param="RELAY" Val="0" />
+<TEST_PARAM Param="SMART" Val="0" />
+<TEST_PARAM Param="TELE" Val="0" />
+<TEST_PARAM Param="ALV" Val="0" />
+<TEST_PARAM Param="PARKSR" Val="0" />
+<TEST_PARAM Param="MVC" Val="0" />
+<TEST_PARAM Param="BSI" Val="0" />
+<TEST_PARAM Param="!AUTO_SELECT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="FI_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:18:34" TestEndTime="@TODAY@T12:18:34" ProcessInfo="S055" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="FI_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="FI_DWG" Val="37820RNAA720M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="READ_FI_ECU_ID" InCycleRetestNum="1" TestTime="@TODAY@T12:18:34" TestEndTime="@TODAY@T12:18:34" ProcessInfo="S055" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!$#FIECUID" Val="FFFFFFFFFF" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!FI ECUID = FFFFFFFFFF" Val="FFFFFFFFFF" ExpectedVal="FFFFFFFFFF" />
+<TEST_ATTRIBUTE Att="FI_ECU_ID" Val="1009010001" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="FI_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:18:34" TestEndTime="@TODAY@T12:18:34" ProcessInfo="S055" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ECU_Read_Length" Val="11" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!F_NO_PGM-FI_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_PGM-FI_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_PGM-FI_COMM_ERR" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="SUPPLIER_FI_SERIAL" Val="34202270142" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="READ_AT_ECU_ID" InCycleRetestNum="1" TestTime="@TODAY@T12:18:35" TestEndTime="@TODAY@T12:18:35" ProcessInfo="S060" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!$#MISSECUID" Val="FFFFFFFFFF" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!AT ECUID = FFFFFFFFFF" Val="FFFFFFFFFF" ExpectedVal="FFFFFFFFFF" />
+<TEST_ATTRIBUTE Att="EAT_ECU_ID" Val="0009000009" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ABS_VSA_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:18:36" TestEndTime="@TODAY@T12:18:37" ProcessInfo="S100" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!DWG_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="ABS_VSA_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="ABS_VSA_DWG" Val="57110SNAA540M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TPMS_TRC_ABLTY" InCycleRetestNum="2" TestTime="@TODAY@T12:18:38" TestEndTime="@TODAY@T12:18:39" ProcessInfo="S110" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!DWG_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="TPMS_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="TPMS_DWG" Val="39350SNAA120M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TPMS_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:18:37" TestEndTime="@TODAY@T12:18:38" ProcessInfo="S110" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!HM_STATUS" Val="0xF0" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="!SUP_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SUPPLIER_TPMS_SERIAL" Val="95861279" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_TPMS_HM_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_HM_TPMS_NOT_SUPPORT" Val="-1" />
+<TEST_PARAM Param="!F_HM_TPMS_COMM_ERR" Val="0" />
+<TEST_PARAM Param="!F_NO_TPMS_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_TPMS_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_TPMS_COMM_ERR" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="ENG_CONDITION" InCycleRetestNum="1" TestTime="@TODAY@T12:18:39" TestEndTime="@TODAY@T12:21:02" ProcessInfo="A130-A295" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="PARAMETER_NESTART" Val="400" Unit="rpm" />
+<TEST_PARAM Param="PARAMETER_VIDL" Val="5" Unit="kph" />
+<TEST_PARAM Param="PARAMETER_MAPLOADLO" Val="100" Unit="kPaA" />
+<TEST_PARAM Param="PGMFI_CAN" Val="-1" />
+<TEST_PARAM Param="ECUID5_bit0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="F_ATNP" Val="-1" />
+<TEST_PARAM Param="ATNP" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="IDLING" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NESTART" Val="717" LoLimit="400" Unit="rpm" />
+<TEST_PARAM Param="!VSP@VIDL" Val="0" HiLimit="5" Unit="km/h" />
+<TEST_PARAM Param="!MAP@MAPLOADLO" Val="40" HiLimit="100" Unit="kpa" />
+<TEST_PARAM Param="LOOP_CNT" Val="743" LoLimit="142414" Unit="times" />
+<TEST_PARAM Param="LOOP_TIM_AVE" Val="191" LoLimit="142414" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MAX" Val="286" LoLimit="14523" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MIN" Val="168" LoLimit="1803" Unit="mS" />
+<TEST_PARAM Param="COMMNGCNT1" />
+<TEST_PARAM Param="COMMNGCNT2" />
+<TEST_PARAM Param="COMMNGCNT3" />
+<TEST_PARAM Param="!Support bit" Val="FFFDFF7DE0" Unit="hex" />
+<TEST_PARAM Param="LAST_NE" Val="717" Unit="rpm" />
+<TEST_PARAM Param="LAST_VSP" Val="0" Unit="kph" />
+<TEST_PARAM Param="LAST_MAP" Val="40" Unit="kPaA" />
+<TEST_PARAM Param="LAST_TW" Val="88" Unit="degC" />
+<TEST_PARAM Param="LAST_VB" Val="14.1" Unit="V" />
+<TEST_PARAM Param="LAST_RELTH" Val="1.9608" Unit="deg" />
+<TEST_PARAM Param="LAST_TA" Val="33" Unit="degC" />
+<TEST_PARAM Param="LAST_PA" Val="98" Unit="kPaA" />
+<TEST_PARAM Param="LAST_ACGF" Val="63.14" Unit="%" />
+<TEST_PARAM Param="LAST_LACT" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="LAST_GAIR" Val="3.02" Unit="g/sec" />
+<TEST_PARAM Param="LAST_TW2" Val="24" Unit="degC" />
+<TEST_PARAM Param="NE_MIN" Val="0" LoLimit="142" Unit="rpm" />
+<TEST_PARAM Param="NE_MAX" Val="3053" LoLimit="73094" Unit="rpm" />
+<TEST_PARAM Param="NE_AVE" Val="801" LoLimit="142523" Unit="rpm" />
+<TEST_PARAM Param="VSP_MIN" Val="0" LoLimit="5965" Unit="kph" />
+<TEST_PARAM Param="VSP_MAX" Val="71" LoLimit="79233" Unit="kph" />
+<TEST_PARAM Param="VSP_AVE" Val="5" LoLimit="142523" Unit="kph" />
+<TEST_PARAM Param="MAP_MIN" Val="23" LoLimit="80742" Unit="kPaA" />
+<TEST_PARAM Param="MAP_MAX" Val="98" LoLimit="142" Unit="kPaA" />
+<TEST_PARAM Param="MAP_AVE" Val="54" LoLimit="142523" Unit="kPaA" />
+<TEST_PARAM Param="TW_MIN" Val="74" LoLimit="2056" Unit="degC" />
+<TEST_PARAM Param="TW_MAX" Val="88" LoLimit="124213" Unit="degC" />
+<TEST_PARAM Param="VB_MIN" Val="8.8" LoLimit="13591" Unit="V" />
+<TEST_PARAM Param="VB_MAX" Val="14.2" LoLimit="17526" Unit="V" />
+<TEST_PARAM Param="RELTH_MIN" Val="1.9608" LoLimit="138811" Unit="deg" />
+<TEST_PARAM Param="RELTH_MAX" Val="60.0000" LoLimit="134475" Unit="deg" />
+<TEST_PARAM Param="RELTH_AVE" Val="4.7930" LoLimit="142524" Unit="deg" />
+<TEST_PARAM Param="TA_MIN" Val="30" LoLimit="28515" Unit="degC" />
+<TEST_PARAM Param="TA_MAX" Val="35" LoLimit="142" Unit="degC" />
+<TEST_PARAM Param="PA_MIN" Val="98" LoLimit="142" Unit="kPaA" />
+<TEST_PARAM Param="PA_MAX" Val="98" LoLimit="142" Unit="kPaA" />
+<TEST_PARAM Param="ACGF_MIN" Val="23.14" LoLimit="5965" Unit="%" />
+<TEST_PARAM Param="ACGF_MAX" Val="86.67" LoLimit="15536" Unit="%" />
+<TEST_PARAM Param="ACGF_AVE" Val="62.51" LoLimit="142524" Unit="%" />
+<TEST_PARAM Param="LACT_MIN" Val="0.00" LoLimit="142" Unit="mm" />
+<TEST_PARAM Param="LACT_MAX" Val="4.55" LoLimit="73094" Unit="mm" />
+<TEST_PARAM Param="LACT_AVE" Val="0.18" LoLimit="142524" Unit="mm" />
+<TEST_PARAM Param="GAIR_MIN" Val="0.20" LoLimit="838" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_MAX" Val="33.17" LoLimit="73095" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_AVE" Val="5.22" LoLimit="142524" Unit="g/sec" />
+<TEST_PARAM Param="TW2_MIN" Val="24" LoLimit="142" Unit="degC" />
+<TEST_PARAM Param="TW2_MAX" Val="24" LoLimit="142" Unit="degC" />
+<TEST_PARAM Param="IXREF" Val="110.0" Unit="l/min" />
+<TEST_PARAM Param="IALSTAT0" Val="0" />
+<TEST_PARAM Param="IALSTAT1" Val="0" />
+<TEST_PARAM Param="IALSTAT2" Val="0" />
+<TEST_PARAM Param="!INSPECTION_TIME" Val="142544" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="VPLS" InCycleRetestNum="2" TestTime="@TODAY@T12:18:57" TestEndTime="@TODAY@T12:19:53" ProcessInfo="S200" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!VSP@VVSP" Val="31" LoLimit="30" Unit="km/h" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MFINH" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:20:27" ProcessInfo="A205A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!VSP &gt;= $#VSPLTRG" Val="40" LoLimit="0" Unit="km/h" />
+<TEST_PARAM Param="!VSP &gt;= $#VSPHTRG" Val="0" LoLimit="150" Unit="km/h" />
+<TEST_PARAM Param="F_MFINHOP" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="VTSW1_POIL" InCycleRetestNum="2" TestTime="@TODAY@T12:18:57" TestEndTime="@TODAY@T12:19:52" ProcessInfo="A200-A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!L_NE@NEVT" Val="2520" LoLimit="2000" Unit="rpm" />
+<TEST_PARAM Param="!RVTS@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="POILL" Val="0" HiLimit="49" Unit="kpa" />
+<TEST_PARAM Param="!RVTS@value of 1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="POILH" Val="635" LoLimit="300" Unit="kpa" />
+<TEST_PARAM Param="F_VTS1L" Val="-1" />
+<TEST_PARAM Param="F_VTS1H" Val="-1" />
+<TEST_PARAM Param="F_POIL1L" Val="-1" />
+<TEST_PARAM Param="F_POIL1H" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="OPSW_CHECK1" InCycleRetestNum="2" TestTime="@TODAY@T12:18:57" TestEndTime="@TODAY@T12:19:54" ProcessInfo="A200-A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="Parameter OP2" Val="1" />
+<TEST_PARAM Param="Parameter OP3" Val="1" />
+<TEST_PARAM Param="Parameter OP4" Val="0" />
+<TEST_PARAM Param="Parameter OP5" Val="0" />
+<TEST_PARAM Param="Parameter OP6" Val="0" />
+<TEST_PARAM Param="Parameter OP7" Val="0" />
+<TEST_PARAM Param="Parameter OP8" Val="0" />
+<TEST_PARAM Param="Support Bit OP_23*****" Val="11000000" Unit="BIN" />
+<TEST_PARAM Param="F_OP2L" Val="-1" />
+<TEST_PARAM Param="F_OP2H" Val="-1" />
+<TEST_PARAM Param="F_OKOP2" Val="-1" />
+<TEST_PARAM Param="F_OP3L" Val="-1" />
+<TEST_PARAM Param="F_OP3H" Val="-1" />
+<TEST_PARAM Param="F_OKOP3" Val="-1" />
+<TEST_PARAM Param="F_OKOPC" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AT_VNMVNC" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:19:55" ProcessInfo="A205A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!VSP" Val="51" LoLimit="20" Unit="km/h" />
+<TEST_PARAM Param="RATIOVNMVNC" Val="1.000" LoLimit="0.500" HiLimit="1.500" />
+<TEST_PARAM Param="!NOKVNMVNC" Val="3" LoLimit="3" />
+<TEST_PARAM Param="VNM" Val="51" Unit="km/h" />
+<TEST_PARAM Param="VNC" Val="51" Unit="km/h" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MAF" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:19:54" ProcessInfo="A205-L499" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!RLTNG50BL@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!RLTOK50BL@value of 1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!RLTNG50BH@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!RLTOK50BH@value of 1" Val="1" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SVO2_B1" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:19:59" ProcessInfo="A205A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!FSS-B1@value of 1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!SO1MIN" Val="0.7252" Unit="V" />
+<TEST_PARAM Param="!SO1MAX" Val="0.8428" Unit="V" />
+<TEST_PARAM Param="!DSO1&gt;DSO1" Val="0.1176" LoLimit="0.1100" Unit="V" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="LAF_B1" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:19:54" ProcessInfo="A205A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ILAFL@ ILAF @ILAFH" Val="0.027344" LoLimit="-0.075000" HiLimit="0.133000" Unit="mA" />
+<TEST_PARAM Param="!NILAF@LAFOFFSET" Val="4" LoLimit="3" Unit="times" />
+<TEST_PARAM Param="!DILAF@LAFSTUCK" Val="0.019531" LoLimit="0.010000" Unit="mA" />
+<TEST_PARAM Param="NILAF" Val="4" Unit="times" />
+<TEST_PARAM Param="ILAFMIN" Val="0.007813" Unit="mA" />
+<TEST_PARAM Param="ILAFMAX" Val="0.027344" Unit="mA" />
+<TEST_PARAM Param="DILAF" Val="0.019531" Unit="mA" />
+<TEST_PARAM Param="!FSS BIT1" Val="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="KNOCK_KS" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:19:54" ProcessInfo="A205A210" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!KSOK@value_of_1" Val="1" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="BRK_SW" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:20:03" ProcessInfo="A205-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!BRKSW@value_of_0" Val="1" LoLimit="0" HiLimit="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUTO_CRUISE_SW" InCycleRetestNum="1" TestTime="@TODAY@T12:19:53" TestEndTime="@TODAY@T12:20:02" ProcessInfo="A205-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!BRK" Val="1" />
+<TEST_PARAM Param="!CL" Val="0" />
+<TEST_PARAM Param="!STRGSW" Val="0" />
+<TEST_PARAM Param="!SB-CCBITS" Val="BF" />
+<TEST_PARAM Param="!CCBITS" Val="20" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="F_CRBRKSWL" Val="-1" ExpectedVal="0:FALSE -1:TRUE" />
+<TEST_ATTRIBUTE Att="F_CRBRKSWH" Val="-1" ExpectedVal="0:FALSE -1:TRUE" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AT_POSITION" InCycleRetestNum="1" TestTime="@TODAY@T12:20:24" TestEndTime="@TODAY@T12:20:26" ProcessInfo="S210" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="SEQ_USE" Val="1" ExpectedVal="Parameter setting" />
+<TEST_ATTRIBUTE Att="PARKING" Val="1" ExpectedVal="Parameter setting" />
+<TEST_ATTRIBUTE Att="REVERSE" Val="1" ExpectedVal="Parameter setting" />
+<TEST_ATTRIBUTE Att="OTHER_SHIFT" Val="1" ExpectedVal="Parameter setting" />
+<TEST_ATTRIBUTE Att="DISPNGATP" Val="1" ExpectedVal="Parameter setting" />
+<TEST_ATTRIBUTE Att="!AT Position History" Val="00000000" ExpectedVal="Judgment value (HEX)" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ENG_CONDITION1" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="PARAMETER_NESTART" Val="400" Unit="rpm" />
+<TEST_PARAM Param="PARAMETER_VIDL" Val="5" Unit="kph" />
+<TEST_PARAM Param="PARAMETER_MAPLOADLO" Val="100" Unit="kPaA" />
+<TEST_PARAM Param="PGMFI_CAN" Val="-1" />
+<TEST_PARAM Param="ECUID5_bit0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="F_ATNP" Val="-1" />
+<TEST_PARAM Param="ATNP" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="IDLING" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NESTART" Val="756" LoLimit="400" Unit="rpm" />
+<TEST_PARAM Param="!VSP@VIDL" Val="0" HiLimit="5" Unit="km/h" />
+<TEST_PARAM Param="!MAP@MAPLOADLO" Val="41" HiLimit="100" Unit="kpa" />
+<TEST_PARAM Param="LOOP_CNT" Val="202" LoLimit="40431" Unit="times" />
+<TEST_PARAM Param="LOOP_TIM_AVE" Val="200" LoLimit="40431" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MAX" Val="261" LoLimit="345" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MIN" Val="183" LoLimit="10682" Unit="mS" />
+<TEST_PARAM Param="COMMNGCNT1" />
+<TEST_PARAM Param="COMMNGCNT2" />
+<TEST_PARAM Param="COMMNGCNT3" />
+<TEST_PARAM Param="!Support bit" Val="FFFDFF7DE0" Unit="hex" />
+<TEST_PARAM Param="LAST_NE" Val="756" Unit="rpm" />
+<TEST_PARAM Param="LAST_VSP" Val="0" Unit="kph" />
+<TEST_PARAM Param="LAST_MAP" Val="41" Unit="kPaA" />
+<TEST_PARAM Param="LAST_TW" Val="88" Unit="degC" />
+<TEST_PARAM Param="LAST_VB" Val="14.2" Unit="V" />
+<TEST_PARAM Param="LAST_RELTH" Val="1.9608" Unit="deg" />
+<TEST_PARAM Param="LAST_TA" Val="33" Unit="degC" />
+<TEST_PARAM Param="LAST_PA" Val="98" Unit="kPaA" />
+<TEST_PARAM Param="LAST_ACGF" Val="58.04" Unit="%" />
+<TEST_PARAM Param="LAST_LACT" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="LAST_GAIR" Val="3.28" Unit="g/sec" />
+<TEST_PARAM Param="LAST_TW2" Val="24" Unit="degC" />
+<TEST_PARAM Param="NE_MIN" Val="690" LoLimit="39925" Unit="rpm" />
+<TEST_PARAM Param="NE_MAX" Val="756" LoLimit="40534" Unit="rpm" />
+<TEST_PARAM Param="NE_AVE" Val="712" LoLimit="40534" Unit="rpm" />
+<TEST_PARAM Param="VSP_MIN" Val="0" LoLimit="220" Unit="kph" />
+<TEST_PARAM Param="VSP_MAX" Val="0" LoLimit="220" Unit="kph" />
+<TEST_PARAM Param="VSP_AVE" Val="0" LoLimit="40534" Unit="kph" />
+<TEST_PARAM Param="MAP_MIN" Val="37" LoLimit="29973" Unit="kPaA" />
+<TEST_PARAM Param="MAP_MAX" Val="42" LoLimit="40120" Unit="kPaA" />
+<TEST_PARAM Param="MAP_AVE" Val="38" LoLimit="40534" Unit="kPaA" />
+<TEST_PARAM Param="TW_MIN" Val="88" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="TW_MAX" Val="88" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="VB_MIN" Val="13.5" LoLimit="39526" Unit="V" />
+<TEST_PARAM Param="VB_MAX" Val="14.2" LoLimit="1290" Unit="V" />
+<TEST_PARAM Param="RELTH_MIN" Val="1.9608" LoLimit="220" Unit="deg" />
+<TEST_PARAM Param="RELTH_MAX" Val="2.7451" LoLimit="40120" Unit="deg" />
+<TEST_PARAM Param="RELTH_AVE" Val="1.9724" LoLimit="40534" Unit="deg" />
+<TEST_PARAM Param="TA_MIN" Val="33" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="TA_MAX" Val="33" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="PA_MIN" Val="97" LoLimit="19995" Unit="kPaA" />
+<TEST_PARAM Param="PA_MAX" Val="98" LoLimit="220" Unit="kPaA" />
+<TEST_PARAM Param="ACGF_MIN" Val="58.04" LoLimit="40534" Unit="%" />
+<TEST_PARAM Param="ACGF_MAX" Val="83.92" LoLimit="39926" Unit="%" />
+<TEST_PARAM Param="ACGF_AVE" Val="62.51" LoLimit="40534" Unit="%" />
+<TEST_PARAM Param="LACT_MIN" Val="0.00" LoLimit="220" Unit="mm" />
+<TEST_PARAM Param="LACT_MAX" Val="0.00" LoLimit="220" Unit="mm" />
+<TEST_PARAM Param="LACT_AVE" Val="0.00" LoLimit="40534" Unit="mm" />
+<TEST_PARAM Param="GAIR_MIN" Val="2.79" LoLimit="35357" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_MAX" Val="3.75" LoLimit="39723" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_AVE" Val="3.00" LoLimit="40534" Unit="g/sec" />
+<TEST_PARAM Param="TW2_MIN" Val="24" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="TW2_MAX" Val="24" LoLimit="220" Unit="degC" />
+<TEST_PARAM Param="IXREF" Val="110.0" Unit="l/min" />
+<TEST_PARAM Param="IALSTAT0" Val="0" />
+<TEST_PARAM Param="IALSTAT1" Val="0" />
+<TEST_PARAM Param="IALSTAT2" Val="0" />
+<TEST_PARAM Param="!INSPECTION_TIME" Val="40617" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="IDLE_SPEED" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:07" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ECT@TWIDL" Val="88" LoLimit="65" Unit="degC" />
+<TEST_PARAM Param="!SUMIDL@SUMIDL_" Val="11" LoLimit="10" Unit="times" />
+<TEST_PARAM Param="!DTRGIDL@DTRGIDLH" Val="2.18" HiLimit="50.00" Unit="rpm" />
+<TEST_PARAM Param="DTRGIDL_NE" Val="0" Unit="rpm" />
+<TEST_PARAM Param="DTRGIDL" Val="2.18" Unit="rpm" />
+<TEST_PARAM Param="F_CNDIDL" Val="-1" />
+<TEST_PARAM Param="F_OKLETIDLSP" Val="-1" />
+<TEST_PARAM Param="SUMIDL" Val="11" Unit="times" />
+<TEST_PARAM Param="SUMNE" Val="7834" />
+<TEST_PARAM Param="SUMTRGIDL" Val="7810" />
+<TEST_PARAM Param="F_ACCLON" />
+<TEST_PARAM Param="!ACCNOW" Val="0" />
+<TEST_PARAM Param="!ACCLAST" Val="0" />
+<TEST_PARAM Param="F_ACCFAST" Val="-1" />
+<TEST_PARAM Param="F_CNDACC" Val="0" />
+<TEST_PARAM Param="F_OKCNDNE" Val="0" />
+<TEST_PARAM Param="NNGCNDACC" Val="0" Unit="times" />
+<TEST_PARAM Param="NCNDNE" Val="0" Unit="times" />
+<TEST_PARAM Param="AVENE" Val="712.18" Unit="rpm" />
+<TEST_PARAM Param="AVETRGIDL" Val="710.00" Unit="rpm" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="PTANK_CHARACTER" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!SB_ERUNTM@1" Val="0" />
+<TEST_PARAM Param="!RLTNG91B@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!RLTOK91B@value of 1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!SB_CPTOC91BJD@1" Val="1" />
+<TEST_PARAM Param="!CPTOC91BJD &gt;= $#JUDGECOUNT" Val="354" LoLimit="100" Unit="times" />
+<TEST_PARAM Param="!CPTOC91BNG / CPTOC91BJD &lt;= $#OKRATE" Val="0.00" HiLimit="0.30" />
+<TEST_PARAM Param="F_CONDERUN_TM" Val="-1" />
+<TEST_PARAM Param="ENG_RUNTM" Val="128000" LoLimit="45000" Unit="ms" />
+<TEST_PARAM Param="F_PURGE_STOP" Val="0" />
+<TEST_PARAM Param="F_COUNT_SUPPORT" Val="-1" />
+<TEST_PARAM Param="CPTOC91BJD" Val="354" />
+<TEST_PARAM Param="CPTOC91BNG" Val="0" />
+<TEST_PARAM Param="CPTOC91BNG/CPTOC91BJD" Val="0.00" />
+<TEST_PARAM Param="F_PTANK_CHA_OBDOK" Val="0" />
+<TEST_PARAM Param="F_PTANK_CHA_LETOK" Val="-1" />
+<TEST_PARAM Param="F_OKPTANK_CHA" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TP" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:03" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!RLTNG91C@value_of_0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!RLTOK91C@value_of_1" Val="1" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AF_LAF_B1" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:03" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ECT@ECTAFL1" Val="88" LoLimit="58" Unit="degC" />
+<TEST_PARAM Param="!EXECMD@0x013B" Val="0x0" LoLimit="0x13B" HiLimit="0x13B" />
+<TEST_PARAM Param="!DPCS@DPCSAFL1" Val="34.71" LoLimit="5.00" Unit="%" />
+<TEST_PARAM Param="!KREFX@AF1LIM" Val="0.99976" LoLimit="0.90000" HiLimit="1.10000" Unit="times" />
+<TEST_PARAM Param="AFL1RST" Val="0.99976" Unit="%" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="IDLE_LAF_B1" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:08" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!FSS_B1@value_of_1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!SUMNIAFL1@SUMNIAFL1_" Val="3" LoLimit="3" Unit="times" />
+<TEST_PARAM Param="!IAFL1@IAFL1L" Val="0.9609" LoLimit="0.8000" Unit="times" />
+<TEST_PARAM Param="!IAFL1@IAFL1H" Val="0.9609" HiLimit="1.2000" Unit="times" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MAP" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:02" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!MAP@MAPBOSL" Val="40" LoLimit="30" Unit="kpa" />
+<TEST_PARAM Param="!MAP@MAPBOSH" Val="40" HiLimit="100" Unit="kpa" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="MAP_LO" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!MAP@MAPLL" Val="43" HiLimit="20" Unit="kpa" />
+<TEST_PARAM Param="!MAP@MAPLH" Val="43" LoLimit="55" Unit="kpa" />
+<TEST_PARAM Param="MAPLMIN" Val="37" Unit="kpa" />
+<TEST_PARAM Param="MAPLMAX" Val="43" Unit="kpa" />
+<TEST_PARAM Param="MAPLRST" Val="43" Unit="kpa" />
+<TEST_PARAM Param="F_CNDMAPL" Val="-1" />
+<TEST_PARAM Param="NMAPLNG" Val="0" Unit="times" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AFM_LO" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!GAIR@AFMLL" Val="3.43" HiLimit="1.00" Unit="g/s" />
+<TEST_PARAM Param="!GAIR@AFMLH" Val="3.43" LoLimit="7.00" Unit="g/s" />
+<TEST_PARAM Param="AFMLMIN" Val="2.79" Unit="g/s" />
+<TEST_PARAM Param="AFMLMAX" Val="3.75" Unit="g/s" />
+<TEST_PARAM Param="AFMLRST" Val="3.43" Unit="g/s" />
+<TEST_PARAM Param="F_CNDAFML" Val="-1" />
+<TEST_PARAM Param="NAFML" Val="0" Unit="times" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="CRK_NOISE" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!SB266F_4@$30" Val="00" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="NCRK@NCRKNNG" Val="30" LoLimit="18" Unit="times" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="TDC_NOISE" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:43" ProcessInfo="A300-A320" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!SB266F_4@$03" Val="00" ExpectedVal="03" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="NTDC@NTDCNNG" Val="30" LoLimit="5" Unit="times" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="TW_LO" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:02" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!RLTNG86@value_of_0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!RLTOK86@value_of_1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!ECT@TWLO" Val="88" LoLimit="32" Unit="degC" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SECT" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:03" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ECT1@SECT1" Val="88" LoLimit="5" Unit="degC" />
+<TEST_PARAM Param="!ECT2@SECT2" Val="24" LoLimit="5" Unit="degC" />
+<TEST_PARAM Param="!DSECT@PARAM_DSECT" Val="64" LoLimit="1" Unit="degC" />
+<TEST_PARAM Param="DSECT" Val="64" Unit="degC" />
+<TEST_PARAM Param="F_OKLETSECT" Val="-1" />
+<TEST_PARAM Param="F_NGLETSECT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ACGF" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:03" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ACGF@PARAM_ACGF" Val="166" LoLimit="16" HiLimit="255" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TA" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:03" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!TA@TABOSHL" Val="33" LoLimit="20" Unit="degC" />
+<TEST_PARAM Param="!TA@TABOSH" Val="33" HiLimit="75" Unit="degC" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="FUEL_FLOAT" InCycleRetestNum="1" TestTime="@TODAY@T12:21:02" TestEndTime="@TODAY@T12:21:10" ProcessInfo="A300-A320" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!METER_SPEED_K@0Km/h" Val="0" LoLimit="0" HiLimit="0" Unit="kph" />
+<TEST_PARAM Param="!FUELFRST@FUELL_FUELH" Val="9" LoLimit="0" HiLimit="30" Unit="%" />
+<TEST_PARAM Param="FUELFRST" Val="9" Unit="%" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AC_SW" InCycleRetestNum="1" TestTime="@TODAY@T12:22:26" TestEndTime="@TODAY@T12:22:26" ProcessInfo="A399-A460" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!ACS@0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!ACSW_ON_JUD" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!ACSW_OFF_JUD_A" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="F_ACL" Val="0" LoLimit="-1:TRUE" HiLimit="0:FALSE" />
+<TEST_PARAM Param="F_ACH" Val="-1" LoLimit="-1:TRUE" HiLimit="0:FALSE" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ENG_CONDITION2" InCycleRetestNum="1" TestTime="@TODAY@T12:21:42" TestEndTime="@TODAY@T12:23:32" ProcessInfo="A395-A460" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="PARAMETER_NESTART" Val="400" Unit="rpm" />
+<TEST_PARAM Param="PARAMETER_VIDL" Val="5" Unit="kph" />
+<TEST_PARAM Param="PARAMETER_MAPLOADLO" Val="100" Unit="kPaA" />
+<TEST_PARAM Param="PGMFI_CAN" Val="-1" />
+<TEST_PARAM Param="ECUID5_bit0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="F_ATNP" Val="-1" />
+<TEST_PARAM Param="ATNP" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="IDLING" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NESTART" Val="2776" LoLimit="400" Unit="rpm" />
+<TEST_PARAM Param="!VSP@VIDL" Val="0" HiLimit="5" Unit="km/h" />
+<TEST_PARAM Param="!MAP@MAPLOADLO" Val="32" HiLimit="100" Unit="kpa" />
+<TEST_PARAM Param="LOOP_CNT" Val="568" LoLimit="109404" Unit="times" />
+<TEST_PARAM Param="LOOP_TIM_AVE" Val="192" LoLimit="109404" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MAX" Val="1006" LoLimit="37422" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MIN" Val="170" LoLimit="36243" Unit="mS" />
+<TEST_PARAM Param="COMMNGCNT1" Val="1" LoLimit="37322" HiLimit="-1" Unit="times" />
+<TEST_PARAM Param="COMMNGCNT2" />
+<TEST_PARAM Param="COMMNGCNT3" />
+<TEST_PARAM Param="!Support bit" Val="FFFDFF7DE0" Unit="hex" />
+<TEST_PARAM Param="LAST_NE" Val="2776" Unit="rpm" />
+<TEST_PARAM Param="LAST_VSP" Val="0" Unit="kph" />
+<TEST_PARAM Param="LAST_MAP" Val="32" Unit="kPaA" />
+<TEST_PARAM Param="LAST_TW" Val="86" Unit="degC" />
+<TEST_PARAM Param="LAST_VB" Val="14.2" Unit="V" />
+<TEST_PARAM Param="LAST_RELTH" Val="7.8431" Unit="deg" />
+<TEST_PARAM Param="LAST_TA" Val="35" Unit="degC" />
+<TEST_PARAM Param="LAST_PA" Val="98" Unit="kPaA" />
+<TEST_PARAM Param="LAST_ACGF" Val="41.18" Unit="%" />
+<TEST_PARAM Param="LAST_LACT" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="LAST_GAIR" Val="10.69" Unit="g/sec" />
+<TEST_PARAM Param="LAST_TW2" Val="27" Unit="degC" />
+<TEST_PARAM Param="NE_MIN" Val="26" LoLimit="37506" Unit="rpm" />
+<TEST_PARAM Param="NE_MAX" Val="3211" LoLimit="106543" Unit="rpm" />
+<TEST_PARAM Param="NE_AVE" Val="929" LoLimit="109489" Unit="rpm" />
+<TEST_PARAM Param="VSP_MIN" Val="0" LoLimit="122" Unit="kph" />
+<TEST_PARAM Param="VSP_MAX" Val="22" LoLimit="29408" Unit="kph" />
+<TEST_PARAM Param="VSP_AVE" Val="1" LoLimit="109489" Unit="kph" />
+<TEST_PARAM Param="MAP_MIN" Val="26" LoLimit="106183" Unit="kPaA" />
+<TEST_PARAM Param="MAP_MAX" Val="96" LoLimit="28321" Unit="kPaA" />
+<TEST_PARAM Param="MAP_AVE" Val="47" LoLimit="109489" Unit="kPaA" />
+<TEST_PARAM Param="TW_MIN" Val="86" LoLimit="105245" Unit="degC" />
+<TEST_PARAM Param="TW_MAX" Val="90" LoLimit="24638" Unit="degC" />
+<TEST_PARAM Param="VB_MIN" Val="11.1" LoLimit="37506" Unit="V" />
+<TEST_PARAM Param="VB_MAX" Val="14.2" LoLimit="504" Unit="V" />
+<TEST_PARAM Param="RELTH_MIN" Val="0.0000" LoLimit="37506" Unit="deg" />
+<TEST_PARAM Param="RELTH_MAX" Val="61.1765" LoLimit="28511" Unit="deg" />
+<TEST_PARAM Param="RELTH_AVE" Val="4.1263" LoLimit="109489" Unit="deg" />
+<TEST_PARAM Param="TA_MIN" Val="33" LoLimit="122" Unit="degC" />
+<TEST_PARAM Param="TA_MAX" Val="36" LoLimit="62871" Unit="degC" />
+<TEST_PARAM Param="PA_MIN" Val="97" LoLimit="37506" Unit="kPaA" />
+<TEST_PARAM Param="PA_MAX" Val="98" LoLimit="122" Unit="kPaA" />
+<TEST_PARAM Param="ACGF_MIN" Val="0.39" LoLimit="36315" Unit="%" />
+<TEST_PARAM Param="ACGF_MAX" Val="94.51" LoLimit="50155" Unit="%" />
+<TEST_PARAM Param="ACGF_AVE" Val="76.49" LoLimit="109489" Unit="%" />
+<TEST_PARAM Param="LACT_MIN" Val="0.00" LoLimit="122" Unit="mm" />
+<TEST_PARAM Param="LACT_MAX" Val="3.30" LoLimit="28145" Unit="mm" />
+<TEST_PARAM Param="LACT_AVE" Val="0.12" LoLimit="109489" Unit="mm" />
+<TEST_PARAM Param="GAIR_MIN" Val="0.00" LoLimit="35408" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_MAX" Val="41.17" LoLimit="28511" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_AVE" Val="5.23" LoLimit="109489" Unit="g/sec" />
+<TEST_PARAM Param="TW2_MIN" Val="24" LoLimit="123" Unit="degC" />
+<TEST_PARAM Param="TW2_MAX" Val="27" LoLimit="97486" Unit="degC" />
+<TEST_PARAM Param="IXREF" Val="110.0" Unit="l/min" />
+<TEST_PARAM Param="IALSTAT0" Val="0" />
+<TEST_PARAM Param="IALSTAT1" Val="0" />
+<TEST_PARAM Param="IALSTAT2" Val="0" />
+<TEST_PARAM Param="!INSPECTION_TIME" Val="109497" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="BK_ABS" InCycleRetestNum="1" TestTime="@TODAY@T12:22:26" TestEndTime="@TODAY@T12:22:35" ProcessInfo="S399" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="RES_F_E_BKSW@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!FR_R RES_DATA@0x11" Val="17" LoLimit="17" HiLimit="17" />
+<TEST_PARAM Param="!FR_R RES_DATA@0x31" Val="49" LoLimit="49" HiLimit="49" />
+<TEST_PARAM Param="!FR_L RES_DATA@0x11" Val="17" LoLimit="17" HiLimit="17" />
+<TEST_PARAM Param="!FR_L RES_DATA@0x31" Val="49" LoLimit="49" HiLimit="49" />
+<TEST_PARAM Param="!RR_R RES_DATA@0x11" Val="17" LoLimit="17" HiLimit="17" />
+<TEST_PARAM Param="!RR_R RES_DATA@0x31" Val="49" LoLimit="49" HiLimit="49" />
+<TEST_PARAM Param="!RR_L RES_DATA@0x11" Val="17" LoLimit="17" HiLimit="17" />
+<TEST_PARAM Param="!RR_L RES_DATA@0x31" Val="49" LoLimit="49" HiLimit="49" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:22:35" TestEndTime="@TODAY@T12:22:37" ProcessInfo="S400" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="AUDIO_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="AUDIO_DWG" Val="39100SNAA610M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:22:37" TestEndTime="@TODAY@T12:22:39" ProcessInfo="S401" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!AUDIO_DATE" Val="91390382" />
+<TEST_ATTRIBUTE Att="SUPPLIER_AUDIO_SERIAL" Val="28041253" />
+<TEST_ATTRIBUTE Att="!AUDIO_VERSION" Val="1000" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_AUDIO_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_AUDIO_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_NO_AUDIO_DATE" Val="0" />
+<TEST_PARAM Param="!F_AUDIO_DATE_NOT_SUPPORT" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="LEV2_EVP" InCycleRetestNum="1" TestTime="@TODAY@T12:22:35" TestEndTime="@TODAY@T12:22:37" ProcessInfo="A400-A415" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!|PTANK|@LEV2PT1" Val="0.4883" HiLimit="2.0000" Unit="mmHg" />
+<TEST_PARAM Param="!PTANK@LEV2PT2" Val="-4.3945" HiLimit="-4.0000" Unit="mmHg" />
+<TEST_PARAM Param="!|PTANK|@LEV2PT1(2)" Val="1.9531" HiLimit="2.0000" Unit="mmHg" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_DIAG1" InCycleRetestNum="1" TestTime="@TODAY@T12:22:40" TestEndTime="@TODAY@T12:22:57" ProcessInfo="A404-A430" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="START_COMM" Val="OK" />
+<TEST_PARAM Param="DIAG COMM" Val="82,f6,81,50,81,0,0,0" />
+<TEST_PARAM Param="F_AUDIO_DIAGMODE" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SPK_BEEP" InCycleRetestNum="1" TestTime="@TODAY@T12:22:40" TestEndTime="@TODAY@T12:22:44" ProcessInfo="S404" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_INPUT" InCycleRetestNum="1" TestTime="@TODAY@T12:22:44" TestEndTime="@TODAY@T12:22:50" ProcessInfo="S405" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_LCD" InCycleRetestNum="1" TestTime="@TODAY@T12:22:50" TestEndTime="@TODAY@T12:22:52" ProcessInfo="S406" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ACPD" InCycleRetestNum="1" TestTime="@TODAY@T12:22:35" TestEndTime="@TODAY@T12:22:37" ProcessInfo="A400-A425" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="ACPD" Val="738" LoLimit="500" HiLimit="1200" Unit="kPa" />
+<TEST_PARAM Param="!NACPD" Val="4" LoLimit="3" Unit="times" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SPK_BEEP_REST" InCycleRetestNum="1" TestTime="@TODAY@T12:22:52" TestEndTime="@TODAY@T12:22:53" ProcessInfo="S415" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="FR-L" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="FR-R" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="RR-L" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="RR-R" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="FR-CNT" Val="--" ExpectedVal="--" />
+<TEST_ATTRIBUTE Att="SW" Val="--" ExpectedVal="--" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_INPUT_REST" InCycleRetestNum="1" TestTime="@TODAY@T12:22:53" TestEndTime="@TODAY@T12:22:54" ProcessInfo="S420" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="VOLUP" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="VOLDN" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="CHUP" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="CHDN" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="MODESW" Val="OK" ExpectedVal="OK" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_LCD_REST" InCycleRetestNum="1" TestTime="@TODAY@T12:22:54" TestEndTime="@TODAY@T12:22:55" ProcessInfo="S425" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="LCD_ON" Val="OK" ExpectedVal="OK" />
+<TEST_ATTRIBUTE Att="LCD_OFF" Val="OK" ExpectedVal="OK" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="GA_NET_REST" InCycleRetestNum="1" TestTime="@TODAY@T12:22:55" TestEndTime="@TODAY@T12:22:56" ProcessInfo="S430" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="GA1" Val="USB    " Unit="USB    " />
+<TEST_PARAM Param="GA2" Val="-------" Unit="-------" />
+<TEST_PARAM Param="GA3" Val="-------" Unit="-------" />
+<TEST_PARAM Param="GA4" Val="-------" Unit="-------" />
+<TEST_PARAM Param="GA5" Val="-------" Unit="-------" />
+<TEST_PARAM Param="GA6" Val="-------" Unit="-------" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SVS_ACT" InCycleRetestNum="1" TestTime="@TODAY@T12:22:56" TestEndTime="@TODAY@T12:23:13" ProcessInfo="S445" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!RLTNG106A@1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!RLTNG106B@1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!RLTOK106A@1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!RLTOK106B@1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="F_FINSVSLO" Val="-1" />
+<TEST_PARAM Param="F_FINSVSSH" Val="-1" />
+<TEST_PARAM Param="F_OKSVSLONG" Val="-1" />
+<TEST_PARAM Param="F_OKSVSSHORT" Val="-1" />
+<TEST_PARAM Param="F_OKLETSVS" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="METER_TW_DISP" InCycleRetestNum="1" TestTime="@TODAY@T12:23:14" TestEndTime="@TODAY@T12:23:17" ProcessInfo="A450" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!JUD@1" Val="0" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ACGC" InCycleRetestNum="1" TestTime="@TODAY@T12:23:14" TestEndTime="@TODAY@T12:23:25" ProcessInfo="A450" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!MDAEXE@1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="VBlow" Val="12.4" HiLimit="11.5" Unit="V" />
+<TEST_PARAM Param="VBhigh" Val="12.4" LoLimit="13.5" Unit="V" />
+<TEST_PARAM Param="ACGCMIN" Val="12.3" Unit="V" />
+<TEST_PARAM Param="ACGCMAX" Val="13.1" Unit="V" />
+<TEST_PARAM Param="ACGCRST" Val="12.4" Unit="V" />
+<TEST_PARAM Param="NACGC" Val="0" Unit="times" />
+<TEST_PARAM Param="F_CNDACGC" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="HIGHIDLE" InCycleRetestNum="1" TestTime="@TODAY@T12:23:25" TestEndTime="@TODAY@T12:23:32" ProcessInfo="A455A460" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!N_HIDLE@NHIDLE" Val="1" HiLimit="1000" Unit="times" />
+<TEST_PARAM Param="!ATPP@1" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!BRKSW@1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!N_BKON@NBKON" Val="0" LoLimit="0" Unit="times" />
+<TEST_PARAM Param="!MDAEXE_1_APS@1" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NEHIIDLE_LIMIT" Val="2776" LoLimit="1500" HiLimit="5000" Unit="rpm" />
+<TEST_PARAM Param="!BRKSW@0" Val="0" LoLimit="0" HiLimit="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="EGR" InCycleRetestNum="1" TestTime="@TODAY@T12:23:27" TestEndTime="@TODAY@T12:23:32" ProcessInfo="S460" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="TEST_TYPE" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="MDA_LCMD_0@EPOINT0" Val="0.00" HiLimit="0.15" Unit="mm" />
+<TEST_PARAM Param="MDA_LACT_0_MIN" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="MDA_LACT_0_MAX" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="MDA_LACT_0@EPOINT0" Val="0.00" HiLimit="0.15" Unit="mm" />
+<TEST_PARAM Param="NPOINT0_OK@OKPOINT0" Val="5" LoLimit="5" />
+<TEST_PARAM Param="EGR_LOOP_TIM_MAX" Val="381" LoLimit="2671" Unit="mS" />
+<TEST_PARAM Param="EGR_LOOP_TIM_MIN" Val="60" LoLimit="237" Unit="mS" />
+<TEST_PARAM Param="EGR_LOOP_CNT" Val="29" LoLimit="4005" Unit="times" />
+<TEST_PARAM Param="EGR_LOOP_TIM_AVE" Val="140" LoLimit="4005" Unit="mS" />
+<TEST_PARAM Param="!NE_M@NELOW" Val="2546" LoLimit="1500" Unit="rpm" />
+<TEST_PARAM Param="!MDACMD_1@LCMDM" Val="2.50" LoLimit="2.50" Unit="mm" />
+<TEST_PARAM Param="!EGRNE@EGRNEMIN" Val="2966" HiLimit="2966" Unit="rpm" />
+<TEST_PARAM Param="!EGRMAP@EGRMAPMAX" Val="34" LoLimit="34" Unit="kPa" />
+<TEST_PARAM Param="!EGROFFNE-EGRNEMIN@DNEEGRFLOW" Val="245" LoLimit="50" Unit="rpm" />
+<TEST_PARAM Param="MDA_LCMD_M@EPOINTM_Limit" Val="2.50" LoLimit="2.00" HiLimit="3.00" Unit="mm" />
+<TEST_PARAM Param="|MDA_LCMD_M-MDA_LACT_M|@EPOINTM" Val="0.00" HiLimit="0.20" Unit="mm" />
+<TEST_PARAM Param="NPOINTM_OK@OKPOINTM" Val="5" LoLimit="5" />
+<TEST_PARAM Param="MDA_LACT_M_MIN" Val="2.50" Unit="mm" />
+<TEST_PARAM Param="MDA_LACT_M_MAX" Val="2.50" Unit="mm" />
+<TEST_PARAM Param="2POINTCHECK" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="TWEGR" Val="87" Unit="degC" />
+<TEST_PARAM Param="TAEGR" Val="36" Unit="degC" />
+<TEST_PARAM Param="EGROFFNE" Val="3211" Unit="rpm" />
+<TEST_PARAM Param="EGROFFMAP" Val="26" Unit="kPa" />
+<TEST_PARAM Param="EGRNEMIN" Val="2966" Unit="rpm" />
+<TEST_PARAM Param="EGRMAPMAX" Val="34" Unit="kPa" />
+<TEST_PARAM Param="F_OKEGRFLOW" Val="-1" />
+<TEST_PARAM Param="F_CNDEGR_0" Val="-1" />
+<TEST_PARAM Param="F_CNDEGR_M" Val="-1" />
+<TEST_PARAM Param="F_OKPOINT0" Val="-1" />
+<TEST_PARAM Param="F_OKPOINTM" Val="-1" />
+<TEST_PARAM Param="ACC_CHANGE" Val="0" Unit="Times" />
+<TEST_PARAM Param="!EGR_INSPECTION_TIME" Val="4500" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="PS_SW" InCycleRetestNum="1" TestTime="@TODAY@T12:23:32" TestEndTime="@TODAY@T12:23:52" ProcessInfo="A495-A509" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!PSW@value of 0" Val="0" LoLimit="0" HiLimit="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="VSP_TRIGGER_01" InCycleRetestNum="1" TestTime="@TODAY@T12:23:32" TestEndTime="@TODAY@T12:23:47" ProcessInfo="S495" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!SPEED_KM_OR_MILE" Val="0" />
+<TEST_PARAM Param="!F_VSPOVER" Val="-1" />
+<TEST_PARAM Param="!VSP_OVER" Val="1" LoLimit="1" Unit="mph" />
+<TEST_PARAM Param="!VSP_UNDER" Val="2" HiLimit="100" Unit="mph" />
+<TEST_PARAM Param="F_OK" Val="-1" />
+<TEST_PARAM Param="F_TIMEOUT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ENG_CONDITION3" InCycleRetestNum="1" TestTime="@TODAY@T12:23:32" TestEndTime="@TODAY@T12:24:53" ProcessInfo="A495-A509" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="PARAMETER_NESTART" Val="400" Unit="rpm" />
+<TEST_PARAM Param="PARAMETER_VIDL" Val="5" Unit="kph" />
+<TEST_PARAM Param="PARAMETER_MAPLOADLO" Val="100" Unit="kPaA" />
+<TEST_PARAM Param="PGMFI_CAN" Val="-1" />
+<TEST_PARAM Param="ECUID5_bit0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="F_ATNP" Val="-1" />
+<TEST_PARAM Param="ATNP" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="IDLING" Val="1" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NESTART" Val="993" LoLimit="400" Unit="rpm" />
+<TEST_PARAM Param="!VSP@VIDL" Val="15" HiLimit="5" Unit="km/h" />
+<TEST_PARAM Param="!MAP@MAPLOADLO" Val="46" HiLimit="100" Unit="kpa" />
+<TEST_PARAM Param="LOOP_CNT" Val="439" LoLimit="80678" Unit="times" />
+<TEST_PARAM Param="LOOP_TIM_AVE" Val="183" LoLimit="80678" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MAX" Val="213" LoLimit="37139" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MIN" Val="173" LoLimit="21469" Unit="mS" />
+<TEST_PARAM Param="COMMNGCNT1" />
+<TEST_PARAM Param="COMMNGCNT2" />
+<TEST_PARAM Param="COMMNGCNT3" />
+<TEST_PARAM Param="!Support bit" Val="FFFDFF7DE0" Unit="hex" />
+<TEST_PARAM Param="LAST_NE" Val="993" Unit="rpm" />
+<TEST_PARAM Param="LAST_VSP" Val="15" Unit="kph" />
+<TEST_PARAM Param="LAST_MAP" Val="43" Unit="kPaA" />
+<TEST_PARAM Param="LAST_TW" Val="91" Unit="degC" />
+<TEST_PARAM Param="LAST_VB" Val="14.1" Unit="V" />
+<TEST_PARAM Param="LAST_RELTH" Val="3.5294" Unit="deg" />
+<TEST_PARAM Param="LAST_TA" Val="29" Unit="degC" />
+<TEST_PARAM Param="LAST_PA" Val="98" Unit="kPaA" />
+<TEST_PARAM Param="LAST_ACGF" Val="63.53" Unit="%" />
+<TEST_PARAM Param="LAST_LACT" Val="0.00" Unit="mm" />
+<TEST_PARAM Param="LAST_GAIR" Val="5.05" Unit="g/sec" />
+<TEST_PARAM Param="LAST_TW2" Val="30" Unit="degC" />
+<TEST_PARAM Param="NE_MIN" Val="688" LoLimit="41935" Unit="rpm" />
+<TEST_PARAM Param="NE_MAX" Val="6443" LoLimit="30451" Unit="rpm" />
+<TEST_PARAM Param="NE_AVE" Val="1648" LoLimit="80769" Unit="rpm" />
+<TEST_PARAM Param="VSP_MIN" Val="0" LoLimit="130" Unit="kph" />
+<TEST_PARAM Param="VSP_MAX" Val="70" LoLimit="31901" Unit="kph" />
+<TEST_PARAM Param="VSP_AVE" Val="25" LoLimit="80769" Unit="kph" />
+<TEST_PARAM Param="MAP_MIN" Val="19" LoLimit="517" Unit="kPaA" />
+<TEST_PARAM Param="MAP_MAX" Val="98" LoLimit="47217" Unit="kPaA" />
+<TEST_PARAM Param="MAP_AVE" Val="54" LoLimit="80769" Unit="kPaA" />
+<TEST_PARAM Param="TW_MIN" Val="86" LoLimit="130" Unit="degC" />
+<TEST_PARAM Param="TW_MAX" Val="91" LoLimit="45944" Unit="degC" />
+<TEST_PARAM Param="VB_MIN" Val="13.4" LoLimit="18548" Unit="V" />
+<TEST_PARAM Param="VB_MAX" Val="14.2" LoLimit="130" Unit="V" />
+<TEST_PARAM Param="RELTH_MIN" Val="2.3529" LoLimit="3762" Unit="deg" />
+<TEST_PARAM Param="RELTH_MAX" Val="92.5490" LoLimit="26816" Unit="deg" />
+<TEST_PARAM Param="RELTH_AVE" Val="14.8859" LoLimit="80769" Unit="deg" />
+<TEST_PARAM Param="TA_MIN" Val="28" LoLimit="32084" Unit="degC" />
+<TEST_PARAM Param="TA_MAX" Val="35" LoLimit="130" Unit="degC" />
+<TEST_PARAM Param="PA_MIN" Val="98" LoLimit="130" Unit="kPaA" />
+<TEST_PARAM Param="PA_MAX" Val="98" LoLimit="130" Unit="kPaA" />
+<TEST_PARAM Param="ACGF_MIN" Val="41.18" LoLimit="130" Unit="%" />
+<TEST_PARAM Param="ACGF_MAX" Val="92.16" LoLimit="18935" Unit="%" />
+<TEST_PARAM Param="ACGF_AVE" Val="61.14" LoLimit="80769" Unit="%" />
+<TEST_PARAM Param="LACT_MIN" Val="0.00" LoLimit="130" Unit="mm" />
+<TEST_PARAM Param="LACT_MAX" Val="4.10" LoLimit="56001" Unit="mm" />
+<TEST_PARAM Param="LACT_AVE" Val="0.48" LoLimit="80769" Unit="mm" />
+<TEST_PARAM Param="GAIR_MIN" Val="3.35" LoLimit="5459" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_MAX" Val="106.91" LoLimit="29898" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_AVE" Val="14.40" LoLimit="80769" Unit="g/sec" />
+<TEST_PARAM Param="TW2_MIN" Val="27" LoLimit="130" Unit="degC" />
+<TEST_PARAM Param="TW2_MAX" Val="30" LoLimit="51045" Unit="degC" />
+<TEST_PARAM Param="IXREF" Val="110.0" Unit="l/min" />
+<TEST_PARAM Param="IALSTAT0" Val="0" />
+<TEST_PARAM Param="IALSTAT1" Val="0" />
+<TEST_PARAM Param="IALSTAT2" Val="0" />
+<TEST_PARAM Param="!INSPECTION_TIME" Val="80807" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SRS_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:23:49" TestEndTime="@TODAY@T12:23:49" ProcessInfo="A500" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!DWG_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SRS_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="SRS_DWG" Val="77960SNAA220M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SRS_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:23:59" TestEndTime="@TODAY@T12:23:59" ProcessInfo="A501" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!HM_STATUS" Val="0xF0" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="!SUP_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SUPPLIER_SRS_SERIAL" Val="14090099ZF" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_SRS_HM_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_HM_SRS_NOT_SUPPORT" Val="-1" />
+<TEST_PARAM Param="!F_HM_SRS_COMM_ERR" Val="0" />
+<TEST_PARAM Param="!F_NO_SRS_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_SRS_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_SRS_COMM_ERR" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="OPDS_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:24:09" TestEndTime="@TODAY@T12:24:10" ProcessInfo="A502" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!DWG_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="OPDS_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="OPDS_DWG" Val="81169SNRC011M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="OPDS_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:24:17" TestEndTime="@TODAY@T12:24:18" ProcessInfo="A503" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!HM_STATUS" Val="0xF0" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="!SUP_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SUPPLIER_OPDS_SERIAL" Val="2PG6968" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_OPDS_HM_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_HM_OPDS_NOT_SUPPORT" Val="-1" />
+<TEST_PARAM Param="!F_HM_OPDS_COMM_ERR" Val="0" />
+<TEST_PARAM Param="!F_NO_OPDS_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_OPDS_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_OPDS_COMM_ERR" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="SWS_TRC_ABLTY" InCycleRetestNum="1" TestTime="@TODAY@T12:24:26" TestEndTime="@TODAY@T12:24:26" ProcessInfo="A504" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!DWG_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SWS_DWG_PARA" Val="**************" />
+<TEST_ATTRIBUTE Att="SWS_DWG" Val="81169SNRC011M1" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SWS_SERIAL_STORE" InCycleRetestNum="1" TestTime="@TODAY@T12:24:34" TestEndTime="@TODAY@T12:24:35" ProcessInfo="A505" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!HM_STATUS" Val="0xF0" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="!SUP_STATUS" Val="0x01" ExpectedVal="0x01" />
+<TEST_ATTRIBUTE Att="SUPPLIER_SWS_SERIAL" Val="2PG6968" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_NO_SWS_HM_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_HM_SWS_NOT_SUPPORT" Val="-1" />
+<TEST_PARAM Param="!F_HM_SWS_COMM_ERR" Val="0" />
+<TEST_PARAM Param="!F_NO_SWS_SUPPLIER_SERIAL" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_SWS_NOT_SUPPORT" Val="0" />
+<TEST_PARAM Param="!F_SUPPLIER_SWS_COMM_ERR" Val="0" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="SPS2" InCycleRetestNum="1" TestTime="@TODAY@T12:24:42" TestEndTime="@TODAY@T12:24:43" ProcessInfo="A506" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!F_OKFAR" Val="-1" />
+<TEST_PARAM Param="!SPS STAT" Val="1" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TW_LO2" InCycleRetestNum="1" TestTime="@TODAY@T12:23:49" TestEndTime="@TODAY@T12:24:11" ProcessInfo="A500-A525" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="ECT" Val="90" Unit="degC" />
+<TEST_PARAM Param="!ECTMAX@ECTH" Val="90" HiLimit="115" />
+<TEST_PARAM Param="!ECTRST2@DECT" Val="2" LoLimit="0" />
+<TEST_PARAM Param="ECTMIN" Val="88" Unit="degC" />
+<TEST_PARAM Param="ECTMAX" Val="90" Unit="degC" />
+<TEST_PARAM Param="F_CNDECT" Val="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="VSP_TRIGGER_02" InCycleRetestNum="1" TestTime="@TODAY@T12:24:50" TestEndTime="@TODAY@T12:24:52" ProcessInfo="S509" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!SPEED_KM_OR_MILE" Val="0" />
+<TEST_PARAM Param="!F_VSPOVER" Val="-1" />
+<TEST_PARAM Param="!VSP_OVER" Val="11" LoLimit="0" Unit="mph" />
+<TEST_PARAM Param="!VSP_UNDER" Val="10" HiLimit="10" Unit="mph" />
+<TEST_PARAM Param="F_OK" Val="-1" />
+<TEST_PARAM Param="F_TIMEOUT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ENG_CONDITION4" InCycleRetestNum="1" TestTime="@TODAY@T12:24:53" TestEndTime="@TODAY@T12:25:04" ProcessInfo="A515-A560" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="PARAMETER_NESTART" Val="400" Unit="rpm" />
+<TEST_PARAM Param="PARAMETER_VIDL" Val="5" Unit="kph" />
+<TEST_PARAM Param="PARAMETER_MAPLOADLO" Val="100" Unit="kPaA" />
+<TEST_PARAM Param="PGMFI_CAN" Val="-1" />
+<TEST_PARAM Param="ECUID5_bit0" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="F_ATNP" Val="-1" />
+<TEST_PARAM Param="ATNP" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="IDLING" Val="0" LoLimit="1" HiLimit="1" />
+<TEST_PARAM Param="!NE@NESTART" Val="1248" LoLimit="400" Unit="rpm" />
+<TEST_PARAM Param="!VSP@VIDL" Val="0" HiLimit="5" Unit="km/h" />
+<TEST_PARAM Param="!MAP@MAPLOADLO" />
+<TEST_PARAM Param="LOOP_CNT" Val="61" LoLimit="11170" Unit="times" />
+<TEST_PARAM Param="LOOP_TIM_AVE" Val="184" LoLimit="11170" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MAX" Val="218" LoLimit="1573" Unit="mS" />
+<TEST_PARAM Param="LOOP_TIM_MIN" Val="174" LoLimit="7232" Unit="mS" />
+<TEST_PARAM Param="COMMNGCNT1" />
+<TEST_PARAM Param="COMMNGCNT2" />
+<TEST_PARAM Param="COMMNGCNT3" />
+<TEST_PARAM Param="!Support bit" Val="FFFDFF7DE0" Unit="hex" />
+<TEST_PARAM Param="LAST_NE" Val="1248" Unit="rpm" />
+<TEST_PARAM Param="LAST_VSP" Val="2" Unit="kph" />
+<TEST_PARAM Param="LAST_MAP" Val="83" Unit="kPaA" />
+<TEST_PARAM Param="LAST_TW" Val="91" Unit="degC" />
+<TEST_PARAM Param="LAST_VB" Val="14.2" Unit="V" />
+<TEST_PARAM Param="LAST_RELTH" Val="14.9020" Unit="deg" />
+<TEST_PARAM Param="LAST_TA" Val="29" Unit="degC" />
+<TEST_PARAM Param="LAST_PA" Val="98" Unit="kPaA" />
+<TEST_PARAM Param="LAST_ACGF" Val="55.69" Unit="%" />
+<TEST_PARAM Param="LAST_LACT" Val="0.90" Unit="mm" />
+<TEST_PARAM Param="LAST_GAIR" Val="15.27" Unit="g/sec" />
+<TEST_PARAM Param="LAST_TW2" Val="29" Unit="degC" />
+<TEST_PARAM Param="NE_MIN" Val="736" LoLimit="10126" Unit="rpm" />
+<TEST_PARAM Param="NE_MAX" Val="2068" LoLimit="4937" Unit="rpm" />
+<TEST_PARAM Param="NE_AVE" Val="1002" LoLimit="11062" Unit="rpm" />
+<TEST_PARAM Param="VSP_MIN" Val="0" LoLimit="10525" Unit="kph" />
+<TEST_PARAM Param="VSP_MAX" Val="16" LoLimit="5296" Unit="kph" />
+<TEST_PARAM Param="VSP_AVE" Val="10" LoLimit="11062" Unit="kph" />
+<TEST_PARAM Param="MAP_MIN" Val="40" LoLimit="5296" Unit="kPaA" />
+<TEST_PARAM Param="MAP_MAX" Val="89" LoLimit="4755" Unit="kPaA" />
+<TEST_PARAM Param="MAP_AVE" Val="51" LoLimit="11062" Unit="kPaA" />
+<TEST_PARAM Param="TW_MIN" Val="91" LoLimit="120" Unit="degC" />
+<TEST_PARAM Param="TW_MAX" Val="91" LoLimit="120" Unit="degC" />
+<TEST_PARAM Param="VB_MIN" Val="13.7" LoLimit="10337" Unit="V" />
+<TEST_PARAM Param="VB_MAX" Val="14.2" LoLimit="11062" Unit="V" />
+<TEST_PARAM Param="RELTH_MIN" Val="3.1373" LoLimit="120" Unit="deg" />
+<TEST_PARAM Param="RELTH_MAX" Val="21.5686" LoLimit="4755" Unit="deg" />
+<TEST_PARAM Param="RELTH_AVE" Val="5.0262" LoLimit="11062" Unit="deg" />
+<TEST_PARAM Param="TA_MIN" Val="29" LoLimit="120" Unit="degC" />
+<TEST_PARAM Param="TA_MAX" Val="29" LoLimit="120" Unit="degC" />
+<TEST_PARAM Param="PA_MIN" Val="98" LoLimit="120" Unit="kPaA" />
+<TEST_PARAM Param="PA_MAX" Val="98" LoLimit="120" Unit="kPaA" />
+<TEST_PARAM Param="ACGF_MIN" Val="48.63" LoLimit="5117" Unit="%" />
+<TEST_PARAM Param="ACGF_MAX" Val="89.02" LoLimit="10337" Unit="%" />
+<TEST_PARAM Param="ACGF_AVE" Val="65.36" LoLimit="11062" Unit="%" />
+<TEST_PARAM Param="LACT_MIN" Val="0.00" LoLimit="120" Unit="mm" />
+<TEST_PARAM Param="LACT_MAX" Val="3.25" LoLimit="4937" Unit="mm" />
+<TEST_PARAM Param="LACT_AVE" Val="0.22" LoLimit="11062" Unit="mm" />
+<TEST_PARAM Param="GAIR_MIN" Val="4.15" LoLimit="2730" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_MAX" Val="24.84" LoLimit="4568" Unit="g/sec" />
+<TEST_PARAM Param="GAIR_AVE" Val="6.56" LoLimit="11062" Unit="g/sec" />
+<TEST_PARAM Param="TW2_MIN" Val="29" LoLimit="6584" Unit="degC" />
+<TEST_PARAM Param="TW2_MAX" Val="30" LoLimit="120" Unit="degC" />
+<TEST_PARAM Param="IXREF" Val="110.0" Unit="l/min" />
+<TEST_PARAM Param="IALSTAT0" Val="0" />
+<TEST_PARAM Param="IALSTAT1" Val="0" />
+<TEST_PARAM Param="IALSTAT2" Val="0" />
+<TEST_PARAM Param="!INSPECTION_TIME" Val="11174" Unit="mS" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="WEN_LINE_CHECK" InCycleRetestNum="1" TestTime="@TODAY@T12:24:53" TestEndTime="@TODAY@T12:24:53" ProcessInfo="S515" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!Time WEN Open LET" Val="0" />
+<TEST_PARAM Param="!Time WEN Open ECU" Val="12" />
+<TEST_PARAM Param="!WEN = value of 0" Val="0" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="!Time WEN Close Voltage" Val="4687" Unit="V" />
+<TEST_PARAM Param="!Time WEN Close LET" Val="37" />
+<TEST_PARAM Param="!Time WEN Close ECU" Val="13" />
+<TEST_PARAM Param="!WEN = value of 1" Val="1" LoLimit="1" HiLimit="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AT_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:24:54" TestEndTime="@TODAY@T12:24:54" ProcessInfo="S520" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="BCAN_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:24:54" TestEndTime="@TODAY@T12:24:58" ProcessInfo="S525" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="AC" Val="0" />
+<TEST_PARAM Param="AFS" Val="0" />
+<TEST_PARAM Param="AUTO_LIGHT" Val="0" />
+<TEST_PARAM Param="C_PANEL" Val="0" />
+<TEST_PARAM Param="COMBI_SW" Val="0" />
+<TEST_PARAM Param="DDE" Val="0" />
+<TEST_PARAM Param="HANDS_FREE" Val="0" />
+<TEST_PARAM Param="HIP" Val="0" />
+<TEST_PARAM Param="IMMOBI" Val="1" />
+<TEST_PARAM Param="MEM_SEAT" Val="0" />
+<TEST_PARAM Param="METER" Val="1" />
+<TEST_PARAM Param="SDL" Val="0" />
+<TEST_PARAM Param="SDR" Val="0" />
+<TEST_PARAM Param="P_TAIL" Val="0" />
+<TEST_PARAM Param="PTRUNK" Val="0" />
+<TEST_PARAM Param="P_WIND" Val="0" />
+<TEST_PARAM Param="RLS" Val="0" />
+<TEST_PARAM Param="RAIN" Val="0" />
+<TEST_PARAM Param="RJU" Val="0" />
+<TEST_PARAM Param="RELAY" Val="0" />
+<TEST_PARAM Param="SMART" Val="0" />
+<TEST_PARAM Param="TELE" Val="0" />
+<TEST_PARAM Param="ALV" Val="0" />
+<TEST_PARAM Param="PARKSR" Val="0" />
+<TEST_PARAM Param="MVC" Val="0" />
+<TEST_PARAM Param="BSI" Val="0" />
+<TEST_PARAM Param="!AUTO_SELECT" Val="0" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SRS_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:24:58" TestEndTime="@TODAY@T12:24:59" ProcessInfo="S530" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="SWS_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:24:59" TestEndTime="@TODAY@T12:25:00" ProcessInfo="S535" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="OPDS_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:25:00" TestEndTime="@TODAY@T12:25:01" ProcessInfo="S540" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TPMS_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:25:03" TestEndTime="@TODAY@T12:25:03" ProcessInfo="S560" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="TPMS_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:25:01" TestEndTime="@TODAY@T12:25:02" ProcessInfo="S550" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!PLANT_MODE=1?" Val="0C" LoLimit="01" HiLimit="01" />
+<TEST_PARAM Param="!PLANT_MODE=2?" Val="0C" LoLimit="02" HiLimit="02" />
+<TEST_PARAM Param="!PLANT_MODE=E?" Val="0C" LoLimit="00" HiLimit="00" />
+<TEST_PARAM Param="SENSID1" Val="8CF55DA4" />
+<TEST_PARAM Param="SENSID2" Val="8CF57D23" />
+<TEST_PARAM Param="SENSID3" Val="8CF56283" />
+<TEST_PARAM Param="SENSID4" Val="8CF57D10" />
+<TEST_PARAM Param="TIRE_AIR1" Val="277" LoLimit="175" HiLimit="600" Unit="KPa" />
+<TEST_PARAM Param="TIRE_AIR2" Val="275" LoLimit="175" HiLimit="600" Unit="KPa" />
+<TEST_PARAM Param="TIRE_AIR3" Val="277" LoLimit="175" HiLimit="600" Unit="KPa" />
+<TEST_PARAM Param="TIRE_AIR4" Val="277" LoLimit="175" HiLimit="600" Unit="KPa" />
+<TEST_PARAM Param="TIRE_TEMP1" Val="22" LoLimit="0" HiLimit="50" Unit="deg/c" />
+<TEST_PARAM Param="TIRE_TEMP2" Val="21" LoLimit="0" HiLimit="50" Unit="deg/c" />
+<TEST_PARAM Param="TIRE_TEMP3" Val="21" LoLimit="0" HiLimit="50" Unit="deg/c" />
+<TEST_PARAM Param="TIRE_TEMP4" Val="22" LoLimit="0" HiLimit="50" Unit="deg/c" />
+<TEST_PARAM Param="!SYSTYPE" Val="1" LoLimit="0" HiLimit="0" />
+<TEST_PARAM Param="LOW_WARNING_ON" Val="175" LoLimit="0" HiLimit="65535" Unit="KPa" />
+<TEST_PARAM Param="LOW_WARNING_OFF" Val="200" LoLimit="0" HiLimit="65535" Unit="KPa" />
+<TEST_PARAM Param="Normal op." Val="12" />
+<TEST_PARAM Param="AIR_CHECK" Val="1" />
+<TEST_PARAM Param="TEMP_CHECK" Val="1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!ECUID4" Val="00" ExpectedVal="00" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AUDIO_DIAG2" InCycleRetestNum="1" TestTime="@TODAY@T12:25:36" TestEndTime="@TODAY@T12:25:52" ProcessInfo="Q000A601" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="START_COMM" Val="OK" />
+<TEST_PARAM Param="DIAG COMM" Val="82,f6,81,50,81,0,0,0" />
+<TEST_PARAM Param="F_AUDIO_DIAGMODE" Val="-1" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="AM_RADIO_ANT" InCycleRetestNum="1" TestTime="@TODAY@T12:25:37" TestEndTime="@TODAY@T12:25:44" ProcessInfo="S601" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!QA_FRE1" Val="0540000" ExpectedVal="AMQAFRE1" />
+<TEST_ATTRIBUTE Att="!ECU_FRE1" Val="303534302e303030" ExpectedVal="AMFRE1" />
+<TEST_ATTRIBUTE Att="!QA_FRE2" Val="0990000" ExpectedVal="AMQAFRE2" />
+<TEST_ATTRIBUTE Att="!ECU_FRE2" Val="303939302e303030" ExpectedVal="AMFRE2" />
+<TEST_ATTRIBUTE Att="!QA_FRE3" Val="1530000" ExpectedVal="AMQAFRE3" />
+<TEST_ATTRIBUTE Att="!ECU_FRE3" Val="313533302e303030" ExpectedVal="AMFRE3" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!RETRY" Val="3" />
+<TEST_PARAM Param="AMRES1" Val="61.8" LoLimit="50.0" HiLimit="75.0" Unit="dBmicroV" />
+<TEST_PARAM Param="AMRES2" Val="62.9" LoLimit="50.0" HiLimit="75.0" Unit="dBmicroV" />
+<TEST_PARAM Param="AMRES3" Val="61.4" LoLimit="50.0" HiLimit="75.0" Unit="dBmicroV" />
+<TEST_PARAM Param="F_AM_ANT_END" Val="-1" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="FM_RADIO_ANT" InCycleRetestNum="1" TestTime="@TODAY@T12:25:37" TestEndTime="@TODAY@T12:25:51" ProcessInfo="S601" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+<TEST_ATTRIBUTE Att="!QA_FRE1" Val="0087900" ExpectedVal="FMQAFRE1" />
+<TEST_ATTRIBUTE Att="!ECU_FRE1" Val="303038372e393030" ExpectedVal="FMFRE1" />
+<TEST_ATTRIBUTE Att="!QA_FRE2" Val="0100300" ExpectedVal="FMQAFRE2" />
+<TEST_ATTRIBUTE Att="!ECU_FRE2" Val="303130302e333030" ExpectedVal="FMFRE2" />
+<TEST_ATTRIBUTE Att="!QA_FRE3" Val="0107900" ExpectedVal="FMQAFRE3" />
+<TEST_ATTRIBUTE Att="!ECU_FRE3" Val="303130372e393030" ExpectedVal="FMFRE3" />
+</TEST_ATTRIBUTES>
+<TEST_PARAMS>
+<TEST_PARAM Param="!RETRY" Val="3" />
+<TEST_PARAM Param="FMRES1" Val="63.3" LoLimit="50.0" HiLimit="80.0" Unit="dBmicroV" />
+<TEST_PARAM Param="FMRES2" Val="60.8" LoLimit="50.0" HiLimit="80.0" Unit="dBmicroV" />
+<TEST_PARAM Param="FMRES3" Val="68.7" LoLimit="50.0" HiLimit="80.0" Unit="dBmicroV" />
+<TEST_PARAM Param="F_AM_ANT_END" Val="-1" />
+</TEST_PARAMS>
+</TEST>
+<TEST Test="FI_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:25:51" TestEndTime="@TODAY@T12:25:52" ProcessInfo="S700" Status="Pass">
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+<TEST Test="ABS_VSA_DTC_READ" InCycleRetestNum="1" TestTime="@TODAY@T12:25:52" TestEndTime="@TODAY@T12:25:54" ProcessInfo="S701" Status="Pass">
+<TEST_PARAMS>
+<TEST_PARAM Param="!AREA_ST" Val="0xAA" />
+</TEST_PARAMS>
+<TEST_ATTRIBUTES><TEST_ATTRIBUTE Att="ASSOCIATE" Val="@OPERATOR_ID@" />
+</TEST_ATTRIBUTES>
+</TEST>
+</TESTS>
+</PROCESS>
+</UNIT_IN_TEST>

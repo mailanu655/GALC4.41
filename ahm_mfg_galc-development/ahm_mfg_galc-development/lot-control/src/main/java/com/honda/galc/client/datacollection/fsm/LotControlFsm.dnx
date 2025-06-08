@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xtools2_universal_type_manager-->
+<?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="Rational Modeling Platform (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.2/Umlnotation" xmi:id="_SbfPoc1ZEd6jrobNq6cU5Q" type="Class" name="LotControlFsm.dnx">
+  <eAnnotations xmi:id="_SbfPo81ZEd6jrobNq6cU5Q" source="com.ibm.xtools.common.ui.reduction.editingCapabilities">
+    <details xmi:id="_SbfPpM1ZEd6jrobNq6cU5Q" key="com.ibm.xtools.activities.javaVisualizerActivity" value="1"/>
+  </eAnnotations>
+  <children xmi:id="_bKwF0M1ZEd6jrobNq6cU5Q">
+    <children xmi:id="_bK520M1ZEd6jrobNq6cU5Q" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_bK520c1ZEd6jrobNq6cU5Q" width="530" height="530"/>
+    </children>
+    <children xmi:id="_bK520s1ZEd6jrobNq6cU5Q" type="Stereotype"/>
+    <children xmi:id="_bK52081ZEd6jrobNq6cU5Q" type="Kind"/>
+    <children xmi:id="_bK521M1ZEd6jrobNq6cU5Q" type="Name"/>
+    <children xmi:id="_bK521c1ZEd6jrobNq6cU5Q" type="Parent"/>
+    <children xmi:id="_bK521s1ZEd6jrobNq6cU5Q" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_bK52181ZEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_bK522M1ZEd6jrobNq6cU5Q" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_bK522c1ZEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_bLDn0M1ZEd6jrobNq6cU5Q" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_bLDn0c1ZEd6jrobNq6cU5Q"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_bKwF0c1ZEd6jrobNq6cU5Q" fillColor="13420443" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bKwF0s1ZEd6jrobNq6cU5Q" x="317" y="-6974"/>
+  </children>
+  <children xmi:id="_eJr8IM1ZEd6jrobNq6cU5Q">
+    <children xmi:id="_eJr8I81ZEd6jrobNq6cU5Q" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_eJr8JM1ZEd6jrobNq6cU5Q" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_eJr8Jc1ZEd6jrobNq6cU5Q" type="Stereotype"/>
+    <children xmi:id="_eJr8Js1ZEd6jrobNq6cU5Q" type="Name"/>
+    <children xmi:id="_eJr8J81ZEd6jrobNq6cU5Q" type="Parent"/>
+    <children xmi:id="_eJr8KM1ZEd6jrobNq6cU5Q" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eJr8Kc1ZEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_eJ1tIM1ZEd6jrobNq6cU5Q" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eJ1tIc1ZEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_eJ1tIs1ZEd6jrobNq6cU5Q" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_eJ1tI81ZEd6jrobNq6cU5Q"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_eJr8Ic1ZEd6jrobNq6cU5Q" fillColor="8047085" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=FSMBuilder%5Bjcu%5Ename=FSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eJr8Is1ZEd6jrobNq6cU5Q" x="20288" y="-6657"/>
+  </children>
+  <children xmi:id="_SMo3Ic1gEd6jrobNq6cU5Q">
+    <children xmi:id="_SMo3JM1gEd6jrobNq6cU5Q" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_SMo3Jc1gEd6jrobNq6cU5Q" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_SMo3Js1gEd6jrobNq6cU5Q" type="Stereotype"/>
+    <children xmi:id="_SMo3J81gEd6jrobNq6cU5Q" type="Name"/>
+    <children xmi:id="_SMo3KM1gEd6jrobNq6cU5Q" type="Parent"/>
+    <children xmi:id="_SMo3Kc1gEd6jrobNq6cU5Q" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_SMo3Ks1gEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_SMyBEM1gEd6jrobNq6cU5Q" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_SMyBEc1gEd6jrobNq6cU5Q"/>
+    </children>
+    <children xmi:id="_SMyBEs1gEd6jrobNq6cU5Q" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_SMyBE81gEd6jrobNq6cU5Q"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_SMo3Is1gEd6jrobNq6cU5Q" fillColor="15053796" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SMo3I81gEd6jrobNq6cU5Q" x="2853" y="4438"/>
+  </children>
+  <children xmi:id="_NV0FIM3vEd6B1-D_mXlYHg">
+    <children xmi:id="_NV92IM3vEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_NV92Ic3vEd6B1-D_mXlYHg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_NV92Is3vEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_NV92I83vEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_NV92JM3vEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_NV92Jc3vEd6B1-D_mXlYHg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_NV92Js3vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_NV92J83vEd6B1-D_mXlYHg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_NV92KM3vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_NV92Kc3vEd6B1-D_mXlYHg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_NV92Ks3vEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_NV0FIc3vEd6B1-D_mXlYHg" fillColor="15053796" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NV0FIs3vEd6B1-D_mXlYHg" x="12046" y="4438"/>
+  </children>
+  <children xmi:id="_UcFkQM3vEd6B1-D_mXlYHg">
+    <children xmi:id="_UcFkQ83vEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_UcFkRM3vEd6B1-D_mXlYHg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_UcFkRc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_UcFkRs3vEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_UcFkR83vEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_UcFkSM3vEd6B1-D_mXlYHg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UcFkSc3vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_UcFkSs3vEd6B1-D_mXlYHg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UcFkS83vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_UcFkTM3vEd6B1-D_mXlYHg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UcFkTc3vEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_UcFkQc3vEd6B1-D_mXlYHg" fillColor="15053796" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UcFkQs3vEd6B1-D_mXlYHg" x="-5072" y="4438"/>
+  </children>
+  <children xmi:id="__Te9YM3vEd6B1-D_mXlYHg">
+    <children xmi:id="__Te9Y83vEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="__Te9ZM3vEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="__Te9Zc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="__Te9Zs3vEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="__Te9Z83vEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="__Te9aM3vEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="__Te9ac3vEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="__Te9as3vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="__Te9a83vEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="__Te9bM3vEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="__Te9bc3vEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="__Te9bs3vEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="__Te9Yc3vEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IDataCollectionControl%5Bjcu%5Ename=IDataCollectionControl.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__Te9Ys3vEd6B1-D_mXlYHg" x="14899" y="-6657"/>
+  </children>
+  <children xmi:id="_K9XKkM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_K9XKk83wEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_K9XKlM3wEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="_K9XKlc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_K9XKls3wEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="_K9XKl83wEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_K9XKmM3wEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_K9XKmc3wEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_K9XKms3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_K9XKm83wEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_K9XKnM3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_K9XKnc3wEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_K9XKns3wEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_K9XKkc3wEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_K9XKks3wEd6B1-D_mXlYHg" x="8876" y="-1585"/>
+  </children>
+  <children xmi:id="_OROvEM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_OROvE83wEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_OROvFM3wEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="_OROvFc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_OROvFs3wEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="_OROvF83wEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_OROvGM3wEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_OROvGc3wEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_OROvGs3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_OROvG83wEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_OROvHM3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_OROvHc3wEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_OROvHs3wEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_OROvEc3wEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OROvEs3wEd6B1-D_mXlYHg" x="-2219" y="-1585"/>
+  </children>
+  <children xmi:id="_Uhbh0M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_Uhbh083wEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_Uhbh1M3wEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="_UhlS0M3wEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_UhlS0c3wEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="_UhlS0s3wEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_UhlS083wEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_UhlS1M3wEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UhlS1c3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_UhlS1s3wEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UhlS183wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_UhlS2M3wEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_UhlS2c3wEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_Uhbh0c3wEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IPartVerificationEvent%5Bjcu%5Ename=IPartVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Uhbh0s3wEd6B1-D_mXlYHg" x="3804" y="-1585"/>
+  </children>
+  <children xmi:id="_Zyd9oM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_Zyd9o83wEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_Zyd9pM3wEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="_Zyd9pc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_Zyd9ps3wEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="_Zyd9p83wEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_Zyd9qM3wEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_Zyd9qc3wEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Zyd9qs3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_Zyd9q83wEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Zyd9rM3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_Zyd9rc3wEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Zyd9rs3wEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_Zyd9oc3wEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=ITorqueDataCollectionEvent%5Bjcu%5Ename=ITorqueDataCollectionEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zyd9os3wEd6B1-D_mXlYHg" x="-8242" y="-1585"/>
+  </children>
+  <children xmi:id="_cIgn8M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_cIgn883wEd6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_cIgn9M3wEd6B1-D_mXlYHg" width="530" height="530"/>
+    </children>
+    <children xmi:id="_cIgn9c3wEd6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_cIgn9s3wEd6B1-D_mXlYHg" type="Kind"/>
+    <children xmi:id="_cIgn983wEd6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_cIgn-M3wEd6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_cIgn-c3wEd6B1-D_mXlYHg" type="AttributeCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_cIgn-s3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_cIgn-83wEd6B1-D_mXlYHg" type="OperationCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_cIgn_M3wEd6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_cIgn_c3wEd6B1-D_mXlYHg" visible="false" type="SignalCompartment">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_cIgn_s3wEd6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLClassifierStyle" xmi:id="_cIgn8c3wEd6B1-D_mXlYHg" fillColor="8905185" lineColor="4210752" showStereotype="Label" useClassifierShape="true"/>
+    <element xmi:type="uml:Interface" href="mmi:///#jsrctype%5Ename=IUserControlEvent%5Bjcu%5Ename=IUserControlEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Interface"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cIgn8s3wEd6B1-D_mXlYHg" x="14899" y="-1585"/>
+  </children>
+  <children xmi:id="_k1QmkM35Ed6B1-D_mXlYHg">
+    <children xmi:id="_k1Qmk835Ed6B1-D_mXlYHg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_k1QmlM35Ed6B1-D_mXlYHg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_k1Qmlc35Ed6B1-D_mXlYHg" type="Stereotype"/>
+    <children xmi:id="_k1Qmls35Ed6B1-D_mXlYHg" type="Name"/>
+    <children xmi:id="_k1aXkM35Ed6B1-D_mXlYHg" type="Parent"/>
+    <children xmi:id="_k1aXkc35Ed6B1-D_mXlYHg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_k1aXks35Ed6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_k1aXk835Ed6B1-D_mXlYHg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_k1aXlM35Ed6B1-D_mXlYHg"/>
+    </children>
+    <children xmi:id="_k1aXlc35Ed6B1-D_mXlYHg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_k1aXls35Ed6B1-D_mXlYHg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_k1Qmkc35Ed6B1-D_mXlYHg" fillColor="8047085" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=LotControlFSMBuilder%5Bjcu%5Ename=LotControlFSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k1Qmks35Ed6B1-D_mXlYHg" x="20288" y="-317" width="6113"/>
+  </children>
+  <children xmi:id="_3a3LwM4lEd6Ar9V-lC7wxg">
+    <children xmi:id="_3a3Lw84lEd6Ar9V-lC7wxg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_3a3LxM4lEd6Ar9V-lC7wxg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_3a3Lxc4lEd6Ar9V-lC7wxg" type="Stereotype"/>
+    <children xmi:id="_3bAVsM4lEd6Ar9V-lC7wxg" type="Name"/>
+    <children xmi:id="_3bAVsc4lEd6Ar9V-lC7wxg" type="Parent"/>
+    <children xmi:id="_3bAVss4lEd6Ar9V-lC7wxg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_3bAVs84lEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_3bAVtM4lEd6Ar9V-lC7wxg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_3bAVtc4lEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_3bAVts4lEd6Ar9V-lC7wxg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_3bAVt84lEd6Ar9V-lC7wxg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_3a3Lwc4lEd6Ar9V-lC7wxg" fillColor="8905185" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=LotControlFSMDefaultHandler%5Bjcu%5Ename=LotControlFSMDefaultHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3a3Lws4lEd6Ar9V-lC7wxg" x="27262" y="6657" width="6437"/>
+  </children>
+  <children xmi:id="_Bkr7cM4mEd6Ar9V-lC7wxg">
+    <children xmi:id="_Bk1FYM4mEd6Ar9V-lC7wxg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_Bk1FYc4mEd6Ar9V-lC7wxg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_Bk1FYs4mEd6Ar9V-lC7wxg" type="Stereotype"/>
+    <children xmi:id="_Bk1FY84mEd6Ar9V-lC7wxg" type="Name"/>
+    <children xmi:id="_Bk1FZM4mEd6Ar9V-lC7wxg" type="Parent"/>
+    <children xmi:id="_Bk1FZc4mEd6Ar9V-lC7wxg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Bk1FZs4mEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_Bk1FZ84mEd6Ar9V-lC7wxg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Bk1FaM4mEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_Bk1Fac4mEd6Ar9V-lC7wxg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_Bk1Fas4mEd6Ar9V-lC7wxg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Bkr7cc4mEd6Ar9V-lC7wxg" fillColor="8905185" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=LotControlFSMInvocationBaseHandler%5Bjcu%5Ename=LotControlFSMInvocationBaseHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bkr7cs4mEd6Ar9V-lC7wxg" x="27262" y="-317" width="6431"/>
+  </children>
+  <children xmi:id="_Eu7p4M4mEd6Ar9V-lC7wxg">
+    <children xmi:id="_Eu7p484mEd6Ar9V-lC7wxg" type="ImageCompartment">
+      <layoutConstraint xmi:type="notation:Size" xmi:id="_Eu7p5M4mEd6Ar9V-lC7wxg" width="1320" height="1320"/>
+    </children>
+    <children xmi:id="_Eu7p5c4mEd6Ar9V-lC7wxg" type="Stereotype"/>
+    <children xmi:id="_Eu7p5s4mEd6Ar9V-lC7wxg" type="Name"/>
+    <children xmi:id="_EvFa4M4mEd6Ar9V-lC7wxg" type="Parent"/>
+    <children xmi:id="_EvFa4c4mEd6Ar9V-lC7wxg" visible="false" type="ANNOTATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_EvFa4s4mEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_EvOk0M4mEd6Ar9V-lC7wxg" type="ANNOTATED_ATTRIBUTE_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_EvOk0c4mEd6Ar9V-lC7wxg"/>
+    </children>
+    <children xmi:id="_EvOk0s4mEd6Ar9V-lC7wxg" type="ANNOTATED_OPERATION_COMPARTMENT">
+      <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_EvOk084mEd6Ar9V-lC7wxg"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Eu7p4c4mEd6Ar9V-lC7wxg" fillColor="8905185" lineColor="4210752" showStereotype="Label"/>
+    <element xmi:type="uml:Class" href="mmi:///#jsrctype%5Ename=FSMInvocationHandler%5Bjcu%5Ename=FSMInvocationHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D$uml.Class"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Eu7p4s4mEd6Ar9V-lC7wxg" x="27262" y="-6657"/>
+  </children>
+  <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_SbfPos1ZEd6jrobNq6cU5Q"/>
+  <element xsi:nil="true"/>
+  <edges xmi:id="_NfzHkM3vEd6B1-D_mXlYHg" source="_SMo3Ic1gEd6jrobNq6cU5Q" target="_NV0FIM3vEd6B1-D_mXlYHg">
+    <children xmi:id="_NfzHk83vEd6B1-D_mXlYHg" type="KindLabel">
+      <children xmi:id="_NfzHlc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_NfzHl83vEd6B1-D_mXlYHg" type="Kind"/>
+      <children xmi:id="_NfzHls3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NfzHlM3vEd6B1-D_mXlYHg" x="-86" y="1205"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_NfzHkc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NfzHks3vEd6B1-D_mXlYHg" points="[3213, 614, -6734, -1286]$[5980, 1143, -3967, -757]"/>
+  </edges>
+  <edges xmi:id="_NfzHmM3vEd6B1-D_mXlYHg" source="_NV0FIM3vEd6B1-D_mXlYHg" target="_SMo3Ic1gEd6jrobNq6cU5Q">
+    <children xmi:id="_NfzHm83vEd6B1-D_mXlYHg" type="KindLabel">
+      <children xmi:id="_NfzHnc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_NfzHn83vEd6B1-D_mXlYHg" type="Kind"/>
+      <children xmi:id="_NfzHns3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NfzHnM3vEd6B1-D_mXlYHg" x="-768" y="-1029"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_NfzHmc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NfzHms3vEd6B1-D_mXlYHg" points="[-3967, -2576, 5980, -676]$[-4980, -3234, 4967, -1334]$[-6734, -2763, 3213, -863]"/>
+  </edges>
+  <edges xmi:id="_Ui7zIM3vEd6B1-D_mXlYHg" source="_NV0FIM3vEd6B1-D_mXlYHg" target="_UcFkQM3vEd6B1-D_mXlYHg">
+    <children xmi:id="_Ui7zI83vEd6B1-D_mXlYHg" type="KindLabel">
+      <children xmi:id="_Ui7zJc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_Ui7zJ83vEd6B1-D_mXlYHg" type="Kind"/>
+      <children xmi:id="_Ui7zJs3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ui7zJM3vEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Ui7zIc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Ui7zIs3vEd6B1-D_mXlYHg" points="[-3967, 1578, 13601, -560]$[-7837, 3116, 9731, 978]$[-14051, 2491, 3517, 353]"/>
+  </edges>
+  <edges xmi:id="_Ui7zKM3vEd6B1-D_mXlYHg" source="_UcFkQM3vEd6B1-D_mXlYHg" target="_SMo3Ic1gEd6jrobNq6cU5Q">
+    <children xmi:id="_Ui7zK83vEd6B1-D_mXlYHg" type="KindLabel">
+      <children xmi:id="_Ui7zLc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_Ui7zL83vEd6B1-D_mXlYHg" type="Kind"/>
+      <children xmi:id="_Ui7zLs3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ui7zLM3vEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Ui7zKc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Ui7zKs3vEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_Ui7zMM3vEd6B1-D_mXlYHg" source="_UcFkQM3vEd6B1-D_mXlYHg" target="_NV0FIM3vEd6B1-D_mXlYHg">
+    <children xmi:id="_Ui7zM83vEd6B1-D_mXlYHg" type="KindLabel">
+      <children xmi:id="_Ui7zNc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_Ui7zN83vEd6B1-D_mXlYHg" type="Kind"/>
+      <children xmi:id="_Ui7zNs3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ui7zNM3vEd6B1-D_mXlYHg" x="253" y="481"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Ui7zMc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Ui7zMs3vEd6B1-D_mXlYHg" points="[3517, 1237, -14051, 3375]$[9096, 3200, -8472, 5338]$[13601, 362, -3967, 2500]"/>
+  </edges>
+  <edges xmi:id="__UEzQM3vEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="__Te9YM3vEd6B1-D_mXlYHg">
+    <children xmi:id="__UEzQ83vEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="__UEzRc3vEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="__UEzRs3vEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="__UEzRM3vEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="__UEzQc3vEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IDataCollectionControl%5Bjcu%5Ename=IDataCollectionControl.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__UEzQs3vEd6B1-D_mXlYHg" points="[4524, 914, -12339, -5321]$[13496, 2728, -3367, -3507]$[15048, 4344, -1815, -1891]"/>
+  </edges>
+  <edges xmi:id="_K9qFgM3wEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="_K9XKkM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_K9qFg83wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_K9qFhc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_K9qFhs3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_K9qFhM3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_K9qFgc3wEd6B1-D_mXlYHg" avoidObstructions="true" closestDistance="true" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_K9qFgs3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_K9qFh83wEd6B1-D_mXlYHg" source="_SMo3Ic1gEd6jrobNq6cU5Q" target="_K9XKkM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_K9qFis3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_K9qFjM3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_K9qFjc3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_K9qFi83wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_K9qFiM3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_K9qFic3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_ORYgEM3wEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="_OROvEM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_ORYgE83wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_ORYgFc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_ORYgFs3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ORYgFM3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_ORYgEc3wEd6B1-D_mXlYHg" avoidObstructions="true" closestDistance="true" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ORYgEs3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_ORYgF83wEd6B1-D_mXlYHg" source="_SMo3Ic1gEd6jrobNq6cU5Q" target="_OROvEM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_ORYgGs3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_ORYgHM3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_ORYgHc3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ORYgG83wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_ORYgGM3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IProductIdVerificationEvent%5Bjcu%5Ename=IProductIdVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ORYgGc3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_Uh4NwM3wEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="_Uhbh0M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_UiB-wM3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_UiB-ws3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_UiB-w83wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UiB-wc3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Uh4Nwc3wEd6B1-D_mXlYHg" avoidObstructions="true" closestDistance="true" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IPartVerificationEvent%5Bjcu%5Ename=IPartVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Uh4Nws3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_UiB-xM3wEd6B1-D_mXlYHg" source="_NV0FIM3vEd6B1-D_mXlYHg" target="_Uhbh0M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_UiB-x83wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_UiB-yc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_UiB-ys3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UiB-yM3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_UiB-xc3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IPartVerificationEvent%5Bjcu%5Ename=IPartVerificationEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_UiB-xs3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_Zy6CgM3wEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="_Zyd9oM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_Zy6Cg83wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_Zy6Chc3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_Zy6Chs3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zy6ChM3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Zy6Cgc3wEd6B1-D_mXlYHg" avoidObstructions="true" closestDistance="true" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ITorqueDataCollectionEvent%5Bjcu%5Ename=ITorqueDataCollectionEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Zy6Cgs3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_Zy6Ch83wEd6B1-D_mXlYHg" source="_UcFkQM3vEd6B1-D_mXlYHg" target="_Zyd9oM3wEd6B1-D_mXlYHg">
+    <children xmi:id="_Zy6Cis3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_Zy6CjM3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_Zy6Cjc3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zy6Ci83wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Zy6CiM3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=ITorqueDataCollectionEvent%5Bjcu%5Ename=ITorqueDataCollectionEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Zy6Cic3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_cIzi4M3wEd6B1-D_mXlYHg" source="_bKwF0M1ZEd6jrobNq6cU5Q" target="_cIgn8M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_cIzi483wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_cIzi5c3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_cIzi5s3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cIzi5M3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_cIzi4c3wEd6B1-D_mXlYHg" avoidObstructions="true" closestDistance="true" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=IDataCollectionFsm%5Bjcu%5Ename=IDataCollectionFsm.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IUserControlEvent%5Bjcu%5Ename=IUserControlEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cIzi4s3wEd6B1-D_mXlYHg" points="[2689, 1045, -12536, -4872]$[2689, 2410, -12536, -3507]$[15264, 2410, 39, -3507]$[15264, 4661, 39, -1256]"/>
+  </edges>
+  <edges xmi:id="_cIzi583wEd6B1-D_mXlYHg" source="_SMo3Ic1gEd6jrobNq6cU5Q" target="_cIgn8M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_cIzi6s3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_cIzi7M3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_cIzi7c3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cIzi683wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_cIzi6M3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=ProcessProduct%5Bjcu%5Ename=ProcessProduct.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IUserControlEvent%5Bjcu%5Ename=IUserControlEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cIzi6c3wEd6B1-D_mXlYHg" points="[3213, -2298, -10786, 5954]$[7190, -5144, -6809, 3108]$[11952, -6097, -2047, 2155]$[12805, -6995, -1194, 1257]"/>
+  </edges>
+  <edges xmi:id="_cIzi7s3wEd6B1-D_mXlYHg" source="_NV0FIM3vEd6B1-D_mXlYHg" target="_cIgn8M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_cIzi8c3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_cIzi883wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_cIzi9M3wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cIzi8s3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_cIzi783wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=ProcessPart%5Bjcu%5Ename=ProcessPart.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IUserControlEvent%5Bjcu%5Ename=IUserControlEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cIzi8M3wEd6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_cIzi9c3wEd6B1-D_mXlYHg" source="_UcFkQM3vEd6B1-D_mXlYHg" target="_cIgn8M3wEd6B1-D_mXlYHg">
+    <children xmi:id="_cIzi-M3wEd6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_cIzi-s3wEd6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_cIzi-83wEd6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cIzi-c3wEd6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_cIzi9s3wEd6B1-D_mXlYHg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:InterfaceRealization" href="mmi:///#jimpl%5Bjsrctype%5Ename=TorqueDataCollection%5Bjcu%5Ename=TorqueDataCollection.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.state%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=IUserControlEvent%5Bjcu%5Ename=IUserControlEvent.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.InterfaceRealization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_cIzi983wEd6B1-D_mXlYHg" points="[852, -7840, -20768, 4767]$[894, -8230, -20726, 4377]$[18938, -10770, -2682, 1837]$[19785, -11350, -1835, 1257]"/>
+  </edges>
+  <edges xmi:id="_k4ruAM35Ed6B1-D_mXlYHg" source="_k1QmkM35Ed6B1-D_mXlYHg" target="_eJr8IM1ZEd6jrobNq6cU5Q">
+    <children xmi:id="_k4ruA835Ed6B1-D_mXlYHg" type="NameLabel">
+      <children xmi:id="_k4ruBc35Ed6B1-D_mXlYHg" type="Stereotype"/>
+      <children xmi:id="_k4ruBs35Ed6B1-D_mXlYHg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k4ruBM35Ed6B1-D_mXlYHg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_k4ruAc35Ed6B1-D_mXlYHg" lineColor="4144959" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=LotControlFSMBuilder%5Bjcu%5Ename=LotControlFSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=FSMBuilder%5Bjcu%5Ename=FSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_k4ruAs35Ed6B1-D_mXlYHg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_3gFC8M4lEd6Ar9V-lC7wxg" source="_k1QmkM35Ed6B1-D_mXlYHg" target="_3a3LwM4lEd6Ar9V-lC7wxg">
+    <children xmi:id="_3gFC884lEd6Ar9V-lC7wxg" type="KindLabel">
+      <children xmi:id="_3gFC9c4lEd6Ar9V-lC7wxg" type="Stereotype"/>
+      <children xmi:id="_3gFC984lEd6Ar9V-lC7wxg" type="Kind"/>
+      <children xmi:id="_3gFC9s4lEd6Ar9V-lC7wxg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3gFC9M4lEd6Ar9V-lC7wxg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_3gFC8c4lEd6Ar9V-lC7wxg" lineColor="4210752" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=LotControlFSMBuilder%5Bjcu%5Ename=LotControlFSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=LotControlFSMDefaultHandler%5Bjcu%5Ename=LotControlFSMDefaultHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_3gFC8s4lEd6Ar9V-lC7wxg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_Bp5yqM4mEd6Ar9V-lC7wxg" source="_3a3LwM4lEd6Ar9V-lC7wxg" target="_Bkr7cM4mEd6Ar9V-lC7wxg">
+    <children xmi:id="_Bp5yq84mEd6Ar9V-lC7wxg" type="NameLabel">
+      <children xmi:id="_Bp5yrc4mEd6Ar9V-lC7wxg" type="Stereotype"/>
+      <children xmi:id="_Bp5yrs4mEd6Ar9V-lC7wxg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Bp5yrM4mEd6Ar9V-lC7wxg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_Bp5yqc4mEd6Ar9V-lC7wxg" lineColor="4144959" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=LotControlFSMDefaultHandler%5Bjcu%5Ename=LotControlFSMDefaultHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=LotControlFSMInvocationBaseHandler%5Bjcu%5Ename=LotControlFSMInvocationBaseHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Bp5yqs4mEd6Ar9V-lC7wxg" points="[-101, -4040, 137, 5469]$[-160, -6419, 78, 3090]"/>
+  </edges>
+  <edges xmi:id="_EzQJMM4mEd6Ar9V-lC7wxg" source="_eJr8IM1ZEd6jrobNq6cU5Q" target="_Eu7p4M4mEd6Ar9V-lC7wxg">
+    <children xmi:id="_EzQJM84mEd6Ar9V-lC7wxg" type="KindLabel">
+      <children xmi:id="_EzQJNc4mEd6Ar9V-lC7wxg" type="Stereotype"/>
+      <children xmi:id="_EzQJN84mEd6Ar9V-lC7wxg" type="Kind"/>
+      <children xmi:id="_EzQJNs4mEd6Ar9V-lC7wxg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EzQJNM4mEd6Ar9V-lC7wxg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_EzQJMc4mEd6Ar9V-lC7wxg" lineColor="4144959" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Usage" href="mmi:///#jdep%5Bjsrctype%5Ename=FSMBuilder%5Bjcu%5Ename=FSMBuilder.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=FSMInvocationHandler%5Bjcu%5Ename=FSMInvocationHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Usage"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EzQJMs4mEd6Ar9V-lC7wxg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+  <edges xmi:id="_EzQJQM4mEd6Ar9V-lC7wxg" source="_Bkr7cM4mEd6Ar9V-lC7wxg" target="_Eu7p4M4mEd6Ar9V-lC7wxg">
+    <children xmi:id="_EzQJQ84mEd6Ar9V-lC7wxg" type="NameLabel">
+      <children xmi:id="_EzQJRc4mEd6Ar9V-lC7wxg" type="Stereotype"/>
+      <children xmi:id="_EzQJRs4mEd6Ar9V-lC7wxg" type="Name"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EzQJRM4mEd6Ar9V-lC7wxg" y="-186"/>
+    </children>
+    <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_EzQJQc4mEd6Ar9V-lC7wxg" lineColor="4144959" lineWidth="1" showStereotype="Text"/>
+    <element xmi:type="uml:Generalization" href="mmi:///#jgen%5Bjsrctype%5Ename=LotControlFSMInvocationBaseHandler%5Bjcu%5Ename=LotControlFSMInvocationBaseHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D%5Bjsrctype%5Ename=FSMInvocationHandler%5Bjcu%5Ename=FSMInvocationHandler.java%5Bjpack%5Ename=com.honda.galc.client.datacollection.fsm%5Bjsrcroot%5Esrcfolder=src%5Bproject%5Eid=LotControl%5D%5D%5D%5D%5D$uml.Generalization"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EzQJQs4mEd6Ar9V-lC7wxg" points="[0, 0, 0, 0]$[0, 0, 0, 0]"/>
+  </edges>
+</notation:Diagram>

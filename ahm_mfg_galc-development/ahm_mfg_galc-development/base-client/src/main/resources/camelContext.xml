@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://camel.apache.org/schema/spring
+       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+	<bean id="DaoProvider" class="com.honda.galc.client.ActiveMQDaoProviderProxy"/>
+ 	
+    <bean id="ActiveMQRequestInvoker" class="com.honda.galc.client.ActiveMQRequestInvoker"/>
+        
+
+    <!--  START SNIPPET: example
+    -->
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+ 
+        <route>
+            <from uri="jms:topic:schedule"/>
+            <!--<to uri="bean:xstreamConverter?method=unmarshal"/>-->
+            <to uri="bean:ActiveMQRequestInvoker?method=receive"/>
+        </route>
+    </camelContext>
+
+    <!--  lets configure the default ActiveMQ broker URL
+    -->
+    <bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="connectionFactory">
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                <property name="brokerURL" value="tcp://207.130.129.77:61616"/>
+            </bean>
+        </property>
+    </bean>
+</beans>

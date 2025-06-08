@@ -1,0 +1,62 @@
+package com.honda.galc.visualoverview.shared.feature;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.fusesource.restygwt.client.JsonCallback;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.Resource;
+import org.gwtopenmaps.openlayers.client.LonLat;
+import org.gwtopenmaps.openlayers.client.Pixel;
+import org.gwtopenmaps.openlayers.client.control.DrawFeature;
+import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
+import org.gwtopenmaps.openlayers.client.geometry.LineString;
+import org.gwtopenmaps.openlayers.client.geometry.LinearRing;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
+import org.gwtopenmaps.openlayers.client.geometry.Polygon;
+import org.gwtopenmaps.openlayers.client.layer.Vector;
+import org.gwtopenmaps.openlayers.client.util.Attributes;
+
+import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.json.client.JSONValue;
+import com.honda.galc.visualoverview.client.event.DrawFeatureEvent;
+import com.honda.galc.visualoverview.client.widgets.FeatureStyle;
+import com.honda.galc.visualoverview.shared.Feature;
+import com.honda.galc.visualoverview.shared.FeatureInterface;
+import com.honda.galc.visualoverview.shared.FeaturePoints;
+import com.honda.galc.visualoverview.shared.Layer;
+import com.honda.galc.visualoverview.shared.PrintAttributeFormat;
+import com.honda.galc.visualoverview.shared.constants.VisualizationConstants;
+
+public class AreaFeature extends Feature {
+
+	@Override
+	public void draw(
+			Map<String, List<PrintAttributeFormat>> attributeMap, Layer refLayer, HandlerManager eventBus, Vector layer) {
+		
+		VectorFeature vectorFeature = null;
+		
+		Point[] points = new Point[getFeaturePoints().size()];
+		int index = 0;
+
+		FeatureStyle style;
+		if(!attributeMap.isEmpty())
+    		style = new FeatureStyle(this, attributeMap.get(getFeatureId()));
+		else
+			style = new FeatureStyle(this, new ArrayList<PrintAttributeFormat>()); 
+		for(FeaturePoints featurePoint : getFeaturePoints())
+		{
+			points[index] = new Point(featurePoint.getXCoordinate(), featurePoint.getYCoordinate());
+			index++;	
+		}
+		
+		LinearRing linearRing = new LinearRing(points);
+        final Polygon polygon = new Polygon(new LinearRing[]{linearRing}); //we need a Polygon object because this has the rotate method
+        vectorFeature = new VectorFeature(polygon, style);
+        vectorFeature.setFeatureId(getFeatureId());
+        
+        eventBus.fireEvent(new DrawFeatureEvent(layer, vectorFeature));        		
+	}
+	
+}

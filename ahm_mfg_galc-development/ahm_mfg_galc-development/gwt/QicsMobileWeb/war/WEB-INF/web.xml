@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+ 
+	<servlet>
+    	<servlet-name>proxy</servlet-name>
+    	<servlet-class>com.honda.galc.qics.mobile.server.ProxyServlet</servlet-class>
+    	<init-param>
+    	  <!-- All requests sent to the proxy servlet are forwarded to this URI.  -->
+	      <param-name>targetUri</param-name>
+	      <!--  Dev 
+	      <param-value>http://127.0.0.1:8080/</param-value> -->
+	      <!-- QA 
+	      <param-value>http://10.128.3.11/</param-value> -->
+	      <!--  Jim Rileys 
+	      <param-value>http://10.142.252.68:8080/</param-value> -->
+		  <!-- WAS  on Jriley -->
+		   <param-value>http://10.142.252.68:8080</param-value>
+	      
+	      
+	    </init-param>
+	    <init-param>
+	      <param-name>log</param-name>
+	      <param-value>true</param-value>
+	    </init-param>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>proxy</servlet-name>
+	  <!-- For standalone IDE development use <url-pattern>/proxy/*</url-pattern> -->
+	  <url-pattern>/proxy/*</url-pattern>
+	</servlet-mapping>
+
+
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>MobileQics.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LecLaserResponses version="1.0">
+	<response id="0"  name="Success" message="The operation completed successfully" />
+	<response id="1"  name="Idle" message="The job engine is idle" />
+	<response id="2"  name="Busy" message="The job engine is currently executing a job" />
+	<response id="3"  name="NoJob" message="The specified job was not found" />
+	<response id="4"  name="InControl" message="The requesting client has exclusive control of the Host" />
+	<response id="5"  name="NotInControl" message="The requesting client does not have exclusive control of the Host" />
+	<response id="6"  name="LicenseUnavailable" message="A valid license was not found" />
+	<response id="7"  name="LicenseAccessDenied" message="The current license does not allow the requested feature" />
+	<response id="8"  name="BadCommand" message="The API command was not recognized" />
+	<response id="9"  name="BadArg" message="A specified argument was invalid" />
+	<response id="10"  name="ArgOutOfRange" message="A specified argument was out of range" />
+	<response id="11"  name="UnknownTimeZone" message="The specified time zone cannot be found" />
+	<response id="12"  name="Reserved" message="Reserved" />
+	<response id="13"  name="BadConversion" message="Error while converting between multi-byte and Unicode characters" />
+	<response id="14"  name="RegistryError" message="A Windows CE Registry read or write operation failed" />
+	<response id="15"  name="TimeZoneFileError" message="A Time Zone File operation failed" />
+	<response id="16"  name="ResetInterlock" message="An interlock was signaled and must be reset by calling Abort" />
+	<response id="17"  name="ListNotOpen" message="An operation was attempted on a list that has not been opened" />
+	<response id="18"  name="ListAlreadyOpen" message="The list is currently open" />
+	<response id="19"  name="BadData" message="The data in the specified file was not in the correct format" />
+	<response id="20"  name="APIException" message="The Remote API caused an unexpected exception." />
+	<response id="21"  name="JobAborting" message="The job is currently aborting from a previous abort command" />
+	<response id="22"  name="FPGALoadFail" message="An attempt to load the FPGA with instructions failed" />
+	<response id="23"  name="JobManagerInitFail" message="The Job Manager failed to initialize properly" />
+	<response id="24"  name="LaserLoadFail" message="The specified laser configuration failed to load properly" />
+	<response id="25"  name="LensLoadFail" message="The specified lens configuration failed to load properly" />
+	<response id="26"  name="PMLoadFail" message="The specified Performance Matrix configuration failed to load properly" />
+	<response id="27"  name="MotionLoadFail" message="The specified motion configuration failed to load properly" />
+	<response id="28"  name="HostManagerInitFail" message="The Host Manager failed to initialize properly" />
+	<response id="29"  name="InvalidIPAddress" message="The specified IP address is not a valid IPv4 IP address" />
+	<response id="30"  name="DataUnknown" message="The format of the data is not recognized" />
+	<response id="31"  name="BadChecksum" message="The data failed a checksum test" />
+	<response id="32"  name="NetworkShareNotConnected" message="There was an attempt to use a network resource, but no connection exists" />
+	<response id="33"  name="NetworkConnectFail" message="An attempt to connect to a network share failed." />
+	<response id="34"  name="UnknownNetworkError" message="An unspecified network error has occurred." />
+	<response id="35"  name="APICommandTimeout" message="A command that was sent to the Remote API timed out" />
+	<response id="36"  name="ExternalProcessFail" message="Internal use" />
+	<response id="37"  name="DLLLoadFail" message="Internal use" />
+	<response id="38"  name="NoAdapter" message="No Network adapter was found" />
+	<response id="39"  name="AddIPAddressFailure" message="An attempt to add a temporary IP address failed" />
+	<response id="40"  name="BadAPIResponse" message="The Remote API returned an unexpected response" />
+	<response id="41"  name="CannotCreateSocket" message="Internal use" />
+	<response id="42"  name="CannotConnectSocket" message="Internal use" />
+	<response id="43"  name="CannotGetFPGABufInfo" message="Internal use" />
+	<response id="44"  name="CannotGetFPGABuf" message="Internal use" />
+	<response id="45"  name="CannotWriteFPGABuf" message="Internal use" />
+	<response id="46"  name="FPGAException" message="Internal use" />
+	<response id="47"  name="FTPConnectionError" message="An attempt to connect to an FTP resouce failed" />
+	<response id="48"  name="FileAlreadyExists" message="The specified file already exists in the specified location API Response Codes (continued)" />
+	<response id="49"  name="UnknownOS" message="Internal use" />
+	<response id="50"  name="SocketException" message="Internal use" />
+	<response id="51"  name="ProcessTimeout" message="The process returned a time out error" />
+	<response id="52"  name="DeviceNotFound" message="The specified device cannot be found" />
+	<response id="53"  name="LoginInProgress" message="An attempt to connect to a device is currently executing" />
+	<response id="54"  name="APIClientInControl" message="There is an active connection to a Remote API client " />
+	<response id="55"  name="StreamClientInControl" message="There is an active connection to a WinLase client" />
+	<response id="56"  name="CannotConnectToAPI" message="An attempt to connect to a device using the Remote API port failed" />
+	<response id="57"  name="ReadFail" message="Internal use" />
+	<response id="58"  name="StreamBufferFull" message="Internal use" />
+	<response id="59"  name="NoConfigRecord" message="Cannot find the specified configuration record" />
+	<response id="60"  name="OperationCanceled" message="Operation was canceled bu the user" />
+	<response id="61"  name="NoData" message="Internal use" />
+	<response id="62"  name="InitializationError" message="Internal use" />
+	<response id="63"  name="FailToCreateServiceThread" message="Internal use" />
+	<response id="64"  name="CannotOpenDevice" message="Internal use" />
+	<response id="65"  name="SegmentFull" message="Internal use" />
+	<response id="66"  name="MarkerLibraryNotInitialized" message="An operation was attempted before the Marker Library was initialized" />
+	<response id="67"  name="RingBufferNotInitialized" message="An operation was attempted before the Ring Buffer was initialized" />
+	<response id="68"  name="AccessDenied" message="Access to a resource was denied" />
+	<response id="69"  name="RequiresUACElevation" message="The attempted opration can only be performed by elevation the UAC" />
+	<response id="70"  name="NotAllowed" message="The requested operation is not allowed" />
+	<response id="71"  name="NoLaserConfig" message="The laser config file was not found" />
+	<response id="72"  name="NoLensConfig" message="The lens config file was not found" />
+	<response id="73"  name="OutOfMemory" message="There is not enough memory to complete the task" />
+	<response id="74"  name="LensTableNotFound" message="The specified lens correction table cannot be found" />
+	<response id="75"  name="HostControlInitError" message="No Host Controllers loaded during device boot time" />
+	<response id="76"  name="NoBytesRead" message="A read operation failed with no bytes read" />
+	<response id="77"  name="WritePending" message="Data was added to the Pending queue and will execute when possible" />
+	<response id="84"  name="NoPen" message="A pen found in the vectorlist did not have an associated Profile" />
+	<response id="100"  name="NoFilesFound" message="No files were found at the specified path" />
+	<response id="101"  name="NoDrive" message="No drive was found" />
+	<response id="102"  name="JobOutOfMemory" message="Out of memory exception" />
+	<response id="103"  name="TooManyObjects" message="Internal error, consult factory" />
+	<response id="104"  name="NoObject" message="The specified object does not exist" />
+	<response id="105"  name="JobException" message="An internal job exception" />
+	<response id="106"  name="NotInHostControl" message="Operation cannot be performed if the client is not in control" />
+	<response id="107"  name="WrongHostType" message="Operation cannot be performed with this host type" />
+	<response id="108"  name="ErrorJobBusy" message="Operation cannot be performed while a job is executing" />
+	<response id="109"  name="NoActiveJob" message="There is no Active Job" />
+	<response id="110"  name="ErrorSoftware" message="Internal error, consult factory" />
+	<response id="111"  name="LoadFail" message="A job load failed" />
+	<response id="112"  name="NoObjects" message="Job file version not compatible with current firmware" />
+	<response id="113"  name="WriteFail" message="Internal error writing job file" />
+	<response id="114"  name="JobFileFormat" message="Job file format error" />
+	<response id="115"  name="FileException" message="Internal error while processing file" />
+	<response id="116"  name="UnknownObject" message="Unknown object type" />
+	<response id="117"  name="UnknownType" message="Unknown type" />
+	<response id="118"  name="NotSupported" message="Operation not supported" />
+	<response id="119"  name="NotAvailable" message="Resource not available" />
+	<response id="120"  name="FPGADataFail" message="Internal FPGA data format failure" />
+	<response id="121"  name="FileNotFound" message="The file specified was not found" />
+	<response id="122"  name="FileCreationError" message="Error while attempting to create a file" />
+	<response id="123"  name="WriteFileFail" message="Not all data was written to the file" />
+	<response id="124"  name="PathNotFound" message="The specified path was not found" />
+	<response id="125"  name="NotInCacheMode" message="The command requires that the job was started in Cache mode" />
+	<response id="126"  name="NotWaitingForStartMark" message="The FIFO is not currently waiting for a Start Mark signal" />
+	<response id="127"  name="MotionNotHomed" message="The command is not allowed if the device is not homed" />
+	<response id="128"  name="No3DModel" message="The operation cannot complete because there is no 3D model loaded" />
+	<response id="129"  name="ProjectionError" message="An error was encountered while projecting onto the 3D model" />
+	<response id="200"  name="NoProperties" message="Object does not contain any properties" />
+	<response id="201"  name="ObjectException" message="Internal object exception" />
+	<response id="202"  name="Abort" message="Operation was aborted" />
+	<response id="203"  name="NoFontResource" message="The font specified in the object was not found" />
+	<response id="204"  name="NoOverride" message="Internal object error" />
+	<response id="205"  name="ExternalEnableDenied" message="Operation denied by External control" />
+	<response id="206"  name="CannotCreatePort" message="A port setting (baud rate, stop bits, etc.) is invalid" />
+	<response id="207"  name="CannotOpenPort" message="Error while attempting to open COM port" />
+	<response id="208"  name="PortNotOpen" message="Port must be open to execute command" />
+	<response id="209"  name="PortTimeout" message="A port operation timed out" />
+	<response id="210"  name="WrongPortNumber" message="Invalid port number" />
+	<response id="211"  name="WrongObjectType" message="Operation is not supported by this object type" />
+	<response id="212"  name="AxisNotConfigured" message="A motion control axis referenced in an object has not been configured" />
+	<response id="213"  name="TextBufferOverrun" message="Too many characters in buffer (MAX 3000 including command opcode)" />
+	<response id="214"  name="InvBarcodeStringValue" message="The barcode string to encode contains invalid characters" />
+	<response id="215"  name="InvBarcodeStringLength" message="The length of the barcode string to encode is either too short or too long" />
+	<response id="216"  name="InvBarcodeNarrowWidth" message="The Narrow to Wide ratio is invalid" />
+	<response id="217"  name="InvBarcodeWidthReduce" message="The Width Reduction value is invalid" />
+	<response id="218"  name="InvBarcodeECC" message="The ECC value is invalid or cannot be used to encode the string" />
+	<response id="219"  name="BarcodeOutOfMemory" message="There was insufficient memory to complete an internal barcode operation" />
+	<response id="220"  name="BarcodeUnknownError" message="Undocumented error. Please notify the factory" />
+	<response id="221"  name="BarcodeException" message="Incorrect data or an internal operation resulted in an unexpected result" />
+	<response id="222"  name="NoVectors" message="An object was saved to the job with both Mark Outline and Mark Fill disabled" />
+	<response id="223"  name="BadMotionResponse" message="The motion controller responded with an unexpected value" />
+	<response id="224"  name="MotionDriverNotFound" message="An object is referencing a motion driver that does not exist" />
+	<response id="225"  name="AxisNotFound" message="An operation was attempted on an axis index that was not found" />
+	<response id="226"  name="EncoderNotFound" message="An operation was attempted that depends on an encoder and no encoder was found" />
+	<response id="227"  name="InvStringValue" message="The string to process is not a valid string" />
+	<response id="228"  name="MotionControllerNotFound" message="The motion system cannot detect a valid motion controller device" />
+	<response id="229"  name="MotorNotProvisioned" message="The motor has not been provisioned for use with the LEC controller" />
+	<response id="230"  name="RuntimeMotionError" message="An error was generated during a motor move operation" />
+	<response id="231"  name="ObjectOutOfBounds" message="The object is outside the legal marking area" />
+	<response id="232"  name="InvVersion" message="Invalid version" />
+	<response id="233"  name="NoOutline" message="Not valid to have MarkOutline enabled with no outline to mark" />
+</LecLaserResponses>

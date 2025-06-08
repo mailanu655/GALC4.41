@@ -1,0 +1,98 @@
+.radio-btn {
+	-fx-font-size: 10pt;
+	-fx-font-weight: bold;
+}
+
+.radio-button .radio {
+	-fx-border-width: 2px;
+	-fx-border-color: grey;
+	-fx-background-color: #e2e2e2;
+	-fx-background-image: null;
+	-fx-border-radius: 15px;
+	-fx-padding: 4px;
+}
+
+.radio-button .dot {
+	-fx-background-radius: 15px;
+	-fx-padding: 4px;
+}
+
+.font-12 {
+	-fx-font-size: 12pt;
+}
+
+.combo-box-med {
+	-fx-background-insets: 0, 3, 5;
+	-fx-padding: 4px;
+	-fx-border-insets: 3px;
+	-fx-font-size: 12pt;
+}
+
+.combo-box-base {
+	-fx-background-insets: 0, 3, 5;
+	-fx-padding-left: 5px;
+	-fx-padding-right: 5px;
+	-fx-border-insets: 3px;
+	-fx-font-size: 10pt;
+}
+
+.combo-box-base *.arrow {
+	-fx-background-color: black;
+	-fx-pref-width: 10;
+}
+
+.combo-box-base .text-field {
+	-fx-border-color: silver;
+}
+
+.combo-box-base:disabled, .combo-box-base:disabled > * {
+	-fx-opacity: 0.75;
+	-fx-text-fill: black;
+}
+
+.display-asterisk-mark {
+	-fx-text-fill: red;
+}
+
+.action-btn {
+	-fx-background-insets: 0 0 -1 0, 0, 1;
+	-fx-background-radius: 5, 5, 4;
+	-fx-padding: 10 0 10 0;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+}
+
+.small-btn {
+	-fx-background-insets: 0, 1, 2, 3;
+	-fx-background-radius: 3, 2, 2, 2;
+	-fx-padding: 6 15 6 15;
+	-fx-text-fill: black;
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-pref-width: 100px;
+}
+
+.error-message {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: red; 
+}
+
+.display-label {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+}
+
+.display-msg-label {
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: red;
+}
+
+.check-box > .box {
+    -fx-padding: 0.166667em 0.166667em 0.25em 0.25em; /* 2 2 3 3 */
+}
+.check-box > .box > .mark {
+    -fx-padding: 0.416667em 0.416667em 0.5em 0.5em; /* 5 5 6 6 */
+    -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
+}

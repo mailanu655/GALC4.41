@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0018" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.global.galc.client.lotcontrol.model.SelectParamSet">
+    <field id="" name="P_SET" type="String" length="3" defaultValue="001" />
+</OPMessage>
+
+  

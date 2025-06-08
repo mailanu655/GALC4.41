@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+
+<project name="base_build" default="masterbuild" basedir=".">
+    <property name="name" value="BASE_BUILD"/>
+
+    <!-- Give user a chance to override without editing this file
+         (and without typing -D each time it compiles it -->
+    <property name="env" value="dev"/>
+    <property name="filter.file" value="./filters/${env}-filter.properties"/>
+    <property name="build.number.file" value="${basedir}/build.number"/>
+
+    <dirname property="base_build.dir" file="${ant.file.base_build}"/>
+    <property name="workspace.dir" value="${base_build.dir}/../.."/>
+
+    <property name="ejbdeploy.aix.command" value="/usr/WebSphere/AppServer/bin/ejbdeploy.sh"/>
+    <property name="ejbdeploy.windows.command"
+              value="c:\Program Files\IBM\SDP70\runtimes\base_v61\profiles\AppSrv01\bin\ejbdeploy.bat"/>
+
+    <!-- get local  build options  -->
+    <property file="${basedir}/build.properties"/>
+
+    <!-- get global  build options  -->
+    <property file="${base_build.dir}/build.properties"/>
+
+    <!-- Default jar_includes filter -->
+    <property name="jar_includes" value="**"/>
+
+    <target name="info-verbose">
+        <echo message="ENV = ${env}"/>
+        <echo/>
+        <echo message="filter.file = ${filter.file}"/>
+        <echo/>
+        <echo message="JAVAC = ${JAVAC}"/>
+        <echo message="My basedir = ${basedir}"/>
+        <echo message="workspace = ${workspace.dir}"/>
+        <echo message="jars.dir = ${jars.dir}"/>
+        <echo message="was.dir = ${was.dir}"/>
+        <echo message="name = ${name}"/>
+        <echo message="compile.class.path = ${compile.class.path}"/>
+        <echo message="OS name = ${os.name}"/>
+    </target>
+
+    <target name="info">
+        <property name="build" value="N/A"/>
+        <property name="smr" value="N/A"/>
+        <property name="plant" value="N/A"/>
+        <property name="line" value="N/A"/>
+
+        <echo message="NAME = ${name}"/>
+        <echo/>
+        <echo message="BUILD = ${build}"/>
+        <echo message="SMR = ${smr}"/>
+        <echo/>
+        <echo message="PLANT = ${plant}"/>
+        <echo message="LINE = ${line}"/>
+        <echo message="ENVIRONMENT = ${env}"/>
+        <echo/>
+        <echo message="JAVAC = ${JAVAC}"/>
+        <echo/>
+        <echo message="filter.file = ${filter.file}"/>
+        <echo/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- A Clean from scratch build                                          -->
+    <!-- =================================================================== -->
+    <target name="cleanbuild" depends="clean,module">
+        <echo message="ENV = ${env}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- A build using an previously built classes                           -->
+    <!-- =================================================================== -->
+    <target name="masterbuild" depends="info,module"/>
+
+    <!-- =================================================================== -->
+    <!-- Assemble the deployable artifact                                    -->
+    <!-- =================================================================== -->
+    <target name="assemble">
+        <echo message="Base ASSEMBLE target called!  Doing nothing!"/>
+    </target>
+
+
+    <target name="module">
+        <echo message="dummy module target..."/>
+    </target>
+    <!-- =================================================================== -->
+    <!-- Prepares the build directory                                        -->
+    <!-- =================================================================== -->
+    <target name="prepare">
+        <!-- Create the time stamp -->
+        <tstamp>
+            <format property="TSTAMP" pattern="h:mm a" locale="en"/>
+            <format property="DSTAMP" pattern="MMMM d, yyyy" locale="en"/>
+            <format property="TODAY" pattern="MMMM d, yyyy h:mm a" locale="en"/>
+        </tstamp>
+        <echo message="Building ${name} on ${TODAY}..."/>
+        <available file="${filter.file}" type="file" property="filter.file.available"/>
+        <echo message="filter file:  ${filter.file}  -- filter.file.available?  ${filter.file.available}"/>
+        <antcall target="prepare-filter"/>
+    </target>
+
+    <target name="prepare-filter" if="filter.file.available">
+        <echo message="filter file exists:  ${filter.file}"/>
+        <filter filtersfile="${filter.file}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- Prepares the build directory                                        -->
+    <!-- =================================================================== -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Target for vanilla javac compile                          -->
+    <!-- ========================================================= -->
+    <target name="compile">
+        <echo>Workspace dir: ${workspace.dir}</echo>
+        <echo>Basedir: ${basedir}: Jars dir: ${jars.dir} : Tools dir: ${tools.dir}</echo>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${build.src.dir}"/>
+        <echo message=" "/>
+        <echo message=" "/>
+        <echo message="JAVAC = ${JAVAC}!!!"/>
+        <echo message=" "/>
+        <echo message=" "/>
+
+        <javac destdir="${build.classes.dir}"
+               fork="YES"
+               debug="on"
+               optimize="on"
+               verbose="off"
+               deprecation="on"
+               includes="**/*.java"
+               executable="${JAVAC}"
+               memoryMaximumSize="256M"
+               target="1.5"
+               source="1.5"
+               classpathref="compile.class.path"
+                >
+            <src path="${src.dir}" />
+            <src path="${test.src.dir}"/>
+            <src path="${build.src.dir}"/>
+            <exclude name="**/_*.java"/>
+            <exclude name="**/_EJS*.java"/>
+            <exclude name="**/EJS*.java"/>
+        </javac>
+    </target>
+
+    <!-- ================================================================ -->
+    <!-- Runs unit tests                                                  -->
+    <!-- ================================================================ -->
+    <target name="test" depends="compile"
+            description="Execute unit tests">
+        <mkdir dir="${test.data.dir}"/>
+        <mkdir dir="${test.reports.dir}"/>
+
+        <junit printsummary="yes"
+               errorProperty="test.failed"
+               failureProperty="test.failed"
+               fork="yes">
+            <classpath>
+                <path refid="test.classpath"/>
+            </classpath>
+            <formatter type="brief" usefile="false"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="${test.data.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test.java"/>
+                    <exclude name="**/AllTests.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${test.data.dir}">
+            <fileset dir="${test.data.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.reports.dir}"/>
+        </junitreport>
+        <fail message="Tests failed big time. Check the reports..." if="test.failed"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- Creates the API documentation                                       -->
+    <!-- =================================================================== -->
+    <target name="javadocs">
+        <mkdir dir="${docs.dir}"/>
+        <javadoc packagenames="${packages}"
+                 sourcepath="${src.dir}"
+                 destdir="${docs.dir}"
+                 author="true"
+                 version="true"
+                 windowtitle="${name} API"
+                 doctitle="${name}"
+                 bottom="Copyright &#169; 2007 Honda of America, Inc. All Rights Reserved.">
+        </javadoc>
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Assembling a third-party Jar                             -->
+    <!-- ========================================================= -->
+    <target name="libjar">
+        <echo message="INCLUDES = ${module_includes}"/>
+        <echo message="EXCLUDES = ${module_excludes}"/>
+
+        <mkdir dir="${build.dist.dir}"/>
+
+        <property name="manifest.file" value="${src.dir}/META-INF/MANIFEST.MF"/>
+        <available file="${manifest.file}" type="file" property="manifest.file.available"/>
+        <echo message="manifest file:  ${manifest.file}  -- manifest.file.available?  ${manifest.file.available}"/>
+        <antcall target="libjar-without-manifest"/>
+        <antcall target="libjar-with-manifest"/>
+    </target>
+
+    <target name="libjar-with-manifest" if="manifest.file.available">
+        <echo message="Target:  libjar-with-manifest.  MANIFEST FILE:  ${manifest.file}"/>
+        <jar jarfile="${build.dist.dir}/${name}.jar"
+             manifest="${manifest.file}">
+            <fileset dir="${build.classes.dir}" includes="${jar_includes}"/>
+        </jar>
+
+    </target>
+
+    <target name="libjar-without-manifest" unless="manifest.file.available">
+        <echo message="Target:  libjar-without-manifest.  MANIFEST FILE:  ${manifest.file}"/>
+        <jar jarfile="${build.dist.dir}/${name}.jar">
+            <fileset dir="${build.classes.dir}" includes="${jar_includes}"/>
+        </jar>
+    </target>
+
+    <!-- ======================================================= -->
+    <!-- Assemble EJB JAR module.                                -->
+    <!-- ======================================================= -->
+    <target name="ejbjar">
+        <mkdir dir="${build.dist.dir}"/>
+        <jar destfile="${build.dist.dir}/${name}.jar"
+             manifest="${src.dir}/META-INF/MANIFEST.MF">
+            <zipfileset dir="${build.classes.dir}"/>
+            <zipfileset dir="${src.dir}/META-INF" prefix="META-INF"/>
+        </jar>
+    </target>
+
+    <!-- ======================================================= -->
+    <!-- Assemble JCA Connector RAR module.                      -->
+    <!-- ======================================================= -->
+    <target name="connectorrar">
+        <mkdir dir="${build.dist.dir}"/>
+        <jar destfile="${build.dist.dir}/ra.jar"
+             manifest="${src.dir}/META-INF/MANIFEST.MF">
+            <zipfileset dir="${build.classes.dir}"/>
+            <zipfileset dir="${src.dir}/META-INF" prefix="META-INF"/>
+        </jar>
+        <jar destfile="${build.dist.dir}/${name}.rar"
+             manifest="${src.dir}/META-INF/MANIFEST.MF">
+			<zipfileset dir="${build.dist.dir}">
+				<include name="ra.jar"/>
+			</zipfileset>
+            <zipfileset dir="${src.dir}/META-INF" prefix="META-INF"/>
+        </jar>
+    </target>
+	
+    <target name="war-prepare" if="filter.file.available">
+        <filter filtersfile="${filter.file}"/>
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-bnd.xmi.template"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-bnd.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-ext.xmi.template"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-ext.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Assembling a WAR                                           -->
+    <!-- ========================================================= -->
+    <target name="war">
+        <mkdir dir="${build.dist.dir}"/>
+        <mkdir dir="${build.docroot.dir}"/>
+
+        <filter filtersfile="${filter.file}"/>
+        <antcall target="war-prepare"/>
+        <property name="war.manifest.file" value="${src.dir}/META-INF/MANIFEST.MF"/>
+        <available file="${war.manifest.file}" type="file" property="war.manifest.file.exists"/>
+
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-bnd.xmi"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-bnd.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-bnd.xmi.template"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-bnd.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-ext.xmi"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-ext.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/ibm-web-ext.xmi.template"
+              tofile="${build.docroot.dir}/WEB-INF/ibm-web-ext.xmi"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/web.xml"
+              tofile="${build.docroot.dir}/WEB-INF/web.xml"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+        <copy file="${src.docroot.dir}/WEB-INF/web.xml.template"
+              tofile="${build.docroot.dir}/WEB-INF/web.xml"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                />
+
+        <antcall target="war-with-manifest"/>
+        <antcall target="war-without-manifest"/>
+    </target>
+
+    <target name="war-with-manifest" if="war.manifest.file.exists">
+        <echo message="running war-with-manifest"/>
+        <war destfile="${build.dist.dir}/${name}.war"
+             webxml="${src.docroot.dir}/WEB-INF/web.xml"
+             manifest="${src.dir}/META-INF/MANIFEST.MF"
+                >
+            <zipfileset dir="${src.docroot.dir}"
+                        excludes="**/WEB-INF/ibm-web-ext.xmi,**/WEB-INF/ibm-web-bnd.xmi,**/classes/**,**/*.sh,cvs,anontation,**/web.xml,**/*.template,filters/**"/>
+            <zipfileset dir="${build.docroot.dir}"/>
+            <zipfileset dir="${build.classes.dir}" prefix="WEB-INF/classes"/>
+            <zipfileset dir="${src.dir}"
+                        excludes="**/*.java,**/*.template,META-INF/*"
+                        prefix="WEB-INF/classes"/>
+        </war>
+    </target>
+
+    <target name="war-without-manifest" unless="war.manifest.file.exists">
+        <echo message="running war-without-manifest"/>
+        <war destfile="${build.dist.dir}/${name}.war"
+             webxml="${src.docroot.dir}/WEB-INF/web.xml"
+                >
+            <zipfileset dir="${src.docroot.dir}"
+                        excludes="**/WEB-INF/ibm-web-ext.xmi,**/WEB-INF/ibm-web-bnd.xmi,**/classes/**,**/*.sh,cvs,anontation,**/web.xml,**/*.template,filters/**"/>
+            <zipfileset dir="${build.docroot.dir}"/>
+            <zipfileset dir="${build.classes.dir}" prefix="WEB-INF/classes"/>
+            <zipfileset dir="${src.dir}"
+                        excludes="**/*.java,**/*.template,META-INF/*"
+                        prefix="WEB-INF/classes"/>
+        </war>
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Assembling an EAR                                          -->
+    <!-- ========================================================= -->
+    <target name="ear">
+        <echo message="INCLUDES = ${module_includes}"/>
+        <echo message="EXCLUDES = ${module_excludes}"/>
+
+        <mkdir dir="${build.dist.dir}"/>
+        <property name="app.xml" value="${basedir}/META-INF/application.xml"/>
+        <antcall target="ear-prepare"/>
+
+        <ear destfile="${build.dist.dir}/${name}.ear" appxml="${app.xml}" duplicate="preserve">
+            <zipfileset dir="${basedir}" includes="*.jar"/>
+            <zipfileset dir="${galc.dir}" includes="${module_includes}" excludes="${module_excludes}"/>
+            <zipfileset dir="${build.dir}" includes="META-INF/was.policy,META-INF/*.xmi"/>
+            <zipfileset dir="${basedir}" includes="META-INF/was.policy,META-INF/*.xmi"/>
+        </ear>
+        <echo message="aix = ${ejbdeploy.aix.command}"/>
+        <echo message="win = ${ejbdeploy.windows.command}"/>
+        <condition property="run.ejbdeploy">
+            <or>
+                <available file="${ejbdeploy.aix.command}"/>
+                <available file="${ejbdeploy.windows.command}"/>
+            </or>
+        </condition>
+        <echo message="EAR:  run.ejbdeploy = ${run.ejbdeploy}"/>
+        <antcall target="was.ejbdeploy"/>
+    </target>
+
+    <target name="ear-prepare" if="${filter.file.available}">
+        <copy file="${app.xml}.template"
+              tofile="${app.xml}"
+              filtering="true"
+              overwrite="true"
+              failonerror="false"
+                >
+            <filterset begintoken="@" endtoken="@">
+                <filtersfile file="${filter.file}"/>
+            </filterset>
+        </copy>
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Assemble stubs/skel for EJBS given an EAR as input        -->
+    <!-- ========================================================= -->
+    <target name="was.ejbdeploy" if="run.ejbdeploy">
+        <property name="input.ear" value="${build.dist.dir}/${name}.ear"/>
+        <property name="output.ear" value="${build.dist.dir}/OUT_${name}.ear"/>
+        <property name="working.dir" value="${build.dir}/ejbdeploy_temp"/>
+        <mkdir dir="${working.dir}"/>
+        <exec executable="${ejbdeploy.aix.command}" os="AIX" failonerror="true" failifexecutionfails="true">
+            <arg value="${input.ear}"/>
+            <arg value="${working.dir}"/>
+            <arg value="${output.ear}"/>
+            <arg value="-nowarn"/>
+        </exec>
+        <exec executable="${ejbdeploy.windows.command}" os="Windows XP" failonerror="true" failifexecutionfails="true">
+            <arg value="${input.ear}"/>
+            <arg value="${working.dir}"/>
+            <arg value="${output.ear}"/>
+            <arg value="-nowarn"/>
+        </exec>
+        <move file="${output.ear}" tofile="${input.ear}" overwrite="true"/>
+    </target>
+
+    <target name="was.ejbdeploy_java_version">
+        <property name="input.ear" value="${build.dist.dir}/${name}.ear"/>
+        <property name="output.ear" value="${build.dist.dir}/OUT_${name}.ear"/>
+        <property name="working.dir" value="${build.dir}/working"/>
+        <echo message="deploytool.dir = ${deploytool.dir}"/>
+        <mkdir dir="${working.dir}"/>
+        <java failonerror="true"
+              jvm="${JAVA_JVM}"
+              fork="true"
+              classname="com.ibm.etools.ejbdeploy.EJBDeploy"
+              maxmemory="512m">
+            <sysproperty key="itp.loc" value="${deploytool.dir}/deploytool/itp"/>
+            <sysproperty key="websphere.lib.dir" value="${deploytool.dir}/lib"/>
+            <sysproperty key="ws.ext.dirs"
+                         value="${deploytool.dir}/java/lib;${deploytool.dir}/classes;${deploytool.dir}/lib:${deploytool.dir}/installedChannels;${deploytool.dir}/deploytool/itp/plugins/com.ibm.etools.ejbdeploy/runtime"/>
+            <sysproperty key="com.ibm.sse.model.structuredbuilder" value="off"/>
+            <classpath>
+                <pathelement location="${deploytool.dir}/deploytool/itp/batch2.jar"/>
+                <pathelement location="${deploytool.dir}/deploytool/itp/batch2_nll.jar"/>
+                <!--<fileset dir="${deploytool.dir}">-->
+                <!--<include name="**/*.jar"/>-->
+                <!--</fileset>-->
+            </classpath>
+
+            <bootclasspath>
+                <pathelement location="${JVM}/jre/lib/rt.jar"/>
+                <pathelement location="${JVM}/jre/lib/vm.jar"/>
+                <pathelement location="${deploytool.dir}/deploytool/itp/batchboot.jar"/>
+                <pathelement location="${deploytool.dir}/java/jre/lib/ext/iwsorbutil.jar"/>
+            </bootclasspath>
+            <jvmarg value="-Xverify:none"/>
+
+            <sysproperty key="was.install.root" value="${deploytool.dir}"/>
+            <sysproperty key="ejbdeploy.user.install.root" value=""/>
+            <sysproperty key="com.ibm.sse.model.structuredbuilder" value="off"/>
+            <arg value="${input.ear}"/>
+            <arg value="${working.dir}"/>
+            <arg value="${output.ear}"/>
+        </java>
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Target for compiling ejb stubs                            -->
+    <!-- ========================================================= -->
+    <target name="ejbcompile">
+    </target>
+
+    <!-- ========================================================= -->
+    <!-- Target for pre-compiling jsps                             -->
+    <!-- ========================================================= -->
+    <target name="jspcompile">
+    </target>
+
+</project>

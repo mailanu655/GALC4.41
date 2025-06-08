@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ImmobiMessage id="MTOC_NG" version="1.0" severity="error" description="Sent MTOC_NG" className="com.honda.galc.client.device.lotcontrol.immobi.ImmobiMessage">
+    <field id="01" name="LENGTH" dataType="string" length="3" value="029" />
+    <field id="02" name="COMMAND_CODE" dataType="string" length="3" value="006" />    
+    <field id="03" name="SUB_COMMAND_CODE" dataType="string" length="3" value="002" />    
+    <field id="04" name="DATA_SEGMENT_LENGTH" dataType="string" length="3" value="020" />
+    <field id="05" name="SEGMENT_DATA" dataType="string" lengthField="DATA_SEGMENT_LENGTH" value="BAD MTOC         " />
+ </ImmobiMessage>
+
+  

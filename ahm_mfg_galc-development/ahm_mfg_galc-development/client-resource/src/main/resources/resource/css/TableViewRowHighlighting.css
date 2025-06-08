@@ -1,0 +1,18 @@
+.updatedGenericTableRow {
+    -fx-background-color: yellow;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;   
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-font-weight: bold;
+    -fx-text-background-color: black ;
+}
+
+.deletedGenericTableRow {
+    -fx-background-color: brown;
+    -fx-background-insets: 0, 1, 2;
+    -fx-font-weight: bold;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+

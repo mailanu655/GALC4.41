@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="920.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="371.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="326.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="2">
+               <children>
+                  <TableView fx:id="productsTblView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowSpan="2" VBox.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets bottom="30.0" left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </VBox.margin>
+                     <columns>
+                        <TableColumn fx:id="noCol" maxWidth="1000.0" prefWidth="26.0" sortable="false" text="#" />
+                        <TableColumn fx:id="afSeqCol" maxWidth="1950.0" prefWidth="70.0" text="Af on Seq" />
+                        <TableColumn fx:id="productIdCol" prefWidth="130.0" text="Prod Id" />
+                        <TableColumn fx:id="mcSnCol" prefWidth="130.0" text="MC#" />
+                        <TableColumn fx:id="dcSnCol" prefWidth="130.0" text="DC#" />
+                        <TableColumn fx:id="prodSpecCodeCol" prefWidth="110.0" text="Prod Spec Code" />
+                        <TableColumn fx:id="prodDateCol" maxWidth="3350.0" prefWidth="90.0" text="Prod Date" />
+                        <TableColumn fx:id="prodLotCol" prefWidth="110.0" text="Prod Lot" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="UNCONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox prefHeight="46.0" prefWidth="549.0">
+                     <children>
+                        <Region prefHeight="46.0" prefWidth="30.0" />
+                        <Button fx:id="selectBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Select">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="filterLbl" contentDisplay="RIGHT" text="Show filtered results">
+                           <graphic>
+                              <CheckBox fx:id="filterChkBx" mnemonicParsing="false" />
+                           </graphic>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Region prefHeight="200.0" prefWidth="30.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <GridPane fx:id="searchGridPane" prefHeight="399.0" prefWidth="358.0" GridPane.rowSpan="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="136.0" minWidth="10.0" prefWidth="136.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="196.0" />
+                  <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+              </rowConstraints>
+               <children>
+                  <Label text="Search Option" GridPane.columnSpan="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="prodIdRdBtn" mnemonicParsing="false" selected="true" style="-fx-wrap-text: TRUE;" text="Product Id" GridPane.rowIndex="1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGroup" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="shortVinRdBtn" mnemonicParsing="false" style="-fx-wrap-text: TRUE;" text="Short Vin" toggleGroup="$toggleGroup" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="seqNoRdBtn" mnemonicParsing="false" prefHeight="35.0" prefWidth="115.0" style="-fx-wrap-text: TRUE;" text="SEQ Number" toggleGroup="$toggleGroup" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="seqRangeRdBtn" mnemonicParsing="false" style="-fx-wrap-text: TRUE;" text="SEQ Range" toggleGroup="$toggleGroup" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="prodLotRdBtn" layoutX="10.0" layoutY="340.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="109.0" style="-fx-wrap-text: TRUE;" text="Production Lot" toggleGroup="$toggleGroup" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="trackStsRdBtn" layoutX="10.0" layoutY="415.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-wrap-text: TRUE;" text="Tracking Status" toggleGroup="$toggleGroup" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </RadioButton>
+                  <Button fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" GridPane.columnSpan="3" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="inputTxtField" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                   <TextField fx:id="seqRangeTxtField" layoutX="147.0" layoutY="137.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+     
+                  <Label fx:id="shippingOptionLabel" text="Shipping Option" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  	</Label>
+                 
+                   <RadioButton fx:id="notShippedBtn" mnemonicParsing="false" prefHeight="41.0" prefWidth="200.0" selected="true" style="-fx-wrap-text: TRUE;" text="Not Shipped" GridPane.rowIndex="8">
+                   <toggleGroup>
+                        <ToggleGroup fx:id="shipToggleGroup" />
+                     </toggleGroup>
+                    	 <font>
+                        	<Font size="13.0" />
+                     	</font>
+                  	</RadioButton>
+                   	<RadioButton fx:id="shippedBtn" mnemonicParsing="false" prefHeight="41.0" prefWidth="100.0" style="-fx-wrap-text: TRUE;" text="Shipped" toggleGroup="$shipToggleGroup" GridPane.rowIndex="9">
+                    	 <font>
+                        	<Font size="13.0" />
+                     	</font>
+                  	</RadioButton>
+                 
+                  <ComboBox fx:id="status" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="6">  
+                               
+        		  </ComboBox>
+                  <HBox prefHeight="31.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <children>
+                        <Button fx:id="decrementPageBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" />
+                        <TextField fx:id="pageTxtField" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="31.0" />
+                        <Button fx:id="incrementPageBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" />
+                     </children>
+                  </HBox>
+                 
+               </children>
+             
+               <GridPane.margin>
+                  <Insets bottom="90.0" left="15.0" right="5.0" />
+               </GridPane.margin>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,12 @@
+Author        : Ambica Gawarla
+Prod Ticket   : NALC-1676 - Update Warranty OIF to add Indicator for ICE or BEV
+
+Release Number: 4.59.0
+
+Update Warranty OIF to add Indicator for ICE or BEV  
+
+New Property Added
+===============================================================================================================================================
+COMPONENT_ID					PROPERTY_KEY						PROPERTY_VALUES			DESCRIPTION
+===============================================================================================================================================
+OIF_SALES_WARRANTY		          PARSE_LINE_DEFS{VIN_IND}			                470,3, ,				

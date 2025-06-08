@@ -1,0 +1,1 @@
+update GALADM.QI_ENTRY_MODEL_GROUPING_TBX set MTC_MODEL = substr(MTC_MODEL, 2) where MTC_MODEL like '~%';

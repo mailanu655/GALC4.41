@@ -1,0 +1,1426 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio Developer Edition (Trial) 8.1.0.2319 (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:sciemetric="http://www.sciemetric.com/namespace" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.sciemetric.com/namespace" version="3.10.68.1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="root">
+		<xs:annotation>
+			<xs:documentation>This is the root of the file</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="single_part">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="information" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>This is all the information about the generation of the file. Some of the fields are useless but may be used in the future</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="source" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="version" type="xs:string" default="1">
+														<xs:annotation>
+															<xs:documentation>version of the application</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="date" type="sciemetric:QW_datetime">
+														<xs:annotation>
+															<xs:documentation>Generation date</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="application" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Name of the application that generated the file.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="database" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="host" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>host of the database</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="database" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>database catalog name</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="version" type="xs:string" default="1">
+														<xs:annotation>
+															<xs:documentation>Database version or database schema version</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="id" type="xs:string" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>A unique identifier that identifies each database.</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="part" type="sciemetric:PartType">
+								<xs:annotation>
+									<xs:documentation>This is the description of the part element</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:choice minOccurs="0">
+								<xs:element name="sections" type="sciemetric:SectionsType">
+									<xs:annotation>
+										<xs:documentation>This is the data holder with all the information about the history of the part</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="stations" type="sciemetric:StationsType">
+									<xs:annotation>
+										<xs:documentation>If no section, we will have a list of stations</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:choice>
+							<xs:element name="birth_history" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Raw memory map of the element</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="file_name" type="sciemetric:QW_filename" minOccurs="0" />
+										<xs:element name="version_number" type="xs:float">
+											<xs:annotation>
+												<xs:documentation>This is the version on tag</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="version_id" type="sciemetric:QW_id" minOccurs="0" />
+										<xs:element name="data" type="sciemetric:DataType" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="binary_catalog" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>This is the catalog of the binary file. This catalog will be used to decode the information in the binary block and can also be used as a stand alone element to replace the WFM file in the future</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="item" type="sciemetric:CatalogItemsType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="gateways" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="gateway" type="sciemetric:GatewayDataType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="CatalogItemsType">
+		<xs:annotation>
+			<xs:documentation>Description of a binary block</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The waveform label that is linked to this catalog item.  This is for review purposes only.  If it does not match the waveform label, nothing bad will happen.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="50" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="reference" type="sciemetric:ReferenceNumberType">
+				<xs:annotation>
+					<xs:documentation>Reference number matching with the  one specified in the top section of the file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="type" type="sciemetric:EnumDataType">
+				<xs:annotation>
+					<xs:documentation>Type of data stored in the binary block</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="index" type="xs:unsignedInt">
+				<xs:annotation>
+					<xs:documentation>This is the index order of this block</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="size">
+				<xs:annotation>
+					<xs:documentation>Size of the binary block</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="filesize" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:unsignedInt">
+						<xs:minInclusive value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="compression" type="sciemetric:EnumCompressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of compression for the binary data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="crc_check" type="xs:unsignedInt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>CRC check of the binary block</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A series of x-y data pairs.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="x_label" type="sciemetric:QW_MdataLabel">
+							<xs:annotation>
+								<xs:documentation>The label used as the default label for the x axis on a graph.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="y_label" type="sciemetric:QW_MdataLabel">
+							<xs:annotation>
+								<xs:documentation>The label used as the default label for the y axis on a graph.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:sequence minOccurs="0">
+							<xs:element name="x_start" type="xs:float">
+								<xs:annotation>
+									<xs:documentation>The first x point in a constant x interval waveform.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="x_interval" type="xs:float">
+								<xs:annotation>
+									<xs:documentation>The x interval in a constant x interval waveform</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:element name="datapoint" type="sciemetric:DataPointType" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnalysisType">
+		<xs:annotation>
+			<xs:documentation>Analysis region description</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="xs:short">
+				<xs:annotation>
+					<xs:documentation>This is the inspeXion signature enumeration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_y_data" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>This let the user know if the waveform was a X or a Y format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="range" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is the extraction range of the Analysis Region</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice maxOccurs="2">
+							<xs:sequence>
+								<xs:element name="start" type="xs:float">
+									<xs:annotation>
+										<xs:documentation>Startion point in Eng Units</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="format_start" type="sciemetric:QW_precision" minOccurs="0" />
+							</xs:sequence>
+							<xs:sequence>
+								<xs:element name="stop" type="xs:float">
+									<xs:annotation>
+										<xs:documentation>Stopping point in Eng units</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="format_stop" type="sciemetric:QW_precision" minOccurs="0" />
+							</xs:sequence>
+						</xs:choice>
+						<xs:element name="units" type="sciemetric:UnitType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Units of the value provided</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="limits" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Limit of the signature step</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:choice maxOccurs="2">
+						<xs:sequence>
+							<xs:element name="lower" type="xs:float">
+								<xs:annotation>
+									<xs:documentation>Lower limit</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="format_lower" type="sciemetric:QW_precision" minOccurs="0" />
+						</xs:sequence>
+						<xs:sequence>
+							<xs:element name="upper" type="xs:float">
+								<xs:annotation>
+									<xs:documentation>Upper limit</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="format_upper" type="sciemetric:QW_precision" minOccurs="0" />
+						</xs:sequence>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="envelope" type="sciemetric:EnvelopeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>In case of envelope, this is storage for it</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuildComplexitiesType">
+		<xs:annotation>
+			<xs:documentation>Collection of BCs</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="build_complexity" type="sciemetric:BuildComplexityType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is the definition of the complexity element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ComponentComplexityType">
+		<xs:annotation>
+			<xs:documentation>Definition of the complexity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the complexity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="xs:integer" />
+			<xs:element name="type_label" type="xs:string" />
+			<xs:element name="type_number" type="xs:int" minOccurs="0" />
+			<xs:element name="datestamp" type="sciemetric:QW_datetime" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuildComplexityType">
+		<xs:annotation>
+			<xs:documentation>Definition of the complexity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the complexity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Value if the complexity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="datestamp" type="sciemetric:QW_datetime" minOccurs="0" />
+			<xs:element name="id" type="xs:integer" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ComponentType">
+		<xs:annotation>
+			<xs:documentation>Definition of a component</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ComponentComplexitiesType">
+		<xs:annotation>
+			<xs:documentation>Collection of CCs</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="component_complexity" type="sciemetric:ComponentComplexityType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the component complexity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConnectionType">
+		<xs:annotation>
+			<xs:documentation>This is the information about the database connection</xs:documentation>
+		</xs:annotation>
+		<xs:choice maxOccurs="2">
+			<xs:element name="unique_identifier" type="sciemetric:GUIDType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This unique identifier is used to ensure the synchronisation of the id with the database</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DataHeaderType">
+		<xs:annotation>
+			<xs:documentation>Description of the data information </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="type" type="sciemetric:EnumDataType">
+				<xs:annotation>
+					<xs:documentation>This enum tell the type of data stored in this node</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_id" type="sciemetric:QW_id" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The data_id value.  Not valid for all data types.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="format" type="sciemetric:QW_precision" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This will be the C like forrmat used to convert the data to string</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unit" type="sciemetric:UnitType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unit of the data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataPointType">
+		<xs:annotation>
+			<xs:documentation>An x-y data pair from a waveform</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="xdata" type="xs:float" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The x data value from an x-y data pair.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ydata" type="xs:float">
+				<xs:annotation>
+					<xs:documentation>The y data value from an x-y data pair.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order" type="sciemetric:QW_order">
+				<xs:annotation>
+					<xs:documentation>The order value from an x-y data pair within a waveform.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataType">
+		<xs:annotation>
+			<xs:documentation>Data storage</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:DataHeaderType">
+				<xs:choice>
+					<xs:element name="reference" type="sciemetric:ReferenceNumberType">
+						<xs:annotation>
+							<xs:documentation>In case of reference to the binary block, this number will be the link</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="value" type="xs:anyType">
+						<xs:annotation>
+							<xs:documentation>In case of local data, The value will be stored in this element. This element as not type check </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DefectType">
+		<xs:annotation>
+			<xs:documentation>Description of a defect</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the defect</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="data_id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="time_in" type="sciemetric:QW_datetime">
+				<xs:annotation>
+					<xs:documentation>Type the defect is flaged</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="time_repaired" type="sciemetric:QW_datetime">
+				<xs:annotation>
+					<xs:documentation>repaired time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="true_defect" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True defect of only a text???</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="location" type="sciemetric:LocationType">
+				<xs:annotation>
+					<xs:documentation>Location of of the defect</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="component" type="sciemetric:ComponentType">
+				<xs:annotation>
+					<xs:documentation>Defective component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="repair_station" type="sciemetric:RepairStationType">
+				<xs:annotation>
+					<xs:documentation>Station involved for this reparation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="operator" type="sciemetric:OperatorType">
+				<xs:annotation>
+					<xs:documentation>Repair Operator personnal information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="audit" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The defect audit flag.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rank" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The defect prediction rank value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="repairs" type="sciemetric:RepairsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Repair stesp to make it work</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DefectsType">
+		<xs:annotation>
+			<xs:documentation>Collection of Defects</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="defect" type="sciemetric:DefectType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the defect</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnvelopeType">
+		<xs:annotation>
+			<xs:documentation>Description of an envelope</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_label" />
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="version" type="xs:integer" />
+			<xs:element name="data" type="sciemetric:DataType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ElementDefinitionType">
+		<xs:annotation>
+			<xs:documentation>Base to define the general information on element</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_label">
+				<xs:annotation>
+					<xs:documentation>Name of the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="result" type="sciemetric:ResultType" />
+			<xs:element name="order" type="sciemetric:QW_order" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Display order for the element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FeatureType">
+		<xs:annotation>
+			<xs:documentation>Dexscription of a feature</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:ElementDefinitionType">
+				<xs:sequence>
+					<xs:element name="date_stamp" type="sciemetric:QW_datetime">
+						<xs:annotation>
+							<xs:documentation>Date and tine of the element creation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="data" type="sciemetric:DataType">
+						<xs:annotation>
+							<xs:documentation>Feature Data</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="analysis_region" type="sciemetric:AnalysisType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This is the information about the signature involver in the creation of this feature</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FeaturesType">
+		<xs:annotation>
+			<xs:documentation>Collection of Features</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="feature" type="sciemetric:FeatureType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Description of a feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GatewayDataType">
+		<xs:annotation>
+			<xs:documentation>Gateway data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="gateway_id" type="xs:unsignedLong">
+				<xs:annotation>
+					<xs:documentation>This is the target gateway ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="error_code" type="xs:unsignedLong">
+				<xs:annotation>
+					<xs:documentation>This is the error occured while storing to database </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="error_description">
+				<xs:annotation>
+					<xs:documentation>This is text describes the error</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="512" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="date_stamp" type="sciemetric:QW_datetime" minOccurs="0" >
+				<xs:annotation>
+					<xs:documentation>Date and tine of the element creation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order" type="sciemetric:QW_order" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ImageType">
+		<xs:annotation>
+			<xs:documentation>Description of an image</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:ElementDefinitionType">
+				<xs:sequence>
+					<xs:element name="date_stamp" type="sciemetric:QW_datetime">
+						<xs:annotation>
+							<xs:documentation>Date and tine of the element creation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="data" type="sciemetric:DataType">
+						<xs:annotation>
+							<xs:documentation>Image information</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="features" type="sciemetric:FeaturesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of features extracted from this image</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="data_id" type="sciemetric:QW_id" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ImagesType">
+		<xs:annotation>
+			<xs:documentation>Colllection of Images</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="image" type="sciemetric:ImageType">
+				<xs:annotation>
+					<xs:documentation>Definition of an image</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LocationType">
+		<xs:annotation>
+			<xs:documentation>Description of a location</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the location</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModelType">
+		<xs:annotation>
+			<xs:documentation>Description of a model</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_serialnumber">
+				<xs:annotation>
+					<xs:documentation>Model name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OperationType">
+		<xs:annotation>
+			<xs:documentation>Description of an operation</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:ElementDefinitionType">
+				<xs:sequence>
+					<xs:element name="data_id" type="sciemetric:QW_id" minOccurs="0" />
+					<xs:element name="date_stamp" type="sciemetric:QW_datetime">
+						<xs:annotation>
+							<xs:documentation>Date and tine of the element creation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="count" type="xs:integer">
+						<xs:annotation>
+							<xs:documentation>Operation count</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="shift" type="sciemetric:ShiftType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Shift</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="comment" minOccurs="0" />
+					<xs:element name="operator" type="sciemetric:OperatorType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Operator in charge of this operation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:sequence minOccurs="0">
+						<xs:element name="version_name" type="sciemetric:QW_filename" />
+						<xs:element name="version_number" />
+						<xs:element name="version_date" type="sciemetric:QW_datetime" minOccurs="0" />
+					</xs:sequence>
+					<xs:sequence minOccurs="0">
+						<xs:element name="status_value" type="xs:unsignedInt" />
+						<xs:element name="status_bits" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="status_bit" maxOccurs="unbounded">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="label" type="sciemetric:QW_label" />
+												<xs:element name="value" type="xs:boolean" />
+												<xs:element name="result_id" type="sciemetric:QW_id" minOccurs="0" />
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:element name="defects" type="sciemetric:DefectsType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>List of defective component and their reparation procedures</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="images" type="sciemetric:ImagesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of images extracted from this operation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="waveforms" type="sciemetric:WaveformsType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of waveforms extracted from this operation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="features" type="sciemetric:FeaturesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of features extracted from this operation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OperationsType">
+		<xs:annotation>
+			<xs:documentation>Collection of operations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operation" type="sciemetric:OperationType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Operation definition</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OperatorType">
+		<xs:annotation>
+			<xs:documentation>Description of an operator</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="first_name" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>First namee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="last_name" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Second name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="logid" type="xs:string" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartType">
+		<xs:annotation>
+			<xs:documentation>Description of a part</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_part">
+				<xs:annotation>
+					<xs:documentation>Name of the part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="unit_id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="archive" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Will contain the name of the achive media if the part is not anymore in the database</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="sciemetric:QW_filename">
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="serial_number" type="sciemetric:QW_serialnumber">
+				<xs:annotation>
+					<xs:documentation>Serial number of the part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="model_number" type="sciemetric:ModelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Model of this part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pallet_number" type="sciemetric:QW_serialnumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The pallet number associated with the part (used by the RBM).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rbm_repair_state" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The current repair state for the part.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rbm_time_in_bay" type="sciemetric:QW_datetime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The time when the part entered the repair bay.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rbm_loop_count" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The current loop count for the repair bay.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="part_parameters" type="sciemetric:PartParametersType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection of Part parameters  asdpciate with this part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="build_complexities" type="sciemetric:BuildComplexitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection of Build complecities associate with this part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="component_complexities" type="sciemetric:ComponentComplexitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection of Component complecities associate with this part</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartParametersType">
+		<xs:annotation>
+			<xs:documentation>Collection of part parameters</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="part_parameter" type="sciemetric:PartParameterType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the Part Parameters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartParameterType">
+		<xs:annotation>
+			<xs:documentation>Description of a part parameter</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name of the Part Parameter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_type_id" type="xs:integer" />
+			<xs:element name="data" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Depending of the type of the part parameter, the following child node will be different</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="data_format" type="xs:string" minOccurs="0" />
+			<xs:element name="column_number" type="xs:int" minOccurs="0" />
+			<xs:element name="order" type="sciemetric:QW_order" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to define the order in which part parameters are displayed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepairType">
+		<xs:annotation>
+			<xs:documentation>Description of a repair </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_name">
+				<xs:annotation>
+					<xs:documentation>Name od the repair operation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="comment" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Comment of the operator about the reparation</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="exit_code" type="xs:int" minOccurs="0" />
+			<xs:element name="location" type="sciemetric:LocationType">
+				<xs:annotation>
+					<xs:documentation>Location of the reparation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="component" type="sciemetric:ComponentType">
+				<xs:annotation>
+					<xs:documentation>Repaired component</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepairsType">
+		<xs:annotation>
+			<xs:documentation>Collection of repairs</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="repair" type="sciemetric:RepairType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the Repair</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepairStationType">
+		<xs:annotation>
+			<xs:documentation>Description of a station where the repair occurs</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_label">
+				<xs:annotation>
+					<xs:documentation>Name of the station</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResultType">
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_Result_Label" />
+			<xs:element name="id" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:integer">
+						<xs:minInclusive value="-3" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SectionType">
+		<xs:annotation>
+			<xs:documentation>Description of a section</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_label" />
+			<xs:element name="description" type="sciemetric:QW_description" minOccurs="0" />
+			<xs:element name="result" type="sciemetric:ResultType" minOccurs="0" />
+			<xs:element name="order" type="sciemetric:QW_order" minOccurs="0" />
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+			<xs:element name="build_complexities" type="sciemetric:BuildComplexitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection of build complexities associate with this section</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="component_complexities" type="sciemetric:ComponentComplexitiesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Collection of Component complexities associate with this sections</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Here a section can only exist if a Collection of stations or of operations or both are existing</xs:documentation>
+				</xs:annotation>
+				<xs:element name="stations" type="sciemetric:StationsType">
+					<xs:annotation>
+						<xs:documentation>Collection of stations associate with this station</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="operations" type="sciemetric:OperationsType">
+					<xs:annotation>
+						<xs:documentation>Collection of operations associate with this section</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SectionsType">
+		<xs:annotation>
+			<xs:documentation>Collection of sections</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="section" type="sciemetric:SectionType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of a section</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ShiftType">
+		<xs:annotation>
+			<xs:documentation>Description of a shift</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_label">
+				<xs:annotation>
+					<xs:documentation>Shift name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StationType">
+		<xs:annotation>
+			<xs:documentation>Description of a station</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:ElementDefinitionType">
+				<xs:sequence>
+					<xs:element name="type" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This is the station type</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="label" type="xs:string" />
+								<xs:element name="id" type="sciemetric:QW_id" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="build_complexities" type="sciemetric:BuildComplexitiesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of build complexities associate with this station</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="component_complexities" type="sciemetric:ComponentComplexitiesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of component complexities associate with this station</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="operations" type="sciemetric:OperationsType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of operations associate with this station</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StationsType">
+		<xs:annotation>
+			<xs:documentation>Collection of stations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="station" type="sciemetric:StationType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Station definition</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnitType">
+		<xs:annotation>
+			<xs:documentation>Description of a unit</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="label" type="sciemetric:QW_unit">
+				<xs:annotation>
+					<xs:documentation>Label used to display the unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="id" type="sciemetric:QW_id" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WaveformDataType">
+		<xs:annotation>
+			<xs:documentation>Description of an X or Y waveform</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:DataType">
+				<xs:sequence>
+					<xs:element name="scale" type="sciemetric:WaveformScaleType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Scale of the axis assocaite with this waveform</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WaveformScaleType">
+		<xs:annotation>
+			<xs:documentation>Description of the axis scale</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="min" type="xs:float" />
+			<xs:element name="max" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WaveformType">
+		<xs:annotation>
+			<xs:documentation>Description a complete waveform</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="sciemetric:ElementDefinitionType">
+				<xs:sequence>
+					<xs:element name="date_stamp" type="sciemetric:QW_datetime">
+						<xs:annotation>
+							<xs:documentation>Date and tine of the element creation</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="x" type="sciemetric:WaveformDataType">
+						<xs:annotation>
+							<xs:documentation>X Data</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="y" type="sciemetric:WaveformDataType">
+						<xs:annotation>
+							<xs:documentation>Y Data</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="nominal" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Nominal associate with this waveform</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="x" type="sciemetric:WaveformDataType" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>X nominal</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="y" type="sciemetric:WaveformDataType">
+									<xs:annotation>
+										<xs:documentation>Y nominal</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="features" type="sciemetric:FeaturesType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Collection of features associate with this waveform</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WaveformsType">
+		<xs:annotation>
+			<xs:documentation>Collection of waveforms</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="waveform" type="sciemetric:WaveformType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Definition of the waveform</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EnumDataSource" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Enum of the input data source</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="value" />
+			<xs:enumeration value="binary" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EnumCompressionType" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Enum of the input data type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none" />
+			<xs:enumeration value="base64" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EnumDataType" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Enum of the input data type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NULL" />
+			<xs:enumeration value="RAW" />
+			<xs:enumeration value="float" />
+			<xs:enumeration value="integer" />
+			<xs:enumeration value="boolean" />
+			<xs:enumeration value="string" />
+			<xs:enumeration value="PortableMData" />
+			<xs:enumeration value="PortableEnvelope" />
+			<xs:enumeration value="JPEG" />
+			<xs:enumeration value="GIF" />
+			<xs:enumeration value="PNG" />
+			<xs:enumeration value="BMP" />
+			<xs:enumeration value="BirthHistoryData" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GUIDType">
+		<xs:annotation>
+			<xs:documentation>String containing a GUID</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="36" />
+			<xs:whiteSpace value="collapse" />
+			<xs:pattern value="[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReferenceNumberType">
+		<xs:annotation>
+			<xs:documentation>Reference to binary format</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer" />
+	</xs:simpleType>
+	<xs:simpleType name="QW_label">
+		<xs:annotation>
+			<xs:documentation>Database label</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterL">
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+			<xs:maxLength value="12" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_Result_Label">
+		<xs:annotation>
+			<xs:documentation>Result label</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+			<xs:maxLength value="12" />
+			<xs:pattern value="[0-9A-Za-z][\-\(\)/0-9A-Z\s\[\\\]_a-z]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_label50">
+		<xs:annotation>
+			<xs:documentation>Database label (Special with 50 chars for the binary catalog)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterL">
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+			<xs:maxLength value="50" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_datetime">
+		<xs:annotation>
+			<xs:documentation>Date and Time</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime" />
+	</xs:simpleType>
+	<xs:simpleType name="QW_description">
+		<xs:annotation>
+			<xs:documentation>Database description</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterD">
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_filename">
+		<xs:annotation>
+			<xs:documentation>Filenames</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterF">
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_name">
+		<xs:annotation>
+			<xs:documentation>Database Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterN">
+			<xs:minLength value="1" />
+			<xs:maxLength value="25" />
+			<xs:whiteSpace value="preserve" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_id">
+		<xs:annotation>
+			<xs:documentation>Database ID</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer" />
+	</xs:simpleType>
+	<xs:simpleType name="QW_order">
+		<xs:annotation>
+			<xs:documentation>Database order</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt" />
+	</xs:simpleType>
+	<xs:simpleType name="QW_part">
+		<xs:annotation>
+			<xs:documentation>Database part</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterL">
+			<xs:maxLength value="20" />
+			<xs:minLength value="1" />
+			<xs:whiteSpace value="collapse" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_precision">
+		<xs:annotation>
+			<xs:documentation>Database precision (from MSDN %[flags] [width] [.precision] [{h | l | I64 | L}]type )</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="10" />
+			<xs:whiteSpace value="preserve" />
+			<xs:pattern value="%(\-|\+|\s|#)?\p{N}*(\.\p{N}+)?(h|I|I64|L)?(c|C|d|i|o|u|x|X|e|E|f|g|G|n|p|s|S)" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_serialnumber">
+		<xs:annotation>
+			<xs:documentation>Database serialnumber</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sciemetric:QW_StringFilterSN_MN">
+			<xs:minLength value="1" />
+			<xs:maxLength value="64" />
+			<xs:whiteSpace value="collapse" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_StringFilterD">
+		<xs:annotation>
+			<xs:documentation>Sciemetric String Filter for Descriptions</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z][\- !#$&amp;\(\)\*\+,\./0-9:;&lt;=&gt;\?@A-Z\[\\\]\^_a-z]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_StringFilterF">
+		<xs:annotation>
+			<xs:documentation>Sciemetric String Filter for Filenames</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\- !#$%&amp;'\(\)\+,\.0-9=@A-Z\[\]\^_a-z\{\}~]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_StringFilterL">
+		<xs:annotation>
+			<xs:documentation>Sciemetric String Filter for Labels</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z][\-\(\)/0-9A-Z\[\\\]_a-z]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_StringFilterN">
+		<xs:annotation>
+			<xs:documentation>Sciemetric String Filter for Names</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z][\- \(\)/0-9A-Z\[\\\]_a-z]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_StringFilterSN_MN">
+		<xs:annotation>
+			<xs:documentation>Sciemetric String Filter for Serial and Model Numbers</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\- \(\)\./0-9A-Z\[\\\]_a-z]*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_type">
+		<xs:annotation>
+			<xs:documentation>Database type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_unit">
+		<xs:annotation>
+			<xs:documentation>Database unit</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="15" />
+			<xs:whiteSpace value="preserve" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QW_MdataLabel">
+		<xs:annotation>
+			<xs:documentation>Label embedded in an MDATA structure.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32" />
+			<xs:whiteSpace value="preserve" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+	<!-- Data Sources -->
+	<data-sources>
+	</data-sources>
+
+	<!-- Form Beans -->
+	<form-beans>
+		<form-bean name="siteForm" type="com.honda.galc.system.config.web.forms.SiteForm">
+		</form-bean>
+		<form-bean name="plantForm" type="com.honda.galc.system.config.web.forms.PlantForm">
+		</form-bean>
+		<form-bean name="divisionForm" type="com.honda.galc.system.config.web.forms.DivisionForm">
+		</form-bean>
+		<form-bean name="lDAPForm" type="com.honda.galc.system.config.web.forms.LDAPForm">
+		</form-bean>
+		<form-bean name="lineForm" type="com.honda.galc.system.config.web.forms.LineForm">
+		</form-bean>
+		<form-bean name="terminalForm" type="com.honda.galc.system.config.web.forms.TerminalForm">
+		</form-bean>
+		<form-bean name="deviceForm" type="com.honda.galc.system.config.web.forms.DeviceForm">
+		</form-bean>
+		<form-bean name="processPointForm" type="com.honda.galc.system.config.web.forms.ProcessPointForm">
+		</form-bean>
+		<form-bean name="deviceDataFormatForm" type="com.honda.galc.system.config.web.forms.DeviceDataFormatForm">
+		</form-bean>
+		<form-bean name="printAttributeFormatForm" type="com.honda.galc.system.config.web.forms.PrintAttributeFormatForm">
+		</form-bean>
+		<form-bean name="applicationTaskForm" type="com.honda.galc.system.config.web.forms.ApplicationTaskForm">
+		</form-bean>
+		<form-bean name="taskSpecificationForm" type="com.honda.galc.system.config.web.forms.TaskSpecificationForm">
+		</form-bean>
+		<form-bean name="terminalApplicationItemListForm" type="org.apache.struts.action.DynaActionForm">
+		</form-bean>
+		<form-bean name="broadcastDestinationForm" type="com.honda.galc.system.config.web.forms.BroadcastDestinationForm">
+		</form-bean>
+		<form-bean name="appMenuForm" type="com.honda.galc.system.config.web.forms.AppMenuForm">
+		</form-bean>
+		<form-bean name="applicationForm" type="com.honda.galc.system.config.web.forms.ApplicationForm">
+		</form-bean>
+		<form-bean name="applicationSearchForm" type="com.honda.galc.system.config.web.forms.ApplicationSearchForm">
+		</form-bean>
+		<form-bean name="aclForm" type="com.honda.galc.system.config.web.forms.ACLForm">
+		</form-bean>
+		<form-bean name="adminUserSearchForm" type="com.honda.galc.system.config.web.forms.AdminUserSearchForm">
+		</form-bean>
+		<form-bean name="adminUserForm" type="com.honda.galc.system.config.web.forms.AdminUserForm">
+		</form-bean>
+		<form-bean name="adminGroupForm" type="com.honda.galc.system.config.web.forms.AdminGroupForm">
+		</form-bean>
+		<form-bean name="adminGroupSearchForm" type="com.honda.galc.system.config.web.forms.AdminGroupSearchForm">
+		</form-bean>
+		<form-bean name="zoneForm" type="com.honda.galc.system.config.web.forms.ZoneForm">
+		</form-bean>
+		<form-bean name="securityGroupForm" type="com.honda.galc.system.config.web.forms.SecurityGroupForm">
+		</form-bean>
+		<form-bean name="securityGroupSearchForm" type="com.honda.galc.system.config.web.forms.SecurityGroupSearchForm">
+		</form-bean>
+		<form-bean name="opcListForm" type="com.honda.galc.system.config.web.forms.OpcListForm">
+		</form-bean>
+		<form-bean name="opcSettingsForm" type="com.honda.galc.system.config.web.forms.OpcSettingsForm">
+		</form-bean>
+		<form-bean name="propertySettingsForm" type="com.honda.galc.system.config.web.forms.PropertySettingsForm">
+		</form-bean>
+		<form-bean name="propertyListForm" type="com.honda.galc.system.config.web.forms.PropertyListForm">
+		</form-bean>
+		<form-bean name="componentStatusSettingsForm" type="com.honda.galc.system.config.web.forms.ComponentStatusSettingsForm">
+		</form-bean>
+		<form-bean name="componentStatusListForm" type="com.honda.galc.system.config.web.forms.ComponentStatusListForm">
+		</form-bean>
+		
+		<form-bean name="productTypeLoadForm" type="com.honda.galc.system.config.web.forms.ProductTypeLoadForm">
+		</form-bean>
+		<form-bean name="productTypeForm" type="com.honda.galc.system.config.web.forms.ProductTypeForm">
+		</form-bean>
+		<form-bean name="processPointGroupSettingsForm" type="com.honda.galc.system.config.web.forms.ProcessPointGroupSettingsForm">
+		</form-bean>
+		<form-bean name="regionalCodeListForm" type="com.honda.galc.system.config.web.forms.RegionalCodeListForm">
+		</form-bean>
+		<form-bean name="regionalProcessPointGroupListForm" type="com.honda.galc.system.config.web.forms.RegionalProcessPointGroupListForm">
+		</form-bean>
+		<form-bean name="availableProcessPointListForm" type="com.honda.galc.system.config.web.forms.AvailableProcessPointListForm">
+		</form-bean>
+		<form-bean name="assignedProcessPointListForm" type="com.honda.galc.system.config.web.forms.AssignedProcessPointListForm">
+		</form-bean>
+		
+		<form-bean name="gpcsForm" type="com.honda.galc.system.config.web.forms.GpcsForm">
+		</form-bean>
+	</form-beans>
+
+	<!-- Global Exceptions -->
+	<global-exceptions>
+	</global-exceptions>
+	<global-forwards>
+		<forward name="messages" path="common/Messages.jsp" contextRelative="true">
+		</forward>
+	</global-forwards>
+
+	<!-- Global Forwards -->
+	<action-mappings>
+		<action path="/buildProcessTree" type="com.honda.galc.system.config.web.actions.BuildProcessTreeAction">
+			<forward name="success" contextRelative="true" path="process/ProcessTree.jsp">
+			</forward>
+			<forward name="failure" contextRelative="true" path="process/ProcessTree.jsp">
+			</forward>
+		</action>
+		<action path="/getSiteInformation" type="com.honda.galc.system.config.web.actions.GetSiteInformationAction" name="siteForm" scope="request" validate="false" attribute="siteForm">
+			<forward name="success" contextRelative="true" path="process/SiteInformation.jsp">
+			</forward>
+			<forward name="failure" path="process/SiteInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="plantForm" path="/plantSettings" scope="request" type="com.honda.galc.system.config.web.actions.PlantSettingsAction">
+			<forward name="success" path="process/PlantInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" contextRelative="true" path="process/PlantInformation.jsp">
+			</forward>
+		</action>
+		<action name="divisionForm" path="/divisionSettings" scope="request" type="com.honda.galc.system.config.web.actions.DivisionSettingsAction">
+			<forward name="success" contextRelative="true" path="process/DivisionInformation.jsp">
+			</forward>
+			<forward name="failure" contextRelative="true" path="process/DivisionInformation.jsp">
+			</forward>
+		</action>
+		<action name="divisionForm" path="/checkExistingDivisionIdAjax" scope="request" type="com.honda.galc.system.config.web.actions.AjaxRequestAction" parameter="function">
+			<forward name="success" contextRelative="true" path="process/DivisionInformation.jsp">
+			</forward>
+			<forward name="failure" contextRelative="true" path="process/DivisionInformation.jsp">
+			</forward>
+		</action>
+		<action path="/initialize" type="com.honda.galc.system.config.web.actions.InitializationAction">
+			<forward name="success" contextRelative="true" path="process/OuterProcessFrame.jsp">
+			</forward>
+		</action>
+		<action path="/lDAPSettings" type="com.honda.galc.system.config.web.actions.LDAPSettingsAction" name="lDAPForm" scope="request">
+			<forward name="success" path="ldap/LDAPInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="ldap/LDAPInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="lineForm" path="/lineSettings" scope="request" type="com.honda.galc.system.config.web.actions.LineSettingsAction">
+			<forward name="success" path="process/LineInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="process/LineInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/terminalList" type="com.honda.galc.system.config.web.actions.TerminalListAction">
+			<forward name="success" path="terminal/TerminalList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="terminal/TerminalList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="terminalForm" path="/terminalSettings" scope="request" type="com.honda.galc.system.config.web.actions.TerminalSettingsAction">
+			<forward name="success" path="terminal/TerminalInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="terminal/TerminalInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/deviceList" type="com.honda.galc.system.config.web.actions.DeviceListAction">
+			<forward name="success" path="/device/DeviceList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/device/DeviceList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="deviceForm" path="/deviceSettings" scope="request" type="com.honda.galc.system.config.web.actions.DeviceSettingsAction">
+			<forward name="success" path="device/DeviceInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="device/DeviceInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/processPointList" type="com.honda.galc.system.config.web.actions.ProcessPointListAction">
+			<forward name="success" path="process/ProcessPointList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="process/ProcessPointList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="processPointForm" path="/processPointSettings" scope="request" type="com.honda.galc.system.config.web.actions.ProcessPointSettingsAction">
+			<forward name="success" path="process/CompleteProcessPoint.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="process/CompleteProcessPoint.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="processPointForm" path="/populateFeatureIdAjax" scope="request" type="com.honda.galc.system.config.web.actions.AjaxRequestAction" parameter="function">
+			<forward name="success" path="process/CompleteProcessPoint.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="process/CompleteProcessPoint.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="deviceDataFormatForm" path="/deviceDataFormatSettings" scope="request" type="com.honda.galc.system.config.web.actions.DeviceDataFormatSettingsAction">
+			<forward contextRelative="true" name="success" path="device/DeviceDataFormatInformation.jsp">
+			</forward>
+			<forward contextRelative="true" name="failure" path="device/DeviceDataFormatInformation.jsp">
+			</forward>
+		</action>
+		<action name="printAttributeFormatForm" path="/printAttributeFormatSettings" scope="request" type="com.honda.galc.system.config.web.actions.PrintAttributeFormatSettingsAction">
+			<forward contextRelative="true" name="success" path="print/PrintAttributeFormatInformation.jsp">
+			</forward>
+			<forward contextRelative="true" name="failure" path="print/PrintAttributeFormatInformation.jsp">
+			</forward>
+		</action>
+		<action name="applicationTaskForm" path="/applicationTaskSettings" scope="request" type="com.honda.galc.system.config.web.actions.ApplicationTaskSettingsAction">
+			<forward name="success" path="/application/ApplicationTaskInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/application/ApplicationTaskInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="taskSpecificationForm" path="/taskSpecificationSettings" type="com.honda.galc.system.config.web.actions.TaskSpecificationSettingsAction" scope="request">
+			<forward name="success" path="/application/TaskSpecification.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/application/TaskSpecification.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="terminalApplicationItemListForm" path="/terminalApplicationItemList" type="com.honda.galc.system.config.web.actions.TerminalApplicationItemListAction" scope="request" >
+			<forward contextRelative="true" name="success" path="terminal/TerminalApplicationItemList.jsp">
+			</forward>
+			<forward contextRelative="true" name="failure" path="terminal/TerminalApplicationItemList.jsp">
+			</forward>
+		</action>
+		<action name="broadcastDestinationForm" path="/broadcastDestinationSettings" scope="request" type="com.honda.galc.system.config.web.actions.BroadcastDestinationSettingsAction">
+			<forward name="success" path="/broadcast/BroadcastDestinationInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/broadcast/BroadcastDestinationInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="appMenuForm" path="/appMenuSetting" scope="request" type="com.honda.galc.system.config.web.actions.AppMenuSettingAction">
+			<forward name="success" path="terminal/ApplicationMenuInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="terminal/ApplicationMenuInformation.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/terminalApplicationList" type="com.honda.galc.system.config.web.actions.TerminalApplicationListAction">
+			<forward name="success" path="terminal/TerminalApplicationSelectList.jsp">
+			</forward>
+			<forward name="failure" path="terminal/TerminalApplicationSelectList.jsp">
+			</forward>
+		</action>
+		<action name="applicationSearchForm" path="/applicationSearch" scope="request" type="com.honda.galc.system.config.web.actions.ApplicationSearchAction">
+			<forward name="success" path="application/ApplicationSearchResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="application/ApplicationSearchResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="initialize" path="application/ApplicationSearch.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="applicationForm" path="/applicationSettings" scope="request" type="com.honda.galc.system.config.web.actions.ApplicationSettingsAction">
+			<forward name="success" contextRelative="true" path="application/ApplicationSettings.jsp">
+			</forward>
+			<forward name="failure" path="application/ApplicationSettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/applicationSearchAndConfigure" type="com.honda.galc.system.config.web.actions.ApplicationSearchAndConfigureAction">
+			<forward contextRelative="true" name="success" path="application/ApplicationSettingsFrame.jsp">
+			</forward>
+		</action>
+		<action name="aclForm" path="/ACLSettings" scope="request" type="com.honda.galc.system.config.web.actions.ACLSettingsAction">
+			<forward name="success" path="application/ScreenACLInformation.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" contextRelative="true" path="application/ScreenACLInformation.jsp">
+			</forward>
+		</action>
+		<action path="/lDAPList" type="com.honda.galc.system.config.web.actions.LDAPListAction">
+			<forward name="success" path="ldap/LDAPList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="ldap/LDAPList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/lDAPConfiguration" type="com.honda.galc.system.config.web.actions.LDAPConfigurationAction">
+			<forward name="success" path="ldap/LDAPSettingsFrame.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/lDAPListFrame" type="com.honda.galc.system.config.web.actions.LDAPListFrameAction">
+			<forward name="success" path="ldap/LDAPListFrame.jsp">
+			</forward>
+		</action>
+		<action path="/cacheConfiguration" type="com.honda.galc.system.config.web.actions.CacheConfigurationAction">
+			<forward name="success" path="cache/RefreshCachesFrame.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/cacheSearch" scope="request" type="com.honda.galc.system.config.web.actions.CacheContentsAction">
+			<forward name="success" path="cache/CacheContents.jsp" contextRelative="true"/>
+			<forward name="initialize" path="cache/CacheContents.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/cacheDisplayProperty" type="com.honda.galc.system.config.web.actions.CacheDisplayPropertyAction">
+			<forward name="success" path="cache/CacheDisplayProperty.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/cacheDisplayLotControlRule" type="com.honda.galc.system.config.web.actions.CacheDisplayLotControlRuleAction">
+			<forward name="success" path="cache/CacheDisplayLotControlRule.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/cacheRefresh" type="com.honda.galc.system.config.web.actions.CacheRefreshAction">
+			<forward name="success" path="cache/CacheRefreshResult.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="adminUserForm" path="/adminUserSettings" scope="request" type="com.honda.galc.system.config.web.actions.AdminUserSettingsAction">
+			<forward name="initialize" path="admin/AdminUserOuterPage.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/AdminUsersSettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="admin/AdminUsersSettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="adminUserSearchForm" path="/adminUsersSearch" scope="request" type="com.honda.galc.system.config.web.actions.AdminUsersSearchAction">
+			<forward name="initialize" path="admin/AdminUserSearch.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/AdminUsersSearchResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="admin/AdminUsersSearchResults.jsp">
+			</forward>
+		</action>
+		<action name="adminGroupForm" path="/adminGroupSettings" type="com.honda.galc.system.config.web.actions.AdminGroupSettingsAction" scope="request">
+			<forward name="initialize" path="admin/AdminGroupOuterPage.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/AdminGroupSettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" contextRelative="true" path="admin/AdminGroupSettings.jsp">
+			</forward>
+		</action>
+		<action name="adminGroupSearchForm" path="/adminGroupsSearch" scope="request" type="com.honda.galc.system.config.web.actions.AdminGroupsSearchAction">
+			<forward name="success" path="admin/AdminGroupsSearchResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" contextRelative="true" path="admin/AdminGroupsSearchResults.jsp">
+			</forward>
+		</action>
+		<action name="zoneForm" path="/zoneSettings" scope="request" type="com.honda.galc.system.config.web.actions.ZoneSettingsAction">
+			<forward contextRelative="true" name="success" path="process/ZoneInformation.jsp">
+			</forward>
+			<forward contextRelative="true" name="failure" path="process/ZoneInformation.jsp">
+			</forward>
+		</action>
+		<action path="/securityGroupsSearch" type="com.honda.galc.system.config.web.actions.SecurityGroupsSearchAction" name="securityGroupSearchForm" scope="request">
+			<forward name="success" path="group/SecurityGroupsSearchResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="group/SecurityGroupsSearchResults.jsp" redirect="false" contextRelative="true">
+			</forward>
+		</action>
+		<action path="/securityGroupSettings" type="com.honda.galc.system.config.web.actions.SecurityGroupSettingsAction" name="securityGroupForm" scope="request">
+			<forward name="initialize" path="group/SecurityGroupOuterPage.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="group/SecurityGroupSettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="group/SecurityGroupSettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="opcListForm" path="/opcConfigurationList" scope="request" type="com.honda.galc.system.config.web.actions.OpcConfigurationListAction">
+			<forward name="success" path="device/OPCList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="device/OPCList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="opcSettingsForm" path="/opcSettings" scope="request" type="com.honda.galc.system.config.web.actions.OpcSettingsAction">
+			<forward contextRelative="true" name="success" path="device/OPCSettings.jsp">
+			</forward>
+			<forward contextRelative="true" name="failure" path="device/OPCSettings.jsp">
+			</forward>
+		</action>
+		<action name="propertySettingsForm" path="/propertySettings" scope="request" type="com.honda.galc.system.config.web.actions.PropertySettingsAction">
+			<forward name="success" path="application/PropertySettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="application/PropertySettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="propertyListForm" path="/propertyList" scope="request" type="com.honda.galc.system.config.web.actions.PropertyListAction" >
+			<forward name="success" path="application/PropertyList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="componentStatusSettingsForm" path="/componentStatusSettings" scope="request" type="com.honda.galc.system.config.web.actions.ComponentStatusSettingsAction">
+			<forward name="success" path="componentstatus/ComponentStatusSettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="componentstatus/ComponentStatusSettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="componentStatusListForm" path="/componentStatusList" scope="request" type="com.honda.galc.system.config.web.actions.ComponentStatusListAction" >
+			<forward name="success" path="componentstatus/ComponentStatusList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		
+		<action name="productTypeForm" path="/productType" scope="request" type="com.honda.galc.system.config.web.actions.ProductTypeConfigAction">
+			<forward name="initialize" path="admin/ProductTypeOuterPage.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/ProductType.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="admin/ProductType.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="productTypeLoadForm" path="/productTypeLoad" scope="request" type="com.honda.galc.system.config.web.actions.productTypeLoadAction">
+			<forward name="initialize" path="admin/ProductTypeLoadResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/ProductTypeLoadResults.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="admin/ProductTypeLoadResults.jsp">
+			</forward>
+		</action>
+		
+		<action name="processPointGroupForm" path="/processPointGroup" scope="request" type="com.honda.galc.system.config.web.actions.ProcessPointGroupAction">
+			<forward name="success" path="/processpointgroup/ProcessPointGroup.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/ProcessPointGroup.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="regionalCodeListForm" path="/regionalCodeList" scope="request" type="com.honda.galc.system.config.web.actions.RegionalCodeListAction">
+			<forward name="success" path="/processpointgroup/RegionalCodeList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/RegionalCodeList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="regionalProcessPointGroupListForm" path="/regionalProcessPointGroupList" scope="request" type="com.honda.galc.system.config.web.actions.RegionalProcessPointGroupListAction">
+			<forward name="success" path="/processpointgroup/RegionalProcessPointGroupList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/RegionalProcessPointGroupList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="processPointGroupSettingsForm" path="/processPointGroupSettings" scope="request" type="com.honda.galc.system.config.web.actions.ProcessPointGroupSettingsAction">
+			<forward name="success" path="/processpointgroup/ProcessPointGroupSettings.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/ProcessPointGroupSettings.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="availableProcessPointListForm" path="/availableProcessPointList" scope="request" type="com.honda.galc.system.config.web.actions.AvailableProcessPointListAction">
+			<forward name="success" path="/processpointgroup/AvailableProcessPointList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/AvailableProcessPointList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		<action name="assignedProcessPointListForm" path="/assignedProcessPointList" scope="request" type="com.honda.galc.system.config.web.actions.AssignedProcessPointListAction">
+			<forward name="success" path="/processpointgroup/AssignedProcessPointList.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="/processpointgroup/AssignedProcessPointList.jsp" contextRelative="true">
+			</forward>
+		</action>
+		
+		
+		<action name="gpcsForm" path="/gpcs" scope="request" type="com.honda.galc.system.config.web.actions.GpcsConfigurationAction">
+			<forward name="initialize" path="admin/Gpcs.jsp" contextRelative="true">
+			</forward>
+			<forward name="success" path="admin/Gpcs.jsp" contextRelative="true">
+			</forward>
+			<forward name="failure" path="admin/Gpcs.jsp" contextRelative="true">
+			</forward>
+		</action>
+			
+	</action-mappings>
+	<controller processorClass="com.honda.galc.system.config.web.controller.ConfigurationServicesRequestProcessor">
+	</controller>
+	<message-resources parameter="Message">
+	</message-resources>
+	<plug-in className="com.honda.galc.system.config.web.plugin.InitializationPugin">
+	</plug-in>
+
+	<!-- Action Mappings -->
+
+	<!-- Message Resources -->
+
+</struts-config>

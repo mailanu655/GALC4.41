@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<project name="Client Build" default="all" basedir=".">
+
+	<property name="client.dir" value="/build/client"/>
+	<property name="client.dir.tmp" value="${client.dir}/tmp"/>
+	<property name="client.jar" value="ClientMain.jar"/>
+	<property name="client.jar.filepath" value="${client.dir.tmp}/${client.jar}"/>
+	<property name="out.instr.dir" value="${client.dir}/outinstr" />
+	<property name="client.jar.zipfile" value="Regional_GALC_Lot_Control_${version}_${buildLevel}_GALCClientEmma.zip"/>
+	<property name="src.lib" value="../../base-library/lib"/>
+	<property name="keystore" value="GALCAppletKeyStore_Expires_2020.jks"/>
+	<property name="keystore.pass" value="g2lcr0cks" />
+	<property name="keystore.alias" value="galcFiles" />	
+	<target name = "all" depends = "zip,cleanUp" description = "Complete Server Build">
+		<tstamp/>
+		<echo> Build All Finished  ${TSTAMP} on ${TODAY}</echo>
+	</target>
+
+
+	<target name =  "compile" description="compile everything">
+		 	<ant antfile ="${basedir}\sub_compile.xml"		target ="buildClient"/>
+	</target>
+	
+	<target name ="EmmaInstrument"  description="Instrumentation">
+			<ant antfile ="${basedir}\ClientInstrument.xml"		target ="emma"/>
+	</target>
+	
+	<target name="unjar" depends="cleanUp">
+		<mkdir dir = "${client.dir}"/>
+		<mkdir dir = "${client.dir.tmp}"/>
+		<unjar src="${src.lib}/openjpa/openjpa-1.2.1.jar" dest="${client.dir.tmp}" />
+	</target>
+	
+	<target name="buildClientjar" depends="compile,unjar,EmmaInstrument" description="Aggregate JARs into fewer JARs">
+
+		<delete file="${client.jar.filepath}"/>			  		
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${out.instr.dir}/classes/bin"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="../../device-simulator/bin"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="../../galc-test/bin"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${client.dir.tmp}" includes="**\org/apache/openjpa/util/*.class"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${client.dir.tmp}" includes="**\org/apache/openjpa/kernel/*.class"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${client.dir.tmp}" includes="**\org/apache/openjpa/enhance/*.class"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${client.dir.tmp}" includes="**\org/apache/openjpa/lib/util/*.class"/>
+		<jar jarfile="${client.jar.filepath}" update="true" compress="true" basedir="${client.dir.tmp}" includes="**\org/apache/openjpa/lib/util/concurrent/*.class"/>
+												
+	</target>
+	
+	<target name="buildResourceJar">
+			<delete file="${client.dir.tmp}/resource.jar"/>
+			<echo>Packaging properties from: ../../client-resource</echo>
+			<jar jarfile="${client.dir.tmp}/resource.jar" update="true" compress="true" basedir="../../client-resource"/>
+	</target>
+	
+	<target name="signBaseJars" depends="buildClientjar,buildResourceJar" description="Sign Base JAR files">
+			<echo message="Jar signing requires that the jarsigner.exe tool be in your windows Path environment variable" />
+			
+			<signjar jar="${client.dir.tmp}/${client.jar}" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}/ehcache/ehcache-core-1.7.0.jar" signedjar="${client.dir.tmp}/ehcache-core-1.7.0.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}/jakarta-commons/lang/2.6/commons-lang-2.6.jar" signedjar="${client.dir.tmp}/commons-lang-2.6.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}/jakarta-commons/commons-collections-3.2.1.jar" signedjar="${client.dir.tmp}/commons-collections-3.2.1.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}/jakarta-commons/commons-logging-1.1.1.jar" signedjar="${client.dir.tmp}/commons-logging-1.1.1.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//event-bus/eventbus-1.3.jar" signedjar="${client.dir.tmp}/eventbus-1.3.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+     		<signjar jar="${src.lib}//log4j/log4j-1.2.15.jar" signedjar="${client.dir.tmp}/log4j-1.2.15.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${client.dir.tmp}/resource.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//Spring/spring-2.5.6.jar" signedjar="${client.dir.tmp}/spring-2.5.6.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//xstream/1.3.1/xpp3_min-1.1.4c.jar" signedjar="${client.dir.tmp}/xpp3_min-1.1.4c.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//xstream/1.3.1/xstream-1.3.1.jar" signedjar="${client.dir.tmp}/xstream-1.3.1.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//jsr173-sjsxp/jsr173_api.jar" signedjar="${client.dir.tmp}/jsr173_api.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//jsr173-sjsxp/sjsxp.jar" signedjar="${client.dir.tmp}/sjsxp.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//event-bus/eventbus-1.3.jar" signedjar="${client.dir.tmp}/eventbus-1.3.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//beanshell/2.0/bsh-2.0b4.jar" signedjar="${client.dir.tmp}/bsh-2.0b4.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//beanshell/2.0/bsh-core-2.0b4.jar" signedjar="${client.dir.tmp}/bsh-core-2.0b4.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/freetts.jar" signedjar="${client.dir.tmp}/freetts.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/freetts-jsapi10.jar" signedjar="${client.dir.tmp}/freetts-jsapi10.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/jsapi.jar" signedjar="${client.dir.tmp}/jsapi.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/en_us.jar" signedjar="${client.dir.tmp}/en_us.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/cmutimelex.jar" signedjar="${client.dir.tmp}/cmutimelex.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/cmulex.jar" signedjar="${client.dir.tmp}/cmulex.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/cmudict04.jar" signedjar="${client.dir.tmp}/cmudict04.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/cmu_us_kal.jar" signedjar="${client.dir.tmp}/cmu_us_kal.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//freetts/cmu_time_awb.jar" signedjar="${client.dir.tmp}/cmu_time_awb.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//fest-swing-1.2/lib/fest-assert-1.2.jar" signedjar="${client.dir.tmp}/fest-assert-1.2.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//fest-swing-1.2/lib/fest-reflect-1.2.jar" signedjar="${client.dir.tmp}/fest-reflect-1.2.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//fest-swing-1.2/lib/fest-util-1.1.2.jar" signedjar="${client.dir.tmp}/fest-util-1.1.2.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//fest-swing-1.2/fest-swing-1.2.jar" signedjar="${client.dir.tmp}/fest-swing-1.2.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//miglayout/3.7.4/miglayout-3.7.4-swing.jar" signedjar="${client.dir.tmp}/miglayout-3.7.4-swing.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+	    	<signjar jar="${src.lib}//apache-fop/0.20/apache-fop.jar" signedjar="${client.dir.tmp}/apache-fop.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+		    <signjar jar="${src.lib}//apache-fop/0.20/avalon-framework-4.2.0.jar" signedjar="${client.dir.tmp}/avalon-framework-4.2.0.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+		    <signjar jar="${src.lib}//apache-fop/0.20/batik.jar" signedjar="${client.dir.tmp}/batik.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+    		<signjar jar="${src.lib}//apache-poi/poi-3.8-20120326.jar" signedjar="${client.dir.tmp}/poi-3.8-20120326.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />				
+			<signjar jar="${src.lib}//gson/2.2.3/gson-2.2.3.jar" signedjar="${client.dir.tmp}/gson-2.2.3.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+			<signjar jar="${src.lib}//jhotdraw/JHotDraw7.jar" signedjar="${client.dir.tmp}/JHotDraw7.jar" keystore="${keystore}" alias="${keystore.alias}" storepass="${keystore.pass}" />
+	</target>
+	
+	<target name="zip" depends="signBaseJars">
+		<zip destfile = "${client.dir}/${client.jar.zipfile}">
+			<zipfileset dir="${client.dir.tmp}" includes ="ehcache-core-1.7.0.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="commons-lang-2.6.jar"  prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="commons-collections-3.2.1.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="commons-logging-1.1.1.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="eventbus-1.3.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes="log4j-1.2.15.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes = "spring-2.5.6.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="xstream-1.3.1.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="xpp3_min-1.1.4c.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="jsr173_api.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="sjsxp.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes="${client.jar}" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes="resource.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="bsh-2.0b4.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="bsh-core-2.0b4.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="miglayout-3.7.4-swing.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="apache-fop.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="avalon-framework-4.2.0.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="batik.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="poi-3.8-20120326.jar" prefix="lib"/>			
+			<zipfileset dir="${client.dir.tmp}" includes ="gson-2.2.3.jar" prefix="lib"/>			
+			<zipfileset dir="${client.dir.tmp}" includes ="JHotDraw7.jar" prefix="lib"/>			
+						<!-- 
+			<zipfileset dir="${client.dir.tmp}" includes ="freetts.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="freetts-jsapi10.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="jsapi.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="en_us.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="cmutimelex.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="cmulex.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="cmudict04.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="cmu_us_kal.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="cmu_time_awb.jar" prefix="lib"/>
+			<zipfileset dir="../../base-library/lib/freetts" includes ="voices.txt" prefix="lib"/>
+		    /-->
+			<zipfileset dir="${client.dir.tmp}" includes ="fest-assert-1.2.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="fest-reflect-1.2.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="fest-util-1.1.2.jar" prefix="lib"/>
+			<zipfileset dir="${client.dir.tmp}" includes ="fest-swing-1.2.jar" prefix="lib"/>
+			<zipfileset dir="../../base-client" includes="startClientMain.bat"/>
+		</zip>
+			
+	</target>
+	
+	<target name="cleanUp">
+			<echo>Cleaning ${client.dir.tmp}</echo>
+			<delete dir="${client.dir.tmp}"/>
+	</target>
+
+</project>

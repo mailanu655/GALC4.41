@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar id="ejb-jar_ID" version="2.1" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<display-name>oif-service-ejb</display-name>
+	<enterprise-beans>
+		<session id="EventScheduleManager">
+			<display-name>EventScheduleManager</display-name>
+			<ejb-name>EventScheduleManager</ejb-name>
+			<home>com.honda.galc.oif.sched.EventManagerHome</home>
+			<remote>com.honda.galc.oif.sched.EventManager</remote>
+			<ejb-class>com.honda.galc.oif.sched.EventManagerBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Container</transaction-type>
+			<ejb-ref id="EjbRef_1193766186473">
+				<description>
+				</description>
+				<ejb-ref-name>ejb/OifEventHandler</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.ibm.websphere.scheduler.TaskHandlerHome</home>
+				<remote>com.ibm.websphere.scheduler.TaskHandler</remote>
+				<ejb-link>EventHandler</ejb-link>
+			</ejb-ref>
+			<resource-ref id="ResourceRef_1193757271405">
+				<description>
+				</description>
+				<res-ref-name>sched/GalcScheduler</res-ref-name>
+				<res-type>com.ibm.websphere.scheduler.Scheduler</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+		</session>
+		<session id="EventHandler">
+			<display-name>EventHandler</display-name>
+			<ejb-name>EventHandler</ejb-name>
+			<home>com.ibm.websphere.scheduler.TaskHandlerHome</home>
+			<remote>com.ibm.websphere.scheduler.TaskHandler</remote>
+			<ejb-class>com.honda.galc.oif.taskbean.EventHandlerBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref id="EjbRef_1207769435597">
+				<description>
+				</description>
+				<ejb-ref-name>ejb/OifEventTask</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.honda.galc.oif.taskbean.EventTaskHome</home>
+				<remote>com.honda.galc.oif.taskbean.EventTask</remote>
+				<ejb-link>EventTask</ejb-link>
+			</ejb-ref>
+			<resource-ref id="ResourceRef_1200327674717">
+				<description>
+				</description>
+				<res-ref-name>wm/EventWorkManager</res-ref-name>
+				<res-type>com.ibm.websphere.asynchbeans.WorkManager</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+		</session>
+		<session id="EventTask">
+			<ejb-name>EventTask</ejb-name>
+			<home>com.honda.galc.oif.taskbean.EventTaskHome</home>
+			<remote>com.honda.galc.oif.taskbean.EventTask</remote>
+			<ejb-class>com.honda.galc.oif.taskbean.EventTaskBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+		</session>
+	</enterprise-beans>
+	<assembly-descriptor id="AssemblyDescriptor_1201265657916">
+		<container-transaction>
+			<method>
+				<ejb-name>OifEventTask</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Supports</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>

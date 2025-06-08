@@ -1,0 +1,13 @@
+<!--      GALC Menu     -->
+
+<!ELEMENT rootmenu (submenu+)>
+<!ELEMENT submenu (menuitem*)>
+<!ELEMENT menuitem (#PCDATA)>
+<!ATTLIST rootmenu name CDATA #REQUIRED>
+<!ATTLIST submenu name CDATA #REQUIRED>
+<!ATTLIST submenu tooltip CDATA #IMPLIED>
+<!ATTLIST submenu mnemonic CDATA #IMPLIED>
+<!ATTLIST menuitem name CDATA #REQUIRED>
+<!ATTLIST menuitem action CDATA #REQUIRED>
+<!ATTLIST menuitem tooltip CDATA #IMPLIED>
+<!ATTLIST menuitem mnemonic CDATA #IMPLIED>

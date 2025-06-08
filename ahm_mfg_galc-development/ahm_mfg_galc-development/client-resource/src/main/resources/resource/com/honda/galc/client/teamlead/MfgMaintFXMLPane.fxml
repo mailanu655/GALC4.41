@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import com.honda.galc.client.ui.component.*?>
+
+<AnchorPane fx:id="mfgCtrlMaintPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <VBox layoutY="15.0">
+         <children>
+			<HBox alignment="BASELINE_LEFT" prefHeight="62.0" prefWidth="2000.0" spacing="10.0">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="Plant">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </LoggedLabel>
+                  <LoggedComboBox fx:id="plantCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="Department">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></LoggedLabel>
+                  <LoggedComboBox fx:id="deptCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="Model Year">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></LoggedLabel>
+                  <LoggedComboBox fx:id="modelYearCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="Production Rate">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></LoggedLabel>
+                  <LoggedComboBox fx:id="prodRateCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="Line Number">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></LoggedLabel>
+                  <LoggedComboBox fx:id="lineNumberCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <LoggedLabel text="VMC">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></LoggedLabel>
+                  <LoggedComboBox fx:id="vmcCombobox" prefHeight="25.0" prefWidth="193.0" />
+               </children>
+            </VBox>
+                  <Hyperlink fx:id="addNewPlatformLink" alignment="CENTER" contentDisplay="CENTER" text="Add New &#10;Platform" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Hyperlink>
+                  
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="2000.0">
+      <LoggedLabel fx:id="jobRunningState" text="Approval Job is in Running state." >
+                     <font>
+                        <Font name="System Bold" size="20.0"/>
+                     </font></LoggedLabel>
+                      <padding>
+                  <Insets left="550.0" />
+               </padding> 
+      </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="25.0" prefWidth="2000.0">
+               <children>
+                  <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
+               </children>
+               <padding>
+                  <Insets left="550.0" />
+               </padding>
+            </HBox>
+            <TabPane fx:id="mainTabPane" layoutY="15.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+                  <Tab styleClass="tabheading" text="Revision Maintenance">
+      <content>
+                        <ScrollPane fx:id="revMaintScrollPane" fitToHeight="true" fitToWidth="true" prefViewportHeight="1041.0" prefViewportWidth="1920.0">
+                           <content>
+            <AnchorPane prefHeight="1017.0" prefWidth="1985.0">
+            <children>
+            <LoggedTableView fx:id="revisionsTblView" layoutX="11.0" layoutY="41.0" prefHeight="195.0" prefWidth="1197.0">
+            <columns>
+            <LoggedTableColumn fx:id="revIdTblCol" prefWidth="112.0" text="Revision ID" />
+            <LoggedTableColumn fx:id="revDescriptionTblCol" prefWidth="367.0" text="Description" />
+            <LoggedTableColumn fx:id="revAssociateTblCol" minWidth="0.0" prefWidth="140.0" text="Associate" />
+            <LoggedTableColumn fx:id="revTypeTblCol" prefWidth="268.0" text="Type" />
+            <LoggedTableColumn fx:id="revStatusTblCol" prefWidth="288.0" text="Status" />
+            </columns>
+            </LoggedTableView>
+            <LoggedLabel layoutX="10.0" layoutY="14.0" styleClass="tableheading" text="Revisions">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+            <LoggedTableView fx:id="newchngFormsTblView" layoutX="10.0" layoutY="531.0" prefHeight="219.0" prefWidth="1197.0">
+            <columns>
+	            <LoggedTableColumn fx:id="newcFormIdCol" prefWidth="122.0" text="Change Form Id" />
+	            <LoggedTableColumn fx:id="newcFormTypeCol" prefWidth="100" text="Type" />
+	            <LoggedTableColumn fx:id="newcFormControlNoCol" prefWidth="100.0" text="Control No" />
+		        <LoggedTableColumn fx:id="newcFormAsmProcNosCol" prefWidth="367.0" text="ASM Proc Numbers" />
+		        <LoggedTableColumn fx:id="newcFormAsmProcNamesCol" prefWidth="367.0" text="ASM Proc Names" />
+            </columns>
+            </LoggedTableView>
+            <LoggedLabel layoutX="10.0" layoutY="504.0" styleClass="tableheading" text="New  Change Forms">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+            <LoggedTableView fx:id="chngFormsTblView" layoutX="10.0" layoutY="290.0" prefHeight="186.0" prefWidth="1198.0">
+            <columns>
+	            <LoggedTableColumn fx:id="cFormIdCol" prefWidth="122.0" text="Change Form Id" />
+	            <LoggedTableColumn fx:id="cFormTypeCol" prefWidth="100" text="Type" />
+	            <LoggedTableColumn fx:id="cFormControlNumber" prefWidth="100.0" text="Control No" />
+	          	<LoggedTableColumn fx:id="cFormAsmProcNosCol" prefWidth="367.0" text="ASM Proc Numbers" />
+	          	<LoggedTableColumn fx:id="cFormAsmProcNamesCol" prefWidth="367.0" text="ASM Proc Names" />
+            </columns>
+            </LoggedTableView>
+            <LoggedLabel layoutX="10.0" layoutY="263.0" styleClass="tableheading" text="Change Forms">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+            </children>
+            </AnchorPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+      </content>
+      </Tab>
+                       <Tab styleClass="tabheading" text="One Click Approval">
+      <content>
+             <ScrollPane fx:id="revMaintScrollPaneOneClick" fitToHeight="true" fitToWidth="true" prefViewportHeight="1041.0" prefViewportWidth="1920.0">
+             <content>
+            <AnchorPane prefHeight="1017.0" prefWidth="1985.0">
+            <children>
+            <LoggedTableView fx:id="revisionsTblViewOneClick" layoutX="11.0" layoutY="325.0" prefHeight="195.0" prefWidth="1197.0">
+            <columns>
+            <LoggedTableColumn fx:id="revControlNoColOneClick" prefWidth="112.0" text="Control No" />
+            <LoggedTableColumn fx:id="revIdTblColOneClick" prefWidth="112.0" text="Revision ID" />
+            <LoggedTableColumn fx:id="revDescriptionTblColOneClick" prefWidth="367.0" text="Description" />
+            <LoggedTableColumn fx:id="revAssociateTblColOneClick" minWidth="0.0" prefWidth="140.0" text="Associate" />
+            <LoggedTableColumn fx:id="revTypeTblColOneClick" prefWidth="268.0" text="Type" />
+            <LoggedTableColumn fx:id="revStatusTblColOneClick" prefWidth="288.0" text="Status" />
+
+            </columns>
+            </LoggedTableView>
+            <LoggedLabel layoutX="10.0" layoutY="300.0" styleClass="tableheading" text="Revisions">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+            <LoggedTableView fx:id="newchngFormsTblViewOneClick" layoutX="10.0" layoutY="41.0" prefHeight="219.0" prefWidth="1197.0">
+            <columns>
+	            <LoggedTableColumn fx:id="newcFormIdColOneClick" prefWidth="122.0" text="Change Form Id" />
+	            <LoggedTableColumn fx:id="newcFormTypeColOneClick" prefWidth="100.0" text="Type" />
+	            <LoggedTableColumn fx:id="newcFormControlNoColOneClick" prefWidth="100.0" text="Control No" />
+		        <LoggedTableColumn fx:id="newcFormAsmProcNosColOneClick" prefWidth="367.0" text="ASM Proc Numbers" />
+		        <LoggedTableColumn fx:id="newcFormAsmProcNamesColOneClick" prefWidth="367.0" text="ASM Proc Names" />
+            </columns>
+            </LoggedTableView>
+            
+              <LoggedButton fx:id="makeActivate" layoutX="950.0" layoutY="275.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="209.0" text="Make Active" />
+              
+            <LoggedLabel layoutX="10.0" layoutY="14.0" styleClass="tableheading" text="New  Change Forms">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+
+            </children>
+            </AnchorPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+      </content>
+      </Tab>
+                  <Tab styleClass="tabheading" text="Operations Maintenance">
+      <content>
+                        <ScrollPane fx:id="operMaintScrollPane" prefViewportHeight="1051.0" prefViewportWidth="1955.0">
+                           <content>
+            <VBox>
+            <children>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+            <LoggedLabel layoutX="14.0" layoutY="9.0" styleClass="tableheading" text="Operation Revisions">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+            <LoggedTableView fx:id="opRevTblView" layoutX="14.0" layoutY="43.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="1039.0">
+            <columns>
+            <LoggedTableColumn fx:id="opRevNameCol" maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Operation Name" />
+            <LoggedTableColumn fx:id="opRevRevCol" maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Op Revision" />
+            <LoggedTableColumn fx:id="opRevRevIdCol" prefWidth="75.0" text="Rev ID" />
+            <LoggedTableColumn fx:id="opRevDescriptionCol" prefWidth="200.0" text="Op Desc" />
+            <LoggedTableColumn fx:id="opRevViewCol" prefWidth="115.0" text="Op View" />
+            <LoggedTableColumn fx:id="opRevProcessorCol" maxWidth="5000.0" minWidth="10.0" prefWidth="157.0" text="Op Processor" />
+            <LoggedTableColumn fx:id="opRevStatusCol" prefWidth="155.0" text="Op Status" />
+            </columns>
+            </LoggedTableView>
+            <VBox layoutX="20.0" layoutY="303.0" prefHeight="52.0" prefWidth="251.0">
+            <children>
+                        <LoggedLabel prefHeight="27.0" prefWidth="171.0" styleClass="tableheading" text="Operation Parts">
+                        <font>
+                        <Font name="System Bold" size="18.0" />
+                        </font>
+                        <VBox.margin>
+                        <Insets top="20.0" />
+                        </VBox.margin>
+                        </LoggedLabel>
+            </children>
+            </VBox>
+                                          <Accordion fx:id="opPartAccordian" layoutX="550.0" layoutY="7.0" />
+      <TitledPane animated="false" expanded="false" layoutX="735.0" layoutY="11.0" prefHeight="158.0" prefWidth="318.0" text="Filter">
+      <content>
+      <GridPane prefHeight="165.0" prefWidth="316.0">
+      <children>
+      <LoggedLabel text="Plant" GridPane.rowIndex="1" />
+      <LoggedLabel text="Division" GridPane.rowIndex="2" />
+      <ChoiceBox fx:id="opTab_divisions_cb" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <LoggedLabel text="Processs Point" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="opTab_processPoints_cb" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="opTab_plants_cb" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      </children>
+      <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="89.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="207.0" />
+      </columnConstraints>
+      <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints maxHeight="42.0" minHeight="30.0" prefHeight="42.0" />
+      <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      </GridPane>
+      </content>
+      </TitledPane>
+            </children>
+            </AnchorPane>
+            <LoggedTableView fx:id="opPartTblView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="192.0" prefWidth="1038.0">
+            <columns>
+            <LoggedTableColumn fx:id="opPartOpNameCol" prefWidth="130.0" text="Operation Name" />
+            <LoggedTableColumn fx:id="opPartPartIdCol" prefWidth="69.0" text="Part Id" />
+            <LoggedTableColumn fx:id="opPartPartRevCol" prefWidth="84.0" text="Part Rev" />
+            <LoggedTableColumn fx:id="opPartRevIdCol" prefWidth="84.0" text="Rev Id" />
+            <LoggedTableColumn fx:id="opPartViewCol" prefWidth="84.0" text="Part  View" />
+            <LoggedTableColumn fx:id="opPartProcessorCol" prefWidth="110.0" text="Part Processor" />
+            <LoggedTableColumn fx:id="opPartPartNoCol" prefWidth="86.0" text="Part No" />
+            <LoggedTableColumn fx:id="opPartPartItemNoCol" prefWidth="86.0" text="Part Item No" />
+            <LoggedTableColumn fx:id="opPartSectionCodeCol" prefWidth="102.0" text="Section Code" />
+            <LoggedTableColumn fx:id="opPartDescrCol" prefWidth="94.0" text="Description" />
+            <LoggedTableColumn fx:id="opPartPartMaskCol" prefWidth="77.0" text="Part Mask" />
+            <LoggedTableColumn fx:id="opPartDeviceMsgCol" prefWidth="101.0" text="Device  Msg" />
+            <LoggedTableColumn fx:id="opPartTypeCol" prefWidth="101.0" text="Part Type" />
+            </columns>
+            <VBox.margin>
+            <Insets left="14.0" top="180.0" />
+            </VBox.margin>
+            </LoggedTableView>
+            <LoggedLabel prefHeight="27.0" prefWidth="201.0" styleClass="tableheading" text="Operations Matrix">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="14.0" top="20.0" />
+                                       </VBox.margin>
+            </LoggedLabel>
+            <LoggedTableView fx:id="opMatrixTblView" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="1039.0">
+            <columns>
+            <LoggedTableColumn fx:id="opMatrixNameCol" minWidth="0.0" prefWidth="401.0" text="Op Name" />
+            <LoggedTableColumn fx:id="opMatrixSpecCodeMaskCol" prefWidth="138.0" text="Spec Code Mask" />
+            <LoggedTableColumn fx:id="opMatrixSpecCodeTypeCol" minWidth="0.0" prefWidth="198.0" text="Spec Code Type" />
+            </columns>
+            <VBox.margin>
+            <Insets left="14.0" />
+            </VBox.margin>
+            </LoggedTableView>
+            </children>
+            </VBox>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+      </content>
+      </Tab>
+                  <Tab styleClass="tabheading" text="Parts Maintenance">
+      <content>
+                        <ScrollPane fx:id="partsMaintScrollPane" prefViewportHeight="1056.0" prefViewportWidth="1970.0">
+                           <content>
+      <AnchorPane prefHeight="811.0" prefWidth="1255.0">
+      <children>
+      <LoggedLabel layoutX="14.0" layoutY="14.0" styleClass="tableheading" text="Part">
+      <font>
+      <Font name="System Bold" size="18.0" />
+      </font>
+      </LoggedLabel>
+            <LoggedTableView fx:id="partMaintTblView" layoutX="14.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="210.0" prefWidth="1218.0">
+            <columns>
+                                          <LoggedTableColumn fx:id="partMaintOpNameCol" prefWidth="127.0" text="Operation Name" />
+            <LoggedTableColumn fx:id="partMaintPartIdCol" prefWidth="74.0" text="Part Id" />
+            <LoggedTableColumn fx:id="partMaintPartRevCol" prefWidth="61.0" text="Part Rev" />
+            <LoggedTableColumn fx:id="partMaintRevIdCol" prefWidth="63.0" text="Rev Id" />
+            <LoggedTableColumn fx:id="partMaintViewCol" prefWidth="117.0" text="Part View" />
+            <LoggedTableColumn fx:id="partMaintProcessorCol" prefWidth="130.0" text="Part  Processor" />
+            <LoggedTableColumn fx:id="partMaintPartNoCol" prefWidth="133.0" text="Part  No" />
+            <LoggedTableColumn fx:id="partMaintSectionCodeCol" prefWidth="99.0" text="Section Code" />
+            <LoggedTableColumn fx:id="partMaintDescriptionCol" prefWidth="124.0" text="Description" />
+            <LoggedTableColumn fx:id="partMaintPartMaskCol" prefWidth="89.0" text="Part Mask" />
+            <LoggedTableColumn fx:id="partMaintPartCheckCol" prefWidth="87.0" text="Part Check" />
+            <LoggedTableColumn fx:id="partMaintDeviceMsgCol" prefWidth="92.0" text="Device Msg" />
+            <LoggedTableColumn fx:id="partTypeMaintCol" prefWidth="92.0" text="Part Type" />
+            </columns>
+            </LoggedTableView>
+      <LoggedLabel layoutX="14.0" layoutY="266.0" prefHeight="22.0" prefWidth="97.0" styleClass="tableheading" text="Part Matrix">
+      <font>
+      <Font name="System Bold" size="18.0" />
+      </font>
+      <padding>
+      <Insets bottom="10.0" />
+      </padding>
+      </LoggedLabel>
+            <LoggedTableView fx:id="partMatrixTblView" layoutX="14.0" layoutY="296.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="196.0" prefWidth="1218.0">
+            <columns>
+            <LoggedTableColumn fx:id="partMatrixPartNameCol" minWidth="0.0" prefWidth="542.0" text="Op Name" />
+            <LoggedTableColumn fx:id="partMatrixSpecCodeMaskCol" prefWidth="126.0" text="Spec Code Mask" />
+            <LoggedTableColumn fx:id="partMatrixSpecCodeType" minWidth="0.0" prefWidth="141.0" text="Spec Code Type" />
+            <LoggedTableColumn fx:id="partEffectiveBeginDateCol" prefWidth="138.0" text="Effective Start Date" />
+            <LoggedTableColumn fx:id="partEffectiveEndDateCol" minWidth="0.0" prefWidth="198.0" text="Effective End Date" />
+            </columns>
+            </LoggedTableView>
+            <LoggedLabel layoutX="14.0" layoutY="508.0" styleClass="tableheading" text="Measurements">
+            <font>
+            <Font name="System Bold" size="18.0" />
+            </font>
+            </LoggedLabel>
+      <LoggedTableView fx:id="measurementsTblView" layoutX="14.0" layoutY="541.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="220.0" prefWidth="1218.0">
+      <columns>
+      <LoggedTableColumn fx:id="measOpNameCol" prefWidth="125.0" text="Operation Name" />
+      <LoggedTableColumn fx:id="measPartIdCol" prefWidth="56.0" text="Part ID" />
+      <LoggedTableColumn fx:id="measPartRevCol" prefWidth="69.0" text="Part Rev" />
+      <LoggedTableColumn fx:id="measSeqNoCol" prefWidth="57.0" text="Seq No" />
+      <LoggedTableColumn fx:id="measTypeCol" prefWidth="90.0" text="Meas  Type" />
+      <LoggedTableColumn fx:id="measViewCol" prefWidth="152.0" text="Meas View" />
+      <LoggedTableColumn fx:id="measProcessorCol" prefWidth="149.0" text="Meas Processor" />
+      <LoggedTableColumn fx:id="measDeviceIdCol" prefWidth="79.0" text="Device Id" />
+      <LoggedTableColumn fx:id="measDeviceMsg" prefWidth="88.0" text="Device Msg" />
+      <LoggedTableColumn fx:id="measMinLimitCol" prefWidth="106.0" text="Min Limit" />
+      <LoggedTableColumn fx:id="measMaxLimitCol" prefWidth="100.0" text="Max Limit" />
+      <LoggedTableColumn fx:id="measMaxAttempts" prefWidth="125.0" text="Max Attempts" />
+      </columns>
+      <VBox.margin>
+      <Insets top="10.0" />
+      </VBox.margin>
+      </LoggedTableView>
+                                    <LoggedButton fx:id="addMeasurementButton" layoutX="14.0" layoutY="772.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="209.0" text="Add Measurement" />
+      </children>
+      </AnchorPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+      </content>
+      </Tab>
+                  <Tab fx:id="matrixMaintTab" styleClass="tabheading" text="Matrix Maintenance">
+                     <content>
+                        <ScrollPane fx:id="matrixMaintScrollPane" prefViewportHeight="1061.0" prefViewportWidth="1985.0">
+                           <content>
+                              <HBox prefHeight="700.0" prefWidth="1250.0">
+                                 <children>
+                                    <Pane prefHeight="700.0" prefWidth="1250.0">
+                                       <children>
+                                          <LoggedLabel layoutX="14.0" layoutY="238.0" prefHeight="27.0" prefWidth="248.0" text="Select Product Spec Code Mask">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </LoggedLabel>
+                                          <LoggedLabel layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="134.0" text="Select Process">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </LoggedLabel>
+                                          <LoggedTableView fx:id="specCodeUnitsTblView" layoutX="14.0" layoutY="268.0" prefHeight="185.0" prefWidth="1103.0">
+                                             <columnResizePolicy>
+                                                <LoggedTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <columns>
+                                                <LoggedTableColumn fx:id="specCodeMaskCol" maxWidth="1700.0" minWidth="2.0" prefWidth="10.0" text="PRODUCT SPEC CODE MASK" />
+                                                <LoggedTableColumn fx:id="unitsCol" maxWidth="7000.0" prefWidth="75.0" text="UNITS" />
+                                             </columns>
+                                          </LoggedTableView>
+                                          <LoggedTableView fx:id="platformMMTblView" layoutX="14.0" layoutY="41.0" prefHeight="185.0" prefWidth="1103.0">
+                                             <columns>
+                                                <LoggedTableColumn fx:id="platformIdMMCol" prefWidth="200.0" text="PDDA Platform Id" />
+                                                <LoggedTableColumn fx:id="platformProcNoMMCol" prefWidth="200.0" text="ASM Proc Number" />
+                                                <LoggedTableColumn fx:id="platformProcPtIdMMCol" prefWidth="200.0" text="Process Point Id" />
+                                                <LoggedTableColumn fx:id="platformProcSeqNoMMCol" prefWidth="200.0" text="Process Seq No" />
+                                             </columns>
+                                          </LoggedTableView>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </padding>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+        </tabs>
+      </TabPane>
+         </children>
+      </VBox>
+</children></AnchorPane>

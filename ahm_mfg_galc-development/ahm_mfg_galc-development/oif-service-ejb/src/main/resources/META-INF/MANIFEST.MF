@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Class-Path: BaseCommon.jar 
+ BaseCommonService.jar 
+ BaseEntity.jar 
+ BaseServiceInterface.jar 
+ commons-lang-2.6.jar 
+ mqft.jar 
+ jsch-0.1.54.jar 
+ commons-net-3.3.jar
+

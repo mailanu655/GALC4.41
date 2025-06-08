@@ -1,0 +1,51 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>galc-client-all</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<files>
+		<file>
+			<source>../../base-client/src/main/resources/launch.bat</source>
+			<outputDirectory></outputDirectory>
+			<destName>launch-swing.bat</destName>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>../../base-client-fx/src/main/resources/launch.bat</source>
+			<outputDirectory></outputDirectory>
+			<destName>launch-fx.bat</destName>
+			<filtered>true</filtered>
+		</file>
+		<file>
+			<source>../galc-client-fx/target/galc-client-fx-${galc.build.version}.jar</source>
+			<outputDirectory></outputDirectory>
+		</file>
+		<file>
+			<source>../galc-client-swing/target/galc-client-swing-${galc.build.version}.jar</source>
+			<outputDirectory></outputDirectory>
+		</file>
+		<file>
+			<source>../../gts-client/target/gts-client-${galc.build.version}.jar</source>
+			<outputDirectory></outputDirectory>
+		</file>
+	</files>
+
+  	<dependencySets>
+    	<dependencySet>
+    		<outputDirectory></outputDirectory>
+    		<unpack>false</unpack>
+			<useProjectArtifact>false</useProjectArtifact>                                                                 
+			<useTransitiveDependencies>false</useTransitiveDependencies>
+			<includes>                                                                                                                       
+				<include>com.honda.galc:vios-badge-reader</include>    
+				<include>org.rxtx:rxtx</include> 				
+			</includes> 
+    	</dependencySet>
+  	</dependencySets>
+
+</assembly>

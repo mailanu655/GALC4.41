@@ -1,0 +1,21 @@
+.table-view {
+	-fx-background-color:transparent;
+	-fx-font-size:16;
+	-fx-table-cell-border-color:transparent;
+}
+
+.table-view .column-header {
+	-fx-background-color:rgb(244,244,244);
+}
+
+.table-view .column-header .label {
+	-fx-alignment:CENTER_LEFT;
+	-fx-background-color:rgb(244,244,244);
+	-fx-font-size:16;
+	-fx-font-weight:normal;
+}
+
+.table-view .table-row-cell {
+	-fx-alignment:CENTER_LEFT;
+	-fx-background-color:rgb(244,244,244);
+}

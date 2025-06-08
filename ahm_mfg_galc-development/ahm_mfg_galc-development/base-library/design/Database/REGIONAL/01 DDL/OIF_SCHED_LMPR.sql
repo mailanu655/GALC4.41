@@ -1,0 +1,38 @@
+
+------------------------------------------------
+-- DDL Statements for Table "GALADM  "."OIF_SCHED_LMPR"
+------------------------------------------------
+ 
+DROP TABLE "GALADM  "."OIF_SCHED_LMPR";
+
+
+CREATE TABLE "GALADM  "."OIF_SCHED_LMPR"  (
+		  "LEASENAME" VARCHAR(254 OCTETS) NOT NULL , 
+		  "NAME" VARCHAR(254 OCTETS) NOT NULL , 
+		  "VALUE" VARCHAR(254 OCTETS) NOT NULL )   
+		 IN "GALTBSREF11" INDEX IN "GALTBSIDX1"  
+		 ORGANIZE BY ROW; 
+
+COMMENT ON TABLE "GALADM  "."OIF_SCHED_LMPR" IS 'RMT OIF WAS Arbitrary Lease Properties';
+
+
+
+
+
+
+-- DDL Statements for Indexes on Table "GALADM  "."OIF_SCHED_LMPR"
+
+SET SYSIBM.NLS_STRING_UNITS = 'SYSTEM';
+
+CREATE INDEX "GALADM  "."OIF_SCHED_LMPR_IDX1" ON "GALADM  "."OIF_SCHED_LMPR" 
+		("LEASENAME" ASC,
+		 "NAME" ASC)
+		
+		COMPRESS NO 
+		INCLUDE NULL KEYS ALLOW REVERSE SCANS;
+
+
+
+
+
+

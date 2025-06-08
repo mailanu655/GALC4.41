@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OPHeader" fixedLength="true" delimiter="">
+    <field id="01" name="LENGTH" type="String" length="4" defaultValue="0001" />
+    <field id="02" name="MESSAGE_ID" type="String" length="4" defaultValue="0001" />
+    <field id="03" name="REVISION" type="String" length="3" defaultValue="001" />    
+    <field id="04" name="NO_ACK_FLAG" type="String" length="1" defaultValue="0" />    
+    <field id="05" name="RESERVED_FIELD" type="String" length="8" defaultValue="00000000" />
+ </OPMessage>

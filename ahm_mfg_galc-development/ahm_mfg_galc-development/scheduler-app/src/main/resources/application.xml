@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd" >
+    
+                 
+     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+     
+        <!-- Check java system properties first, then check the application.properties file -->
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+     
+        <property name="locations">
+           <value>classpath:application.properties</value>
+        </property>
+        
+     </bean>
+
+	<bean id="InetAddress" class="java.net.InetAddress" />
+     
+    <bean id="AbstractDao" class="com.honda.util.AbstractDao" abstract="true" >
+      	<property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+        
+    <bean id="PropertyDao" class="com.honda.util.PropertyDao" parent="AbstractDao"/>
+
+    <bean id="Schedule" class="com.honda.scheduler.Schedule" >
+      	<property name="propertyDao" ref="PropertyDao" />
+    </bean>
+    
+    <bean id="SchedulerFactoryDB" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+         <property name="schedulerName" value="GALC" />
+         <property name="autoStartup" value="false" />
+         <property name="dataSource" ref="db2-dataSource" />
+         <property name="configLocation" value="quartzDB.properties" />
+    </bean>        
+
+    <bean id="SchedulerFactoryRAM" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+         <property name="schedulerName" value="GALC" />
+         <property name="autoStartup" value="false" />
+         <property name="configLocation" value="quartzRAM.properties" />
+    </bean>  
+
+    <bean id="SchedulerManager" class="com.honda.scheduler.SchedulerManager" >
+        <constructor-arg ref="SchedulerFactory${scheduler.jobstore}" />
+        <constructor-arg value="${galc.server.url}" />
+        <constructor-arg value="${httpclient.timeout}" />
+        <constructor-arg value="${scheduler.sync.interval}" />
+        <constructor-arg value="http://${socket.listener.hostname}:${socket.listener.port}/notify" />
+     	<constructor-arg ref="Schedule" />
+     	<constructor-arg value="${scheduler.user}" />
+    </bean>
+    
+
+   <bean id="ServletContainer" class="com.honda.web.ServletContainer" >
+      	<property name="port" value="${socket.listener.port}" />
+      	<property name="servletConfigList">
+      	  <list>
+      	   <map>
+              <entry key="context" value="/console/*"/>
+              <entry key="servlet" value-ref="ConsoleServlet"/>
+           </map>
+      	   <map>
+              <entry key="context" value="/notify/*"/>
+              <entry key="servlet" value-ref="NotificationServlet"/>
+           </map>
+      	  </list>
+      	</property>
+    </bean>
+    
+
+
+    <bean id="ConsoleServlet" class="com.honda.web.ConsoleServlet" >
+      	<property name="schedulerManager" ref="SchedulerManager" />
+    </bean>
+        
+    <bean id="NotificationServlet" class="com.honda.web.JobNotificationServlet" >
+      	<property name="schedulerManager" ref="SchedulerManager" />
+    </bean>
+    
+    
+   <!-- enable the configuration of transactional behavior based on annotations -->
+   <tx:annotation-driven transaction-manager="txManager"/>
+   <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+     <property name="dataSource" ref="db2-dataSource"/>
+   </bean>
+    
+    
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="db2-dataSource" />
+	</bean>
+	
+	<bean id="db2-dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="url" value="${jdbc.datasource.url}" />
+		<property name="username" value="${jdbc.datasource.username}" />
+		<property name="password" value="${jdbc.datasource.password}" />
+	</bean>
+	
+</beans>
+

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPReplies>
+  <OP0001>					<!-- communicationStart -->
+  	<Reply>0002</Reply>		<!-- communicationStart Acknowledge -->
+  </OP0001>
+  <OP0014>					<!-- Parameter set Selected Subscribe -->
+  	<Reply>0005</Reply>		<!-- Command Accepted -->
+  	<Reply>0015</Reply>		<!-- Parameter set Selected -->
+  </OP0014>
+  <OP0016>					<!-- Parameter set Selected Acknowledge -->
+  </OP0016>
+  <OP0018>					<!-- Select Parameter Set -->
+    <Reply>0005</Reply>		<!-- Command Accepted -->
+  </OP0018>
+  <OP0036>					<!-- Job Info Acknowledge -->
+  </OP0036>
+  <OP0038>					<!-- Select Job -->
+    <Reply>0005</Reply>		<!-- Command Accepted -->
+  </OP0038>
+  <OP0042>					<!-- Tool Disable -->
+    <Reply>0005</Reply>		<!-- Command Accepted -->
+  </OP0042>
+  <OP0043>					<!-- Tool Enable -->
+    <Reply>0005</Reply>		<!-- Command Accepted -->
+  </OP0043>
+  <OP0060>					<!-- Last Tightening Result Data subscribe -->
+  	<Reply>0005</Reply>		<!-- Command Accepted -->
+  </OP0060>
+  <OP9999>					<!-- Keep Alive -->
+  	<Reply>9999</Reply>		<!-- Keep Alive response -->
+  </OP9999>
+</OPReplies>

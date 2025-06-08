@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reprint_Ticket" language="groovy" pageWidth="360" pageHeight="612" columnWidth="360" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="245"/>
+	<subDataset name="COL1_VALUES">
+		<field name="DEFECT_DESC" class="java.lang.String"/>
+		<field name="ENTRY_DEPT" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="PRODUCT_ID" class="java.lang.String"/>
+	<parameter name="MODEL" class="java.lang.String"/>
+	<parameter name="SHORT_VIN" class="java.lang.String"/>
+	<parameter name="EXT_COLOR_CODE" class="java.lang.String"/>
+	<parameter name="GRADE_CODE" class="java.lang.String"/>
+	<parameter name="ROW_VALUE" class="java.lang.String"/>
+	<parameter name="SPACE_VALUE" class="java.lang.String"/>
+	<parameter name="DEFECT_DETAILS" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="612" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="130" width="50" height="20" />
+				<text><![CDATA[Parked:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="140" y="130" width="150" height="20" />
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss aaa").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="152" y="157" width="57" height="50" />
+				<jr:DataMatrix xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom" shape="force-square">
+					<jr:codeExpression><![CDATA[$P{PRODUCT_ID}]]></jr:codeExpression>
+				</jr:DataMatrix>
+			</componentElement>
+			<textField>
+				<reportElement x="82" y="212" width="213" height="32" />
+				<textElement>
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRODUCT_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="82" y="252" width="217" height="56"/>
+				<textElement>
+					<font fontName="Arial" size="36" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Outside Lot]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="315" width="101" height="30" />
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[[-----Row-----]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="315" width="110" height="29" />
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[[-----Space-----]]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="405" width="100" height="20" />
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EXT_COLOR_CODE}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="76" y="440" width="320" height="160" />
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="COL1_VALUES">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{DEFECT_DETAILS})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="10">
+						<textField isStretchWithOverflow="true">
+							<reportElement x="1" y="0" width="30" height="10" />
+							<textElement>
+								<font fontName="Arial" size="8" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ENTRY_DEPT}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement x="31" y="0" width="290" height="10"/>
+							<textElement>
+								<font fontName="Arial" size="8" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{DEFECT_DESC}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement x="196" y="407" width="100" height="20" />
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GRADE_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="340" width="100" height="29" />
+				<textElement>
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ROW_VALUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="382" width="100" height="20" />
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SHORT_VIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="380" width="100" height="20" />
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{MODEL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="340" width="110" height="29" />
+				<textElement>
+					<font fontName="Arial" size="20" isBold="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SPACE_VALUE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+	<!-- Data Sources -->
+	<data-sources>
+	</data-sources>
+	<form-beans>
+		<form-bean name="enterUserIdForm" type="com.honda.galc.handheld.forms.EnterUserIdForm"/>
+		<form-bean name="chooseProcessForm" type="com.honda.galc.handheld.forms.ChooseProcessForm"/>
+		<form-bean name="scanProductIdForm" type="com.honda.galc.handheld.forms.ScanProductIdForm"/>
+		<form-bean name="scanPartsForm" type="com.honda.galc.handheld.forms.ScanPartsForm"/>
+		<form-bean name="errorPageForm" type="com.honda.galc.handheld.forms.ErrorPageForm"/>
+		<form-bean name="mbpnOnForm" type="com.honda.galc.handheld.forms.MBPNOnForm"/>
+	</form-beans>
+	<global-exceptions>
+	</global-exceptions>
+	<global-forwards>
+	</global-forwards>
+	<action-mappings>
+		<action name="enterUserIdForm" path="/enterUserIdAction" type="com.honda.galc.handheld.actions.EnterUserIdAction">
+			<forward name="success" path="ChooseProcess.jsp" contextRelative="true"/>
+			<forward name="failure" path="EnterUserId.jsp" contextRelative="true"/>
+		</action>
+		<action name="chooseProcessForm" path="/chooseProcessAction" type="com.honda.galc.handheld.actions.ChooseProcessAction">
+			<forward name="zoneSelectionChanged" path="ChooseProcess.jsp" contextRelative="true"/>
+			<forward name="MBPNOnRequested" path="MBPNOn.jsp" contextRelative="true"/>
+			<forward name="success" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="failure" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="SessionTimedOut" path="EnterUserId.jsp" contextRelative="true"/>
+		</action>
+		<action name="mbpnOnForm" path="/mbpnOnAction" type="com.honda.galc.handheld.actions.MBPNOnAction">
+			<forward name="success" path="MBPNOn.jsp" contextRelative="true"/>
+			<forward name="failure" path="ErrorPage.jsp" contextRelative="true"/>
+			<forward name="invalidParentProductId" path="MBPNOn.jsp" contextRelative="true"/>
+			<forward name="cancel" path="ChooseProcess.jsp" contextRelative="true"/>
+			<forward name="MoreUserDataRequired" path="MBPNOn.jsp"  contextRelative="true"/>		
+			<forward name="SessionTimedOut" path="EnterUserId.jsp" contextRelative="true"/>	
+		</action>
+		<action name="scanProductIdForm" path="/scanProductIdAction" type="com.honda.galc.handheld.actions.ScanProductIdAction">
+			<forward name="scanParts" path="ScanParts.jsp" contextRelative="true"/>
+			<forward name="scanProductIdAfterPartSaved" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="noRulesForProductId" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="productIdNotValid" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="stationChangeRequested" path="ChooseProcess.jsp" contextRelative="true"/>
+			<forward name="success" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="SessionTimedOut" path="EnterUserId.jsp" contextRelative="true"/>
+		</action>
+		<action name="scanPartsForm" path="/scanPartsAction" type="com.honda.galc.handheld.actions.ScanPartsAction">
+			<forward name="success" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="failure" path="ErrorPage.jsp" contextRelative="true"/>
+			<forward name="cancel" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="SessionTimedOut" path="EnterUserId.jsp" contextRelative="true"/>
+		</action>
+		<action name="errorPageForm" path="/errorPageAction" type="com.honda.galc.handheld.actions.ErrorPageAction">
+			<forward name="mbpnOnForm" path="MBPNOn.jsp" contextRelative="true"/>
+			<forward name="success" path="ScanProductId.jsp" contextRelative="true"/>
+			<forward name="SessionTimedOut" path="EnterUserId.jsp" contextRelative="true"/>
+		</action>
+	</action-mappings>
+	<message-resources parameter="Message"/>
+	<plug-in className="com.honda.galc.handheld.plugin.InitializationPlugIn"/>
+</struts-config>

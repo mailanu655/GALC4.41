@@ -1,0 +1,15 @@
+package com.honda.galc.client.datacollection.fsm;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(value=RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Transitions {
+
+	Transition[] value();
+	
+
+}
