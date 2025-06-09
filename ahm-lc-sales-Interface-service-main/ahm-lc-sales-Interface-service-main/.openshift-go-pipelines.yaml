@@ -1,0 +1,7 @@
+DEVOPS_REPOS:
+  - DevopsRepoURL: https://hnapxlscmgit01.amerhonda.com/Line-Control/ahm-lc-sales-Interface-devops.git
+    DevopsBranchName: dev-odc
+    SourceBranchName: main
+  - DevopsRepoURL: https://hnapxlscmgit01.amerhonda.com/Line-Control/ahm-lc-sales-Interface-devops.git
+    DevopsBranchName: dev-odc
+    SourceBranchName: ogp

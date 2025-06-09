@@ -1,0 +1,11 @@
+apiVersion: v2
+type: application
+appVersion: "1.0"
+description: Deploy microservice group
+name: 01-microservice-group
+version: 0.0.1
+dependencies:
+  - name: microservice-deploy
+    repository: https://artifactory.amerhonda.com:443/artifactory/esa-helm-prod
+    version: 3.6.1-qmq6c
+    alias: lc-sales-interface-service

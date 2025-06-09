@@ -1,0 +1,8 @@
+logging:
+  config: classpath:logback.xml
+  maxFileSize: 200MB
+  totalSizeCap: 1GB
+  maxHistory: 31
+  path: /var/logs/application/
+  level:
+    com.honda: INFO

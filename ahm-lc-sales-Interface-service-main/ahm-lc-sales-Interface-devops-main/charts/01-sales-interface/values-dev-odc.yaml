@@ -1,0 +1,59 @@
+# LC Sales Interface - MAP DEV ODC
+
+global:
+  useCase:
+    env: dev
+  clusterInstance: odc
+lc-lot-sequencing-service:
+  artifactoryRepo: linectrl-container-dev
+  imageVersion: latest # Use latest for sandbox and dev but manage semantic version in values.yaml
+  route:
+    url: lc-sales-interface-service-linectrl-salesinterface-dev.apps.ocpnp.ham.am.honda.com
+  env:
+    - name: ibm.mq.queueManager
+      value: MAP_TGAL
+    - name: ibm.mq.channel
+      value: ADMIN.SVRCONN
+    - name: ibm.mq.connName
+      value: qmap1mq.ham.am.honda.com(1414)
+    - name: ibm.mq.user
+      value: was7adm
+    - name: sales.shipping.queue.name
+      value: LQ.MQFT_RECEIVE.01
+    - name: sales.receiving.queue.name
+      value: LQ.MQFT_RECEIVE.01
+    - name: lc.receiving.queue.name
+      value: LQ.TEST.01      
+    - name: lc.product.type
+      value: FRAME
+    - name: lc.plant.name
+      value: MAP
+    - name: lc.url
+      value: http://qmap1was.ham.am.honda.com:8005
+    - name: lc.tracking.url
+      value: /TrackingService/track
+    - name: lc.findbykey.method
+      value: findByKey?
+    - name: lc.save.method
+      value: save
+    - name: lc.ccc.part.name
+      value: VQSHIPCCC
+    - name: lc.key.part.name
+      value: VQSHIPKEYNO
+    - name: lc.adc.process.code
+      value: 50A
+    - name: lc.part.installed
+      value: 
+    - name: lc.tran.type
+      value: PR
+    - name: lc.ship.tran.type
+      value: VQ-SHIP
+    - name: scheduledTasks.cron.expression
+      value: 0 0 4 * * ?
+    - name: scheduledTasks.cron.timezone
+      value: EST
+    - name: AH-SHIP.process.id
+      value: AAH1DC1P00101 
+    - name: lc.AFOFF.process.id
+      value: AAF1OF1PQ0111      
+      
