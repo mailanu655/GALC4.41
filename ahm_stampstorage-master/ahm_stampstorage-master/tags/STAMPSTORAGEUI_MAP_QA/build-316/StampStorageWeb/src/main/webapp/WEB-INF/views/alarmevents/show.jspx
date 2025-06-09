@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_alarmevent" object="${alarmevent}" path="/alarmevents"
+               z="user-managed" create="false" update="true" delete="false">
+        <field:display field="locationStop" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_locationstop"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:display field="alarm" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_alarm"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:display field="cleared" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_cleared"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:display field="clearedBy" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_clearedby"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:display field="clearedTimestamp" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_clearedtime"
+                       object="${alarmevent}" z="user-managed"/>
+    </page:show>
+</div>

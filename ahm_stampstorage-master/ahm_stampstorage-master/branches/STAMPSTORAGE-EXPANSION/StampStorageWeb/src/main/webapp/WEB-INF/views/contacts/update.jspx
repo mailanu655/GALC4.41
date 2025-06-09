@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_Contact" modelAttribute="contact" path="/contacts"
+                 versionField="Version" z="nhH25FWiZ+gTj6CgSC7rOH0WJyI=">
+        <field:input field="contactName" id="c_com_honda_mfg_stamp_storage_domain_Contact_contactName" required="true"
+                     z="pPVNhHyoyT54mLkj2lCo3MxH1PY="/>
+        <field:input field="email" id="c_com_honda_mfg_stamp_storage_domain_Contact_email" required="false"
+                     validationRegex="^[a-z_]+@[a-z]+.honda.com" validationMessageCode="field_invalid_email"
+                     z="6c/aD47PWLuofm/J6MaSUqSS/1Y="/>
+        <field:input field="pagerNo" id="c_com_honda_mfg_stamp_storage_domain_Contact_pagerNo" required="false"
+                     validationRegex="^[A-Za-z0-9_]+@.*" validationMessageCode="field_invalid_pager"
+                     z="s9NXgWGee10Fk6MZsG2AeNxExH8="/>
+        <!--validationRegex="^[a-z]@[a-z]" validationMessageCode="field_invalid_pager"-->
+    </form:update>
+</div>

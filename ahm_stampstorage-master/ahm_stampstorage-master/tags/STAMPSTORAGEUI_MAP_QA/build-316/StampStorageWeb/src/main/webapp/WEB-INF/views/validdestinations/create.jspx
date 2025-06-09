@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+            <c:choose>
+                <c:when test="${not empty existsMsg }">
+	           		<table>
+	                	<tr>
+		                    <td class="carrierRoutingMessage">
+		                        <b>
+		                            <c:choose>
+		                                <c:when test="${not empty existsMsg}">
+		                                    <c:out value="${existsMsg}"/>
+		                                    <br></br>
+		                                </c:when>
+		                            </c:choose>
+		                        </b>
+		                    </td>
+		                    <td>
+		                        <br></br>
+		                    </td>
+	                	</tr>
+	            	</table>
+                </c:when>
+            </c:choose>
+      <table>
+      <tr>
+      <td>
+    <form:create id="fc_com_honda_mfg_stamp_conveyor_domain_ValidDestination" modelAttribute="validDestination" path="/validdestinations" render="${empty dependencies}" z="ZTE0BmI1B5cZwUZN9+XzvWulf+c=">
+        <field:select field="stop" id="c_com_honda_mfg_stamp_conveyor_domain_ValidDestination_stop" itemValue="id" items="${stops}" path="/stops" required="true" z="Bj00CF0CHNc8CBEfBbfcjNYqWFQ="/>
+        <field:select field="destination" id="c_com_honda_mfg_stamp_conveyor_domain_ValidDestination_destination" itemValue="id" items="${stops}" path="/stops" required="true" z="Wz5ufM3NKL6NOOdqBU427TR05IU="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_honda_mfg_stamp_conveyor_domain_ValidDestination" render="${not empty dependencies}" z="ULXuOgAVFlx+GrhcxdN4JqlY1HE="/>
+</td>
+</tr>
+</table>
+</div>

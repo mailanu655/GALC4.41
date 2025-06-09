@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:spring="http://www.springframework.org/tags" version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("grouphold");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <table>
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+
+
+    <div style="color:red;">
+
+        <h4>
+            <center>
+                <c:out value="${message}"/>
+            </center>
+        </h4>
+        <h4>
+            <center>
+                <c:out value="${defectmessage}"/>
+            </center>
+        </h4>
+    </div>
+
+
+    <b>HOLD CRITERIA :</b>
+    &amp;nbsp; &amp;nbsp; &amp;nbsp;
+    <b>ProductionRunNumber =</b>"${finderCriteria.productionRunNumber}",
+    <c:choose>
+        <c:when test="${finderCriteria.rowAndProdRun}">
+            <b>Select Carriers in Row Only =</b>
+            "${finderCriteria.rowAndProdRun}",
+        </c:when>
+    </c:choose>
+
+    <b>Row =</b>
+    "${finderCriteria.row}",
+    <b>ProductionRunDate =</b>
+    "${finderCriteria.productionRunDate}",
+    <b>Number After =</b>
+    "${finderCriteria.numberAfterRunDate}",
+    <b>Number Before =</b>
+    "${finderCriteria.numberBeforeRunDate}"
+    <br></br>
+    <br></br>
+    <b>The carriers Below would be updated to CarrierStatus to</b>
+    "${finderCriteria.status}"
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Carrier" items="${carriers}" z="user-managed">
+        <table:table data="${carriers}" id="l_com_honda_mfg_stamp_storage_domain_Carrier" path="/groupholds"
+                     update="false" create="false" delete="false" show="false" z="user-managed">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber" property="carrierNumber"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_die" property="die" maxLength="30"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_quantity" property="quantity"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation" property="currentLocation"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_destination" property="destination"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_buffer" maxLength="20"
+                          property="buffer" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus" maxLength="20"
+                          property="carrierStatus" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_press" maxLength="20"
+                          property="press" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_productionrunno" maxLength="20"
+                          property="productionRunNo" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_stampingProductionRunTimestamp"
+                          maxLength="20"
+                          property="stampingProductionRunTimestamp" z="user-managed"/>
+        </table:table>
+    </page:list>
+    <br></br>
+    <c:choose>
+        <c:when test="${allowDefectAdd}">
+            <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_Defect" items="${defects}"
+                       z="nTgIkJu2bLdSOwOBHSb7JKMPw8k=">
+                <field:groupHoldtable data="${defects}" id="l_com_honda_mfg_stamp_conveyor_domain_Defect"
+                                      path="/groupholds" z="+YwVUwnllwOCCMy08go+I9BU+2g=" delete="false">
+                    <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectType"
+                                  property="defectType" maxLength="40" z="ENtEajGnX7ot8ht99M4OUfxP6y0="/>
+                    <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_reworkMethod"
+                                  property="reworkMethod" z="Yxn4Y5g+HnLvzFYlHyUQlljkxSc="/>
+                    <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_xArea"
+                                  property="XArea" z="LRY8uDZNH28uUvHlzhPLw5bH65o="/>
+                    <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_yArea"
+                                  property="YArea" z="QoAYj61p7BGXrNjpfWFQspXEhuw="/>
+                    <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_note"
+                                  property="note" maxLength="-1" z="QoAYj61p7BGXrNjpfWFQspXEhuw="/>
+                    <!--<table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectRepaired"-->
+                    <!--property="defectRepaired" z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>-->
+                </field:groupHoldtable>
+            </page:list>
+        </c:when>
+    </c:choose>
+
+    <br></br>
+
+    <form:update_group finderName="submitgrouphold" label=""
+                       id="ff_com_honda_mfg_stamp_storage_domain_grouphold" path="/groupholds"
+                       z="user-managed">
+    </form:update_group>
+
+    <br></br>
+
+</div>
+

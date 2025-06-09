@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+     xmlns:security="http://www.springframework.org/security/tags"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <c:set var="disabled" value="true"/>
+
+    <security:authorize ifAllGranted="ROLE_ADMIN">
+        <c:set var="disabled" value="false"/>
+    </security:authorize>
+
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_CarrierMes" modelAttribute="carriermes" path="/carriermes"
+                 versionField="Version" z="user-managed">
+
+        <field:input disabled="true" field="carrierNumber" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_carrierNumber"
+                     required="true" validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="dieNumber" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_dieNumber" required="true"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="quantity" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_quantity"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input disabled="${disabled}" field="currentLocation" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_currentLocation"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="destination" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_destination"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="status" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_status"
+                     validationMessageCode="field_invalid_integer" required="true" z="user-managed"/>
+        <field:input field="originationLocation"
+                     id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_originationLocation"
+                     validationMessageCode="field_invalid_integer" required="true" z="user-managed"/>
+        <field:input field="productionRunNumber"
+                     id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_productionRunNumber"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="productionRunDate" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_updateDate"
+                     z="user-managed"/>
+        <field:input field="updateDate" id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_updateDate"
+                     z="user-managed"/>
+        <!--<field:datetime dateTimePattern="${carriermes_loadtimestamp_date_format}" field="updateDate"-->
+        <!--id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_updateDate" z="user-managed"/>-->
+        <!--<field:datetime dateTimePattern="${carrier_unloadtimestamp_date_format}" field="productionRunDate"-->
+        <!--id="c_com_honda_mfg_stamp_storage_domain_CarrierMes_productionRunDate" z="user-managed"/>-->
+    </form:update>
+</div>

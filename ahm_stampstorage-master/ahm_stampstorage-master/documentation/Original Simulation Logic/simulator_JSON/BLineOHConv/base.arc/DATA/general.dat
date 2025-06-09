@@ -1,0 +1,38 @@
+Weld Line 1 Cycle Time L (sec)	44.5
+Weld Line 1 Cycle Time R (sec)	44.5
+Weld Line 2 Cycle Time L (sec)	44.5
+Weld Line 2 Cycle Time R (sec)	44.5
+Weld L1 Changeover Time (min)	7
+Weld L2 Changeover Time (min)	7
+Weld L1 Output/Shift	475
+Weld L2 Output/Shift	475
+Spo Weld Release Quantity	62
+Die Change Time B Line (min)	7.5
+Die Change Time C Line (min)	12.8
+Number of Carriers	670
+A-Line Bay Carriers/Row	21
+C-High Bay Carriers/Row	12
+C-Low Bay Carriers/Row	30
+A Bay Cleanup Trigger Point	170
+Empty Carrier Lane Priority - 1	3
+Empty Carrier Lane Priority - 2	1
+Empty Carrier Lane Priority - 3	2
+Empty Carriers Needed for Spo Run on B Line	0
+Split Accord 4Dr Spo Run (1=yes, 2=no)	2
+Run SPO on B Line	1
+Run SPO on C Line	1
+Number of Carriers to Store at B Press	25
+Number of Carriers to Store at C Press	14
+Empties Needed at Cline Trigger (2 Press Scenario)	11
+Initialize SPO (1= interface, 2 = JSON messages)	1
+ST5_8 Inspect	100
+ST5_8 Read/Write	5
+ST5_9 Inspect	100
+ST5_10 Read.Write	5
+ST5_13 Read/Write	5
+ST_B15 Inspect	28
+ST_B16 Inspect	35
+ST_B28 Read/Write	5
+ST13 Inspect	120
+ST7_4 Read/Write	5
+Down	15

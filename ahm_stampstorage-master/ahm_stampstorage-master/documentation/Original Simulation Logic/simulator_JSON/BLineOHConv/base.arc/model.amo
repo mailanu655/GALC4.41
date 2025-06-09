@@ -1,0 +1,28 @@
+VERSION 12.3.1 BUILD 2152.80
+UNITS Feet Seconds
+RNSET 3
+DRAWPOS minx -686.005511811024 maxx 264.939711286089 miny -580.095695538058 maxy 51.5837959317585 minz -146.617742782152 maxz 161.13719160105 trx 0 try 0
+MOVESYS name pf_ohc
+	SYSPOS endx 1
+MOVESYS name C_Press
+	SYSPOS endx 1
+MOVESYS name K_RBT
+	SYSPOS endx 1
+STATIC name S_Legend
+	SYSPOS endx 1
+STATIC name S_3DTrack
+	SYSPOS endx 1
+STATIC name sNewLayout
+	SYSPOS endx 1
+STATIC name sNewPress
+	SYSPOS endx 1
+STATIC name sNewPress2
+	SYSPOS endx 1
+STATIC name sNewPress3
+	SYSPOS endx 1
+MOVESYS name kLift
+	SYSPOS endx 1
+PROCSYS name base~
+	SYSPOS endx 1
+CONTROL snaplen 1 Days counts 1 reset
+CONTROL snaplen 20 Days counts 1 autorep

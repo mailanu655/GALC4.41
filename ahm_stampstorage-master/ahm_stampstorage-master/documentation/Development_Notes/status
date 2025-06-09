@@ -1,0 +1,22 @@
+Update / Questions for Bill for 7/14/11
+----------------------------------------------------
+Update
+----------------------------------------------------
+- After 7 consecutive days, we have store-in and fulfillment functional.  
+  For some reason, this testing did not happen 6/27/11 thru 7/1/11
+	
+- Empty manager high limit and low limit are working.
+	
+Questions
+----------------------------------------------------
+- Need to re-address consumption of parts.  There might be a better way.
+
+- Weld line 2 space available is really at odds with blocking KD line.
+  A better way would be to maintain inventory/current capacity of carriers after ST146
+
+- Delivery state at system start-up.  
+  How will accurate carriers at stops for delivery be maintained?
+  
+- Please tell me the stops after the robot derack stops for weld line 1 and weld line2.
+
+

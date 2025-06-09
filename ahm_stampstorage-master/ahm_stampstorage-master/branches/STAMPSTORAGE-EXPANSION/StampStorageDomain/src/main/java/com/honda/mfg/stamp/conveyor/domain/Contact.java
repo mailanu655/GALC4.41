@@ -1,0 +1,166 @@
+package com.honda.mfg.stamp.conveyor.domain;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.transaction.annotation.Transactional;
+
+@Configurable
+@Entity
+@Table(name = "CONTACT_TBX")
+public class Contact {
+
+	@NotNull
+	@Column(name = "CONTACT_NAME")
+	private String contactName;
+
+	@Column(name = "EMAIL_ADDRESS")
+	private String email;
+
+	@Column(name = "PAGER_NUMBER")
+	private String pagerNo;
+
+	public String getContactName() {
+		return this.contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPagerNo() {
+		return this.pagerNo;
+	}
+
+	public void setPagerNo(String pagerNo) {
+		this.pagerNo = pagerNo;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		// sb.append("ContactName: ")
+		sb.append(getContactName());
+		// .append(", ");
+//        sb.append("Email: ").append(getEmail()).append(", ");
+//        sb.append("Id: ").append(getId()).append(", ");
+//        sb.append("PagerNo: ").append(getPagerNo()).append(", ");
+//        sb.append("Version: ").append(getVersion());
+		return sb.toString();
+	}
+
+	@PersistenceContext
+	transient EntityManager entityManager;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "CONTACT_ID")
+	private Long id;
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	@Transactional
+	public void persist() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.persist(this);
+	}
+
+	@Transactional
+	public void remove() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		if (this.entityManager.contains(this)) {
+			this.entityManager.remove(this);
+		} else {
+			Contact attached = Contact.findContact(this.id);
+			this.entityManager.remove(attached);
+		}
+	}
+
+	@Transactional
+	public void flush() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.flush();
+	}
+
+	@Transactional
+	public void clear() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.clear();
+	}
+
+	@Transactional
+	public Contact merge() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		Contact merged = this.entityManager.merge(this);
+		this.entityManager.flush();
+		return merged;
+	}
+
+	public static EntityManager entityManager() {
+		EntityManager em = new Contact().entityManager;
+		if (em == null)
+			throw new IllegalStateException(
+					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+		return em;
+	}
+
+	public static long countContacts() {
+		return entityManager().createQuery("SELECT COUNT(o) FROM Contact o", Long.class).getSingleResult();
+	}
+
+	public static List<Contact> findAllContacts() {
+		return entityManager().createQuery("SELECT o FROM Contact o", Contact.class).getResultList();
+	}
+
+	public static Contact findContact(Long id) {
+		if (id == null)
+			return null;
+		return entityManager().find(Contact.class, id);
+	}
+
+	public static List<Contact> findContactEntries(int firstResult, int maxResults) {
+		return entityManager().createQuery("SELECT o FROM Contact o", Contact.class).setFirstResult(firstResult)
+				.setMaxResults(maxResults).getResultList();
+	}
+}

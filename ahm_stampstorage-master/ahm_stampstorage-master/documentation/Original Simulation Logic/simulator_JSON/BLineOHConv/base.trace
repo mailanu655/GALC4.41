@@ -1,0 +1,6 @@
+163926.51     	pf_ohc:OHC_Carrier(921)	pf_ohc:ST5_13	finished moving to deliver	Load 4749 (L_BS4DR)
+163926.51     	Process 'pCarrierLoad'		arriving procedure completed by	Load 4749 (L_BS4DR)
+163926.51     	Process 'pCarrierLoad'		being left by	Load 4749 (L_BS4DR)
+163926.51     	Process 'pCarrierLoad'		sending	Load 4749 (L_BS4DR)	to process 'pStorage'
+163926.51     	Process 'pStorage'		attempted to be entered by	Load 4749 (L_BS4DR)
+163926.51     	Process 'pStorage'			Load 4749 (L_BS4DR)	travel to pf_ohc:ST12_35

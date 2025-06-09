@@ -1,0 +1,138 @@
+package com.honda.mfg.stamp.conveyor.domain;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml")
+@Transactional
+@Configurable
+public class CarrierHistoryIntegrationTest {
+
+	@Test
+	public void testMarkerMethod() {
+	}
+
+	@Autowired
+	private CarrierHistoryDataOnDemand dod;
+
+	@Test
+	public void testCountCarrierHistories() {
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly",
+				dod.getRandomCarrierHistory());
+		long count = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.countCarrierHistories();
+		org.junit.Assert.assertTrue("Counter for 'CarrierHistory' incorrectly reported there were no entries",
+				count > 0);
+	}
+
+	@Test
+	public void testFindCarrierHistory() {
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory obj = dod.getRandomCarrierHistory();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly", obj);
+		java.lang.Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to provide an identifier", id);
+		obj = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.findCarrierHistory(id);
+		org.junit.Assert.assertNotNull("Find method for 'CarrierHistory' illegally returned null for id '" + id + "'",
+				obj);
+		org.junit.Assert.assertEquals("Find method for 'CarrierHistory' returned the incorrect identifier", id,
+				obj.getId());
+	}
+
+	@Test
+	public void testFindAllCarrierHistories() {
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly",
+				dod.getRandomCarrierHistory());
+		long count = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.countCarrierHistories();
+		org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'CarrierHistory', as there are "
+				+ count
+				+ " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test",
+				count < 250);
+		java.util.List<com.honda.mfg.stamp.conveyor.domain.CarrierHistory> result = com.honda.mfg.stamp.conveyor.domain.CarrierHistory
+				.findAllCarrierHistories();
+		org.junit.Assert.assertNotNull("Find all method for 'CarrierHistory' illegally returned null", result);
+		org.junit.Assert.assertTrue("Find all method for 'CarrierHistory' failed to return any data",
+				result.size() > 0);
+	}
+
+	@Test
+	public void testFindCarrierHistoryEntries() {
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly",
+				dod.getRandomCarrierHistory());
+		long count = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.countCarrierHistories();
+		if (count > 20)
+			count = 20;
+		java.util.List<com.honda.mfg.stamp.conveyor.domain.CarrierHistory> result = com.honda.mfg.stamp.conveyor.domain.CarrierHistory
+				.findCarrierHistoryEntries(0, (int) count);
+		org.junit.Assert.assertNotNull("Find entries method for 'CarrierHistory' illegally returned null", result);
+		org.junit.Assert.assertEquals(
+				"Find entries method for 'CarrierHistory' returned an incorrect number of entries", count,
+				result.size());
+	}
+
+	@Test
+	public void testFlush() {
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory obj = dod.getRandomCarrierHistory();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly", obj);
+		java.lang.Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to provide an identifier", id);
+		obj = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.findCarrierHistory(id);
+		org.junit.Assert.assertNotNull("Find method for 'CarrierHistory' illegally returned null for id '" + id + "'",
+				obj);
+		boolean modified = dod.modifyCarrierHistory(obj);
+		java.lang.Integer currentVersion = obj.getVersion();
+		obj.flush();
+		org.junit.Assert.assertTrue("Version for 'CarrierHistory' failed to increment on flush directive",
+				(currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+		// org.junit.Assert.assertNotSame(obj, dod.getRandomCarrierHistory() );
+		// org.junit.Assert.assertEquals(obj, obj );
+	}
+
+	@Test
+	public void testMerge() {
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory obj = dod.getRandomCarrierHistory();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly", obj);
+		java.lang.Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to provide an identifier", id);
+		obj = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.findCarrierHistory(id);
+		boolean modified = dod.modifyCarrierHistory(obj);
+		java.lang.Integer currentVersion = obj.getVersion();
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory merged = (com.honda.mfg.stamp.conveyor.domain.CarrierHistory) obj
+				.merge();
+		obj.flush();
+		org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object",
+				merged.getId(), id);
+		org.junit.Assert.assertTrue("Version for 'CarrierHistory' failed to increment on merge and flush directive",
+				(currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+	}
+
+	@Test
+	public void testPersist() {
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly",
+				dod.getRandomCarrierHistory());
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory obj = dod.getNewTransientCarrierHistory(Integer.MAX_VALUE);
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to provide a new transient entity",
+				obj);
+		org.junit.Assert.assertNull("Expected 'CarrierHistory' identifier to be null", obj.getId());
+		obj.persist();
+		obj.flush();
+		org.junit.Assert.assertNotNull("Expected 'CarrierHistory' identifier to no longer be null", obj.getId());
+	}
+
+	@Test
+	public void testRemove() {
+		com.honda.mfg.stamp.conveyor.domain.CarrierHistory obj = dod.getRandomCarrierHistory();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to initialize correctly", obj);
+		java.lang.Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'CarrierHistory' failed to provide an identifier", id);
+		obj = com.honda.mfg.stamp.conveyor.domain.CarrierHistory.findCarrierHistory(id);
+		obj.remove();
+		obj.flush();
+		org.junit.Assert.assertNull("Failed to remove 'CarrierHistory' with identifier '" + id + "'",
+				com.honda.mfg.stamp.conveyor.domain.CarrierHistory.findCarrierHistory(id));
+	}
+}

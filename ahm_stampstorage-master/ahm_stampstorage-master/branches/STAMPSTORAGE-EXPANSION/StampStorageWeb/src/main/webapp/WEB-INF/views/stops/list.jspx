@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <h3 align="center">
+        <u>
+           Stops
+        </u>
+    </h3>
+    <c:set var="writable" value="false"/>
+
+    <security:authorize
+            access="hasAnyRole('ROLE_APP-OHCVD-MAP-STADMIN', 'ROLE_APP-OHCVP-MAP-STADMIN', 'ROLE_APP-OHCVQ-MAP-STADMIN')">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Stop" items="${stops}" z="user-managed">
+        <table:table data="${stops}" id="l_com_honda_mfg_stamp_storage_domain_Stop" path="/stops" z="user-managed"
+                     create="${writable}" update="${writable}" delete="${writable}" show="true">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Stop_id" property="id" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Stop_name" property="name" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Stop_stopType" maxLength="40" property="stopType"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Stop_stopArea" maxLength="40" property="stopArea"
+                          z="user-managed"/>
+          
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Stop_description" maxLength="60"
+                          property="description"
+                          z="user-managed"/>
+            
+        </table:table>
+    </page:list>
+</div>

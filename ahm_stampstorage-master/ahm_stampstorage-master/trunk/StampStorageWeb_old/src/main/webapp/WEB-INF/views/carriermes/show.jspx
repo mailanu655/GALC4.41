@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_CarrierMes" object="${carriermes}" path="/carriermes"
+               z="user-managed" list="true" delete="false" update="true" create="false">
+        <field:display field="carrierNumber" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_carrierNumber"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="dieNumber" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_dieNumber"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="quantity" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_quantity"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="updateDate" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_updateDate"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="currentLocation" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_currentLocation"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="destination" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_destination"
+                       object="${carriermes}" z="user-managed"/>
+        <field:display field="status" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_status" object="${carriermes}"
+                       z="user-managed"/>
+        <field:display field="originationLocation"
+                       id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_originationLocation" object="${carriermes}"
+                       z="user-managed"/>
+        <field:display field="buffer" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_buffer" object="${carriermes}"
+                       z="user-managed"/>
+        <field:display field="productionRunNumber"
+                       id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_productionRunNumber" object="${carriermes}"
+                       z="user-managed"/>
+        <field:display field="productionRunDate" id="s_com_honda_mfg_stamp_storage_domain_CarrierMes_productionRunDate"
+                       object="${carriermes}" z="user-managed"/>
+    </page:show>
+</div>

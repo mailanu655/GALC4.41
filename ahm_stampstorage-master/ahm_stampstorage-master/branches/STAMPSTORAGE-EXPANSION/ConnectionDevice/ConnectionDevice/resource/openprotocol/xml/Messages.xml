@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<codemap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="CodeMap.xsd" protocolversion="5.1">
+    <item code="0001" description="Communication start"/>
+    <item code="0002" description="Communication start acknowledge"/>
+    <item code="0003" description="Communication stop"/>
+    <item code="0004" description="Command error"/>
+    <item code="0005" description="Command accepted"/>
+    <!-- item code="0010" description="Parameter set numbers upload events"/ -->
+    <!-- item code="0011" description="Parameter set numbers upload reply"/ -->
+    <!-- item code="0012" description="Parameter set data upload events"/ -->
+    <!-- item code="0013" description="Parameter set data upload reply"/ -->
+    <item code="0014" description="Parameter set: selected, subscribe"/>
+    <item code="0015" description="Parameter set: selected "/>
+    <item code="0016" description="Parameter set: selected, acknowledge"/>
+    <item code="0017" description="Parameter set: selected, unsubscribe"/>
+    <item code="0018" description="Select Parameter set "/>
+    <!-- item code="0019" description="Set Parameter set batch size"/ -->
+    <!-- item code="0020" description="Reset Parameter set batch size"/ -->
+    <!-- item code="0030" description="Job numbers upload events"/ -->
+    <!-- item code="0031" description="Job numbers upload reply"/ -->
+    <!-- item code="0032" description="Job data upload events"/ -->
+    <!-- item code="0033" description="Job data upload reply"/ -->
+    <!-- item code="0034" description="Job :schedule, subscribe"/ -->
+    <!-- item code="0035" description="Job :schedule,"/ -->
+    <!-- item code="0036" description="Job :schedule, acknowledge"/ -->
+    <!-- item code="0037" description="Job :schedule, unsubscribe"/ -->
+    <item code="0038" description="Select Job"/>
+    <!-- item code="0039" description="Job restart "/>
+    <item code="0040" description="Tool data upload events"/>
+    <item code="0041" description="Tool data upload reply"/ -->
+    <item code="0042" description="Disable tool"/>
+    <item code="0043" description="Enable tool"/>
+    <!-- item code="0044" description="Disconnect tool"/ -->
+    <item code="0050" description="Vehicle Id Number download request "/>
+    <!-- item code="0051" description="Vehicle Id Number upload subscribe"/>
+     <item code="0052" description="Vehicle Id Number upload"/>
+     <item code="0053" description="Vehicle Id Number upload acknowledge"/>
+     <item code="0054" description="Vehicle Id Number upload unsubscribe"/ -->
+    <item code="0060" description="Last tightening result data subscribe"/>
+    <item code="0061" description="Last tightening result data upload "/>
+    <item code="0062" description="Last tightening result data acknowledge"/>
+    <!-- item code="0063" description="Last tightening result data unsubscribe"/>
+     <item code="0064" description="Old tightening result upload events"/>
+     <item code="0065" description="Old tightening result reply"/>
+     <item code="0070" description="Alarm subscribe"/>
+     <item code="0071" description="Alarm Upload "/>
+     <item code="0072" description="Alarm Upload acknowledge"/>
+     <item code="0073" description="Alarm Unsubscribe"/>
+     <item code="0074" description="Alarm Acknowledged on torque controller"/>
+     <item code="0075" description="Alarm Acknowledged Ack"/>
+     <item code="0076" description="Alarm Status"/>
+     <item code="0077" description="Alarm Status acknowledge"/>
+     <item code="0078" description="Acknowledge alarm remotely on torque controller"/>
+     <item code="0080" description="Read time upload events"/>
+     <item code="0081" description="Time upload reply"/>
+     <item code="0082" description="Set Time in the Torque Controller"/>
+     <item code="0090" description="Multi spindle status subscribe"/>
+     <item code="0091" description="Multi spindle status upload"/>
+     <item code="0092" description="Multi spindle status upload acknowledge"/>
+     <item code="0093" description="Multi spindle status unsubscribe"/>
+     <item code="0100" description="Multi spindle result subscribe"/>
+     <item code="0101" description="Multi spindle result upload"/>
+     <item code="0102" description="Multi spindle result upload acknowledge"/>
+     <item code="0103" description="Multi spindle result unsubscribe"/>
+     <item code="0110" description="Display user text on compact"/>
+     <item code="0111" description="Display user text on graph"/>
+     <item code="0113" description="Flash green light on tool"/>
+     <item code="0120" description="Job line control schedule subscribe"/>
+     <item code="0121" description="Job line control started"/>
+     <item code="0122" description="Job line control alert 1"/>
+     <item code="0123" description="Job line control alert 2"/>
+     <item code="0124" description="Job line control done"/>
+     <item code="0125" description="Job line control schedule acknowledge"/>
+     <item code="0126" description="Job line control schedule unsubscribe"/-->
+    <item code="0127" description="Abort job "/>
+    <!-- item code="0128" description="Job batch increment"/>
+     <item code="0129" description="Job batch decrement"/>
+     <item code="0130" description="Job off"/>
+     <item code="0150" description="Identifier download events"/>
+     <item code="0151" description="Multiple Identifiers work order upload subscribe"/>
+     <item code="0152" description="Multiple Identifiers work order upload"/>
+     <item code="0153" description="Multiple Identifiers work order upload acknowledge"/>
+     <item code="0154" description="Multiple Identifiers work order upload unsubscribe"/>
+     <item code="0155" description="Bypass Identifier"/>
+     <item code="0156" description="Reset latest Identifier"/>
+     <item code="0157" description="Reset all Identifier"/>
+     <item code="0200" description="Set :external controlled, relays"/>
+     <item code="0210" description="Status: external monitored inputs, subscribe"/>
+     <item code="0211" description="Status: external monitored inputs, upload"/>
+     <item code="0212" description="Status: external monitored inputs, upload acknowledge"/>
+     <item code="0213" description="Status: external monitored inputs, unsubscribe"/>
+     <item code="0214" description="IO devices status events"/>
+     <item code="0215" description="IO devices status"/>
+     <item code="0300" description="Histogram upload events"/>
+     <item code="0301" description="Histogram upload events reply"/>
+     <item code="8000" description="Reserved"/>
+     <item code="8001" description="Reserved"/>
+     <item code="8002" description="Reserved"/>
+     <item code="8003" description="Reserved"/-->
+    <item code="9999" description="Keep alive finsWriteRequest"/>
+</codemap>
+

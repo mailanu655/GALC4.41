@@ -1,0 +1,13 @@
+Sorting Rule	Zone Priority	Sorting Rule	Zone Priority
+Partial	1	Mixed-Front	3
+Empty	1	Mixed-Front	2
+Partial	2	Mixed-Front	1
+Empty	2	Partial	3
+Mixed-Same	1	Partial	2
+Mixed	1	Partial	1
+Mixed-Same	2	Full	3
+Mixed	2	Full	2
+Partial	3	Full	1
+Empty	3	Mixed-Blocked	3
+Mixed-Same	3	Mixed-Blocked	2
+Mixed	3	Mixed-Blocked	1

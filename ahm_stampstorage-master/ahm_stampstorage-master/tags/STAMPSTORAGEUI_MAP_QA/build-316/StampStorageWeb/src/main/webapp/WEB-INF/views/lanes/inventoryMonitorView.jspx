@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <head>
+        <meta http-equiv="refresh" content="900"/>
+
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+
+    </head>
+
+    <table>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+    <br></br>
+    <table class="inventoryMonitorView">
+        <tr>
+            <td class="inventoryMonitorViewHeader" align="center">
+                Side Panel Inventory Tracking
+            </td>
+        </tr>
+        <tr>
+            <td class="inventoryMonitorView" valign="top" colspan="2" halign="center">
+                <table class="inventoryMonitorView" align="center">
+                    <th>Model</th>
+                    <th>Total</th>
+                    <th>On Hold</th>
+                    <th>Insp. Req.</th>
+                    <th>KD Line</th>
+                    <th>Weld 1</th>
+                    <th>Weld 2</th>
+                    <c:forEach items="${dieInventory}" var="row">
+                        <c:choose>
+                            <c:when test="${displayRows[row.dieName]==1}">
+                                <tr>
+                                    <td class="inventoryMonitorViewModelRights" width="200">
+                                        ${row.dieName}
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        ${row.quantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        ${row.holdQuantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        ${row.inspectionRequiredQuantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        <c:forEach items="${kDDieInventory}" var="kdRow">
+                                            <c:choose>
+                                                <c:when test="${kdRow.dieName==row.dieName}">${kdRow.quantity}</c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        <c:forEach items="${weldOneDieInventory}" var="weldOneRow">
+                                            <c:choose>
+                                                <c:when test="${weldOneRow.dieName==row.dieName}">${weldOneRow.quantity}
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                    <td class="inventoryMonitorViewRights" width="100">
+                                        <c:forEach items="${weldTwoDieInventory}" var="weldTwoRow">
+                                            <c:choose>
+                                                <c:when test="${weldTwoRow.dieName==row.dieName}">${weldTwoRow.quantity}
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <tr>
+                                    <td class="inventoryMonitorViewModelOther" width="180">
+                                        ${row.dieName}
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        ${row.quantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        ${row.holdQuantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        ${row.inspectionRequiredQuantity}
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        <c:forEach items="${kDDieInventory}" var="kdRow">
+                                            <c:choose>
+                                                <c:when test="${kdRow.dieName==row.dieName}">${kdRow.quantity}</c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        <c:forEach items="${weldOneDieInventory}" var="weldOneRow">
+                                            <c:choose>
+                                                <c:when test="${weldOneRow.dieName==row.dieName}">${weldOneRow.quantity}
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                    <td class="inventoryMonitorViewOther" width="100">
+                                        <c:forEach items="${weldTwoDieInventory}" var="weldTwoRow">
+                                            <c:choose>
+                                                <c:when test="${weldTwoRow.dieName==row.dieName}">${weldTwoRow.quantity}
+                                                </c:when>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br></br>
+    <br></br>
+</div>

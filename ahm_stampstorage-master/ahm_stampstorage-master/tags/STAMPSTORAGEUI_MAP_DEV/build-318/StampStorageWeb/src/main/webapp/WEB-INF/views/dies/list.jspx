@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <c:set var="writable" value="false"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <h3 align="center">
+        <u>
+            Dies
+        </u>
+    </h3>
+    <!--<security:authorize ifAllGranted="ROLE_ADMIN">-->
+    <!--<c:set var="writable" value="true"/>-->
+    <!--</security:authorize>-->
+
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Die" items="${dies}" z="user-managed">
+        <table:table data="${dies}" id="l_com_honda_mfg_stamp_storage_domain_Die" path="/dies" z="user-managed"
+                     create="${writable}" update="${writable}" delete="${writable}" show="true">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_id" property="id"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_bpmpartnumber" property="bpmPartNumber"
+                          maxLength="20" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_description" property="description"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_partProductionVolume" maxLength="20"
+                          property="partProductionVolume" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_imagefilename" property="imageFileName"
+                          z="user-managed"/>
+            <table:column property="active" id="c_com_honda_mfg_stamp_storage_domain_Die_active" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_backgroundColor" property="backgroundColor"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Die_textColor" property="textColor"
+                          z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stampstorage_domain_ParmSetting" object="${parmsetting}" path="/parmsettings" z="AHSUJHuVSI85eSJw4wx/IVF91F0=" create="false" delete="false">
+        <field:display field="fieldname" id="s_com_honda_mfg_stampstorage_domain_ParmSetting_fieldname" object="${parmsetting}" z="g8fA/c5PW70WQfdZDA8guq9ujPU="/>
+        <field:display field="fieldvalue" id="s_com_honda_mfg_stampstorage_domain_ParmSetting_fieldvalue" object="${parmsetting}" z="QtL6RXIT4okBvys9kddrM/WllQQ="/>
+        <field:display field="description" id="s_com_honda_mfg_stampstorage_domain_ParmSetting_description" object="${parmsetting}" z="2MhsEbfRZizaN8BoJEmMckyIt6s="/>
+        <field:display field="updatedby" id="s_com_honda_mfg_stampstorage_domain_ParmSetting_updatedby" object="${parmsetting}" z="y0A4T6SdywJq6ZSPOx0/AL6pNc8="/>
+        <field:display field="updatetstp" id="s_com_honda_mfg_stampstorage_domain_ParmSetting_updatetstp" object="${parmsetting}" z="Fm5V73Sl4kLKRmalLL1qx6BKS8I="/>
+    </page:show>
+</div>

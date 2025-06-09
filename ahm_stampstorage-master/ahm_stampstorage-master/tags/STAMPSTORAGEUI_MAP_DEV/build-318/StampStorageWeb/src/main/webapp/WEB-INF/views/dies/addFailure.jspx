@@ -1,0 +1,16 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <spring:message var="title" code="error_dataaccessfailure_title" htmlEscape="false"/>
+    <util:panel id="title" title="${title}">
+        <h2>${title}</h2>
+
+        <p>
+          A Die with id <c:out value="${id}"/> already Exists
+        </p>
+
+    </util:panel>
+</div>
+

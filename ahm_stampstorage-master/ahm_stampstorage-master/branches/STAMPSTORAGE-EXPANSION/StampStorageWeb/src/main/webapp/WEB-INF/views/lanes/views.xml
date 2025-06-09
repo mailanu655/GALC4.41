@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition extends="default" name="lanes/list">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/list.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/detailedInventory">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/detailedInventory.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/inventory">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/inventory.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/inventoryMonitorView">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/inventoryMonitorView.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/findlane">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/findlane.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/overview">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/overview.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/resequence">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/resequence.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/overlay">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/overlay.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/manualemptyrelease">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/manualemptyrelease.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/manualorderfulfillment">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/manualorderfulfillment.jspx"/>
+    </definition>
+    <definition extends="default" name="lanes/storageState">
+        <put-attribute name="body" value="/WEB-INF/views/lanes/storageState.jspx"/>
+    </definition>
+</tiles-definitions>

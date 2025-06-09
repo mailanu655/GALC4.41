@@ -1,0 +1,192 @@
+MIME-Version: 1.0
+Content-Location: file:///C:/6528D638/AAF_20110408.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:dt=3D"uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8">
+<meta name=3DProgId content=3DOneNote.File>
+<meta name=3DGenerator content=3D"Microsoft OneNote 11">
+<link id=3DMain-File rel=3DMain-File href=3D"AAF_20110408.htm">
+<link rel=3DFile-List href=3D"AAF_20110408_files/filelist.xml">
+</head>
+
+<body lang=3DEN-US>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:14=
+.0pt'>Design
+review meeting</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>Friday,
+April 08, 2011</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>9:09
+AM</p>
+
+<p style=3D'margin:0in'>&nbsp;</p>
+
+<ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Security
+     Concerns:</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Verify
+      database authentication methods (MES and DB2). Prefer windows integra=
+ted
+      authentication.</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>How wil=
+l the
+       credentials be passed? (encrypted vs. clear text?)</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Follow u=
+p with
+      Mitsubishi about TCP authentication and encryption.</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Create =
+our
+       own security protocol?</span></li>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>DOS? At=
+tack
+       methods?</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Set up M=
+ES-IT
+      meeting with Chris and Nate RE: security</span></li>
+ </ul>
+</ul>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-weight:bold;font-family:Ver=
+dana;
+font-size:10.0pt'>Architecture:</p>
+
+<ul type=3Dcircle style=3D'margin-left:1.0in;direction:ltr;unicode-bidi:emb=
+ed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Meet on M=
+onday
+     to discuss specific concerns.</span></li>
+ <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Finalize =
+system
+     architecture diagram.</span></li>
+</ul>
+
+<ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Testing:</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>How do w=
+e test
+      failover?</span></li>
+ </ul>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Document
+     items:</span></li>
+ <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Add data=
+base
+      tables for persistence</span></li>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Update
+      architecture diagram</span></li>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Security
+      accounts</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Databas=
+e</span></li>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Applica=
+tion</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>App depl=
+oyment
+      scheme (Jenkins/Hudson)</span></li>
+ </ul>
+</ul>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>&nbsp;</p>
+
+<ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Schedule a
+     meeting with stamping prior to E1 on Tuesday.</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Include
+      architecture</span></li>
+ </ul>
+</ul>
+
+<p style=3D'mso-outline-level:2;margin:0in;margin-left:.5in;font-family:Ver=
+dana;
+font-size:10.0pt'>&nbsp;</p>
+
+<p style=3D'mso-outline-level:2;margin:0in;margin-left:.5in;font-family:Ver=
+dana;
+font-size:10.0pt'>&nbsp;</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>&nbsp;</p>
+
+</body>
+
+</html>

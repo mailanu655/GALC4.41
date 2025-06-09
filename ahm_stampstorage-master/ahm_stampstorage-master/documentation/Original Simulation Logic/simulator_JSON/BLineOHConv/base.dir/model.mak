@@ -1,0 +1,7 @@
+ASIDEFINES			=
+
+MSVCLOC				= "$(VCINSTALLDIR)"
+ASIINCLUDES			= -I$(MSVCLOC)\PlatformSDK\include
+ASILIBPATHS			= /LIBPATH:$(MSVCLOC)\PlatformSDK\lib
+ASILIBS				= Ws2_32.lib
+

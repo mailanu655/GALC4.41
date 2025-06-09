@@ -1,0 +1,65 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:security="http://www.springframework.org/security/tags"
+	version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<c:set var="writable" value="false" />
+
+	<security:authorize
+		ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-INSPECT,ROLE_APP-OHCVQ-MAP-INSPECT,ROLE_APP-OHCVP-MAP-INSPECT,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-MAINT,ROLE_APP-OHCVQ-MAP-MAINT,ROLE_APP-OHCVP-MAP-MAINT">
+		<c:set var="writable" value="true" />
+	</security:authorize>
+
+	<c:if test="${writable =='true'}">
+		<h1>${uploadResult}</h1>
+		<form method="POST" enctype="multipart/form-data" action="uploadImage">
+			File to upload: <input type="file" name="file" /><br /> <br /> <br />
+			<input type="submit" value="Upload"> Press here to upload the
+			file!</input>
+		</form>
+	</c:if>
+	<br />
+	<h1>Current Images</h1>
+	<table>
+		<tr>
+			<td valign="top" width="25%">
+				<table>
+					<thead>
+						<td>File Name</td>
+					</thead>
+					<c:forEach var="name" items="${currentImages}">
+						<tr>
+							<td><a href="#" onclick="changeImage('${name}');">${name}</a></td>
+						</tr>
+					</c:forEach>
+
+				</table>
+
+
+
+			</td>
+			<td valign="top">
+				<table>
+					<thead>
+						<td>Image</td>
+					</thead>
+					<tr>
+						<td><img id="pic" alt="Image" src="" /></td>
+					</tr>
+
+				</table>
+
+			</td>
+		</tr>
+
+	</table>
+	<script type="text/javascript">
+		function changeImage(name) {
+			$("#pic").attr("src", "resources/images/" + name);
+		}
+	</script>
+</div>

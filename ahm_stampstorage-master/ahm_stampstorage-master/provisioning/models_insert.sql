@@ -1,0 +1,8 @@
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (1, 'Acura TL (09-13)', 'TK4', 0, 1, 2);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (2, 'Acura RDX (08-12)', 'STK', 0, 7, 8);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (3, 'Acura TL (04-08)', 'SEP', 0, 5, 6);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (4, 'China Accord 4DR', 'TE5', 0, 72, 66);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (5, 'Honda Accord 4DR', 'TA0', 0, 67, 66);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (6, 'Honda Accord 2DR', 'TE0', 0, 97, 96);
+insert into MODEL_TBX (MODEL_ID, DESCRIPTION, NAME, VERSION, LEFT_DIE, RIGHT_DIE) values (7, 'Honda TEST Model', 'TST', 0, 999, 999);
+

@@ -1,0 +1,90 @@
+project --topLevelPackage com.honda.mfg.stamp.storage
+persistence setup --provider HIBERNATE --database DERBY
+
+enum type --class ~.domain.OrderStatus
+enum constant --name Queued --class OrderStatus
+enum constant --name InProcess --class OrderStatus
+enum constant --name Delivered --class OrderStatus
+enum constant --name Completed --class OrderStatus
+enum constant --name Cancelled --class OrderStatus
+enum constant --name Paused --class OrderStatus
+
+enum type --class ~.domain.Side
+enum constant --name Left_Side --class Side
+enum constant --name Right_Side --class Side
+
+entity --class ~.domain.Die --testAutomatically --table DIE_TBX --identifierField id --identifierColumn DIE_ID
+field string --class ~.domain.Die --fieldName dieNumber --notNull --column DIE_NUMBER --sizeMin 3 --sizeMax 3
+field string --class ~.domain.Die --fieldName description --column DESCRIPTION
+
+entity --class ~.domain.Model --testAutomatically --table MODEL_TBX --identifierField id --identifierColumn MODEL_ID
+field string --class ~.domain.Model --fieldName name --notNull --column NAME --sizeMin 3 --sizeMax 3
+field string --class ~.domain.Model --fieldName description --notNull --column DESCRIPTION
+field enum --class ~.domain.Model --fieldName side --notNull --type ~.domain.Side --column SIDE
+field reference --class ~.domain.Model --fieldName die --type ~.domain.Die --cardinality MANY_TO_ONE
+
+field set --class ~.domain.Die --fieldName models --type ~.domain.Model --cardinality ONE_TO_MANY
+
+entity --class ~.domain.Item --testAutomatically --table ITEM_TBX --identifierField id --identifierColumn ITEM_ID
+field number --class ~.domain.Item --fieldName quantity --notNull --column QUANTITY --type java.lang.Integer
+field reference --class ~.domain.Item --fieldName model --notNull --type ~.domain.Model --cardinality MANY_TO_ONE
+
+entity --class ~.domain.WeldOrder --testAutomatically --table WELD_ORDER_TBX --identifierField id --identifierColumn ORDER_ID
+field number --class ~.domain.WeldOrder --fieldName orderSequence --notNull --column ORDER_SEQUENCE --type java.lang.Integer
+field string --class ~.domain.WeldOrder --fieldName orderName --notNull --column ORDER_NAME
+field enum --class ~.domain.WeldOrder --fieldName orderStatus --notNull --type ~.domain.OrderStatus --column ORDER_STATUS
+field set --class ~.domain.WeldOrder --fieldName items --notNull --type ~.domain.Item --cardinality ONE_TO_MANY
+field reference --class ~.domain.Item --fieldName weldOrder --notNull --type ~.domain.WeldOrder --cardinality MANY_TO_ONE
+
+entity --class ~.domain.OrderMgr --testAutomatically --table ORDER_MGR_TBX --identifierField id --identifierColumn ORDER_MGR_ID
+field string --class ~.domain.OrderMgr --fieldName lineName --notNull --column LINE_NAME
+field set --class ~.domain.OrderMgr --fieldName orders --notNull --type ~.domain.WeldOrder --cardinality ONE_TO_MANY
+field reference --class ~.domain.WeldOrder --fieldName orderMgr --notNull --type ~.domain.OrderMgr --cardinality MANY_TO_ONE
+
+entity --class ~.domain.ItemFulfillment --testAutomatically --table ITEM_FULFILLMENT_TBX --identifierField id --identifierColumn ITEM_FULFILLMENT_ID
+field number --class ~.domain.ItemFulfillment --fieldName fulfilledQuantity --notNull --column FULFILLED_QUANTITY --type java.lang.Integer
+field reference --class ~.domain.ItemFulfillment --fieldName item --notNull --type ~.domain.Item --cardinality ONE_TO_ONE
+
+enum type --class ~.domain.StopType
+enum constant --name NoAction --class StopType
+enum constant --name StoreIn --class StopType
+enum constant --name StoreInHighCapacity --class StopType
+enum constant --name StoreInMediumCapacity --class StopType
+enum constant --name StoreInLowCapacity --class StopType
+enum constant --name StoreOut --class StopType
+
+entity --class ~.domain.Stop --testAutomatically --table STOP_TBX --identifierField id --identifierColumn STOP_ID
+field string --class ~.domain.Stop --fieldName name --notNull --column NAME
+field enum --class ~.domain.Stop --fieldName stopType --notNull --type ~.domain.StopType --column STOP_TYPE
+
+entity --class ~.domain.AreaLookup --testAutomatically --table AREA_LOOKUP_TBX --identifierField id --identifierColumn AREA_LOOKUP_ID
+field string --class ~.domain.AreaLookup --fieldName name --notNull --column NAME
+field reference --class ~.domain.AreaLookup --fieldName stop --type ~.domain.Stop --notNull --cardinality ONE_TO_ONE
+
+enum type --class ~.domain.Press
+enum constant --name PRESS_A_ROBOT_1 --class Press
+enum constant --name PRESS_A_ROBOT_2 --class Press
+enum constant --name PRESS_B_ROBOT_1 --class Press
+enum constant --name PRESS_B_ROBOT_2 --class Press
+enum type --class ~.domain.CarrierStatus
+enum constant --name Shippable --class CarrierStatus
+enum constant --name OnHoldStatus --class CarrierStatus
+enum constant --name InspectionRequired --class CarrierStatus
+
+entity --class ~.domain.Carrier --testAutomatically --table CARRIER_TBX --identifierField id --identifierColumn CARRIER_ID
+field number --class ~.domain.Carrier --fieldName carrierNumber --notNull --column Carrier_Number --type java.lang.Integer
+//field reference --class ~.domain.Carrier --fieldName model --type ~.domain.Model --cardinality MANY_TO_ONE
+field number --class ~.domain.Carrier --fieldName quantity --column QUANTITY --type java.lang.Integer
+field number --class ~.domain.Carrier --fieldName dieNumber --column DIE_NUMBER --type java.lang.Integer
+field reference --class ~.domain.Carrier --fieldName currentLocation --type ~.domain.Stop --cardinality ONE_TO_ONE
+field reference --class ~.domain.Carrier --fieldName destinationLocation --type ~.domain.Stop  --cardinality ONE_TO_ONE
+field enum --class ~.domain.Carrier --fieldName carrierStatus --notNull --type ~.domain.CarrierStatus --column Carrier_STATUS
+field enum --class ~.domain.Carrier --fieldName press --notNull --type ~.domain.Press --column PRESS_INFO
+field date --class ~.domain.Carrier --fieldName loadTimestamp --type java.util.Date --column LOAD_TIMESTAMP
+field date --class ~.domain.Carrier --fieldName unloadTimestamp --type java.util.Date --column UNLOAD_TIMESTAMP
+field reference --class ~.domain.Carrier --fieldName die --type ~.domain.Die  --cardinality MANY_TO_ONE
+
+
+perform tests
+
+controller all --package ~.web

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+    <bean id="finsConfig" class="com.honda.mfg.device.omron.OmronPlcDeviceConfig">
+
+    </bean>
+
+    <bean id="streamPair" class="com.honda.io.socket.SocketStreamPair">
+        <property name="hostname" value="10.33.29.247"/>
+        <property name="port" value="9600"/>
+    </bean>
+
+    <bean id="finMessageBuilder" class="com.honda.mfg.device.omron.MockFinMessageBuilder">
+        <property name="finsSourceNode" value="1"/>
+        <property name="finsDestinationNode" value="1"/>
+    </bean>
+
+    <bean id="vinMemory" class="com.honda.mfg.device.plc.omron.FinsMemory">
+        <property name="bank" value="BR"/>
+        <property name="location" value="0100"/>
+    </bean>
+
+    <bean id="vinStampDevice" class="com.honda.mfg.device.plc.omron.BasicFinsPlcDevice">
+        <property name="vinMemory" ref="vinMemory"/>
+
+    </bean>
+
+    <aop:aspectj-autoproxy/>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>

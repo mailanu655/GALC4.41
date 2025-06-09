@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<project name="ConnectionDevice" default="masterbuild" basedir=".">
+
+    <property name="name" value="device"/>
+    <property name="version" value="1.0"/>
+    <property name="src.dir" value="src"/>
+    <property name="test.src.dir" value="test"/>
+    <property environment="env"/>
+    <property name="jvm.dir" value="${env.JAVA_HOME}"/>
+
+    <property name="test" value="false"/>
+    <property name="workspace.dir" value="${basedir}/.."/>
+
+    <import file="${workspace.dir}/tools/base/build.xml"/>
+    <import file="${workspace.dir}/tools/base/codeQuality.xml"/>
+
+    <path id="compile.class.path">
+        <pathelement path="${src.dir}"/>
+        <pathelement path="${build.classes.dir}"/>
+        <fileset dir="${junit.dir}">
+            <include name="junit*.jar"/>
+        </fileset>
+        <fileset dir="${eventbus.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${mockito.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${slf4j.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${log4j.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    <property name="compile.class.path" refid="compile.class.path"/>
+
+    <path id="test.classpath">
+        <pathelement path="${test.src.dir}"/>
+        <path refid="compile.class.path"/>
+    </path>
+
+    <target name="module" depends="prepare,compile,libjar">
+        <mkdir dir="${modules.dir}"/>
+        <copy overwrite="yes" file="${build.dist.dir}/${name}.jar"
+              todir="${modules.dir}"/>
+        <echo>NOTE:</echo>
+        <echo>${build.dist.dir}/${name}.jar has been updated!</echo>
+        <echo>Remember to check this into CVS if you commit your source changes.</echo>
+    </target>
+
+</project>
+

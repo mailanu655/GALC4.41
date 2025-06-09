@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     version="2.0" >
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+     <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+        </head>
+    <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_storagerow" items="${lanes}" label="Storage Rows" z="user-managed">
+        <table:table data="${lanes}" id="l_com_honda_mfg_stamp_conveyor_domain_storagerow" path="/carriers" z="user-managed" create="false" update="false" delete="false" show="false">
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_storagerow_rowName" property="rowName" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_storagerow_capacity" property="capacity" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_storagerow_currentcarriercount" property="currentCarrierCount" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_storagerow_die" property="die" z="user-managed"/>
+            <!--<table:column id="c_com_honda_mfg_stamp_conveyor_domain_laneimpl_partcount" property="partCount" z="user-managed"/>-->
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_storagerow_lanecondition" property="laneCondition" z="user-managed"/>
+        </table:table>
+
+     </page:list>
+
+</div>

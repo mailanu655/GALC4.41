@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="weldorders/list">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/list.jspx"/>
+    </definition>
+    <definition extends="default" name="weldorders/show">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/show.jspx"/>
+    </definition>
+    <definition extends="default" name="weldorders/create">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/create.jspx"/>
+    </definition>
+    <definition extends="default" name="weldorders/update">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/update.jspx"/>
+    </definition>
+    <definition extends="default" name="weldorders/findWeldOrdersByOrderMgr">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/findWeldOrdersByOrderMgr.jspx"/>
+    </definition>
+    <definition extends="default" name="weldorders/manual">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/manualfulfillment.jspx"/>
+    </definition>
+     <definition extends="default" name="weldorders/orderfulfillmentupdate">
+        <put-attribute name="body" value="/WEB-INF/views/weldorders/orderfulfillmentupdate.jspx"/>
+    </definition>
+</tiles-definitions>

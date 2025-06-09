@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_alarmevent" modelAttribute="alarmevent"
+                 path="/alarmevents" versionField="Version" z="user-managed">
+        
+        <field:display field="locationStop" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_locationstop"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:display field="alarm" id="s_com_honda_mfg_stamp_storage_domain_alarmevent_alarm"
+                       object="${alarmevent}" z="user-managed"/>
+        <field:checkbox field="cleared" id="c_com_honda_mfg_stamp_storage_domain_alarmevent_cleared"
+                        z="user-managed"/>
+    </form:update>
+</div>

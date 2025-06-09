@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+         <meta http-equiv="refresh" content="30"/>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("weldschedule");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_WeldSchedule" items="${weldschedules}"
+               z="HZ/rc+V6/zc757ab4/W0A5g4WW0=">
+        <table:table data="${weldschedules}" id="l_com_honda_mfg_stampstorage_domain_WeldSchedule" path="/weldschedules"
+                     z="0lLUsh6BMsEQgBErjJ8k+IoHgHo=" create="false" update="false" delete="false">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_weldline"
+                          property="weldLine" z="+A8UXt9KNEO8gdPPedCpjX67zpM="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodplan"
+                          property="leftHandProdPlan" z="+A8UXt9KNEO8gdPPedCpjX67zpM="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodremaining"
+                          property="leftHandProdRemaining" z="x+/A1itb/lInz5yPVy5WBZY7F+Q="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodplan"
+                          property="rightHandProdPlan" z="+A8UXt9KNEO8gdPPedCpjX67zpM="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodremaining"
+                          property="rightHandProdRemaining" z="x+/A1itb/lInz5yPVy5WBZY7F+Q="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_currentmodel"
+                          property="currentModel" z="x+/A1itb/lInz5yPVy5WBZY7F+Q="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_nextmodel"
+                          property="nextModel" z="x+/A1itb/lInz5yPVy5WBZY7F+Q="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_nextquantity"
+                          property="nextQuantity" z="x+/A1itb/lInz5yPVy5WBZY7F+Q="/>
+        </table:table>
+    </page:list>
+</div>

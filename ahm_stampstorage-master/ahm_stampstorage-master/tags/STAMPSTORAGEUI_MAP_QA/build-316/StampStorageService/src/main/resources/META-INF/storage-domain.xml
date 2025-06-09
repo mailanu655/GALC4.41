@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <bean id="storageStateContextHelper" class="com.honda.mfg.stamp.conveyor.manager.StorageStateContextHelperImpl"/>
+
+    <bean id="storageStateContext" class="com.honda.mfg.stamp.conveyor.manager.StorageStateContextImpl">
+        <constructor-arg ref="storageStateContextHelper"/>
+    </bean>
+
+    <bean id="storeInManager" class="com.honda.mfg.stamp.conveyor.rules.store_in.StoreInManagerImpl">
+        <constructor-arg ref="storageStateContext"/>
+    </bean>
+
+    <bean id="storeOutManager" class="com.honda.mfg.stamp.conveyor.rules.store_out.StoreOutManagerImpl">
+        <constructor-arg ref="storageStateContext"/>
+    </bean>
+
+    <bean id="emptyManager" class="com.honda.mfg.stamp.conveyor.rules.empty.EmptyManagerImpl">
+        <constructor-arg ref="storageStateContext"/>
+    </bean>
+
+    <bean id="storage" class="com.honda.mfg.stamp.conveyor.manager.StorageImpl">
+        <constructor-arg ref="storeInManager"/>
+        <constructor-arg ref="storeOutManager"/>
+        <constructor-arg ref="emptyManager"/>
+        <constructor-arg ref="storageStateContext"/>
+    </bean>
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <c:set var="writable" value="false"/>
+
+    <security:authorize  access="hasAnyRole('ROLE_ADMIN')">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_AlarmDefinition" object="${alarm}" path="/alarms"
+               z="user-managed" create="${writable}" update="${writable}" delete="${writable}">
+        <field:display field="alarmNumber" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_alarmNumber" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="location" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_location" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="name" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_name" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="description" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_description" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="notificationCategory" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_category" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="severity" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_severity" object="${alarm}"
+                       z="user-managed"/>
+        <field:display field="notification" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_notification"
+                       object="${alarm}" z="user-managed"/>
+        <field:display field="notificationRequired" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_notificationreq"
+                       object="${alarm}" z="user-managed"/>
+         <field:display field="qpcNotificationRequired" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_qpcnotificationreq"
+                       object="${alarm}" z="user-managed"/>
+        <field:display field="active" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_active"
+                       object="${alarm}" z="user-managed"/>
+        <field:display field="autoArchiveTime" id="s_com_honda_mfg_stamp_storage_domain_AlarmDefinition_autoarchivetime"
+                       object="${alarm}" z="user-managed"/>
+    </page:show>
+</div>

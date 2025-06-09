@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<table class="canvas" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+       xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:c="http://java.sun.com/jsp/jstl/core"
+       xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+        xmlns:security="http://www.springframework.org/security/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+      <head>
+            <script type="text/javascript">
+
+                function changeHeaderBgColor(){
+                    var elem = document.getElementById("ordering");
+                    elem.style.backgroundColor = '#99CC66';
+                }
+                window.onload=changeHeaderBgColor;
+            </script>
+            <STYLE type="text/css">
+              table.filter {
+			    background: #FFFFFF;
+			    margin: 0px 0 0 0;
+			    border: 0px;
+			    width: 100%;
+			    color:#000000 ;
+              }
+              td.filter {
+			    border: 0px;
+              }
+              table.canvas {
+			    background: #FFFFFF;
+              }
+            </STYLE>
+        </head>
+    <security:authorize
+    access="hasAnyRole('ROLE_APP-OHCVD-MAP-STADMIN', 'ROLE_APP-OHCVP-MAP-STADMIN', 'ROLE_APP-OHCVQ-MAP-STADMIN','ROLE_APP-OHCVD-MAP-TLCORD','ROLE_APP-OHCVQ-MAP-TLCORD','ROLE_APP-OHCVP-MAP-TLCORD','ROLE_APP-OHCVD-MAP-WEOP1','ROLE_APP-OHCVQ-MAP-WEOP1','ROLE_APP-OHCVP-MAP-WEOP1','ROLE_APP-OHCVD-MAP-WEOP2','ROLE_APP-OHCVQ-MAP-WEOP2','ROLE_APP-OHCVP-MAP-WEOP2')">
+            
+            <!--ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">-->
+
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <tr>
+         <c:choose>
+        <c:when test="${writable}">
+        <td>
+            <div>
+                <c:choose>
+                    <c:when test="${weldOrder.id != null}">
+                        <form:weldupdate id="fu_com_honda_mfg_stamp_storage_domain_WeldOrder" modelAttribute="weldOrder"
+                                     path="/weldorders" versionField="Version" z="SWBS7DnvOIfn09liIGFz/tyINBo=">
+                            <field:select disabled="false" field="orderMgr"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" itemValue="id"
+                                          items="${ordermgrs}" path="/oordermgrs" z="user-managed"/>
+                            <field:select disabled="false" field="model"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_model" itemValue="id"
+                                          items="${models}" path="/weldorders" required="true" z="user-managed"/>
+                            <field:input field="orderSequence"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderSequence"
+                                         required="true" validationMessageCode="field_invalid_integer"
+                                         z="user-managed"/>
+                            <c:choose>
+                                <c:when test="${canUpdateOrderStatus}">
+                                    <field:select field="orderStatus"
+                                                  id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                                  items="${orderstatuses}" path="orderstatuses" z="user-managed"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <field:display field="orderStatus"
+                                                   id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                                   object="${weldOrder}" z="user-managed"/>
+                                </c:otherwise>
+                            </c:choose>
+                             <c:choose>
+                                <c:when test="${canUpdateDeliveryStatus}">
+
+							        <field:select field="deliveryStatus"
+							                      id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+							                      items="${deliverystatuses}" path="deliverystatuses" z="user-managed"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <field:display field="deliveryStatus"
+                                                   id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                                   object="${weldOrder}" z="user-managed"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <field:input field="leftQuantity"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                                         required="true" validationMessageCode="field_invalid_integer"
+                                         z="user-managed"/>
+                            <field:input field="rightQuantity"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                                         required="true" validationMessageCode="field_invalid_integer"
+                                         z="user-managed"/>
+                        </form:weldupdate>
+                    </c:when>
+                    <c:otherwise>
+                        <form:create id="fc_com_honda_mfg_stamp_storage_domain_WeldOrder" modelAttribute="weldOrder"
+                                     path="/weldorders" render="${empty dependencies}" z="QFfz67XrHkgb+110ZAPofwLpeMk=">
+                            <field:selectWithBlank disabled="false" field="orderMgr"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" itemValue="id"
+                                          items="${ordermgrs}" path="/oordermgrs" z="user-managed"/>
+                            <field:selectWithBlank disabled="false" field="model"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_model" itemValue="id"
+                                          items="${models}" path="/weldorders" required="true" z="user-managed"/>
+                            <field:input disabled="true" field="orderSequence"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderSequence"
+                                         required="false" validationMessageCode="field_invalid_integer"
+                                         z="user-managed">999
+                            </field:input>
+                            <field:select disabled="false" field="orderStatus"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                          items="${orderstatuses}" path="orderstatuses" required="true"
+                                          z="user-managed"/>
+                            <field:select disabled="false" field="deliveryStatus"
+                                          id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                          items="${deliverystatuses}" path="deliverystatuses" required="true"
+                                          z="user-managed"/>
+                            <field:input field="leftQuantity"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                                         required="true" validationMessageCode="field_invalid_integer"
+                                         z="user-managed"/>
+                            <field:input field="rightQuantity"
+                                         id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                                         required="true" validationMessageCode="field_invalid_integer"
+                                         z="user-managed"/>
+                        </form:create>
+                        <form:dependency dependencies="${dependencies}"
+                                         id="d_com_honda_mfg_stamp_storage_domain_WeldOrder"
+                                         render="${not empty dependencies}" z="VyEKeRdZViYQ7ebNU0AQacZ6THk="/>
+                    </c:otherwise>
+                </c:choose>
+                <page:list id="pl_com_honda_mfg_stamp_storage_domain_WeldOrderPending" items="${weldordersPending}" z="user-managed">
+                    <table:table data="${weldordersPending}" id="l_com_honda_mfg_stamp_storage_domain_WeldOrderPending"
+                                 path="/weldorders" show="true" z="user-managed" create="false" delete="false" update="${writable}">
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" property="orderMgr"
+                                      maxLength="30" z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_id" property="id" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_model" property="model"
+                                      z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                      property="orderStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_createdby"
+                                      property="createdBy" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                                      property="leftQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                                      property="rightQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                      property="deliveryStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/>
+                    </table:table>
+                </page:list>
+            </div>
+        </td>
+        </c:when>
+        </c:choose>
+        <td valign="top">
+            <div>
+                <form:find finderName="ByOrderMgrAndByOrderStatusAndDeliveryStatus" id="ff_com_honda_mfg_stamp_storage_domain_WeldOrder"
+                           path="/weldorders" z="GcnRyQWYjXGrLPOfi9lfsVaNUKc=">
+            	<table class="filter"><tr><td class="filter">
+                    <field:selectWithBlank disableFormBinding="true" field="orderMgr"
+                                           id="f_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" itemValue="id"
+                                           items="${ordermgrs}" path="/oordermgrs" required="false" multiple="false"
+                                           z="user-managed"/>
+                    </td><td class="filter">
+                    <field:selectWithBlank disableFormBinding="true" field="orderStatus"
+                                           id="f_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                           items="${filterorderstatuses}" path="orderstatuses" required="false"
+                                           z="user-managed"/>
+                    </td><td class="filter">
+                    <field:selectWithValue disableFormBinding="true" field="deliveryStatus"
+                                           id="f_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                           items="${filterorderstatuses}" path="orderstatuses" required="false"
+                                           z="user-managed" />
+                    </td></tr>
+                </table>
+                </form:find>
+                <page:list id="pl_com_honda_mfg_stamp_storage_domain_WeldOrderDelivering" items="${weldorders}" z="user-managed">
+                    <table:table data="${weldordersDelivering}" id="l_com_honda_mfg_stamp_storage_domain_WeldOrderDelivering"
+                                 path="/weldorders" show="true" z="user-managed" create="false" delete="false" update="${writable}">
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" property="orderMgr"
+                                      maxLength="30" z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_id" property="id" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_model" property="model"
+                                      z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <!-- <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                      property="orderStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/> -->
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                      property="deliveryStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_createdby"
+                                      property="createdBy" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                                      property="leftQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                                      property="rightQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_queued_qty"
+                                      property="leftQueuedQty" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_queued_qty"
+                                      property="rightQueuedQty" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingleftquantity"
+                                      property="remainingLeftQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingrightquantity"
+                                      property="remainingRightQuantity" z="user-managed"/>
+                    </table:table>
+                </page:list>
+                <page:list id="pl_com_honda_mfg_stamp_storage_domain_WeldOrder" items="${weldorders}" z="user-managed">
+                    <table:table data="${weldorders}" id="l_com_honda_mfg_stamp_storage_domain_WeldOrder"
+                                 path="/weldorders" show="true" z="user-managed" create="false" delete="false" update="${writable}">
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr" property="orderMgr"
+                                      maxLength="30" z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_id" property="id" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_model" property="model"
+                                      z="U9v7V8ZvUMX9AuRl7HvT8kWqa38="/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                                      property="orderStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/>
+                        <!-- <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                                      property="deliveryStatus" z="8EvxY1mCtIgNks6avXoyBb8bEp0="/> -->
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_createdby"
+                                      property="createdBy" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                                      property="leftQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                                      property="rightQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_queued_qty"
+                                      property="leftQueuedQty" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_queued_qty"
+                                      property="rightQueuedQty" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingleftquantity"
+                                      property="remainingLeftQuantity" z="user-managed"/>
+                        <table:column id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingrightquantity"
+                                      property="remainingRightQuantity" z="user-managed"/>
+                    </table:table>
+                </page:list>
+            </div>
+        </td>
+    </tr>
+</table>

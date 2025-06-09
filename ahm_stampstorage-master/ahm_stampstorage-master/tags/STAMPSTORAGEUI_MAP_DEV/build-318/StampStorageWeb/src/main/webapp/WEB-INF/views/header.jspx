@@ -1,0 +1,399 @@
+<jsp:root
+        xmlns:jsp="http://java.sun.com/JSP/Page"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:spring="http://www.springframework.org/tags"
+        xmlns:security="http://www.springframework.org/security/tags"
+        version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+
+    <c:set var="reseq" value="false"/>
+    <c:set var="config" value="true"/>
+    <c:set var="audit" value="false"/>
+
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">
+        <c:set var="config" value="false"/>
+    </security:authorize>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">
+        <c:set var="reseq" value="true"/>
+    </security:authorize>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,
+            ROLE_APP-OHCVD-MAP-MAINT, ROLE_APP-OHCVP-MAP-MAINT, ROLE_APP-OHCVQ-MAP-MAINT">
+        <c:set var="audit" value="true"/>
+    </security:authorize>
+
+    <spring:url var="banner" value="/resources/images/banner-graphic.png"/>
+    <spring:url var="home" value="/"/>
+
+    <spring:url var="carriermes" value="/carriermes" htmlEscape="false" />
+    <spring:url var="stops" value="/stops">
+        <spring:param name="page" value="1" />
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="validdestinations" value="/validdestinations">
+    </spring:url>
+    <spring:url var="models" value="/models">
+    </spring:url>
+    <spring:url var="weldorder" value="/weldorders" htmlEscape="false" >
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="10"/>
+    </spring:url>
+    <spring:url var="dies" value="/dies">
+    </spring:url>
+    <spring:url var="storagerows" value="/storagerows">
+    </spring:url>
+    <spring:url var="ordermgrs" value="/ordermgrs">
+    </spring:url>
+    <spring:url var="alarms" value="/alarms" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="contacts" value="/contacts" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="alarmcontacts" value="/alarmcontacts" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="currentAlarms" value="/alarmevents" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <!--<spring:url var="inspectionCLineRobot1" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="509"/>
+        <spring:param name="workStationName" value="Inspection C-Line Robot 1"/>
+    </spring:url>
+    <spring:url var="inspectionCLineRobot2" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="508"/>
+        <spring:param name="workStationName" value="Inspection C-Line Robot 2"/>
+    </spring:url> -->
+    <spring:url var="inspection13" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="1300"/>
+        <spring:param name="workStationName" value="Inspection 13"/>
+    </spring:url>
+    <spring:url var="inspectionBLine2014" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="2014"/>
+        <spring:param name="workStationName" value="Inspection B-Line 20-14"/>
+    </spring:url>
+    <spring:url var="inspectionBLine2015" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="2015"/>
+        <spring:param name="workStationName" value="Inspection B-Line 20-15"/>
+    </spring:url>
+    <spring:url var="inspectionBLine2016" value="/carriers" htmlEscape="false">
+        <spring:param name="inspection" value="-"/>
+        <spring:param name="location" value="2016"/>
+        <spring:param name="workStationName" value="Inspection B-Line 20-16"/>
+    </spring:url>
+    <spring:url var="reworkBLine1" value="/carriers" htmlEscape="false">
+        <spring:param name="rework" value="-"/>
+        <spring:param name="location" value="2018"/>
+        <spring:param name="workStationName" value="Rework B-Line 1"/>
+    </spring:url>
+    <spring:url var="reworkBLine2" value="/carriers" htmlEscape="false">
+        <spring:param name="rework" value="-"/>
+        <spring:param name="location" value="2019"/>
+        <spring:param name="workStationName" value="Rework B-Line 2"/>
+    </spring:url>
+    <!--<spring:url var="reworkCLine" value="/carriers" htmlEscape="false">
+        <spring:param name="rework" value="-"/>
+        <spring:param name="location" value="405"/>
+        <spring:param name="workStationName" value="Rework C-Line"/>
+    </spring:url> -->
+        <spring:url var="reworkKD" value="/carriers" htmlEscape="false">
+        <spring:param name="rework" value="-"/>
+        <spring:param name="location" value="800"/>
+        <spring:param name="workStationName" value="Rework KD"/>
+    </spring:url>
+    <spring:url var="moving" value="/carriers/moving" htmlEscape="false">
+    </spring:url>
+    <spring:url var="defects" value="/defects"/>
+    <spring:url var="lanes" value="/lanes" htmlEscape="false">
+        <spring:param name="rows" value="-"/>
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="inventory" value="/lanes" htmlEscape="false">
+        <spring:param name="inventory" value="-"/>
+    </spring:url>
+    <spring:url var="inventoryOverview" value="/lanes" htmlEscape="false">
+        <spring:param name="overview" value="-"/>
+    </spring:url>
+    <spring:url var="inventoryMonitorView" value="/lanes" htmlEscape="false">
+        <spring:param name="inventoryMonitorView" value="-"/>
+    </spring:url>
+    <spring:url var="detailedinventory" value="/lanes">
+    </spring:url>
+    <spring:url var="grouphold" value="/groupholds" htmlEscape="false">
+        <spring:param name="ByRowAndProductionRunNoAndProductionRunDate" value="-"/>
+    </spring:url>
+    <spring:url var="carrierslist" value="/carriers"  htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="laneResequence" value="/lanes" htmlEscape="false">
+        <spring:param name="find" value="ByLane"/>
+        <spring:param name="form" value="-"/>
+    </spring:url>
+    <spring:url var="manualempty" value="/lanes" htmlEscape="false">
+        <spring:param name="ByEmpty" value="-"/>
+    </spring:url>
+    <spring:url var="manualfulfillment" value="/lanes" htmlEscape="false">
+        <spring:param name="ByRow" value="-"/>
+    </spring:url>
+    <spring:url var="weldschedule" value="/weldschedules">
+    </spring:url>
+    <spring:url var="releaselist" value="/carrierreleases">
+    </spring:url>
+    <spring:url var="carrierhistory" value="/carrierhistories" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="auditerrorlog" value="/auditerrorlogs" htmlEscape="false">
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <!--<spring:url var="cpressactivity" value="/carriers" htmlEscape="false">
+        <spring:param name="pressactivity" value="-"/>
+        <spring:param name="press" value="C PRESS"/>
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>-->
+    <spring:url var="sidePanelLoadCellactivity" value="/carriers" htmlEscape="false">
+        <spring:param name="pressactivity" value="-"/>
+        <spring:param name="press" value="SIDE PANEL LOAD CELL"/>
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="bpressactivity" value="/carriers" htmlEscape="false">
+        <spring:param name="pressactivity" value="-"/>
+        <spring:param name="press" value="B PRESS"/>
+        <spring:param name="page" value="1"/>
+        <spring:param name="size" value="50"/>
+    </spring:url>
+    <spring:url var="storageState" value="/lanes" htmlEscape="false">
+        <spring:param name="storageState" value="-"/>
+    </spring:url>
+     <spring:url var="parmsettings" value="/parmsettings">
+    </spring:url>
+    <spring:message code="button_home" var="home_label" htmlEscape="false"/>
+    <span id="banner" align="center">
+        <a href="${home}" name="${fn:escapeXml(home_label)}" title="${fn:escapeXml(home_label)}">
+            <h3>STAMPING OVERHEAD CONVEYOR TRACKING SYSTEM</h3>
+        </a>
+    </span>
+
+    <c:if test="${pageContext['request'].userPrincipal == null}">
+        <spring:url var="login" value="/secure_welcome"/>
+        <a href="${login}">login</a>
+    </c:if>
+    <!--<c:out value="${pageContext.request.userPrincipal}"/>-->
+    <c:if test="${pageContext['request'].userPrincipal != null}">
+        <span>
+            <c:out value="Welcome, ${pageContext['request'].userPrincipal.name}  "/>
+            <spring:url value="/resources/j_spring_security_logout" var="logout"/>
+            <a href="${logout}">
+                <spring:message code="security_logout"/>
+            </a>
+        </span>
+    </c:if>
+    <table class="mainmenu">
+        <tr align="center">
+            <td class="mainmenu" height="40" id="carriermgt">
+                <a href="${carrierslist}">Carrier Mgt</a>
+            </td>
+            <td class="mainmenu" height="40" id="carrierreleasemgt">
+                <a href="${releaselist}">Release Mgt</a>
+            </td>
+            <td class="mainmenu" height="40" id="ordering">
+                <a href="${weldorder}">Ordering</a>
+            </td>
+            <td class="mainmenu" height="40" id="grouphold">
+                <a href="${grouphold}">Group Hold</a>
+            </td>
+            <td class="mainmenu" height="40" id="inspectionMenu">
+                <ul id="navigation-1">
+                    <li id="inspection">
+                        <a href="#>" title="inspection">Inspection</a>
+                        <ul class="navigation-2">
+                            <!--  <li id="inspectionRobot1">
+                                <a href="${inspectionCLineRobot1}">C-Line Robot1</a>
+                            </li>
+                            <li id="inspectionRobot2">
+                                <a href="${inspectionCLineRobot2}">C-Line Robot2</a>
+                            </li>-->
+                            <li id="inspectionBLine2014">
+                                <a href="${inspectionBLine2014}">B-Line 20-14</a>
+                            </li>
+                            <li id="inspectionBLine2015">
+                                <a href="${inspectionBLine2015}">B-Line 20-15</a>
+                            </li>
+                            <li id="inspectionBLine2016">
+                                <a href="${inspectionBLine2016}">B-Line 20-16</a>
+                            </li>
+                            <li id="inspection13">
+                                <a href="${inspection13}">Inspection ST13</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td class="mainmenu" height="40" id="reworkMenu">
+                <ul id="navigation-1">
+                    <li id="rework">
+                        <a href="#>" title="rework">Rework</a>
+                        <ul class="navigation-2">
+                            <!-- <li id="reworkCLine">
+                                <a href="${reworkCLine}">C Line Rework</a>
+                            </li>  -->
+                            <li id="reworkBLine1">
+                                <a href="${reworkBLine1}">B-Line Rework 1</a>
+                            </li>
+                            <li id="reworkBLine2">
+                                <a href="${reworkBLine2}">B-Line Rework 2</a>
+                            </li>
+                            <li id="reworkKD">
+                                <a href="${reworkKD}">KD Rework</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+
+
+            <td class="mainmenu" height="40" id="pressactivityMenu">
+                <ul id="navigation-1">
+                    <li id="pressactivity">
+                        <a href="#>" title="pressactivity">PressActivity</a>
+                        <ul class="navigation-2">
+                            <!--  <li id="cpressactivity">
+                                <a href="${cpressactivity}">C PressActivity</a>
+                            </li>-->
+                            <li id="sidePanelLoadCellactivity">
+                                <a href="${sidePanelLoadCellactivity}">Side Panel Load Cell</a>
+                            </li>
+                            <li id="bpressactivity">
+                                <a href="${bpressactivity}">B PressActivity</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+
+
+            <td class="mainmenu" height="40" id="currentalarms">
+                <a href="${currentAlarms}">Current Alarms</a>
+            </td>
+            <td class="mainmenu" height="40" id="carrierhistory">
+                <a href="${carrierhistory}">Carrier History</a>
+            </td>
+            <c:choose>
+                <c:when test="${audit}">
+                    <td class="mainmenu" height="40" id="auditerrorlog">
+                        <a href="${auditerrorlog}">Audit Logs</a>
+                    </td>
+                </c:when>
+            </c:choose>
+            <td class="mainmenu" height="40" id="weldschedule">
+                <a href="${weldschedule}">Weld Schedule</a>
+            </td>
+            <td class="mainmenu" height="40" id="inventoryMenu">
+                <ul id="navigation-1">
+                    <li id="inventoryMenu">
+                        <a href="#>" title="inventoryMenu">Inventory Views</a>
+                        <ul class="navigation-2">
+                            <li id="inventory">
+                                <a href="${inventory}">Inventory Totals</a>
+                            </li>
+                            <li id="inventoryOverview">
+                                <a href="${inventoryOverview}">Overview</a>
+                            </li>
+                            <li id="detailedinventory">
+                                <a href="${detailedinventory}">Detailed Inventory</a>
+                            </li>
+                            <li id="inventoryMonitorView">
+                                <a href="${inventoryMonitorView}">Inventory Monitor</a>
+                            </li>
+                            <li id="inroute">
+                                <a href="${moving}">Carriers In-Route</a>
+                            </li>
+                            <!--<li id="lanes">-->
+                                <!--<a href="${lanes}">Row Inventory</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td class="mainmenu" id="manualempty">
+                <a href="${manualempty}">Manual Empty</a>
+            </td>
+            <td class="mainmenu" id="manualorder">
+                <a href="${manualfulfillment}">Manual Order</a>
+            </td>
+            <c:choose>
+                <c:when test="${config}">
+                </c:when>
+                <c:otherwise>
+                    <td class="mainmenu" id="config">
+                        <ul id="navigation-1">
+                            <li id="config">
+                                <a href="#>" title="config">Admin</a>
+                                <ul class="navigation-2">
+                                    <li>
+                                        <a href="${storagerows}">Rows</a>
+                                    </li>
+                                    <li>
+                                        <a href="${models}">Models</a>
+                                    </li>
+                                    <li>
+                                        <a href="${dies}">Dies</a>
+                                    </li>
+                                    <li>
+                                        <a href="${stops}">Stop Mgt</a>
+                                    </li>
+                                    <li>
+                                        <a href="${validdestinations}">ValidDestMgmt</a>
+                                    </li>
+                                    <li>
+                                        <a href="${ordermgrs}">Order Mgrs</a>
+                                    </li>
+                                    <li>
+                                        <a href="${alarms}">Alarms Config</a>
+                                    </li>
+                                    <li>
+                                        <a href="${contacts}">Contacts</a>
+                                    </li>
+                                    <li>
+                                        <a href="${alarmcontacts}">Alarm Contacts</a>
+                                    </li>
+                                    <li>
+                                        <a href="${parmsettings}">Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="${storageState}">Storage State</a>
+                                    </li>
+                                    <li>
+                                        <a href="${laneResequence}">Row Resequence</a>
+                                    </li>
+									<li>
+									<a href="uploadImage"> Manage Images</a>
+									</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+    </table>
+</jsp:root>

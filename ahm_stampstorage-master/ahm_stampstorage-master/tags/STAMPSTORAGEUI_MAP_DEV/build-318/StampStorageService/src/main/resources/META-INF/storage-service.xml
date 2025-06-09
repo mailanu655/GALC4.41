@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <import resource="mes-device.xml"/>
+    <!--<import resource="mes-device-mock.xml"/>-->
+
+    <import resource="storage-domain.xml"/>
+
+    <!-- ============================================================================================ -->
+    <!-- The dataStaleEventAdaptor purpose is to detect MES device initialize and uninitialize events -->
+    <!-- and publishes the StaleDataMessage.                                                          -->
+    <!-- To properly use this adaptor, simply construct (default constructor) a single instance       -->
+    <!-- ============================================================================================ -->
+    <bean id="dataStaleEventAdaptor" class="com.honda.mfg.stamp.conveyor.processor.DataStaleEventAdaptor"/>
+
+	<!-- creates a java.util.Properties instance with values loaded from the supplied location -->
+	<bean id="socketProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="location" value="classpath:META-INF/stamp-service-socket.properties"/>
+	</bean>
+	
+    <bean id="serviceRoleWrapper" class="com.honda.mfg.stamp.storage.service.utils.ServiceRoleWrapperImpl" factory-method="getInstance">
+        <constructor-arg ref="socketProperties"/>
+    </bean>
+
+    <bean id="serviceRoleWrapperServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="serviceRoleWrapper"/>
+        <constructor-arg value="30"/>
+        <constructor-arg value="ServiceRoleWrapper"/>
+        <constructor-arg value="false"/>
+    </bean>
+
+    <bean id="deviceReceiveMessageProcessor"
+          class="com.honda.mfg.stamp.conveyor.processor.DeviceReceiveMessageProcessor">
+    </bean>
+
+    <bean id="deviceSendMessageProcessor" class="com.honda.mfg.stamp.conveyor.processor.DeviceSendMessageProcessor">
+        <constructor-arg ref="plcDevice"/>
+    </bean>
+
+    <bean id="storageReceiveMessageProcessor"
+          class="com.honda.mfg.stamp.conveyor.processor.StorageReceiveMessageProcessor">
+        <constructor-arg ref="storage"/>
+    </bean>
+
+    <bean id="releaseManagerHelper" class="com.honda.mfg.stamp.conveyor.release.ReleaseManagerHelperImpl"/>
+    <bean id="carrierReleaseProcessor" class="com.honda.mfg.stamp.conveyor.release.CarrierReleaseProcessor">
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="releaseManagerHelper"/>
+    </bean>
+
+    <bean id="releaseManager" class="com.honda.mfg.stamp.conveyor.release.ReleaseManagerImpl">
+        <constructor-arg ref="releaseManagerHelper"/>
+    </bean>
+
+    <bean id="fulfillmentHelper" class="com.honda.mfg.stamp.conveyor.newfulfillment.NewFulfillmentHelperImpl"/>
+
+    <bean id="fulfillmentProcessor" class="com.honda.mfg.stamp.conveyor.newfulfillment.FulfillmentProcessor">
+         <constructor-arg ref="fulfillmentHelper"/>
+         <constructor-arg value="fulfillmentCarrierInspectionStop"/>
+    </bean>
+
+    <bean id="backOrderProcessor" class="com.honda.mfg.stamp.conveyor.newfulfillment.BackOrderProcessor">
+         <constructor-arg ref="storage"/>
+         <constructor-arg ref="fulfillmentHelper"/>
+        <constructor-arg value="deliveryCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="weldLine1OrderManager" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod">
+            <value>com.honda.mfg.stamp.storage.OrderManagers.getWeldLine1</value>
+        </property>
+    </bean>
+
+    <bean id="weldLine1Fulfillment" class="com.honda.mfg.stamp.conveyor.newfulfillment.OrderFulfillmentManager">
+        <constructor-arg ref="weldLine1OrderManager"/>
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="fulfillmentHelper"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="fulfillmentCarrierReleaseCount"/>
+        <constructor-arg value="recirculationCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="weldLine1OrderFulfillmentService"
+          class="com.honda.mfg.stamp.conveyor.service.OrderFulfillmentServiceImpl">
+        <constructor-arg ref="weldLine1Fulfillment"/>
+    </bean>
+
+    <bean id="weldLine1OrderFulfillmentServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="weldLine1OrderFulfillmentService"/>
+        <constructor-arg value="20"/>
+        <constructor-arg value="45"/>
+        <constructor-arg value="Fulfillment-weldLine1OrderFulfillmentService"/>
+    </bean>
+    <bean id="weldLine1Delivery" class="com.honda.mfg.stamp.conveyor.newfulfillment.DeliveryManager">
+        <constructor-arg ref="weldLine1OrderManager"/>
+        <constructor-arg ref="fulfillmentHelper"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="deliveryCarrierReleaseCount"/>
+        <constructor-arg value="fulfillmentCarrierInspectionStop"/>
+    </bean>
+
+    <bean id="weldLine1DeliveryService"
+          class="com.honda.mfg.stamp.conveyor.service.OrderFulfillmentServiceImpl">
+        <constructor-arg ref="weldLine1Delivery"/>
+    </bean>
+
+    <bean id="weldLine1DeliveryServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="weldLine1DeliveryService"/>
+        <constructor-arg value="20"/>
+        <constructor-arg value="45"/>
+        <constructor-arg value="Delivery-weldLine1DeliveryService"/>
+    </bean>
+
+
+    <bean id="weldLine2OrderManager" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod">
+            <value>com.honda.mfg.stamp.storage.OrderManagers.getWeldLine2</value>
+        </property>
+    </bean>
+
+    <bean id="weldLine2Fulfillment" class="com.honda.mfg.stamp.conveyor.newfulfillment.OrderFulfillmentManager">
+        <constructor-arg ref="weldLine2OrderManager"/>
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="fulfillmentHelper"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="fulfillmentCarrierReleaseCount"/>
+        <constructor-arg value="recirculationCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="weldLine2OrderFulfillmentService"
+          class="com.honda.mfg.stamp.conveyor.service.OrderFulfillmentServiceImpl">
+        <constructor-arg ref="weldLine2Fulfillment"/>
+    </bean>
+
+    <bean id="weldLine2OrderFulfillmentServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="weldLine2OrderFulfillmentService"/>
+        <constructor-arg value="40"/>
+        <constructor-arg value="45"/>
+        <constructor-arg value="Fulfillment-weldLine2OrderFulfillmentService"/>
+    </bean>
+
+    <bean id="weldLine2Delivery" class="com.honda.mfg.stamp.conveyor.newfulfillment.DeliveryManager">
+        <constructor-arg ref="weldLine2OrderManager"/>
+        <constructor-arg ref="fulfillmentHelper"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="deliveryCarrierReleaseCount"/>
+        <constructor-arg value="fulfillmentCarrierInspectionStop"/>
+    </bean>
+
+    <bean id="weldLine2DeliveryService"
+          class="com.honda.mfg.stamp.conveyor.service.OrderFulfillmentServiceImpl">
+        <constructor-arg ref="weldLine2Delivery"/>
+    </bean>
+
+    <bean id="weldLine2DeliveryServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="weldLine2DeliveryService"/>
+        <constructor-arg value="40"/>
+        <constructor-arg value="45"/>
+        <constructor-arg value="Delivery-weldLine2DeliveryService"/>
+    </bean>
+
+    <bean id="emptyCarriersServiceHelper" class="com.honda.mfg.stamp.conveyor.service.EmptyCarriersServiceHelperImpl"/>
+
+    <bean id="emptyCarriersService" class="com.honda.mfg.stamp.conveyor.service.OrderEmptyCarriersToOldWeldLineServiceImpl">
+        <constructor-arg ref="emptyCarriersServiceHelper"/>
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="emptyCarrierOldWeldLineLowLimit"/>
+        <constructor-arg value="emptyCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="emptyCarriersServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="emptyCarriersService"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="emptyCarriersService"/>
+    </bean>
+
+     <bean id="bAreaEmptyCarriersService" class="com.honda.mfg.stamp.conveyor.service.OrderEmptyCarriersToBAreaEmptyStorageServiceImpl" >
+        <constructor-arg ref="emptyCarriersServiceHelper"/>
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="bAreaEmptyCarrierLowLimit"/>
+        <constructor-arg value="emptyCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="bAreaEmptyCarriersServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="bAreaEmptyCarriersService"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="bAreaEmptyCarriersService"/>
+    </bean>
+
+    <bean id="releaseEmptyCarriersService" class="com.honda.mfg.stamp.conveyor.service.ReleaseEmptyCarriersServiceImpl">
+        <constructor-arg ref="emptyCarriersServiceHelper"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg value="emptyCarrierLowLimit"/>
+        <constructor-arg value="emptyCarrierReleaseCount"/>
+    </bean>
+
+    <bean id="releaseEmptyCarriersServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="releaseEmptyCarriersService"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="releaseEmptyCarriersService"/>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host"><value>${filter.smtp.host}</value></property>
+    </bean>
+
+    <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+      <property name="from"><value>stampstorage_alert@ham.honda.com</value></property>
+      <property name="subject"><value>StampStorageAlert</value></property>
+    </bean>
+
+    <bean id="alertingService" class="com.honda.mfg.stamp.conveyor.service.AlertingServiceImpl">
+      <constructor-arg ref="mailSender"/>
+      <constructor-arg ref="mailMessage"/>
+       <constructor-arg value="${filter.env.name}"/>
+    </bean>
+
+     <bean id="alarmServiceHelper" class="com.honda.mfg.stamp.conveyor.service.AlarmServiceHelperImpl">
+         <constructor-arg ref="alertingService"/>
+     </bean>
+     <bean id="alarmArchiveService" class="com.honda.mfg.stamp.conveyor.service.AlarmArchiveServiceImpl">
+         <constructor-arg ref="alarmServiceHelper"/>
+     </bean>
+    <bean id="alarmArchiveServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="alarmArchiveService"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="alarmArchiveService"/>
+    </bean>
+     <bean id="alarmAlertService" class="com.honda.mfg.stamp.conveyor.service.AlarmAlertServiceImpl">
+         <constructor-arg ref="alarmServiceHelper"/>
+     </bean>
+    <bean id="alarmAlertServiceScheduler" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="alarmAlertService"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="60"/>
+        <constructor-arg value="alarmAlertService"/>
+    </bean>
+    <bean id="storageStateUpdateService" class="com.honda.mfg.stamp.conveyor.service.StorageStateUpdateServiceImpl">
+        <constructor-arg ref="storage"/>
+        <constructor-arg ref="releaseManager"/>
+        <constructor-arg ref="alarmServiceHelper"/>
+    </bean>
+
+    <bean id="serverSo" class="com.honda.mfg.stamp.storage.service.clientmgr.StampServiceServerSocket">
+        <constructor-arg ref="socketProperties"/>
+ 		<property name="carrierManager"><ref bean="storageStateUpdateService"/></property>
+    </bean>
+    <bean id="serverSoService" class="com.honda.mfg.schedule.Scheduler">
+        <constructor-arg ref="serverSo"/>
+        <constructor-arg value="ServerSoService"/>
+    </bean>
+
+</beans>

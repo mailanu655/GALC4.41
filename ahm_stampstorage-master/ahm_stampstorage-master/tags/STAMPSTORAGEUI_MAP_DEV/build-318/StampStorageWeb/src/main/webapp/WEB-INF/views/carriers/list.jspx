@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+      xmlns:spring="http://www.springframework.org/tags" version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <head>
+            <script type="text/javascript">
+
+               function changeHeaderBgColor(){
+                    var elem = document.getElementById("carriermgt");
+                    elem.style.backgroundColor = '#99CC66';
+                }
+                window.onload=changeHeaderBgColor;
+
+
+               $(document).ready(function (){
+                   <!-- $( document.getElementById("myTable")).tablesorter({});  -->
+                    $("#myTable").tablesorter({
+                    headers:{
+                           13:{ sorter:false}
+                      }
+               });
+                });
+            </script>
+
+
+
+        </head>
+        
+            <spring:url value="/resources/images/wrench.png" var="wrench_url" />
+<spring:url value="/resources/images/bit1.png" var="bit1_url" />
+<spring:url value="/resources/images/bit2.png" var="bit2_url" />
+<spring:url value="/resources/images/bit3.png" var="bit3_url" />
+<spring:url value="/resources/images/bit4.png" var="bit4_url" />
+<spring:url value="/resources/images/bit5.png" var="bit5_url" />
+<spring:url value="/resources/images/bit6.png" var="bit6_url" />
+<spring:url value="/resources/images/bit7.png" var="bit7_url" />
+<spring:url value="/resources/images/bit8.png" var="bit8_url" />
+<spring:url value="/resources/images/bit9.png" var="bit9_url" />
+<spring:url value="/resources/images/bit10.png" var="bit10_url" />
+<spring:url value="/resources/images/bit11.png" var="bit11_url" />
+<spring:url value="/resources/images/bit12.png" var="bit12_url" />
+<spring:url value="/resources/images/bit13.png" var="bit13_url" />
+<spring:url value="/resources/images/bit14.png" var="bit14_url" />
+<spring:url value="/resources/images/bit15.png" var="bit15_url" />
+    <table class="meshealthy">
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+ 					</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                        <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+    <br></br>
+    <!--<h2 align="center">-->
+        <!--<u>Carrier Management</u>-->
+    <!--</h2>-->
+    <!--<br></br>-->
+    <form:find_carrier label=" "
+                       finderName="ByCarrierNumberAndDieAndCurrentLocationAndCarrierStatusAndPressAndProductionRunNo"
+                       id="ff_com_honda_mfg_stamp_storage_domain_Carrier" path="/carriers" openPane="${openfind}"
+                       z="user-managed" >
+        <table border="0">
+            <tr>
+                <td>
+                    <field:input disableFormBinding="true" field="carrierNumber"
+                                 id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber"
+                                 validationMessageCode="field_invalid_integer" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="die"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_die" itemValue="id"
+                                           items="${dies}"
+                                           path="/dies" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="productionRunNumber"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_productionrunno"
+                                           items="${productionRunNumbers}"
+                                           path="productionRunNumbers" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="currentLocation"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation"
+                                           itemValue="id" items="${stops}" path="/stops" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="destination"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_destination"
+                                           itemValue="id" items="${stops}" path="/stops" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="carrierStatus"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus"
+                                           items="${carrierstatuses}" path="carrierstatuses" z="user-managed"/>
+                </td>
+                <td>
+                    <field:selectWithBlank disableFormBinding="true" field="press"
+                                           id="c_com_honda_mfg_stamp_storage_domain_Carrier_press" items="${presses}"
+                                           path="presses" z="user-managed"/>
+                </td>
+            </tr>
+            <tr>
+            <td>
+            	<label for="selectMaintReqd">Maint Required</label> <br></br><img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;" title="Maintenance Required"/> 
+            	<select name="maintRequired" id="selectMaintReqd" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            <c:if test="${bitInfo.showBit1}">
+            <td>
+            	<label for="selectShowBit1">${bitInfo.bit1Label }</label><br></br><img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;" title="${bitInfo.bit1Label }"/> 
+            	<select name="showBit1" id="selectShowBit1" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit2}">
+            <td>
+            	<label for="selectShowBit2">${bitInfo.bit2Label }</label><br></br><img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;" title="${bitInfo.bit2Label }"/> 
+            	<select name="showBit2" id="selectShowBit2" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit3}">
+            <td>
+            	<label for="selectShowbit3">${bitInfo.bit3Label }</label><br></br><img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;" title="${bitInfo.bit3Label }"/>  
+            	<select name="showBit3" id="selectShowbit3" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit4}">
+            <td>
+            	<label for="selectShowbit4">${bitInfo.bit4Label }</label><br></br><img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;" title="${bitInfo.bit4Label }"/> 
+            	<select name="showBit4" id="selectShowbit4" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit5}">
+            <td>
+            	<label for="selectShowbit5">${bitInfo.bit5Label }</label><br></br><img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;" title="${bitInfo.bit5Label }"/> 
+            	<select name="showBit5" id="selectShowbit5" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit6}">
+            <td>
+            	<label for="selectShowbit6">${bitInfo.bit6Label }</label><br></br><img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;" title="${bitInfo.bit6Label }"/> 
+            	<select name="showBit6" id="selectShowbit6" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit7}">
+            <td>
+            	<label for="selectShowbit7">${bitInfo.bit7Label }</label> <br></br><img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;" title="${bitInfo.bit7Label }"/> 
+            	<select name="showBit7" id="selectShowbit7" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit8}">
+            <td>
+            	<label for="selectShowbit8">${bitInfo.bit8Label }</label><br></br><img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;" title="${bitInfo.bit8Label }"/> 
+            	<select name="showBit8" id="selectShowbit8" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit9}">
+            <td>
+            	<label for="selectShowbit9">${bitInfo.bit9Label }</label> <br></br><img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;" title="${bitInfo.bit9Label }"/>
+            	<select name="showBit9" id="selectShowbit9" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit10}">
+            <td>
+            	<label for="selectShowbit10">${bitInfo.bit10Label }</label>  <br></br><img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;" title="${bitInfo.bit10Label }"/>
+            	<select name="showBit10" id="selectShowbit10" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit11}">
+            <td>
+            	<label for="selectShowbit11">${bitInfo.bit11Label }</label><br></br><img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;" title="${bitInfo.bit11Label }"/> 
+            	<select name="showBit11" id="selectShowbit11" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit12}">
+            <td>
+            	<label for="selectShowbit12">${bitInfo.bit12Label }</label><br></br><img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;" title="${bitInfo.bit12Label }"/> 
+            	<select name="showBit12" id="selectShowbit12" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit13}">
+            <td>
+            	<label for="selectShowbit13">${bitInfo.bit13Label }</label> <br></br><img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;" title="${bitInfo.bit13Label }"/>
+            	<select name="showBit13" id="selectShowbit13" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit14}">
+            <td>
+            	<label for="selectShowbit14">${bitInfo.bit14Label }</label> <br></br><img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;" title="${bitInfo.bit14Label }"/> 
+            	<select name="showBit14" id="selectShowbit14" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+                        <c:if test="${bitInfo.showBit15}">
+            <td>
+            	<label for="selectShowbit15">${bitInfo.bit15Label }</label> <br></br><img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;" title="${bitInfo.bit15Label }"/> 
+            	<select name="showBit15" id="selectShowbit15" value = "3" ><option value="3"></option><option value="1">true</option><option value="0">false</option></select>
+            </td>
+            </c:if>
+            
+            </tr>
+        </table>
+    </form:find_carrier>
+    <br></br>
+    <br></br>
+
+    <b>FIND CRITERIA :</b>
+    <br></br>
+    <b>CarrierNumber =</b>
+    "${carrierNumber}",<b>Model =</b>"${die}",<b>ProductionRunNumber =</b>"${productionRunNumber}",
+    <b>Currentlocation =</b>
+    "${currentLocation}",
+    <b>Destination =</b>
+    "${destination}",
+    <b>CarrierStatus =</b>
+    "${carrierStatus}",<b>Press =</b>"${press}"
+    <b>MaintBits=</b>
+	"${finderBits}" ,
+    <br></br>
+    <br></br>
+
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Carrier" items="${carriers}" z="user-managed">
+        <field:table-sort data="${carriers}" id="l_com_honda_mfg_stamp_storage_domain_Carrier" path="/carriers"
+                     create="false" delete="false" show="false" z="user-managed">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber" property="carrierNumber"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_die" property="die" maxLength="30"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_quantity" property="quantity"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation" property="currentLocation"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_destination" property="destination"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_buffer" maxLength="20"
+                          property="buffer" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_positioninlane" maxLength="20"
+                          property="positionInLane" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_updateDate" maxLength="20"
+                          property="updateDate" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus" maxLength="20"
+                          property="carrierStatus" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_source" maxLength="20"
+                          property="source" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_press" maxLength="20"
+                          property="press" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_productionrunno" maxLength="20"
+                          property="productionRunNo" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_stampingProductionRunTimestamp"
+                          maxLength="20"
+                          property="stampingProductionRunTimestamp" z="user-managed"/>
+           <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_maintRequired"
+                          property="maintRequired" z="user-managed" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit1"
+                          property="bit1" z="user-managed" render="${bitInfo.showBit1}" label="${bitInfo.bit1Label }"/>
+                          
+         <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit2"
+                          property="bit2" z="user-managed" render="${bitInfo.showBit2}" label="${bitInfo.bit2Label }"/>
+           <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit3"
+                          property="bit3" z="user-managed" render="${bitInfo.showBit3}" label="${bitInfo.bit3Label }"/>
+           <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit4"
+                          property="bit4" z="user-managed" render="${bitInfo.showBit4}" label="${bitInfo.bit4Label }"/>
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit5"
+                          property="bit5" z="user-managed" render="${bitInfo.showBit5}" label="${bitInfo.bit5Label }"/>
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit6"
+                          property="bit6" z="user-managed"  render="${bitInfo.showBit6}" label="${bitInfo.bit6Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit7"
+                          property="bit7" z="user-managed" render="${bitInfo.showBit7}" label="${bitInfo.bit7Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit8"
+                          property="bit8" z="user-managed" render="${bitInfo.showBit8}" label="${bitInfo.bit8Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit9"
+                          property="bit9" z="user-managed" render="${bitInfo.showBit9}" label="${bitInfo.bit9Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit10"
+                          property="bit10" z="user-managed" render="${bitInfo.showBit10}" label="${bitInfo.bit10Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit11"
+                          property="bit11" z="user-managed" render="${bitInfo.showBit11}" label="${bitInfo.bit11Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit12"
+                          property="bit12" z="user-managed" render="${bitInfo.showBit12}" label="${bitInfo.bit12Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit13"
+                          property="bit13" z="user-managed" render="${bitInfo.showBit13}" label="${bitInfo.bit13Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit14"
+                          property="bit14" z="user-managed" render="${bitInfo.showBit14}" label="${bitInfo.bit14Label }" />
+          <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_bit15"
+                          property="bit15" z="user-managed" render="${bitInfo.showBit15}" label="${bitInfo.bit15Label }" />
+                                   
+             </field:table-sort>
+    </page:list>
+
+</div>
+

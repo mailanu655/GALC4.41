@@ -1,0 +1,351 @@
+<AutoStat JavaClass="com.autosim.ast.automod.AMHeader">
+    <BaseAutoStat JavaClass="com.autosim.ast.automod.AMHeader" SaveFileVersion="1.3">
+        <Properties JavaClass="com.autosim.ast.ModelProperties">
+            <Property>
+                <Name>SeedIncrement</Name>
+                <Value Type="Integer">10000</Value>
+            </Property>
+            <Property>
+                <Name>UseCRN</Name>
+                <Value Type="Integer">2</Value>
+            </Property>
+            <Property>
+                <Name>DefaultSampMethod</Name>
+                <Value JavaClass="com.autosim.ast.response.SampleMethod" Type="SampleMethod">
+                    <Method>ReplicationDeletion</Method>
+                    <Warmup>1 Days</Warmup>
+                    <SampleLength>35 Days</SampleLength>
+                    <ExactWarmup>true</ExactWarmup>
+                </Value>
+            </Property>
+            <Property>
+                <Name>AutoSaveWhileRunning</Name>
+                <Value Type="Boolean">true</Value>
+            </Property>
+            <Property>
+                <Name>AutoSaveWhileRunningTime</Name>
+                <Value Type="Time">30 Minutes</Value>
+            </Property>
+            <Property>
+                <Name>DefaultWarmup</Name>
+                <Value Type="Time">1 Days</Value>
+            </Property>
+            <Property>
+                <Name>DefaultNumRep</Name>
+                <Value Type="Integer">5</Value>
+            </Property>
+            <Property>
+                <Name>MaxRealTimeRun</Name>
+                <Value Type="Time">30 Minutes</Value>
+            </Property>
+            <Property>
+                <Name>RepeatErrorRun</Name>
+                <Value Type="Boolean">true</Value>
+            </Property>
+            <Property>
+                <Name>DefaultSampLen</Name>
+                <Value Type="Time">35 Days</Value>
+            </Property>
+            <Property>
+                <Name>Random</Name>
+                <Value Type="Boolean">true</Value>
+            </Property>
+            <Property>
+                <Name>ErrorRunLimit</Name>
+                <Value Type="Integer">2000</Value>
+            </Property>
+            <Property>
+                <Name>HasWarmup</Name>
+                <Value Type="Boolean">true</Value>
+            </Property>
+            <Property>
+                <Name>KillLongRuns</Name>
+                <Value Type="Boolean">true</Value>
+            </Property>
+            <Property>
+                <Name>ReportViewer</Name>
+                <Value Type="String">notepad.exe</Value>
+            </Property>
+            <Property>
+                <Name>Terminating</Name>
+                <Value Type="Boolean">false</Value>
+            </Property>
+        </Properties>
+        <Reports JavaClass="com.autosim.ast.report.ReportList">
+            <Elem JavaClass="com.autosim.ast.report.Report">
+                <Id>1</Id>
+                <File>base.report</File>
+                <UserReport>false</UserReport>
+                <TabDelim>false</TabDelim>
+                <SnapSeparator>*** AutoMod</SnapSeparator>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.report.Report">
+                <Id>2</Id>
+                <File>base.message</File>
+                <UserReport>false</UserReport>
+                <TabDelim>false</TabDelim>
+                <SnapSeparator>*** AutoMod</SnapSeparator>
+            </Elem>
+        </Reports>
+        <Datafiles JavaClass="com.autosim.ast.datafile.DatafileList"/>
+        <Responses JavaClass="com.autosim.ast.response.ResponseList">
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>CleanUp</Name>
+                <System>base</System>
+                <Entity>tABayCleanUp</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>Recirc</Name>
+                <System>base</System>
+                <Entity>tRecircCount</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(1) Weld Max</Name>
+                <System>base</System>
+                <Entity>T_Output(1)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(1) Weld Min</Name>
+                <System>base</System>
+                <Entity>T_Output(1)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Min</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(1) Weld</Name>
+                <System>base</System>
+                <Entity>T_Output(1)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(3) Weld</Name>
+                <System>base</System>
+                <Entity>T_Output(3)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(3) Weld Max</Name>
+                <System>base</System>
+                <Entity>T_Output(3)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Mean</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMResponse">
+                <Name>T_Output(3) Weld Min</Name>
+                <System>base</System>
+                <Entity>T_Output(3)</Entity>
+                <StatisticSet>Statistics</StatisticSet>
+                <Statistic>Min</Statistic>
+                <Cache JavaClass="com.autosim.ast.automod.AMResponse"/>
+            </Elem>
+        </Responses>
+        <Factors JavaClass="com.autosim.ast.factor.FactorList">
+            <Elem JavaClass="com.autosim.ast.automod.AMFactor">
+                <Name>ATrigger</Name>
+                <System>base</System>
+                <Entity>viABayTriggerAS</Entity>
+                <Attribute>Initial_Value</Attribute>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMFactor">
+                <Name>Autostat</Name>
+                <System>base</System>
+                <Entity>Vi_Autostat</Entity>
+                <Attribute>Initial_Value</Attribute>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.AMFactor">
+                <Name>Release</Name>
+                <System>base</System>
+                <Entity>Vi_ReleaseAS</Entity>
+                <Attribute>Initial_Value</Attribute>
+            </Elem>
+        </Factors>
+        <Analyses JavaClass="com.autosim.ast.analysis.AnalysisList">
+            <Elem JavaClass="com.autosim.ast.analysis.MultFactorAnalysis">
+                <Name>Test</Name>
+                <UseCRN>2</UseCRN>
+                <NumberOfSamples>10</NumberOfSamples>
+                <Factors>
+                    <Factor JavaClass="com.autosim.ast.factor.FactorValueRange">
+                        <Factor>ATrigger</Factor>
+                        <Beg JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>ATrigger</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">160</Value>
+                        </Beg>
+                        <End JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>ATrigger</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">180</Value>
+                        </End>
+                        <Inc JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>ATrigger</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">5</Value>
+                        </Inc>
+                    </Factor>
+                    <Factor JavaClass="com.autosim.ast.factor.FactorValueRange">
+                        <Factor>Release</Factor>
+                        <Beg JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>Release</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">40</Value>
+                        </Beg>
+                        <End JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>Release</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">60</Value>
+                        </End>
+                        <Inc JavaClass="com.autosim.ast.factor.FactorVal">
+                            <Factor>Release</Factor>
+                            <Value JavaClass="com.autosim.modenv.type.IntegerValue">10</Value>
+                        </Inc>
+                    </Factor>
+                </Factors>
+                <ConstantFactors JavaClass="com.autosim.ast.factor.FactorVals">
+                    <Elem JavaClass="com.autosim.ast.factor.FactorVal">
+                        <Factor>Autostat</Factor>
+                        <Value JavaClass="com.autosim.modenv.type.IntegerValue">1</Value>
+                    </Elem>
+                </ConstantFactors>
+            </Elem>
+        </Analyses>
+        <DoneRuns JavaClass="com.autosim.ast.run.RunList"/>
+        <ErrorRuns JavaClass="com.autosim.ast.run.RunList"/>
+        <RepArchive JavaClass="com.autosim.ast.archive.DirFileArchive"/>
+        <DatafileArchive JavaClass="com.autosim.ast.archive.DirFileArchive"/>
+        <ResponseAuditOwner JavaClass="com.autosim.ast.audit.ResponseAuditOwner">
+            <Version>1</Version>
+        </ResponseAuditOwner>
+    </BaseAutoStat>
+    <RepAuditManager JavaClass="com.autosim.ast.automod.audit.AMAuditManager">
+        <Checks JavaClass="com.autosim.util.ObjCollection">
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.C_Press</System>
+                <EntityType>Section</EntityType>
+                <Statistic>Total</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.C_Press</System>
+                <EntityType>Station</EntityType>
+                <Statistic>Total</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.K_RBT</System>
+                <EntityType>Vehicle</EntityType>
+                <Statistic>Max_Time_In_Cur_State</Statistic>
+                <Compare>greater_than</Compare>
+                <ValueType>snapLen</ValueType>
+                <Value>0.5</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.C_Press</System>
+                <EntityType>Motor</EntityType>
+                <Statistic>Percent_Up</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Vehicle</EntityType>
+                <Statistic>Max_Time_In_Cur_State</Statistic>
+                <Compare>greater_than</Compare>
+                <ValueType>snapLen</ValueType>
+                <Value>0.5</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Chain</EntityType>
+                <Statistic>Total</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Station</EntityType>
+                <Statistic>Total</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Photoeye</EntityType>
+                <Statistic>Percent_Blocked</Statistic>
+                <Compare>equal</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.0</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Photoeye</EntityType>
+                <Statistic>Percent_Blocked</Statistic>
+                <Compare>greater_than</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.75</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+            <Elem JavaClass="com.autosim.ast.automod.audit.AuditCheck">
+                <System>base.pf_ohc</System>
+                <EntityType>Motor</EntityType>
+                <Statistic>Percent_Up</Statistic>
+                <Compare>less_than</Compare>
+                <ValueType>num</ValueType>
+                <Value>0.25</Value>
+                <ListIsExceptions>true</ListIsExceptions>
+                <EntList/>
+            </Elem>
+        </Checks>
+    </RepAuditManager>
+    <MsgAuditManager JavaClass="com.autosim.ast.automod.audit.AMMsgAuditManager">
+        <String>Error</String>
+        <String>error</String>
+        <String>ERROR</String>
+        <String>Warning</String>
+        <String>warning</String>
+        <String>WARNING</String>
+    </MsgAuditManager>
+    <RunExecutor JavaClass="com.autosim.ast.automod.AMRunExecutor">
+        <Local JavaClass="com.autosim.ast.run.ParallelRunMachine">
+            <Name>LocalHost</Name>
+            <NumRuns>1</NumRuns>
+            <Enabled>true</Enabled>
+            <Port>-1</Port>
+        </Local>
+    </RunExecutor>
+    <ModifiedChecksum>15566184066358</ModifiedChecksum>
+</AutoStat>

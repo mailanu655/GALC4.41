@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Contact" items="${contacts}" z="0AVhAwbvlL249yIty+GXUPVBGCE=">
+        <table:table data="${contacts}" id="l_com_honda_mfg_stamp_storage_domain_Contact" path="/contacts"
+                     z="CL+DPHvJKvKjrSSBMze5hb1sfHw=">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Contact_contactName" maxLength="40"
+                          property="contactName" z="Xb7DUxi1RJCIuP3U66lR3GwKoBQ="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Contact_email" maxLength="40" property="email"
+                          z="k26gchMmDdaIAj/hFEf2dWvoGGg="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Contact_pagerNo" maxLength="40" property="pagerNo"
+                          z="K2NjrUMer+saoqdQerEo89mYE8g="/>
+        </table:table>
+    </page:list>
+</div>

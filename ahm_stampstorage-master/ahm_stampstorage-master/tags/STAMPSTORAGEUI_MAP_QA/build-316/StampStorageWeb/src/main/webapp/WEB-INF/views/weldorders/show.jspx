@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0"
+     xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("ordering");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <table class="meshealthy">
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->
+                       Service healthy
+ 					</td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                        <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+    <br></br>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-WEOP1,ROLE_APP-OHCVQ-MAP-WEOP1,ROLE_APP-OHCVP-MAP-WEOP1,ROLE_APP-OHCVD-MAP-WEOP2,ROLE_APP-OHCVQ-MAP-WEOP2,ROLE_APP-OHCVP-MAP-WEOP2">
+        <c:set var="writable" value="true"/>
+    </security:authorize> 
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_WeldOrder" object="${weldorder}" path="/weldorders"
+               z="user-managed" create="false" update="false" delete="false">
+        <field:display field="orderMgr" id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_orderMgr"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="model" id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_model" object="${weldorder}"
+                       z="user-managed"/>
+        <field:display field="orderSequence" id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_orderSequence"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="orderStatus" id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_orderStatus"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="deliveryStatus" id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_deliveryStatus"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="leftQuantity" id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_left_quantity"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="rightQuantity" id="c_com_honda_mfg_stamp_storage_domain_WeldOrder_right_quantity"
+                       object="${weldorder}" z="user-managed"/>
+        <field:display field="remainingLeftQuantity"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingleftQuantity" object="${weldorder}"
+                       z="user-managed"/>
+        <field:display field="remainingRightQuantity"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_remainingrightQuantity" object="${weldorder}"
+                       z="user-managed"/> 
+        <field:display field="leftDeliveryComments"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_leftDeliveryComments" object="${weldorder}"
+                       z="user-managed"/>
+        <field:display field="rightDeliveryComments"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_rightDeliveryComments" object="${weldorder}"
+                       z="user-managed"/>
+        <field:display field="leftFulfillmentComments"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_leftFulfillmentComments" object="${weldorder}"
+                       z="user-managed"/>
+        <field:display field="rightFulfillmentComments"
+                       id="s_com_honda_mfg_stamp_storage_domain_WeldOrder_rightFulfillmentComments" object="${weldorder}"
+                       z="user-managed"/>  
+     
+
+    </page:show>
+    <!--<c:out value="${weldorder.orderStatus}"/>-->
+    <!--<c:out value="${weldorder.id}"/>-->
+    <c:choose>
+        <c:when test="${writable}">
+            <c:choose>
+                <c:when test="${weldorder.orderStatus eq 'InProcess' || weldorder.orderStatus eq 'OnHold' || weldorder.orderStatus eq 'RetrievingCarriers'
+                 || weldorder.deliveryStatus eq 'Initialized' || weldorder.deliveryStatus eq 'InProcess' || weldorder.deliveryStatus eq 'DeliveringCarriers'
+                 || weldorder.deliveryStatus eq 'OnHold' || weldorder.deliveryStatus eq 'Delivered' }">
+                    <form:complete_order finderName="ByManualComplete" label="Complete Order"
+                                         id="ff_com_honda_mfg_stamp_storage_domain_WeldOrder" path="/weldorders"
+                                         z="user-managed">
+                        <input type="hidden" name="id" value="${itemId}"/>
+                    </form:complete_order>
+                    <head>
+                        <meta http-equiv="refresh" content="50"/>
+                    </head>
+                </c:when>
+
+                <c:when test="${weldorder.orderStatus eq 'Queued' || weldorder.orderStatus eq 'Initialized'}">
+                    <form:cancel_order finderName="ByCancel" label="Cancel Order"
+                                       id="ff_com_honda_mfg_stamp_storage_domain_WeldOrder" path="/weldorders"
+                                       z="user-managed">
+                        <input type="hidden" name="id" value="${itemId}"/>
+                    </form:cancel_order>
+                </c:when>
+            </c:choose>
+        </c:when>
+    </c:choose>
+    <div style="overflow: auto;height=400;" align="center">
+        <table>
+            <th>
+                CarrierNumber
+            </th>
+            <th>
+                Die
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Current Location
+            </th>
+            <th>
+                Destination
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Cycle
+            </th>
+            <th>
+                Production Run No
+            </th>
+            <th>
+
+            </th>
+            <c:forEach items="${orderfulfillments}" var="item">
+                <tr>
+                    <td>
+                        ${item.id.carrierNumber}
+                    </td>
+                    <td>
+                        ${item.die.description}
+                    </td>
+                    <td>
+                        ${item.quantity}
+                    </td>
+                    <td>
+                        ${item.currentLocation.name}
+                    </td>
+                    <td>
+                        ${item.destination.name}
+                    </td>
+                    <td>
+                        ${item.carrierFulfillmentStatus}
+                    </td>
+                    <td>
+                        ${item.id.releaseCycle}
+                    </td>
+                    <td>
+                        ${item.productionRunNo}
+                    </td>
+                    <!--<td width="50">-->
+                        <!--<spring:url value="/resources/images/delete.png" var="delete_image_url"/>-->
+                        <!--<spring:url var="orderfulfillmentsdelete" value="/weldorders">-->
+                            <!--<spring:param name="orderfulfillment" value="-"/>-->
+                            <!--<spring:param name="itemId" value="${itemId}"/>-->
+                            <!--<spring:param name="carrierNumber" value="${item.id.carrierNumber}"/>-->
+                        <!--</spring:url>-->
+
+                        <!--<a href="${orderfulfillmentsdelete}" alt="delete" title="delete">-->
+                            <!--<img alt="delete" class="image" src="${delete_image_url}" title="delete"/>-->
+                        <!--</a>-->
+                    <!--</td>-->
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
+
+</div>

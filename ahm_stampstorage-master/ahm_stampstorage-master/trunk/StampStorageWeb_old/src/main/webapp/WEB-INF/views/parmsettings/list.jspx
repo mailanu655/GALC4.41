@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_honda_mfg_stampstorage_domain_ParmSetting" items="${parmsettings}" z="DrbEmlYz7uhCCDR0kTtXJ3Q9+0s=">
+        <table:table data="${parmsettings}" id="l_com_honda_mfg_stampstorage_domain_ParmSetting" path="/parmsettings" z="4zsucvsRqJYxgABZUfoviCoonmA=" create="true" delete="true" show="true">
+            <table:column id="c_com_honda_mfg_stampstorage_domain_ParmSetting_fieldname" property="fieldname" maxLength="40" z="Jot2y7LhtzAJaOYfgjj8yolLdbA="/>
+            <table:column id="c_com_honda_mfg_stampstorage_domain_ParmSetting_fieldvalue" property="fieldvalue" z="KiimgiTWFgs98sqPQmEYgV1U9+o="/>
+            <table:column id="c_com_honda_mfg_stampstorage_domain_ParmSetting_description" property="description" maxLength="40" z="+V2eyw9hPKhzjbdcKYzSeIp9HxU="/>
+            <table:column id="c_com_honda_mfg_stampstorage_domain_ParmSetting_updatedby" property="updatedby" z="NyDzcl5TLRqd8f22r/9tT0di5ic="/>
+            <table:column id="c_com_honda_mfg_stampstorage_domain_ParmSetting_updatetstp" property="updatetstp" z="5f1o8GsHgYh1CxuWSV06S5jRRbo="/>
+        </table:table>
+    </page:list>
+</div>

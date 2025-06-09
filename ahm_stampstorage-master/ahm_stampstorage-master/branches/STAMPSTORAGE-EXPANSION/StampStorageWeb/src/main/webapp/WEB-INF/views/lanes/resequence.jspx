@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags"
+     xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+                var elem = document.getElementById("config");
+                elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+            function checkValues(count){
+
+                var x = document.getElementsByName('carriernumber')
+                var i=0;
+                var length = x.length;
+                while (length > i){
+
+                    if(x[count].value.length == 0){
+                        return;
+                    }
+                    if(i != count){
+                        if(x[i].value == x[count].value){
+                            alert('duplicate carrier number'+ x[count].value);
+                            x[count].value="";
+                            x[count].select();
+                            break;
+                        }
+                    }
+
+                    i++;
+                }
+            }
+
+            function noBlank(){
+                var x = document.getElementsByName('carriernumber')
+                var i=0;
+                var length = x.length;
+                while (length-1 > i){
+
+                    if(x[i].value.length == 0){
+
+                        if(x[i+1].value.length > 0){
+                            alert('blanks not allowed in between ');
+                            x[i].select();
+                            break;
+                        }
+                    }
+                     i++;
+                }
+            }
+
+
+            function checkInsertValues(){
+                var x = null;
+                x = document.getElementsByName('carriernumber');
+                var y = document.getElementsByName('carriernumberinsert');
+
+                var i=0;
+                var length = x.length;
+
+                if(y[0].value.length == 0){
+                    return;
+                }
+                var k;
+                while (length > i){
+                    k = k+","+ x[i].value ;
+                    if(x[i].value == y[0].value){
+                        alert('duplicate carrier number '+ y[0].value+" cannot insert "+x[i].value);
+                        y[0].select();
+                        break;
+                    }
+
+                    i++;
+                }
+            }
+
+
+            function gowait() {
+                     document.getElementById("wait").style.display = "block";
+            }
+
+        </script>
+    </head>
+    <table>
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+    </table>
+    <spring:eval var="counter" expression="0"/>
+    <h3 align="center"> <u><c:out value="${lanename}"/></u> </h3>
+    <table>
+        <tr>
+            <c:choose>
+                <c:when test="${message!= null}">
+                    <td colspan="2" style="color:red;">
+                        <br></br>
+                        <b>
+                            <c:out value="${message}"/>
+                        </b>
+                        <br></br>
+                    </td>
+                </c:when>
+            </c:choose>
+             <div id="wait" class="form-submit-popup" style="display: none;">
+                         <h3> processing please wait.....</h3>
+             </div>
+        </tr>
+        <tr>
+            <td>
+                <form:form action="lanes" method="PUT" modelAttribute="carriers" name="resequenceform"
+                           onsubmit="gowait();">
+                    <table>
+                        <tr>
+                            <th colspan="2" align="center">
+                                Resequence Complete Row
+                            </th>
+                        </tr>
+                        <tr>
+                            <td align="center">Position In Row</td>
+                            <td halign="center">Carrier Number</td>
+                        </tr>
+                        <c:forEach var="i" begin="1" end="${maxcapacity}" step="1" varStatus="status">
+                            <tr>
+                                <td align="center">
+                                    <c:out value="${counter+1}"/>
+                                </td>
+                                <td align="center">
+                                    <input id="_carriernumber_id_${counter}" name="carriernumber" type="text" SIZE="10"
+                                           MAXLENGTH="3" value="${carriers[counter]}" onBlur="checkValues(${counter});"/>
+                                </td>
+                            </tr>
+                            <spring:eval var="counter" expression="counter + 1"/>
+                        </c:forEach>
+                    </table>
+                    <input type="hidden" name="stopConveyorId" value="${stop}"/>
+                    <br></br>
+                    <div align="center">
+                        <script type="text/javascript">Spring.addDecoration(new
+                            Spring.ValidateAllDecoration({elementId:'proceed',
+                            event:'onclick'}));
+                        </script>
+                        <input id="proceed" name="submit" type="submit" value="Submit"/>
+                    </div>
+                    <br></br>
+
+                </form:form>
+            </td>
+
+
+            <td valign="top">
+                <table>
+                    <c:choose>
+                        <c:when test="${allowinsert}">
+                            <tr>
+                                <c:choose>
+                                    <c:when test="${insertmessage!= null}">
+                                        <td style="color:red;">
+                                            <br></br>
+                                            <b>
+                                                <c:out value="${insertmessage}"/>
+                                            </b>
+                                            <br></br>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td valign="top">
+                                    <br></br>
+                                    <br></br>
+                                    <spring:eval var="counter" expression="0"/>
+                                    <form:form action="lanes" method="PUT" modelAttribute="carriers">
+                                        <table>
+                                            <tr>
+                                                <th colspan="2">
+                                                    Insert Carrier
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    Carrier Number :
+                                                    <input id="carrierno" name="carriernumberinsert" type="text"
+                                                           MAXLENGTH="3" SIZE="10" onBlur="checkInsertValues();"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    Position :
+                                                    <select id="carrierposition" name="carrierposition">
+                                                        <c:forEach var="i" begin="1" end="${carriercount}" step="1"
+                                                                   varStatus="status">
+                                                            <option>${counter+1}</option>
+                                                            <spring:eval var="counter" expression="counter + 1"/>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <input type="hidden" name="stopConveyorId" value="${stop}"/>
+                                        <input type="hidden" name="carrier" value="insert"/>
+                                        <br></br>
+                                        <div>
+                                            <script type="text/javascript">Spring.addDecoration(new
+                                                Spring.ValidateAllDecoration({elementId:'proceed',
+                                                event:'onclick'}));
+                                            </script>
+                                            <input id="proceed" type="submit" value="Insert"/>
+                                        </div>
+                                        <br></br>
+                                    </form:form>
+                                </td>
+                            </tr>
+                        </c:when>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${allowdelete}">
+                            <tr>
+
+                                <td valign="top">
+                                    <br></br>
+                                    <br></br>
+                                    <form:form action="lanes" method="PUT" modelAttribute="carriers"
+                                               name="remove carrier">
+                                        <table border="1">
+                                            <tr>
+                                                <th colspan="2" halign="center">
+                                                    Remove Carrier
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    Carrier Number :
+                                                    <select id="carriernodel" name="carriernumberdelete">
+                                                        <c:forEach items="${carriers}" var="carrier">
+                                                            <option>${carrier}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <input type="hidden" name="stopConveyorId" value="${stop}"/>
+                                        <input type="hidden" name="carrier" value="remove"/>
+                                        <br></br>
+                                        <div align="center">
+                                            <script type="text/javascript">Spring.addDecoration(new
+                                                Spring.ValidateAllDecoration({elementId:'proceed',
+                                                event:'onclick'}));
+                                            </script>
+                                            <input id="proceed" type="submit" value="Delete"/>
+                                        </div>
+                                        <br></br>
+                                    </form:form>
+                                </td>
+                            </tr>
+                        </c:when>
+                    </c:choose>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

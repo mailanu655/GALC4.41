@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_conveyor_domain_Defect" object="${defect}" path="/defects"
+               z="Y9yGsuzYSRHjY4fo4BnMKYzq9ok=">
+        <field:display field="carrierNumber" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_carrierNumber"
+                       object="${defect}" z="4I9raDHcupOSAfXdDa1QHGL3+4U="/>
+        <field:display field="productionRunNo" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_productionRunNo"
+                       object="${defect}" z="mRcfyz0671UbXSyggdfrtOqOOfY="/>
+        <field:display field="defectType" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_defectType"
+                       object="${defect}" z="B8EcTpZoyKFUySwffNpBYSrlEwk="/>
+        <field:display field="reworkMethod" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_reworkMethod"
+                       object="${defect}" z="0gXSeSKU/vixeT1Mgz/3hLqdULw="/>
+        <field:display field="XArea" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_xArea" object="${defect}"
+                       z="S/dfZHJICIxtYRB+xr7BfQbg/L8="/>
+        <field:display field="YArea" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_yArea" object="${defect}"
+                       z="ZhFPHqoG3Vl4RhFWwWccfoNjiXU="/>
+        <field:display field="Note" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_note" object="${defect}"
+                       z="ZhFPHqoG3Vl4RhFWwWccfoNjiXU="/>
+        <field:display date="true" dateTimePattern="${defect_defecttimestamp_date_format}" field="defectTimestamp"
+                       id="s_com_honda_mfg_stamp_conveyor_domain_Defect_defectTimestamp" object="${defect}"
+                       z="Rd4VpQf/6MoTsKo91X9N76u/K7g="/>
+        <field:display field="defectRepaired" id="s_com_honda_mfg_stamp_conveyor_domain_Defect_defectRepaired"
+                       object="${defect}" z="YrAJW5YJ/MFu7sCwFiO67Gp2MlA="/>
+    </page:show>
+</div>

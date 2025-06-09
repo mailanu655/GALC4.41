@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_Die" modelAttribute="die" path="/dies" versionField="Version"
+                 z="user-managed">
+        <!--<field:input field="id" id="c_com_honda_mfg_stamp_storage_domain_Die_id" max="3" min="3"-->
+        <!--required="true" z="user-managed"/>-->
+        <field:display field="id" id="s_com_honda_mfg_stamp_storage_domain_Die_id" object="${die}"
+                       z="user-managed"/>
+        <field:input field="bpmPartNumber" id="c_com_honda_mfg_stamp_storage_domain_Die_bpmpartnumber"
+                     required="true" z="user-managed"/>
+        <field:input field="description" id="c_com_honda_mfg_stamp_storage_domain_Die_description" z="user-managed"/>
+        <field:select field="partProductionVolume" id="c_com_honda_mfg_stamp_storage_domain_Die_partProductionVolume"
+                      items="${partProductionVolumes}" path="partProductionVolumes" required="true" z="user-managed"/>
+        <field:input field="imageFileName" id="c_com_honda_mfg_stamp_storage_domain_Die_imagefilename"
+                     z="user-managed"/>
+        <field:input field="backgroundColor" id="c_com_honda_mfg_stamp_storage_domain_Die_backgroundColor"
+                     z="user-managed"/>
+        <field:input field="textColor" id="c_com_honda_mfg_stamp_storage_domain_Die_textColor" z="user-managed"/>
+        <field:checkbox field="active" id="c_com_honda_mfg_stamp_storage_domain_Die_active" z="user-managed"/>
+    </form:update>
+</div>

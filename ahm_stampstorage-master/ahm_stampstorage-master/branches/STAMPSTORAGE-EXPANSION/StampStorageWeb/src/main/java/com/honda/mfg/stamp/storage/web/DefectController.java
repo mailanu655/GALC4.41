@@ -1,0 +1,239 @@
+package com.honda.mfg.stamp.storage.web;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.joda.time.format.DateTimeFormat;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.UriUtils;
+import org.springframework.web.util.WebUtils;
+
+import com.honda.mfg.stamp.conveyor.domain.CarrierMes;
+import com.honda.mfg.stamp.conveyor.domain.Defect;
+import com.honda.mfg.stamp.conveyor.domain.Die;
+import com.honda.mfg.stamp.conveyor.domain.Stop;
+import com.honda.mfg.stamp.conveyor.domain.enums.DEFECT_TYPE;
+import com.honda.mfg.stamp.conveyor.domain.enums.REWORK_METHOD;
+import com.honda.mfg.stamp.conveyor.domain.enums.StopType;
+
+@RequestMapping("/defects")
+@Controller
+public class DefectController {
+
+	@RequestMapping(params = "detailedinventory", method = RequestMethod.POST)
+	public String create(@Valid Defect defect, BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			uiModel.addAttribute("defect", defect);
+			addDateTimeFormatPatterns(uiModel);
+			return "defects/create";
+		}
+		defect.setDefectTimestamp(new Date(System.currentTimeMillis()));
+		String user = httpServletRequest.getUserPrincipal().getName();
+		defect.setSource(user);
+		defect.persist();
+
+		uiModel.asMap().clear();
+		String[] paramValues = httpServletRequest.getParameterValues("detailedinventory");
+
+		boolean detailedInventory = Boolean.valueOf(paramValues[0]);
+		CarrierMes carrierMes = CarrierMes.findCarrierByCarrierNumber(defect.getCarrierNumber());
+
+		Long location = carrierMes.getCurrentLocation();
+		Stop currentLocation = Stop.findStop(location);
+
+		if (currentLocation.getStopType().equals(StopType.STORE_IN_ALL_LANES)
+				|| currentLocation.getStopType().equals(StopType.RELEASE_CHECK)) {
+			return "redirect:/carriers?inspection=-&location=" + location + "&workStationName="
+					+ currentLocation.getName();
+		} else {
+			if (detailedInventory) {
+				return "redirect:/lanes/" + carrierMes.getId() + "?form=-";
+			}
+			return "redirect:/carriers/" + carrierMes.getId() + "?form=-";
+		}
+	}
+
+	@RequestMapping(params = "form", method = RequestMethod.GET)
+	public String createDefectForm(Model uiModel) {
+		Defect defect = new Defect();
+		String imgUrl = "";
+		String imageName = "";
+		imgUrl = "/resources/images/" + imageName;
+		uiModel.addAttribute("defect", defect);
+		uiModel.addAttribute("imgUrl", imgUrl);
+		uiModel.addAttribute("imgLabel", imageName);
+		addDateTimeFormatPatterns(uiModel);
+		return "defects/create";
+	}
+
+	@RequestMapping(params = "create", value = "/{carriernumber}/{detailedinventory}", method = RequestMethod.GET)
+	public String createDefectFormForInspection(@PathVariable("carriernumber") Integer carriernumber,
+			@PathVariable("detailedinventory") boolean detailedinventory, Model uiModel) {
+		Defect defect = new Defect();
+		CarrierMes carrier = CarrierMes.findCarrierByCarrierNumber(carriernumber);
+		String imageName = "";
+		String imgUrl = "";
+		Die die = null;
+		if (carrier != null) {
+			defect.setCarrierNumber(carriernumber);
+			defect.setProductionRunNo(carrier.getProductionRunNumber());
+			die = Die.findDie(new Long(carrier.getDieNumber()));
+		}
+		if (die != null) {
+			imageName = die.getDescription();
+			imgUrl = "/resources/images/" + die.getImageFileName();
+		}
+
+		uiModel.addAttribute("defect", defect);
+		uiModel.addAttribute("imgUrl", imgUrl);
+		uiModel.addAttribute("imgLabel", imageName);
+		uiModel.addAttribute("detailedinventory", detailedinventory);
+		addDateTimeFormatPatterns(uiModel);
+		return "defects/create";
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String show(@PathVariable("id") Long id, Model uiModel) {
+		addDateTimeFormatPatterns(uiModel);
+		uiModel.addAttribute("defect", Defect.findDefect(id));
+		uiModel.addAttribute("itemId", id);
+		return "defects/show";
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public String list(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+		if (page != null || size != null) {
+			int sizeNo = size == null ? 10 : size.intValue();
+			uiModel.addAttribute("defects",
+					Defect.findDefectEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+			float nrOfPages = (float) Defect.countDefects() / sizeNo;
+			uiModel.addAttribute("maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+		} else {
+			uiModel.addAttribute("defects", Defect.findAllDefects());
+		}
+		addDateTimeFormatPatterns(uiModel);
+		return "defects/list";
+	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	public String update(@Valid Defect defect, BindingResult bindingResult, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		if (bindingResult.hasErrors()) {
+			uiModel.addAttribute("defect", defect);
+			addDateTimeFormatPatterns(uiModel);
+			return "defects/update";
+		}
+		uiModel.asMap().clear();
+		String user = httpServletRequest.getUserPrincipal().getName();
+		defect.setSource(user);
+		defect.merge();
+
+		String[] paramValues = httpServletRequest.getParameterValues("detailedinventory");
+
+		boolean detailedInventory = Boolean.valueOf(paramValues[0]);
+		CarrierMes carrierMes = CarrierMes.findCarrierByCarrierNumber(defect.getCarrierNumber());
+
+		Long location = carrierMes.getCurrentLocation();
+		Stop currentLocation = Stop.findStop(location);
+
+//        if (defect.getDefectType() == DEFECT_TYPE.OTHER && defect.getNote().length() <= 0) {
+//            return "defects/exception_EmptyNote";
+//        }
+
+		if (currentLocation.getStopType().equals(StopType.STORE_IN_ALL_LANES)
+				|| currentLocation.getStopType().equals(StopType.RELEASE_CHECK)) {
+			return "redirect:/carriers?inspection=-&location=" + location;
+		} else {
+			if (detailedInventory) {
+				return "redirect:/lanes/" + carrierMes.getId() + "?form=-";
+			}
+			return "redirect:/carriers/" + carrierMes.getId() + "?form=-";
+		}
+		// return "redirect:/defects/" + encodeUrlPathSegment(defect.getId().toString(),
+		// httpServletRequest);
+	}
+
+	@RequestMapping(value = "/{id}/{detailedinventory}", params = "form", method = RequestMethod.GET)
+	public String updateForm(@PathVariable("id") Long id, @PathVariable("detailedinventory") boolean detailedinventory,
+			Model uiModel) {
+		uiModel.addAttribute("defect", Defect.findDefect(id));
+		uiModel.addAttribute("detailedinventory", detailedinventory);
+		addDateTimeFormatPatterns(uiModel);
+		return "defects/update";
+	}
+
+	@RequestMapping(value = "/{id}/{detailedinventory}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable("id") Long id, @PathVariable("detailedinventory") Boolean detailedInventory,
+			@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "size", required = false) Integer size, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+
+		Defect defect = Defect.findDefect(id);
+		CarrierMes carrierMes = CarrierMes.findCarrierByCarrierNumber(defect.getCarrierNumber());
+		Long location = carrierMes.getCurrentLocation();
+		Stop currentLocation = Stop.findStop(location);
+
+//        String[] paramValues = httpServletRequest.getParameterValues("detailedinventory") ;
+//        boolean detailedInventory = Boolean.valueOf(paramValues[0]);
+//
+		defect.remove();
+		uiModel.asMap().clear();
+		uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+		uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+		if (currentLocation.getStopType().equals(StopType.STORE_IN_ALL_LANES)
+				|| currentLocation.getStopType().equals(StopType.RELEASE_CHECK)) {
+			return "redirect:/carriers?inspection=-&location=" + location;
+		} else {
+			if (detailedInventory) {
+				return "redirect:/lanes/" + carrierMes.getId() + "?form=-";
+			}
+			return "redirect:/carriers/" + carrierMes.getId() + "?form=-";
+		}
+	}
+
+	@ModelAttribute("defect_types")
+	public Collection<DEFECT_TYPE> populateDEFECT_TYPEs() {
+		return Arrays.asList(DEFECT_TYPE.class.getEnumConstants());
+	}
+
+	@ModelAttribute("defects")
+	public Collection<Defect> populateDefects() {
+		return Defect.findAllDefects();
+	}
+
+	@ModelAttribute("rework_methods")
+	public Collection<REWORK_METHOD> populateREWORK_METHODs() {
+		return Arrays.asList(REWORK_METHOD.class.getEnumConstants());
+	}
+
+	void addDateTimeFormatPatterns(Model uiModel) {
+		uiModel.addAttribute("defect_defecttimestamp_date_format",
+				DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+	}
+
+	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest)
+			throws UnsupportedEncodingException {
+		String enc = httpServletRequest.getCharacterEncoding();
+		if (enc == null) {
+			enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+		}
+		pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+		return pathSegment;
+	}
+}

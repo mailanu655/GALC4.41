@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_honda_mfg_stamp_conveyor_domain_CarrierHistory" modelAttribute="carrierHistory" path="/carrierhistories" versionField="Version" z="1YtA6+QhpHVbwC9UrVKHSC3HsT8=">
+        <field:input field="buffer" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_buffer" required="true" validationMessageCode="field_invalid_integer" z="kellzYCNQh4UqQGzuRU28OZNvOY="/>
+        <field:input field="CarrierNumber" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CarrierNumber" required="true" validationMessageCode="field_invalid_integer" z="HyzSnBcQJ7+xXgKBwvAcg1pp5cA="/>
+        <field:input field="CurrentLocation" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CurrentLocation" required="true" validationMessageCode="field_invalid_integer" z="iKeDTbw/H/YZd7o9s9Ey4xwdp9A="/>
+        <field:input field="Destination" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Destination" required="true" validationMessageCode="field_invalid_integer" z="Zecof+vXwd7AE/g49kUrtZIaMKY="/>
+        <field:input field="DieNumber" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_DieNumber" required="true" validationMessageCode="field_invalid_integer" z="BxvuRudetaBXZQOOS+t6ke/SeRk="/>
+        <field:input field="OriginationLocation" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_OriginationLocation" required="true" validationMessageCode="field_invalid_integer" z="uncsaeU5Lp2de6XrXAdSecK/A84="/>
+        <field:input field="ProductionRunDate" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_ProductionRunDate" required="true" z="lid0qgmPx7YaYE1sfnoYmEAoBBo="/>
+        <field:input field="ProductionRunNumber" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_ProductionRunNumber" required="true" validationMessageCode="field_invalid_integer" z="hatmefpTmTDX93nkkpPde3xYe7c="/>
+        <field:input field="Quantity" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Quantity" required="true" validationMessageCode="field_invalid_integer" z="0hh25JEZGv48AlLq8178V8E1eZ0="/>
+        <field:input field="Status" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Status" required="true" validationMessageCode="field_invalid_integer" z="e/XYFbh9UYshCWA4fvtGYC6oUwU="/>
+        <field:input field="TagId" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_TagId" required="true" validationMessageCode="field_invalid_integer" z="0gQxn1dp7jqFQ3yQ1ZYezBpkoyc="/>
+        <field:input field="UpdateDate" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_UpdateDate" required="true" z="MX+8R7wsQbufwUDKWZa1ch+WDFo="/>
+        <field:input field="Source" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Source" required="true" z="DSI0moksZ8dXhjhDvw/ZAU6KnS4="/>
+        <field:input field="CarrierMesArchiveTstp" id="c_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CarrierMesArchiveTstp" required="true" z="D8vwS2WmL+WRZvhP0rUKj69w5Rg="/>
+    </form:update>
+</div>

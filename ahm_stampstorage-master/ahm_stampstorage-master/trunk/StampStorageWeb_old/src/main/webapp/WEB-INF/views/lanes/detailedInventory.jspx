@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     version="2.0" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+    </head>
+    <div name="top">
+        <table border="0" class="detailedInventoryAreaHeaderMenu">
+            <tr>
+                <td align="center">
+                    <a href="#Q_AREA">Q-AREA</a>
+                </td>
+                <td align="center">
+                    <a href="#C_HIGH">C-High</a>
+                </td>
+                <td align="center">
+                    <a href="#A_AREA">A-Area</a>
+                </td>
+                <td align="center">
+                    <a href="#C_LOW">C-Low</a>
+                </td>
+                <td align="center">
+                    <a href="#S_AREA">S-AREA</a>
+                </td>
+                <td align="center">
+                    <a href="#B_AREA">B-AREA</a>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <label class="detailedInventoryLeaving" style="text-align:center;font-size: 14px;">
+            <b>LEAVING</b>
+        </label>
+        <label class="detailedInventoryInQueue" style="text-align:center;font-size: 14px;">
+            <b>INQUEUE</b>
+        </label>
+        <label class="detailedInventoryInLane" style="text-align:center;font-size: 14px;">
+            <b>IN LANE</b>
+        </label>
+        <label class="detailedInventoryInRoute" style="text-align:center;font-size: 14px;">
+            <b>IN ROUTE</b>
+        </label>
+        <label style="background-color:#FF3300;color:#FFFFFF;text-align:center;font-size: 14px;">
+            <b>ON-HOLD</b>
+        </label>
+        <label style="background-color:#3399FF;color:#FFFFFF;text-align:center;font-size: 14px;">
+            <b>INSPECTION</b>
+        </label>
+    </div>
+    <br/>
+    <br/>
+
+    <spring:eval var="i" expression="0"/>
+
+
+    <c:forEach items="${rows}" var="storageRows">
+
+        <div class="detailedInventoryAreaHeader">
+            <a name="${areas[i]}">${areas[i]}</a>
+        </div>
+        <div class="detailedInventoryMenuLink">
+            <a href="#top">Menu</a>
+        </div>
+        <div style="overflow: auto;" align="center">
+        <c:forEach items="${storageRows}" var="row">
+            <table class="detailedInventoryContainerTable">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <td class="detailedInventoryLabel">
+                        <table class="detailedInventoryLabel">
+                            <tr>
+                                <td class="detailedInventoryLabel">
+                                    Model
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detailedInventoryLabel">
+                                    Status
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detailedInventoryLabel">
+                                    Quantity
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="detailedInventoryLabel">
+                                    Carrier
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <td>
+                            <c:choose>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <table border="0" class="detailedInventoryLeaving">
+                                        <tr>
+                                            <td class="detailedInventoryDataCell detailedInventoryLeaving">
+                                                ${item.die.description}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                            <td class="detailedInventoryHold">
+                                                                HOLD
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                            <td class="detailedInventoryInspection">
+                                                                INSP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                            <td  class="detailedInventoryLeaving">
+                                                              SHIP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                            <td class="detailedInventoryMaintenanceRequired">
+                                                               MTRQ
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td>
+                                                        ${item.carrierStatus}
+                                                    </td>
+                                                </c:otherwise>
+                                            </c:choose>
+
+                                        </tr>
+                                        <tr>
+                                            <td  class="detailedInventoryLeaving">
+                                                ${item.quantity}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="detailedInventoryLeaving">
+                                                <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                                    <spring:param name="form" value="-"/>
+                                                </spring:url>
+
+                                                <a href="${carrierupdate}">${item.carrierNumber}</a>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </c:when>
+
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <table border="0" class="detailedInventoryInQueue">
+                                        <tr>
+                                            <td class="detailedInventoryInQueue">
+                                                ${item.die.description}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                            <td class="detailedInventoryHold">
+                                                                HOLD
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                            <td class="detailedInventoryInspection">
+                                                                INSP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                            <td class="detailedInventoryInQueue">
+                                                              SHIP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                            <td class="detailedInventoryMaintenanceRequired">
+                                                               MTRQ
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td>
+                                                        ${item.carrierStatus}
+                                                    </td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInQueue">
+                                                ${item.quantity}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInQueue">
+                                                <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                                    <spring:param name="form" value="-"/>
+                                                </spring:url>
+
+                                                <a href="${carrierupdate}">${item.carrierNumber}</a>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${item.alreadyInLane}">
+                                    <table border="0" class="detailedInventoryInLane">
+                                        <tr>
+                                            <td class="detailedInventoryInLane">
+                                                ${item.die.description}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                            <td class="detailedInventoryHold">
+                                                                HOLD
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                            <td class="detailedInventoryInspection">
+                                                                INSP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                            <td class="detailedInventoryInLane">
+                                                              SHIP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                            <td class="detailedInventoryMaintenanceRequired">
+                                                               MTRQ
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td class="detailedInventoryInLane">
+                                                        ${item.carrierStatus}
+                                                    </td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInLane">
+                                                ${item.quantity}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInLane">
+                                                <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                                    <spring:param name="form" value="-"/>
+                                                </spring:url>
+
+                                                <a href="${carrierupdate}">${item.carrierNumber}</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <table border="0" class="detailedInventoryInRoute">
+                                        <tr>
+                                            <td class="detailedInventoryInRoute">
+                                                ${item.die.description}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                            <td class="detailedInventoryHold">
+                                                                HOLD
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                            <td class="detailedInventoryInspection">
+                                                                INSP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                            <td class="detailedInventoryInRoute">
+                                                              SHIP
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                    <c:choose>
+                                                        <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                            <td class="detailedInventoryMaintenanceRequired">
+                                                               MTRQ
+                                                            </td>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td class="detailedInventoryInRoute">
+                                                        ${item.carrierStatus}
+                                                    </td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInRoute">
+                                                ${item.quantity}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="detailedInventoryInRoute">
+                                                <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                                    <spring:param name="form" value="-"/>
+                                                </spring:url>
+
+                                                <a href="${carrierupdate}">${item.carrierNumber}</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </c:when>
+                            </c:choose>
+
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.capacity - row.carriersAsLinkedList.size()"/>
+
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td>
+                                    <table class="detailedInventoryVacantMarker" border="0">
+                                        <tr>
+                                            <td>
+                                                00000
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </table>
+        </c:forEach>
+    </div>
+    <br/>
+        <spring:eval var="i" expression="i + 1"/>
+    </c:forEach>
+
+
+
+</div>

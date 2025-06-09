@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<telegram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="Telegram.xsd" id="MID0018">
+    <header headerlength="20">
+        <length length="4" datatype="decimal">23</length>
+        <mid length="4" datatype="decimal">18</mid>
+        <revision length="3"/>
+        <no_ack_flag length="1"/>
+        <spare length="8"/>
+    </header>
+    <data includeId="false">
+        <parameter id="01" name="PSET_NUMBER" length="3" datatype="decimal" value="0"/>
+    </data>
+    <!--  MESSAGE_END -->
+</telegram>
+

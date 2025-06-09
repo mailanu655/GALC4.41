@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_AlarmContact" object="${alarmcontact}" path="/alarmcontacts"
+               z="htSCtN0zkTAtZ5GCszA8OeYc4P8=">
+        <field:display field="alarm" id="s_com_honda_mfg_stamp_storage_domain_AlarmContact_alarm"
+                       object="${alarmcontact}" z="Mqi+B6Q2savctZkmLwaK0Lcz81E="/>
+        <field:display field="contact" id="s_com_honda_mfg_stamp_storage_domain_AlarmContact_contact"
+                       object="${alarmcontact}" z="fESXAr82VfUcyp9+msn/Qawxv9U="/>
+        <field:display field="contactType" id="s_com_honda_mfg_stamp_storage_domain_AlarmContact_contactType"
+                       object="${alarmcontact}" z="AkO3elZEXOIpOGDS7dk9Gni3WFM="/>
+    </page:show>
+</div>

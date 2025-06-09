@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_conveyor_domain_StorageRow" object="${storagerow}" path="/storagerows" z="Y5igntnjPbbB2IEUXySN0wshNq0=">
+        <field:display field="rowName" id="s_com_honda_mfg_stamp_conveyor_domain_StorageRow_rowName" object="${storagerow}" z="uoBSXR8JR+MXQvCLM1SjfG+NvP8="/>
+        <field:display field="stop" id="s_com_honda_mfg_stamp_conveyor_domain_StorageRow_stop" object="${storagerow}" z="xnRNYiTp2FgV+jRaK0ixEAUzato="/>
+        <field:display field="capacity" id="s_com_honda_mfg_stamp_conveyor_domain_StorageRow_capacity" object="${storagerow}" z="xNXUBRqibH4bsDt2HlhgHWFtM+g="/>
+        <field:display field="storageArea" id="s_com_honda_mfg_stamp_conveyor_domain_StorageRow_storageArea" object="${storagerow}" z="sOSswvo3Ff2FdzfH+TPh/WUP0zg="/>
+        <field:display field="availability" id="s_com_honda_mfg_stamp_conveyor_domain_StorageRow_availability" object="${storagerow}" z="FqHkNw9wONRJm8gzqINnrtLqUWo="/>
+    </page:show>
+</div>

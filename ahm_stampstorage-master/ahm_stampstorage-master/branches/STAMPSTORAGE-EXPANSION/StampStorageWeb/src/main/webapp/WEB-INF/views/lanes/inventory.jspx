@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <head>
+        <meta http-equiv="refresh" content="900"/>
+
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+
+    </head>
+    <table>
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+
+    </table>
+    <br></br>
+    <!--<h2 align="center">-->
+    <!--<u>Inventory By Areas</u>-->
+    <!--</h2>-->
+    <!--<br></br>-->
+    <div class="inventoryTitle">INVENTORY TOTALS</div>
+    <br/>
+    <table>
+        <tr>
+            <td valign="top" colspan="2" halign="center">
+                <div class="inventoryAreaTitle">ENTIRE STORAGE SYSTEM<br/>(does not include KD area)
+                </div>
+                <br/>
+                <table align="center">
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <th></th>
+                    <c:forEach items="${dieInventory}" var="row">
+                        <tr>
+                            <td width="110">
+                                ${row.dieName}
+                            </td>
+                            <td width="80">
+                                ${row.quantity}
+                            </td>
+                            <td width="100">
+                                ${row.holdQuantity}
+                            </td>
+                            <td width="100">
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                            <td width="400"></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top"  colspan="2" halign="center">
+                <br/>
+                <div class="inventoryAreaTitle">IN STORAGE ALL ROWS 1-46</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                     <th></th>
+                    <c:forEach items="${rowDieInventory}" var="row">
+                        <tr>
+                            <td  width="110">
+                                ${row.dieName}
+                            </td>
+                            <td  width="80">
+                                ${row.quantity}
+                            </td>
+                            <td  width="100">
+                                ${row.holdQuantity}
+                            </td>
+                            <td  width="100">
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                               <td width="400"></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+
+
+           
+
+        </tr>
+        <tr>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">STORE-OUT ROUTE</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${storeOutDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">STORE-IN ROUTE</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${storeInDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+
+
+        </tr>
+
+        <tr>
+           <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">Q WELD LINE1 AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${qWE1AreaDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+             <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">Q WELD LINE2 AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${qWE2AreaDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">WELD LINE 1</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${weldOneDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">WELD LINE 2</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${weldTwoDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">OLD WELD LINE (EMPTY STORAGE)</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <c:forEach items="${oldWeldDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">EMPTY AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <c:forEach items="${emptyAreaDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+         <tr>
+           <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">KD AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${kDDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">B AREA</div>
+                <br/>
+                 <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <c:forEach items="${bAreaDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">C PRESS AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${cPressDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td valign="top">
+                <br/>
+                <div class="inventoryAreaTitle">B PRESS AREA</div>
+                <br/>
+                <table>
+                    <th>Model</th>
+                    <th>Quantity</th>
+                    <th>On Hold</th>
+                    <th>Inspection Required</th>
+                    <c:forEach items="${bPressDieInventory}" var="row">
+                        <tr>
+                            <td>
+                                ${row.dieName}
+                            </td>
+                            <td>
+                                ${row.quantity}
+                            </td>
+                            <td>
+                                ${row.holdQuantity}
+                            </td>
+                            <td>
+                                ${row.inspectionRequiredQuantity}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+    <spring:url var="detailedInventory" value="/lanes">
+        <!--<spring:param name="detailedInventory" value="-"/>-->
+    </spring:url>
+
+    click
+    <a href="${detailedInventory}">here</a>
+    for detailed view
+
+    <br></br>
+    <br></br>
+</div>

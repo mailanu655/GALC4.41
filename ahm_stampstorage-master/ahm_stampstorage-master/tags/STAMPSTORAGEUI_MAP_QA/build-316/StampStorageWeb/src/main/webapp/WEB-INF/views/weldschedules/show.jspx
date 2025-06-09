@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_WeldSchedule" object="${weldschedule}" path="/weldschedules" z="zEAHSEMgofgtqG9PUQgZ3T6NhH4=">
+        <field:display field="weldLine" id="s_com_honda_mfg_stamp_storage_domain_WeldSchedule_weldLine" object="${weldschedule}" z="UH1KEBzzsnTDwG93aCz20K68hbQ="/>
+        <field:display field="leftHandProdPlan" id="s_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodplan" object="${weldschedule}" z="UH1KEBzzsnTDwG93aCz20K68hbQ="/>
+        <field:display field="leftHandProdRemaining" id="s_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodremaining" object="${weldschedule}" z="r9lsM281ZxkUpqq0Lnr7CEBdOCw="/>
+        <field:display field="rightHandProdPlan" id="s_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodplan" object="${weldschedule}" z="b58uOjkeTBNgFsFQ0CnpXn+BEPQ="/>
+        <field:display field="rightHandProdRemaining" id="s_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodremaining" object="${weldschedule}" z="slEvoaMDSwpGWriZxzRGNk7tv4A="/>
+    </page:show>
+</div>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_model" z="8/mXd6fgtA85V7Ct17pKVRMsC1Q=">
+            <menu:item id="i_model_new" messageCode="global_menu_new" url="/models?form="
+                       z="VrHOBQbIrFF6EHKMSQOtI20URBg="/>
+            <menu:item id="i_model_list" messageCode="global_menu_list"
+                       url="/models?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="t4HgOoJlUXLNYtYUiSG5+KRqS8o="/>
+        </menu:category>
+        <menu:category id="c_ordermgr" z="22aTxKOJAUneO8l5jrbsKuOmL0o=">
+            <menu:item id="i_ordermgr_new" messageCode="global_menu_new" url="/ordermgrs?form="
+                       z="1TwYBRrgRRpFdxONkhYN/INlio8="/>
+            <menu:item id="i_ordermgr_list" messageCode="global_menu_list"
+                       url="/ordermgrs?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="mNW55PQDy62dLlhy51R1q2/4vL0="/>
+        </menu:category>
+        <menu:category id="c_weldorder" z="2UE/uIHetUCZFkrvFC8xVENL2bg=">
+            <menu:item id="i_weldorder_new" messageCode="global_menu_new" url="/weldorders?form="
+                       z="DPWLH6fVq/5EJHQF0yDBnKqbP8g="/>
+            <menu:item id="i_weldorder_list" messageCode="global_menu_list"
+                       url="/weldorders?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="qRPkgTTtkQ2zdOinqxJzd/CcrM8="/>
+        </menu:category>
+        <menu:category id="c_stop" z="HVFgHKWi7FlLNNtc2tXXHeIZoRw=">
+            <menu:item id="i_stop_new" messageCode="global_menu_new" url="/stops?form="
+                       z="xcvZmBDjKcPFlqWxC+s/ntOc4fw="/>
+            <menu:item id="i_stop_list" messageCode="global_menu_list"
+                       url="/stops?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="G3hPWBmwYy5b4aIFnidPBGH8d7o="/>
+        </menu:category>
+        <menu:category id="c_arealookup" z="q33YuSKshv3Oq1w+fSJhhcR0K9Q=">
+            <menu:item id="i_arealookup_new" messageCode="global_menu_new" url="/arealookups?form="
+                       z="03Sl1gI44+H58gDwmLUYk4k3u+A="/>
+            <menu:item id="i_arealookup_list" messageCode="global_menu_list"
+                       url="/arealookups?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="3K/H5Lcjr7w4Om22WNyTSFaQ6cQ="/>
+        </menu:category>
+        <menu:category id="c_carrier" z="QaOlPw8YgjdS2mC/x/G+fjxE3aY=">
+            <menu:item id="i_carrier_new" messageCode="global_menu_new" url="/carriers?form="
+                       z="qyHTMVP1MWXFIx+VFfwTA+bpTpU="/>
+            <menu:item id="i_carrier_list" messageCode="global_menu_list"
+                       url="/carriers?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="pwI4l+kgAY8En0ePdOIl2azmoTU="/>
+        </menu:category>
+        <menu:category id="c_die" z="XxfzlafaafE73kCWgSiJWY0ZBPM=">
+            <menu:item id="i_die_new" messageCode="global_menu_new" url="/dies?form=" z="s+ATFqWcd8s7d2xXnRQMdPuWl/4="/>
+            <menu:item id="i_die_list" messageCode="global_menu_list"
+                       url="/dies?page=1&amp;size=${empty param.size ? 10 : param.size}"
+                       z="ESBxEkmD8qG4RQJYfs+plfMy8/I="/>
+        </menu:category>
+    </menu:menu>
+</div>

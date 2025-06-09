@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:spring="http://www.springframework.org/tags"
+     xmlns:security="http://www.springframework.org/security/tags" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("carriermgt");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+            dojo.addOnLoad(function destinationUpdate(){
+                          var currentLocationID = dijit.byId("_currentLocation_id");
+                          var carrierID = document.getElementById("_id_id");
+                          var _fragment_item_ = dojo.byId("_fragement_item_");
+                          dojo.connect(currentLocationID,"onChange", function(evt){
+
+                              window.location = '../../carriers/'+carrierID.value+'/'+currentLocationID.value+'?locationupdate=-';
+
+                          });
+
+            }) ;
+
+
+
+        </script>
+    </head>
+    <c:set var="adminOnly" value="true"/>
+    <c:set var="writable" value="false"/>
+    <c:set var="status" value="true"/>
+    <c:set var="releaseMgr" value="false"/>
+<spring:url value="/resources/images/wrench.png" var="wrench_url" />
+<spring:url value="/resources/images/bit1.png" var="bit1_url" />
+<spring:url value="/resources/images/bit2.png" var="bit2_url" />
+<spring:url value="/resources/images/bit3.png" var="bit3_url" />
+<spring:url value="/resources/images/bit4.png" var="bit4_url" />
+<spring:url value="/resources/images/bit5.png" var="bit5_url" />
+<spring:url value="/resources/images/bit6.png" var="bit6_url" />
+<spring:url value="/resources/images/bit7.png" var="bit7_url" />
+<spring:url value="/resources/images/bit8.png" var="bit8_url" />
+<spring:url value="/resources/images/bit9.png" var="bit9_url" />
+<spring:url value="/resources/images/bit10.png" var="bit10_url" />
+<spring:url value="/resources/images/bit11.png" var="bit11_url" />
+<spring:url value="/resources/images/bit12.png" var="bit12_url" />
+<spring:url value="/resources/images/bit13.png" var="bit13_url" />
+<spring:url value="/resources/images/bit14.png" var="bit14_url" />
+<spring:url value="/resources/images/bit15.png" var="bit15_url" />
+
+    <table>
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+                    </td>
+
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+    </table>
+    <br></br>
+    <!--<h2 align="center">-->
+    <!--<u>Carrier Update</u>-->
+    <!--</h2>-->
+    <!--<br></br>-->
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-STOP,ROLE_APP-OHCVQ-MAP-STOP,ROLE_APP-OHCVP-MAP-STOP,ROLE_APP-OHCVD-MAP-WEOP1,ROLE_APP-OHCVQ-MAP-WEOP1,ROLE_APP-OHCVP-MAP-WEOP1,ROLE_APP-OHCVD-MAP-WEOP2,ROLE_APP-OHCVQ-MAP-WEOP2,ROLE_APP-OHCVP-MAP-WEOP2,ROLE_APP-OHCVD-MAP-INSPECT,ROLE_APP-OHCVQ-MAP-INSPECT,ROLE_APP-OHCVP-MAP-INSPECT,ROLE_APP-OHCVD-MAP-MAINT,ROLE_APP-OHCVQ-MAP-MAINT,ROLE_APP-OHCVP-MAP-MAINT">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-MAINT,ROLE_APP-OHCVQ-MAP-MAINT,ROLE_APP-OHCVP-MAP-MAINT">
+        <c:set var="adminOnly" value="false"/>
+    </security:authorize>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-STOP,ROLE_APP-OHCVQ-MAP-STOP,ROLE_APP-OHCVP-MAP-STOP,ROLE_APP-OHCVD-MAP-INSPECT,ROLE_APP-OHCVQ-MAP-INSPECT,ROLE_APP-OHCVP-MAP-INSPECT">
+        <c:set var="status" value="false"/>
+    </security:authorize>
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">
+        <c:set var="releaseMgr" value="true"/>
+    </security:authorize>
+    <div>
+        <table>
+            <c:choose>
+                <c:when test="${not empty releasemsg || not empty recirculatemsg || not empty partOfOrderMsg || not empty invalidDieMsg }">
+                <tr>
+                    <td class="carrierRoutingMessage">
+                        <b>
+                            <c:choose>
+                                <c:when test="${not empty releasemsg}">
+                                    <c:out value="${releasemsg}"/>
+                                    <br></br>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${not empty recirculatemsg}">
+                                    <c:out value="${recirculatemsg}"/>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${not empty partOfOrderMsg}">
+                                    <br></br>
+                                    <c:out value="${partOfOrderMsg}"/>
+                                </c:when>
+                            </c:choose>
+                            <c:choose>
+                                <c:when test="${not empty invalidDieMsg}">
+                                    <br></br>
+                                    <c:out value="${invalidDieMsg}"/>
+                                </c:when>
+                            </c:choose>
+                        </b>
+                    </td>
+                    <td>
+                        <br></br>
+                    </td>
+                </tr>
+                </c:when>
+            </c:choose>
+            <tr>
+                <td valign="top">
+                    <c:choose>
+                        <c:when test="${writable}">
+
+                            <form:update id="fu_com_honda_mfg_stamp_storage_domain_Carrier" modelAttribute="carrier"
+                                         path="/carriers"
+                                         versionField="Version" z="user-managed">
+                                <field:input disabled="true" field="carrierNumber"
+                                             id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber"
+                                             required="true" validationMessageCode="field_invalid_integer"
+                                             z="user-managed"/>
+                                <field:input field="quantity" id="c_com_honda_mfg_stamp_storage_domain_Carrier_quantity"
+                                             validationMessageCode="field_invalid_integer" z="user-managed"/>
+                                <field:display field="currentLocation"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation"
+                                               object="${carrier}" z="user-managed"/>
+                                <field:select disabled="${adminOnly}" field="currentLocation"
+                                              id="c_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation"
+                                              itemValue="id" items="${stops}" path="/stops" z="user-managed" />
+                                <div id="_fragement_item_">
+                                <field:select disabled="${adminOnly}" field="destination"
+                                              id="c_com_honda_mfg_stamp_storage_domain_Carrier_destination"
+                                              itemValue="id" items="${destinations}" path="/stops" z="user-managed"/>
+                                </div>
+                                <field:select disabled="${status}" field="carrierStatus"
+                                              id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus"
+                                              items="${carrierstatuses}" path="carrierstatuses" required="true"
+                                              z="user-managed"/>
+                                <field:selectWithBlank disabled="${adminOnly}" field="die"
+                                                       id="c_com_honda_mfg_stamp_storage_domain_Carrier_die"
+                                                       itemValue="id"
+                                                       items="${dies}"
+                                                       path="/dies" z="user-managed"/>
+                                <field:display field="source" id="s_com_honda_mfg_stamp_storage_domain_Carrier_source"
+                                               object="${carrier}" z="user-managed"/>
+                                <!--<field:input disabled="true" field="updateDate"-->
+                                <!--id="c_com_honda_mfg_stamp_storage_domain_Carrier_updateDate"-->
+                                <!--required="true" validationMessageCode="field_invalid_integer" z="user-managed"/>-->
+                                <field:input disabled="${adminOnly}" field="buffer"
+                                             id="c_com_honda_mfg_stamp_storage_domain_Carrier_buffer"
+                                             required="true" validationMessageCode="field_invalid_integer"
+                                             z="user-managed"/>
+
+                                <field:display field="productionRunNo"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_productionRunNo"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display date="true" dateTimePattern="${carrier_loadtimestamp_date_format}"
+                                               field="stampingProductionRunTimestamp"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_stampingproductionruntimestamp"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                            <table style="width: 50%;">
+                                            <input type="hidden" value = "0" name="maintRequired"/>
+                                            <input type="hidden" value = "0" name="bit1"/>
+                                            <input type="hidden" value = "0" name="bit2"/>
+                                            <input type="hidden" value = "0" name="bit3"/>
+                                            <input type="hidden" value = "0" name="bit4"/>
+                                            <input type="hidden" value = "0" name="bit5"/>
+                                            <input type="hidden" value = "0" name="bit6"/>
+                                            <input type="hidden" value = "0" name="bit7"/>
+                                            <input type="hidden" value = "0" name="bit8"/>
+                                            <input type="hidden" value = "0" name="bit9"/>
+                                            <input type="hidden" value = "0" name="bit10"/>
+                                            <input type="hidden" value = "0" name="bit11"/>
+                                            <input type="hidden" value = "0" name="bit12"/>
+                                            <input type="hidden" value = "0" name="bit13"/>
+                                            <input type="hidden" value = "0" name="bit14"/>
+                                            <input type="hidden" value = "0" name="bit15"/>                                           
+									<thead>
+										<td>Maintenence Bits</td>
+										<td></td>
+									</thead>
+									<tr>
+										<td>Maintenance Required <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;" title="Maintenance Required"/>  </td>
+										<td><input type="checkbox" id='maintRequired'  value = "0" /></td>
+									</tr>
+									<c:if test="${bitInfo.showBit1}" >
+										<tr>
+										<td>${bitInfo.bit1Label }<img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;" title="${bitInfo.bit1Label }"/>  </td>
+										<td><input type="checkbox" id='bit1'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit2}">
+										<tr>
+										<td>${bitInfo.bit2Label }<img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;" title="${bitInfo.bit2Label }"/>  </td>
+										<td><input type="checkbox" id='bit2'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit3}">
+										<tr>
+										<td>${bitInfo.bit3Label }<img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;" title="${bitInfo.bit3Label }"/> </td>
+										<td><input type="checkbox" id='bit3' value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit4}">
+										<tr>
+										<td>${bitInfo.bit4Label }<img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;" title="${bitInfo.bit4Label }"/></td>
+										<td><input type="checkbox" id='bit4'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit5}">
+										<tr>
+										<td>${bitInfo.bit5Label }<img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;" title="${bitInfo.bit5Label }"/>  </td>
+										<td><input type="checkbox" id='bit5'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit6}">
+										<tr>
+										<td>${bitInfo.bit6Label }<img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;" title="${bitInfo.bit6Label }"/>  </td>
+										<td><input type="checkbox" id='bit6'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit7}">
+										<tr>
+										<td>${bitInfo.bit7Label }<img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;" title="${bitInfo.bit7Label }"/>  </td>
+										<td><input type="checkbox" id='bit7'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit8}">
+										<tr>
+										<td>${bitInfo.bit8Label }<img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;" title="${bitInfo.bit8Label }"/>  </td>
+										<td><input type="checkbox" id='bit8'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit9}">
+										<tr>
+										<td>${bitInfo.bit9Label }<img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;" title="${bitInfo.bit9Label }"/>  </td>
+										<td><input type="checkbox" id='bit9'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit10}">
+										<tr>
+										<td>${bitInfo.bit10Label }<img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;" title="${bitInfo.bit10Label }"/>  </td>
+										<td><input type="checkbox" id='bit10'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit11}">
+										<tr>
+										<td>${bitInfo.bit11Label }<img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;" title="${bitInfo.bit11Label }"/> </td>
+										<td><input type="checkbox" id='bit11'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit12}">
+										<tr>
+										<td>${bitInfo.bit12Label }<img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;" title="${bitInfo.bit12Label }"/>  </td>
+										<td><input type="checkbox" id='bit12'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit13}">
+										<tr>
+										<td>${bitInfo.bit13Label }<img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;" title="${bitInfo.bit13Label }"/></td>
+										<td><input type="checkbox" id='bit13'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit14}">
+										<tr>
+										<td>${bitInfo.bit14Label }<img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;" title="${bitInfo.bit14Label }"/>  </td>
+										<td><input type="checkbox" id='bit14'  value = "0" /></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit15}">
+										<tr>
+										<td>${bitInfo.bit15Label }<img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;" title="${bitInfo.bit15Label }"/> </td>
+										<td><input type="checkbox" id='bit15'  value = "0" /></td>
+										</tr>
+									</c:if>
+								</table>
+<br></br>
+<br></br>
+
+                                <c:choose>
+                                    <c:when test="${!status}">
+                                        <spring:url var="grouphold" value="/groupholds/${carriernumber}">
+                                            <spring:param name="ByRowAndProductionRunNoAndProductionRunDate" value="-"/>
+                                        </spring:url>
+                                        <spring:url value="/resources/images/updategroup.png" var="update_image_url"/>
+                                        <a href="${grouphold}" alt="Update Group"
+                                           title="Update Group">
+                                            <img alt="Update Group" class="image" src="${update_image_url}"
+                                                 title="Update Group"
+                                                 onclick="return confirm('Are you sure want to update group?');"/>
+                                        </a>
+                                    </c:when>
+                                </c:choose>
+                                <field:checkbox field="reprocess"
+                                                id="c_com_honda_mfg_stamp_storage_domain_Carrier_reprocess"
+                                                z="user-managed"/>
+
+                                <input type="hidden" name="originalReferrer" value="${originalReferrer}"/>
+                            </form:update>
+                        </c:when>
+                        <c:otherwise>
+                            <page:show id="ps_com_honda_mfg_stamp_storage_domain_Carrier" object="${carrier}"
+                                       path="/carriers" z="user-managed"
+                                       list="false" delete="false" update="false" create="false">
+                                <field:display field="carrierNumber"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber"
+                                               object="${carrier}" z="user-managed"/>
+                                <field:display field="quantity"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_quantity"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display field="currentLocation"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation"
+                                               object="${carrier}" z="user-managed"/>
+                                <field:display field="destination"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_destination"
+                                               object="${carrier}" z="user-managed"/>
+                                <field:display field="carrierStatus"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus"
+                                               object="${carrier}" z="user-managed"/>
+                                <field:display field="press" id="s_com_honda_mfg_stamp_storage_domain_Carrier_press"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display field="buffer" id="s_com_honda_mfg_stamp_storage_domain_Carrier_buffer"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display field="productionRunNo"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_productionRunNo"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display date="true" dateTimePattern="${carrier_loadtimestamp_date_format}"
+                                               field="stampingProductionRunTimestamp"
+                                               id="s_com_honda_mfg_stamp_storage_domain_Carrier_stampingproductionruntimestamp"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display field="die" id="s_com_honda_mfg_stamp_storage_domain_Carrier_die"
+                                               object="${carrier}"
+                                               z="user-managed"/>
+                                <field:display field="source" id="s_com_honda_mfg_stamp_storage_domain_Carrier_source"
+                                               object="${carrier}" z="user-managed"/>
+                                                                                           <table style="width: 50%;">
+									<thead>
+										<td>Maintenence Bits</td>
+										<td></td>
+									</thead>
+									<tr>
+										<td>Maintenance Required<img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;" title="Maintenance Required"/>  </td>
+										<td><input type="checkbox" id='maintRequired' value = "0" disabled="disabled"/></td>
+									</tr>
+									<c:if test="${bitInfo.showBit1}">
+										<tr>
+										<td>${bitInfo.bit1Label }<img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;" title="${bitInfo.bit1Label }"/> </td>
+										<td><input type="checkbox" id='bit1'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit2}">
+										<tr>
+										<td>${bitInfo.bit2Label }<img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;" title="${bitInfo.bit2Label }"/>  </td>
+										<td><input type="checkbox" id='bit2'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit3}">
+										<tr>
+										<td>${bitInfo.bit3Label }<img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;" title="${bitInfo.bit3Label }"/>  </td>
+										<td><input type="checkbox" id='bit3'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit4}">
+										<tr>
+										<td>${bitInfo.bit4Label }<img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;" title="${bitInfo.bit4Label }"/>  </td>
+										<td><input type="checkbox" id='bit4'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit5}">
+										<tr>
+										<td>${bitInfo.bit5Label }<img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;" title="${bitInfo.bit5Label }"/> </td>
+										<td><input type="checkbox" id='bit5'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit6}">
+										<tr>
+										<td>${bitInfo.bit6Label }<img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;" title="${bitInfo.bit6Label }"/> </td>
+										<td><input type="checkbox" id='bit6'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit7}">
+										<tr>
+										<td>${bitInfo.bit7Label }<img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;" title="${bitInfo.bit7Label }"/> </td>
+										<td><input type="checkbox" id='bit7'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit8}">
+										<tr>
+										<td>${bitInfo.bit8Label }<img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;" title="${bitInfo.bit8Label }"/> </td>
+										<td><input type="checkbox" id='bit8'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit9}">
+										<tr>
+										<td>${bitInfo.bit9Label }<img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;" title="${bitInfo.bit9Label }"/> </td>
+										<td><input type="checkbox" id='bit9'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit10}">
+										<tr>
+										<td>${bitInfo.bit10Label }<img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;" title="${bitInfo.bit10Label }"/>  </td>
+										<td><input type="checkbox" id='bit10'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit11}">
+										<tr>
+										<td>${bitInfo.bit11Label }<img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;" title="${bitInfo.bit11Label }"/>  </td>
+										<td><input type="checkbox" id='bit11'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit12}">
+										<tr>
+										<td>${bitInfo.bit12Label }<img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;" title="${bitInfo.bit12Label }"/>  </td>
+										<td><input type="checkbox" id='bit12'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit13}">
+										<tr>
+										<td>${bitInfo.bit13Label }<img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;" title="${bitInfo.bit13Label }"/>  </td>
+										<td><input type="checkbox" id='bit13'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit14}">
+										<tr>
+										<td>${bitInfo.bit14Label }<img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;" title="${bitInfo.bit14Label }"/></td>
+										<td><input type="checkbox" id='bit14'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+									<c:if test="${bitInfo.showBit15}">
+										<tr>
+										<td>${bitInfo.bit15Label }<img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;" title="${bitInfo.bit15Label }"/> </td>
+										<td><input type="checkbox" id='bit15'  value = "0" disabled="disabled"/></td>
+										</tr>
+									</c:if>
+								</table>
+                            </page:show>
+                        </c:otherwise>
+                    </c:choose>
+                    <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_Defect" items="${defects}"
+                               z="nTgIkJu2bLdSOwOBHSb7JKMPw8k=">
+                        <field:defecttable data="${defects}" id="l_com_honda_mfg_stamp_conveyor_domain_Defect"
+                                           path="/defects" create="${writable}" update="${writable}"
+                                           delete="false"
+                                           show="false" z="+YwVUwnllwOCCMy08go+I9BU+2g=">
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectType"
+                                          property="defectType" maxLength="40" z="ENtEajGnX7ot8ht99M4OUfxP6y0="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_reworkMethod"
+                                          property="reworkMethod" z="Yxn4Y5g+HnLvzFYlHyUQlljkxSc="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_xArea"
+                                          property="XArea" z="LRY8uDZNH28uUvHlzhPLw5bH65o="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_yArea"
+                                          property="YArea" z="QoAYj61p7BGXrNjpfWFQspXEhuw="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_source"
+                                          property="source" z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_note"
+                                          property="note" maxLength="-1" z="gtx28PJLK8sOenpMvPyLvRRsFVk="/>
+                            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectRepaired"
+                                          property="defectRepaired" z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>
+                            <input type="hidden" name="carriernumber" value="${carriernumber}"/>
+                            <input type="hidden" name="detailedinventory" value="${detailedinventory}"/>
+                        </field:defecttable>
+                    </page:list>
+                </td>
+                <td valign="top">
+                    <table border="1">
+                        <tr>
+                            <td align="center">
+                                <h1>
+                                    <c:out value="${imgLabel}"/>
+                                </h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <spring:url value="${imgUrl}" var="die_image_url"/>
+                                <spring:message arguments="${imgLabel}" var="img_label" htmlEscape="false"/>
+                                <img alt="${img_label}" class="image" src="${die_image_url}" title="${img_label}"
+                                     align="center"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+<script>
+	//display initial values for maint check boxes
+$("#maintRequired").prop("checked", ${carrier.maintRequired==1});
+$("#bit1").prop("checked", ${carrier.bit1==1});
+$("#bit2").prop("checked", ${carrier.bit2==1});
+$("#bit3").prop("checked", ${carrier.bit3==1});
+$("#bit4").prop("checked", ${carrier.bit4==1});
+$("#bit5").prop("checked", ${carrier.bit5==1});
+$("#bit6").prop("checked", ${carrier.bit6==1});
+$("#bit7").prop("checked", ${carrier.bit7==1});
+$("#bit8").prop("checked", ${carrier.bit8==1});
+$("#bit9").prop("checked", ${carrier.bit9==1});
+$("#bit10").prop("checked", ${carrier.bit10==1});
+$("#bit11").prop("checked", ${carrier.bit11==1});
+$("#bit12").prop("checked", ${carrier.bit12==1});
+$("#bit13").prop("checked", ${carrier.bit13==1});
+$("#bit14").prop("checked", ${carrier.bit14==1});
+$("#bit15").prop("checked", ${carrier.bit15==1});
+//$("#maintRequired").prop("value", ${carrier.maintRequired});
+$("[name=maintRequired]").prop("value", ${carrier.maintRequired});
+$("[name=bit1]").prop("value", ${carrier.bit1});
+$("[name=bit2]").prop("value", ${carrier.bit2});
+$("[name=bit3]").prop("value", ${carrier.bit3});
+$("[name=bit4]").prop("value", ${carrier.bit4});
+$("[name=bit5]").prop("value", ${carrier.bit5});
+$("[name=bit6]").prop("value", ${carrier.bit6});
+$("[name=bit7]").prop("value", ${carrier.bit7});
+$("[name=bit8]").prop("value", ${carrier.bit8});
+$("[name=bit9]").prop("value", ${carrier.bit9});
+$("[name=bit10]").prop("value", ${carrier.bit10});
+$("[name=bit11]").prop("value", ${carrier.bit11});
+$("[name=bit12]").prop("value", ${carrier.bit12});
+$("[name=bit13]").prop("value", ${carrier.bit13});
+$("[name=bit14]").prop("value", ${carrier.bit14});
+$("[name=bit15]").prop("value", ${carrier.bit15});
+$("#maintRequired").change( function (e){
+	var check = this.checked;
+	//this.value=this.checked?1:0;
+	$("[name=maintRequired]").each(function(){
+		this.value = check?1:0;
+	});
+	
+	//value = this.checked?1:0;
+	//alert("changed" + JSON.stringify(e));
+});
+
+$("input[id^='bit']").change( function (e){
+	this.value=this.checked?1:0;
+	var check = this.checked;
+	//alert("[name=" + this.id+"]");
+	$("[name=" + this.id+"]" ).each(function(){
+		this.value = check?1:0;
+	});
+// 	alert("changed" + JSON.stringify(e));
+// 	alert(JSON.stringify(this));
+// 	alert(this.id);
+});
+
+</script>
+</div>

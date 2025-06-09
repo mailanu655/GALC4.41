@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"  xmlns:security="http://www.springframework.org/security/tags"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+        </head>
+     <c:set var="writable" value="false"/>
+      <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN,ROLE_APP-OHCVD-MAP-INSPECT,ROLE_APP-OHCVQ-MAP-INSPECT,ROLE_APP-OHCVP-MAP-INSPECT,ROLE_APP-OHCVD-MAP-TLCORD,ROLE_APP-OHCVQ-MAP-TLCORD,ROLE_APP-OHCVP-MAP-TLCORD,ROLE_APP-OHCVD-MAP-MAINT,ROLE_APP-OHCVQ-MAP-MAINT,ROLE_APP-OHCVP-MAP-MAINT">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_Carrier" items="${carriers}" z="user-managed">
+
+        <table:table data="${carriers}" id="l_com_honda_mfg_stamp_storage_domain_Carrier" path="/carriers"
+                     create="false" delete="false" show="false" update="${writable}" z="user-managed">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierNumber" property="carrierNumber"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_die" property="die" maxLength="30"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_quantity" property="quantity"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_currentLocation" property="currentLocation"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_destination" property="destination"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_buffer" maxLength="20"
+                          property="buffer" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_positioninlane" maxLength="20"
+                          property="positionInLane" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_updateDate" maxLength="20"
+                          property="updateDate" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_carrierStatus" maxLength="20"
+                          property="carrierStatus" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_press" maxLength="20"
+                          property="press" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_productionrunno" maxLength="20"
+                          property="productionRunNo" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_Carrier_stampingProductionRunTimestamp"
+                          maxLength="20"
+                          property="stampingProductionRunTimestamp" z="user-managed"/>
+        </table:table>
+
+    </page:list>
+</div>

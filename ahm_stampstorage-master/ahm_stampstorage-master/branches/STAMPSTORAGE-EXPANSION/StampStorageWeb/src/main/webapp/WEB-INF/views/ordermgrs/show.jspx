@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <c:set var="writable" value="false"/>
+
+    <security:authorize ifAllGranted="ROLE_ADMIN">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_OrderMgr" object="${ordermgr}" path="/ordermgrs"
+               z="user-managed" create="${writable}" update="${writable}" delete="${writable}">
+        <field:display field="lineName" id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_lineName" object="${ordermgr}"
+                       z="user-managed"/>
+        <field:display field="leftQueueStop"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_leftqueueStop"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="rightQueueStop"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_rightqueueStop"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="deliveryStop" id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_deliveryStop"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="leftConsumptionStop"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_leftconsumptionStop"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="rightConsumptionStop"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_rightconsumptionStop"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="leftConsumptionExit"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_leftconsumptionExit"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="rightConsumptionExit"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_rightconsumptionExit"
+                       object="${ordermgr}" z="user-managed"/>
+        <field:display field="maxDeliveryCapacity"
+                       id="s_com_honda_mfg_stamp_storage_domain_OrderMgr_maxDeliveryCapacity"
+                       object="${ordermgr}" z="user-managed"/>
+    </page:show>
+</div>

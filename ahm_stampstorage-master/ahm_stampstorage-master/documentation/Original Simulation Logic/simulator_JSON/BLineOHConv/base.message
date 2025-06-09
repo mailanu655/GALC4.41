@@ -1,0 +1,13 @@
+0.00: Starting.
+0.00: Datafiles have been read. Initializing model.
+0.00: Attention: 'vsmPressCondition' has been initialized to state 'PlannedDT'.
+0.00: Resource 'rCLine' is using a state set but it does NOT have any attached resource cycles.
+0.00: Resource 'R_Weld' is using a state set but it does NOT have any attached resource cycles.
+0.00: Resource 'R_LineStarved' is using a state set but it does NOT have any attached resource cycles.
+0.00: Resource 'rBLine' is using a state set but it does NOT have any attached resource cycles.
+0.00: No valid starting location that has work or park list is in system 'pf_ohc'.
+0.00: The system may lock up.
+0.00: No valid starting location that has work or park list is in system 'kLift'.
+0.00: The system may lock up.
+0.00: Model image prepared... Ready to simulate.
+0.00: Waiting to connect to 'Ken-PC' on port: 3455

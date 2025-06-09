@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+    <definition extends="default" name="groupholds/carrierlist">
+        <put-attribute name="body" value="/WEB-INF/views/groupholds/carrierlist.jspx"/>
+    </definition>
+    <definition extends="default" name="groupholds/list">
+        <put-attribute name="body" value="/WEB-INF/views/groupholds/list.jspx"/>
+    </definition>
+     <definition extends="default" name="groupholds/createdefect">
+        <put-attribute name="body" value="/WEB-INF/views/groupholds/createdefect.jspx"/>
+    </definition>
+     <definition extends="default" name="groupholds/updatedefect">
+        <put-attribute name="body" value="/WEB-INF/views/groupholds/updatedefect.jspx"/>
+    </definition>
+</tiles-definitions>

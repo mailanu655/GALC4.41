@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <form:create id="fc_com_honda_mfg_stamp_storage_domain_alarmdefinition" modelAttribute="alarm" path="/alarms"
+                 render="${empty dependencies}" z="user-managed">
+        <field:input field="alarmNumber" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_alarmNumber" required="true"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="location" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_location" required="true"
+                     validationMessageCode="field_invalid_integer" z="user-managed"/>
+        <field:input field="name" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_name" required="true"
+                     z="user-managed"/>
+        <field:input field="description" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_description" required="true"
+                     z="user-managed"/>
+        <field:select field="notificationCategory" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_category"
+                      items="${alarm_category}" path="alarm_category" required="true" z="DIG9vCU6+ZIhpQ4/hhy9hunXMh0="/>
+        <field:select field="severity" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_severity" items="${severity}"
+                      path="severity" required="true" z="user-managed"/>
+       
+        <field:checkbox field="active" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_active"
+                        z="user-managed"/>
+        <field:checkbox field="notificationRequired" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_notificationreq"
+                        z="user-managed"/>
+        <field:checkbox field="qpcNotificationRequired" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_qpcnotificationreq"
+                        z="user-managed"/>
+        <field:select field="autoArchiveTimeInMinutes" id="c_com_honda_mfg_stamp_storage_domain_alarmdefinition_autoarchivetime" items="${autoarchivetimes}"
+                      itemValue="timeInMin" path="com.honda.mfg.stamp.conveyor.domain.enums.AutoArchiveTime" required="true" z="user-managed"/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_honda_mfg_stamp_storage_domain_alarmdefinition"
+                     render="${not empty dependencies}" z="user-managed"/>
+</div>

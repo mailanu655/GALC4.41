@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="carriers/list">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/list.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/moving">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/moving.jspx"/>
+    </definition>
+
+    <definition extends="default" name="carriers/show">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/show.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/create">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/create.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/update">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/update.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/inspection">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/inspection.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/rework_update">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/rework_update.jspx"/>
+    </definition>
+    <definition extends="default" name="carriers/exception">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/updateFailure.jspx"/>
+    </definition>
+     <definition extends="default" name="carriers/pressactivity">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/press_activity.jspx"/>
+    </definition>
+     <definition extends="default" name="carriers/current_location_update">
+        <put-attribute name="body" value="/WEB-INF/views/carriers/current_location_update.jspx"/>
+    </definition>
+</tiles-definitions>

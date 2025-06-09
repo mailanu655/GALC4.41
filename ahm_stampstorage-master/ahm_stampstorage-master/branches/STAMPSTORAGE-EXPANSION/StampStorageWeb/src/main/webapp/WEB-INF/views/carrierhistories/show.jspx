@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_conveyor_domain_CarrierHistory" object="${carrierhistory}" path="/carrierhistories" z="iagSS6eR5MejVpgQft7yrjzR7xc=">
+        <field:display field="buffer" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_buffer" object="${carrierhistory}" z="IhqI2d7irjj4mJvqPGNB3eEfIco="/>
+        <field:display field="carrierNumber" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CarrierNumber" object="${carrierhistory}" z="3HyvoImeGU4BWLpyxmjEiLrA9dc="/>
+        <field:display field="currentLocation" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CurrentLocation" object="${carrierhistory}" z="oOvrNE/4l7BMUeEVEia0qrVaICE="/>
+        <field:display field="destination" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Destination" object="${carrierhistory}" z="/tOcv6SS6ZOrE7IKLY5EPyTi+5M="/>
+        <field:display field="dieNumber" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_DieNumber" object="${carrierhistory}" z="4CsJFrUgea9fHywre5kB+3LpS9I="/>
+        <field:display field="originationLocation" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_OriginationLocation" object="${carrierhistory}" z="yZl5SGhpO+sjICGxdMJuoDKLe9c="/>
+        <field:display field="productionRunDate" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_ProductionRunDate" object="${carrierhistory}" z="vODgprVTu9mD3o1gn2tfu8U218Q="/>
+        <field:display field="productionRunNumber" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_ProductionRunNumber" object="${carrierhistory}" z="MckASrhy9PCbZqGgoZfA0e2JKbQ="/>
+        <field:display field="quantity" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Quantity" object="${carrierhistory}" z="efFCV7SsrnmXa5UERTytOnXiUMI="/>
+        <field:display field="status" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Status" object="${carrierhistory}" z="3wgWDovSda7qDneZT7As92he+co="/>
+        <field:display field="tagId" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_TagId" object="${carrierhistory}" z="8/Cz+G5B5jba9dYd8k3JEcPy3bg="/>
+        <field:display field="updateDate" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_UpdateDate" object="${carrierhistory}" z="yzSHWMKzrF8vMHnG7+raYCr665c="/>
+        <field:display field="source" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_Source" object="${carrierhistory}" z="S84lizFCwchgNlQ2YcHUdEKZZV8="/>
+        <field:display field="carrierMesArchiveTstp" id="s_com_honda_mfg_stamp_conveyor_domain_CarrierHistory_CarrierMesArchiveTstp" object="${carrierhistory}" z="aUF82AiRVo+tAcFY5ri4Z+Nmieo="/>
+    </page:show>
+</div>

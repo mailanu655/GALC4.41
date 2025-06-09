@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_StorageRow" items="${storagerows}" z="nipzXGL6fcnskXjplarPuDZRrBE=">
+        <table:table data="${storagerows}" id="l_com_honda_mfg_stamp_conveyor_domain_StorageRow" delete="false" path="/storagerows" z="RvNgXBcBgjoKu41Kvf5QmrOHrc4=">
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_rowName" property="rowName" z="DFwBYqCPR0XcLEx02b80GR9Y38w="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_stop" property="stop" z="C2AGB6z9wweU5yR8B2clflM5lbM="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_capacity" property="capacity" z="RKY7y6ntVMn9/yI6dqv+jNQI3bk="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_storageArea" property="storageArea" z="ISGpnC0i7aRdvw7IGFNH6pTT6uc="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_availability" property="availability" z="8oY6BgUPNKVYhPUQcsQm5V+F6xc="/>
+        </table:table>
+    </page:list>
+</div>

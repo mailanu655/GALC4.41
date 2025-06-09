@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="defects/list">
+        <put-attribute name="body" value="/WEB-INF/views/defects/list.jspx"/>
+    </definition>
+    <definition extends="default" name="defects/show">
+        <put-attribute name="body" value="/WEB-INF/views/defects/show.jspx"/>
+    </definition>
+    <definition extends="default" name="defects/create">
+        <put-attribute name="body" value="/WEB-INF/views/defects/create.jspx"/>
+    </definition>
+    <definition extends="default" name="defects/update">
+        <put-attribute name="body" value="/WEB-INF/views/defects/update.jspx"/>
+    </definition>
+    <definition extends="default" name="defects/exception_EmptyNote">
+        <put-attribute name="body" value="/WEB-INF/views/defects/updateFailure_EmptyNote.jspx"/>
+    </definition>
+</tiles-definitions>

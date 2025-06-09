@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<telegram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="Telegram.xsd" id="MID0001">
+    <header headerlength="20">
+        <length length="4" datatype="decimal">20</length>
+        <mid length="4" datatype="decimal">1</mid>
+        <revision length="3"/>
+        <no_ack_flag length="1"/>
+        <spare length="8"/>
+    </header>
+    <data/>
+    <!--  MESSAGE_END -->
+</telegram>
+

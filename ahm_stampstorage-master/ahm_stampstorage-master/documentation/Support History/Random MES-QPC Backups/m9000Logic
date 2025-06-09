@@ -1,0 +1,43 @@
+1. Set: 1 -> Local CPU 1.M[9001]
+2. Device Commit
+3. Set: Local CPU 1.D[9001] -> LocalVariables.carrierNumber
+4. Set: Local CPU 1.D[9201] -> LocalVariables.dieNumber
+5. Set: Local CPU 1.D[9301] -> LocalVariables.quantity
+6. Set: Local CPU 1.D[9401] -> LocalVariables.currentLocation
+7. Set: Local CPU 1.D[9501] -> LocalVariables.destination
+8. Transaction: MesDB_SelectCarrierInformation
+9. If: carrierNumber > 0
+10. If: currentLocation > 0
+11. If: 1200 < localVariable_CurrentLocation
+12. If: 1236 > localVariable_CurrentLocation
+13. Transaction: MesDB_SelectCarrierInformation
+14. If: dieNumber > 0 
+15. If: LocalVariables_currentLocation == 502
+16. If: LocalVariables_currentLocation == 506
+17. If: LocalVariables_currentLocation == 3700
+18. If: LocalVariables_currentLocation == 1800
+19. If: LocalVariables_currentLocation == 10900
+20. If: LocalVariables_currentLocation == 11900
+21. If: LocalVariables_currentLocation == 11200
+22. If: LocalVariables_currentLocation == 12200
+23. If: LocalVariables_currentLocation == 2007
+24. If: LocalVariables_currentLocation == 2011
+25. If: LocalVariables_currentLocation == 800
+26. If: LocalVariables_currentLocation == 12400
+27. If: LocalVariables_currentLocation == 4500
+28. If: LocalVariables_currentLocation == 4700
+29. If: LocalVariables_currentLocation == 2003
+30. If: LocalVariables_currentLocation == 2008
+31. If: LocalVariables_currentLocation == 2012
+32. If: LocalVariables_currentLocation == 405
+33. If: quantity == 0
+34. Set: 999 -> LocalVariables.productionRunNumber
+35. String Builder: LocalVariables.productionRunNumber=$(MM)$(YY)$(DD)$(DieNumber)
+36. String Builder: LocalVariables.productionRunNumber=$(MM)$(YY)$(DD)$(DieNumber)
+37. Execute SubTrigger: CarrierUpdate_M9000 from Project OHCV_PLC
+38. String Builder: LocalVariables.logMessage=M9000/carrier: $(carrierNumber) | currentLoc: $(currentLocation) | buff: $(buffer) | dest: $(destination) | die: $(dieNumber) | qty: $(quantity) | origin: $(origin) | runNo: $(runNumber) | runDate: $(runDate) | M9004: $(M9004)
+39. Execute SubTrigger: logMessage_M9000 from Project OHCV_PLC
+40. Set: 1 -> Local CPU 1.M[9002]
+41. String Builder: LocalVariables.logMessage=M9000/carrier: $(carrierNumber) | currentLoc: $(currentLocation) | buff: $(buffer) | dest: $(destination) | die: $(dieNumber) | qty: $(quantity) | origin: $(origin) | runNo: $(runNumber) | runDate: $(runDate) | M9004: $(M9004)
+42. Execute SubTrigger: logMessage_M9000 from Project OHCV_PLC
+43. Set: 1 -> Local CPU 1.M[9004]

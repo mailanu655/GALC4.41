@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:security="http://www.springframework.org/security/tags"
+      xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("currentalarms");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <c:set var="writable" value="false"/>
+    <security:authorize
+            access="hasAnyRole('ROLE_APP-OHCVD-MAP-STADMIN', 'ROLE_APP-OHCVP-MAP-STADMIN','ROLE_APP-OHCVQ-MAP-STADMIN','ROLE_APP-OHCVD-MAP-INSPECT','ROLE_APP-OHCVQ-MAP-INSPECT','ROLE_APP-OHCVP-MAP-INSPECT','ROLE_APP-OHCVD-MAP-TLCORD','ROLE_APP-OHCVQ-MAP-TLCORD','ROLE_APP-OHCVP-MAP-TLCORD','ROLE_APP-OHCVD-MAP-MAINT','ROLE_APP-OHCVQ-MAP-MAINT','ROLE_APP-OHCVP-MAP-MAINT')">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <form:clear_all finderName="ByClearAll" label="Clear Alarms"
+                         id="ff_com_honda_mfg_stamp_storage_domain_alarmevent" path="/alarmevents"
+                         z="user-managed">
+    </form:clear_all>
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_alarmevent" items="${alarmevents}"
+               z="Lx6Lu0STZmO5bXb7XD5oK0jjeQ8=">
+        <table:table data="${alarmevents}" id="l_com_honda_mfg_stamp_storage_domain_alarmevent"
+                     path="/alarmevents" z="user-managed" create="false" update="${writable}" delete="${writable}">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_eventtimestamp" property="eventTimestamp"
+                          maxLength="24" z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_locationstop" property="locationStop"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_alarm" property="alarm" maxLength="150"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_cleared" property="cleared"
+                          maxLength="150"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_clearedby" property="clearedBy"
+                          maxLength="150"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_alarmevent_clearedtime" property="clearedTimestamp"
+                          maxLength="150"
+                          z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

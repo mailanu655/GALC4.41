@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>StampStorageEar</name>
+    <groupId>com.honda.mfg.stamp.storage</groupId>
+    <artifactId>StampStorageUIEar</artifactId>
+    <version>1.0</version>
+    <packaging>ear</packaging>
+
+    <profiles>
+        <profile>
+            <id>alwaysactive</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+            <properties>
+                <env>dev</env>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>qa</value>
+                </property>
+            </activation>
+            <properties>
+                <env>qa</env>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>prod</value>
+                </property>
+            </activation>
+            <properties>
+                <env>prod</env>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.honda.mfg.stamp.storage</groupId>
+            <artifactId>StampStorageUI</artifactId>
+            <version>1.0</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <filtering>true</filtering>
+                    <filters>
+                        <filter>filters/${env}.properties</filter>
+                    </filters>
+                    <webModule>
+                        <artifactId>StampStorageUI</artifactId>
+                        <groupId>com.honda.mfg.stamp.storage</groupId>
+                        <version>1.0</version>
+                    </webModule>
+
+                    <!--<ejbModule>-->
+                    <!--<groupId>org.example.mvnearplg</groupId>-->
+                    <!--<artifactId>ejb</artifactId>-->
+                    <!--</ejbModule>-->
+                    <!--<jarModule>-->
+                    <!--<groupId>org.apache.lucene</groupId>-->
+                    <!--<artifactId>lucene-highlighter</artifactId>-->
+                    <!--<bundleDir>lucenlib</bundleDir>-->
+                    <!--</jarModule>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

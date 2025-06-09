@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_Contact" object="${contact}" path="/contacts"
+               z="6/R6r6wN1BDZ3rh3LgfSeyid4HE=">
+        <field:display field="contactName" id="s_com_honda_mfg_stamp_storage_domain_Contact_contactName"
+                       object="${contact}" z="buV7G2tEXC6MYpt6hquqTG69Arg="/>
+        <field:display field="email" id="s_com_honda_mfg_stamp_storage_domain_Contact_email" object="${contact}"
+                       z="5qzATw55C9APLrKd52NEiEWNLPk="/>
+        <field:display field="pagerNo" id="s_com_honda_mfg_stamp_storage_domain_Contact_pagerNo" object="${contact}"
+                       z="0QhIGldaY2Rb8s0TBM4bzCgC06o="/>
+    </page:show>
+</div>

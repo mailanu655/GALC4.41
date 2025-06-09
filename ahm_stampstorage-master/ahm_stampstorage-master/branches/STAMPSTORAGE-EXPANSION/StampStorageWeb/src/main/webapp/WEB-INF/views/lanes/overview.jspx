@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     version="2.0" xmlns:spring="http://www.springframework.org/tags"
+     xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <head>
+        <script type="tqext/javascript" language="javascript">
+            $(function(){
+
+            (function pulseMovingIn(){
+            $('.overview-movingIn').delay(1000).animate({"opacity": "0.2"}, "slow").delay(10).animate({"opacity": "1"},
+            "slow", pulseMovingIn);
+            })();
+
+            (function pulseMovingOut(){
+            $('.overview-movingOut').delay(1000).animate({"opacity": "0.2"}, "slow").delay(10).animate({"opacity": "1"},
+            "slow", pulseMovingOut);
+            })();
+
+            (function pulseMovingOutQueued(){
+            $('.overview-movingQueued').delay(1000).animate({"opacity": "0.2"}, "slow").delay(10).animate({"opacity":
+            "1"},
+            "slow", pulseMovingOutQueued);
+            })();
+
+            (function ResizeOverviewPanel() {
+            var
+            w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;
+            document.all['overviewPanel'].style.height = y-200;
+            })();
+
+            $(document).ready(function() {
+            $(window).resize(function() {ResizeOverviewPanel()}); });
+
+            });
+        </script>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("inventoryMenu");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+      </head>
+        <spring:url value="/resources/images/wrench.png" var="wrench_url" />
+<spring:url value="/resources/images/bit1.png" var="bit1_url" />
+<spring:url value="/resources/images/bit2.png" var="bit2_url" />
+<spring:url value="/resources/images/bit3.png" var="bit3_url" />
+<spring:url value="/resources/images/bit4.png" var="bit4_url" />
+<spring:url value="/resources/images/bit5.png" var="bit5_url" />
+<spring:url value="/resources/images/bit6.png" var="bit6_url" />
+<spring:url value="/resources/images/bit7.png" var="bit7_url" />
+<spring:url value="/resources/images/bit8.png" var="bit8_url" />
+<spring:url value="/resources/images/bit9.png" var="bit9_url" />
+<spring:url value="/resources/images/bit10.png" var="bit10_url" />
+<spring:url value="/resources/images/bit11.png" var="bit11_url" />
+<spring:url value="/resources/images/bit12.png" var="bit12_url" />
+<spring:url value="/resources/images/bit13.png" var="bit13_url" />
+<spring:url value="/resources/images/bit14.png" var="bit14_url" />
+<spring:url value="/resources/images/bit15.png" var="bit15_url" />
+        <table class="meshealthy">
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->
+                       Service healthy
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+    <div style="overflow-y: auto; height: 35px;" align="center">
+        <table border="0" class="labelHeader">
+            <tr>
+                <c:forEach items="${models}" var="modelItem">
+                    <spring:eval var="BackgroundColor" expression="modelItem.getLeftDie().backgroundColor"/>
+                    <spring:eval var="TextColor" expression="modelItem.getLeftDie().textColor"/>
+                    <spring:eval var="Description" expression="modelItem.getLeftDie().description"/>
+
+                    <td>
+                        <label style="background-color:${BackgroundColor};color:${TextColor}">
+                            <b>${Description}</b>
+                        </label>
+                    </td>
+                </c:forEach>
+                <td>
+                    <label style="background-color:#CCCCCC">
+                        <b>Vacant (X)</b>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <c:forEach items="${models}" var="modelItem">
+                    <spring:eval var="BackgroundColor" expression="modelItem.getRightDie().backgroundColor"/>
+                    <spring:eval var="TextColor" expression="modelItem.getRightDie().textColor"/>
+                    <spring:eval var="Description" expression="modelItem.getRightDie().description"/>
+
+                    <td>
+                        <label style="background-color:${BackgroundColor};color:${TextColor};}">
+                            <b>${Description}</b>
+                        </label>
+                    </td>
+
+                </c:forEach>
+            </tr>
+        </table>
+    </div>
+    <div id="overviewPanel" style="overflow-y: scroll; border:1px solid; color: #000000;" align="center">
+
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="q-area" class="overview-header">Q-Area</a>
+                </td>
+            </tr>
+        </table>
+
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="qarearows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${qarearows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+-                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.Capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="a-area" class="overview-header">C-High</a>
+                </td>
+            </tr>
+        </table>
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="chighrows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${chighrows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="a-area" class="overview-header">A-Area</a>
+                </td>
+            </tr>
+        </table>
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="aarearows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${aarearows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="a-area" class="overview-header">C-Low</a>
+                </td>
+            </tr>
+        </table>
+
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="clowrows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${clowrows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.Capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+        <!-- 20130613 GSA - Add areas B,Q and S -->
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="b-area" class="overview-header">B-Area</a>
+                </td>
+            </tr>
+        </table>
+
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="barearows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${barearows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.Capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+        <!-- 20130613 GSA - Add areas B,Q and S -->
+
+        <!-- 20130613 GSA - Add areas B,Q and S -->
+        <table border="0" class="areaHeader">
+            <tr>
+                <td border="0" width="100%">
+                    <a name="s-area" class="overview-header">S-Area</a>
+                </td>
+            </tr>
+        </table>
+
+        <table class="areaContainer">
+            <tr>
+                <td width="30" class="detailedInventoryLabel">
+                    POSITION:
+                </td>
+                <spring:eval var="posCounter" expression="1"/>
+                <spring:eval var="positions" expression="sarearows[0].getCapacity()"/>
+                <c:choose>
+                    <c:when test="${positions>0}">
+                        <c:forEach begin="${posCounter}" end="${positions}">
+                            <td width="30" class="detailedInventoryLabel">${posCounter}</td>
+                            <spring:eval var="posCounter" expression="posCounter + 1"/>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
+            </tr>
+            <c:forEach items="${sarearows}" var="row">
+                <tr>
+                    <c:choose>
+                        <c:when test="${row.blocked}">
+                            <!-- Row Blocked -->
+                            <td width="40" class="detailedInventoryLabelRowBlocked">
+                                ${row.rowName}
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <!-- Row Unblocked -->
+                            <td width="40" class="detailedInventoryLabel">
+                                ${row.rowName}
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <spring:eval var="BackgroundColor" expression="item.die.backgroundColor"/>
+                        <spring:eval var="TextColor" expression="item.die.textColor"/>
+                        <td width="50" class="inventoryOverview"
+                            style="background-color:${BackgroundColor};color:${TextColor}">
+                            <spring:url var="carrierupdate" value="/carriers/${item.id}">
+                                <spring:param name="form" value="-"/>
+                            </spring:url>
+                            <c:choose>
+                                <c:when test="${item.movingInToLane}">
+                                    <div class="overview-movingIn"></div>
+                                </c:when>
+                                <c:when test="${item.movingOutOfLane}">
+                                    <div class="overview-movingOut"></div>
+                                </c:when>
+                                <c:when test="${item.inQueueToMoveOutOfLane}">
+                                    <div class="overview-movingQueued"></div>
+                                </c:when>
+                            </c:choose>
+                            <a class="overview" href="${carrierupdate}" style="color:${TextColor}">
+                                ${item.quantity}
+                                <c:if test="${item.maintRequired  == 1}">
+                                    <img alt="MTRQ" class="image" src="${wrench_url}" style="width:15px;height:15px;"
+                                         title="Maintenance Required"/>
+                                </c:if>
+                                <c:if test="${item.bit1 == 1}">
+                                    <img alt="bit1" class="image" src="${bit1_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit1Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit2 == 1}">
+                                    <img alt="bit2" class="image" src="${bit2_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit2Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit3 == 1}">
+                                    <img alt="bit3" class="image" src="${bit3_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit3Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit4 == 1}">
+                                    <img alt="bit4" class="image" src="${bit4_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit4Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit5 == 1}">
+                                    <img alt="bit5" class="image" src="${bit5_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit5Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit6 == 1}">
+                                    <img alt="bit6" class="image" src="${bit6_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit6Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit7 == 1}">
+                                    <img alt="bit7" class="image" src="${bit7_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit7Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit8 == 1}">
+                                    <img alt="bit8" class="image" src="${bit8_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit8Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit9 == 1}">
+                                    <img alt="bit9" class="image" src="${bit9_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit9Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit10 == 1}">
+                                    <img alt="bit10" class="image" src="${bit10_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit10Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit11 == 1}">
+                                    <img alt="bit11" class="image" src="${bit11_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit11Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit12 == 1}">
+                                    <img alt="bit12" class="image" src="${bit12_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit12Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit13 == 1}">
+                                    <img alt="bit13" class="image" src="${bit13_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit13Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit14 == 1}">
+                                    <img alt="bit14" class="image" src="${bit14_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit14Label }"/>
+                                </c:if>
+                                <c:if test="${item.bit15 == 1}">
+                                    <img alt="bit15" class="image" src="${bit15_url}" style="width:15px;height:15px;"
+                                         title="${bitInfo.bit15Label }"/>
+                                </c:if>
+                            </a>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.Capacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td width="50" class="vacant">
+                                    X
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>

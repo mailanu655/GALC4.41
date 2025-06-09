@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.honda.mfg.stamp.storage</groupId>
+	<artifactId>StampStorageApp</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<org.springframework.version>4.3.30.RELEASE</org.springframework.version>
+		<org.springframework-security.version>4.2.20.RELEASE</org.springframework-security.version>
+	</properties>
+
+	<modules>
+		<module>ConnectionDevice</module>
+		<module>StampStorageDomain</module>
+		<module>StampStorageManager</module>
+		<module>StampStorageService</module>
+		<module>StampStorageWeb</module>
+		<module>StampStorageEar</module>
+	</modules>
+
+</project>

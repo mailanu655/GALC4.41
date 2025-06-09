@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--suppress SpringModelInspection -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- ======================================================== -->
+	<!-- MES Device Definition -->
+	<!-- ======================================================== -->
+	<bean id="mesSocketFactory" class="com.honda.io.socket.SocketFactory">
+		<constructor-arg value="${device.mes.ip}" />
+		<constructor-arg value="${device.mes.port}" />
+		<constructor-arg value="5" />
+	</bean>
+	<bean id="messageResponsePublisher"
+		class="com.honda.mfg.connection.processor.ConnectionResponsePublisher">
+		<constructor-arg value="messageResponsePublisher" />
+	</bean>
+	<bean id="pingResponsePublisher"
+		class="com.honda.mfg.connection.processor.ConnectionResponsePublisher">
+		<constructor-arg value="pingResponsePublisher" />
+	</bean>
+
+
+	<bean id="mesStreamPair" class="com.honda.io.socket.SocketStreamPair">
+		<constructor-arg ref="mesSocketFactory" />
+	</bean>
+
+	<bean id="plcProcessorPair"
+		class="com.honda.mfg.connection.processor.StreamConnectionProcessorPair">
+		<constructor-arg ref="mesStreamPair" />
+		<property name="maxExceptionCount" value="10" />
+		<property name="msgPublisher">
+			<ref local="messageResponsePublisher" />
+		</property>
+				<property name="pingPublisher">
+			<ref local="pingResponsePublisher" />
+		</property>
+	</bean>
+
+	<bean id="mesInitializer"
+		class="com.honda.mfg.connection.processor.ConnectionInitializer">
+		<constructor-arg ref="plcProcessorPair" />
+		<constructor-arg value="5" />
+	</bean>
+
+	<bean id="basicMesDevice" class="com.honda.mfg.connection.processor.BasicConnection">
+		<constructor-arg ref="plcProcessorPair" />
+		<constructor-arg ref="mesInitializer" />
+		<constructor-arg value="${filter.mes.watchdog.responseTimeout}" />
+	</bean>
+
+	<bean id="mesDevicePing" class="com.honda.mfg.connection.processor.ConnectionPing">
+		<constructor-arg ref="basicMesDevice" />
+	</bean>
+
+	<bean id="mesWatchdog" class="com.honda.mfg.connection.watchdog.Watchdog">
+		<constructor-arg ref="mesStreamPair" />
+	</bean>
+
+	<bean id="mesWatchdogAdapter" class="com.honda.mfg.connection.watchdog.WatchdogAdapter">
+		<constructor-arg ref="mesWatchdog" />
+		<constructor-arg ref="mesDevicePing" />
+		<constructor-arg value="${device.mes.watchdog.interval}" />
+		<constructor-arg value="true" />
+		<property name="passiveWaitCount" value="2" />
+		<property name="currentMaxWaitCount" value="2" />
+	</bean>
+
+	<bean id="plcDevice" class="com.honda.mfg.connection.processor.AdvancedConnection">
+		<constructor-arg ref="basicMesDevice" />
+		<constructor-arg ref="mesWatchdogAdapter" />
+	</bean>
+
+</beans>

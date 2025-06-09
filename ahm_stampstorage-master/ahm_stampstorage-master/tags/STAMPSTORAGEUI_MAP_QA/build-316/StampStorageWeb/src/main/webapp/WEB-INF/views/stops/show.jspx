@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <c:set var="writable" value="false"/>
+
+    <security:authorize ifAllGranted="ROLE_ADMIN">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+
+    <page:show id="ps_com_honda_mfg_stamp_storage_domain_Stop" object="${stop}" path="/stops" z="user-managed"
+               create="${writable}" update="${writable}" delete="${writable}">
+        <field:display field="id" id="s_com_honda_mfg_stamp_storage_domain_Stop_id" object="${stop}"
+                       z="user-managed"/>
+        <field:display field="name" id="s_com_honda_mfg_stamp_storage_domain_Stop_name" object="${stop}"
+                       z="user-managed"/>
+        <field:display field="stopType" id="s_com_honda_mfg_stamp_storage_domain_Stop_stopType" object="${stop}"
+                       z="user-managed"/>
+        <field:display field="stopArea" id="s_com_honda_mfg_stamp_storage_domain_Stop_stopArea" object="${stop}"
+                       z="user-managed"/>
+        <!--<field:display field="capacity" id="s_com_honda_mfg_stamp_storage_domain_Stop_capacity" object="${stop}"-->
+                       <!--z="user-managed"/>-->
+        <!--<field:display field="stopAvailability" id="s_com_honda_mfg_stamp_storage_domain_Stop_stopAvailability"-->
+                       <!--object="${stop}"-->
+                       <!--z="user-managed"/>-->
+        <field:display field="description" id="s_com_honda_mfg_stamp_storage_domain_Stop_description" object="${stop}"
+                       z="user-managed"/>
+        <!--<field:display field="showAsDestination" id="c_com_honda_mfg_stamp_storage_domain_Stop_showAsDestination"  object="${stop}"-->
+        <!--z="user-managed"/>-->
+    </page:show>
+</div>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_Defect" items="${defects}" z="nTgIkJu2bLdSOwOBHSb7JKMPw8k=">
+        <table:table data="${defects}" id="l_com_honda_mfg_stamp_conveyor_domain_Defect" path="/defects"
+                     z="+YwVUwnllwOCCMy08go+I9BU+2g=">
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_carrierNumber" property="carrierNumber"
+                          z="qtxqqYwDOKxpAb19kMePOeHi79Y="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_productionRunNo" property="productionRunNo"
+                          z="lQbAjjj0WgSP7cOUkTbkc22YENs="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectType" property="defectType"
+                          z="ENtEajGnX7ot8ht99M4OUfxP6y0="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_reworkMethod" property="reworkMethod"
+                          z="Yxn4Y5g+HnLvzFYlHyUQlljkxSc="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_xArea" property="XArea"
+                          z="LRY8uDZNH28uUvHlzhPLw5bH65o="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_yArea" property="YArea"
+                          z="QoAYj61p7BGXrNjpfWFQspXEhuw="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectRepaired" property="defectRepaired"
+                          z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_Defect_note" property="note"
+                          z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>
+        </table:table>
+    </page:list>
+</div>

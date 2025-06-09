@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_WeldSchedule" modelAttribute="weldSchedule" path="/weldschedules" versionField="Version" z="VLPKT+WjyII85aq+Yn3oQRlkwCc=">
+        <field:input field="weldLine" id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_weldline" required="true" validationMessageCode="field_invalid_integer" z="nJvUOVRba9o1ZabRIQM2hsOY7x4="/>
+        <field:input field="leftHandProdPlan" id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodplan" required="true" validationMessageCode="field_invalid_integer" z="nJvUOVRba9o1ZabRIQM2hsOY7x4="/>
+        <field:input field="leftHandProdRemaining" id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_lefthandprodremaining" required="true" validationMessageCode="field_invalid_integer" z="OPo9dhYHutoOyJTZT9A3OH1sUjY="/>
+        <field:input field="rightHandProdPlan" id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodplan" required="true" validationMessageCode="field_invalid_integer" z="Xy66trtVVpKs/j1v3tZqRF03Leg="/>
+        <field:input field="rightHandProdRemaining" id="c_com_honda_mfg_stamp_storage_domain_WeldSchedule_righthandprodremaining" required="true" validationMessageCode="field_invalid_integer" z="PIjP1w/5fhp7PtSu4mPSy4pZE3A="/>
+    </form:update>
+</div>

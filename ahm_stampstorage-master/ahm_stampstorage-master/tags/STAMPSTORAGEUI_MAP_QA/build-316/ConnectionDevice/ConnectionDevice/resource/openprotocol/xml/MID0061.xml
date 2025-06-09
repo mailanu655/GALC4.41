@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<telegram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="Telegram.xsd" id="MID0061">
+    <header headerlength="20">
+        <length length="4">231</length>
+        <mid length="4">0061</mid>
+        <revision length="3"/>
+        <no_ack_flag length="1"/>
+        <spare length="8"/>
+    </header>
+    <data includeId="true">
+        <parameter id="01" name="CELL_ID" length="4" value=""/>
+        <parameter id="02" name="CHANNEL_ID" length="2" value=""/>
+        <parameter id="03" name="CONTROLLER_NAME" length="25" value=""/>
+        <parameter id="04" name="VIN_NUMBER" length="25" value=""/>
+        <parameter id="05" name="JOB_NUMBER" length="2" value=""/>
+        <parameter id="06" name="PSET_NUMBER" length="3" value=""/>
+        <parameter id="07" name="BATCH_SIZE" length="4" value=""/>
+        <parameter id="08" name="BATCH_COUNTER" length="4" value=""/>
+        <parameter id="09" name="TIGHTENING_STATUS" length="1" value=""/>
+        <parameter id="10" name="TORQUE_STATUS" length="1" value=""/>
+        <parameter id="11" name="ANGLE_STATUS" length="1" value=""/>
+        <parameter id="12" name="TORQUE_MIN_LIMIT" length="6" value=""/>
+        <parameter id="13" name="TORQUE_MAX_LIMIT" length="6" value=""/>
+        <parameter id="14" name="TORQUE_FINAL_TARGET" length="6" value=""/>
+        <parameter id="15" name="TORQUE" length="6" value=""/>
+        <parameter id="16" name="ANGLE_MIN" length="5" value=""/>
+        <parameter id="17" name="ANGLE_MAX" length="5" value=""/>
+        <parameter id="18" name="FINAL_ANGLE_TARGET" length="5" value=""/>
+        <parameter id="19" name="ANGLE" length="5" value=""/>
+        <parameter id="20" name="TIME_STAMP" length="19" value="1000-00-00:00:00:00"/>
+        <parameter id="21" name="LAST_PSET_CHANGE_TIME" length="19" value=""/>
+        <parameter id="22" name="BATCH_STATUS" length="1" value=""/>
+        <parameter id="23" name="TIGHTENING_ID" length="10" value="0000000000"/>
+    </data>
+    <!--  MESSAGE_END -->
+</telegram>
+

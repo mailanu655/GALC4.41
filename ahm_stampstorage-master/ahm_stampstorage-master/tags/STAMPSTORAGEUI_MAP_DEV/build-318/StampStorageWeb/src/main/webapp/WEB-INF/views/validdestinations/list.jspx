@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_honda_mfg_stamp_conveyor_domain_ValidDestination" items="${validdestinations}" z="2avOLqAUQRZj5rTHdi6e2+OcS1Y=">
+        <table:table data="${validdestinations}" id="l_com_honda_mfg_stamp_conveyor_domain_ValidDestination" path="/validdestinations" z="7vStnmE3OIKHjq2+VKa2mMkzF2E=" update="false">
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_ValidDestination_stop" property="stop" z="nAJvisHraVq3UU4E2Sj4JG0F31I="/>
+            <table:column id="c_com_honda_mfg_stamp_conveyor_domain_ValidDestination_destination" property="destination" z="N2cvYAaoirbH/mBEParfkF0KN+A="/>
+        </table:table>
+    </page:list>
+</div>

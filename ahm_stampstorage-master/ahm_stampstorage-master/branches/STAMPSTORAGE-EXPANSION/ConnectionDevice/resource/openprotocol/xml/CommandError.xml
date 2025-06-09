@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<codemap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="CommandError.xsd" protocolversion="5.1">
+    <item code="01" description="Invalid data."/>
+    <item code="02" description="Pset number not present"/>
+    <item code="03" description="Pset can not be set."/>
+    <item code="04" description="Pset not running"/>
+    <item code="06" description="VIN upload subscription already exists"/>
+    <item code="07" description="VIN upload subscription does not exists"/>
+    <item code="08" description="VIN input source not granted"/>
+    <item code="09" description="Last tightening result subscription already exists"/>
+    <item code="10" description="Last tightening result subscription does not exist"/>
+    <item code="11" description="Alarm subscription already exists"/>
+    <item code="12" description="Alarm subscription does not exist"/>
+    <item code="13" description="Parameter set selection subscription already exists"/>
+    <item code="14" description="Parameter set selection subscription does not exist"/>
+    <item code="15" description="Tightening Id requested not found"/>
+    <item code="16" description="Connection rejected protocol busy"/>
+    <item code="17" description="Job number not present"/>
+    <item code="18" description="Job schedule subscription already exists"/>
+    <item code="19" description="Job schedule subscription does not exist"/>
+    <item code="20" description="Job can not be set"/>
+    <item code="21" description="Job not running"/>
+    <item code="30" description="Controller is not a sync Master"/>
+    <item code="31" description="Multi spindle status subscription already exists"/>
+    <item code="32" description="Multi spindle status subscription does not exist"/>
+    <item code="33" description="Multi spindle result subscription already exists"/>
+    <item code="34" description="Multi spindle result subscription does not exist"/>
+    <item code="40" description="Job line control schedule subscription already exists "/>
+    <item code="41" description="Job line control schedule subscription does not exist"/>
+    <item code="42" description="Identifier input source not granted"/>
+    <item code="43" description="Multiple identifiers work order subscription already exists"/>
+    <item code="44" description="Multiple identifiers work order subscription does not exist"/>
+    <item code="50" description="Status: external monitored inputs, subscription already exists"/>
+    <item code="51" description="Status: external monitored inputs, subscription does not exist"/>
+    <item code="52" description="IO device not connected"/>
+    <item code="53" description="Faulty IO device number"/>
+    <item code="58" description="No alarm present"/>
+    <item code="59" description="Tool currently in use"/>
+    <item code="60" description="No histogram available"/>
+    <item code="80" description="Reserved"/>
+    <item code="81" description="Reserved"/>
+    <item code="96" description="Client already connected"/>
+    <item code="97" description="MID revision unsupported"/>
+    <item code="98" description="Controller internal request timeout"/>
+    <item code="99" description="Unknown MID"/>
+</codemap>
+

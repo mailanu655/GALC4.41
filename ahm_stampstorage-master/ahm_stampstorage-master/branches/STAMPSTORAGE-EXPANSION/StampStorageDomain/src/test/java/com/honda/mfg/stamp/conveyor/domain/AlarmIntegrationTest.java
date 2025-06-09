@@ -1,0 +1,135 @@
+package com.honda.mfg.stamp.conveyor.domain;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+@Configurable
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext.xml")
+@Transactional
+public class AlarmIntegrationTest {
+
+	@Test
+	public void testMarkerMethod() {
+	}
+
+	@Autowired
+	private AlarmDefinitionDataOnDemand dod;
+
+	@Test
+	public void testCountAlarms() {
+		AlarmDefinition alarmDefinition = dod.getRandomAlarm();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly",
+				dod.getRandomAlarm());
+		long count = AlarmDefinition.countAlarmDefinitions();
+		org.junit.Assert.assertTrue("Counter for 'AlarmDefinition' incorrectly reported there were no entries",
+				count > 0);
+	}
+
+	@Test
+	public void testFindAlarm() {
+		AlarmDefinition obj = dod.getRandomAlarm();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly", obj);
+		Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to provide an identifier", id);
+		obj = AlarmDefinition.findAlarmDefinition(id);
+		org.junit.Assert.assertNotNull("Find method for 'AlarmDefinition' illegally returned null for id '" + id + "'",
+				obj);
+		org.junit.Assert.assertEquals("Find method for 'AlarmDefinition' returned the incorrect identifier", id,
+				obj.getId());
+	}
+
+	@Test
+	public void testFindAllAlarms() {
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly",
+				dod.getRandomAlarm());
+		long count = AlarmDefinition.countAlarmDefinitions();
+		org.junit.Assert.assertTrue("Too expensive to perform a find all test for 'AlarmDefinition', as there are "
+				+ count
+				+ " entries; set the findAllMaximum to exceed this value or set findAll=false on the integration test annotation to disable the test",
+				count < 250);
+		java.util.List<AlarmDefinition> result = AlarmDefinition.findAllAlarmDefinitions();
+		org.junit.Assert.assertNotNull("Find all method for 'AlarmDefinition' illegally returned null", result);
+		org.junit.Assert.assertTrue("Find all method for 'AlarmDefinition' failed to return any data",
+				result.size() > 0);
+	}
+
+	@Test
+	public void testFindAlarmEntries() {
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly",
+				dod.getRandomAlarm());
+		long count = AlarmDefinition.countAlarmDefinitions();
+		if (count > 20)
+			count = 20;
+		java.util.List<AlarmDefinition> result = AlarmDefinition.findAlarmEntries(0, (int) count);
+		org.junit.Assert.assertNotNull("Find entries method for 'AlarmDefinition' illegally returned null", result);
+		org.junit.Assert.assertEquals(
+				"Find entries method for 'AlarmDefinition' returned an incorrect number of entries", count,
+				result.size());
+	}
+
+	@Test
+	public void testFlush() {
+		AlarmDefinition obj = dod.getRandomAlarm();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly", obj);
+		Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to provide an identifier", id);
+		obj = AlarmDefinition.findAlarmDefinition(id);
+		org.junit.Assert.assertNotNull("Find method for 'AlarmDefinition' illegally returned null for id '" + id + "'",
+				obj);
+		boolean modified = dod.modifyAlarm(obj);
+		Integer currentVersion = obj.getVersion();
+		obj.flush();
+		org.junit.Assert.assertTrue("Version for 'AlarmDefinition' failed to increment on flush directive",
+				(currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+	}
+
+	@Test
+	public void testMerge() {
+		AlarmDefinition obj = dod.getRandomAlarm();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly", obj);
+		Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to provide an identifier", id);
+		obj = AlarmDefinition.findAlarmDefinition(id);
+		boolean modified = dod.modifyAlarm(obj);
+		Integer currentVersion = obj.getVersion();
+		AlarmDefinition merged = (AlarmDefinition) obj.merge();
+		obj.flush();
+		org.junit.Assert.assertEquals("Identifier of merged object not the same as identifier of original object",
+				merged.getId(), id);
+		org.junit.Assert.assertTrue("Version for 'AlarmDefinition' failed to increment on merge and flush directive",
+				(currentVersion != null && obj.getVersion() > currentVersion) || !modified);
+	}
+
+	@Test
+	public void testPersist() {
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly",
+				dod.getRandomAlarm());
+		AlarmDefinition obj = dod.getNewTransientAlarm(Integer.MAX_VALUE);
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to provide a new transient entity",
+				obj);
+		// org.junit.Assert.assertNull("Expected 'AlarmDefinition' identifier to be
+		// null", obj.getId());
+		obj.persist();
+		obj.flush();
+		org.junit.Assert.assertNotNull("Expected 'AlarmDefinition' identifier to no longer be null", obj.getId());
+	}
+
+	@Test
+	public void testRemove() {
+		AlarmDefinition obj = dod.getRandomAlarm();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to initialize correctly", obj);
+		Long id = obj.getId();
+		org.junit.Assert.assertNotNull("Data on demand for 'AlarmDefinition' failed to provide an identifier", id);
+		obj = AlarmDefinition.findAlarmDefinition(id);
+		obj.remove();
+		obj.flush();
+		org.junit.Assert.assertNull("Failed to remove 'AlarmDefinition' with identifier '" + id + "'",
+				AlarmDefinition.findAlarmDefinition(id));
+	}
+}

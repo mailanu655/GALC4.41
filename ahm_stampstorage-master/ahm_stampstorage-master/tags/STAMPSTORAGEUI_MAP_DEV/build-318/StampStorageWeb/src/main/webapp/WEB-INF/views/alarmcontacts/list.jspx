@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_AlarmContact" items="${alarmcontacts}"
+               z="qp9MUnEaxXxixoQfZcja6KDilu0=">
+        <table:table data="${alarmcontacts}" id="l_com_honda_mfg_stamp_storage_domain_AlarmContact"
+                     path="/alarmcontacts" z="Jln+HoHIko7KGox8TXGOD9Rw9SI=">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmContact_alarm" property="alarm" maxLength="40"
+                          z="eLq1ouleBQSx2BWtrAU932Ps6PQ="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmContact_contact" property="contact"
+                          maxLength="40" z="b5hN5X2VVI9HBX87mAFjeeHoRok="/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmContact_contactType" property="contactType"
+                          maxLength="40" z="GEOM24yazv/W0pFgiMEUTM7bXpY="/>
+        </table:table>
+    </page:list>
+</div>

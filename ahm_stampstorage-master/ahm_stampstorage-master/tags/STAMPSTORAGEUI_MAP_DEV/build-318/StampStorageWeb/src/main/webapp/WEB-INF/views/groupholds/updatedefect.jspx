@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <table>
+        <tr>
+            <td valign="top">
+                <form:update id="fu_com_honda_mfg_stamp_conveyor_domain_Defect" modelAttribute="defect"
+                             path="/groupholds"
+                             versionField="Version" z="D2k2BgsiB6z5tB4E43JBfcTIlm4=">
+
+                    <field:select field="defectType" id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectType"
+                                  items="${defect_types}" path="defect_types" required="true"
+                                  z="AXiq93+l6P3rvnfyAkeVrFs59HY="/>
+                    <field:select field="reworkMethod" id="c_com_honda_mfg_stamp_conveyor_domain_Defect_reworkMethod"
+                                  items="${rework_methods}" path="rework_methods" required="true"
+                                  z="z4UvMU9AGsCYJMarhT3cae0DxVY="/>
+                    <field:input field="xArea" label="X Area (ex.1, 2...)"
+                                 id="c_com_honda_mfg_stamp_conveyor_domain_Defect_xArea" required="true"
+                                 validationRegex="^[0-9]+$" validationMessageCode="field_invalid_integer"
+                                 z="z8v2xrU2erO11EZIOFnsFzAr9Oc="/>
+                    <field:input field="yArea" label="Y Area (ex. A,B...)"
+                                 id="c_com_honda_mfg_stamp_conveyor_domain_Defect_yArea" required="true"
+                                 validationRegex="^[a-z]+$" z="xigUlTLRlOzmKdAfJuWFYTqMhsg="/>
+                    <field:input field="note" label="Note"
+                                 id="c_com_honda_mfg_stamp_conveyor_domain_Defect_note" required="false"
+                                 z="user-managed"/>
+                    <!--<field:checkbox field="defectRepaired" id="c_com_honda_mfg_stamp_conveyor_domain_Defect_defectRepaired"-->
+                    <!--z="gtx28PJLK8sOenpMvPyLvRRsPBk="/>-->
+
+                </form:update>
+            </td>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td align="center">
+                            <h1>
+                                <c:out value="${imgLabel}"/>
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <spring:url value="${imgUrl}" var="die_image_url"/>
+                            <spring:message arguments="${imgLabel}" var="img_label" htmlEscape="false"/>
+                            <img alt="${img_label}" class="image" src="${die_image_url}" title="${img_label}"
+                                 align="center"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

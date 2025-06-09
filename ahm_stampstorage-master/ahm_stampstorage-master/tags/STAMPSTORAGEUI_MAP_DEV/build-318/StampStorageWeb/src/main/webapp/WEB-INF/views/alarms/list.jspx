@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:security="http://www.springframework.org/security/tags"
+     xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <c:set var="writable" value="false"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <h3 align="center">
+        <u>
+            Alarm Definitions
+        </u>
+    </h3>
+    <!--<security:authorize ifAllGranted="ROLE_ADMIN">-->
+    <!--<c:set var="writable" value="true"/>-->
+    <!--</security:authorize>-->
+
+    <security:authorize
+            ifAnyGranted="ROLE_APP-OHCVD-MAP-STADMIN, ROLE_APP-OHCVP-MAP-STADMIN, ROLE_APP-OHCVQ-MAP-STADMIN">
+        <c:set var="writable" value="true"/>
+    </security:authorize>
+    <c:choose>
+        <c:when test="${active}">
+            <form:show_inactive finderName="ByShowInActive" label=" "
+                                id="ff_com_honda_mfg_stamp_storage_domain_AlarmDefinition" path="/alarms"
+                                z="user-managed">
+            </form:show_inactive>
+        </c:when>
+        <c:otherwise>
+
+            <form:show_active finderName="ByShowActive" label=" "
+                              id="ff_com_honda_mfg_stamp_storage_domain_AlarmDefinition" path="/alarms"
+                              z="user-managed">
+            </form:show_active>
+
+        </c:otherwise>
+    </c:choose>
+
+
+    <page:list id="pl_com_honda_mfg_stamp_storage_domain_AlarmDefinition" items="${alarms}" z="user-managed">
+        <table:table data="${alarms}" id="l_com_honda_mfg_stamp_storage_domain_AlarmDefinition" path="/alarms"
+                     z="user-managed" create="${writable}" update="${writable}" delete="${writable}" show="true">
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_alarmNumber" property="alarmNumber"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_location" maxLength="75"
+                          property="location"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_name" maxLength="75" property="name"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_description" maxLength="100"
+                          property="description"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_category"
+                          property="notificationCategory"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_severity" property="severity"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_notification" property="notification"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_notificationreq"
+                          property="notificationRequired"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_qpcnotificationreq"
+                          property="qpcNotificationRequired"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_autoarchivetime"
+                          property="autoArchiveTime"
+                          z="user-managed"/>
+            <table:column id="c_com_honda_mfg_stamp_storage_domain_AlarmDefinition_active" property="active"
+                          z="user-managed"/>
+        </table:table>
+    </page:list>
+</div>

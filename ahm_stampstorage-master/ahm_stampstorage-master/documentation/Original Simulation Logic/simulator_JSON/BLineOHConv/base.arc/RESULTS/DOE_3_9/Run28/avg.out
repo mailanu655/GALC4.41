@@ -1,0 +1,44 @@
+Weld Production
+Weld Line 1 	474.41
+Weld Line 2 	474.91
+
+Avg Carrier Wait Time BLine:	0.12
+Avg Carrier Wait Time CLine:	0.02
+Avg Daily Changeovers BLine:	6.11
+Avg Daily Changeovers CLine:	4.20
+Avg Recirculations/Shift:	0.00
+Avg Early Pulls for A-Bay Cleanup:	0.05
+Avg Mixed Lanes:	0.18
+Avg Clean Lanes:	34.82
+
+Carriers	Average	Max	Min
+Loaded:	407.95	640	208
+Empty:	262.05	462	30
+
+B Line Press States
+Production	63.85
+DieChange	5.46
+NoScheduledRuns	0.28
+NoCarriers	0.57
+Blocked	0.00
+Down	18.73
+PlannedDT	11.11
+
+C Line Press States
+Production	62.48
+DieChange	5.90
+NoScheduledRuns	3.00
+NoCarriers	0.06
+Blocked	0.10
+Down	17.36
+PlannedDT	11.11
+
+Weld Line 1 Starved
+Starved/Day	0.17
+Avg Starved Time (min)	7.77
+Starved %	0.15
+
+Weld Line 2 Starved
+Starved/Day	0.35
+Avg Starved Time (min)	8.19
+Starved %	0.32

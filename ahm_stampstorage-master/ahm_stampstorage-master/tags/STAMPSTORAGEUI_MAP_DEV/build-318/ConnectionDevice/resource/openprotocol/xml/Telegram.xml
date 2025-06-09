@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<telegram xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="Telegram.xsd" id="0020">
+    <header headerlength="20">
+        <length length="4">0020</length>
+        <mid length="4">0001</mid>
+        <revision length="3"/>
+        <no_ack_flag length="1"/>
+        <spare length="8"/>
+    </header>
+    <data>
+        <parameter name="Cell Id" id="01" length="4" value="0000"/>
+        <parameter name="Channel Id" id="02" length="2" value="00"/>
+        <parameter name="Controller Name" id="03" length="25" value=""/>
+    </data>
+    <!--  MESSAGE_END -->
+</telegram>
+

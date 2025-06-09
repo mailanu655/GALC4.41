@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     version="2.0" xmlns:spring="http://www.springframework.org/tags" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:security="http://www.springframework.org/security/tags">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <security:authorize
+            access="hasAnyRole('ROLE_APP-OHCVD-MAP-STADMIN', 'ROLE_APP-OHCVP-MAP-STADMIN', 'ROLE_APP-OHCVQ-MAP-STADMIN')">
+        <c:set var="allowRefresh" value="true"/>
+    </security:authorize>
+    <head>
+        <script type="text/javascript">
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+
+        </script>
+    </head>
+    <table class="meshealthy">
+        <tr>
+            <c:choose>
+                <c:when test="${meshealthy}">
+                    <td class="meshealthy">
+ <!--                        MES / QPC Healthy -->                    
+                       Service healthy
+                    </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="mesunhealthy" align="center">
+                       <!-- <h3 align="center">MES / QPC UnHealthy</h3> -->
+                        <h3 align="center">Service unavailable</h3>
+                    </td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <c:choose>
+            <c:when test="${alarmevent == null}">
+            </c:when>
+            <c:otherwise>
+                <tr>
+                    <td class="alarm" align="center">
+                        <spring:url var="alarmclear" value="/alarmevents/${alarmevent.id}">
+                            <spring:param name="form" value="-"/>
+                        </spring:url>
+                        ${alarmevent.alarm} &amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        click
+                        <a href="${alarmclear}">here</a>
+                        to clear
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </table>
+    <div name="top">
+        <spring:url var="refresh" value="/lanes">
+            <spring:param name="storageState" value="refresh"/>
+        </spring:url>
+        <table border="0" class="storageStateAreaHeaderMenu">
+            <tr>
+                <td class="storageStateAreaHeaderMenu">
+                    Storage State as of ${loadTimestamp}
+                </td>
+                <td style="min-width: 200px; text-align: center;">
+                    <c:choose>
+                        <c:when test="${allowRefresh}">
+                            <a class="storageStateMenuLink" href="${refresh}">Force StorageState Refresh</a>
+                            <br/>
+                        </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+    <div class="storageStateAreaHeader">
+        C-High
+    </div>
+    <div style="overflow: auto;" align="center">
+        <c:forEach items="${cHighRows}" var="row">
+            <table class="storageStateContainerTable">
+                <tr>
+                    <td class="storageStateLabel">
+                        ${row.laneName}
+                    </td>
+                    <td class="storageStateLabel">
+                        <table class="storageStateLabel">
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Model
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierStatus
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Quantity
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierNumber
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <td>
+                            <table border="0" class="storageStateInLane">
+                                <tr>
+                                    <td>
+                                        ${item.die.description}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <c:choose>
+                                        <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                    <td class="storageStateHold">
+                                                        HOLD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                    <td class="storageStateInspection">
+                                                        INSP
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                    <td>
+                                                        SHIPPABLE
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <td class="storageStateMaintenanceRequired">
+                                                        MAINT_RQD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>
+                                                ${item.carrierStatus}
+                                            </td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ${item.quantity}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>${item.carrierNumber}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.maxCapacity - row.carriersAsLinkedList.size()"/>
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td>
+                                    <table class="storageStateVacantMarker" border="0">
+                                        <tr>
+                                            <td>
+                                                00000
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </table>
+        </c:forEach>
+    </div>
+    <br/>
+    <div class="storageStateAreaHeader">
+        A-Area
+    </div>
+    <div style="overflow: auto;" align="center">
+        <c:forEach items="${aAreaRows}" var="row">
+            <table class="storageStateRowHeader">
+                <tr>
+                    <td class="storageStateLabel">
+                        ${row.laneName}
+                    </td>
+                    <td class="storageStateLabel">
+                        <table border="0">
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Model
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierStatus
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Quantity
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierNumber
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <td>
+                            <table border="0" class="storageStateInLane">
+                                <tr>
+                                    <td>
+                                        ${item.die.description}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <c:choose>
+                                        <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                    <td class="storageStateHold">
+                                                        HOLD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                    <td class="storageStateInspection">
+                                                        INSP
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                    <td>
+                                                        SHIPPABLE
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <td class="storageStateMaintenanceRequired">
+                                                        MAINT_RQD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>
+                                                ${item.carrierStatus}
+                                            </td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ${item.quantity}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>${item.carrierNumber}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.maxCapacity - row.carriersAsLinkedList.size()"/>
+                    <!--c:out value="${col}"></c:out-->
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td>
+                                    <table class="storageStateVacantMarker" border="0">
+                                        <tr>
+                                            <td>
+                                                00000
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </table>
+            <br></br>
+        </c:forEach>
+    </div>
+    <br/>
+    <div class="storageStateAreaHeader">
+        C-Low
+    </div>
+    <div style="overflow: auto;" align="center">
+
+        <c:forEach items="${cLowRows}" var="row">
+            <table class="storageStateRowHeader">
+                <tr>
+                    <td class="storageStateLabel">
+                        ${row.laneName}
+                    </td>
+                    <td class="storageStateLabel">
+                        <table border="0">
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Model
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierStatus
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    Quantity
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="storageStateLabel">
+                                    CarrierNumber
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <c:forEach items="${row.carriersAsLinkedList}" var="item">
+                        <td>
+                            <table border="0" class="storageStateInLane">
+                                <tr>
+                                    <td>
+                                        ${item.die.description}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <c:choose>
+                                        <c:when test="${item.carrierStatus eq 'ON_HOLD' || item.carrierStatus eq 'INSPECTION_REQUIRED' || item.carrierStatus eq 'SHIPPABLE' || item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'ON_HOLD'}">
+                                                    <td class="storageStateHold">
+                                                        HOLD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'INSPECTION_REQUIRED'}">
+                                                    <td class="storageStateInspection">
+                                                        INSP
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'SHIPPABLE'}">
+                                                    <td>
+                                                        SHIPPABLE
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                            <c:choose>
+                                                <c:when test="${item.carrierStatus eq 'MAINTENANCE_REQUIRED'}">
+                                                    <td class="storageStateMaintenanceRequired">
+                                                        MAINT_RQD
+                                                    </td>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>
+                                                ${item.carrierStatus}
+                                            </td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ${item.quantity}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>${item.carrierNumber}</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </c:forEach>
+                    <spring:eval var="colCounter" expression="1"/>
+                    <spring:eval var="col" expression="row.maxCapacity - row.carriersAsLinkedList.size()"/>
+                    <!--c:out value="${col}"></c:out-->
+                    <c:choose>
+                        <c:when test="${col>0}">
+                            <c:forEach begin="${colCounter}" end="${col}">
+                                <td>
+                                    <table class="storageStateVacantMarker" border="0">
+                                        <tr>
+                                            <td>
+                                                00000
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <spring:eval var="colCounter" expression="colCounter + 1"/>
+                            </c:forEach>
+                        </c:when>
+                    </c:choose>
+                </tr>
+            </table>
+            <br></br>
+        </c:forEach>
+    </div>
+</div>

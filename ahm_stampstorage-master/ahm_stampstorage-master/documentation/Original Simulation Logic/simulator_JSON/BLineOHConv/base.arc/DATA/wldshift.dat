@@ -1,0 +1,50 @@
+Weld Line 1	
+A Shift	Duration
+Meeting	10
+Production	110
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	105
+COP	5
+BetweenShifts	120
+Production Minutes/Shift	445
+B Shift	Duration
+Meeting	10
+Production	110
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	105
+COP	5
+BetweenShifts	300
+Production Minutes/Shift	445
+Weld Line 2	
+A Shift	Duration
+Meeting	10
+Production	110
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	105
+COP	5
+BetweenShifts	120
+Production Minutes/Shift	445
+B Shift	Duration
+Meeting	10
+Production	110
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	105
+COP	5
+BetweenShifts	300
+Production Minutes/Shift	445

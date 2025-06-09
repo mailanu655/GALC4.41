@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_honda_mfg_stamp_conveyor_domain_ValidDestination" object="${validdestination}" path="/validdestinations" z="PQWuIQ9M4Q3LpO9R9zWEow3pZ+I=">
+        <field:display field="stop" id="s_com_honda_mfg_stamp_conveyor_domain_ValidDestination_stop" object="${validdestination}" z="C5oh3QfUTshxyqdFrBjeAdfEMp4="/>
+        <field:display field="destination" id="s_com_honda_mfg_stamp_conveyor_domain_ValidDestination_destination" object="${validdestination}" z="RcuVwY8XRZxPsiXn3/NQKS0yPjI="/>
+    </page:show>
+</div>

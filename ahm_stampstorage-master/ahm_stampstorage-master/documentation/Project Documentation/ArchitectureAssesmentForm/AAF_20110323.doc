@@ -1,0 +1,140 @@
+MIME-Version: 1.0
+Content-Location: file:///C:/6528D273/AAF_20110323.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:dt=3D"uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8">
+<meta name=3DProgId content=3DOneNote.File>
+<meta name=3DGenerator content=3D"Microsoft OneNote 11">
+<link id=3DMain-File rel=3DMain-File href=3D"AAF_20110323.htm">
+<link rel=3DFile-List href=3D"AAF_20110323_files/filelist.xml">
+</head>
+
+<body lang=3DEN-US>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:14=
+.0pt'>AAF
+Meeting</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>Wednesday,
+March 23, 2011</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>9:17
+AM</p>
+
+<p style=3D'margin:0in'>&nbsp;</p>
+
+<ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Inquire a=
+bout
+     other documents from Architecture for E1</span></li>
+</ul>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>&nbsp;</p>
+
+<p style=3D'margin:0in'>&nbsp;</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>Need
+to have a heart to heart about manual mode</p>
+
+<ul type=3Ddisc style=3D'margin-left:1.0in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Line-side=
+ PC or
+     HMI?</span></li>
+ <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Grades of
+     manual mode?</span></li>
+ <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Full man=
+ual</span></li>
+  <ul type=3Dsquare style=3D'margin-left:.5in;direction:ltr;unicode-bidi:em=
+bed;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>HMI
+       interaction</span></li>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>manual
+       diverter operation</span></li>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>MES cac=
+he
+       status messages until main app becomes available</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Deprecat=
+ed
+      auto</span></li>
+  <ul type=3Dsquare style=3D'margin-left:.5in;direction:ltr;unicode-bidi:em=
+bed;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>limited
+       client PC at critical locations: (5-13, ST13)</span></li>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Send lo=
+cation
+       specific MOVE messages directly to MES</span></li>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>MES cac=
+hes
+       status messages until main app becomes available</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Auto -
+      line-side local backup</span></li>
+  <ul type=3Dsquare style=3D'margin-left:.5in;direction:ltr;unicode-bidi:em=
+bed;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Full pr=
+ogram
+       running on limited hardware (XPM, XPP)</span></li>
+   <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Hardwar=
+e is
+       local and connected to the Stamping cell network </span></li>
+  </ul>
+  <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Auto Ful=
+l</span></li>
+ </ul>
+</ul>
+
+<p style=3D'mso-outline-level:2;margin:0in;margin-left:.5in;font-family:Ver=
+dana;
+font-size:10.0pt'>&nbsp;</p>
+
+</body>
+
+</html>

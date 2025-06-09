@@ -1,0 +1,33 @@
+A Shift	Duration
+Meeting	10
+Production	110
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	105
+BetweenShifts	0
+Production Minutes/Shift	445
+B Shift	Duration
+Meeting	0
+Production	125
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	95
+BetweenShifts	0
+Production Minutes/Shift	450
+C Shift	Duration
+Meeting	0
+Production	75
+Break 1	10
+Production	110
+Lunch	30
+Production	120
+Break 2	10
+Production	80
+BetweenShifts	0
+Production Minutes/Shift	385

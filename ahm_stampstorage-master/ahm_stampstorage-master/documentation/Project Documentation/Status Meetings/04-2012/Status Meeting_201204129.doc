@@ -1,0 +1,255 @@
+MIME-Version: 1.0
+Content-Location: file:///C:/A71ACA79/StatusMeeting_201204129.htm
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset="utf-8"
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office"
+xmlns:dt=3D"uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; charset=3Dutf-8">
+<meta name=3DProgId content=3DOneNote.File>
+<meta name=3DGenerator content=3D"Microsoft OneNote 11">
+<link id=3DMain-File rel=3DMain-File href=3D"StatusMeeting_201204129.htm">
+<link rel=3DFile-List href=3D"StatusMeeting_201204129_files/filelist.xml">
+</head>
+
+<body lang=3DEN-US>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:14=
+.0pt'>Status
+Meeting</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>Wednesday,
+April 18, 2012</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>9:03
+AM</p>
+
+<p style=3D'margin:0in'>&nbsp;</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>Attendance:
+William Klingler, Adam Kendell</p>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>&nbsp;</p>
+
+<p style=3D'margin:0in'>&nbsp;</p>
+
+<ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embed;
+ margin-top:0in;margin-bottom:0in'>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Explain t=
+he DB2
+     work going in this weekend</span></li>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Discuss
+     build items</span><span style=3D'font-family:Verdana'>:</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Explained
+      fulfillment correction with manual completing storage state</span></l=
+i>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Explained
+      potential performance issues with new alarm processing.</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Check w=
+ith
+       Krishna for prod CPU issue</span></li>
+   <ul type=3Dsquare style=3D'margin-left:.5in;direction:ltr;unicode-bidi:e=
+mbed;
+    margin-top:0in;margin-bottom:0in'>
+    <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-=
+align:
+        middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Take a
+        baseline reading today</span></li>
+    <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-=
+align:
+        middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Take
+        readings tomorrow</span></li>
+    <li style=3D'mso-outline-level:4;margin-top:0;margin-bottom:0;vertical-=
+align:
+        middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Alarm
+        rollback potential</span></li>
+    <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:em=
+bed;
+     margin-top:0in;margin-bottom:0in'>
+     <li style=3D'mso-outline-level:5;margin-top:0;margin-bottom:0;vertical=
+-align:
+         middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>If we
+         detect lost processing or bad pings - roll back</span></li>
+     <li style=3D'mso-outline-level:5;margin-top:0;margin-bottom:0;vertical=
+-align:
+         middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Other
+         errors in the feature - keep in place</span></li>
+    </ul>
+   </ul>
+  </ul>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Discussed
+      schedule </span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>3am -
+       database and adam</span></li>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>3:30 - =
+bill /
+       steve</span></li>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>4 AM - =
+build</span></li>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>4:15 - =
+5:30
+       Test</span></li>
+  </ul>
+ </ul>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Discussed
+     simulation/emulation progress and future debugging potential.</span></=
+li>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Fulfillme=
+nt
+     full implementation is waiting on order carrier removal. (changing a
+     destination at ST13.)</span></li>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Predictive
+     Scheduling</span><span style=3D'font-family:Verdana'>: needs further
+     discussion.<span style=3D'mso-spacerun:yes'>  </span>Bill will work u=
+p and
+     excel spreadsheet with his ideas for how it should work.<span
+     style=3D'mso-spacerun:yes'>  </span>This may only need to look ahead =
+24hrs.<span
+     style=3D'mso-spacerun:yes'>  </span>Requirements are fuzzy.</span></l=
+i>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Adam - W=
+e need
+      to be able to do this calculation manually before we can automate it.=
+</span></li>
+ </ul>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Press
+     Activity Manager</span><span style=3D'font-family:Verdana'>: </span></=
+li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:=
+Verdana'>4/25</span><span
+      style=3D'font-family:Verdana'> - Bill will give me a copy of old PAM =
+screen
+      with requirements</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>PLC reg=
+isters
+       to read</span></li>
+  </ul>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Design w=
+ill be
+      very similar to Weld Schedule Report</span></li>
+ </ul>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Prompted
+     Ordering:</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Adam: If=
+ we
+      need to hook into GPCS, this would be complex and require a significa=
+nt
+      effort.</span></li>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Bill: we=
+ could
+      potentially hook into the existing weld schedule report and populate =
+the
+      values in the order screen.<span style=3D'mso-spacerun:yes'>  </span=
+>This
+      would significantly reduce complexity.</span></li>
+  <ul type=3Ddisc style=3D'margin-left:.5in;direction:ltr;unicode-bidi:embe=
+d;
+   margin-top:0in;margin-bottom:0in'>
+   <li style=3D'mso-outline-level:3;margin-top:0;margin-bottom:0;vertical-a=
+lign:
+       middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Bill wi=
+ll
+       verify requirements to see if this is a valid option.</span></li>
+  </ul>
+ </ul>
+ <li style=3D'mso-outline-level:1;margin-top:0;margin-bottom:0;vertical-ali=
+gn:
+     middle;font-size:10.0pt'><span style=3D'font-weight:bold;font-family:V=
+erdana'>Reporting</span><span
+     style=3D'font-family:Verdana'>: Looks like there are many control fiel=
+ds and
+     items that are hard-coded in the reports.</span></li>
+ <ul type=3Dcircle style=3D'margin-left:.5in;direction:ltr;unicode-bidi:emb=
+ed;
+  margin-top:0in;margin-bottom:0in'>
+  <li style=3D'mso-outline-level:2;margin-top:0;margin-bottom:0;vertical-al=
+ign:
+      middle;font-size:10.0pt'><span style=3D'font-family:Verdana'>Adam: I'=
+ll set
+      up a meeting with the reporting team to go over our report requiremen=
+ts
+      and make sure that they understand where the dynamic data lies.</span=
+></li>
+ </ul>
+</ul>
+
+<p style=3D'mso-outline-level:1;margin:0in;font-family:Verdana;font-size:10=
+.0pt'>&nbsp;</p>
+
+</body>
+
+</html>

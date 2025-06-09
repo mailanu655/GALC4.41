@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+     xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <head>
+        <script type="text/javascript">
+
+            function changeHeaderBgColor(){
+            var elem = document.getElementById("config");
+            elem.style.backgroundColor = '#99CC66';
+            }
+            window.onload=changeHeaderBgColor;
+        </script>
+    </head>
+    <form:update id="fu_com_honda_mfg_stamp_storage_domain_OrderMgr" modelAttribute="orderMgr" path="/ordermgrs"
+                 versionField="Version" z="user-managed">
+        <field:input field="lineName" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_lineName" required="true"
+                     z="user-managed"/>
+        <field:select field="leftQueueStop" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_leftqueuestop"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:select field="rightQueueStop"
+                      id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_rightqueuestop"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:select field="deliveryStop" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_deliveryStop"
+                      required="true" itemValue="id" items="${stops}" path="ordermgrs"/>
+        <field:select field="leftConsumptionStop" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_leftconsumptionstop"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:select field="rightConsumptionStop"
+                      id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_rightconsumptionstop"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:select field="leftConsumptionExit" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_leftconsumptionexit"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:select field="rightConsumptionExit"
+                      id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_rightconsumptionexit"
+                      itemValue="id" items="${stops}" path="ordermgrs" z="user-managed"/>
+        <field:input field="maxDeliveryCapacity" id="c_com_honda_mfg_stamp_storage_domain_OrderMgr_maxDeliveryCapacity"
+                     required="true"
+                     z="user-managed"/>
+    </form:update>
+</div>

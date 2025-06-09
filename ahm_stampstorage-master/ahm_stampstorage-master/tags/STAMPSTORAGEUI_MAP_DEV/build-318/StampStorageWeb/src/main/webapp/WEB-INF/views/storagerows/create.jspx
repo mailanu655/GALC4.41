@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_honda_mfg_stamp_conveyor_domain_StorageRow" modelAttribute="storageRow" path="/storagerows" render="${empty dependencies}" z="eeLOxNM1Dz+7FiUttxZWajnJBwg=">
+        <field:input field="rowName" id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_rowName" required="true" z="GqWhJ/jAZdxMo4RaZ2dKClxNL1A="/>
+        <field:select field="stop" id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_stop" itemValue="id" items="${stops}" path="/stops" required="true" z="cO41Yc5X9MEEirRzZcZ0z8mj4LM="/>
+        <field:input field="capacity" id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_capacity" required="true" validationMessageCode="field_invalid_integer" z="9kqho8C/cgeupMROMsj5+9U9pX8="/>
+        <field:select field="storageArea" id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_storageArea" items="${storageareas}" path="storageareas" required="true" z="2r5by1yUlp5p5ZVc4u53cfNhq9w="/>
+        <field:select field="availability" id="c_com_honda_mfg_stamp_conveyor_domain_StorageRow_availability" items="${stopavailabilitys}" path="stopavailabilitys" required="true" z="vaA3XzXZB7SUm9uDcBOmAf4NCyY="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_honda_mfg_stamp_conveyor_domain_StorageRow" render="${not empty dependencies}" z="69/oqLrQs2sqTowgcWBUZhUUp/I="/>
+</div>
