@@ -1,0 +1,23 @@
+@import '../../lib/lc-mat-tab.css';
+@import '../../lib/lc-card.css';
+@import '../../lib/lc-form.css';
+.form {
+    width: 600px;
+    min-width: 540px;
+    height: 100%;
+}
+
+mat-tab-group {
+    height: calc(100% - 180px);
+}
+
+::ng-deep .mat-tooltip {
+    white-space: pre-line;
+    font-size: 12px;
+    background-color: #427fbb;
+    max-width: unset !important;
+}
+
+mat-icon {
+    color: #205081;
+}

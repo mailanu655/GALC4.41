@@ -1,0 +1,81 @@
+/**
+ * @author Subu Kathiresan
+ * @date May 21, 2019
+ *
+ * Line layout
+ */
+
+@groovy.transform.Field String BUSINESS_SRV_QA = 'bhmi1is1.hmin.am.honda.com'
+@groovy.transform.Field String BUSINESS_SRV_PROD = 'bhmi1is2.hmin.am.honda.com'
+
+@groovy.transform.Field String SCRIPTS_DIR = '/UI/Scripts/jenkins/scripts'
+
+@groovy.transform.Field String RUN_AS = 'sudo -i -u'
+@groovy.transform.Field String SUDO = 'sudo sh -c'
+@groovy.transform.Field String RM = '/usr/bin/rm -fr'
+@groovy.transform.Field String MV = '/usr/bin/mv'
+@groovy.transform.Field String CP = '/usr/bin/cp -R'
+@groovy.transform.Field String SSH = '/usr/bin/ssh'
+@groovy.transform.Field String CHOWN = '/usr/bin/chown -R'
+@groovy.transform.Field String SCP = '/usr/bin/scp -pr'
+@groovy.transform.Field String SED = '/usr/bin/sed -e'
+
+// variables
+@groovy.transform.Field String deployUser = 'hmideplo'
+@groovy.transform.Field String approvers = 'APP-GALC-HMI-ADMIN,AM_HMI_IS_Development'
+
+pipeline {
+	agent any
+
+	stages {
+    stage ('QA: Clean deployment directory') {
+		  steps {
+			  script {
+				  sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_QA} ${RM} /opt/freeware/apache/share/htdocs/frame-loc"
+			  }
+		  }
+		}
+
+		stage ('QA: Deploy application') {
+			steps {
+				script {
+					sh "${RUN_AS} ${deployUser} ${SCP} ${WORKSPACE}/dist/frame-loc ${BUSINESS_SRV_QA}:/tmp/frame-loc"
+
+          // replace proxy server name
+          sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_QA} '${SED} \'s/pteiidproxy/dteiidproxy/g\' /tmp/frame-loc/main.js > /tmp/frame-loc/main_tmp.js'"
+          sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_QA} '${MV} /tmp/frame-loc/main_tmp.js /tmp/frame-loc/main.js'"
+
+          // copy distribution to target folder
+          sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_QA} '${CP} /tmp/frame-loc /opt/freeware/apache/share/htdocs/frame-loc'"
+
+           // clean-up temp folder
+          sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_QA} '${RM} /tmp/frame-loc'"
+				}
+			}
+		}
+
+    stage ('PROD Approval') {
+			steps {
+				script {
+					input message: 'Continue to PROD deployment?', submitter: "${approvers}"
+				}
+			}
+		}
+
+    stage ('PROD: Clean deployment directory') {
+		  steps {
+			  script {
+				  sh "${RUN_AS} ${deployUser} ${SSH} ${BUSINESS_SRV_PROD} ${RM} /opt/freeware/apache/share/htdocs/frame-loc"
+			  }
+		  }
+		}
+
+		stage ('PROD: Copy files from GIT') {
+			steps {
+				script {
+					sh "${RUN_AS} ${deployUser} ${SCP} ${WORKSPACE}/dist/frame-loc ${BUSINESS_SRV_PROD}:/opt/freeware/apache/share/htdocs/frame-loc"
+				}
+			}
+		}
+	}
+}

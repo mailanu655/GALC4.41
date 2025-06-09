@@ -1,0 +1,25 @@
+<!-- keep html for testing -->
+<mat-drawer-container autosize="true" style="height: 100%;">
+    <line *ngIf="displayLineView" #lineComponent [selectedProducts]="selectedProducts" (mouseOverLocation)='onMouseOverLocation($event)' (mouseOutLocation)='onMouseOutLocation($event)'></line>
+    <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms" style="min-height: 200px;">
+        <mat-tab [label]="qicsLabel" *ngIf="displayDefectView">
+            <defects [id]="qicsLabel" #defectsComponent [tableData]="filteredDefects" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></defects>
+        </mat-tab>
+        <mat-tab [label]="partsLabel" *ngIf="displayPartIssueView">
+            <part-issues [id]="partsLabel" #partIssuesComponent [tableData]="filteredPartIssues" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></part-issues>
+        </mat-tab>
+        <mat-tab [label]="pmqaLabel" *ngIf="displayPmqaIssueView">
+            <pmqa-issues [id]="pmqaLabel" #PMQAIssuesComponent [tableData]="filteredPmqaIssue"></pmqa-issues>
+        </mat-tab>
+        <mat-tab [label]="holdsLabel" *ngIf="displayHoldView">
+            <holds [id]="holdsLabel" #holdsComponent [tableData]="filteredHolds" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></holds>
+        </mat-tab>
+        <mat-tab [label]="productsLabel" *ngIf="displayLineView && selectedProducts?.length! > 0">
+            <products [id]="productsLabel" #productsComponent [tableData]="selectedProducts" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></products>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-drawer #drawer mode="side" position="end" opened="{{openSidePanel}}">
+        <legend *ngIf="appService.menuItem === 'legend'"></legend>
+        <settings *ngIf="appService.menuItem === 'settings'"></settings>
+    </mat-drawer>
+</mat-drawer-container>

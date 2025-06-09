@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This is the property file used by GalcWindow. The default location of      -->
+<!-- this file is in the same directory where the application will be launched. -->
+
+
+<!DOCTYPE properties SYSTEM "/resource/com/honda/galc/device/simulator/client/ui/properties.dtd">
+
+<properties version="1.0">
+   <comment>
+    Some of the properties can be replaced by the application at runtime.
+  </comment>
+
+  <entry key="Window Title">GALC Device Simulator</entry>
+  <entry key="Menu File URI">resource/com/honda/galc/device/simulator/client/ui/applicationmenu.xml</entry>
+  <entry key="Window Width">1000</entry>
+  <entry key="Window Height">800</entry>
+  <entry key="Window Location X">100</entry>
+  <entry key="Window Location Y">100</entry>
+  <entry key="Has Menubar">true</entry>
+  <!--  entry key="Dispatcher URL">http://localhost/BaseWeb/HttpServiceHandler DataCollectionService</entry -->
+  <entry key="Dispatcher URL">http://localhost/BaseWeb/HttpDeviceHandler</entry>
+  <entry key="OPC Instance Name">Device Simulator</entry>
+</properties>

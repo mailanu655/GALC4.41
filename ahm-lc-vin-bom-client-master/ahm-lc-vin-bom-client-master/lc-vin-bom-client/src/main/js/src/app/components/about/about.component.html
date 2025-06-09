@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Vin Bom</h1>
+<hr />
+<div mat-dialog-content>
+    <ng-container *ngFor="let app of applications">
+        <b>{{app?.info?.name}}</b><br />
+        {{app?.info?.artifact}} :: {{app?.info?.version}} :: {{app?.info?.time}}
+        <hr />
+    </ng-container>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close style="align-self: right;">Close</button>
+</div>

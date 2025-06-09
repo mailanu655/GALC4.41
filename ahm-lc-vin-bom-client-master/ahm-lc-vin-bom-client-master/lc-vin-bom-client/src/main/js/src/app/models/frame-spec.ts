@@ -1,0 +1,34 @@
+export class FrameSpec {
+    productSpecCode: string;
+    extColorCode: string;
+    intColorCode: string;
+    extColorDescription: string;
+    intColorDescription: string;
+    plantCodeGpcs: string;
+    enginePlantCode: string;
+    engineMto: string;
+    salesModelCode: string;
+    salesModelTypeCode: string;
+    salesExtColorCode: string;
+    salesIntColorCode: string;
+    prototypeCode: string;
+    frameNoPrefix: string;
+    seriesCode: string;
+    seriesDescription: string;
+    gradeCode: string;
+    bodyAndTransTypeCode: string;
+    bodyAndTransTypeDesc: string;
+    boundaryMarkRequired: string;
+    altEngineMto: string;
+    modelDescription: string;
+    shortModelDescription: string;
+    commonSalesModelCode: string;
+    commonSalesModelTypeCode: string;
+    modelYearCode: string;
+    modelCode: string;
+    modelTypeCode: string;
+    modelOptionCode: string;
+    modelYearDescription: string;
+    createTimestamp: string;
+    updateTimestamp: string; 
+}

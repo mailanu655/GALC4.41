@@ -1,0 +1,132 @@
+<span style="display: flex; height: 100%; overflow-x: auto; width: 100%;">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Straggler Int</mat-card-title>
+          </mat-card-header>
+        <!-- <mat-card-content id="filter_n_reload">
+            <div class="row">
+                <div class="col-xs-10 col-sm-12">
+                    <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Search</legend>
+                        <mat-card-content id="filter_panel">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="row">
+                                        System Name
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 part-assign-filter-value">
+                                            <select class="form-control " id="systemName" name="systemName" [(ngModel)]="systemName" (change)="search(systemName)">
+                                                <option value="" selected> Select </option>
+                                                <option *ngFor="let item of systemNameList"  [ngValue]="item" title="{{item}}">
+                                                    {{item}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </fieldset>
+                </div>
+            </div>
+        </mat-card-content> -->
+        <mat-card-content id="interchangeable-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 90px)">
+            <div class="table-container">
+                <table [dataSource]="dataSource" class="table" mat-table matSort>
+                    <ng-container matColumnDef="productSpecWildcard">
+                        <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                            Product Spec <br>
+                            <mat-form-field class="filter select-width-90-perc" floatLabel="never">
+                              <mat-label>Search</mat-label>
+                             <!--<mat-select  placeholder="All" [formControl]="productSpecWildcardFilter">
+                                  <mat-option value="">All</mat-option>
+                                  <mat-option *ngFor="let item of productSpecWildcardList" value="{{ item | lowercase }}">
+                                      {{ item }}
+                                  </mat-option>
+                              </mat-select>--> 
+                              <input matInput [formControl]="productSpecWildcardFilter">
+                            </mat-form-field>
+                        </th>
+                        <td mat-cell class="" *matCellDef="let item">{{item.productSpecWildcard}}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="letSystemName">
+                        <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                            System Name <br>
+                            <mat-form-field class="filter select-width-90-perc" floatLabel="never">
+                              <mat-label>Search</mat-label>
+                              <mat-select  placeholder="All" [formControl]="letSystemNameFilter">
+                                  <mat-option value="">All</mat-option>
+                                  <mat-option *ngFor="let item of letSystemNameList" value="{{ item | lowercase }}">
+                                      {{ item }}
+                                  </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                        </th>
+                        <td mat-cell class="" *matCellDef="let item">{{item.letSystemName}}</td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="dcPartNumber">
+                        <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                            DC Part Number <br>
+                            <mat-form-field class="filter select-width-90-perc" floatLabel="never">
+                              <mat-label>Search</mat-label>
+                              <input matInput [formControl]="dcPartNumberFilter">
+                            </mat-form-field>
+                        </th>
+                        <td mat-cell class="" *matCellDef="let item">{{item.dcPartNumber}}</td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="active">
+                        <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+                        <td  class="active_{{item.active}};" [ngStyle]="{'background-color': (item.active== 'ACTIVE') ? '#73c7af' : '#c45331'}" mat-cell *matCellDef="let item"> {{item.active}} </td> -->
+                        <th class="header px-100-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                            Active <br>
+                            <mat-form-field class="filter" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                            <mat-select  placeholder="All" [formControl]="activeFilter">
+                                <mat-option value="">All</mat-option>
+                                <mat-option value="active">Yes</mat-option>
+                                <mat-option value="false">No</mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                        </th>
+                        <td mat-cell class="active_{{item.active}};" [ngStyle]="{'background-color': (item.active== 'ACTIVE') ? '#73c7af' : '#c45331'}" *matCellDef="let item">{{ item.active }}</td>
+                  </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                    (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>
+                </table>
+                </div>
+        </mat-card-content>
+        <mat-card-content id="interchangeable_actions">
+            <div class="row">
+                <div class="col-sm-5">
+                    <!--<button type="button" class="btn btn-primary" (click)="active()">&nbsp;&nbsp;Active&nbsp;&nbsp;</button> &nbsp;-->
+                    <button type="button" class="btn btn-danger" (click)="inactive()">Inactive</button>
+                </div>
+                <div class="col-sm-7" >
+                    <alert></alert>
+                    <p *ngIf="message && message?.type === 'ERROR'" style="background-color: red;" >{{ message.message }}</p>
+                    <p *ngIf="message && message?.type === 'SUCCESS'" style="background-color: greenyellow;" >{{ message.message }}</p>
+                    <p *ngIf="message && message?.type === 'WARNING'" style="background-color: yellow;" >{{ message.message }}</p>
+                </div>
+            </div>
+            <div class="my-container">
+                <ng-template #customLoadingTemplate>
+                    <div class="custom-class">
+                        <h3>
+                            Please wait ...
+                        </h3>
+                        
+                    </div>
+                </ng-template>
+             
+                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+               
+            </div>
+        </mat-card-content>
+    </mat-card>
+</span>

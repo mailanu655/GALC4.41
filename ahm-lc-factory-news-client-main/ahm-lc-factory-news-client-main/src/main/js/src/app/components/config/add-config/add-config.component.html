@@ -1,0 +1,160 @@
+<mat-dialog-content>
+    <div class="dialog-header">
+        <h3 *ngIf="nextNode === 'third'" class="dialog-title">Process Point Group</h3>
+        <h3 *ngIf="nextNode !== 'third'" class="dialog-title">Department</h3>
+    </div>
+
+    <div class="scrollable-content">
+        <form #configForm="ngForm" class="config-form">
+            <div class="form-group-container">
+                <div *ngIf="nextNode !== 'third'" class="form-group-center1">
+                    <div *ngFor="let column of displayedColumns" class="form-field1">
+                        <label [for]="column" class="right-align-label1">{{ column | titlecase }}:</label>
+                        <input matInput [(ngModel)]="newRecord[column]" [name]="column" [id]="column"
+                            [placeholder]="column === 'departmentId' ? 'Department ID' : 'Enter ' + column"
+                            [value]="column === 'departmentId' ? data.department_id : newRecord[column]"
+                            [readonly]="column === 'departmentId'" required class="input-field1" />
+                    </div>
+                </div>
+                <div class="form-group-left" *ngIf="nextNode === 'third'">
+                    <div *ngFor="let column of displayedColumns.slice(0, displayedColumns.length / 2)"
+                        class="form-field">
+                        <label [for]="column" class="right-align-label"> {{ column | titlecase }}:</label>
+                        <input matInput [(ngModel)]="newRecord[column]" [name]="column" [id]="column"
+                            [placeholder]="column === 'departmentId' ? 'Department ID' : 'Enter ' + column"
+                            [value]="column === 'departmentId' ? data.department_id : newRecord[column]"
+                            [readonly]="column === 'departmentId'" required class="input-field" />
+                    </div>
+                </div>
+                <div class="form-group-right" *ngIf="nextNode === 'third'">
+                    <div *ngFor="let column of displayedColumns.slice(displayedColumns.length / 2)" class="form-field">
+                        <label [for]="column" class="right-align-label"> {{ column === 'gpcsProcessLocation' ?
+                            'Gpcslocation' : (column | titlecase) }}:</label>
+
+                        <ng-container *ngIf="column === 'groupType'; else defaultInput">
+                            <mat-form-field class="dropdown-field full-width dropdown-margin">
+                                <mat-select [(ngModel)]="newRecord.groupType" [name]="column" [id]="column" required>
+                                    <mat-option value="1">Tracking</mat-option>
+                                    <mat-option value="2">Inventory</mat-option>
+                                    <mat-option value="3">Metric</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+
+
+                        <ng-template #defaultInput>
+                            <input matInput [(ngModel)]="newRecord[column]" [name]="column" [id]="column"
+                                placeholder="Enter {{ column }}" required class="input-field" />
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container" *ngIf="nextNode === 'third'">
+                <div class="left-table">
+                    <h3 class="table-header">Available Process Points:</h3>
+                    <div class="table-wrapper">
+                        <table mat-table [dataSource]="availableProcessPointsDataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="processPointName">
+                                <th mat-header-cell *matHeaderCellDef> Process Point Name </th>
+                                <td mat-cell *matCellDef="let processPoint" (click)="selectProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedProcessPoint">
+                                    {{ processPoint.processPointName }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="processPointId">
+                                <th mat-header-cell *matHeaderCellDef> Process Point ID </th>
+                                <td mat-cell *matCellDef="let processPoint" (click)="selectProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedProcessPoint">
+                                    {{ processPoint.processPointId }}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="['processPointName', 'processPointId']"></tr>
+                            <tr mat-row *matRowDef="let processPoint; columns: ['processPointName', 'processPointId'];"
+                                (click)="selectProcessPoint(processPoint)"
+                                [class.selected-row]="processPoint === selectedProcessPoint"></tr>
+                        </table>
+
+                        <table mat-table [dataSource]="selectedProcessPointsDataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="processPointName">
+                                <th mat-header-cell *matHeaderCellDef> Process Point Name </th>
+                                <td mat-cell *matCellDef="let processPoint"
+                                    (click)="selectRightProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedRightProcessPoint">
+                                    {{ processPoint.processPointName }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="processPointId">
+                                <th mat-header-cell *matHeaderCellDef> Process Point ID </th>
+                                <td mat-cell *matCellDef="let processPoint"
+                                    (click)="selectRightProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedRightProcessPoint">
+                                    {{ processPoint.processPointId }}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="['processPointName', 'processPointId']"></tr>
+                            <tr mat-row *matRowDef="let processPoint; columns: ['processPointName', 'processPointId'];"
+                                (click)="selectRightProcessPoint(processPoint)"
+                                [class.selected-row]="processPoint === selectedRightProcessPoint"></tr>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="center-action">
+                    <button mat-raised-button color="primary" (click)="addToRight()" [disabled]="!selectedProcessPoint">
+                        Add to Right
+                    </button>
+                    <button mat-raised-button color="warn" (click)="moveToLeft()"
+                        [disabled]="!selectedRightProcessPoint">
+                        Move to Left
+                    </button>
+                </div>
+
+                <div class="right-table">
+                    <h3 class="table-header">Selected Process Points:</h3>
+                    <div class="table-wrapper">
+                        <table mat-table [dataSource]="selectedProcessPointsDataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="processPointName">
+                                <th mat-header-cell *matHeaderCellDef> Process Point Name </th>
+                                <td mat-cell *matCellDef="let processPoint"
+                                    (click)="selectRightProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedRightProcessPoint">
+                                    {{ processPoint.processPointName }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="processPointId">
+                                <th mat-header-cell *matHeaderCellDef> Process Point ID </th>
+                                <td mat-cell *matCellDef="let processPoint"
+                                    (click)="selectRightProcessPoint(processPoint)"
+                                    [class.selected-row]="processPoint === selectedRightProcessPoint">
+                                    {{ processPoint.processPointId }}
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="['processPointName', 'processPointId']"></tr>
+                            <tr mat-row *matRowDef="let processPoint; columns: ['processPointName', 'processPointId'];"
+                                (click)="selectRightProcessPoint(processPoint)"
+                                [class.selected-row]="processPoint === selectedRightProcessPoint"></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+
+<!-- <mat-dialog-actions align="center">
+    <div class="button-group">
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button color="primary" (click)="onSubmit()">Save</button>
+    </div>
+</mat-dialog-actions> -->
+<div class="fixed-actions">
+    <button mat-button mat-dialog-close (click)="onCancel()" class="action-button close-button">Close</button>
+    <button mat-button (click)="onSubmit()"  class="action-button save-button">Save</button>
+  </div>

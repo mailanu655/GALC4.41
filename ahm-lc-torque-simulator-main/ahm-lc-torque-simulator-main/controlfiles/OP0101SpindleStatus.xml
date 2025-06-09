@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0101" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.galc.openprotocol.model.MultiSpindleResultUpload">
+    <field id="01" name="SPINDLE_NUMBER" type="Integer" length="2" defaultValue="02" />
+    <field id="02" name="CHANNEL_ID" type="String" length="2" defaultValue="00" />
+    <field id="03" name="OVERALL_STATUS" type="Integer" length="1" defaultValue="0" />    
+    <field id="04" name="TORQUE_STATUS" type="Integer" length="1" defaultValue="0" />    
+    <field id="05" name="TORQUE_RESULT" type="String" length="6" defaultValue="000000" />
+    <field id="06" name="ANGLE_STATUS" type="Integer" length="1" defaultValue="0" />
+    <field id="07" name="ANGLE_RESULT" type="String" length="5" defaultValue="000000" />    
+</OPMessage>
+
+  

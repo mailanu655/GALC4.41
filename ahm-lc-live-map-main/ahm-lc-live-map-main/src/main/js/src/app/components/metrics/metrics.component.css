@@ -1,0 +1,51 @@
+@import '../../lib/lc-card.css';
+@import '../../lib/lc-form.css';
+
+.form {
+    width: 600px;
+    min-width: 540px;
+    /*height: 100%;*/
+}
+
+.metric {
+    width: 11%;
+}
+
+.placeholder {
+    color: #585858;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    height: 30px !important;
+    font-size: 10px !important;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+input.input-small {
+    font-weight: 600;
+    font-size: 25px;
+    /*background-color: #cce6ff !important;*/
+    color: #585858;
+    text-align: center;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0.5em 0 1em 0 !important;
+}
+
+input.ok {
+    color: green;
+}
+
+input.ng {
+    color: red;
+}
+
+input.warning {
+    color: blue;
+}

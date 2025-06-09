@@ -1,0 +1,377 @@
+.content-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+input[matInput] {
+    width: 50%; 
+    padding: 6px 10px; 
+    font-size: 12px; 
+    line-height: 1.2; 
+    border-radius: 2px; 
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+  
+input[matInput]:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 8px rgba(63, 81, 181, 0.2); 
+}
+  
+input[matInput]::placeholder {
+    color: #999; 
+    font-size: 11px; 
+    opacity: 1; 
+}
+.columns-container {
+    display: flex;
+    flex-wrap: wrap;  
+    gap: 1px;
+    margin-top: 1px;
+    justify-content: unset; 
+  }
+  
+.column-section {
+    flex: 1;
+  }
+  
+  .column-section h3 {
+    text-align: center;
+    font-size: 11px; 
+    font-weight: 500; 
+    color: #333; 
+  }
+  
+  .form-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .column-label {
+    flex: 0 0 150px; 
+    text-align: right;
+    margin-right: 8px;
+  }
+  
+  /* .dialog-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #205081;
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 20px;
+} */
+.scrollable-content {
+    max-height: 480px;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+::ng-deep .mat-dialog-container {
+    height: 90%;
+    padding: 0;
+}
+
+.config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-group-left,
+.form-group-right {
+    flex: 1;
+}
+
+.form-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.right-align-label {
+    flex-basis: 40%;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    flex: 0 0 120px;
+}
+
+.input-field {
+    flex-basis: 60%;
+    padding: 8px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-field:focus {
+    border-color: #3f51b5;
+    outline: none;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.dropdown-field {
+    width: 100%;
+    max-width: 55%;
+    height: 25px;
+    font-size: 0.9em;
+   
+}
+
+.mat-select-trigger {
+    height: 36px;
+    line-height: 36px;
+}
+
+ .table-container {
+    display: flex;
+    /* justify-content: space-between; */
+    margin-top: 20px;
+} 
+.table-wrapper {
+    background-color: #f7f7f7;
+    padding: 1px;
+    border-radius: 1px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 1em;
+}
+
+.left-table,
+.right-table {
+    width: 45%;
+}
+
+.center-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+.table-header {
+    font-size: 1em;
+    /* font-weight: bold; */
+    color: #333;
+    /* padding: 1px; */
+    text-align: center;
+    border-bottom: 1px solid #00796b;
+    margin-bottom: 1px;
+}
+
+.left-table h3,
+.right-table h3 {
+    text-align: center;
+    color: #00796b;
+}
+
+.selected-row {
+    background-color: #c8e6c9;
+    color: #004d40;
+    font-weight: bold;
+}
+
+.mat-row:hover {
+    background-color: #f1f1f1;
+}
+
+.input-field,
+.dropdown-field {
+    flex: 1;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.dropdown-margin {
+    margin-bottom: 16px;
+}
+
+.form-group-center {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-group-center1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.form-field1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.right-align-label1 {
+    flex: 1;
+    text-align: right;
+    margin-right: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.input-field1 {
+    flex: 2;
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.input-field1:focus {
+    border-color: #3f51b5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+}
+
+.mat-header-cell {
+    text-align: center;
+    padding: 1px 1px; 
+    font-size: 0.9em;
+}
+
+
+.dialog-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+  
+  .left-table,
+  .right-table {
+    width: 45%;
+  }
+  
+  .center-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .selected-row {
+    background-color: #c8e6c9;
+    color: #004d40;
+    font-weight: bold;
+  }
+  
+  .mat-row:hover {
+    background-color: #f1f1f1;
+  }
+
+  .fixed-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 20px;
+    padding: 10px;
+    background-color: #f1f1f1; 
+    border-top: 1px solid #e0e0e0;
+    border-radius: 4px; 
+    position: sticky; 
+    bottom: 0; 
+    width: 100%; 
+  }
+  
+  .action-button {
+    padding: px 1px;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .close-button {
+    background-color:  #2f679e;
+    color: white;
+    border: 1px solid #f44336;
+  }
+  
+  .save-button {
+    background-color:  #2f679e; 
+    color: white;
+    border: 1px solid #4caf50;
+  }
+  
+  .save-button:disabled {
+    background-color: #bdbdbd;
+    border: 1px solid #bdbdbd;
+    color: #757575;
+    cursor: not-allowed;
+  } 
+
+  .dialog-header {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #205081;
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.dialog-header {
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #205081;
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 1px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mat-column-processPointId {
+    padding-right: 16px; 
+  }
+  
+  .mat-column-processPointName {
+    padding-left: 16px;
+  }
+  .selected-row {
+    background-color: #d0e8ff; 
+    cursor: pointer;
+  }
+  
+  .selected-row:hover {
+    background-color: #a1c6ff;
+  }
+  

@@ -1,0 +1,16 @@
+@import '../line/line.component.css';
+
+mat-card {
+    background-color: #dee4e9;
+    padding-left: 10px;
+}
+
+.mat-h2 {
+    color: black;
+}
+
+#legendSvg {
+    width: 100%;
+    min-height: 500px;
+    height: calc(100vh - 145px);
+}

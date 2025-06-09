@@ -1,0 +1,50 @@
+.sums-navigation__link {
+    display:flex;
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+}
+
+.part-assignment__link {
+    padding-left: 1.0rem !important;
+}
+
+.mdl-layout-title {
+    padding-right: 1px !important;
+    padding-left: 5px !important;
+}
+
+button {
+    color: white;
+    font-size: 20px;
+    background-color: #205081;
+}
+button:hover {
+    background-color: #2f679e;
+}
+::ng-deep .mat-menu-panel {
+    background-color: #205081;
+}
+::ng-deep .mat-menu-content {
+  background-color: #205081;
+}
+button.mat-menu-item {
+    height: 40px;
+    line-height: 35px;
+    font-size: 13px;
+    
+}
+button.mat-menu-item:hover {
+    background-color: #2f679e;
+}
+.menu-icon {
+     color: white;
+}
+input {
+    background-color: white;
+}
+.countdown {
+    width: 40px; 
+    text-align: center; 
+    font-size: 15px; 
+    color: white;
+}

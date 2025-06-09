@@ -1,0 +1,29 @@
+<mat-drawer-container autosize="true" style="height: 100%;">
+    <button mat-icon-button (click)="download()" matTooltip="{{messages.get('tooltip.download.xls')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 60px; z-index: 100;">
+        <mat-icon>file_download</mat-icon>
+    </button>
+    <button mat-icon-button (click)="print()" matTooltip="{{messages.get('tooltip.print')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 20px;z-index: 100;">
+        <mat-icon>print</mat-icon>
+    </button>
+    <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="200ms" style="height: 100%;">
+        <mat-tab [label]="qicsLabel" *ngIf="displayDefectView">
+            <defects [id]="qicsLabel" #defectsComponent [tableData]="filteredDefects"></defects>
+        </mat-tab>
+        <mat-tab [label]="partsLabel" *ngIf="displayPartIssueView">
+            <part-issues [id]="partsLabel" #partIssuesComponent [tableData]="filteredPartIssues"></part-issues>
+        </mat-tab>
+        <mat-tab [label]="pmqaLabel" *ngIf="displayPmqaIssueView">
+            <pmqa-issues [id]="pmqaLabel" #PMQAIssuesComponent [tableData]="filteredPmqaIssue"></pmqa-issues>
+        </mat-tab>
+        <mat-tab [label]="holdsLabel" *ngIf="displayHoldView">
+            <holds [id]="holdsLabel" #holdsComponent [tableData]="filteredHolds"></holds>
+        </mat-tab>
+        <mat-tab [label]="stragglersLabel" *ngIf="displayStragglerView">
+            <stragglers [id]="stragglersLabel" #stragglersComponent [tableData]="filteredStragglers"></stragglers>
+        </mat-tab>
+    </mat-tab-group>
+    <mat-drawer #drawer mode="side" position="end" opened="{{openSidePanel}}">
+        <legend *ngIf="appService.menuItem === 'legend'"></legend>
+        <settings *ngIf="appService.menuItem === 'settings'"></settings>
+    </mat-drawer>
+</mat-drawer-container>

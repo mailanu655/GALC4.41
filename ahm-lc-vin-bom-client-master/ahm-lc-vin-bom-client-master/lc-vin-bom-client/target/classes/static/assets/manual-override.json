@@ -1,0 +1,35 @@
+[
+    {
+	    "productId": "5FNRL102345L09L",
+	    "productionLot": "TYT",
+	    "productSpecCode": "AA7",
+	    "systemName": "EPS_SOFT",
+	    "dcPartNo": "39110TX5 A000",
+        "isShippable": true
+    }, 
+    {
+	    "productId": "5FNRL102345L09L",
+	    "productionLot": "TYT",
+	    "productSpecCode": "AA7",
+	    "systemName": "EPS_SOFT",
+	    "dcPartNo": "39110TX5 A000",
+        "isShippable": false
+    }, 
+    {
+	    "productId": "5FNRL102345L09L",
+	    "productionLot": "TYT",
+	    "productSpecCode": "AA7",
+	    "systemName": "EPS_SOFT",
+	    "dcPartNo": "39110TX5 A000",
+        "isShippable": true
+    }, 
+    {
+	    "productId": "5FNRL102345L09L",
+	    "productionLot": "TYT",
+	    "productSpecCode": "AA7",
+	    "systemName": "EPS_SOFT",
+	    "dcPartNo": "39110TX5 A000",
+        "isShippable": true
+    }
+
+]

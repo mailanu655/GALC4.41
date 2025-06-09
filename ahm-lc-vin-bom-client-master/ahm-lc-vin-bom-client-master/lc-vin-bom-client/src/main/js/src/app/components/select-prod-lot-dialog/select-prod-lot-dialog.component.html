@@ -1,0 +1,121 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle (mousedown)="toTop('data.id')">Select Production Lot</h1>
+
+<mat-card>
+    <mat-card-content id="filter_n_reload">
+        <div class="row">
+            <div class="col">
+                <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Search</legend>
+                    <mat-card-content id="part-assignment-filter_panel">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="row">
+                                    Date
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 part-assign-filter-value">
+                                        <mat-form-field appearance="fill">
+                                            <input  matInput [matDatepicker]="fromDatePicker"  placeholder="MM/dd/yyyy" [(ngModel)]="fromDate"  id="fromDate"  name="fromDate" (dateChange)="getDate($event.value)">
+                                            <mat-datepicker-toggle  matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #fromDatePicker></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="row">
+                                    Line
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 part-assign-filter-value">
+                                        <select class="form-control" id="line" name="line" [(ngModel)]="line">
+                                            <option value="0" selected> Select </option>
+                                            <option *ngFor="let item of lineList"  [ngValue]="item" title="{{item}}">
+                                                {{item}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <button class="btn btn-success float-right btn-filter-part-assign" id="filterPartAssignment" title="filter" style="margin-left: 5px;"
+                                    (click)="search()">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </fieldset>
+            </div>
+        </div> 
+    </mat-card-content>
+
+    <mat-card-content id="immediate_change">
+        <div class="row">
+            <div class="col-sm">
+                <input type="checkbox" class="isImmediateChange_checkbox" style="width: 10%;" required id="isImmediateChange"
+                    name="isImmediateChange" [(ngModel)]="isImmediateChange" #contactActive="ngModel">
+                    Immediate Change
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-content id="filter_n_reload">
+        <div class="row" [hidden]="isImmediateChange">
+            <fieldset class="scheduler-border" style="width: 100%;">
+                <legend class="scheduler-border">Filter</legend>
+                    <mat-card-content id="select-prod-lot-dialog-filter_panel">
+                        <div class="row">
+                            <div class="col" style="text-align: right;">
+                                Product Spec Code
+                            </div>
+                            <div class="col">
+                                <!-- <input class="form-control" type="text" maxlength="200" placeholder="Product Spec Code" id="prodSpecCode" name="prodSpecCode" /> -->
+                                <mat-form-field class="filter" floatLabel="never">
+                                    <mat-label>Search</mat-label>
+                                    <input name="productSpecText" matInput [formControl]="productSpecCodeFilter" id="prodSpecCode" name="prodSpecCode">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </fieldset>
+        </div>
+        <div class="row" [hidden]="isImmediateChange" style="height: calc(100% - 5rem);">
+            <mat-card-content id="prod-lot-table" style="box-shadow: 0px 1px 1px #000e; width: 100%; height: 100%;">
+                <div class="table-container" id="filter_n_reload_tbl">
+                    <table [dataSource]="dataSource" class="table" mat-table matSort>
+                        <ng-container matColumnDef="productionLot">
+                        <th mat-header-cell *matHeaderCellDef> Production Lot </th>
+                        <td mat-cell *matCellDef="let item"> {{item.productionLot}} </td>
+                        </ng-container>
+                
+                        <ng-container matColumnDef="productSpecCode">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Spec Code </th>
+                        <td mat-cell *matCellDef="let item"> {{item.productSpecCode}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                        (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>
+                    </table>
+                    </div>
+            </mat-card-content>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <button *ngIf="!doSave" float-right class="btn btn-primary btn-ok-lot-assgn-dialog" id="okBtnLotAssignmentDialog" title="Ok" style="margin-top: 1rem;" 
+                    (click)="ok()">
+                    &nbsp;&nbsp;&nbsp;&nbsp;OK&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+                <button *ngIf="doSave" [disabled] = "!enableSave" float-right class="btn btn-primary btn-ok-lot-assgn-dialog" id="okBtnLotAssignmentDialog" title="Save" style="margin-top: 1rem;" 
+                    (click)="save()">
+                    &nbsp;&nbsp;Save&nbsp;&nbsp;
+                </button>&nbsp;&nbsp;
+                <button float-right (click)="cancel()" class="btn btn-secondary btn-cancel-lot-assgn-dialog" id="cancelBtnLotAssignmentDialog" title="Cancel" style="margin-top: 1rem;">
+                    Cancel
+                </button>
+                <input type="hidden" [(ngModel)]="data.selectedProdLot" />
+                
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

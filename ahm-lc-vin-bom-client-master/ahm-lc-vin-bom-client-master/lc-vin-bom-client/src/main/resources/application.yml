@@ -1,0 +1,267 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+# Servlet Container
+server:
+  address: 0.0.0.0
+  port: 9005
+  servlet:
+    context-path: 
+
+# Client 
+client:
+  appenv: 'localhost'
+  appName: 'LC SUMS VIN BOM'
+  logoMessage: 'Line Control - VIN BOM - AHM'
+  helpUrl: 'https://home.hondaweb.com/w1/hondawiki/pages/VIN-BOM.aspx'
+  revisionHistory: 'https://hondaweb.com/hra_wiki/display/GALC/VIN-BOM+Release+Notes'
+  hidPort: 59080
+  minPollingInterval: 30
+  refreshInterval: 15
+  sites:
+     elp:
+        name=ELP,
+        gmqaplantName=ELP,
+        gpcsplantName=ELP
+        serviceUrl=http://delp1was.ham.am.honda.com:8005,
+        url=http://170.108.47.111:9080,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-elp,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     map:
+        name=MAP,
+        gmqaplantName=MAP,
+        gpcsplantName=MAP,
+        serviceUrl=http://qmap1was.ham.am.honda.com:8005,
+        url=http://170.108.47.111:9080,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-map,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     pmc:
+        name=PMC,
+        gmqaplantName=PMC,
+        gpcsplantName=PMC,
+        serviceUrl=http://qpmc1was.ham.am.honda.com:8005,
+        url=http://170.108.47.111:9080,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-pmc,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     qpmc1mq:
+        name=PMC,
+        gmqaplantName=PMC,
+        gpcsplantName=PMC,
+        serviceUrl=http://qpmc1was.ham.am.honda.com:8005,
+        url=http://qpmc1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-pmc,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     ppmc1mq:
+        name=PMC,
+        gmqaplantName=PMC,
+        gpcsplantName=PMC,
+        serviceUrl=http://ppmc1was.ham.am.honda.com:8005,
+        url=http://ppmc1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-pmc,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     qelp1mq:
+        name=ELP,
+        gmqaplantName=ELP,
+        gpcsplantName=ELP,
+        serviceUrl=http://qelp1was.ham.am.honda.com:8005,
+        url=http://qelp1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-elp,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     pelp1mq:
+        name=ELP,
+        gmqaplantName=ELP,
+        gpcsplantName=ELP,
+        serviceUrl=http://pelp1was.ham.am.honda.com:8005,
+        url=http://pelp1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-elp,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     qmap1mq:
+        name=MAP,
+        gmqaplantName=MAP,
+        gpcsplantName=MAP,
+        serviceUrl=http://qmap1was.ham.am.honda.com:8005,
+        url=http://qmap1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-map,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     pmap1mq:
+        name=MAP,
+        gmqaplantName=MAP,
+        gpcsplantName=MAP,
+        serviceUrl=http://pmap1was.ham.am.honda.com:8005,
+        url=http://pmap1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-map,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     dhma1cvs1:
+        name=AAP1,
+        gmqaplantName=HMA,
+        gpcsplantName=HMA,
+        serviceUrl=http://qhma1was.hma.am.honda.com:8005,
+        url=http://dhma1cvs1.hma.am.honda.com:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-AAP1,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     AAPQ2:
+        name=AAP2,
+        gmqaplantName=HMA,
+        gpcsplantName=HMA,
+        serviceUrl=http://qhma2was.hma.am.honda.com:8005,
+        url=http://dhma1cvs1.hma.am.honda.com:9006,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-AAP2,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     AAP1:
+        name=AAP1,
+        gmqaplantName=HMA,
+        gpcsplantName=HMA,
+        serviceUrl=http://phma1was.hma.am.honda.com:8005,
+        url=http://hma1mqe:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-AAP1,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     AAP2:
+        name=AAP2,
+        gmqaplantName=HMA,
+        gpcsplantName=HMA,
+        serviceUrl=http://phma2was.hma.am.honda.com:8005,
+        url=http://hma2mqe:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-AAP2,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HCMQ1:
+        name=HCMQ1,
+        gmqaplantName=HCM,
+        gpcsplantName=HCM,
+        serviceUrl=http://10.167.200.220:8005,
+        url=http://10.167.200.237:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcm1,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HCMQ2:
+        name=HCMQ2,
+        gmqaplantName=HCM,
+        gpcsplantName=HCM,
+        serviceUrl=http://10.167.200.120:8005,
+        url=http://10.167.200.132:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcm2,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HCMP1:
+        name=HCMP1,
+        gmqaplantName=HCM,
+        gpcsplantName=HCM,
+        serviceUrl=http://10.167.151.30:8005,
+        url=http://10.167.151.45:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcm1,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HCMP2:
+        name=HCMQ2,
+        gmqaplantName=HCM,
+        gpcsplantName=HCM,
+        serviceUrl=http://10.167.152.30:8005,
+        url=http://10.167.152.45:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcm2,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     IAPQ:
+        name=IAP,
+        gmqaplantName=HMIN,
+        gpcsplantName=HMI,
+        serviceUrl=http://galchminline1naqa.hmin.am.honda.com,
+        url=http://thmi1mq1.hmin.am.honda.com:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-iap,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     IAPP:
+        name=IAP,
+        gmqaplantName=HMIN,
+        gpcsplantName=HMI,
+        serviceUrl=http://galchminline1naprod.hmin.am.honda.com,
+        url=http://thmi1mq1.hmin.am.honda.com:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-iap,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HDMQ:
+        name=HDMQ,
+        gmqaplantName=HDMC,
+        gpcsplantName=HDMC,
+        serviceUrl=http://thdmc1jb.hdm.am.honda.com:8505,
+        url=http://thcl1mq1:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcl,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     HDMP:
+        name=HDM,
+        gmqaplantName=HDMC,
+        gpcsplantName=HDMC,
+        serviceUrl=http://phdmc1jb.hdm.am.honda.com:8005,
+        url=http://phcl1mq1:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-hcl,
+        keyCloakUrl=http://ahmpxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false
+     localhost:
+        name=AAP1,
+        gmqaplantName=HMA,
+        gpcsplantName=HMA,
+        serviceUrl=http://qhma1was.hma.am.honda.com:8005,
+        url=http://qelp1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-AAP1,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false   
+     
+  feedbackClientUrl: 'http:///170.108.47.111:6200/feedback'
+  feedbackBaseUrl: 'http://170.108.47.111:7200'
+      

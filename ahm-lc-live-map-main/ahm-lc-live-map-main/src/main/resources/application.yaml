@@ -1,0 +1,87 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+
+# Servlet Container
+server:
+  address: 0.0.0.0
+  port: 8080
+  servlet:
+    context-path: 
+
+# Client 
+# This will be overridden by environment variables
+# In OpenShift this is managed in ConfigMap lclm-cm
+# Example ConfigMap in src/main/etc/cd/os/lclm-cm.yaml
+# Need to update url's, logMessage for the environment deploying ConfigMap in
+client:
+  appName: 'LC Live Map'
+  appShortName: 'LM'
+  env: 'DEV'
+  logoMessage: 'Line Control - Live Map - AHM Dev@Docker'
+  url: http://127.0.0.1:${server.port}
+  serviceUrl: http://127.0.0.1:8081
+  refreshInterval: 15
+  helpUrl: http://home.hondaweb.com/w1/hondawiki/Pages/LIVE-MAP--Sites-and-Views.aspx
+  feedbackUrl: http://127.0.0.1:8083/feedback  
+  infoUrl: https://hondaweb.com/hra_wiki/display/GALC/Live+Map+Release+Notes
+  sites: 
+    elp: 
+      name: ELP
+      partIssueServiceUrl: http://127.0.0.1:9181
+      partIssueConfigurationIds: [0] 
+    
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+  application:
+    name: ${project.artifactId}
+
+# Only log to console  When application is ran then console logs should be redirected if persistence is needed
+logging:
+  pattern:
+    console: '%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n'
+  level:
+    com.honda: INFO
+
+endpoints:
+  cors:
+    allowed-origins: '*'
+    allowed-methods: '*'
+    allowed-headers: '*'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, configprops, loggers, logfile, metrics, httptrace, prometheus, jolokia, hawtio
+      #exclude: env, beans
+      cors:
+        allowed-origins: '*'
+        allowed-methods: '*'
+        allowed-headers: '*'      
+  info.env.enabled: true
+  info.java.enabled: true
+hawtio:
+  authenticationEnabled: false  
+
+info:
+  app:
+    artifactId: ${project.artifactId}
+    version: ${project.version}
+    server:
+      address: ${server.address:}
+      port: ${server.port:}
+    logging:
+      config: ${logging.config:}
+      path: ${logging.path:}
+      email:
+        from: ${logging.email.from:}
+        to: ${logging.email.to:}
+      maxFileSize: ${logging.maxFileSize:}
+      totalSizeCap: ${logging.totalSizeCap:}
+      maxHistory: ${logging.maxHistory:}
+    client:
+      url: ${client.url:}
+      appName: ${client.appName:}
+      logoMessage: ${client.logoMessage:}        

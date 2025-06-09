@@ -1,0 +1,174 @@
+<div *ngIf="!getFeedbackShow()">
+    <div class="feedbackLinkBox">
+        <div class="header">
+            <h4 class="modal-title feedback">Feedback</h4>
+        </div>
+    </div>
+    <hr>
+    <form class="contact" [formGroup]="form" method="post" (ngSubmit)="onSubmit()">
+        <div class="add-associate">
+            <strong>
+                <mat-label>Associate</mat-label>
+            </strong>
+            <div class="input-group">
+                <input matInput class="associatebox mar-left-0 upper" [formControl]="associateId"
+                    placeholder="AssociateId" required minlength=4 autofocus width=50px
+                    (focusout)="setAssocIdValidity()">
+                <input matInput type="text" class="acknowledgeTxtBox small" [formControl]="firstName"
+                    placeholder="FirstName" (focusout)="setAssocFirstNameValidity()" />
+                <input matInput type="text" class="acknowledgeTxtBox small" (focusout)="setAssocLastName()"
+                    [formControl]="lastName" placeholder="LastName" />
+            </div>
+
+        </div>
+
+        <mat-form-field class="add-reason">
+            <strong>
+                <mat-label>Feedback Type</mat-label>
+            </strong>
+
+            <mat-select (selectionChange)="changeReason($event.value)" [formControl]="feedbackType" required>
+                <mat-option *ngFor="let feedbackType of feedbackTypes" [value]="feedbackType">{{feedbackType}}
+                </mat-option>
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="add-feedback">
+            <strong>
+                <mat-label>Feedback</mat-label>
+            </strong>
+            <textarea matInput [formControl]="message" maxlength="4000" rows="5"
+                placeholder="Please share feedback here..." (focusout)="setFeedbackMesasageValidity()"
+                required></textarea>
+            <mat-hint align="end"> {{message.value?.length || 0}}/4000</mat-hint>
+
+        </mat-form-field>
+        <div class="add-attachment" title="Zip to upload multiple files. File size cannot exceed 10 mb"><input
+                align="center" type="file" class="file-upload" (change)="onFileSelected($event)"></div>
+        <div align="center" class="container-fluid text-center">
+            <button [disabled]="checkFields()" class="feedbackButton" mat-dialog-close (click)="saveFeedback()">Send
+                Feedback</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-dialog-close class="feedbackButton">Close</button>
+        </div>
+        <mat-error *ngIf="assocFlag || assocNameFlag || assocLastNameFlag">Please enter your
+            associate details</mat-error>
+        <mat-error *ngIf="reasonFlag">FeedbackType is required</mat-error>
+        <mat-error *ngIf="messageFlag">Please enter a feedback details</mat-error>
+        <input [formControl]="honeypot" class="hidden" type="text" />
+        <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
+            <span>{{responseMessage}}</span>
+        </div>
+    </form>
+    <ng-template #fileUploadErrorDialog>
+        <h2 matDialogTitle color="warn">Error!</h2>
+        <p matDialogContent>File size is greater than the acceptable 10MB, please check and upload again.</p>
+        <mat-dialog-actions align="end">
+            <button class="feedbackButton" (click)="close()">Dismiss</button>
+        </mat-dialog-actions>
+    </ng-template>
+    <ng-template #alertDialog>
+        <h2 matDialogTitle color="warn">Error!</h2>
+        <p matDialogContent>Unable to submit feedback, please try after some time.</p>
+        <mat-dialog-actions align="end">
+            <button class="feedbackButton" (click)="close()">Dismiss</button>
+        </mat-dialog-actions>
+    </ng-template>
+    <ng-template #successDialog>
+        <h2 matDialogTitle color="blue">Success</h2>
+        <p matDialogContent>Feedback sent with id : {{feedbackId}}</p>
+        <mat-dialog-actions align="end">
+            <button class="feedbackButton" (click)="close()">Ok</button>
+        </mat-dialog-actions>
+    </ng-template>
+</div>
+<div *ngIf="getFeedbackShow()">
+    <div class="feedbackLinkBox">
+        <div class="header">
+            <h4 class="modal-title feedback">Feedback</h4>
+        </div>
+    </div>
+    <hr>
+    <form class="contact1" [formGroup]="form1" method="post" (ngSubmit)="onSubmit()">
+        <div>
+            <div class="add-associate">
+                <p></p>
+                <strong>
+                    <mat-label>Associate</mat-label>
+                </strong><br>
+
+                <input class="historyAssoc mar-left-0" placeholder="AssociateId"
+                    value="{{firstName}} {{lastName}} {{associateId}}" [formControl]="assocId" readonly>
+            </div>
+            <div class="historyStatus add-status">
+                <p></p>
+                <strong>
+                    <mat-label>Status</mat-label>
+                </strong>
+                <p></p>
+                <mat-select (selectionChange)="changeStatus($event.value)" [(value)]="defaultStatus" required>
+                    <mat-option *ngFor="let status of statusList" [value]="status.key">{{status.value}}</mat-option>
+                </mat-select>
+            </div>
+            &nbsp;
+            <div class="created-date add-date-time">
+                <p></p>
+                <strong>Created on</strong><br>
+                <input type=text class="historyDate" value="{{createdDate | date: format}} {{createdTime}}" />
+            </div>
+        </div>
+        <br>
+
+        <mat-form-field class="add-feedback">
+            <strong>
+                <mat-label>Comments</mat-label>
+            </strong><br>
+            <textarea class="comments-style" matInput [formControl]="message" maxlength="4000" rows="5"
+                placeholder="Enter comments here" required></textarea>
+            <mat-hint align="end"> {{message.value?.length || 0}}/4000</mat-hint>
+            <mat-error *ngIf="message.invalid">Please enter a comments</mat-error>
+        </mat-form-field>
+        <div class="attachments-section" *ngFor="let comment of commentData;let i=index;">
+            <div *ngIf="comment.uploadAttachmentId!=0" class="comment-attachment"
+                (click)="openImage(comment.uploadAttachmentId)"><label>UploadedFile</label></div>
+            <div *ngIf="comment.screenshotAttachmentId!=0" class="comment-attachment"
+                (click)="openImage(comment.screenshotAttachmentId)"><label>app-screenshot</label></div>
+        </div>
+        <div align="center" class="container-fluid text-center">
+            <button [disabled]="checkFieldsSupport()" class="feedbackButton" (click)="saveFeedbackMessages()">Submit
+            </button>
+        </div>
+        <input [formControl]="honeypot" class="hidden" type="text" />
+        <div [ngClass]="!submitted? 'hidden' : 'visible'" class="center-text">
+            <span>{{responseMessage}}</span>
+        </div>
+        <div class="view-comment-section" *ngIf="commentData!=null&&commentData.length!=0">
+            <strong>
+                <mat-label>Comments history</mat-label>
+            </strong>
+
+            <div *ngFor="let comment of commentData;let i=index;">
+                <div class="view-comment-arrow"></div>
+                <div class="view-comment-box display-table txt-wrap">
+                    <div class="view-comment-title">
+                        <span class="capital">{{comment.firstName}} {{comment.lastName}}</span>
+                        <br />
+                        <span class="upper">{{comment.associateId}}</span>
+                    </div>
+                    <div class="view-comment-details">
+                        <div class="display-table">
+                            <div class="comment-data">{{comment.message}}</div>
+                            <div class="comment-date" *ngIf="comment.createdOn!=null">
+                                <span>{{comment.createdDate}}</span>
+                                <br />
+                                <span>{{comment.createdTime}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br><br>
+    </form>
+</div>

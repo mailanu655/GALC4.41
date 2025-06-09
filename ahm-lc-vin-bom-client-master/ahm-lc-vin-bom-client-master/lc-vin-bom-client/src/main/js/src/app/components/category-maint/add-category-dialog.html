@@ -1,0 +1,132 @@
+ 
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle >Add Category</h1>
+<span  style="display: flex; height: calc(100% - 10px); overflow-x: auto; width: 100%;">
+   
+<mat-card>
+    <mat-card-content id="addCat" style="height:90%;width:calc(100% - 100px);float:left;">
+<!--<div mat-dialog-content style="padding-top: 10px;">-->
+    <form  [formGroup]="addCatForm">
+        <div class="row">
+            <div class="col-sm-6">
+                
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Category Name</div>
+                    <div class="col-sm">
+                        <input class="form-control" 
+                                type="text" 
+                                matInput
+                                maxlength="200" 
+                                placeholder="CategoryName" 
+                                formControlName="catNameInDialog"
+                                [ngClass]="{ 'is-invalid': submitted && f.catNameInDialog.errors }"
+                                #catName
+                        />
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.catNameInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.catNameInDialog.errors.required">Category Name is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Description</div>
+                    <div class="col-sm">
+                        <input  class="form-control" 
+                                type="text" 
+                                maxlength="200" 
+                                matInput
+                                placeholder="Description"  
+                                formControlName="descriptionInDialog"
+                                [ngClass]="{ 'is-invalid': submitted && f.descriptionInDialog.errors }"
+                                #description
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.descriptionInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.descriptionInDialog.errors.required">Description is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">inclusion list</div>
+                    <div class="col-sm">
+                     <input     class = "form-control" 
+                                type = "checkbox"
+                                formControlName="inclusionInDialog"
+                                 (change) ="updateInclusion($event)" 
+                                 #inclusive                              
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Inspection Name</div>
+                    <div class="col-sm">
+                        <input  class="form-control" 
+                                type="text" 
+                                maxlength="200" 
+                                matInput
+                                placeholder="InspectionName"  
+                                formControlName="inspectionNameInDialog"
+                                #inspectionName
+                                (input)="inspectionName.value=inspectionName.value.toUpperCase()"
+                        />
+                    </div>
+                    
+                </div>
+                <div class="row">
+                  
+                    
+                    <div >
+                        <div>
+                            <button (click)="addToList(inspectionName.value,catName.value,description.value)"   class="btn btn-primary btn-add-bom-part" id="Add To List" title="Add To List" style="margin-top: 1rem;" >
+                            Add To List
+                            </button>&nbsp;
+                            <button (click)="removeFromList()"  class="btn btn-danger btn-add-bom-part" id="Remove From List" title="Remove From List" style="margin-top: 1rem;" >
+                                Remove From List
+                            </button>
+                        </div>
+                        <div style="margin-top: 5px;height:calc(100% -100px);">
+                            
+                            <table [dataSource]="inspectionDataSource" class="table" mat-table matSort >
+                            <ng-container matColumnDef="letInspectionName">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Inspection Name </th>
+                              <td  mat-cell *matCellDef="let item"> {{item.id.letInspectionName}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="inspectionDisplayedColumns" ></tr> 
+                            <tr mat-row *matRowDef="let row; columns: inspectionDisplayedColumns; let i = index" 
+                                  (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>    
+                          </table>
+                        </div>
+                        
+                    </div>
+                 
+                    
+                    
+                </div>
+                
+                
+            </div>
+        </div> 
+        
+ 
+    </form>
+
+
+</mat-card-content>  
+</mat-card>
+<!--<mat-card-content id="category_maint_button" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 120px);">-->
+<div class="col-sm-3" >
+      
+        <button  (click)="save()" float-right class="btn btn-primary btn-add-bom-part" id="save" title="Add / Update" style="margin-top: 1rem;" >
+        &nbsp;&nbsp;Save &nbsp;&nbsp;
+        </button>&nbsp;&nbsp;
+
+        <button (click)="cancel()" float-right class="btn btn-primary btn-add-bom-part" id="cancel" title="Search Part" style="margin-top: 1rem;" >
+        &nbsp;&nbsp;Cancel&nbsp;&nbsp;
+        </button>
+   
+</div>
+
+<!--</mat-card-content>-->
+
+</span>

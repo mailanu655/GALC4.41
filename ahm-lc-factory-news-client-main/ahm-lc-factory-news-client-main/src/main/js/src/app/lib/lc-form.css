@@ -1,0 +1,58 @@
+input {
+    color: rgb(54, 69, 79);
+    padding-left: 5px;
+}
+input.input-large {
+    font-size: 25px;
+    height: 40px;
+}
+input.input-medium {
+    font-size: 20px;
+    height: 28px;
+}
+input.input-small {
+    font-size: 17px;
+    height: 25px;
+}
+input:disabled {
+    color: #585858 !important;
+}
+input.state:enabled {
+    background-color: skyblue !important;
+}
+input.state:read-only {
+    background-color: lightgreen !important;
+}
+.full-width {
+    width: 100%;
+}
+.half-width {
+    width: 50%;
+}
+.less-half-width {
+    width: 45%;
+}
+.two-field {
+	width: 49%;
+	padding-right: 2%;    
+}
+.second-field {
+    width: 49%;
+}
+.three-field {
+	width: 32%;
+	padding-right: 2%;
+}
+.third-field {
+	width: 32%;
+}
+.four-field {
+	width: 23%;
+	padding-right: 2%;
+}
+.fourth-field {
+	width: 25%;
+}
+.placeholder {
+    color: rgb(54, 69, 79);
+}

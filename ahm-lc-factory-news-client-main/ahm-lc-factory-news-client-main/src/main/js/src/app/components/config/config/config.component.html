@@ -1,0 +1,31 @@
+<div *ngIf="node" class="config-page-container">
+  <div class="node-details">
+    <mat-icon class="edit-icon" *ngIf="node.type && !['first', 'second', 'fifth'].includes(node.type.toLowerCase())"
+      (click)="editNode()">edit</mat-icon>
+
+    <div class="heading-container">
+      <h2 class="heading center-heading">
+        {{ getNodeLabel(node) }} {{ node.name || node.galcProcessPointName || node.groupTypeName }}
+      </h2>
+    </div>
+    <div class="column-details" *ngFor="let column of nodeColumns">
+      <div class="column-label">
+        <strong>{{ column.charAt(0).toUpperCase() + column.slice(1) }}:</strong>
+      </div>
+      <div class="column-value">
+        <span *ngIf="!isEditMode" class="value-display">{{ node[column] || 'N/A' }}</span>
+        <input *ngIf="isEditMode" [(ngModel)]="node[column]" class="value-input" />
+      </div>
+    </div>
+
+    <button *ngIf="!isEditMode && shouldShowAddButton()" (click)="addNode(node)" class="add-button">
+      {{ getAddButtonLabel() }}
+    </button>
+
+    <div *ngIf="isEditMode" class="edit-actions">
+      <button class="save-button" (click)="saveChanges()">Save</button>
+      <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
+      
+    </div>
+  </div>
+</div>

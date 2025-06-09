@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rootmenu SYSTEM "/resource/com/honda/galc/device/simulator/client/ui/applicationmenu.dtd">
+
+<rootmenu name="PLC Simulator Menu">
+  <submenu name="File" tooltip="File Menu" mnemonic="VK_F">
+    <menuitem name="Exit" action="exitSystem" tooltip="Exit System" mnemonic="VK_E"/>
+   </submenu>
+
+  <submenu name="Configuration">
+    <menuitem name="Options..." action="configuration"/>
+  </submenu>
+
+  <submenu name="About">
+    <menuitem name="About" action="aboutApplication"/>
+  </submenu>
+</rootmenu>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+            http://www.springframework.org/schema/aop     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+            "
+       default-autowire="byName"
+        >
+        
+   
+ 	<bean id="ServiceProvider" class="com.honda.galc.net.HttpServiceProvider"/>
+ 	<bean id="NotificationServiceProvider" class="com.honda.galc.client.notification.ClientNotificationProvider"/>
+  	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	  	<property name="corePoolSize" value="5" />
+  		<property name="maxPoolSize" value="10" />
+		<property name="queueCapacity" value="25" />
+	</bean>
+
+	<bean id="NotificationServiceExecutor" class="com.honda.galc.notification.NotificationServiceExecutorImpl">
+  		<constructor-arg ref="taskExecutor" />
+	</bean>
+ 	
+ 	<!-- post-processors for all standard config annotations -->
+    <context:annotation-config/>
+
+  	
+   
+</beans>

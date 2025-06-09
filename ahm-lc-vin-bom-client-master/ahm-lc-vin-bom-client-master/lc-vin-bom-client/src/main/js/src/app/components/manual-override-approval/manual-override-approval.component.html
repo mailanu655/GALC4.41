@@ -1,0 +1,353 @@
+<span class="manual-override" style="display: flex; height: 100%; overflow-x: auto; width: 100%;overflow-y: auto;">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Manual Override Approval</mat-card-title>
+      </mat-card-header>
+        <mat-card-content id="manual-override-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 90px);width: 100%;">
+            <div class="table-container">
+                <table [dataSource]="dataSource" class="table" mat-table matSort>
+
+                  <ng-container matColumnDef="productId">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Product Id <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productIdFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productId}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="productSpecCode">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Product Spec Code <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productSpecCodeFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productSpecCode}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="productionLot">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Production Lot <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productionLotFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productionLot}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="letSystemName">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      System Name <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select  placeholder="All" [formControl]="letSystemNameFilter">
+                            <mat-option value="">All</mat-option>
+                            <mat-option *ngFor="let item of letSystemNameList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-70-cell-width" mat-cell *matCellDef="let item"> {{item.letSystemName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="currentDcPartNumber">
+                    <th class="header px-95-cell-width multi-line-text" mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Current <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionCurrentDcPartNumberChange($event.value)" placeholder="All" [formControl]="currentDcPartNumberFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of currentDcPartNumberList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-95-cell-width" [ngClass]="{changed_rule_bg:item.currentDcPartNumber !== item.newDcPartNumber}" mat-cell *matCellDef="let item"> {{item.currentDcPartNumber}} </td>
+                  </ng-container>
+                  
+                  <!-- <ng-container matColumnDef="currentDcPartNumber">
+                    <th class="header px-95-cell-width multi-line-text" mat-header-cell *matHeaderCellDef  [attr.rowspan]="2"> 
+                      Current <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="currentDcPartNumberFilter">
+                      </mat-form-field>
+                    </th>
+                    <td class="px-95-cell-width" mat-cell *matCellDef="let item"  [ngClass]="{changed_rule_bg:item.currentDcPartNumber !== item.newDcPartNumber}"> {{item.currentDcPartNumber}} </td>
+                  </ng-container> -->
+                  <ng-container matColumnDef="newDcPartNumber">
+                    <th class="header px-95-cell-width multi-line-text" mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      New  <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionNewDcPartNumberChange($event.value)" placeholder="All" [formControl]="newDcPartNumberFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of newDcPartNumberList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-95-cell-width" [ngClass]="{changed_rule_bg:item.currentDcPartNumber !== item.newDcPartNumber}" mat-cell *matCellDef="let item"> {{item.newDcPartNumber}} </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="newDcPartNumber">
+                    <th class="header px-95-cell-width multi-line-text" mat-header-cell *matHeaderCellDef  [attr.rowspan]="2"> 
+                      New  <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="newDcPartNumberFilter">
+                      </mat-form-field>
+                    </th>
+                    <td class="px-95-cell-width" mat-cell *matCellDef="let item" [ngClass]="{changed_rule_bg:item.currentDcPartNumber !== item.newDcPartNumber}"> {{item.newDcPartNumber}} </td>
+                  </ng-container> -->
+
+                  <ng-container matColumnDef="interchangeable">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Interchangeable <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <mat-select  placeholder="All" [formControl]="interchangeableFilter">
+                            <mat-option value="">All</mat-option>
+                            <mat-option value="true">Yes</mat-option>
+                            <mat-option value="false">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td class="px-40-cell-width" mat-cell *matCellDef="let item"> {{item.interchangeable ? 'Yes' : 'No'}} </td>
+                  </ng-container>
+
+                 
+                  <ng-container matColumnDef="currentShipStatus">
+                   
+                    <th class="header px-60-cell-width multi-line-text" mat-header-cell *matHeaderCellDef >
+                       Current 
+                      
+                      <mat-form-field class="filter select-width-65-perc" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select  placeholder="Select" [formControl]="currentShipStatusFilter">
+                            <mat-option value="">All</mat-option>
+                            <mat-option value="true">Yes</mat-option>
+                            <mat-option value="false">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td class="px-60-cell-width" mat-cell *matCellDef="let item" [ngClass]="{changed_rule_bg:item.currentShipStatus !== item.newShipStatus}"> {{item.currentShipStatus ? 'Yes' : 'No'}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="newShipStatus">
+                    <th class="header px-60-cell-width multi-line-text" mat-header-cell *matHeaderCellDef >
+                      New 
+                      <mat-form-field class="filter select-width-65-perc" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select  placeholder="Select" [formControl]="newShipStatusFilter">
+                            <mat-option value="">All</mat-option>
+                            <mat-option value="true">Yes</mat-option>
+                            <mat-option value="false">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td class="px-60-cell-width" mat-cell *matCellDef="let item" [ngClass]="{changed_rule_bg:item.currentShipStatus !== item.newShipStatus}"> {{item.newShipStatus ? 'Yes' : 'No'}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="requestAssociateName">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Requestor <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="requestAssociateNameFilter">
+                      </mat-form-field>
+                    </th>
+                    <td class="px-70-cell-width" mat-cell *matCellDef="let item">  {{ abbreviatedName(item.requestAssociateName) }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="requestTimestamp">
+                    <th [attr.rowspan]="2" [ngStyle]="{'display': 'none'}" class="header" mat-header-cell *matHeaderCellDef> 
+                      Request Time </th>
+                    <td class="px-130-cell-width" mat-cell *matCellDef="let item"> {{item.requestTimestamp | slice:0:10 }} {{item.requestTimestamp | slice:11:19 }} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="header-row-group-productId">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Product Id <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionProdIdChange($event.value)" placeholder="All" [formControl]="productIdFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of productIdList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productId}} </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="header-row-group-productId">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Product Id <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productIdFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productId}} </td>
+                    
+                  </ng-container> -->
+                  <ng-container matColumnDef="header-row-group-productSpeCode">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Product Spec Code <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionProdSpecChange($event.value)" placeholder="All" [formControl]="productSpecCodeFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of productSpecCodeList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productSpecCode}} </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="header-row-group-productSpeCode">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Product Spec Code <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productSpecCodeFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productSpecCode}} </td>
+                  </ng-container> -->
+                  <ng-container matColumnDef="header-row-group-productionLot">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      ProductionLot <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionProdLotChange($event.value)" placeholder="All" [formControl]="productionLotFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of productionLotList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productionLot}} </td>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="header-row-group-productionLot">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">  
+                      ProductionLot <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                        <input matInput [formControl]="productionLotFilter">
+                      </mat-form-field>
+                    </th>
+                    <td  class="px-95-cell-width" mat-cell *matCellDef="let item"> {{item.productionLot}} </td>
+                  </ng-container> -->
+                  <ng-container matColumnDef="header-row-group-systemName">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      System Name <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionSystemNameChange($event.value)" placeholder="All" [formControl]="letSystemNameFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of letSystemNameList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-70-cell-width" mat-cell *matCellDef="let item"> {{item.letSystemName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="header-row-group-dcPartNo">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">DC Part # </th>
+                  </ng-container>
+                  <ng-container matColumnDef="header-row-group-interchangeable">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2" >    
+                    Inter<br>changeable <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select  placeholder="All" [formControl]="interchangeableFilter">
+                            <mat-option value="">All</mat-option>
+                            <mat-option value="true">Yes</mat-option>
+                            <mat-option value="false">No</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td  mat-cell *matCellDef="let item"> {{item.interchangeable ? 'Yes' : 'No'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="header-row-group-shippable">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">Shippable </th>
+                  </ng-container>
+                  <ng-container matColumnDef="header-row-group-requester">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Requestor <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionRequestorChange($event.value)" placeholder="All" [formControl]="requestAssociateNameFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of requestAssociateNameList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </th>
+                    <td class="px-70-cell-width" mat-cell *matCellDef="let item"> {{ abbreviatedName(item.requestAssociateName) }} </td>
+                  </ng-container>
+
+                  <!-- <ng-container matColumnDef="header-row-group-requester">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">  Requestor <br>
+                      
+                        <mat-form-field class="filter" floatLabel="never">
+                          <mat-label>All</mat-label>
+                          <input matInput [formControl]="requestAssociateNameFilter" style="max-width:100px;">
+                        </mat-form-field>
+                        
+                    </th>
+                    <td class="px-70-cell-width" mat-cell *matCellDef="let item">  {{ abbreviatedName(item.requestAssociateName) }} </td>
+                  </ng-container> -->
+                  <ng-container matColumnDef="header-row-group-requestTime">
+                    <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> 
+                      Request <br> Time </th>
+                      <td class="px-130-cell-width" mat-cell *matCellDef="let item"> 
+                        {{item.requestTimestamp | slice:0:10 }} {{item.requestTimestamp | slice:11:19 }} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="['header-row-group-productId','header-row-group-productSpeCode','header-row-group-productionLot','header-row-group-systemName','header-row-group-dcPartNo','header-row-group-interchangeable','header-row-group-shippable','header-row-group-requester','header-row-group-requestTime']"></tr>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                    (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>
+                </table>
+              </div>
+        </mat-card-content>
+
+        <mat-card-content id="man_override_approv_parent_actions">
+            <div class="row">
+                <div class="col-sm">
+                    <button type="button" class="btn btn-primary" (click)="approveChange()">Approve Manual Override</button> &nbsp;
+                    <button type="button" class="btn btn-danger" (click)="denyChange()">Deny Manual Override</button>
+                </div>
+                <div class="col-sm-8" >
+                    <alert></alert>
+                    <p *ngIf="message && message?.type === 'ERROR'" style="background-color: red;" >{{ message.message }}</p>
+                    <p *ngIf="message && message?.type === 'SUCCESS'" style="background-color: greenyellow;" >{{ message.message }}</p>
+                    <p *ngIf="message && message?.type === 'WARNING'" style="background-color: yellow;" >{{ message.message }}</p>
+                </div>
+            </div>
+            <div class="my-container">
+              <ng-template #customLoadingTemplate>
+                  <div class="custom-class">
+                      <h3>
+                        Please wait...
+                      </h3>
+                      
+                  </div>
+              </ng-template>
+           
+              <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+             
+          </div>
+        </mat-card-content>
+    </mat-card>
+</span>

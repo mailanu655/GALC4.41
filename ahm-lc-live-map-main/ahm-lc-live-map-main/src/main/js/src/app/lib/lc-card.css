@@ -1,0 +1,31 @@
+.mat-card {
+    height: calc(100% - 35px);
+    min-height: 200px; 
+    background-color: #ecf2f7;
+    color: #585858;
+}
+.mat-card-header {
+    font-size: 20px;
+    height: 40px;
+    white-space: nowrap;
+}
+.mat-card-content {
+    font-size: 16px;
+    height: calc(100% - 90px);
+}
+.mat-card-actions {
+    height: 35px;
+    text-align: left;
+    width: 100%;
+}
+mat-tab-group {
+    height: calc(100% - 135px);
+}
+.mat-button {
+    background-color: lightgrey;
+    width: 100px; 
+    height: 35px;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 3px;
+}

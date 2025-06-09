@@ -1,0 +1,8 @@
+{
+  "/RestWeb/*": {
+    "target": "http://qhma2was:8005",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

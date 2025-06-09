@@ -1,0 +1,69 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle (mousedown)="toTop('data.id')">Change Rules</h1>
+
+<mat-card>
+    <mat-card-content id="rules_panel">
+        <div class="row">
+            <div class="col-sm" style="padding-top: 3px;">
+                <div class="col-xs-10 col-sm-12">
+                    <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Rules</legend>
+                        <mat-card-content id="rules_panel">
+                            <div class="row" style="padding-bottom: 3px;">
+                                <div class="col-sm-6" >
+                                    
+                                </div>
+                                <div class="col-sm" > 
+                                    Yes
+                                </div>
+                                <div class="col-sm" >
+                                    No
+                                </div>
+                            </div>
+                            <div class="row" style="padding-bottom: 3px;">
+                                <div class="col-sm-6 rules-radio-labels" >
+                                    Reflash
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="cbuReflash" ng-control="cbuReflash" type="radio" [value]="1"  [(ngModel)]="cbuReflash" ><br/>
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="cbuReflash" ng-control="cbuReflash" type="radio" [value]="0"  [(ngModel)]="cbuReflash" ><br/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 rules-radio-labels" >
+                                    Strglr-New
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="scrapParts" ng-control="scrapParts" type="radio" [value]="1"  [(ngModel)]="scrapParts" ><br/>
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="scrapParts" ng-control="scrapParts" type="radio" [value]="0"  [(ngModel)]="scrapParts" ><br/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 rules-radio-labels" >
+                                    Interchangeable
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="stragglerInterChangeable" ng-control="stragglerInterChangeable" type="radio" [value]="1"  [(ngModel)]="stragglerInterChangeable" ><br/>
+                                </div>
+                                <div class="col-sm" > 
+                                    <input name="stragglerInterChangeable" ng-control="stragglerInterChangeable" type="radio" [value]="0"  [(ngModel)]="stragglerInterChangeable" ><br/>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="col-xs-10 col-sm-12">
+                    <button type="button"  class="btn btn-info" (click)="save()">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>&nbsp;&nbsp;
+                    <button type="button"  class="btn btn-info" (click)="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

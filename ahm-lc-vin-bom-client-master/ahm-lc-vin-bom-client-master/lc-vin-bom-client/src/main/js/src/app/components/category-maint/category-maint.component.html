@@ -1,0 +1,70 @@
+<span  style="display: flex; height: 100%; overflow-x: auto; width: 100%;">
+  <mat-card>
+   
+      <mat-card-header>
+          <mat-card-title>LET Partial Pass</mat-card-title>
+     </mat-card-header>
+  <mat-card-content id="category-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 100px);width:calc(80% - 10px);float:left;">
+    
+        <div style="display:inline-table; float:left;width:100%;">
+            <table  [dataSource]="dataSource" class="table" mat-table matSort #catTableSort = "matSort" (matSortChange)= "sortColumn($event)">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Category Name </th>
+                <td  mat-cell *matCellDef="let item"> {{item.name}} </td>
+              </ng-container>
+                      
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                <td  mat-cell *matCellDef="let item"> {{item.description}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="inclusive">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Inclusive List </th>
+                <td mat-cell *matCellDef="let item"> 
+     
+                  <mat-checkbox   [checked]="item.inclusive" [disabled]=true> </mat-checkbox>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr> 
+              <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                    (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>    
+            </table>
+            </div>
+          </mat-card-content>
+          <mat-card-content id="inspection-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 100px);width:calc(20% - 10px);float:right;">
+            <div style="display:inline-table; float:right;width:100%">
+              <table [dataSource]="inspectionDataSource" class="table_inspection" mat-table matSort #inspTableSort="matSort" (matSortChange)= "sortInspColumn($event)">
+              <ng-container matColumnDef="letInspectionName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Inspection Name </th>
+                <td  mat-cell *matCellDef="let item"> {{item.id.letInspectionName}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="inspectionDisplayedColumns" ></tr> 
+              <tr mat-row *matRowDef="let row; columns: inspectionDisplayedColumns; let i = index" 
+                     [class.hover]="i == highlightedRow" > </tr>    
+            </table>
+          </div>
+        </mat-card-content>     
+        <mat-card-content id="category_maint_button" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 20px);">
+          <div style="display:flex; float:left;width:100%">
+            <button type="button" class="btn btn-primary" (click)="addCategoryOpenDialog(true)">&nbsp;&nbsp;Add &nbsp;&nbsp;</button> &nbsp;
+            <button type="button" class="btn btn-primary" (click)="addCategoryOpenDialog(false)">&nbsp;&nbsp;Edit&nbsp;&nbsp;</button> &nbsp;
+            <button type="button" class="btn btn-danger" (click)="removeCat()">&nbsp;&nbsp;Delete&nbsp;&nbsp;</button>
+          </div>
+          <div class="my-container">
+            <ng-template #customLoadingTemplate>
+                <div class="custom-class">
+                    <h3>
+                      Please wait...
+                    </h3>
+                    
+                </div>
+            </ng-template>
+         
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+           
+        </div>
+        </mat-card-content>
+ 
+  </mat-card>
+  
+</span>

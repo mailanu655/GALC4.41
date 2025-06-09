@@ -1,0 +1,27 @@
+.dashboard {
+    height: calc(100% - 30px);
+}
+
+.logo {
+    position: relative;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+.logo-msg {
+    color: #000066;
+    font-size: 3em;
+    line-height: 1em;
+}
+
+@media screen and (orientation:landscape) {
+    .logo-icon {
+        width: 14%;
+    }
+}
+
+@media screen and (orientation:portrait) {
+    .logo-icon {
+        width: 40%;
+    }
+}

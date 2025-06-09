@@ -1,0 +1,62 @@
+<mat-card>
+    <mat-card-header>Product Information</mat-card-header>
+    <mat-card-content>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="id" [(ngModel)]="product.id" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">VIN</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="afOnSequence" [(ngModel)]="product.afOnSequence" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">AFON Sequence</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="afOnTs" value="{{product.afOnTs|date:'medium'}}" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">AFON Time</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="trStatus" value="{{dataService.lineCache.get(product.trackingStatus)?.name}}" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">TR Status</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="model" [(ngModel)]="product.model" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">Model</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="specCode" [(ngModel)]="product.specCode" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">Spec Code</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="prodLot" [(ngModel)]="product.prodLot" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">Production Lot</mat-label>
+        </mat-form-field>
+        <mat-form-field class="four-field" appearance="outline" floatLabel="always">
+            <input name="kdLot" [(ngModel)]="product.kdLot" matInput [readonly]="true" class="input-medium state">
+            <mat-label class="placeholder" position="left">KD Lot</mat-label>
+        </mat-form-field>
+        <button mat-icon-button (click)="download()" matTooltip="{{messages.get('tooltip.download.xls')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 60px; top: 255px; z-index: 100;">
+            <mat-icon>file_download</mat-icon>
+        </button>
+        <button mat-icon-button (click)="print()" matTooltip="{{messages.get('tooltip.print')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 20px; top: 255px; z-index: 100;">
+            <mat-icon>print</mat-icon>
+        </button>
+        <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms">
+            <mat-tab [label]="historyLabel">
+                <lc-table [id]="historyLabel" #historyComponent [tableData]="product['history']" [columns]="historyColumns"></lc-table>
+            </mat-tab>
+            <mat-tab [label]="qicsLabel">
+                <defects [id]="qicsLabel" #defectsComponent [tableData]="product.defects" [columns]="defectcolumns"></defects>
+            </mat-tab>
+            <mat-tab [label]="partsLabel">
+                <part-issues [id]="partsLabel" #partIssuesComponent [tableData]="product.partIssues" [columns]="partIssueColumns"></part-issues>
+            </mat-tab>
+            <mat-tab [label]="holdsLabel">
+                <holds [id]="partsLabel" #holdsComponent [tableData]="product.holds" [columns]="holdsColumns"></holds>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+    <mat-card-actions>
+        <!--<button type="button" mat-button routerLink="{{backUrl}}">Back</button>-->
+        <button type="button" mat-button (click)="onRefresh()">Refresh</button>
+        <button type="button" mat-button [cdkCopyToClipboard]="product.id">Copy VIN</button>
+    </mat-card-actions>
+</mat-card>

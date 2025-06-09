@@ -1,0 +1,49 @@
+<mat-drawer-container (window:resize)="onResize()" style="height: 100%;">
+    <as-split id="split" #split direction="vertical" (window:resize)="onResize()" unit="pixel" (gutterDblClick)="onResize()" [gutterDblClickDuration]="400">
+        <as-split-area id="lineSplit">
+            <metrics #metricsComponent></metrics>
+            <line #lineComponent [selectedProducts]="selectedProducts" (mouseOverLocation)='onMouseOverLocation($event)' (mouseOutLocation)='onMouseOutLocation($event)'></line>
+        </as-split-area>
+        <mat-divider></mat-divider>
+        <as-split-area id="tabSplit">
+            <div style="position: absolute; right: 20px;">
+                <button mat-icon-button (click)="download()" matTooltip="{{messages.get('tooltip.download.xls')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="top: -15px; z-index: 100;">
+                    <mat-icon>file_download</mat-icon>
+                </button>
+                <button mat-icon-button (click)="print()" matTooltip="{{messages.get('tooltip.print')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="top: -15px; z-index: 100;">
+                    <mat-icon>print</mat-icon>
+                </button>
+            </div>
+            <!--
+            <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms" style="min-height: 150px;">
+            -->
+            <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms" style="height: calc(100% - 5px);">
+                <mat-tab [label]="upcomingLotsLabel">
+                    <upcoming-lots [id]="upcomingLotsLabel" #upcomingLotsComponent [tableData]="upcomingLots"></upcoming-lots>
+                </mat-tab>
+                <mat-tab [label]="qicsLabel" *ngIf="displayDefectView">
+                    <defects [id]="qicsLabel" #defectsComponent [tableData]="filteredDefects" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></defects>
+                </mat-tab>
+                <mat-tab [label]="partsLabel" *ngIf="displayPartIssueView">
+                    <part-issues [id]="partsLabel" #partIssuesComponent [tableData]="filteredPartIssues" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></part-issues>
+                </mat-tab>
+                <mat-tab [label]="pmqaLabel" *ngIf="displayPmqaIssueView">
+                    <pmqa-issues [id]="pmqaLabel" #PMQAIssuesComponent [tableData]="filteredPmqaIssue" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></pmqa-issues>
+                </mat-tab>
+                <mat-tab [label]="holdsLabel" *ngIf="displayHoldView">
+                    <holds [id]="holdsLabel" #holdsComponent [tableData]="filteredHolds" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></holds>
+                </mat-tab>
+                <mat-tab [label]="stragglersLabel" *ngIf="displayStragglerView">
+                    <stragglers [id]="stragglersLabel" #stragglersComponent [tableData]="filteredStragglers" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></stragglers>
+                </mat-tab>
+                <mat-tab [label]="productsLabel" *ngIf="selectedProducts?.length! > 0">
+                    <products [id]="productsLabel" #productsComponent [tableData]="selectedProducts" (mouseOverRow)='onMouseOverRow($event)' (mouseOutRow)='onMouseOutRow($event)'></products>
+                </mat-tab>
+            </mat-tab-group>
+        </as-split-area>
+    </as-split>
+    <mat-drawer #drawer mode="side" (openedChange)="onResize()" position="end" opened="{{openSidePanel}}">
+        <legend *ngIf="appService.menuItem === 'legend'"></legend>
+        <settings *ngIf="appService.menuItem === 'settings'"></settings>
+    </mat-drawer>
+</mat-drawer-container>

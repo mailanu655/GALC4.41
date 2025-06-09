@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<OPMessage id="OP0038" version="1.0" fixedLength="true" delimiter="" hasFieldNumbers="false" className="com.honda.galc.openprotocol.model.SelectJob">
+    <field id="01" name="JOB_NUMBER"  datatype="String" length="2" defaultValue="0" />
+</OPMessage>

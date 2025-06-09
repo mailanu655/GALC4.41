@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lclm-cm
+data:
+  client.url: 'http://lclm.localhost'
+  client.appName: LC Live Map - UAT OS !!!
+  client.logoMessage: Line Control - Live Map - UAT@OS  
+  client.refreshInterval: '15'  
+  client.sites.aap1.name: AAP1
+  client.sites.aap1.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-aap1'
+  client.sites.aap1.partIssueServiceUrl: 'http://127.0.0.1:9781'
+  client.sites.aap1.partIssueConfigurationIds: '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]'
+  client.sites.aap1.models.0.name: ODYSSEY
+  client.sites.aap1.models.1.name: RIDGELINE
+  client.sites.aap2.name: AAP2
+  client.sites.aap2.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-aap2'
+  client.sites.aap2.partIssueServiceUrl: 'http://127.0.0.1:9881'
+  client.sites.aap2.partIssueConfigurationIds: '[38]'
+  client.sites.aap2.models.0.name: PASSPORT
+  client.sites.aap2.models.0.label: Passport
+  client.sites.aap2.models.0.viewId: '8'
+  client.sites.aap2.models.1.name: PILOT
+  client.sites.elp.name: ELP
+  client.sites.elp.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-elp'
+  client.sites.elp.partIssueServiceUrl: 'http://127.0.0.1:9181'
+  client.sites.elp.partIssueConfigurationIds: '[9]'  
+  client.sites.elp.models.0.name: CRV  
+  client.sites.elp.models.0.viewId: '1'  
+  client.sites.elp.models.1.name: MDX
+  client.sites.elp.models.1.viewId: '9'
+  client.sites.elp.models.2.name: RDX  
+  client.sites.elp.models.2.viewId: '10'
+  client.sites.hcm1.name: HCM1
+  client.sites.hcm1.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-hcm1'
+  client.sites.hcm1.partIssueServiceUrl: 'http://127.0.0.1:9581'
+  #client.sites.hcm1.partIssueConfigurationIds=[1, 2, 3, 4, 5]
+  client.sites.hcm1.partIssueConfigurationIds: '[5,7,8,9,10]'
+  client.sites.hcm1.models.0.name: CIVIC 
+  client.sites.hcm1.models.0.label: Civic
+  client.sites.hcm1.models.0.viewId: '6'
+  client.sites.hcm2.name: HCM2
+  client.sites.hcm2.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-hcm2'
+  client.sites.hcm2.partIssueServiceUrl: http://127.0.0.1:9681
+  client.sites.hcm2.partIssueConfigurationIds: '[1]'
+  client.sites.hcm2.models.0.name: RV
+  client.sites.hcm2.models.0.label: CRV
+  client.sites.hcm2.models.0.viewId: '1'
+  client.sites.hdmc.name: HDMC
+  client.sites.hdmc.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-hdmc'
+  client.sites.hdmc.partIssueServiceUrl: 'http://170.108.47.115:19981'
+  client.sites.hdmc.partIssueConfigurationIds: '[1]'
+  client.sites.hdmc.models.0.name: FRAME
+  client.sites.hdmc.models.0.label: HR-V
+  client.sites.hdmc.models.0.viewId: '9'
+  client.sites.iap.name: IAP  
+  client.sites.iap.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-iap'  
+  client.sites.iap.partIssueServiceUrl: 'http://127.0.0.1:9281'
+  client.sites.iap.partIssueConfigurationIds: '[12]'
+  client.sites.iap.models.0.name: CIVIC
+  client.sites.iap.models.0.viewId: '6'
+  client.sites.iap.models.1.name: CRV  
+  client.sites.iap.models.1.viewId: '1'
+  client.sites.iap.models.2.name: INSIGHT
+  client.sites.iap.models.2.viewId: '4'
+  client.sites.map1.name: MAP1
+  client.sites.map1.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-map1'
+  client.sites.map1.partIssueServiceUrl: 'http://127.0.0.1:9381'
+  client.sites.map1.partIssueConfigurationIds: '[81]'  
+  client.sites.map1.models.0.name: ILX
+  client.sites.map1.models.0.label: Acura ILX
+  client.sites.map1.models.0.viewId: '8'
+  client.sites.map1.models.1.name: TLX
+  client.sites.map1.models.1.label: Acura TLX
+  client.sites.map1.models.1.viewId: '9'  
+  client.sites.map1.models.2.name: CRV
+  client.sites.map1.models.2.viewId: '1'
+  client.sites.map2.name: MAP2
+  client.sites.map2.vdbUrl: 'http://vdb.lclm.localhost/odata4/lclmvdb-map2'
+  client.sites.map2.partIssueServiceUrl: 'http://127.0.0.1:9381'
+  client.sites.map2.partIssueConfigurationIds: '[82]'
+  client.sites.map2.models.0.name: ACCORD 4DR FHEV
+  client.sites.map2.models.0.label: Accord 4DR FHEV
+  client.sites.map2.models.0.viewId: '10'
+  client.sites.map2.models.1.name: ACCORD 4DR L4
+  client.sites.map2.models.1.label: Accord 4DR L4
+  client.sites.map2.models.1.viewId: '8'
+  client.sites.map2.models.2.name: ACCORD 4DR V6
+  client.sites.map2.models.2.label: Accord 4DR V6
+  client.sites.map2.models.2.viewId: '9'
+  logging.email.from: lc_lm_os_hdc@na.honda.com
+  logging.email.to: karol_wozniak@na.honda.com

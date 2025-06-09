@@ -1,0 +1,36 @@
+[
+	{
+	"modelPartId": 1,
+	"productSpecWildcard": "JT7ABA7",
+	"letSystemName": "BBC_SOFT",
+	"dcPartNumber": "31700T9S J010M1",
+	"active": "INACTIVE",
+	"dcClass": null,
+	"dcEffBegDate": "",
+	"dcNumber": "",
+	"interchangeable": true,
+	"reflash": true,
+	"scrapParts": true,
+	"planCode": "MAP",
+	"startingProductionLot": "PLOT1",
+	"model": "JT7A",
+	"modelType": "BA7"
+	},
+	{
+	"modelPartId": 2,
+	"productSpecWildcard": "JT7ABA7",
+	"letSystemName": "BBC_PROD",
+	"dcPartNumber": "31705T9S J010M1",
+	"active": "INACTIVE",
+	"dcClass": null,
+	"dcEffBegDate": "",
+	"dcNumber": "",
+	"interchangeable": true,
+	"reflash": false,
+	"scrapParts": true,
+	"planCode": "MAP",
+	"startingProductionLot": "PLOT2",
+	"model": "JT7A",
+	"modelType": "BA7"
+	}
+	]

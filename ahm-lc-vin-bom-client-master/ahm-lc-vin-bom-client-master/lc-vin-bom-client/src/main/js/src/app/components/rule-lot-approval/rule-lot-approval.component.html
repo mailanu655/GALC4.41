@@ -1,0 +1,415 @@
+<span style="display: flex; height: 100%; overflow-x: auto; width: 100%;">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Rule Lot Approval</mat-card-title>
+      </mat-card-header>
+        <mat-card-content id="rule-lot-approval-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 90px)">
+            <div class="table-container">
+                <table [dataSource]="dataSource" class="table" mat-table matSort>
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                          
+                        </th>
+                        <td mat-cell *matCellDef="let item">
+                          <mat-checkbox (click)="$event.stopPropagation()"
+                                        (change)="$event ? selection.toggle(item) : null"
+                                        [checked]="selection.isSelected(item)">
+                          </mat-checkbox>
+                        </td>
+                    </ng-container> 
+                    <ng-container matColumnDef="dcNumber">
+                      <th  class="header px-50-cell-width padding-0" mat-header-cell *matHeaderCellDef>
+                       <!-- DC # <br>-->
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select (selectionChange)="selectionDcNumberChange($event.value)" class="font-size-151px" placeholder="Select" [formControl]="dcNumberFilter" multiple>
+                              <mat-option value="all">All</mat-option>
+                              <mat-option *ngFor="let item of dcNumberList" value="{{ item | lowercase }}">
+                                  {{ item }}
+                              </mat-option>
+                          </mat-select>
+                      
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell *matCellDef="let item">{{item.modelPart.dcNumber}}</td>
+                  </ng-container>
+                    <!-- <ng-container matColumnDef="dcNumber">
+                      <th   class="header" mat-header-cell *matHeaderCellDef>
+                        DC # <br/> &nbsp; <br/>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <br/>
+                          <input matInput [formControl]="dcNumberFilter">
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell  *matCellDef="let item">{{item.modelPart.dcNumber}}</td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="model">
+                        <th  class="header px-50-cell-width padding-0" mat-header-cell *matHeaderCellDef>
+                         <!-- Model <br>-->
+                          <mat-form-field class="filter select-width-100-perc" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                            <mat-select (selectionChange)="selectionModelChange($event.value)" class="font-size-151px" placeholder="Select" [formControl]="modelFilter" multiple>
+                                <mat-option value="all">All</mat-option>
+                                <mat-option *ngFor="let item of modelList" value="{{ item | lowercase }}">
+                                    {{ item }}
+                                </mat-option>
+                            </mat-select>
+                        
+                          </mat-form-field>
+                        </th>
+                        <td mat-cell class="px-50-cell-width" *matCellDef="let item">{{item.model}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="modelType">
+                        <th    class="header px-50-cell-width" mat-header-cell *matHeaderCellDef>
+                          <!--Type <br>-->
+                          <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                            
+                            <mat-select (selectionChange)="selectionModelTypeChange($event.value)" placeholder="Select" [formControl]="modelTypeFilter" multiple>
+                                <mat-option value="all">All</mat-option>
+                                <mat-option *ngFor="let item of modelTypeList" value="{{ item | lowercase }}">
+                                    {{ item }}
+                                </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </th>
+                        <td mat-cell class="px-50-cell-width" *matCellDef="let item">{{item.modelType}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dcPartNumber">
+                      <th   class="header" mat-header-cell *matHeaderCellDef>
+                        <!--DC Part #  <br>-->
+                        <mat-form-field class="filter select-width-85-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                         
+                          <mat-select (selectionChange)="selectionDcPartNumberChange($event.value)" placeholder="Select" [formControl]="dcPartNumberFilter" multiple>
+                              <mat-option value="all">All</mat-option>
+                              <mat-option *ngFor="let item of dcPartNumberList" value="{{ item | lowercase }}">
+                                  {{ item }}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell *matCellDef="let item">
+                        {{item.modelPart.dcPartNumber}}
+                        </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="dcPartNumber">
+                      <th   class="header" mat-header-cell *matHeaderCellDef>
+                        DC Part # <br/> &nbsp;
+                        <mat-form-field class="filter select-width-85-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <br/>
+                          <input matInput [formControl]="dcPartNumberFilter">
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell  *matCellDef="let item">{{item.modelPart.dcPartNumber}}</td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="letSystemName">
+                      <th   class="header px-80-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                        <!--System Name <br>-->
+                        <mat-form-field class="filter system-name-filter" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                         
+                          <mat-select (selectionChange)="selectionSystemNameChange($event.value)" placeholder="Select" [formControl]="letSystemNameFilter" multiple>
+                              <mat-option value="all">All</mat-option>
+                              <mat-option *ngFor="let item of letSystemNameList" value="{{ item | lowercase }}">
+                                  {{ item }}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td class='systemName' mat-cell *matCellDef="let item">
+                        {{item.modelPart.letSystemName }}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="dcClass">
+                        <th   class="header px-50-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                         <!-- DC Class <br>-->
+                          <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                           
+                            <mat-select (selectionChange)="selectionDcClassChange($event.value)" placeholder="Select" [formControl]="dcClassFilter" multiple>
+                                <mat-option value="all">All</mat-option>
+                                <mat-option *ngFor="let item of dcClassList" value="{{ item | lowercase }}">
+                                    {{ item }}
+                                </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </th>
+                        <td mat-cell class="px-50-cell-width" *matCellDef="let item">{{item.modelPart.dcClass}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="currentReflash">
+                      <th class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef >
+                        Prev <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="currentReflashFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-40-cell-width" *matCellDef="let item">{{ getPreviousFlashValue(item.currentReflash) }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="newReflash">
+                      <th class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef  >
+                        New <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="newReflashFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                     
+                      <td mat-cell class="px-40-cell-width" [ngClass]="{changed_rule_bg:item.newReflash !== item.currentReflash}" *matCellDef="let item">{{item.newReflash ? 'Yes' : 'No'}}</td>
+                     
+                    </ng-container>
+                    <ng-container matColumnDef="currentScrapParts">
+                      <th  class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          Prev <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="currentScrapPartsFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-40-cell-width" *matCellDef="let item">{{getPreviousScrapPartsValue(item.currentScrapParts)}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="newScrapParts">
+                      <th  class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          New <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="newScrapPartsFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-40-cell-width" [ngClass]="{changed_rule_bg:item.newScrapParts !== item.currentScrapParts}" *matCellDef="let item">{{item.newScrapParts ? 'Yes' : 'No'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="currentInterchangable">
+                      <th  class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          Prev <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="currentInterchangableFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-40-cell-width" *matCellDef="let item">{{ getPreviousInterchangableValue(item.currentInterchangable) }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="newInterchangable">
+                      <th  class="header px-40-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          New  <br>
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select  placeholder="Select" [formControl]="newInterchangableFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option value="true">Yes</mat-option>
+                              <mat-option value="false">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-40-cell-width" [ngClass]="{changed_rule_bg:item.newInterchangable !== item.currentInterchangable}" *matCellDef="let item">{{item.newInterchangable ? 'Yes' : 'No'}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="dcEffBegDate">
+                      <th   class="header px-80-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                        <!--Eff Begin Date <br>-->
+                        <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                         
+                          <mat-select (selectionChange)="selectionEffBeginDateChange($event.value)" placeholder="Select" [formControl]="dcEffBegDateFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of dcEffBegDateList" value="{{ item | slice:0:10 }}">
+                                {{ item | slice:0:10 }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.modelPart.dcEffBegDate | slice:0:10 }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="currentStartingProductionLot">
+                        <th  class="header px-180-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                            Prev Lot <br>
+                            <mat-form-field class="filter px-170-cell-width select-width-95-perc" floatLabel="never">
+                              <mat-label>Search</mat-label>
+                               <input matInput [formControl]="currentStartingProductionLotFilter"> 
+                             
+                            </mat-form-field>                      
+                          </th>
+                        <td mat-cell class="px-180-cell-width" *matCellDef="let item">{{item.currentStartingProductionLot}}</td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="currentStartingProductionDate">
+                        <th  class="header px-90-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          Prev Date <br>
+                          <mat-form-field class="filter px-170-cell-width select-width-95-perc" floatLabel="never">
+                            <mat-select  placeholder="Select" [formControl]="currentStartingProductionDateFilter" >
+                              <mat-option value="">All</mat-option>
+                              <mat-option *ngFor="let item of currentStartingProductionDateList" value="{{ item | lowercase }}">
+                                  {{ item | slice:0:10 }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </th>
+                        <td mat-cell *matCellDef="let item">{{item.currentStartingProductionDate | slice:0:10 }}</td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="newStartingProductionLot">
+                        <th class="header px-170-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          New Lot <br>
+                          <mat-form-field class="filter px-170-cell-width select-width-95-perc" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                             <input matInput [formControl]="newStartingProductionLotFilter"> 
+                           
+                          </mat-form-field>                      
+                        </th>
+                        <td mat-cell  [ngClass]="{changed_rule_bg:item.newStartingProductionLot !== item.currentStartingProductionLot}" class="px-170-cell-width"  *matCellDef="let item">{{item.newStartingProductionLot}}</td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="newStartingProductionDate">
+                      <th class="header px-110-cell-width multi-line-text" mat-header-cell *matHeaderCellDef>
+                          New Date <br>
+                          <mat-form-field class="filter px-170-cell-width select-width-95-perc" floatLabel="never">
+                            <mat-select  placeholder="Select" [formControl]="newStartingProductionDateFilter">
+                              <mat-option value="">All</mat-option>
+                              <mat-option *ngFor="let item of newStartingProductionDateList" value="{{ item | lowercase }}">
+                                  {{ item | slice:0:10 }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                      </th>
+                        <td mat-cell *matCellDef="let item">{{item.newStartingProductionDate | slice:0:10 }}</td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="requestAssociateName">
+                        <th   class="header px-100-cell-width" mat-header-cell *matHeaderCellDef>
+                           <!-- Requester <br>-->
+                          <mat-form-field class="filter select-width-95-perc" floatLabel="never">
+                            <mat-label>Search</mat-label>
+                           
+                            <mat-select (selectionChange)="selectionRequestorChange($event.value)" placeholder="Select" [formControl]="requestAssociateNameFilter" multiple>
+                              <mat-option value="all">All</mat-option>
+                              <mat-option *ngFor="let item of requestAssociateNameList" value="{{ item | lowercase }}">
+                                  {{ item }}
+                              </mat-option>
+                          </mat-select>
+                          </mat-form-field>
+                        </th>
+                        <td mat-cell *matCellDef="let item">{{item.requestAssociateName}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="requestTimestamp">
+                        <th   class="header px-100-cell-width " mat-header-cell *matHeaderCellDef>
+                                                 
+                        </th>
+                        <td mat-cell *matCellDef="let item">{{item.requestTimestamp | slice:0:10 }} {{item.requestTimestamp | slice:11:19 }}</td>
+                    </ng-container>
+                      <!-- Header row first group -->
+  <ng-container matColumnDef="header-row-group-select">
+    <th mat-header-cell *matHeaderCellDef > 
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                                        [checked]="selection.hasValue() && isAllSelected()"
+                                        [indeterminate]="selection.hasValue() && !isAllSelected()">
+                          </mat-checkbox>
+     </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-dcNumber">
+    <th class="px-80-cell-width " mat-header-cell *matHeaderCellDef > DC # 
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-model">
+    <th class="px-50-cell-width " mat-header-cell *matHeaderCellDef > Model 
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-type">
+    <th class="px-50-cell-width " mat-header-cell *matHeaderCellDef > Type 
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-dcPartNo">
+    <th mat-header-cell *matHeaderCellDef> DC Part # </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-systemName">
+    <th class="px-80-cell-width multi-line-text " mat-header-cell *matHeaderCellDef > System Name 
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-dcClass">
+    <th class="px-50-cell-width multi-line-text " mat-header-cell *matHeaderCellDef > DC Class 
+    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-reflash">
+    <th  mat-header-cell *matHeaderCellDef [attr.colspan]="2" > Reflash </th>
+      
+  </ng-container>
+  
+  <ng-container matColumnDef="header-row-group-scrap">
+    <th class="header px-60-cell-width multi-line-text" mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Strglr - New </th>
+  </ng-container>
+ 
+  <ng-container matColumnDef="header-row-group-strglr">
+    <th class="header px-60-cell-width multi-line-text" mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Inter changeable </th>
+  </ng-container>
+ 
+  <ng-container matColumnDef="header-row-group-eff-begin-date">
+    <th class="header px-80-cell-width multi-line-text" mat-header-cell *matHeaderCellDef > Eff Begin Date    </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-start-prod">
+    <th mat-header-cell *matHeaderCellDef [attr.colspan]="2"> Start Production </th>
+  </ng-container>
+  
+  <ng-container matColumnDef="header-row-group-requester">
+    <th class="header px-100-cell-width " mat-header-cell *matHeaderCellDef > Requester   </th>
+  </ng-container>
+  <ng-container matColumnDef="header-row-group-requestTime">
+    <th mat-header-cell *matHeaderCellDef > Request Time </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedGroupColumns;sticky: true"></tr>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns;" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                    (click)="selectRow(i, row); selection.toggle(row);" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr> 
+                 
+                </table>
+              </div>
+        </mat-card-content>
+        <mat-card-content id="lot_assignment_lower_panel">
+          <div class="row">
+              <div class="col-sm-5" style="padding-top: 3px;">
+                  <div class="row">
+                      <div class="col-sm">
+                          <button type="button" class="btn btn-info" id="approveRuleLotChange" (click)="approve()">Approve Rule/Lot Change</button>&nbsp;&nbsp;
+                          <button type="button" class="btn btn-danger" id="denyRuleLotChange" (click)="deny()">Deny Rule/Lot Change</button>
+                         <!--                    NALC-1082  --> &nbsp;&nbsp;&nbsp; Selected:{{selection?.selected?.length}} / Filtered:{{dataSource?.filterPredicate ? dataSource?.filteredData?.length:0}} /  Total:{{dataSource?.data?.length}} 
+                      </div>
+                  </div>
+              </div>
+              <div class="col-sm-7" >
+                <alert></alert>
+                <p *ngIf="message && message?.type === 'ERROR'" style="background-color: red;" >{{ message.message }}</p>
+                <p *ngIf="message && message?.type === 'SUCCESS'" style="background-color: greenyellow;" >{{ message.message }}</p>
+                <p *ngIf="message && message?.type === 'WARNING'" style="background-color: yellow;" >{{ message.message }}</p>
+              </div>
+          </div>
+          <div class="my-container">
+            <ng-template #customLoadingTemplate>
+                <div class="custom-class">
+                    <h3>
+                      Please wait...
+                    </h3>
+                    
+                </div>
+            </ng-template>
+         
+            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+           
+        </div>
+      </mat-card-content>    </mat-card>
+</span>

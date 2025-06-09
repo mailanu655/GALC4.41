@@ -1,0 +1,80 @@
+
+
+<div class="mdl-layout__header-row" style="padding-left: 5px; padding-right: 5px;background: #205081; display: flex; justify-content: space-between;">
+    
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <img src="assets/img/honda.ico" style="width: 30px; height: 30px;">
+        
+        <!--<button mat-button [matMenuTriggerFor]="menu_site" style="padding-left: 30px;">Sites<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menu_site="matMenu">
+            <ng-container *ngFor="let id of configService.sitesIds;">
+                <button mat-menu-item  (click)="updateSite(id)">{{configService.sites[id].name}}</button>
+                <mat-divider></mat-divider>
+            </ng-container>
+        </mat-menu>-->
+        <a class="mdl-navigation__link mdl-layout-title" style="color: white; padding-right: 20px;" [routerLink]="['/']">{{appName}}</a>
+        <label *ngIf="configService.siteId" style="color: white; font-size: 20px;padding-top: 10px; padding-right:20px;padding-left: 20px; min-width: 70px;">{{configService.sites[configService.siteId]?.name}}</label>
+        <!-- <div *ngFor="let item of menuItems; let i = index">
+            <a class="mdl-navigation__link" [routerLink]="[item.path]" *ngIf="isUserInRole(item.readRole)" [routerLinkActive]="['active-link']">{{item.menuLabel}}</a>
+        </div> -->
+        <button mat-button [matMenuTriggerFor]="menu_site" >Menu<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menu_site="matMenu">
+           <button mat-menu-item [disabled]="!isUserInRole('cat_assign,system_assign')" (click)="openMenu('Part Assignment')" >Part Assignment</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item [disabled]="!isUserInRole('rule_assign')" (click)="openMenu('Rule Assignment')">Rule Assignment</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item  [disabled]="!isUserInRole('lot_assign,rule_assign')" (click)="openMenu('Lot Assignment')" >Lot Assignment</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item  [disabled]="!isUserInRole('override_approval')" (click)="openMenu('Rule/Lot Approval')" >Rule/Lot Approval</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item  [disabled]="!isUserInRole('lot_assign,rule_assign')" (click)="openMenu('Rule/Lot Maintenance')">Rule/Lot Maintenance</button>
+           <mat-divider></mat-divider>
+          <!--<button mat-menu-item  [disabled]="!isUserInRole('lot_assign,rule_assign')" (click)="openMenu('Straggler Int')">Straggler Int</button>
+           <mat-divider></mat-divider>-->
+           <button mat-menu-item  [disabled]="!isUserInRole('override_approval,rule_assign,system_assign,lot_assign')" (click)="openMenu('Manual Override')">Manual Override</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item  [disabled]="!isUserInRole('override_approval')" (click)="openMenu('Manual Override Approval')">Manual Override Approval</button>
+           <mat-divider></mat-divider>
+           <button mat-menu-item  [disabled]="!isUserInRole('cat_assign')" (click)="openMenu('LET Partial Pass')">LET Partial Pass</button>
+        </mat-menu>
+        <!--
+        <a class="mdl-navigation__link sums-navigation__link part-assignment__link" style="color: white; font-size: 14px;" [routerLink]="'/part-assignment'" *ngIf="isUserInRole('cat_assign,system_assign')" [routerLinkActive]="['active-link']">Part Assignment</a>
+        <a class="mdl-navigation__link sums-navigation__link manualoverride__link" style="color: white; font-size: 14px;" [routerLink]="'/ruleassignment'" *ngIf="isUserInRole('rule_assign')" [routerLinkActive]="['active-link']">Rule Assignment</a>
+        <a class="mdl-navigation__link sums-navigation__link lot-assignment__link" style="color: white; font-size: 14px;" [routerLink]="'/lot-assignment'" *ngIf="isUserInRole('lot_assign,rule_assign')" [routerLinkActive]="['active-link']">Lot Assignment</a>
+        <a class="mdl-navigation__link sums-navigation__link manualoverride__link" style="color: white; font-size: 14px;" [routerLink]="'/rulelotapproval'" *ngIf="isUserInRole('override_approval')" [routerLinkActive]="['active-link']">Rule/Lot Approval</a>
+        <a class="mdl-navigation__link sums-navigation__link manualoverride__link" style="color: white; font-size: 14px;" [routerLink]="'/rulelotmaintenance'" *ngIf="isUserInRole('lot_assign,rule_assign')" [routerLinkActive]="['active-link']">Rule/Lot Maintenance</a>
+        <a class="mdl-navigation__link sums-navigation__link interchangeable__link" style="color: white; font-size: 14px;" [routerLink]="'/interchangeable'" *ngIf="isUserInRole('lot_assign,rule_assign')" [routerLinkActive]="['active-link']">Straggler Int</a>
+        <a class="mdl-navigation__link sums-navigation__link manualoverride__link" style="color: white; font-size: 14px;" [routerLink]="'/manualoverride'" *ngIf="isUserInRole('override_approval,rule_assign,system_assign')" [routerLinkActive]="['active-link']">Manual Override</a>
+        <a class="mdl-navigation__link sums-navigation__link manualoverride__link" style="color: white; font-size: 14px;" [routerLink]="'/manualoverrideapproval'" *ngIf="isUserInRole('override_approval')" [routerLinkActive]="['active-link']">Manual Override Approval</a>
+        <a class="mdl-navigation__link sums-navigation__link categorymaint__link" style="color: white; font-size: 14px;" [routerLink]="'/category-maint'" *ngIf="isUserInRole('cat_assign')" [routerLinkActive]="['active-link']">LET Partial Pass</a>
+        -->
+        
+    </nav>
+    <span class="mdl-navigation">
+        <a *ngIf="isUserLoggedIn()" class="mdl-navigation__link" style="cursor: pointer;color: white; font-size: 14px;" (click)="logout()">Logout: {{getUser()}}</a>
+        <a *ngIf="isUserLoggedOut()" class="mdl-navigation__link" style="cursor: pointer;color: white; font-size: 14px;" (click)="login()">Login</a>
+       <!-- <a class="mdl-navigation__link" style="cursor: pointer;" (click)="openAboutDialog()">
+            <img src="assets/img/help.png" style="width: 20px; height: 20px;">
+        </a>-->
+        <button type="button" class="login_button" mat-button (click)="openFeedbackForm()" title="feedback"> <img src="assets/img/Feedback.svg" height="30" width="28" /></button>              
+        <button mat-icon-button [matMenuTriggerFor]="menu_right_side" aria-label="Top Side Menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu_right_side="matMenu">
+            <button mat-menu-item (click)="openHelp()">
+                <mat-icon class="menu-icon">video_library</mat-icon>
+                <span>How To</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="openRevisionHistory()">
+                <mat-icon class="menu-icon">video_library</mat-icon>
+                <span>Revision History</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="openAboutDialog()">
+                <mat-icon class="menu-icon">info</mat-icon>
+                <span>About</span>
+            </button>
+        </mat-menu>
+    </span>
+</div>

@@ -1,0 +1,90 @@
+/**
+To run from cmd using maven
+- release with version input
+	mvn clean jgitflow:release-start jgitflow:release-finish -Dmaven.javadoc.skip=true
+- relese no input, automatic version increment
+	mvn --batch-mode clean jgitflow:release-start jgitflow:release-finish -Dmaven.javadoc.skip=true
+	
+- hotfix with version input
+	mvn clean jgitflow:hotfix-start jgitflow:hotfix-finish -Dmaven.javadoc.skip=true
+- hotfix no input, automatic version increment
+	mvn --batch-mode clean jgitflow:hotfix-start jgitflow:hotfix-finish -Dmaven.javadoc.skip=true
+	
+*/
+
+def selectBuildType = 'Please select build type'
+def release = 'RELEASE(START+FINISH)'
+def releaseStart = 'RELEASE_START'
+def releaseFinish = 'RELEASE_FINISH'
+def hotFixStart = 'HOT_FIX_START'
+def hotFixFinish = 'HOT_FIX_FINISH'
+
+def projectGitUtl = 'http://bitbucket.amerhonda.com/scm/atg/lc-product-search-vdb.git'
+def initBranch = 'development'
+
+pipeline {
+    agent any
+    parameters {
+        choice (name: 'BUILD_TYPE', choices:[selectBuildType, release, releaseStart, releaseFinish, hotFixStart, hotFixFinish], description:'')
+    }
+	environment { 
+		GIT_AUTH = credentials('jenkins')
+		MVN_CMD = '/opt/maven/bin/mvn'
+	}  
+    stages {
+        stage('Info') {
+    		steps {
+        		echo 'Building: ' + params.BUILD_TYPE + ', ' + projectGitUtl
+        		sh(''' $MVN_CMD -v ''')
+        	}
+    	}
+    	stage('Clean') {
+    		steps {
+        		cleanWs()
+        	}
+    	}
+    	stage('Git Init') {
+    		steps {
+       			git url: projectGitUtl, branch: initBranch
+            	sh(''' git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f" ''')
+			}    		
+    	}
+		stage (releaseStart) {
+		 	when {
+				expression {params.BUILD_TYPE == releaseStart || params.BUILD_TYPE == release}
+    		} 
+    		steps {
+				echo 'Executing ' + params.BUILD_TYPE + ', ' + projectGitUtl
+	   		 	sh(''' $MVN_CMD --batch-mode clean jgitflow:release-start -Dgit.user=$GIT_AUTH_USR -Dgit.password=$GIT_AUTH_PSW ''')
+    		}          
+		}
+		stage (releaseFinish) {
+		 	when {
+	 		    expression {params.BUILD_TYPE == releaseFinish || params.BUILD_TYPE == release}
+	   		} 
+    		steps {
+				echo 'Executing ' + params.BUILD_TYPE + ', ' + projectGitUtl
+				sh(''' $MVN_CMD --batch-mode clean jgitflow:release-finish -Dmaven.javadoc.skip=true -Djib.httpTimeout=120000 -Dgit.user=$GIT_AUTH_USR -Dgit.password=$GIT_AUTH_PSW ''')  	 
+    		}          
+		}
+		stage (hotFixStart) {
+		 	when {
+				expression {params.BUILD_TYPE == hotFixStart}
+    		} 
+    		steps {
+				echo 'Executing ' + params.BUILD_TYPE + ', ' + projectGitUtl
+	   		 	sh(''' $MVN_CMD --batch-mode clean jgitflow:hotfix-start -Dgit.user=$GIT_AUTH_USR -Dgit.password=$GIT_AUTH_PSW ''')
+    		}          
+		}		
+
+		stage (hotFixFinish) {
+		 	when {
+				expression {params.BUILD_TYPE == hotFixFinish}
+    		} 
+    		steps {
+				echo 'Executing ' + params.BUILD_TYPE + ', ' + projectGitUtl
+	   		 	sh(''' $MVN_CMD --batch-mode clean jgitflow:hotfix-finish -Dmaven.javadoc.skip=true -Djib.httpTimeout=120000 -Dgit.user=$GIT_AUTH_USR -Dgit.password=$GIT_AUTH_PSW ''')
+    		}          
+		}
+    }
+}

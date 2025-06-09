@@ -1,0 +1,1 @@
+java -jar torque-simulator-2.6.jar HMIN_DEV LOT_CONTROL_SUBU

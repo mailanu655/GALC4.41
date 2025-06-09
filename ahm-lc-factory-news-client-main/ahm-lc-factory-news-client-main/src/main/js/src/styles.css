@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~angular-vertical-timeline/dist/vertical-timeline.css";
+
+html, body { 
+    height: 100%; 
+    scroll-behavior: smooth;
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f0f4f7;
+}
+
+/* Laptops and Monitors*/
+@media (min-width: 1230px) {
+  .snackbar-view {
+    background: rgb(235, 75, 54);
+    color: white;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .cdk-overlay-pane {
+    margin-bottom: 50vh !important;
+  }
+}
+
+/* Tablets */
+@media (min-width: 1000px) and (max-width: 1230px) {
+  .snackbar-view {
+    background: rgb(235, 75, 54);
+    color: white;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .cdk-overlay-pane {
+    margin-bottom: 50vh !important;
+  }
+}
+
+/* Mobile Phones */
+@media (min-width: 400px) and (max-width: 1000px) {
+  .snackbar-view {
+    background: rgb(235, 75, 54);
+    color: white;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .cdk-overlay-pane {
+    margin-bottom: 50vh !important;
+  }
+}
+
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: local("./assests/woff/KFOlCnqEu92Fr1MmSU5vAA.woff") format("woff");
+  }
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local("./assets/woff/KFOmCnqEu92Fr1Me5g.woff") format("woff");
+  }
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local("./assets/woff/KFOlCnqEu92Fr1MmEU9vAA.woff") format("woff");
+  }
+  
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local("./assets/woff/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2") format("woff2");
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,74 @@
+button {
+    color: white;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #2f679e;
+}
+
+::ng-deep .mat-menu-panel {
+    background-color: #205081;
+}
+
+::ng-deep .mat-menu-content {
+    background-color: #205081;
+}
+
+button.mat-menu-item {
+    height: 40px;
+    line-height: 35px;
+    font-size: 13px;
+}
+
+button.mat-menu-item:hover {
+    background-color: #2f679e;
+}
+
+.menu-icon {
+    color: white;
+}
+
+input {
+    background-color: white;
+}
+
+.countdown {
+    width: 40px;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+}
+
+.search-icon {
+    position: relative;
+    cursor: pointer;
+    color: #205081;
+}
+
+.search-input {
+    text-align: left;
+    float: left;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.app-name {
+    font-size: 20px;
+    padding: 0 15px 0 5px;
+}
+
+.site {
+    color: white;
+    font-size: 20px;
+    min-width: 60px;
+    padding: 0 15px 0 5px;
+}
+
+.sites {
+    padding: 0 5px 0 5px;
+}
+
+.views {
+    padding: 0 5px 0 5px;
+}

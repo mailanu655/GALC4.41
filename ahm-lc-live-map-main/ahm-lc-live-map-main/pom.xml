@@ -1,0 +1,237 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.honda.ahm.lc</groupId>
+        <artifactId>lc-parent</artifactId>
+        <version>1.1</version>
+    </parent>
+    <!-- TODO Required by RelMgmt pipeline, remove when release management pipeline is fixed or project uses standard solution. -->
+    <!-- groupId is redundand as it is inherited from the parent -->    
+    <groupId>com.honda.ahm.lc</groupId>
+    <artifactId>lc-live-map</artifactId>
+    <version>1.9</version>
+    <packaging>jar</packaging>
+    <name>LC Live Map</name>
+    <url>http://maven.apache.org</url>
+    <properties />
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+            </plugin>
+            <!-- -->
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <configuration>
+                    <from>
+                        <image>openjdk:8-jre-alpine</image>
+                    </from>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>1.10.4</version>
+                    <configuration>
+                        <nodeVersion>v14.17.0</nodeVersion>
+                        <workingDirectory>src/main/js/</workingDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>install node and npm</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>install-node-and-npm</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Use Artifactory to download -->
+                                <nodeDownloadRoot>https://artifactory.amerhonda.com/artifactory/NodeJS/dist/</nodeDownloadRoot>
+                                <npmDownloadRoot>https://artifactory.amerhonda.com/artifactory/npmjs/npm/-/</npmDownloadRoot>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>set-npm-strict-ssl</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <!-- After OpenShift 8.2 upgrade then test removing and switching to https -->
+                                <arguments>config set strict-ssl false</arguments>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>set-npm-registry</id>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <phase>generate-resources</phase>
+                            <configuration>
+                                <!-- Use Artifactory to download -->
+                                <arguments>config set registry=https://artifactory.amerhonda.com/artifactory/api/npm/npmjs/</arguments>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>npm install</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>npm run build</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>npm</goal>
+                            </goals>
+                            <configuration>
+                                <arguments>run build-prod</arguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>replacer</artifactId>
+                    <version>1.5.3</version>
+                    <configuration>
+                        <file>src/main/js/src/assets/js/build-info.js</file>
+                        <tokenValueMap>target/classes/META-INF/build-info.properties</tokenValueMap>
+                        <outputFile>src/main/js/dist/${project.artifactId}/assets/js/build-info.js</outputFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>ang-build-info</id>
+                            <phase>process-classes</phase>
+                            <goals>
+                                <goal>replace</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+                                <!-- <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory> -->
+                                <resources>
+                                    <resource>
+                                        <directory>${project.basedir}/src/main/js/dist/${project.artifactId}</directory>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>${project.basedir}/src/main/js/dist</directory>
+                                <!-- TODO remove when release management pipeline is fixed or project uses standard solution -->
+                                <!-- Clean the node_modules directory or the s2i-java-11 OpenShift Pipeline task will fail -->
+                                <directory>${project.basedir}/src/main/js/node_modules</directory>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>libs-release</name>
+            <url>https://artifactory.amerhonda.com/artifactory/libs-release</url>
+        </repository>
+        <repository>
+            <snapshots />
+            <id>snapshots</id>
+            <name>libs-snapshot</name>
+            <url>https://artifactory.amerhonda.com/artifactory/libs-snapshot</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>plugins-release</name>
+            <url>https://artifactory.amerhonda.com/artifactory/plugins-release</url>
+        </pluginRepository>
+        <pluginRepository>
+            <snapshots />
+            <id>snapshots</id>
+            <name>plugins-snapshot</name>
+            <url>https://artifactory.amerhonda.com/artifactory/plugins-snapshot</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

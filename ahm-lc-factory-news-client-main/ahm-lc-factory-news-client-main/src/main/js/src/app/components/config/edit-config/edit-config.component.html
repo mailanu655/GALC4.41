@@ -1,0 +1,107 @@
+<!-- <mat-dialog-content class="content-container"> -->
+<div class="dialog-header">
+  <h3 class="dialog-title">Update Process Point Group</h3>
+
+</div>
+<div class="columns-container">
+  <div class="column-section">
+    <div *ngFor="let column of leftColumns" class="form-field">
+      <label [for]="column" class="column-label">{{ column | titlecase }}:</label>
+      <input matInput [(ngModel)]="nodeData[column]" [id]="column" [name]="column"
+        [placeholder]="getPlaceholder(column)" required />
+    </div>
+  </div>
+  <div class="column-section">
+    <div *ngFor="let column of rightColumns" class="form-field">
+      <label [for]="column" class="column-label">{{ column | titlecase }}:</label>
+
+      <ng-container *ngIf="column === 'calculatedifference'; else checkGroupType">
+        <div class="radio-group">
+          <mat-radio-group [(ngModel)]="nodeData[column]" [name]="column" [id]="column">
+            <mat-radio-button [value]="true">True</mat-radio-button>
+            <mat-radio-button [value]="false">False</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </ng-container>
+
+      <ng-template #checkGroupType>
+        <ng-container *ngIf="column === 'groupType'; else inputField">
+          <mat-form-field class="dropdown-field full-width dropdown-margin">
+            <mat-select [(ngModel)]="nodeData[column]" [name]="column" [id]="column" required>
+              <mat-option [value]="1">Tracking</mat-option>
+              <mat-option [value]="2">Inventory</mat-option>
+              <mat-option [value]="3">Metric</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #inputField>
+        <input matInput [(ngModel)]="nodeData[column]" [id]="column" [name]="column"
+          [placeholder]="getPlaceholder(column)" required />
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div class="left-table">
+      <h3 class="table-header">Available Process Points:</h3>
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="availableProcessPointsDataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="processPointId">
+            <th mat-header-cell *matHeaderCellDef> Process Point ID </th>
+            <td mat-cell *matCellDef="let processPoint" (click)="selectProcessPoint(processPoint)"
+              [ngClass]="{'selected-row': selectedProcessPoint && selectedProcessPoint.processPointId === processPoint.processPointId}">
+              {{ processPoint.processPointId }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="processPointName">
+            <th mat-header-cell *matHeaderCellDef> Process Point Name </th>
+            <td mat-cell *matCellDef="let processPoint" (click)="selectProcessPoint(processPoint)"
+              [ngClass]="{'selected-row': selectedProcessPoint && selectedProcessPoint.processPointId === processPoint.processPointId}">
+              {{ processPoint.processPointName }}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['processPointId', 'processPointName']"></tr>
+          <tr mat-row *matRowDef="let processPoint; columns: ['processPointId', 'processPointName'];"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="center-action">
+      <button mat-raised-button color="primary" (click)="addToRight()" [disabled]="!selectedProcessPoint">
+        >>
+      </button>
+      <button mat-raised-button color="primary" (click)="moveToLeft()" [disabled]="!selectedRightProcessPoint">
+        << </button>
+    </div>
+    <div class="right-table">
+      <h3 class="table-header">Selected Process Points:</h3>
+      <div class="table-wrapper">
+        <table mat-table [dataSource]="selectedProcessPointsDataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="processPointId">
+            <th mat-header-cell *matHeaderCellDef> Process Point ID </th>
+            <td mat-cell *matCellDef="let processPoint" (click)="selectRightProcessPoint(processPoint)"
+              [ngClass]="{'selected-row': selectedRightProcessPoint && selectedRightProcessPoint.processPointId === processPoint.processPointId}">
+              {{ processPoint.processPointId }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="processPointName">
+            <th mat-header-cell *matHeaderCellDef> Process Point Name </th>
+            <td mat-cell *matCellDef="let processPoint" (click)="selectRightProcessPoint(processPoint)"
+              [ngClass]="{'selected-row': selectedRightProcessPoint && selectedRightProcessPoint.processPointId === processPoint.processPointId}">
+              {{ processPoint.processPointName }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['processPointId', 'processPointName']"></tr>
+          <tr mat-row *matRowDef="let processPoint; columns: ['processPointId', 'processPointName'];"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed-actions">
+    <button mat-button mat-dialog-close class="action-button close-button">Close</button>
+    <button mat-button (click)="save()" [disabled]="!isFormChanged" class="action-button save-button">Save</button>
+  </div>

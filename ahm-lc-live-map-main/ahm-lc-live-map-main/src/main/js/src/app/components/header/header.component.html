@@ -1,0 +1,83 @@
+<div class="mdl-layout__header-row" style="padding-left: 5px; padding-right: 5px; background: #205081; display: flex; justify-content: space-between;">
+    <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <img src="assets/img/honda-header.svg">
+        <button mat-button [routerLink]="['/']" class="app-name">{{appName}} {{config.env}}</button>
+        <label *ngIf="config.siteId" class="site">{{config.sites[config.siteId]?.name}}</label>
+        <button mat-button [matMenuTriggerFor]="menu_site" class="sites">Sites<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menu_site="matMenu">
+            <ng-container *ngFor="let id of config.sitesIds;">
+                <button mat-menu-item routerLink="/{{id}}">{{config.sites[id].name}}</button>
+                <mat-divider></mat-divider>
+            </ng-container>
+        </mat-menu>
+        <ng-container *ngIf="config.siteId">
+            <button mat-button [matMenuTriggerFor]="menu_view" class="views">Views<mat-icon>expand_more</mat-icon></button>
+            <mat-menu #menu_view="matMenu">
+                <button mat-menu-item routerLink="/{{config.siteId}}">Line & Data</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/line">Line</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/defects">QICS Defects</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/parts">Lot Control Issues</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/pmqa">PMQA Issues</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/holds">Holds</button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/{{config.siteId}}/stragglers">Stragglers</button>
+            </mat-menu>
+        </ng-container>
+    </nav>
+    <span class="mdl-navigation">
+        <ng-container *ngIf="appService.isVisible('search')">
+            <div style="display: inline-flex; width: 330px; align-items: center; background-color: white; border-radius: 2px; padding: 2px;">
+                <input #searchInput id="searchInput" matInput name="searchValue" [value]="appService.searchValue" oninput="this.value = this.value.toUpperCase()" (keydown.enter)="search(searchInput.value, false)" maxlength="22" class="search-input" type="text" placeholder="Search" />
+                <mat-icon *ngIf="searchInput.value" (click)="searchInput.value = ''; search(searchInput.value, false)" class="search-icon" style="transform: scale(0.7);" matTooltip="{{messages.get('tooltip.clear')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">clear</mat-icon>
+                <mat-icon (click)="search(searchInput.value, false)" class="search-icon" matTooltip="{{messages.get('tooltip.search')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">search</mat-icon>
+                <div *ngIf="appService.watchOn === true; then watchOn else watchOff"></div>
+                <ng-template #watchOn>
+                    <mat-icon (click)="search(searchInput.value, true)" class="search-icon" matTooltip="{{messages.get('tooltip.watch')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">visibility</mat-icon>
+                </ng-template>
+                <ng-template #watchOff>
+                    <mat-icon (click)="search(searchInput.value, true)" class="search-icon" matTooltip="{{messages.get('tooltip.watch')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">visibility_off</mat-icon>
+                </ng-template>
+            </div>
+        </ng-container>
+        <label class="countdown" *ngIf="appService.isVisible('countdown')">{{appService.countDown}}</label>
+        <button mat-icon-button [matMenuTriggerFor]="menu_right_side" aria-label="Top Side Menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu_right_side="matMenu">
+            <button *ngIf="appService.isVisible('settings')" mat-menu-item (click)="menuSelected('settings')">
+                <mat-icon class="menu-icon">settings</mat-icon>
+                <span>Settings</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button *ngIf="appService.isVisible('legend')" mat-menu-item (click)="menuSelected('legend')">
+                <mat-icon class="menu-icon">info</mat-icon>
+                <span>Legend</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="openHelp()">
+                <mat-icon class="menu-icon">video_library</mat-icon>
+                <span>How To</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button *ngIf="config.feedbackUrl" mat-menu-item (click)="openFeedback(config.feedbackUrl, config.appName)">
+                <mat-icon class="menu-icon">feedback</mat-icon>
+                <span>Feedback</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="openInfo()">
+                <mat-icon class="menu-icon">new_releases</mat-icon>
+                <span>Release Notes</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="openAboutDialog()">
+                <mat-icon class="menu-icon">info</mat-icon>
+                <span>About</span>
+            </button>
+        </mat-menu>
+    </span>
+</div>

@@ -1,0 +1,177 @@
+<span class="part-assignment" style="display: flex; height: 100%; overflow-x: auto; width: 100%;">
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>Part Assignment</mat-card-title>
+     </mat-card-header>
+        <mat-card-content id="part-table" style="box-shadow: 0px 1px 1px #000e; height: calc(100% - 90px)">
+          <div class="table-container">
+              <table [dataSource]="dataSource" class="table" mat-table matSort>
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef  [hidden]="!isVisible()"> 
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                   </th>
+                  <td mat-cell *matCellDef="let item" [hidden]="!isVisible()">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(item) : null"
+                          [checked]="selection.isSelected(item) && !isActive(item)"
+                          [disabled]=isActive(item)>
+                    </mat-checkbox>
+                  </td>
+                 </ng-container> 
+
+                  <ng-container matColumnDef="modelYearCode">
+                      <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                        Model Year <br>
+                        <mat-form-field class="filter" floatLabel="never">
+                          <mat-label>Search</mat-label>
+                          <mat-select (selectionChange)="selectionModelYearChange($event.value)" placeholder="All" [formControl]="modelYearCodeFilter" multiple>
+                              <mat-option value="all">All</mat-option>
+                              <mat-option *ngFor="let item of modelYearCodeList" value="{{ item | lowercase }}">
+                                  {{ item }}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </th>
+                      <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.modelYearCode}}</td>
+                  </ng-container>
+                <!-- <ng-container matColumnDef="modelYearCode">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Year </th>
+                  <td  mat-cell *matCellDef="let item"> {{item.modelYearCode}} </td>
+                </ng-container> -->
+          
+                <ng-container matColumnDef="modelCode">
+                  <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Code </th>
+                  <td mat-cell *matCellDef="let item"> {{item.modelCode}} </td> -->
+                  <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                      Model Code <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionModelChange($event.value)" placeholder="All" [formControl]="modelCodeFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of modelCodeList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.modelCode}}</td>
+              </ng-container>
+          
+                <ng-container matColumnDef="modelTypeCode">
+                  <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> Model Type </th>
+                  <td mat-cell *matCellDef="let item"> {{item.modelTypeCode}} </td> -->
+                  <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                      Type <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionModelTypeChange($event.value)" placeholder="All" [formControl]="modelTypeCodeFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of modelTypeCodeList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.modelTypeCode}}</td>
+              </ng-container>
+          
+                <ng-container matColumnDef="dcPartNumber">
+                  <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> DC Part # </th>
+                  <td mat-cell *matCellDef="let item"> {{item.dcPartNumber}} </td> -->
+                  <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                      DC Part # <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>All</mat-label>
+                       <!--  <input matInput [formControl]="dcPartNumberFilter"> -->
+                        <mat-select (selectionChange)="selectionDcPartNumberChange($event.value)" placeholder="All" [formControl]="dcPartNumberFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of dcPartNumberList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.dcPartNumber}}</td>
+              </ng-container>
+
+                <ng-container matColumnDef="letSystemName">
+                  <!-- <th mat-header-cell *matHeaderCellDef mat-sort-header> System Name </th>
+                  <td mat-cell *matCellDef="let item"> {{item.letSystemName}} </td> -->
+                  <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                      System Name <br>
+                      <mat-form-field class="filter" floatLabel="never">
+                        <mat-label>Search</mat-label>
+                        <mat-select (selectionChange)="selectionSystemNameChange($event.value)" placeholder="All" [formControl]="letSystemNameFilter" multiple>
+                            <mat-option value="all">All</mat-option>
+                            <mat-option *ngFor="let item of letSystemNameList" value="{{ item | lowercase }}">
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </th>
+                    <td mat-cell class="px-80-cell-width" *matCellDef="let item">{{item.letSystemName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="active">
+                <th class="header px-80-cell-width" mat-header-cell *matHeaderCellDef>
+                    Active <br>
+                    <mat-form-field class="filter" floatLabel="never">
+                      <mat-label>Search</mat-label>
+                      <mat-select (selectionChange)="selectionActiveChange($event.value)" placeholder="All" [formControl]="activeFilter" multiple>
+                          <mat-option value="all">All</mat-option>
+                          <mat-option *ngFor="let item of activeList" value="{{ item }}">
+                              {{ item }}
+                          </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </th>
+                  <td mat-cell class="px-40-cell-width" *matCellDef="let item">{{item.active}}</td>
+            </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                    (click)="selectRow(i, row); selection.toggle(row);" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr> 
+              </table>
+            </div>
+      </mat-card-content>
+
+      <mat-card-content id="part_assignment_parent_actions">
+          <div class="row">
+              <div class="col-sm-5">
+                  <!--<button type="button" id="addPartAssign"    class="btn btn-primary" (click)="addBomPartOpenDialog()">&nbsp;&nbsp;Add&nbsp;&nbsp;</button> &nbsp;
+                  <button type="button" id="removePartAssign" class="btn btn-danger" (click)="removeBomPart()">Remove</button> &nbsp;-->
+                  <button type="button" id="reloadBomParts"   class="btn btn-primary" (click)="reload()">Reload Dat file from BEAM</button>&nbsp;&nbsp;
+                  <button type="button" id="createActiveRule"   class="btn btn-primary" (click)="createActiveRule()" [hidden]="!isVisible()">Create Active Rule</button>
+                  
+&nbsp;&nbsp;&nbsp;&nbsp;<!--                    NALC-1082  -->
+                    Selected:{{selection?.selected?.length}} / Filtered:{{dataSource?.filterPredicate ? dataSource?.filteredData?.length:0}} /  Total:{{dataSource?.data?.length}} 
+                
+              </div>
+              
+              <div class="col-sm-7" >
+                  <alert></alert>
+                  <p *ngIf="message && message?.type === 'ERROR'" style="background-color: red;" >{{ message.message }}</p>
+                  <p *ngIf="message && message?.type === 'SUCCESS'" style="background-color: greenyellow;" >{{ message.message }}</p>
+                  <p *ngIf="message && message?.type === 'WARNING'" style="background-color: yellow;" >{{ message.message }}</p>
+              </div>
+              
+          </div>
+          <div class="my-container">
+              <ng-template #customLoadingTemplate>
+                  <div class="custom-class">
+                      <h3>
+                          Loading...
+                      </h3>
+                      
+                  </div>
+              </ng-template>
+           
+              <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+             
+          </div>
+      </mat-card-content>
+  </mat-card>
+</span>

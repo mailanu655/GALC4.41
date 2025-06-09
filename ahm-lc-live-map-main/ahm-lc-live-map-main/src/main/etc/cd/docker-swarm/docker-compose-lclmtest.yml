@@ -1,0 +1,25 @@
+version: '3.7'
+networks:
+  net:
+    driver: overlay
+x-logging: &id001
+  driver: json-file
+  options:
+    tag: '{{.Name}}'
+    max-size: 100m
+    max-file: 1
+    compress: 'false'
+services:
+  client:
+    image: artifactory.amerhonda.com/sbxocp/lc-live-map:1.0-SNAPSHOT
+    ports:
+    - 8080:8080
+    networks:
+    - net
+    deploy:
+      replicas: 1
+    logging: *id001
+    environment:
+      TZ: America/New_York
+    env_file:
+    - ./lclm-cm.env

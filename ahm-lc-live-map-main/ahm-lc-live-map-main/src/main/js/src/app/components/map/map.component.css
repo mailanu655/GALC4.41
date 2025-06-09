@@ -1,0 +1,20 @@
+@import '../../lib/lc-mat-tab.css';
+mat-drawer-container {
+    background-color: transparent;
+}
+
+mat-drawer {
+    width: 220px;
+    background-color: transparent;
+}
+
+::ng-deep .mat-tooltip {
+    white-space: pre-line;
+    font-size: 12px;
+    background-color: #427fbb;
+    max-width: unset !important;
+}
+
+mat-icon {
+    color: #205081;
+}

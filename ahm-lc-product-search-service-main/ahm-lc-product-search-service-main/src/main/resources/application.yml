@@ -1,0 +1,97 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+
+# Servlet Container 
+server:
+  address: 0.0.0.0
+  servlet:
+    context-path: 
+  
+# Spring 
+spring:
+  datasource: 
+    galc:
+      jdbcUrl: jdbc:db2://127.0.0.1:60000/GALCDB
+      driverClassName: com.ibm.db2.jcc.DB2Driver
+      username: dbuser
+      password: ENC(emIuHFM5TjYT1majaAPMeg==)
+      #password: dbpass
+      #schema: ELPQDB
+      importer:
+        useFullSchemaName: false
+        useQualifiedName: true
+        tableTypes: TABLE
+        importKeys: true
+        excludeTables: (?!ELPQDB.GAL117TBX|ELPQDB.GAL211TBX|ELPQDB.GAL128TBX|ELPQDB.GAL195TBX|ELPQDB.GAL214TBX|ELPQDB.GAL185TBX|ELPQDB.GAL215TBX|ELPQDB.GAL143TBX|ELPQDB.GAL144TBX|ELPQDB.GAL246TBX|ELPQDB.GAL226TBX|ELPQDB.QI_DEFECT_RESULT_TBX|ELPQDB.GAL163TBX|ELPQDB.QI_REPAIR_RESULT_TBX|ELPQDB.QI_APPLIED_REPAIR_METHOD_TBX|ELPQDB.QI_REPAIR_AREA_SPACE_TBX|ELPQDB.QI_REPAIR_AREA_SPACE_HIST_TBX|ELPQDB.QI_REPAIR_AREA_TBX|ELPQDB.GAL136TBX|ELPQDB.GAL147TBX).*
+        #tableNamePattern: GAL117TBX
+        schemaPattern: ELPQDB
+  jpa:
+    #open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.DB2Dialect   
+  show-sql: true
+  
+  teiid:
+    model:
+      package: com.honda.ahm.lc.vdb.entity
+    file:
+      #parent-directory: src/main/resources      
+              
+  jackson:
+    serialization:
+      indent_output: true
+  application:
+    name: ${project.artifactId}
+
+# Logging
+logging:
+  config: classpath:logback.xml
+  maxFileSize: 100MB
+  totalSizeCap: 1GB
+  maxHistory: 31
+  path: /app/service/logs/
+  level:
+    #org.apache.camel: DEBUG
+    com.honda: INFO
+
+  # Comma separated emails for smtp appender (error msgs)
+  email.from: lc_in_vdb@ahm.honda.com
+  #email.to: lc_admin@ahm.honda.com,lc_in_support@ahm.honda.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, configprops, loggers, logfile, metrics, httptrace, prometheus, jolokia, hawtio
+      #exclude: env, beans
+
+# Encyrption Properties
+jasypt:
+  encryptor:
+    password: LCIN_2020
+    
+info:
+  app:
+    artifactId: ${project.artifactId}
+    version: ${project.version}
+    server:
+      address: ${server.address:}
+      port: ${server.port:}
+    logging:
+      config: ${logging.config:}
+      path: ${logging.path:}
+      email:
+        from: ${logging.email.from:}
+        to: ${logging.email.to:}
+      maxFileSize: ${logging.maxFileSize:}
+      totalSizeCap: ${logging.totalSizeCap:}
+      maxHistory: ${logging.maxHistory:}
+    spring:
+      datasource:
+        galc:
+          jdbcUrl: ${spring.datasource.galc.jdbcUrl:}  
+app:
+  config:
+    divList: AHM,Assembly,Paint,PreProduction,Production Control,VQ,Weld

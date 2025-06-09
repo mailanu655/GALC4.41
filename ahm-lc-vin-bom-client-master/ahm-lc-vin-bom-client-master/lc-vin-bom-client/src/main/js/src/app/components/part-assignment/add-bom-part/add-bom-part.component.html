@@ -1,0 +1,139 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle (mousedown)="toTop('data.id')">Add BOM Part</h1>
+
+<div mat-dialog-content style="padding-top: 10px;">
+    <form (ngSubmit)="save()" [formGroup]="addPartForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Model Year</div>
+                    <div class="col-sm">
+                        <select class="form-control" 
+                            id="modelYearInDialog" 
+                            name="modelYearInDialog"  
+                            (change)="populateModelCodeByYear(modelYearInDialog)"
+                            formControlName="modelYearInDialog"
+                            [(ngModel)]="modelYearInDialog"
+                            [ngClass]="{ 'is-invalid': submitted && f.modelYearInDialog.errors }" >
+
+                            <option value="" [selected]="true" disabled > Select </option>
+                            <option *ngFor="let item of modelYearList"  [ngValue]="item" title="{{item}}">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.modelYearInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.modelYearInDialog.errors.required">Model Year is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Model Code</div>
+                    <div class="col-sm">
+                        <select class="form-control" 
+                            id="modelCodeInDialog" 
+                            name="modelCodeInDialog" 
+                            (change)="populateModelTypebyYMTOC(modelYearInDialog, modelCodeInDialog)"
+                            formControlName="modelCodeInDialog"
+                            [(ngModel)]="modelCodeInDialog"
+                            [ngClass]="{ 'is-invalid': submitted && f.modelCodeInDialog.errors }" >
+                            <option value="" selected> Select </option>
+                            <option *ngFor="let item of modelCodeList"  [ngValue]="item" title="{{item}}">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.modelCodeInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.modelCodeInDialog.errors.required">Model Code is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">Model Type</div>
+                    <div class="col-sm">
+                        <select class="form-control" 
+                            id="modelTypeInDialog" 
+                            name="modelTypeInDialog" 
+                            formControlName="modelTypeInDialog"
+                            [(ngModel)]="modelTypeInDialog"
+                            [ngClass]="{ 'is-invalid': submitted && f.modelTypeInDialog.errors }" >
+                            <option value="" selected> Select </option>
+                            <option *ngFor="let item of modelTypeList"  [ngValue]="item" title="{{item}}">
+                                {{item}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.modelTypeInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.modelTypeInDialog.errors.required">Model Type is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">DC Part #</div>
+                    <div class="col-sm">
+                        <input class="form-control" 
+                                type="text" 
+                                maxlength="200" 
+                                placeholder="DC Part #" 
+                                formControlName="dcPartNoInDialog"
+                                id="dcPartNoInDialog" 
+                                name="dcPartNoInDialog" 
+                                [(ngModel)]="dcPartNoInDialog"
+                                [ngClass]="{ 'is-invalid': submitted && f.dcPartNoInDialog.errors }"
+                        />
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.dcPartNoInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.dcPartNoInDialog.errors.required">DC Part # is required</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm dialog-lbl col-form-label">System Name</div>
+                    <div class="col-sm">
+                        <input  class="form-control" 
+                                type="text" 
+                                maxlength="200" 
+                                placeholder="System Name"  
+                                formControlName="systemNameInDialog"
+                                id="systemNameInDialog" 
+                                name="systemNameInDialog" 
+                                [(ngModel)]="systemNameInDialog"
+                                [ngClass]="{ 'is-invalid': submitted && f.systemNameInDialog.errors }"
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="submitted && f.systemNameInDialog.errors" class="invalid-feedback" style="display: block">
+                        <div *ngIf="f.systemNameInDialog.errors.required">System Name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 grid">
+                <div class="container-fluid" id="home">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7">
+                                    <button type="submit" float-right class="btn btn-primary btn-add-bom-part" id="saveBomPart" title="Search Part" style="margin-top: 1rem;" 
+                                        >
+                                        &nbsp;&nbsp;Save&nbsp;&nbsp;
+                                    </button>
+                                    
+                                    <br>
+                                    <button float-right (click)="cancel()" class="btn btn-secondary btn-add-bom-part" id="cancelBomPart" title="Search Part" style="margin-top: 1rem;">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

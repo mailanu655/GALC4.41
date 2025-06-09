@@ -1,0 +1,147 @@
+.assembly {
+    fill: #ecf2f7;
+    /*fill:  rgb(247, 240, 243);*/
+    stroke: grey;
+    stroke-width: 2;
+    z-index: -1;
+}
+
+.focus-location {
+    fill: rgb(93, 190, 247);
+    stroke: rgb(54, 69, 79);
+    stroke-width: 2;
+    opacity: 0;
+    z-index: 1;
+}
+
+.body-location {
+    fill: white;
+    stroke: grey;
+    stroke-width: 2;
+    opacity: 1;
+    z-index: 1;
+}
+
+.land-mark,
+.section {
+    fill: rgb(93, 190, 247);
+    stroke: rgb(54, 69, 79);
+    opacity: 0.4;
+    z-index: 0
+}
+
+.section {
+    fill: white;
+}
+
+.buffer {
+    fill: gray;
+}
+
+.non-working {
+    fill: green;
+}
+
+.working {
+    fill: white;
+}
+
+.semi-auto {
+    fill: pink;
+    opacity: 0.7;
+}
+
+.auto {
+    fill: red;
+    opacity: 0.5;
+}
+
+.inspection {
+    fill: purple;
+}
+
+.label,
+.land-mark-name,
+.section-name,
+.section-name,
+.process-label,
+.tla-label {
+    font-size: 20px;
+    stroke: rgb(54, 69, 79);
+    stroke-width: 0.7;
+    opacity: 1;
+    z-index: 1
+}
+
+.section-name,
+.process-label,
+.tla-label {
+    font-size: 13px;
+}
+
+.direction-indicator {
+    stroke: steelblue;
+    stroke-width: 1;
+    z-index: 0;
+}
+
+.path {
+    stroke: #034f84;
+    stroke-width: 2;
+    fill: none;
+    z-index: 0;
+}
+
+.lot {
+    fill: red;
+    stroke: black;
+    stroke-width: 1;
+    opacity: 1;
+}
+
+.kd-lot {
+    fill: #ffff00;
+    stroke: black;
+    stroke-width: 1;
+    opacity: 1;
+}
+
+.straggler {
+    fill: aqua;
+    stroke: black;
+    stroke-width: 1;
+    opacity: 1;
+}
+
+.axis {
+    stroke: rgb(54, 69, 79);
+    stroke-width: 1;
+    opacity: 1;
+    z-index: 1
+}
+
+rect:focus {
+    outline: 0px;
+}
+
+use:focus {
+    outline: 0px;
+}
+
+text:focus {
+    outline: 0px;
+}
+
+.it {
+    font-size: 13px;
+    stroke-width: 1px;
+    stroke: black;
+}
+
+.location-behind {
+    stroke: red;
+}
+
+.location-ahead {
+    stroke: blue;
+}

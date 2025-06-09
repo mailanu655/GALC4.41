@@ -1,0 +1,30 @@
+[
+	{
+        "designChangeNumber": "DCN123",
+        "designChangeClass": "DCC123",
+        "serviceInterchangeableCode": "INTER",
+        "stragglerInterchangeableCode": "INT123",
+        "effectiveBeginDate": "2021-01-05",
+        "effectiveEndDate": "2021-09-19",
+        "dcmsModelCode": "CODE123",
+        "modelCode": "MOD123",
+        "modelType": "TYPE123",
+        "designChangePartNumber": "PART123",
+        "letSystemName": "LET123",
+        "startingProductionLot": "LOT123"
+	},
+	{
+        "designChangeNumber": "DCN111",
+        "designChangeClass": "DCC111",
+        "serviceInterchangeableCode": "INTER",
+        "stragglerInterchangeableCode": "INT111",
+        "effectiveBeginDate": "2021-03-07",
+        "effectiveEndDate": "2021-11-21",
+        "dcmsModelCode": "CODE111",
+        "modelCode": "MOD111",
+        "modelType": "TYPE111",
+        "designChangePartNumber": "PART111",
+        "letSystemName": "LET111",
+        "startingProductionLot": "LOT111"
+	}
+]

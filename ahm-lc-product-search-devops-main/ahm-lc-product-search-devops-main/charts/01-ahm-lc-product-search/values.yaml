@@ -1,0 +1,93 @@
+# Default values for helm-honda-ca-add.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: "" # Recommend managing in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml
+fullnameOverride: ""
+
+nodeSelector: {}
+
+global:
+  productTeam: linectrl
+  useCase:
+    name: product-search
+    env: # Recommend managing in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml
+
+lc-product-search-service:
+  nameOverride: lc-product-search-service
+  artifactory: artifactory.amerhonda.com
+  artifactoryRepo: # Managed in OpenShift Pipeline argocd-devops-sync task
+  imageName: lc-product-search-service
+  imageVersion: # Managed in pipeline.sh
+  replicas: 1
+  deployment:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 50m
+        memory: 1Gi
+  container:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 50m
+        memory: 1Gi
+  ports:
+    - name: 8080-tcp
+      containerPort: 8080
+      protocol: TCP
+  service:
+    ports:
+      - name: 8080-tcp
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+    type: ClusterIP
+  route:
+    url: # Override in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml
+    targetPort: 8080-tcp
+  env: # Override in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml
+  envFrom:
+    - secretRef: 
+        name: lc-product-search-service
+#Client Config
+lc-product-search-client:
+  nameOverride: lc-product-search-client
+  artifactory: artifactory.amerhonda.com
+  artifactoryRepo: # Managed in OpenShift Pipeline argocd-devops-sync task
+  imageName: lc-product-search-client
+  imageVersion: # Managed in pipeline.sh
+  replicas: 1
+  deployment:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 50m
+        memory: 1Gi
+  container:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 50m
+        memory: 1Gi
+  ports:
+    - name: 8080-tcp
+      containerPort: 8080
+      protocol: TCP
+  service:
+    ports:
+      - name: 8080-tcp
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+    type: ClusterIP
+  route:
+    url: # Override in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml
+    targetPort: 8080-tcp
+  env:
+    - name: REST_URL
+      value: # Override in values-[[ usecaseEnv ]]-[[ clusterInstance ]].yaml

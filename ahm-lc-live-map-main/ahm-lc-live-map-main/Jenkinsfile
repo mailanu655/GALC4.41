@@ -1,0 +1,336 @@
+// Load common library
+// Plan to create Honda shared library after initial testing and solution created
+// This is example of using redhat shared library but removed all dependencies to this repo for now
+// library identifier: "pipeline-library@v1.5",
+// retriever: modernSCM(
+//   [
+//     $class: "GitSCMSource",
+//     remote: "https://github.com/redhat-cop/pipeline-library.git"
+//   ]
+// )
+
+pipeline {
+    // By default have each stage run in its own container.  This is best when waiting on user input and minimizes long running containers thus reducing resources 
+    agent none
+    options {
+        disableConcurrentBuilds()
+    }
+    stages {
+        stage('Compile and SonarQube analysis'){
+            agent { label 'jenkins-agent-mvn' }
+            stages{
+                stage('Setup Env') {
+                    steps {
+                        script {
+                            echo sh(returnStdout: true, script: 'pwd')
+                            echo sh(returnStdout: true, script: 'env | sort')
+                            // Setup common environment variables
+                            openshift.withCluster() {
+                                // Set the MAJOR version Increment if this is not backwards compatible
+                                env.MAJOR = "1"
+                                // Set the MINOR version Increment this for each sprint / release
+                                env.MINOR = "3"
+                                // Current OpenShift Cluster.  Allows for easy transition to other clusters in future
+                                env.CLUSTER = openshift.cluster()
+                                // This is the current OpenShift Project/Namespace that is running Jenkins
+                                env.NAMESPACE = openshift.project()
+                                echo "${NAMESPACE}"
+                                // If we follow naming standards [[ PRODUCT TEAM ]]-devops-[[ CICD ENV ]] then can determin PRODUCT_TEAM and CICD_ENV from NAMESPACE that jenkins is running in
+                                env.PRODUCT_TEAM = ("${NAMESPACE}" =~ /(?:.(?<!-))+/)[0]
+                                echo "PRODUCT_TEAM=${PRODUCT_TEAM}"
+                                env.CICD_ENV = ("${NAMESPACE}" =~ /(?:.(?<!-))+$/)[0]
+                                echo "CICD_ENV=${CICD_ENV}"
+                                // Think we have a standard of using apps. in the url so use this to parse so we don't have to configure
+                                // When using Jenkins Template this URL is now an IP instead of DNS so need to change
+                                echo "JENKINS_URL=${JENKINS_URL}"
+                                env.JENKINS_ROUTE_LOCATION = sh(returnStdout: true, script: "oc get route jenkins -o json | jq -r '.spec.host'")
+                                echo "JENKINS_ROUTE_LOCATION=${JENKINS_ROUTE_LOCATION}"
+                                env.APPS_OCP_URL = ("${JENKINS_ROUTE_LOCATION}" =~ /.*(apps.*)/)[0][1]
+                                echo "APPS_OCP_URL=${APPS_OCP_URL}"
+                                // Standardize on using secret that has a label credential.sync.jenkins.openshift.io=true
+                                env.GIT_AUTH_HTTPS = "${NAMESPACE}-ghe-auth-https-${PRODUCT_TEAM}-${CICD_ENV}".toLowerCase()
+                                
+                                // Standardize on using secret that has a label credential.sync.jenkins.openshift.io=true and has a value .dockerconfigjson
+                                env.ARTIFACTORY_AUTH = "${NAMESPACE}-artifactory-auth-${PRODUCT_TEAM}-${CICD_ENV}".toLowerCase()
+
+                                // Standardize on having secret that has a label credential.sync.jenkins.openshift.io=true
+                                env.ARGO_AUTH = "${NAMESPACE}-argocd-auth-${PRODUCT_TEAM}-${CICD_ENV}".toLowerCase()
+
+                                // Standardize on having secret that has the Jenkins service account and API Token
+                                env.JENKINS_AUTH = "${NAMESPACE}-jenkins-auth-${PRODUCT_TEAM}-${CICD_ENV}".toLowerCase()
+
+                                // Standardize on having secret that has the SonarQube server as username and Token as password
+                                env.SONAR_AUTH = "${NAMESPACE}-sonar-auth-${PRODUCT_TEAM}-${CICD_ENV}".toLowerCase()
+
+                                // Artifactory details
+                                env.ARTIFACTORY = "artifactory.amerhonda.com"
+                                // Artifactory Virtual Repo used for storing build images 
+                                if ('sbx'==env.CICD_ENV) {
+                                    // If in sandbox then use sbx
+                                    env.ARTIFACT_ENV = 'sbx'    
+                                }
+                                if ('np'==env.CICD_ENV) {
+                                    // This is a build Jenkinsfile so always use dev
+                                    env.ARTIFACT_ENV = 'dev'    
+                                }
+                                if ('prod'==env.CICD_ENV) {
+                                    // Should never call this Jenkinsfile from prod
+                                    error "You should never build in prod!!!  Update include / exclude branches in Jenkins Instance."
+                                }
+                                env.ARTIFACTORY_DOCKER_REPO = "${PRODUCT_TEAM}-container-${ARTIFACT_ENV}"
+                                
+                                // This should be the Git URL that has this Jenkinsfile saved
+                                // We need different security if this is ssh or https.  
+                                // Should we support both or standardize?  
+                                // How is it determined which way is used?
+                                    // Think that this is set by the Jenkins GitHub Branch Source Plugin
+                                    // This looks like it is always using https so standardizing on this security for now
+                                env.REPO_URL = scm.userRemoteConfigs[0].url
+                                echo "REPO_URL=${REPO_URL}"
+                                // Could we get the app name from the git repo name or pom.xml or should this be the main?
+                                // Using the pipelin-utility-steps plugin in Jenkins we can use readMavenPom() thus making this more generic
+                                // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#readmavenpom-read-a-maven-project-file
+                                env.MS_NAME = readMavenPom().getArtifactId()
+                                echo "MS_NAME=${MS_NAME}"
+                                // Use different values if on main vs feature branches
+                                if ('main'==env.BRANCH_NAME) {
+                                    // if on main just use the same name as microservice
+                                    env.MS_INSTANCE = "${MS_NAME}"
+                                    // For main generate version from major, minor and build number
+                                    env.MS_TAG = "v${MAJOR}.${MINOR}.${BUILD_NUMBER}"
+                                } else {
+                                    // Need a unique name per instance so adding BRANCH_NAME and trimmed hash for all feature branches
+                                    env.BRANCH_HASH = sh(returnStdout: true, script: 'echo $BRANCH_NAME | git hash-object --stdin | cut -b -8 -')
+                                    echo "BRANCH_HASH=${BRANCH_HASH}"
+
+                                    // strip NAMIOT from branch name
+                                    env.BRANCH_SHORT = ("${BRANCH_NAME}" =~ /(namiot-)?(NAMIOT-)?(.+)/)[0][3]
+                                    echo "BRANCH_SHORT=${BRANCH_SHORT}"
+                                    env.MS_INSTANCE = "${MS_NAME}-${BRANCH_SHORT}"
+
+                                    // and trim to < 53 - hash characters
+                                    env.MS_INSTANCE = ("${MS_INSTANCE}" =~ /(.{0,43}[a-zA-Z0-9]).*/)[0][1]
+
+                                    // tag on 8 characters of hash
+                                    env.MS_INSTANCE = "${MS_INSTANCE}-${BRANCH_HASH}"
+
+                                    // Tag used to uniquely identify artifacts version in git and artifactory per semantic version spec add - branch name to end
+                                    env.MS_TAG = "v${MAJOR}.${MINOR}.${BUILD_NUMBER}-${BRANCH_SHORT}"
+                                }
+                                // OpenShift requires a DNS-1123 subdomain that consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character
+                                env.MS_INSTANCE = "${MS_INSTANCE}".toLowerCase().replaceAll("_","-")
+                                echo "MS_INSTANCE=${MS_INSTANCE}"
+                                echo "MS_TAG=${MS_TAG}"
+
+                                // Need to make the repo different per environment (SBX, TEST, UAT, PROD)  Wonder if this could be determined and managed by naming convention.  Need to think more about this
+                                env.ARTIFACTORY_HELM = "https://${ARTIFACTORY}/artifactory/${PRODUCT_TEAM}-helm-${ARTIFACT_ENV}"
+
+                                // Should we standardize on what we call the argocd server?
+                                env.ARGO_SERVER = sh(returnStdout: true, script: "oc get route -l app.kubernetes.io/part-of=argocd -o json | jq -r '.items[0].spec.host'")
+
+                                // Version Prompt Variables
+                                env.INVER_TIMEOUT = false
+                                env.INVER_APPROVER = null
+                                env.INVER_VERSION = ''
+                                
+                                // Delete Namespace Prompt Variables
+                                env.INCLEANUP_TIMEOUT = false
+                                env.INCLEANUP_APPROVER = null
+                                env.INCLEANUP_RESOURCES = true
+                            }
+                        }
+                        withCredentials([usernamePassword(credentialsId: env.GIT_AUTH_HTTPS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                            // Retrieve all tags locally
+                            // if http used for git url then need to use credential helper
+                            sh(returnStdout: true, script: 'git config --global credential.username "${GIT_USERNAME}"')
+                            sh(returnStdout: true, script: 'git config --global credential.helper "!echo password=${GIT_PASSWORD}; echo"')
+
+                            sh(returnStdout: true, script: 'git fetch --tags')
+                            script {
+                                // Return the list of tags that start with v in descending order limit to 4 in a quoted, comma seperated list and save in environment variable
+                                env.PREVIOUS_VERSIONS = sh(returnStdout: true, script: 'git tag --list \'v*\' | sort -rV | head -n 4 | sed \'s/^\\|$/\\x27/g\' | paste -sd, - | sed \'s/.*/\'[\\\'\'previous versions\'\\\'\',\\0]/\'')
+                                // push required email and name to be configured
+                                sh(returnStdout: true, script: 'git config --global user.email "Jenkins@honda.com"')
+                                sh(returnStdout: true, script: 'git config --global user.name "${INVER_APPROVER}"')
+                                // Assign tag to git commit.  Use -f to force it to update
+                                sh(returnStdout: true, script: 'git tag -a ${MS_TAG} -m "assigned via Jenkins" -f')
+                                // Need to push the tag up to the central repo which requires write security to the repo
+                                sh(returnStdout: true, script: 'git push origin ${MS_TAG} -f')                        
+                            }
+                        }
+                        // Show all environment variables for troubleshooting
+                        echo sh(returnStdout: true, script: 'env | sort')
+                    }
+                }
+                stage('Unit Tests') {
+                    steps {
+                        // Run unit tests, build and install locally.
+                        echo sh(returnStdout: true, script: 'mvn -B clean install -Drevision=${MS_TAG}')
+                    }
+                }
+                stage('Sonarscan'){
+                    when {
+                        expression { BRANCH_NAME == 'main' }
+                    }
+                    steps {
+                        script{
+                            artifactId = readMavenPom().getArtifactId()
+                            groupId = readMavenPom().getGroupId()
+                            env.PROJECT_KEY = "${groupId}:${artifactId}"
+                        }
+                        withCredentials([usernamePassword(credentialsId: env.SONAR_AUTH, passwordVariable: 'SONAR_TOKEN', usernameVariable: 'SONAR_SERVER')]) {
+                            echo sh(returnStdout: true, script: 'mvn sonar:sonar -Dsonar.host.url=${SONAR_SERVER} -Dsonar.login=${SONAR_TOKEN}')
+                        }
+                    }
+                }
+                stage("Quality Gate") {
+                    when {
+                        expression { BRANCH_NAME == 'main' }
+                    }
+                    steps {
+                        withCredentials([usernamePassword(credentialsId: env.SONAR_AUTH, passwordVariable: 'SONAR_TOKEN', usernameVariable: 'SONAR_SERVER')]) {
+                            script {    
+                                sh (returnStdout: true, script: 'curl -f -u ${SONAR_TOKEN}: -X GET -H "Accept: application/json"  ${SONAR_SERVER}api/qualitygates/project_status?projectKey=${PROJECT_KEY} | python -m json.tool > status.json')
+                                def json = readJSON file:'status.json'
+                                echo "${json.projectStatus.status}"
+                                if ("${json.projectStatus.status}" == "ERROR") {
+                                    currentBuild.result = 'FAILURE'
+                                    error('Pipeline aborted due to quality gate failure.')
+                                }
+                            }
+                        }
+                    }
+                }
+                stage('Build Config') {
+                    steps {
+                        echo "Login to argocd using ${ARGO_SERVER} to run app helm charts in ${NAMESPACE}"
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.ARGO_AUTH, usernameVariable: 'ARGO_USER', passwordVariable: 'ARGO_PASS']]){
+                            echo sh(returnStdout: true, script: 'argocd login ${ARGO_SERVER} --grpc-web --insecure --config /tmp/.argo --username ${ARGO_USER} --password ${ARGO_PASS}')
+                        }
+                        // Should not create any deployment resources.  That should be done in the use-case-deploy git repo and a different pipeline per UC_ENV
+                        echo sh(
+                            returnStdout: true, 
+                            script: 
+                                'argocd app create ${MS_INSTANCE} --grpc-web --config /tmp/.argo ' +
+                                // Add upsert so if it already exists this will force update
+                                '--upsert ' +
+                                '--label MS_NAME=${MS_NAME} ' +
+                                '--repo ${REPO_URL} --path "charts/${MS_NAME}" ' + 
+                                '--revision ${GIT_COMMIT} ' + 
+                                '--dest-namespace ${NAMESPACE} --dest-server https://kubernetes.default.svc ' +
+                                // Use Jenkins to construct variables from environment and override helm template variables to reduce what needs to be managed in GIT values.yaml
+                                '--helm-set-string ${MS_NAME}.nameOverride=${MS_INSTANCE} ' +
+                                '--helm-set-string ${MS_NAME}.sourceRepo.gitRepo=${GIT_URL} ' +
+                                '--helm-set-string ${MS_NAME}.sourceRepo.ref=${GIT_COMMIT} ' +
+                                '--helm-set-string ${MS_NAME}.sourceRepo.gitSecretName=ghe-auth-https-${PRODUCT_TEAM}-${CICD_ENV} ' +
+                                '--helm-set-string ${MS_NAME}.hondaImage.repo=${ARTIFACTORY}/${ARTIFACTORY_DOCKER_REPO} ' +
+                                '--helm-set-string ${MS_NAME}.hondaImage.name=${MS_NAME} ' +
+                                '--helm-set-string ${MS_NAME}.hondaImage.tag=${MS_TAG} ' +
+                                '--helm-set-string ${MS_NAME}.hondaImage.repoSecretName=artifactory-auth-${PRODUCT_TEAM}-${CICD_ENV} '
+                        )
+                        // Wait for argocd operations to complete
+                        echo sh(returnStdout: true, script: 'argocd app wait ${MS_INSTANCE} --grpc-web --config /tmp/.argo --operation')
+                        // This triggers the creation of the objects in openshift
+                        echo sh(returnStdout: true, script: 'argocd app sync ${MS_INSTANCE} --grpc-web --config /tmp/.argo --prune')
+                    }
+                }
+                stage('Bake'){
+                    steps {
+                        //Note that this requires a buildConfig to be created in the NAMESPACE
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    def buildConfig = openshift.selector('bc', env.MS_INSTANCE)
+                                    def build = buildConfig.startBuild("--from-dir=target/",'--wait')
+                                    build.logs('-f')
+                                }
+                            }
+
+                        }
+                    }
+                }
+                stage('Promote to Latest') {
+                    when {
+                        expression { BRANCH_NAME == 'main' }
+                    }
+                    steps {
+                        // Update current build to latest
+                        withCredentials([string(credentialsId: env.ARTIFACTORY_AUTH, variable: "DOCKERCONFIG")]) {
+                            // The image registry credentials are a string like "{.dockerconfigjson:ABC..DEF==}".
+                            // We use the shell pipeline below to extract the value and decode it.
+                            sh "echo ${DOCKERCONFIG} | cut -d: -f2 | cut -d} -f1 | base64 -d > docker-config.json"
+
+                            // Update Artifactory to use this version as latest if on main branch
+                            echo sh(returnStdout: true, script: "oc image mirror -a docker-config.json ${ARTIFACTORY}/${ARTIFACTORY_DOCKER_REPO}/${MS_NAME}:${MS_TAG} ${ARTIFACTORY}/${ARTIFACTORY_DOCKER_REPO}/${MS_NAME}:latest")
+
+                        }
+                    }
+                }
+            }
+        } 
+        stage('Cleanup Prompt') {
+            // Wait for user to say it is ok to cleanup after a period of time
+            agent none
+            when {
+                expression { BRANCH_NAME != 'main' }
+            }
+            options {
+                timeout(time: 2, unit: 'MINUTES')
+            }
+            steps {
+                script{
+                    Exception caughtException = null
+                    catchError(buildResult: 'SUCCESS', stageResult: 'ABORTED') {
+                        try {
+                            INCLEANUP = input id: 'INCLEANUP', message: 'Do you want to cleanup resources in OpenShift for this build?', parameters: [booleanParam(defaultValue: true, description: 'Check if you want to cleanup else the resources in OpenShift will be kept', name: 'CLEANUP_RESOURCES')], submitterParameter: 'INCLEANUP_APPROVER'
+                            env.INCLEANUP_APPROVER = INCLEANUP.INCLEANUP_APPROVER
+                            env.INCLEANUP_RESOURCES = INCLEANUP.CLEANUP_RESOURCES
+                        } catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException e) {
+                            // This is called when you click abort and when timed out but when timed out user is SYSTEM
+                            env.INCLEANUP_APPROVER = e.getCauses()[0].getUser()
+                            if ('SYSTEM' == env.INCLEANUP_APPROVER ) {
+                                env.INCLEANUP_TIMEOUT = true
+                                //When timed out want to capture error and keep build result as SUCCESS so it will continue on as if user clicked Yes
+                                currentBuild.result = 'SUCCESS'
+                                echo "The INCLEANUP Timed out"
+                            }
+                        } catch (Throwable e) {
+                            caughException = e
+                        }
+                    }
+                    if (caughtException) {
+                        error caughtException.message
+                    }
+                }
+                echo "${INCLEANUP_APPROVER} approved with value of INCLEANUP_RESOURCES = ${INCLEANUP_RESOURCES}"
+            }
+        }
+        stage('Cleanup') {
+            agent { label 'jenkins-agent-mvn' }
+            when {
+                expression { 
+                    // Do not delete namespace if on main branch
+                    BRANCH_NAME != 'main' && (
+                        // Do delete if there was a time out
+                        env.INCLEANUP_TIMEOUT || (
+                            // Do delete if user said it was ok
+                            null != env.INCLEANUP_APPROVER && 
+                            env.INCLEANUP_RESOURCES
+                        )
+                    )
+                }
+            }
+            steps {
+                echo "Cleaning up resources was approved by ${INCLEANUP_APPROVER}"
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: env.ARGO_AUTH, usernameVariable: 'ARGO_USER', passwordVariable: 'ARGO_PASS']]){
+                    echo sh(returnStdout: true, script: 'argocd login ${ARGO_SERVER} --grpc-web --insecure --config /tmp/.argo --username ${ARGO_USER} --password ${ARGO_PASS}')
+                }
+                // Delete all argocd apps that were created for this build
+                
+                // At this time not creating namespace but want to leave for reference when we work on feature branch workflow
+                // echo sh(returnStdout: true, script: 'argocd app delete ${NAMESPACE_BUILD} --grpc-web --insecure --config /tmp/.argo')
+                echo sh(returnStdout: true, script: 'argocd app delete ${MS_INSTANCE} --grpc-web --insecure --config /tmp/.argo')
+            }
+        }
+    }
+}

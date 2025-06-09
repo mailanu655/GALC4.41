@@ -1,0 +1,95 @@
+#!groovy
+
+/**
+ * @author Subu Kathiresan
+ * @date Oct 25, 2021
+ *
+ * Project - Torque simulator
+ */
+
+// shell commands
+@groovy.transform.Field String MVN = '/usr/local/maven/bin/mvn -v' 
+
+// variables
+@groovy.transform.Field String buildType = ''
+
+pipeline {
+	agent any
+
+	tools {
+		maven "Maven 3.1.2"
+		jdk "JDK 1.8"
+	}
+
+	stages {
+		stage ('Choose build type') {
+			steps {
+				script {
+					buildType = input message: 'Choose build option:', ok: 'OK',
+									parameters: [choice(name: 'BUILD_TYPE', choices: 'artifact\nsource', description: '')]
+					echo "Build type selected: ${buildType}"
+				}
+			}
+		}
+		
+		stage ('dowload artifact') {
+			when {
+				expression { buildType == 'artifact' }
+			}
+			steps {
+				script {
+                    echo "downloading artifact"
+				}
+				echo "download artifact successful"
+			}
+		}
+		
+		stage ('Build source') {
+			when {
+				expression { buildType == 'source' }
+			}
+			steps {
+				cleanWs()
+				script {
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+					sh "$MVN clean verify deploy"
+				}
+			}
+		}
+	}
+	
+	post {
+		always {
+			echo 'Executing post section: removing workspace directory'
+			cleanWorkSpace() /* clean up workspace */
+		}
+		success {
+			echo 'Build succeeeded!'
+		}
+		unstable {
+			echo 'Build unstable :/'
+		}
+		failure {
+			echo 'Build failed :('
+		}
+		changed {
+			echo 'Things were different before...'
+		}
+	}
+}
+
+boolean cleanWorkSpace() {
+	deleteDir() // clean up workspace
+
+	dir("${WORKSPACE}@tmp") {
+		deleteDir()
+	}
+	dir("${WORKSPACE}@libs") {
+		deleteDir()
+	}
+	dir("${WORKSPACE}@script") {
+		deleteDir()
+	}
+	true
+}

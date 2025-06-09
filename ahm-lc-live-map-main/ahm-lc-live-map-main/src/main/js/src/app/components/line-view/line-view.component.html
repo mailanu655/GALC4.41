@@ -1,0 +1,29 @@
+<mat-drawer-container (window:resize)="onResize()" style="height: 100%;">
+    <as-split id="split" #split direction="vertical" (window:resize)="onResize()" unit="pixel" (gutterDblClick)="onResize()" [gutterDblClickDuration]="400">
+        <as-split-area id="lineSplit">
+            <metrics #metricsComponent></metrics>
+            <line #lineComponent [selectedProducts]="selectedProducts" (mouseOverLocation)='onMouseOverLocation($event)' (mouseOutLocation)='onMouseOutLocation($event)'></line>
+        </as-split-area>
+        <mat-divider></mat-divider>
+        <as-split-area id="tabSplit">
+            <button mat-icon-button (click)="download()" matTooltip="{{messages.get('tooltip.download.xls')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 60px; z-index: 100;">
+                <mat-icon>file_download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="print()" matTooltip="{{messages.get('tooltip.print')}}" matTooltipShowDelay="{{messages.tooltipDelay}}" style="position: absolute; right: 20px;z-index: 100;">
+                <mat-icon>print</mat-icon>
+            </button>
+            <!--
+            <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms" style="min-height: 150px;">
+            -->
+            <mat-tab-group #tabs id="tabs" mat-align-tabs="start" [(selectedIndex)]="selectedTabIx" animationDuration="100ms" style="height: calc(100% - 5px);">
+                <mat-tab [label]="upcomingLotsLabel">
+                    <upcoming-lots [id]="upcomingLotsLabel" #upcomingLotsComponent [tableData]="upcomingLots"></upcoming-lots>
+                </mat-tab>
+            </mat-tab-group>
+        </as-split-area>
+    </as-split>
+    <mat-drawer #drawer mode="side" (openedChange)="onResize()" position="end" opened="{{openSidePanel}}">
+        <legend *ngIf="appService.menuItem === 'legend'"></legend>
+        <settings *ngIf="appService.menuItem === 'settings'"></settings>
+    </mat-drawer>
+</mat-drawer-container>

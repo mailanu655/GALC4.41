@@ -1,0 +1,313 @@
+# Kafka UAT HDC
+
+global:
+  useCase:
+    env: uat
+
+lc-product-search-service:
+  artifactoryRepo: linectrl-container-uat
+  imageVersion: latest # Use latest for sandbox and test but manage semantic version in values.yaml
+  # Override resource limits for this environemnt
+  deployment:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+  container:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+  route:
+    url: ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com
+  env:
+    - name: REST_URL
+      value: https://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com
+    - name: aap1.spring.datasource.jdbcUrl
+      value: jdbc:db2://hma1qdb1.hma.am.honda.com:60004/qdb1
+    - name: aap1.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: aap1.spring.datasource.username
+      value: q
+    - name: aap1.spring.datasource.schema
+      value: QDB
+    - name: aap1.siteId
+      value: aap1
+    - name: aap1.plantName
+      value: Frame
+    - name: aap1.plantCode
+      value: HMA
+    - name: aap1.defaultSchema
+      value: QDB
+    - name: aap1.divList
+      value: WE,WE SubAssembly,PA,PA SubAssembly,AE,AF,AF SubAssembly,VQ,Shipping and Receiving,AHM,PC
+    - name: aap2.spring.datasource.jdbcUrl
+      value: jdbc:db2://hma2qdb1.hma.am.honda.com:60008/qdb2
+    - name: aap2.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: aap2.spring.datasource.username
+      value: q
+    - name: aap2.spring.datasource.schema
+      value: QDB
+    - name: aap2.siteId
+      value: aap2
+    - name: aap2.plantName
+      value: Frame
+    - name: aap2.plantCode
+      value: HMA
+    - name: aap2.defaultSchema
+      value: QDB
+    - name: aap2.divList
+      value: AE,AF,AF SubAssembly,AHM,PA,PA SubAssembly,PC,ShippingReceiving,VQ,WE,WE SubAssembly
+    - name: elp.spring.datasource.jdbcUrl
+      value: jdbc:db2://pelp1qdb1.ham.am.honda.com:60002/PELP1QDB
+    - name: elp.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: elp.spring.datasource.username
+      value: nglcdrpt
+    - name: elp.spring.datasource.schema
+      value: ELPQDB
+    - name: elp.siteId
+      value: elp
+    - name: elp.plantName
+      value: Frame3
+    - name: elp.plantCode
+      value: ELP
+    - name: elp.defaultSchema
+      value: ELPQDB
+    - name: elp.divList
+      value: AHM,Assembly,Paint,PreProduction,Production Control,VQ,Weld
+    - name: hcl.spring.datasource.jdbcUrl
+      value: jdbc:db2://hcl1qdb1.hdm.am.honda.com:60002/hclqdb
+    - name: hcl.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: hcl.spring.datasource.username
+      value: qfrm
+    - name: hcl.spring.datasource.schema
+      value: QFRM1
+    - name: hcl.siteId
+      value: hcl
+    - name: hcl.plantName
+      value: FR1
+    - name: hcl.plantCode
+      value: HCL
+    - name: hcl.defaultSchema
+      value: QFRM1
+    - name: hcl.divList
+      value: AHM,FR1-AE,FR1-AF,FR1-PA,FR1-PC,FR1-VQ,FR1-WE
+    - name: hcm1.spring.datasource.jdbcUrl
+      value: jdbc:db2://hcmpve1af1cp001.hcm.am.honda.com:60000/p1galcp
+    - name: hcm1.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: hcm1.spring.datasource.username
+      value: galccopy
+    - name: hcm1.spring.datasource.schema
+      value: GALCP
+    - name: hcm1.siteId
+      value: hcm1
+    - name: hcm1.plantName
+      value: FRAME1
+    - name: hcm1.plantCode
+      value: HCM
+    - name: hcm1.defaultSchema
+      value: GALCP
+    - name: hcm1.divList
+      value: AF1,MS1,PA1,VQ1,WE1
+    - name: hcm2.spring.datasource.jdbcUrl
+      value: jdbc:db2://hcmpve2af2cp001.hcm.am.honda.com:60000/p2galcp
+    - name: hcm2.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: hcm2.spring.datasource.username
+      value: galccopy
+    - name: hcm2.spring.datasource.schema
+      value: GALCP
+    - name: hcm2.siteId
+      value: hcm2
+    - name: hcm2.plantName
+      value: FRAME2
+    - name: hcm2.plantCode
+      value: HCM
+    - name: hcm2.defaultSchema
+      value: GALCP
+    - name: hcm2.divList
+      value: AF2,PA2,VQ2,WE2
+    - name: hcm3.spring.datasource.jdbcUrl
+      value: jdbc:db2://hcmpve1aepcp001.hcm.am.honda.com:60000/P3GALCP
+    - name: hcm3.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: hcm3.spring.datasource.username
+      value: factnews
+    - name: hcm3.spring.datasource.schema
+      value: GALCP
+    - name: hcm3.siteId
+      value: hcm3
+    - name: hcm3.plantName
+      value: Engine
+    - name: hcm3.plantCode
+      value: HCM
+    - name: hcm3.defaultSchema
+      value: GALCP
+    - name: hcm3.divList
+      value: AE,DC,EQ,HP,LP,MB,MC,ME,MH,PE,PU
+    - name: iap.spring.datasource.jdbcUrl
+      value: jdbc:db2://galchminline1dbqdb.hmin.am.honda.com:60000/GALQDBPR
+    - name: iap.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: iap.spring.datasource.username
+      value: appsignp
+    - name: iap.spring.datasource.schema
+      value: GALADM
+    - name: iap.siteId
+      value: iap
+    - name: iap.plantName
+      value: Frame
+    - name: iap.plantCode
+      value: HMI
+    - name: iap.defaultSchema
+      value: GALADM
+    - name: iap.divList
+      value: AF,AHM,IPU_AF,PA,PC,VQ,WE
+    - name: map1.spring.datasource.jdbcUrl
+      value: jdbc:db2://pmap1qdb1.ham.am.honda.com:60002/pmap1qdb
+    - name: map1.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: map1.spring.datasource.username
+      value: nglcdrpt
+    - name: map1.spring.datasource.schema
+      value: MAPQDB
+    - name: map1.siteId
+      value: map1
+    - name: map1.plantName
+      value: Frame1
+    - name: map1.plantCode
+      value: MAP
+    - name: map1.defaultSchema
+      value: MAPQDB
+    - name: map1.divList
+      value: AHM,Assembly,Paint,PreProduction,Prod Control,Radio Sub Assembly,Vehicle Quality,Weld
+    - name: map1.plantList
+      value: Frame1,Prod Control,VQ
+    - name: map2.spring.datasource.jdbcUrl
+      value: jdbc:db2://pmap1qdb1.ham.am.honda.com:60002/pmap1qdb
+    - name: map2.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: map2.spring.datasource.username
+      value: nglcdrpt
+    - name: map2.spring.datasource.schema
+      value: MAPQDB
+    - name: map2.siteId
+      value: map2
+    - name: map2.plantName
+      value: Frame2
+    - name: map2.plantCode
+      value: MAP
+    - name: map2.defaultSchema
+      value: MAPQDB
+    - name: map2.divList
+      value: AHM,Assembly,Paint,PreProduction,Prod Control,Radio Sub Assembly,Vehicle Quality,Weld
+    - name: map2.plantList
+      value: Frame2,Prod Control,VQ
+    - name: pmc.spring.datasource.jdbcUrl
+      value: jdbc:db2://ppmc1qdb1.ham.am.honda.com:60002/PMCQDB
+    - name: pmc.spring.datasource.driverClassName
+      value: com.ibm.db2.jcc.DB2Driver
+    - name: pmc.spring.datasource.username
+      value: srvpmclv
+    - name: pmc.spring.datasource.schema
+      value: PMCQDB
+    - name: pmc.siteId
+      value: pmc
+    - name: pmc.plantName
+      value: FRAME
+    - name: pmc.plantCode
+      value: PMC
+    - name: pmc.defaultSchema
+      value: PMCQDB
+    - name: pmc.divList
+      value: DUMMY,LIBSHEETS,YAF4,YAF4IPU,YAQ4,YPA4,YPA4COPT,YTL4,YVQ4,YWE4,YWE4A1,YWE4A2,YWE4A3,YWE4A4,YWE4BF,YWE4BZ,YWE4DF,YWE4DZ,YWE4GW,YWE4TRQ
+#Client Config
+lc-product-search-client:
+  artifactoryRepo: linectrl-container-uat
+  imageVersion: latest # Use latest for sandbox and test but manage semantic version in values.yaml
+  # Override resource limits for this environemnt
+  deployment:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+  container:
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 512Mi
+  route:
+    url: ahm-lc-product-search-client-linectrl-product-search-uat.apps.ocp.hna.honda.com
+  env:
+    - name: REST_URL
+      value: https://ahm-lc-product-search-client-linectrl-product-search-uat.apps.ocp.hna.honda.com
+    - name: client.appName
+      value: LC Product Search - UAT
+    - name: client.url
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com
+    - name: client.logoMessage
+      value: LC Product Search - UAT
+    - name: client.refreshInterval
+      value: '15'
+    - name: client.helpUrl
+      value: https://home.hondaweb.com/w1/hondawiki/pages/VIN-Search.aspx
+    - name: client.releaseNotesUrl
+      value: https://hondaweb.com/hra_wiki/display/GALC/Product+Search+Release+Notes      
+    - name: client.feedbackUrl
+      value: http://lc-feedback-client-linectrl-feedback-prod.apps.ocp.hna.honda.com/feedback
+    - name: client.sites.elp.name
+      value: ELP
+    - name: client.sites.elp.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/elp
+    - name: client.sites.aap1.name
+      value: AAP1
+    - name: client.sites.aap1.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/aap1
+    - name: client.sites.aap2.name
+      value: AAP2
+    - name: client.sites.aap2.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/aap2
+    - name: client.sites.hcl.name
+      value: HCL
+    - name: client.sites.hcl.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/hcl
+    - name: client.sites.hcm1.name
+      value: HCM1
+    - name: client.sites.hcm1.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/hcm1
+    - name: client.sites.hcm2.name
+      value: HCM2
+    - name: client.sites.hcm2.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/hcm2
+    - name: client.sites.hcm3.name
+      value: HCM3
+    - name: client.sites.hcm3.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/hcm3
+    - name: client.sites.iap.name
+      value: IAP
+    - name: client.sites.iap.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/iap
+    - name: client.sites.map1.name
+      value: MAP1
+    - name: client.sites.map1.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/map1
+    - name: client.sites.map2.name
+      value: MAP2
+    - name: client.sites.map2.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/map2
+    - name: client.sites.pmc.name
+      value: PMC
+    - name: client.sites.pmc.vdbUrl
+      value: http://ahm-lc-product-search-service-linectrl-product-search-uat.apps.ocp.hna.honda.com/pmc

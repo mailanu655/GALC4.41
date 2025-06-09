@@ -1,0 +1,13 @@
+[{
+	"productSpec": "LTYTDB6***",
+	"systemName": "EPS_SOFT",
+	"dcPartNo": "39110TX5 A000",
+	"active": true
+}, {
+	"productSpec": "KTYTDB6***",
+	"systemName": "TPS_SOFT",
+	"dcPartNo": "55110TX5 A000",
+	"active": false
+}]
+
+

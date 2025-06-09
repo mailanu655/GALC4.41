@@ -1,0 +1,45 @@
+<mat-card class="mat-card, mat-elevation-z8">
+    <mat-card-content>
+        <span style="display: flex; justify-content: space-between !important;">
+            <h2 class="mat-h2">View Settings</h2>
+            <button style="width: 20px; height: 20px; border: none; background-color: transparent;" (click)="close()">
+                <mat-icon style="font-size: 20px; cursor: pointer;">chevron_right</mat-icon>
+            </button>
+        </span>
+        <mat-slide-toggle id="extColor" *ngIf="appService.isVisible('line')" (change)="appService.extColorChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayExtColor" [disabled]="false">Exterior color</mat-slide-toggle>
+        <mat-divider></mat-divider>
+        <ng-container *ngIf="appService.isVisible('qics')">
+            <mat-slide-toggle id="defect" (change)="appService.defectChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayDefects" [disabled]="false" matTooltip="{{messages.get('tooltip.qics.defect.all')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">QICS Defects</mat-slide-toggle>
+            <mat-slide-toggle id="weldDefect" (change)="appService.weldDefectChange($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.displayWeldDefects" [disabled]="false" matTooltip="{{messages.get('tooltip.qics.defect.weld')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">QICS Weld Defects</mat-slide-toggle>
+            <mat-slide-toggle id="paintDefect" (change)="appService.paintDefectChange($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.displayPaintDefects" [disabled]="false" matTooltip="{{messages.get('tooltip.qics.defect.paint')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">QICS Paint Defects</mat-slide-toggle>
+            <mat-slide-toggle id="afDefect" (change)="appService.afDefectChange($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.displayAfDefects" [disabled]="false" matTooltip="{{messages.get('tooltip.qics.defect.af')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">QICS AF Defects</mat-slide-toggle>
+            <mat-divider></mat-divider>
+        </ng-container>
+        <mat-slide-toggle id="part" *ngIf="appService.isVisible('part')" (change)="appService.partIssueChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayPartIssues" [disabled]="false" matTooltip="{{messages.get('tooltip.part.issue')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">Lot Control Issues</mat-slide-toggle>
+        <mat-slide-toggle id="hold" *ngIf="appService.isVisible('hold')" (change)="appService.holdChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayHolds" [disabled]="false" matTooltip="{{messages.get('tooltip.product.hold')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">Holds</mat-slide-toggle>
+        <mat-slide-toggle id="straggler" *ngIf="appService.isVisible('straggler')" (change)="appService.stragglerChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayStragglers" [disabled]="false" matTooltip="{{messages.get('tooltip.straggler')}}" matTooltipShowDelay="400">Stragglers</mat-slide-toggle>
+        <ng-container *ngIf="appService.isVisible('line')">
+            <mat-divider></mat-divider>
+            <mat-slide-toggle id="processArea" (change)="appService.processAreaChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayProcessAreas" [disabled]="false" matTooltip="{{messages.get('tooltip.process.areas')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">Process Areas</mat-slide-toggle>
+            <mat-slide-toggle id="teamLeaderArea" (change)="appService.teamLeaderAreaChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displayTeamLeaderAreas" [disabled]="false" matTooltip="{{messages.get('tooltip.tl.areas')}}" matTooltipShowDelay="{{messages.tooltipDelay}}">Team Leader Areas</mat-slide-toggle>
+            <mat-divider></mat-divider>
+            <ng-container *ngIf="appService.admin">
+                <mat-slide-toggle id="location" *ngIf="appService.admin" (change)="appService.adjustLocation($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.pushLocation" [disabled]="false">Adjust Location</mat-slide-toggle>
+                <mat-slide-toggle id="pushLocation" *ngIf="appService.admin" (change)="appService.pushLocationChanged($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.pushLocation" [disabled]="false">Push Location</mat-slide-toggle>
+                <mat-slide-toggle id="pullSection" *ngIf="appService.admin" (change)="appService.pullSectionChanged($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.pullSection" [disabled]="false">Pull Section</mat-slide-toggle>
+                <mat-slide-toggle id="pullCrossBuffer" *ngIf="appService.admin" (change)="appService.pullCrossBufferChanged($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.pullCrossBuffer" [disabled]="false">Pull Cross Buffer</mat-slide-toggle>
+                <mat-slide-toggle id="pullLocation" *ngIf="appService.admin" (change)="appService.pullLocationChanged($event)" class="mat-slide-toggle item" [color]="color" [checked]="appService.pullLocation" [disabled]="false">Pull Location</mat-slide-toggle>
+                <mat-divider></mat-divider>
+                <mat-slide-toggle id="tracking" (change)="appService.trackingChanged($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.tracking" [disabled]="false">Tracked Products</mat-slide-toggle>
+                <mat-divider></mat-divider>
+                <mat-slide-toggle id="sectionLabel" (change)="appService.sectionLabelChange($event)" class="mat-slide-toggle" [color]="color" [checked]="appService.displaySectionLabels" [disabled]="false">Section Labels</mat-slide-toggle>
+            </ng-container>
+        </ng-container>
+        <mat-divider></mat-divider>
+        <button mat-button (click)="appService.resetSettings()" style="padding-left: 5px; margin-top: 10px;">
+            <mat-icon style="padding-right: 15px;">settings_backup_restore</mat-icon>
+            <span>Reset Settings</span>
+        </button>
+        <mat-divider></mat-divider>
+    </mat-card-content>
+</mat-card>

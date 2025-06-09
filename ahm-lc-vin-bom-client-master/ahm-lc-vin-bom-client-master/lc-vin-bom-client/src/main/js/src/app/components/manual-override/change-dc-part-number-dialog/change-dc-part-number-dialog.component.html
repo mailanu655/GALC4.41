@@ -1,0 +1,119 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle (mousedown)="toTop('data.id')">Change DC Part Number</h1>
+
+<div mat-dialog-content style="padding-top: 10px;">
+    
+        <div class="row">
+            <div class="col-sm">
+                <div class="row">
+                    <fieldset class="scheduler-border" style="width: 100%;">
+                        <legend class="scheduler-border">Current Product Details</legend>
+                        <mat-card-content id="select-prod-lot-dialog-filter_panel">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="row">
+                                        Product Id
+                                    </div>
+                                    <div class="row product_id_txt_div">
+                                        <div class="col-sm-6 part-assign-filter-value">
+                                            <input readonly class="form-control product_id_txt" type="text" placeholder="Product Id" [(ngModel)]="productIdManualOverrideDlg" id="productIdManualOverrideDlg" name="productIdManualOverrideDlg" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="row">
+                                        System Name
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 manual-override-filter-value">
+                                            <input readonly class="form-control system_name_txt" type="text"  placeholder="System Name" [(ngModel)]="systemNameManualOverrideDlg" id="systemNameManualOverrideDlg" name="systemNameManualOverrideDlg" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="row">
+                                        Current DC Part #
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 manual-override-filter-value">
+                                            <input readonly class="form-control current_dc_part_no_txt" type="text" placeholder="Current DC Part #" [(ngModel)]="currentDcPartNoManualOverrideDlg" id="currentDcPartNoManualOverrideDlg" name="currentDcPartNoManualOverrideDlg" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </fieldset>
+                </div>
+                <div class="row" style="height: calc(100% - 5rem);">
+                    <mat-card-content id="dcPartNoDlgTable" style="box-shadow: 0px 1px 1px #000e; width: 100%; height: 100%;">
+                        <div class="table-container">
+                            <table [dataSource]="dataSource" [hidden]="isManualEntry" class="table" mat-table matSort>
+                                <ng-container matColumnDef="dcPartNumber">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> DC Part # </th>
+                                  <td  mat-cell *matCellDef="let item"> {{item.id.dcPartNumber}} </td>
+                                </ng-container>
+                          
+                                <ng-container matColumnDef="effectiveBeginDate">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Eff Begin Date </th>
+                                  <td mat-cell *matCellDef="let item"> {{item.effectiveBeginDateString}} </td>
+                                </ng-container>
+                          
+                                <ng-container matColumnDef="effectiveEndDate">
+                                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Eff End Date </th>
+                                  <td mat-cell *matCellDef="let item"> {{item.effectiveEndDateString}} </td>
+                                </ng-container>
+                                
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+                                  (click)="selectRow(i, row)" [class.hover]="i == highlightedRow" [class.active]="i == selectedRow"> </tr>
+                            </table>
+                        </div>
+                    </mat-card-content>
+                </div>
+                <br>
+                <div class="row" >
+                    <div class="col-sm isManualEntry_checkbox_div">
+                        <div class="row isManualEntry_checkbox_div">
+                            <input type="checkbox" class="isManualEntry_checkbox" style="width: 10%;" required id="isManualEntry"
+                                name="isManualEntry" [(ngModel)]="isManualEntry" #contactActive="ngModel">
+                                Manual Entry
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="row">
+                            DC Part # &nbsp;&nbsp;
+                            <div class="col-sm-6 manual-override-filter-value">
+                                <input class="form-control" type="text" [disabled]="!isManualEntry" maxlength="200" placeholder="DC Part #" id="dcPartNoManOverrideDialog" name="dcPartNoManOverrideDialog" [(ngModel)]="dcPartNoManOverrideDialog" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="col-sm-6 rules-radio-labels" >
+                    Interchangeable
+                </div>
+                <div class="col-sm" > 
+                    <input name="isInterchangeable" ng-control="isInterchangeable" type="radio" [value]="1"  [(ngModel)]="isInterchangeable" > &nbsp;Yes &nbsp;&nbsp;
+               
+                    <input name="isInterchangeable" ng-control="isInterchangeable" type="radio" [value]="0"  [(ngModel)]="isInterchangeable" > &nbsp;No <br/>
+                </div>
+               <!-- <input type="checkbox" class="isInterchangeable_checkbox" style="width: 10%;" required id="isInterchangeable"
+                    name="isInterchangeable" [(ngModel)]="isInterchangeable" #contactActive="ngModel">
+                    Interchangeable -->
+                    <br>
+                <button float-right class="btn btn-primary btn-ok-lot-assgn-dialog" id="saveBtnDcPartNoDlg" title="Save" style="margin-top: 1rem;" 
+                    (click)="save()">
+                    &nbsp;&nbsp;Save&nbsp;&nbsp;
+                </button>
+                <input type="hidden" [(ngModel)]="data.isChangeSuccess" />
+                <br>
+                <button float-right (click)="cancel()" class="btn btn-secondary btn-cancel-lot-assgn-dialog" id="cancelBtnDcPartNoDlg" title="Cancel" style="margin-top: 1rem;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    
+</div> 

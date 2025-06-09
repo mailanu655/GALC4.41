@@ -1,0 +1,8 @@
+/*
+table tr.mat-row { 
+  background-color:  rgb(243, 211, 190); 
+}*/
+
+table tr.mat-row:hover {
+    background-color: rgb(69, 184, 230) !important;
+}

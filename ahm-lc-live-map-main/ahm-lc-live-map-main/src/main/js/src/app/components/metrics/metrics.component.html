@@ -1,0 +1,50 @@
+<div style="display: inline-flex; width: 100%; justify-content: space-between;">
+    <!--
+    <mat-form-field class="metric" appearance="fill" style="width: 8.0%;">
+        <input name="ow" [ngModel]="now | date: 'MMM-dd HH:mm'" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder">Current Time</mat-label>
+    </mat-form-field>
+    -->
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="shift" [ngModel]="shift" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder" position="left">Shift</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="plan" [ngModel]="plan" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder">Shift Plan</mat-label>
+    </mat-form-field>
+    <!--
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="target" [ngModel]="target" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder">Target</mat-label>
+    </mat-form-field>
+    -->
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="actual" [ngModel]="actual" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder">Actual</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="productCount" [ngModel]="productCount" matInput [readonly]="true" class="input-small">
+        <mat-label class="placeholder">Line Count</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="productWithDefectCount" [ngModel]="productWithDefectCount" matInput [readonly]="true" class="input-small" [ngClass]="productWithDefectCount > 0 ? 'ng' : 'ok'">
+        <mat-label class="placeholder">VIN's with Defects</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="productWithPartIssueCount" [ngModel]="productWithPartIssueCount" matInput [readonly]="true" class="input-small" [ngClass]="productWithPartIssueCount > 0 ? 'ng' : 'ok'">
+        <mat-label class="placeholder">VIN's with Issues</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="productOnHoldCount" [ngModel]="productOnHoldCount" matInput [readonly]="true" class="input-small" [ngClass]="productOnHoldCount > 0 ? 'ng' : 'ok'">
+        <mat-label class="placeholder">VIN's on Hold</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="stragglerCount" [ngModel]="stragglerCount" matInput [readonly]="true" class="input-small" class="input-small" [ngClass]="stragglerCount > 0 ? 'warning' : 'ok'">
+        <mat-label class="placeholder">{{stragglersAfLabel}}</mat-label>
+    </mat-form-field>
+    <mat-form-field class="metric" appearance="outline" floatLabel="always">
+        <input name="pendingStragglerCount" [ngModel]="pendingStragglerCount" matInput [readonly]="true" class="input-small" class="input-small" [ngClass]="pendingStragglerCount > 0 ? 'warning' : 'ok'">
+        <mat-label class="placeholder">{{stragglersWePaLabel}}</mat-label>
+    </mat-form-field>
+</div>

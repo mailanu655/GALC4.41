@@ -1,0 +1,68 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+  
+# Servlet Container
+server:
+  address: 0.0.0.0
+  servlet:
+    context-path: 
+
+# Client 
+client:
+  appName: 'LC Factory News - UAT'
+  logoMessage: 'Line Control - Factory News - UAT'
+  refreshInterval: 15
+  helpUrl: https://home.hondaweb.com/w1/hondawiki/pages/Factory-News.aspx
+  releaseNotesUrl: https://hondaweb.com/hra_wiki/display/GALC/Factory+News+Release+Notes
+  feedbackClientUrl: 'http://170.108.47.111:6200/feedback'
+  feedbackBaseUrl: 'http://170.108.47.111:7200'
+  sites: 
+    elp: 
+      name: ELP
+      vdbUrl: http://170.108.47.111:7411
+    
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+  application:
+    name: ${project.artifactId}
+
+logging:
+  pattern:
+    console: '%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n' 
+  level:
+    #org.apache.camel: DEBUG
+    com.honda: DEBUG
+  # Comma separated emails for smtp appender (error msgs)
+  email.from: lc_lm@ahm.honda.com
+  #email.to: lc_admin@ahm.honda.com,lc_support@ahm.honda.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, configprops, loggers, logfile, metrics, httptrace, prometheus, jolokia, hawtio
+      #exclude: env, beans
+
+info:
+  app:
+    artifactId: ${project.artifactId}
+    version: ${project.version}
+    server:
+      address: ${server.address:}
+      port: ${server.port:}
+    logging:
+      config: ${logging.config:}
+      path: ${logging.path:}
+      email:
+        from: ${logging.email.from:}
+        to: ${logging.email.to:}
+      maxFileSize: ${logging.maxFileSize:}
+      totalSizeCap: ${logging.totalSizeCap:}
+      maxHistory: ${logging.maxHistory:}
+    client:
+      url: ${client.url:}
+      appName: ${client.appName:}
+      logoMessage: ${client.logoMessage:}        

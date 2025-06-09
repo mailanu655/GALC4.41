@@ -1,0 +1,434 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import './assets/css-ext/material.indigo-orange.min.css';
+@import 'material-icons/iconfont/material-icons.scss';
+/*@import 'https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-orange.min.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';*/
+
+html,body {
+    height: 100%;
+}
+
+body.busy-cursor {
+    cursor: wait;
+}
+
+.active-link {
+    background-color: #427fbb;
+ }
+
+a.mdl-navigation__link:hover {
+   background-color: #2f679e;    
+}
+
+.mdl-layout__header-row .mdl-navigation__link {
+    line-height: 40px;
+}
+.mdl-layout__header-row {
+    height: 40px;
+}
+.mdl-layout__header {
+    min-height: 40px;
+}
+
+.mat-card {
+    height: calc(100% - 10px) !important;
+    width: 100% !important;
+    min-height: 200px; 
+    background-color: #ecf2f7;
+}
+
+.mat-card-header {
+    font-size: 20px;
+    height: 40px;
+    white-space: nowrap;
+}
+
+.mat-card-content {
+    font-size: 16px;
+   /* height: calc(100% - 100px); */
+}
+
+.mat-card-actions {
+    height: 35px;
+    text-align: left;
+    width: 100%;
+}
+
+.mat-button {
+    background-color: lightgrey;
+    width: 100px; 
+    height: 35px;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 3px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.form {
+    width: 600px;
+    min-width: 540px;
+    height: 100%;;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.less-half-width {
+    width: 45%;
+}
+
+.two-field {
+	width: 49%;
+	padding-right: 2%;    
+}
+
+.second-field {
+    width: 49%;
+}
+
+.three-field {
+	width: 32%;
+	padding-right: 2%;
+}
+
+.third-field {
+	width: 32%;
+}
+
+.four-field {
+	width: 23%;
+	padding-right: 2%;
+}
+
+.fourth-field {
+	width: 25%;
+}
+
+body {
+    background: #f3f3f3;
+}
+
+.table-container {
+    height: calc(100% - 2px); 
+    width: calc(100% - 2px); 
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 0px 0px 0px 0px;
+    overflow: auto;
+    
+   }
+
+table {
+    width: 100%;
+}
+
+tr.selected {
+    /*background: #42A948;*/
+    background: #d2e0f1;
+    font-weight: bold;
+}
+
+tr.data:hover {
+    background-color: #cce6ff !important;
+    /*	font-weight: bold; */
+}
+
+tr.data {
+    height: 30px !important;
+}
+
+input.input-large {
+    font-size: 25px;
+    height: 40px;
+}
+
+input.input-medium {
+    font-size: 20px;
+    height: 28px;
+}
+
+input.input-small {
+    font-size: 17px;
+    height: 25px;
+}
+
+input:disabled {
+    color: #585858 !important;
+}
+
+input.state:enabled {
+    background-color: skyblue !important;
+}
+
+input.state:read-only {
+    background-color: lightgreen !important;
+}
+
+.mat-select {
+    background-color: skyblue ;
+    font-size: 17px; 
+    height:25px;
+    width: 95%;
+}
+
+.font-size-15px {
+    font-size: 15px !important;
+}
+
+.mat-select-disabled {
+    background-color:  lightgreen;
+}
+
+.mat-option {
+    height:20px !important;
+    font-size: 14px !important; 
+}
+
+.mat-list-option {
+    font-size: 14px !important; 
+    height:20px !important;
+}
+
+.tooltip {
+    font-size: 17px;
+    background-color: #427fbb;
+    max-width: unset !important;
+}
+
+/*::ng-deep .error-snackbar {*/
+.error-snackbar {
+    background: red;
+    max-width: unset !important;    
+}
+
+.warning-snackbar {
+     background: #f0fc03;
+     color: black;
+     max-width: unset !important;
+}
+
+.success-snackbar {
+    background: #205081;
+    max-width: unset !important;
+}
+
+.mat-progress-bar-buffer {
+    background-color: #B0C4DE;
+}
+
+.mat-progress-bar-fill::after {
+    background-color: #2f679e;
+}
+
+.warning {
+     background: #f0fc03;
+}
+
+.disabled {
+    background-color:gray;   
+    color: white; 
+}
+
+.idle {
+    background-color: #0B5B0B;
+    color: white;
+}
+.processing {
+    background-color: lightskyblue;    
+}
+
+.failed {
+    background-color: #DF0606;
+    color: white;
+}
+
+.create_pending {
+    background-color: papayawhip;
+}
+
+.schedule_pending {
+    background-color: lightpink;    
+}
+
+.disable_pending {
+    background-color: lightgray;
+}
+
+.delete_pending {
+    background-color: #202020;
+    color: white;
+}
+
+.overAvg {
+    background-color: #f0fc03;    
+}
+.overMax {
+    background-color: #ff7373;    
+}
+
+
+.ok {
+    background-color: #0B5B0B;
+    color: white;
+}
+
+.repaired {
+    background-color: #0E0EBD;
+    color: white;
+}
+
+.ng {
+    background-color: #DF0606;
+    color: white;
+}
+
+.dismissed {
+    background-color:  rgb(46, 43, 43);
+    color: white;
+}
+
+a {
+    color: #0052cc;
+}
+
+
+[mat-dialog-title] {
+    margin: -24px -24px 0px -24px !important;
+    padding: 10px 24px;
+    background: #369;
+    color: #fff;
+    cursor: move;
+}
+
+fieldset.scheduler-border {
+    padding: 0 1.3em 0.7em 1.3em !important;
+    margin: 0 0 0.4em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px rgb(121, 121, 121);
+            box-shadow:  1px 1px 2px 1px rgb(143, 143, 143);
+}
+
+legend div {
+	font-size: 17px !important;
+	color: #004d99;
+	font-weight: bold !important;
+	text-align: left !important;
+}
+
+legend.scheduler-border {
+	font-size: 1.0em !important;
+	color: #004d99;
+	font-weight: bold !important;
+	text-align: left !important;
+	width: auto;
+	padding: 0 2px;
+	border-bottom: none;
+	background-color: #ecf2f7;
+}
+
+::ng-deep.mat-datepicker-content .mat-calendar{
+    width: unset !important;
+    height: unset !important;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 95%;
+}
+
+.select-width-90-perc {
+    width: 90%;
+}
+
+.select-width-95-perc {
+    width: 95%;
+}
+
+.select-width-100-perc {
+    width: 100%;
+    font-size: 15px !important;
+}
+
+.px-40-cell-width,
+.cell-width-40-px {
+    max-width: 40px;
+}
+
+.px-50-cell-width,
+.cell-width-50-px {
+    max-width: 50px;
+}
+
+.px-60-cell-width,
+.cell-width-60-px {
+    max-width: 60px;
+}
+
+.px-70-cell-width,
+.cell-width-70-px {
+    max-width: 70px;
+}
+
+.px-80-cell-width,
+.cell-width-80-px {
+    max-width: 80px;
+}
+
+.px-90-cell-width,
+.cell-width-90-px {
+    max-width: 90px;
+}
+  
+.px-100-cell-width, 
+.cell-width-100-px {
+    max-width: 100px;
+}
+
+.px-110-cell-width,
+.cell-width-110-px {
+    max-width: 110px;
+}
+
+.px-120-cell-width,
+.cell-width-120-px {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.px-180-cell-width,
+.cell-width-180-px {
+    min-width: 120px;
+    max-width: 180px;
+}
+
+
+.multi-line-text {
+    white-space: inherit !important;
+}
+
+.PENDING-status {
+    background-color: #ff944d !important;
+}
+
+.APPROVED-status {
+  background-color: #84dfa2 !important;
+}
+
+.disabled_text_box {
+    background-color: #c1c1d7;
+}
+
+.padding-0 {
+    padding: 0 !important;
+}
+
+input.mat-input-element {
+    margin-top: 0.5em;
+}

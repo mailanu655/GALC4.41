@@ -1,0 +1,137 @@
+<div [ngClass]="{'header-background': factoryNewsMode === 'now', 'header-background-green': factoryNewsMode !== 'now'}">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="mdl-layout__header-row">
+        <div fxLayout="row" fxLayoutAlign="start center" style="width: 38%;">
+            <img src="./assets/img/honda.ico" style="width: 30px; height: 30px;">
+            <button mat-button [routerLink]="['/']" class="app-name" style="font-weight: normal;">
+                {{appName}}
+            </button>
+            <label *ngIf="config.siteId" class="app-name" style="color: white; padding-left: 1.8vw; padding-right: 1.8vw;">
+                {{config.sites[config.siteId]?.name}}
+            </label>
+            <button mat-button [matMenuTriggerFor]="menu_sites" style="padding-left: 30px;">
+                Sites
+                <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #menu_sites="matMenu">
+                <ng-container *ngFor="let id of config.sitesIds;">
+                    <button mat-menu-item routerLink="/{{id}}">{{config.sites[id].name}}</button>
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </mat-menu>
+        </div>
+        <div *ngIf="config.siteId" fxLayout="row" fxLayoutAlign="start center" style="color: white; width: 32%;">
+            <mat-label class="prod-date-label">Prod Date: </mat-label>
+            <mat-form-field appearance="outline" class="input-text">
+                <input
+                    matInput 
+                    readonly
+                    placeholder="Select Production Date"
+                    [max]="maxDate"
+                    [matDatepicker]="picker"
+                    [formControl]="prodDateControl"
+                    (dateInput)='onProdDateSelected()'
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker [disabled]="false"></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button 
+                color="accent" 
+                style="transform: scale(0.6);" 
+                (click)="onProdDateReset()"
+                [disabled]="factoryNewsMode === 'now'"
+                *ngIf="!(factoryNewsMode === 'now')"
+            >
+                Today
+            </button>
+        </div>
+        <div class="mdl-navigation" fxLayout="row" fxLayoutAlign="end center" style="width: 30%;">
+            <ng-container *ngIf="config.siteId && config.lastRefreshed && factoryNewsMode !== 'history'">
+                <div style="border-radius: 10px; display:flex; justify-content: center; align-items: center;">
+                    <div [ngClass]="{'background-green': config.isSiteConnected, 'background-red': !config.isSiteConnected}" style="flex: 1; padding: 5px; border-radius: 5px;" fxLayout="row" fxLayoutAlign="center center">
+                        <div [ngClass]="{'online-indicator': config.isSiteConnected, 'offline-indicator': !config.isSiteConnected}"></div>
+                        <div class="countdown">{{config.siteMessage}}</div>                                 
+                        <label class="countdown">{{config.countDown}} </label>
+                        <label class="countdown">Last Refreshed : {{config.lastRefreshed  | date:'HH:mm:ss'}} </label>
+                    </div>
+                </div>                
+            </ng-container>
+            <ng-container>
+                <button mat-icon-button [matMenuTriggerFor]="menu_right_side" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                
+                <mat-menu #menu_right_side="matMenu">
+                    <button *ngIf="config.siteId" mat-menu-item [matMenuTriggerFor]="settings_menu">
+                        <mat-icon class="menu-icon">settings</mat-icon>
+                        <span>Settings</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="openHelp()">
+                        <mat-icon class="menu-icon">video_library</mat-icon>
+                        <span>How To</span>
+                    </button>
+                    <!-- <ng-container *ngIf="!config.siteId">
+                        <button mat-menu-item (click)="openLogin()">
+                            <mat-icon class="menu-icon">app_settings_alt</mat-icon>
+                            <span>Config</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                    </ng-container> -->
+                    <button mat-menu-item *ngIf="config.feedbackClientUrl" (click)="openFeedback(config.feedbackClientUrl, config.appName)" title="{{feedbackTitle}} - Feedback">
+                        <mat-icon class="menu-icon">feedback</mat-icon>
+                        <span>Feedback</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="openReleaseNotesDetails()">
+                        <mat-icon class="menu-icon">new_releases</mat-icon>
+                        <span>Release Notes</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="openAboutDialog()">
+                        <mat-icon class="menu-icon">info</mat-icon>
+                        <span>About</span>
+                    </button>
+                </mat-menu>
+                <mat-menu #settings_menu="matMenu">
+                    <button mat-menu-item (click)="toggleRightSidenav()">
+                        <mat-icon class="menu-icon">filter_alt</mat-icon>
+                        <span>Filters</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item [matMenuTriggerFor]="themes_menu">
+                        <mat-icon class="menu-icon">format_size</mat-icon>
+                        <span>Themes</span>
+                    </button>
+                    <!-- <button mat-menu-item (click)="openConfigPopUp()">
+                        <mat-icon class="menu-icon">app_settings_alt</mat-icon>
+                        <span>Config</span>
+                    </button> -->
+                    <button mat-menu-item (click)="login()" disabled>
+                        <mat-icon class="menu-icon">app_settings_alt</mat-icon>
+                        <span>Config</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                </mat-menu>
+                <mat-menu #themes_menu="matMenu">
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item *ngIf="model.theme !== 'small'" (click)="setTheme('small')">
+                        <span>Small</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item *ngIf="model.theme !== 'medium'" (click)="setTheme('medium')">
+                        <span>Medium</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item *ngIf="model.theme !== 'large'" (click)="setTheme('large')">
+                        <span>Large</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item *ngIf="model.theme !== 'responsive'" (click)="setTheme('responsive')">
+                        <span>Responsive</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                </mat-menu>
+            </ng-container>
+        </div>
+    </div>
+</div>

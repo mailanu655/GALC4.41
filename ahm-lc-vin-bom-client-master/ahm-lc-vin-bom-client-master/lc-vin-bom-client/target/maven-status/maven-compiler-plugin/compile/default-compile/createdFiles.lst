@@ -1,0 +1,3 @@
+com\honda\ahm\sums\vin\bom\LcVinBomClientApplication.class
+com\honda\ahm\sums\vin\bom\web\AddHttpHeaderFilter.class
+com\honda\ahm\sums\vin\bom\rest\AppController.class

@@ -1,0 +1,194 @@
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #205081;
+  color: white;
+  position: relative;
+}
+
+.logout-button {
+  margin-right: 40px;
+}
+
+.username-display {
+  margin-right: 5px;
+}
+
+.dialog-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+}
+
+.close-icon {
+  font-size: 25px;
+  color: white;
+}
+
+.blue-background {
+  background-color: #0b397e;
+}
+
+.sidenav-container {
+  height: 65vh;
+}
+
+.sidenav {
+  width: 40%;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree .mat-tree-node,
+.example-tree .mat-nested-tree-node {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.example-tree ul,
+.example-tree li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.example-tree ul {
+  padding-left: 20px;
+}
+
+.example-tree a {
+  text-decoration: none;
+  color: #444;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s, background-color 0.3s;
+  font-weight: bold;
+}
+
+.example-tree a:hover {
+  color: #007bff;
+  background-color: #e9f5ff;
+}
+
+.hidden-button {
+  visibility: hidden;
+  width: 2vw;
+  height: 3vh;
+}
+
+.sidenav-content {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.mat-dialog-content {
+  padding: 0;
+  width: 81vw;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.example-tree {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.mat-tree-node,
+.mat-nested-tree-node {
+  position: relative;
+}
+
+.mat-tree-node::before,
+.mat-nested-tree-node::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: 1px;
+  background-color: #ccc;
+  height: 100%;
+}
+
+.tree-node-icon {
+  margin-right: 5px;
+  color: #2f679e;
+  font-size: 18px;
+}
+
+.selected-node {
+  background-color: #e9f5ff;
+  color: #007bff;
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.spinner-overlay mat-spinner {
+  width: 4.17vw;
+  height: 6.25vh;
+}
+
+::ng-deep .mat-dialog-container {
+  height: 90%;
+  padding: 0;
+}
+
+.second-node-yellow {
+  background-color: #f9f5d1 !important;
+}
+
+.second-node-green {
+  background-color: #e9f7d9 !important;
+}
+
+.second-node-blue {
+  background-color: #e1f4fd !important;
+}
+
+.second-node-orange {
+  background-color: #ff9800 !important;
+}
+
+.mat-dialog-container {
+  display: none;
+}
+
+.custom-dialog-container {
+  height: 90%;
+  padding: 0;
+}
+
+::ng-deep .mat-dialog-container .mat-dialog-actions {
+  display: none;
+}

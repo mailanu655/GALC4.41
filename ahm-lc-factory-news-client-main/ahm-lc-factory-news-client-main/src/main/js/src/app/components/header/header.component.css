@@ -1,0 +1,243 @@
+    
+    .background-green {        
+        background: rgb(93, 162, 93);        
+    }
+
+    .background-red {        
+        background: rgb(236, 123, 108);        
+    }
+    
+    .online-indicator {
+        width: 15px;
+        height: 15px;
+        background-color: green;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        margin-right: 5px;     
+    }
+      
+    .online-indicator::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: rgba(0, 255, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: pulse 1.5s infinite;
+    }
+    
+    .offline-indicator {
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        margin-right: 5px;
+    }
+      
+    .offline-indicator::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: rgba(255, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+      
+    button:hover {
+        background-color: #2f679e;
+    }
+
+    ::ng-deep .mat-menu-panel {
+        background-color: #205081 !important;
+    }
+    
+    ::ng-deep .mat-menu-content {
+        background-color: #205081 !important;
+    }
+    
+    button.mat-menu-item {
+        height: 40px;
+        line-height: 35px;
+        font-size: 13px;
+    }
+    
+    button.mat-menu-item:hover {
+        background-color: #2f679e;
+    }
+
+    ::ng-deep .mat-menu-submenu-icon {
+        color: white;
+    }
+
+    .mat-icon {
+        color: white;
+    }
+    .countdown {
+        width: auto; 
+        text-align: center; 
+        font-size: 1vw; 
+        color: white;
+        padding-left: 1vw;
+    }
+
+    .feedback-button {
+        color: rgb(255, 255, 255);
+        vertical-align: middle;
+    }
+
+    .feedback-img {
+        height: 2.2vw !important;
+    }
+
+    ::ng-deep .mat-radio-outer-circle{
+        border-color: whitesmoke;
+    }
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    ::ng-deep .mat-button-disabled {    
+        color: rgb(172, 172, 172) !important;
+        background-color: rgb(220, 220, 220) !important;
+    }
+
+    .header-background {
+        padding-left: 0.7vw; 
+        background: #205081;
+    }
+
+    .header-background-green {
+        padding-left: 0.7vw; 
+        background: rgb(80, 158, 80);
+    }
+    /* Laptops and Monitors*/
+    @media (min-width: 1230px) {
+        .app-name {
+            font-size: 20px; 
+            font-weight: normal;
+        }
+    
+        .input-text {
+            width: 14vw;
+            font-size: 14px;
+            color: gray;
+        }
+        .input-text ::ng-deep div.mat-form-field-infix{
+            padding: 0px;
+        }
+        .input-text ::ng-deep div.mat-form-field-wrapper{
+            padding: 0px;
+        }
+    
+        .countdown {
+            width: auto; 
+            text-align: center; 
+            font-size: 14px; 
+            color: white;
+            padding-left: 1vw;
+        }
+        .prod-date-label {
+            font-size: 16px;
+            margin-right: 5px;
+        }
+        button {
+            color: white;
+            font-size: 16px;
+        }
+    }
+
+    /* Tablets */
+    @media (min-width: 1000px) and (max-width: 1230px) {
+        .app-name {
+            font-size: 14px; 
+            font-weight: normal;
+        }
+    
+        .input-text {
+            width: 14vw;
+            font-size: 12px;
+            color: gray;
+        }
+        .input-text ::ng-deep div.mat-form-field-infix{
+            padding: 0px;
+        }
+        .input-text ::ng-deep div.mat-form-field-wrapper{
+            padding: 0px;
+        }
+    
+        .countdown {
+            width: auto; 
+            text-align: center; 
+            font-size: 11px; 
+            color: white;
+            padding-left: 1vw;
+        }
+        .prod-date-label {
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        button {
+            color: white;
+            font-size: 12px;
+        }
+    }
+
+    /* Mobile Phones */
+    @media (min-width: 400px) and (max-width: 1000px) {
+        .app-name {
+            font-size: 14px; 
+            font-weight: normal;
+        }
+    
+        .input-text {
+            width: 14vw;
+            font-size: 12px;
+            color: gray;
+        }
+        .input-text ::ng-deep div.mat-form-field-infix{
+            padding: 0px;
+        }
+        .input-text ::ng-deep div.mat-form-field-wrapper{
+            padding: 0px;
+        }
+    
+        .countdown {
+            width: auto; 
+            text-align: center; 
+            font-size: 8.5px; 
+            color: white;
+            padding-left: 1vw;
+        }
+        .prod-date-label {
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        button {
+            color: white;
+            font-size: 12px;
+        }
+    }
+
+
+    

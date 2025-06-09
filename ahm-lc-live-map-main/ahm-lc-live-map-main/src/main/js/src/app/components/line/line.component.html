@@ -1,0 +1,110 @@
+<svg id="assemblySvg" [attr.viewBox]="config.siteId === 'ipusub' ? '0 0 1660 650' : '0 0 1660 550'">
+    <!-- symbols/markers definition -->
+    <rect id="assemblyRect" x="0" y="0" width="1660" [attr.height]="config.siteId === 'ipusub' ? 650 : 550" class="assembly" />
+    <g id="stationMarkers">
+        <symbol id="station" class="station">
+            <path fill="white" style="opacity: 0;" d="M0 0 h12 v12 h-12 v-12 z" />
+            <path d="M21 2 H3 c-1.1 0-2 .9-2 2 v12 c0 1.1.9 2 2 2 h7 v2 H8 v2 h8 v-2h-2v-2 h7 c1.1 0 2-.9 2-2 V4 c0-1.1-.9-2-2-2 z m0 14 H3 V4 h18 v12 z" transform="scale(.6)" />
+        </symbol>
+        <symbol id="qics" class="qics">
+            <path fill="white" style="opacity: 0;" d="M0 0 h12 v12 h-12 v-12 z" />
+            <path d="M21 2 H3 c-1.1 0-2 .9-2 2 v12 c0 1.1.9 2 2 2 h7 v2 H8 v2 h8 v-2h-2v-2 h7 c1.1 0 2-.9 2-2 V4 c0-1.1-.9-2-2-2 z m0 14 H3 V4 h18 v12 z" transform="scale(.6)" />
+        </symbol>
+        <symbol id="bos" class="bos">
+            <path fill="white" style="opacity: 0;" d="M0 0 h24 v24 H0 V0 z" />
+            <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z" transform="scale(.6)" style="stroke: orangered" />
+        </symbol>
+    </g>
+    <defs>
+        <marker id="triangle" viewBox="0 0 10 10" refX="1" refY="5" markerUnits="strokeWidth" markerWidth="10" markerHeight="10" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="steelblue" />
+        </marker>
+    </defs>
+    <!-- axis -->
+    <g *ngFor="let ax of line.axis;">
+        <g *ngIf="ax.horizontal === true">
+            <text *ngFor="let value of ax.values; let ix = index" [attr.x]="ax.x +  ix * ax.step" [attr.y]="ax.y" alignment-baseline="middle" text-anchor="middle" class="axis">{{value}}</text>
+        </g>
+        <g *ngIf="ax.horizontal === false">
+            <text *ngFor="let value of ax.values; let ix = index" [attr.x]="ax.x" [attr.y]="ax.y + ix * ax.step" alignment-baseline="middle" text-anchor="middle" class="axis">{{value}}</text>
+        </g>
+    </g>
+    <!-- labels -->
+    <text *ngFor="let label of line.labels;" [attr.x]="label.x" [attr.y]="label.y" alignment-baseline="middle" text-anchor="middle" class="label" transform-origin="center">
+        {{label.text}}
+    </text>
+    <!-- sections landmarks -->
+    <ng-container *ngFor="let lm of line.sections;">
+        <rect id="{{lm.id}}" *ngIf="lm.landMark" [attr.x]="lm.x" [attr.y]="lm.y" [attr.rx]="lm.rx" [attr.ry]="lm.ry" [attr.width]="lm.horizontal?lm.length:lm.width" [attr.height]="lm.horizontal?lm.width:lm.length" class="section" [ngClass]="lm.type"></rect>
+        <text id="{{lm.id}}-txt" *ngIf="appService.displaySectionLabels" [attr.x]="lm.horizontal? lm.cx - lm.name.length * 4: lm.cx + line.config.c2c/2" [attr.y]="lm.horizontal? (lm.cy + 0.45 * lm.width) : lm.cy + 4" matTooltip="{{lm.tooltip}}" class="section-name">
+            {{lm.name}}
+        </text>
+    </ng-container>
+    <!-- land marks -->
+    <ng-container *ngFor="let lm of line.landMarks;">
+        <rect id="{{lm.id}}" [attr.x]="lm.x" [attr.y]="lm.y" [attr.rx]="lm.rx" [attr.ry]="lm.ry" [attr.width]="lm.horizontal?lm.length:lm.width" [attr.height]="lm.horizontal?lm.width:lm.length" [style.fill]="lm.fill" class="land-mark" />
+        <text id="{{lm.id}}-txt" [attr.x]="lm.horizontal? lm.cx - lm.name.length * 6: lm.x" [attr.y]="lm.horizontal? lm.cy + 6: lm.cy + 4" class="land-mark-name">
+            {{lm.name}}
+        </text>
+    </ng-container>
+    <!-- process areas -->
+    <g *ngIf="appService.displayProcessAreas">
+        <ng-container *ngFor="let pa of line.config.processAreas;">
+            <text [attr.x]="getLabelx(pa.location, pa.side, pa.offsetx)" [attr.y]="getLabely(pa.location, pa.side, pa.offsety)" alignment-baseline="middle" text-anchor="middle" class="process-label" matTooltip="{{getAreaTooltip(pa)}}">
+                {{pa.id}}
+            </text>
+        </ng-container>
+    </g>
+    <!-- team leader areas -->
+    <g *ngIf="appService.displayTeamLeaderAreas">
+        <ng-container *ngFor="let tla of line.config.teamLeaderAreas;">
+            <text [attr.x]="getLabelx(tla.location, tla.side, tla.offsetx)" [attr.y]="getLabely(tla.location, tla.side, tla.offsety)" alignment-baseline="middle" text-anchor="middle" class="tla-label" matTooltip="{{getAreaTooltip(tla)}}">
+                {{tla.id}}
+            </text>
+        </ng-container>
+    </g>
+    <!-- row selected product highllight -->
+    <rect id="focusRect" x="5" y="5" rx="5" ry="5" width="30" height="40" class="focus-location" />
+    <!-- direction indicators -->
+    <g class="direction-indicator">
+        <path *ngFor="let ind of line.directionIndicators" [attr.d]="ind.d" marker-end="url(#triangle)" />
+    </g>
+    <!-- line path -->
+    <path id="linePath" [attr.d]="line.path" class="path" fill="steelblue" />
+    <!--- body locations -->
+    <g id="body-locations" class="body-location">
+        <g *ngFor="let bl of line.locations; let ix = index">
+            <g (click)="onClickLocation(bl.id)" (contextmenu)="onRightClickLocation(bl.id, $event)" (mouseover)="onMouseOverLocation(bl.id)" (mouseout)="onMouseOutLocation(bl.id)" matTooltip="{{getLocationTooltip(bl)}}" matTooltipShowDelay="400">
+                <circle *ngIf="bl.product && bl.product['newKdLot'] === true" [attr.cx]="bl.horizontal? bl.cx: bl.x + bl.width" [attr.cy]="bl.horizontal? bl.cy - bl.height/2: bl.cy" r="5" class="kd-lot" />
+                <circle *ngIf="appService.displayStragglers && bl.product && bl.product['straggler'] === true" [attr.cx]="bl.horizontal? bl.cx: bl.x" [attr.cy]="bl.horizontal? bl.cy + bl.height/2: bl.cy" r="5" class="straggler" />
+                <rect id="{{bl.id}}" [attr.x]="bl.x" [attr.y]="bl.y" [attr.width]="bl.width" [attr.height]="bl.height" [attr.rx]="bl.view.rx" [attr.ry]="bl.view.ry" [style.fill]="appService.displayExtColor || !bl.product? bl.color: 'white'" [style.strokeDasharray]="bl.view.strokeDasharray" [style.stroke]="bl.strokeColor" [style.strokeWidth]="bl.strokeWidth">
+                    <!--  
+                    <ng-container *ngIf="bl.animation?.stroke?.values?.length > 0">
+                        <animate attributeName="stroke" [attr.values]="bl.animation?.stroke?.values" [attr.dur]="bl.animation?.stroke?.duration" repeatCount='indefinite' />
+                        <animate attributeName="opacity" [attr.values]="bl.animation?.opacity?.values" [attr.dur]="bl.animation?.opacity?.duration" repeatCount="indefinite" />
+                        <animate attributeName="stroke-width" [attr.values]="bl.animation['stroke-width']?.values" [attr.dur]="bl.animation['stroke-width']?.duration" repeatCount="indefinite" />
+                    </ng-container>
+                    -->
+                </rect>
+                <circle *ngIf="bl.animation?.fill?.values?.length > 0" [attr.cx]="bl.cx" [attr.cy]="bl.cy" r="5" style="stroke-width: 0;">
+                    <animate attributeName="fill" [attr.values]="bl.animation?.fill?.values" [attr.dur]="bl.animation?.fill?.duration" repeatCount='indefinite' />
+                </circle>
+            </g>
+            <g *ngIf="appService.tracking && bl.product?.locationId">
+                <text [attr.x]="getInnerLabelx(bl.id, sideR)" [attr.y]="getInnerLabely(bl.id, sideR)" alignment-baseline="middle" text-anchor="middle" class="it" [ngClass]="{'location-behind': bl.id - bl.product.locationId < 0 , 'location-ahead': bl.id - bl.product.locationId > 0 }">{{bl.product.locationId}}({{line.getLocation(bl.id).sequence - line.getLocation(bl.product.locationId).sequence}})</text>
+            </g>
+        </g>
+    </g>
+    <!-- qics/bos stations -->
+    <g *ngFor="let station of line.stations;">
+        <use xlink:href="#station" [attr.x]="getStationx(station)" [attr.y]="getStationy(station)" />
+        <!--
+                <use id="station.processPoint.id" xlink:href="#station" [attr.x]="line.getStationx(station)" [attr.y]="line.getStationy(station)" matTooltip="{{station.processPoint.tooltip}}" />
+        -->
+        <!--
+            <use *ngIf="!pp.type" id="pp.id" xlink:href="#station" [attr.x]="pp.location.horizontal? pp.location.cx - pp.stationWidth/2: pp.location.cx + line.config.sectionWidth/2" [attr.y]="pp.location.horizontal? pp.location.cy - line.config.sectionWidth/2 - stationHeight: pp.location.cy - stationHeight/2" [attr.width]="pp.width" [attr.height]="pp.height" matTooltip="{{pp.tooltip}}" />
+            <use *ngIf="pp.type=='QICS' || pp.type=='LC'" id="pp.id" xlink:href="#qics" [attr.x]="pp.location.horizontal? pp.location.cx - line.config.stationWidth/2: pp.location.cx + line.config.sectionWidth/2" [attr.y]="pp.location.horizontal? pp.location.cy - line.config.sectionWidth/2 -line.config.stationHeight: pp.location.cy - line.config.stationHeight/2" [attr.width]="pp.width" [attr.height]="pp.height" matTooltip="{{pp.tooltip}}" />
+            <use *ngIf="pp.type=='BOS'" id="pp.id" xlink:href="#bos" [attr.x]="pp.location.horizontal? pp.location.cx - line.config.stationWidth/2: pp.location.cx + line.config.sectionWidth/2" [attr.y]="pp.location.horizontal? pp.location.cy - line.config.sectionWidth/2 -line.config.stationHeight: pp.location.cy - line.config.stationHeight/2" [attr.width]="pp.width" [attr.height]="pp.height" matTooltip="ID: {{pp.id}}&#13;Name: {{pp.name}}&#13;Type: {{pp.type}}&#13;Description: {{pp.description}}" />
+        -->
+    </g>
+</svg>

@@ -1,0 +1,130 @@
+.config-page-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.node-details {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.heading-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.sub-heading {
+  font-size: 16px;
+  color: #666;
+  display: block;
+  margin-top: 5px;
+}
+
+.edit-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #2f679e;
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #2f679e;
+}
+
+.column-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.column-label {
+  flex: 0 0 150px;
+  font-weight: bold;
+  color: #555;
+}
+
+.column-value {
+  flex: 1;
+}
+
+.value-display {
+  padding: 5px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  color: #333;
+}
+
+.value-input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #2f679e;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+  background-color: #2f679e;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button {
+  background-color: #2f679e;
+  color: #fff;
+}
+
+/* .save-button:hover {
+  background-color: #388E3C;
+} */
+
+.cancel-button {
+  background-color: #2f679e;
+  color: #fff;
+}
+
+/* .cancel-button:hover {
+  background-color: #D32F2F;
+} */

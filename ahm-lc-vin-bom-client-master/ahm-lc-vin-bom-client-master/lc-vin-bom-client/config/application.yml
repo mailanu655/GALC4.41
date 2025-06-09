@@ -1,0 +1,36 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+# Servlet Container
+server:
+  address: 0.0.0.0
+  port: 9005
+  servlet:
+    context-path: 
+
+# Client 
+client:
+  appenv: 'localhost'
+  appName: 'LC SUMS VIN BOM'
+  logoMessage: 'Line Control - VIN BOM - AHM'
+  helpUrl: 'https://home.hondaweb.com/w1/hondawiki/pages/VIN-BOM.aspx'
+  revisionHistory: 'https://hondaweb.com/hra_wiki/display/GALC/VIN-BOM+Release+Notes'
+  hidPort: 59080
+  minPollingInterval: 30
+  refreshInterval: 15
+  sites:
+      localhost:
+        name=MAP,
+        gmqaplantName=MAP,
+        gpcsplantName=MAP,
+        serviceUrl=http://qmap1was.ham.am.honda.com:8005,
+        url=http://qmap1mq:9005,
+        vdbUrl= http://127.0.0.1:8082,
+        keyCloakClientId=lc-vinbom-map,
+        keyCloakUrl=http://ahmqxlrincapp01.ham.am.honda.com:9080/auth,
+        keyCloakRealm=ahm,
+        restSecurityEnabled=false   
+     
+  feedbackClientUrl: 'http:///170.108.47.111:6200/feedback'
+  feedbackBaseUrl: 'http://170.108.47.111:7200'
+      

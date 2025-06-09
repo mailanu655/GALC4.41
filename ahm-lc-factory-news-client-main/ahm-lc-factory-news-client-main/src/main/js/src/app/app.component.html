@@ -1,0 +1,29 @@
+<style type="text/css">
+    #warning-message{ 
+      display: none; 
+	}
+    @media only screen and (orientation:portrait){
+        #wrapper { 
+          display:none; 
+      	}
+        #warning-message { 
+          display:block; 
+      	}
+    }
+    @media only screen and (orientation:landscape){
+        #warning-message{
+          display:none; 
+      }
+    }
+</style>
+<div id="wrapper" class="mdl-layout" style="position: relative; height: 100%;">
+    <app-header style="height: 40px;"></app-header>
+    <router-outlet></router-outlet>
+    <app-footer style="height: 20px;"></app-footer>
+</div>
+<div id="warning-message">
+    This website is only viewable in landscape mode. Kindly rotate your phone.
+    <span class="material-icons">
+        rotate_left
+    </span>        
+</div>
