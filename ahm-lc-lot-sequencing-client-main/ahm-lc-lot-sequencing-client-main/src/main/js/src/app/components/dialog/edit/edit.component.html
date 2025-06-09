@@ -1,0 +1,36 @@
+<h1 mat-dialog-title><strong>{{action}} {{type}}</strong></h1>
+<div class="container" mat-dialog-content>
+  <mat-form-field style="width:450px !important" *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  <br>
+  <mat-form-field  style="width:450px !important" *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Description" matInput [(ngModel)]="local_data.description">
+  </mat-form-field>
+  <br>
+  <mat-form-field style="width:450px !important" *ngIf="type=='Application' && action != 'Delete'">
+    <input  placeholder="{{action}} Url" matInput [(ngModel)]="local_data.url">
+  </mat-form-field>
+  <mat-form-field *ngIf="type=='Application'"  style="width:450px !important">
+    <mat-select [(value)]="local_data.client"  placeholder="{{action}} Keycloak id">
+          <mat-option *ngFor="let client of keycloakclients" [value]="client">
+            {{client}}
+          </mat-option>
+        </mat-select>   
+  </mat-form-field>
+  <br>
+  <button *ngIf="type=='Application'" type="button" mat-raised-button (click)="fileInput.click()">Update SVG Icon</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+        <span *ngIf="type=='Application'" >{{fileName}}</span>
+  <ng-template #elseTemplate>
+    Sure to delete <b>{{local_data.name}}</b>?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="editbuttons" (click)="doAction()">Save</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button class="editbuttons">Cancel</button>
+</div>
+<ng-template #svgIconAlert>
+  <h1 mat-dialog-title><strong>SVG Icon</strong></h1>
+  <div mat-dialog-content class="svgAlert">Upload proper SVG Icon</div>
+</ng-template>

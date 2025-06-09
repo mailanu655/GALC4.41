@@ -1,0 +1,19 @@
+<div>
+  <mat-form-field class="full-width">
+    <mat-label>Comments options</mat-label>
+    <mat-select
+      [(value)]="selectedOptions"
+      multiple
+      (selectionChange)="onOptionsChange($event)"
+      [ngStyle]="{
+        'background-color': getBgColor(commentsStr)
+      }"
+    >
+      <mat-option *ngFor="let option of options" [value]="option" [ngStyle]="{
+        'background-color': getBgColor(option)
+      }">{{
+        option
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -1,0 +1,167 @@
+<button mat-button title="Add Application" (click)="addApplication()"><mat-icon class="addIcon">add_circle</mat-icon></button>
+<ng-template #addApplicationDialog>
+  <h1 mat-dialog-title><strong>Add Application</strong></h1>
+  <div mat-dialog-content>
+    <form (ngSubmit)="onSubmit()" #applicationForm="ngForm">
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Name</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter name" 
+            [(ngModel)]="model.name"
+            [formControl]="nameFormControl"
+            name="name" 
+            autocomplete="off">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.name" matSuffix mat-icon-button aria-label="Clear" (click)="model.name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Description</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter description" 
+            [(ngModel)]="model.description"
+            [formControl]="descrFormControl"
+            name="description" 
+            autocomplete="off">
+        <button *ngIf="model.description" matSuffix mat-icon-button aria-label="Clear" (click)="model.description=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>URL</mat-label>
+        <input  
+            type="text" 
+            matInput placeholder="Enter URL" 
+            [(ngModel)]="model.url" 
+            [formControl]="urlFormControl"
+            name="url" 
+            autocomplete="off">
+        <mat-error *ngIf="urlFormControl.hasError('required')">
+          URL is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.url" matSuffix mat-icon-button aria-label="Clear" (click)="model.url=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="start"><strong>E.g., http://127.0.0.1:8080</strong></mat-hint>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="model.client" 
+        [formControl]="clientFormControl">
+          <mat-option *ngFor="let client of keycloakclients" [value]="client">
+            {{client}}
+          </mat-option>
+        </mat-select>           
+        <mat-error *ngIf="clientFormControl.hasError('required')">
+          Client is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.client" matSuffix mat-icon-button aria-label="Clear" (click)="model.client=''">
+          <mat-icon>close</mat-icon>
+        </button>       
+      </mat-form-field>
+      <button type="button" mat-raised-button (click)="fileInput.click()">Upload SVG Icon</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput type="file">
+        <span class="file-name">{{fileName}}</span>     
+      <button 
+          mat-raised-button 
+          type="submit" 
+          class="btn btn-success" 
+          (click)="saveApplication(model); nameFormControl.reset(); descrFormControl.reset(); urlFormControl.reset(); clientFormControl.reset();" 
+          [disabled]="nameFormControl.hasError('required') || urlFormControl.hasError('required') || clientFormControl.hasError('required')">
+        Add
+      </button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #svgIconAlert>
+  <h1 mat-dialog-title><strong>SVG Icon</strong></h1>
+  <div mat-dialog-content class="svgAlert">Upload proper SVG Icon</div>
+</ng-template>
+<!-- <div class="container">
+  <div>
+    <form (ngSubmit)="onSubmit()" #applicationForm="ngForm">
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Name</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter name" 
+            [(ngModel)]="model.name"
+            [formControl]="nameFormControl"
+            name="name" 
+            autocomplete="off">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.name" matSuffix mat-icon-button aria-label="Clear" (click)="model.name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Description</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter description" 
+            [(ngModel)]="model.description"
+            [formControl]="descrFormControl"
+            name="description" 
+            autocomplete="off">
+        <button *ngIf="model.description" matSuffix mat-icon-button aria-label="Clear" (click)="model.description=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>URL</mat-label>
+        <input  
+            type="text" 
+            matInput placeholder="Enter URL" 
+            [(ngModel)]="model.url" 
+            [formControl]="urlFormControl"
+            name="url" 
+            autocomplete="off">
+        <mat-error *ngIf="urlFormControl.hasError('required')">
+          URL is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.url" matSuffix mat-icon-button aria-label="Clear" (click)="model.url=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint align="start"><strong>E.g., http://127.0.0.1:8080</strong></mat-hint>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="model.client" 
+        [formControl]="clientFormControl">
+          <mat-option *ngFor="let client of keycloakclients" [value]="client">
+            {{client}}
+          </mat-option>
+        </mat-select>        
+        <mat-error *ngIf="clientFormControl.hasError('required')">
+          Client is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.client" matSuffix mat-icon-button aria-label="Clear" (click)="model.client=''">
+          <mat-icon>close</mat-icon>
+        </button>       
+      </mat-form-field>
+      <button 
+          mat-raised-button 
+          type="submit" 
+          class="btn btn-success" 
+          (click)="saveApplication(model); nameFormControl.reset(); descrFormControl.reset(); urlFormControl.reset(); clientFormControl.reset();" 
+          [disabled]="nameFormControl.hasError('required') || urlFormControl.hasError('required') || clientFormControl.hasError('required')">
+        Add
+      </button>
+    </form>
+  </div>
+</div> -->

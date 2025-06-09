@@ -1,0 +1,132 @@
+.table {
+    padding: 0 0 20px 1px;
+}
+
+.static-header {
+    font-weight: bold;
+    padding: 4px 10px;
+    background-color: #cfdbe9;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.route-history-content {
+    padding: 5px;
+    background-color: #fafafa;
+}
+
+.table-container {
+    height: calc(100% - 2px);
+    overflow: auto;
+    border: 1px solid #d0d4d9;
+    border-collapse: collapse;
+    padding: 0px 0px 0px 0px;
+    background-color: #ffffff;
+    position: relative;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    white-space: pre;
+    text-align: left;
+    color: #010101;
+    padding: 0px 5px 0px 5px !important;
+}
+
+td {
+    border-right: 1px solid grey !important;
+    border-bottom: 1px solid grey !important;
+    white-space: pre;
+    text-align: left;
+    color: rgb(54, 69, 79);
+    padding: 0px 5px 0px 5px !important;
+}
+
+table tr.mat-header-row {
+    height: 20px;
+    background-color: #B0C4DE;
+}
+
+table .mat-header-cell {
+    height: 25px;
+    font-size: 12px;
+    font-weight: bolder;
+    text-align: initial;
+}
+
+table tr.mat-row {
+    height: 20px;
+    background-color: rgb(235, 239, 241);
+}
+
+.table-content {
+    border: 2px solid #d0d4d9;
+    border-top: none;
+    background: #e8eef7;
+    padding: 10px;
+    height: 82vh;
+}
+
+.table-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.filter-btn {
+    font-weight: bold;
+    border: 1px solid;
+    height: 29px;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    margin: 5px;
+    background: #cbdcec57;
+    color: black;
+}
+
+.non-highlight {
+    color: black;
+    background-color: #e8eef7;
+    cursor: pointer;
+}
+
+.row-highlight {
+    color: black;
+    background-color: #8db1e2;
+}
+
+.btn-edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.add-status {
+    background-color: #d0ebc8;
+}
+
+.edit-status {
+    background-color: #b0a8ed;
+}
+
+.dest-spec-code {
+    padding: 0 !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+
+.mat-form-field {
+    width: 100% !important;
+}

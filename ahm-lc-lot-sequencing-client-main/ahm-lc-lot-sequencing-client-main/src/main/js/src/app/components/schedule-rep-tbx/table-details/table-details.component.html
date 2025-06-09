@@ -1,0 +1,92 @@
+<div class="table">
+    <div class="static-header">
+        <div><label>Table Details</label></div>
+        <div>
+            <img src="../../../assets/img/add_row.svg" alt="add" matTooltip="Add Row" (click)="addRow()"
+                style="width: 40px; height: 30px;">
+        </div>
+    </div>
+    <div class="table-content">
+        <div class="route-history-content table-container">
+            <table mat-table [dataSource]="dataSource" aria-label="replication-data" >
+                <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+                    <th id="header" mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
+                        <span *ngSwitchDefault>{{ col.label }}</span>
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="{{element.status}}-status">
+                        <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+                            <ng-container *ngSwitchCase="'isSelected'">
+                                <mat-checkbox (change)="element.isSelected = $event.checked"
+                                    [checked]="element.isSelected"></mat-checkbox>
+                            </ng-container>
+                            <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                                <img src="../../../assets/img/edit_note.svg" alt="edit" matTooltip="Edit Row"
+                                    (click)="element.isEdit = !element.isEdit" style="width: 20px; height: 20px;">
+                                <img src="../../../assets/img/delete.svg" alt="delete" matTooltip="Delete Row"
+                                    (click)="removeRow(element)" style="width: 20px; height: 20px;">
+                            </div>
+                            <span *ngSwitchCase="'date'">
+                                {{ element[col.key] | date: 'mediumDate' }}
+                            </span>
+                            <span *ngSwitchDefault>
+                                {{ element[col.key] }}
+                            </span>
+                        </div>
+                        <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+                            <div *ngSwitchCase="'isSelected'"></div>
+                            <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                                <button mat-button (click)="editRow(element)" [disabled]="disableSubmit(element.id)">
+                                    Done
+                                </button>
+                                <img src="../../../assets/img/cancel.svg" alt="cancel" matTooltip="Cancel" (click)="cancel(element)"
+                                    style="width: 20px; height: 20px;">
+                            </div>
+                            <div *ngSwitchCase="'subAssyProdIdFormat'" mat-dialog-content class="">
+                                <mat-form-field class="dest-spec-code" appearance="">
+                                    <div style="display: flex; flex-direction: row; align-items: bottom;">
+                                        <input name="subAssyProdIdFormat" [(ngModel)]="element[col.key]" matInput
+                                            [disabled]="col.disabledEdit ? element.id ? true : false : false" required
+                                            maxlength="30" [readonly]="true" [ngClass]="'state'" class="input-small">
+                                        <mat-icon class="cursor" (click)="openSubDialog(element)">
+                                            arrow_drop_down</mat-icon>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+
+                            <div *ngSwitchCase="'destSpecCode'" mat-dialog-content class="">
+                                <mat-form-field class="dest-spec-code" appearance="">
+                                    <div style="display: flex; flex-direction: row; align-items: bottom;">
+                                        <input name="destSpecCode" [(ngModel)]="element[col.key]" matInput
+                                            [disabled]="col.disabledEdit ? element.id ? true : false : false" required
+                                            maxlength="30" [readonly]="true" [ngClass]="'state'" class="input-small">
+                                        <mat-icon class="cursor"
+                                            (click)="col.disabledEdit && !element.id ? setSpecMask(element) : ''">
+                                            arrow_drop_down</mat-icon>
+                                    </div>
+                                </mat-form-field>
+                            </div>
+                            <div *ngSwitchCase="'appUpperCase'">
+                                <mat-form-field class="form-input">
+                                    <input matInput [required]="col.required" [upperOnly]="true" appUpperCase
+                                        [pattern]="col.pattern" [type]="col.type"
+                                        [disabled]="col.disabledEdit ? element.id ? true : false : false"
+                                        [(ngModel)]="element[col.key]"
+                                        (change)="inputHandler($event, element.id, col.key)" />
+                                </mat-form-field>
+                            </div>
+                            <mat-form-field class="form-input" *ngSwitchDefault>
+                                <input matInput [required]="col.required" [pattern]="col.pattern" [type]="col.type"
+                                    [disabled]="col.disabledEdit ? element.id ? true : false : false"
+                                    [(ngModel)]="element[col.key]"
+                                    (change)="inputHandler($event, element.id, col.key)" />
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+        </div>
+    </div>
+</div>

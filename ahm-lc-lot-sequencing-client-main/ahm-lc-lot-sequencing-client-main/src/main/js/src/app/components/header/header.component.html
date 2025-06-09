@@ -1,0 +1,141 @@
+<mat-toolbar color="primary" class="mat-toolbar-custom">
+  <span class="logo_container">
+    <img class="logo-icon" src="assets/img/transparent-honda-logo-2.png" />
+    <h3 class="logo-text">{{ config.appName }}</h3>
+  </span>
+  <label
+    style="
+      color: white;
+      font-size: 20px;
+      padding-right: 20px;
+      padding-left: 50px;
+      min-width: 70px;
+    "
+    >{{ config.siteId }}</label
+  >
+  <button mat-button [matMenuTriggerFor]="menu_site">
+    Menu<mat-icon>expand_more</mat-icon>
+  </button>
+  <!--[disabled]="!isUserInRole('lot_sequence_admin')" -->
+  <mat-menu #menu_site="matMenu">
+    <button mat-button [disabled]="!isUserInRole('schedule_replication_admin')"
+      (click)="openMenu('Sched Rep Maint')">Schedule Rep Maint</button>
+    <mat-divider></mat-divider>
+    <button mat-button [disabled]="!isUserInRole('lot_sequence_sendtoweon,lot_sequence_admin')"
+      (click)="openMenu('Lot Sequencing')">Lot Sequencing</button>
+    <mat-divider></mat-divider>
+  </mat-menu>
+  <mat-menu #menu_site="matMenu">
+    <ng-container *ngFor="let application of applications">
+      <button
+        mat-menu-item
+        *ngIf="application.name.includes('LotSequencing')"
+        (click)="openSite(application.url)"
+      >
+        {{ getApplicationName(application.name) }}
+      </button>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-menu>
+  <span style="width: 100%">
+    <button
+      class="login_button"
+      mat-icon-button
+      [matMenuTriggerFor]="login_menu_below"
+      mat-button
+      *ngIf="isUserLoggedOut()"
+    >
+      <mat-icon>person_outline</mat-icon>
+    </button>
+    <mat-menu #login_menu_below="matMenu">
+      <button mat-menu-item (click)="login()">
+        <span>Login</span>
+      </button>
+    </mat-menu>
+    <button
+      class="login_button"
+      mat-icon-button
+      [matMenuTriggerFor]="logout_menu_below"
+      mat-button
+      *ngIf="isUserLoggedIn()"
+      (click)="getProfile()"
+    >
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #logout_menu_below="matMenu">
+      <button mat-menu-item>
+        <span>{{ getUser() }}</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </span>
+  <span class="mdl-navigation">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu_right_side"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu_right_side="matMenu">
+      <mat-divider></mat-divider>
+      <button
+        mat-menu-item
+        *ngIf="config.feedbackClientUrl"
+        (click)="openFeedback(config.feedbackClientUrl, config.appName)"
+      >
+        <mat-icon class="menu-icon">feedback</mat-icon>
+        <span>Feedback</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="openRevisionHistory()">
+        <mat-icon class="menu-icon">new_releases</mat-icon>
+        <span>Release Notes</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="openHelp()">
+        <mat-icon class="menu-icon">video_library</mat-icon>
+        <span>How To</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="openAboutDialog()">
+        <mat-icon class="menu-icon">info</mat-icon>
+        <span>About</span>
+      </button>
+    </mat-menu>
+    <mat-menu #settings="matMenu">
+      <button
+        *ngIf="isUserLoggedIn()"
+        routerLink="/settings"
+        routerLinkActive="active-link"
+        mat-menu-item
+      >
+        <mat-icon class="menu-icon">settings_applications</mat-icon>
+        <span>Application</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="openSidenav()" style="color: white">
+        <mat-icon class="menu-icon">filter_none</mat-icon>
+        <span>Category Filters</span>
+      </button>
+    </mat-menu>
+    <mat-menu #statistics="matMenu">
+      <button
+        mat-menu-item
+        (click)="openLineGraph()"
+        title="MultiLine graph usage stats"
+      >
+        <mat-icon class="menu-icon">multiline_chart</mat-icon>
+        <span>Application Usage Chart</span>
+      </button>
+      <mat-divider></mat-divider>
+      <!-- <button mat-menu-item  (click)="openBarGraph()" title="Bar graph usage stats">
+                <mat-icon class="menu-icon">bar_chart</mat-icon>
+                <span>Application/Host Usage Chart</span>
+            </button>         -->
+    </mat-menu>
+  </span>
+</mat-toolbar>

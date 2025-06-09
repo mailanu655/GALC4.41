@@ -1,0 +1,499 @@
+<section class="base-table-container">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span class="spacer"></span>
+      <span class="total-units">Total Units: <span class="total-units-value">{{ totalLots }}</span></span>
+      <button mat-icon-button>
+        <mat-icon matTooltip="Refresh Page" class="toolbar-icon" aria-hidden="false" aria-label="refresh table" (click)="refreshTable()">refresh</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon matTooltip="Download as an xsl file" class="toolbar-icon" aria-hidden="false" aria-label="download xls file" (click)="downloadExcel()">download</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon matTooltip="Export as a csv file" class="toolbar-icon" aria-hidden="false" aria-label="export csv file" (click)="exportCsv()">output</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon matTooltip="Print Page" class="toolbar-icon" aria-hidden="false" aria-label="print table" (click)="downloadPdf()">print</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. ium"
+      [(ngModel)]="filterText"
+      #input
+    />
+  </mat-form-field>
+  <spinner
+    [isSpinnerShown]="isMovingRows"
+    [message]="'Moving rows...'"
+  ></spinner>
+  <div class="mat-elevation-z8">
+    <div [class]="'no-data-result'" *ngIf="!dataSource || dataSource.length === 0">
+      No data found.
+    </div>
+    <mat-table 
+      multiTemplateDataRows
+      matSort
+      cdkDropList
+      #basicTable
+      #tbMatSort="matSort"
+      [dataSource]="tableDataSource"
+      *ngIf="dataSource?.length > 0"
+      [cdkDropListData]="tableDataSource"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <ng-container matColumnDef="select">
+        <mat-header-cell
+          *matHeaderCellDef
+          [class]="'position-column fixed-60-width-column print-hidden'"
+        >
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="rowSelection.hasValue() && isAllRowsSelected()"
+            [indeterminate]="rowSelection.hasValue() && !isAllRowsSelected()"
+            [class]="'print-hidden'"
+          >
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let row; let i = index"
+          [class]="'position-column fixed-60-width-column print-hidden'"
+        >
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? rowSelection.toggle(row) : null"
+            [checked]="rowSelection.isSelected(row)"
+            [class]="'print-hidden'"
+          >
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="position">
+        <mat-header-cell
+          *matHeaderCellDef
+          [class]="'position-column fixed-60-width-column print-hidden'"
+        >
+          <mat-toolbar color="primary">
+            <button
+              mat-icon-button
+              [class]="'menu-icon-button print-hidden'"
+              (click)="setMenuAndOpen(headerMenu, $event, displayedColumns)"
+              >
+              <mat-icon matTooltip="Show/Hide columns displayed">menu</mat-icon>
+            </button>
+          </mat-toolbar>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" [class]="'fixed-60-width-column print-hidden'">
+          <button mat-icon-button (click)="toggleRow($event, row)">
+            <mat-icon matTooltip="Expand/Collapse the row">{{
+              expandedRow === row ? "expand_less" : "expand_more"
+            }}</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="seqNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+         [class]="'fixed-140-width-column'"
+          >Sequence</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element" [class]="'fixed-140-width-column'">
+          <div class="left-margin-negative-20px">
+            <mat-icon fontSet="material-icons-outlined" class="row-icon print-hidden" matTooltip="You can't drag rows without selecting rows" *ngIf="isDragable && rowSelection.selected.length === 0">do_not_touch</mat-icon>
+            <mat-icon fontSet="material-icons-outlined" class="row-icon print-hidden" matTooltip="Drag the selected rows" *ngIf="isDragable && rowSelection.selected.length > 0">pan_tool</mat-icon>
+            <span class="left-margin-10px">{{ element.seqNumber }}</span>
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="productionLot">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="'Sort by Production Lot'"
+          [class]="'fixed-200-width-column'"
+        >
+          Production Lot
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [class]="'fixed-200-width-column'">
+          {{ element.productionLot }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="kdLotNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header [class]="'fixed-200-width-column'"
+          >KD Lot</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element" [class]="'fixed-200-width-column'">
+          {{ element.kdLotNumber }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="lotSize">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          [class]="'fixed-80-width-column'"
+        >
+          Lot Size
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element; let row" [class]="'fixed-80-width-column'">
+          <span [class]="'lot-size-span'">{{ element.lotSize }}</span>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="productionDate">
+        <mat-header-cell *matHeaderCellDef [class]="'fixed-140-width-column'">
+          Production Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element" [class]="'fixed-140-width-column'">
+          {{ element.productionDate }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="productSpecCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          SPEC
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.productSpecCode }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="modelCode">
+        <mat-header-cell
+          *matHeaderCellDef
+          [class]="'filter fixed-140-width-column'"
+        >
+          <mat-form-field class="filter">
+            <mat-label>{{ displayModelOptions() }}</mat-label>
+            <mat-select
+              multiple
+              [placeholder]="'Select Model'"
+              [formControl]="modelFilter"
+              [displayWith]="displayModelOptions"
+              [class]="'fixed-140-width-column'"
+            >
+              <button
+                mat-menu-item
+                (click)="
+                  $event.stopPropagation(); $event ? toggleAllModels() : null
+                "
+              >
+                <mat-checkbox
+                  color="primary"
+                  [checked]="modelsSelection.hasValue() && isAllModelsSelected()"
+                  [indeterminate]="
+                    modelsSelection.hasValue() && !isAllModelsSelected()
+                  "
+                >
+                </mat-checkbox>
+                All
+              </button>
+  
+              <mat-option
+                *ngFor="let item of modelList"
+                value="{{ item | lowercase }}"
+                (click)="
+                  $event.stopPropagation();
+                  toggleModelSelection(item.toLowerCase())
+                "
+                [checked]="modelsSelection.isSelected(item.toLowerCase())"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+            <mat-label>Model(s) Selected</mat-label>
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let element"
+          [class]="'filter fixed-140-width-column'"
+        >
+          {{ element.productSpecCode?.substring(0, 4) }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="modelType">
+        <mat-header-cell
+          *matHeaderCellDef
+          [class]="'filter fixed-60-width-column'"
+        >
+          <mat-form-field [class]="'fixed-60-width-column'">
+            <mat-label>Type</mat-label>
+            <mat-select
+              placeholder="All"
+              [formControl]="typeFilter"
+              [class]="'fixed-80-width-column'"
+            >
+              <mat-option value="">All</mat-option>
+              <mat-option
+                *ngFor="let item of typeList"
+                value="{{ item | lowercase }}"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let element"
+          [class]="'fixed-80-width-column'"
+        >
+          {{ element.productSpecCode?.substring(4, 7) }}
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="comments">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Comments
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element; let row" [ngStyle]="{
+          'background-color': getCommentBgColor(element.comments)
+        }">
+          <span *ngIf="editingRow != row" >{{ element.comments }}</span>
+          <comments *ngIf="editingRow === row" [options]="commentsOptions" [commentsStr]="element.comments" (onAddComments)="element.comments = $event"></comments>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="notes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Notes
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element; let row">
+          <span *ngIf="editingRow != row">{{ element.notes }}</span>
+          <mat-form-field *ngIf="editingRow === row">
+            <div style="text-align:center;">
+              <textarea
+                matInput
+                placeholder="Notes"
+                [(ngModel)]="element.notes"
+              ></textarea>
+            </div>
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="editing">
+        <mat-header-cell
+          *matHeaderCellDef
+          [class]="'fixed-60-width-column print-hidden'"
+        >
+          <mat-toolbar color="primary" *ngIf="isUserInRole('lot_sequence_admin')">
+            <mat-icon matTooltip="Editing" style="font-weight: bold; font-size: 18px;">edit</mat-icon>
+          </mat-toolbar>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" [class]="'fixed-60-width-column print-hidden'">
+          <div style="text-align:center;" *ngIf="isUserInRole('lot_sequence_admin')">
+            <mat-icon fontSet="material-icons-outlined" matTooltip="Edit the row" (click)="editRow($event, row)">{{
+              editingRow === row ? "check" : "edit_note"
+            }}</mat-icon>
+            <mat-icon fontSet="material-icons-outlined" matTooltip="Reset the row editing" (click)="resetRow($event, row)">{{
+              editingRow === row ? "restart_alt" : ""
+            }}</mat-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        cdkDrag
+        [ngClass]="{ 'selected-row': rowSelection.isSelected(row), 
+                     'remake-row': row.remakeFlag === 'Y',
+                     'editing-row': editingRow === row
+                  }"
+        [cdkDragDisabled]="!isDragable || !rowSelection.isSelected(row)"
+        [cdkDragData]="row"
+        [class.highlighted]="highlightedRows.includes(row)"
+        (contextmenu)="setMenuAndOpen(rowContextMenu, $event, row)"
+        (cdkDragStarted)="onDragStart($event, row)"
+        (cdkDragReleased)="onDragEnd($event)"
+        [ngStyle]="{
+          'background-color': row.rowBackgroundColor
+        }"
+      >
+        <ng-template cdkDragPreview>
+          <div class="drag-preview">
+            <div class="preview-row">
+              <div class="preview-header preview-cell">Production Lot</div>
+              <div class="preview-header preview-cell">KD Lot</div>
+              <div class="preview-header preview-cell">SPEC</div>
+            </div>
+            <div *ngFor="let row of selectedRows" class="preview-row">
+              <div class="preview-cell">
+                {{ row.productionLot }}
+              </div>
+              <div class="preview-cell">
+                {{ row.kdLotNumber }}
+              </div>
+              <div class="preview-cell">
+                {{ row.productSpecCode }}
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </mat-row>
+      <!-- Expanded row -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        [ngClass]="
+          expandedRow === row ? 'detail-row-expanded' : 'detail-row-collapsed'
+        "
+      ></tr>
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="displayedColumns?.length"
+        >
+          <div
+            *ngIf="expandedRow === element"
+            class="element-detail"
+            [@detailExpand]="expandedRow === element ? 'expanded' : 'collapsed'"
+          >
+            <table class="detail-table" aria-label="detail-table">
+              <tr>
+                <th id="detail-table-build-seq">Build Seq</th>
+                <th id="detail-table-stamped-seq">Stamped Sequence</th>
+                <th id="detail-table-prod-id">Product ID</th>
+                <th id="detail-table-status">Send Status/Tracking Status</th>
+                <th id="detail-table-edit" *ngIf="isCommentEditAllowed && isUserInRole('lot_sequence_admin')">
+                  <mat-icon matTooltip="Editing" style="font-weight: bold; font-size: 18px;">edit</mat-icon>
+                </th>
+              </tr>
+              <tr
+                *ngFor="let rowElement of element.details; index as i"
+                [ngStyle]="{
+                  'background-color': getBgColor(rowElement?.productId, i)
+                }"
+                (contextmenu)="setExpandedMenuAndOpen(expandedRowContextMenu, $event, rowElement)"
+              >
+                <td>{{ rowElement?.buildSequence }}</td>
+                <td>{{ rowElement?.stampedSequence }}</td>
+                <td>{{ rowElement?.productId }}</td>
+                <td>
+                  <div *ngIf="editingProductRow !== rowElement">{{ rowElement?.sendStatus }}</div>
+                  <mat-select
+                    *ngIf="editingProductRow === rowElement"
+                    [class]="'fixed-80-width-column'"
+                    [ngModel]="rowElement.sendStatus"
+                    (selectionChange)="onSendStatusChange($event)"
+                  >
+                    <mat-option
+                      *ngFor="let productSendStatus of productSendStatuses"
+                      value="{{ productSendStatus }}"
+                    >
+                      {{ productSendStatus }}
+                    </mat-option>
+                  </mat-select>
+                </td>
+                <td *ngIf="isCommentEditAllowed && isUserInRole('lot_sequence_admin')">
+                  <div style="text-align:center;">
+                    <mat-icon fontSet="material-icons-outlined" matTooltip="Edit the row" (click)="editProductRow($event, rowElement)">{{
+                      editingProductRow === rowElement ? "check" : "edit_note"
+                    }}</mat-icon>
+                    <mat-icon fontSet="material-icons-outlined" matTooltip="Reset the row editing" (click)="resetProductRow($event, rowElement)"
+                      *ngIf="editingProductRow === rowElement">{{
+                      "restart_alt"
+                    }}</mat-icon>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </mat-cell>
+      </ng-container>
+    </mat-table>
+  </div>
+  <div
+    style="visibility: hidden; position: fixed"
+    [style.left]="rowContextMenuPosition.x"
+    [style.top]="rowContextMenuPosition.y"
+    [matMenuTriggerFor]="rowContextMenu"
+  ></div>
+  <mat-menu  #rowContextMenu="matMenu">
+    <ng-template  matMenuContent let-item="item">
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onFreezeLotsAction()" *ngIf="tableTitle==='Unfrozen Lots'" [disabled]="rowSelection.selected.length === 0">
+        Freeze The Selected Rows
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onBuildAheadLotAction(item)" *ngIf="tableTitle==='Unfrozen Lots'" >
+        Build Ahead The Selected Rows
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onHoldLotAction(item)" *ngIf="tableTitle==='Unfrozen Lots'">
+        Hold The Highlighted Row
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onReleaseLotAction(item)" *ngIf="tableTitle==='Hold Lots'">
+        Release The Highlighted Row
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onUnfreezeLotsAction()" *ngIf="tableTitle==='Frozen Lots'" [disabled]="rowSelection.selected.length === 0">
+        Unfreeze The Selected Rows 
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onMoveBehindLotAction(item)" *ngIf="tableTitle==='Frozen Lots'">
+        Move Behind The Selected Lot 
+      </button>
+      <button style="color:black;background-color: white;" mat-menu-item (click)="onCreateANewLotAction($event)" *ngIf="tableTitle==='Unfrozen Lots' && isAddEnabled" >Create A New Lot</button>
+    </ng-template>
+  </mat-menu>
+
+  <div
+    style="visibility: hidden; position: fixed"
+    [style.left]="headerMenuPosition.x"
+    [style.top]="headerMenuPosition.y"
+    [matMenuTriggerFor]="headerMenu"
+  ></div>
+  <mat-menu #headerMenu="matMenu">
+    <ng-template matMenuContent>
+      <button
+        mat-menu-item
+        (click)="$event.stopPropagation(); $event ? toggleAllColumns() : null"
+      >
+        <mat-checkbox
+          [checked]="columnsSelection.hasValue() && isAllColumnsSelected()"
+          (change)="toggleAllColumns()" (click)="$event.stopPropagation()"
+          [indeterminate]="
+            columnsSelection.hasValue() && !isAllColumnsSelected()
+          "
+        >
+        </mat-checkbox>
+        Show/Hide All Columns
+      </button>
+      <button
+        mat-menu-item
+        *ngFor="let columnName of selectableColumns; index as i"
+        (click)="$event.stopPropagation(); toggleColumnSelection(columnName)"
+      >
+        <mat-checkbox [checked]="columnsSelection.isSelected(columnName)" (change)="toggleColumnSelection(columnName)" (click)="$event.stopPropagation()">
+        </mat-checkbox>
+        {{ WELD_SCHEDULE_COLUMN_HEADER_MAPPING[columnName] }}
+      </button>
+    </ng-template>
+  </mat-menu>
+
+  <div
+    style="visibility: hidden; position: fixed"
+    [style.left]="expandedRowContextMenuPosition.x"
+    [style.top]="expandedRowContextMenuPosition.y"
+    [matMenuTriggerFor]="expandedRowContextMenu"
+  ></div>
+  <mat-menu  #expandedRowContextMenu="matMenu">
+    <ng-template  matMenuContent let-item="item" *ngIf="tableTitle==='Frozen Lots' && isSentToWeldOnEnabled">
+      <button style="color:black;background-color: white;" mat-menu-item 
+        (click)="onSendToWeldOnAction(item)" 
+        *ngIf="item.sendStatus !== 'STAMPED'">
+        Send to Weld On 
+      </button>
+      <div *ngIf="item.sendStatus === 'STAMPED'">
+        Stamped is not allowed to send to Weld On.
+      </div>
+    </ng-template>
+  </mat-menu>
+</section>

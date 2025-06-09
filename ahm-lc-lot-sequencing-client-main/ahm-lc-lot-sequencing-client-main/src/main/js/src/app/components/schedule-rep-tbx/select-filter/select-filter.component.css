@@ -1,0 +1,86 @@
+.select-filter {
+    /* padding: 20px; */
+    height: 100%;
+}
+.static-header {
+    font-weight: bold;
+    padding: 14px 10px;
+    background-color: #cfdbe9;
+    color: #000;
+}
+
+.select-filter-content {
+    /* padding: 10px 100px; */
+    border: 2px solid #d0d4d9;
+    border-top: none;
+    background: #e8eef7;
+    height: 95%;
+}
+
+.filter-form {
+	display: block;
+    justify-content: space-evenly;
+    /* height: 100px; */
+}
+
+.form-field {
+    padding: 10px 25px;
+    text-align: center;
+}
+
+
+
+.select-field option {
+    background-color: white;
+}
+.filter-btn {
+    font-weight: bold;
+    border: 1px solid;
+    height: 29px;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #cbdcec57;
+    color: black;
+    margin: 10px 0;
+}
+
+.filter-btn-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field-label {
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 0px;
+}
+
+.field-label span {
+    color: red;
+}
+
+.mat-form-field-label {
+    display: none !important;
+}
+
+.select-field {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    background: #cfdbe9;
+    /* border: none; */
+    align-items: center;
+}
+
+.mat-form-field-infix {
+    padding: 0 !important;
+    border-top: none !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0 !important;
+
+}

@@ -1,0 +1,17 @@
+<h1 mat-dialog-title class="dialog-title">{{ message }}</h1>
+<div mat-dialog-content class="dialog-content">
+  {{ confirmationContent }}
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button (click)="onConfirmClick()" tabindex="1">
+    {{ confirmButtonText }}
+  </button>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    tabindex="-1"
+    (click)="onConfirmClick('close')"
+  >
+    {{ cancelButtonText }}
+  </button>
+</div>

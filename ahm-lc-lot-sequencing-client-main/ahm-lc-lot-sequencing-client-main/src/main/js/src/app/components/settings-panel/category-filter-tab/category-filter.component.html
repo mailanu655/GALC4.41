@@ -1,0 +1,9 @@
+<div class="spacing" >
+<mat-list *ngFor="let category of categories">
+    <mat-slide-toggle 
+        (change)="updateDisabledCategories($event,category.categoryId)"
+        [checked]="!isCategoryDisabled(category.categoryId)">
+            {{category.name}}
+    </mat-slide-toggle>
+</mat-list>
+</div>

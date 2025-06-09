@@ -1,0 +1,97 @@
+<button mat-button title="Add Category" (click)="addCategory()"><mat-icon class="addIcon">add_circle</mat-icon></button>
+<ng-template #addCategoryDialog>
+  <h1 mat-dialog-title><strong>Add Category</strong></h1>
+  <div mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+    <mat-form-field class="form-field" appearance="standard">
+      <mat-label>Name</mat-label>
+      <input  
+          type="text" 
+          matInput 
+          placeholder="Enter name" 
+          [(ngModel)]="model.name"
+          [formControl]="nameFormControl"
+          name="name" 
+          autocomplete="off">
+      <mat-error *ngIf="nameFormControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+      <button *ngIf="model.name" matSuffix mat-icon-button aria-label="Clear" (click)="model.name=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="form-field" appearance="standard">
+      <mat-label>Description</mat-label>
+      <input  
+          type="text" 
+          matInput 
+          placeholder="Enter description" 
+          [(ngModel)]="model.description"
+          [formControl]="descrFormControl"
+          name="description" 
+          autocomplete="off">
+      <button *ngIf="model.description" matSuffix mat-icon-button aria-label="Clear" (click)="model.description=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button 
+        mat-raised-button 
+        type="submit" 
+        class="btn btn-success" 
+        (click)="saveCategory(model); nameFormControl.reset(); descrFormControl.reset()" 
+        [disabled]="nameFormControl.hasError('required')">
+      Add
+    </button>
+  </form>
+</div>
+</ng-template>
+
+<!-- <div class="container">
+  <div>
+    <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Name</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter name" 
+            [(ngModel)]="model.name"
+            [formControl]="nameFormControl"
+            name="name" 
+            autocomplete="off">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+        <button *ngIf="model.name" matSuffix mat-icon-button aria-label="Clear" (click)="model.name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="standard">
+        <mat-label>Description</mat-label>
+        <input  
+            type="text" 
+            matInput 
+            placeholder="Enter description" 
+            [(ngModel)]="model.description"
+            [formControl]="descrFormControl"
+            name="description" 
+            autocomplete="off">
+        <button *ngIf="model.description" matSuffix mat-icon-button aria-label="Clear" (click)="model.description=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button 
+          mat-raised-button 
+          type="submit" 
+          class="btn btn-success" 
+          (click)="saveCategory(model); nameFormControl.reset(); descrFormControl.reset()" 
+          [disabled]="nameFormControl.hasError('required')">
+        Add
+      </button>
+    </form>
+  </div>
+</div> -->

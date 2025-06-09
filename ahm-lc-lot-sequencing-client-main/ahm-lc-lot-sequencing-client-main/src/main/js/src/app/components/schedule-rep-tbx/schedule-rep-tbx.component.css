@@ -1,0 +1,25 @@
+.schedule-container {
+    display: flex;
+    height: 89vh;
+}
+
+.side-filter {
+    width: 16%;
+}
+
+.table {
+    width: 84%;
+}
+
+.message {
+    position: absolute;
+    top: 91%;
+    left: 53%;
+}
+
+.message label {
+    padding: 5px 20px;
+    background-color: #8db1e2;
+    border-radius: 12px;
+    font-size: 12px;
+}

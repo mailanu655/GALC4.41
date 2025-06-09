@@ -1,0 +1,78 @@
+<div class="select-header">
+  <mat-label style="font-size: large"
+    >{{ specFormat.productType }} Spec Mask</mat-label
+  >
+  <span style="padding-left: 10px">
+    <spec-mask [specFormat]="specFormat" [mask]="mask"></spec-mask>
+  </span>
+</div>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content style="display: flex; flex-direction: row">
+  <ng-container *ngFor="let token of specFormat.tokens; let tokenIx = index">
+    <mat-form-field
+      appearance="outline"
+      floatLabel="always"
+      [style.flex]="getFlexFactor(token)"
+    >
+      <mat-label>{{ token.label }}</mat-label>
+      <input matInput style="display: none" />
+      <mat-radio-group
+        ngDefaultControl 
+        name="{{ token.name }}"
+        [(ngModel)]="values[token.name]"
+        (change)="valueChanged(tokenIx)"
+      >
+        <mat-radio-button
+          *ngFor="let item of options[token.name]; let ix = index"
+          labelPosition="after"
+          color="primary"
+          [value]="item"
+        >
+          {{ ix + 1 }}. {{ item }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-form-field>
+  </ng-container>
+</div>
+
+<!-- <div mat-dialog-content style="display: flex; flex-direction: row">
+  <ng-container *ngFor="let token of specFormat.tokens; let tokenIx = index">
+    <mat-form-field
+      appearance="outline"
+      floatLabel="always"
+      [style.flex]="getFlexFactor(token)"
+    >
+      <mat-label>{{ token.label }}</mat-label>
+      <mat-select
+        name="{{ token.name }}"
+        [(ngModel)]="values[token.name]"
+        (selectionChange)="valueChanged(tokenIx)"
+      >
+        <mat-option
+          *ngFor="let item of options[token.name]; let ix = index"
+          [value]="item"
+        >
+          {{ ix + 1 }}. {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+</div> -->
+
+<mat-divider></mat-divider>
+<div
+  style="
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    padding-right: 20px;
+    height: 4em;
+  "
+>
+  <button mat-button (click)="onSelect()" [disabled]="!lastTokenSelected">
+    Select
+  </button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</div>

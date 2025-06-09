@@ -1,0 +1,17 @@
+version: '3.7'
+networks:
+  net:
+    driver: overlay
+services:
+  service:
+    image: artifactory.amerhonda.com/sbxocp/lc-lot-sequencing-client:1.0.2
+    ports:
+    - 5200:5200
+    networks:
+    - net
+    deploy:
+      replicas: 1
+    environment:
+      TZ: America/New_York
+    env_file:
+    - ./lc-lot-sequencing-client.env

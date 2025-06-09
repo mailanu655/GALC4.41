@@ -1,0 +1,31 @@
+export const WELD_SCHEDULE_COLUMN_HEADER_MAPPING = {
+  select: 'Select All/None',
+  position: 'Position',
+  seqNumber: 'Sequence',
+  productionLot: 'Production Lot',
+  kdLotNumber: 'KD Lot',
+  lotSize: 'Lot Size',
+  productionDate: 'Production Date',
+  productSpecCode: 'SPEC',
+  modelCode: 'Model',
+  modelType: 'Type',
+  notes: 'Notes',
+  comments: 'Comments',
+  editing: 'Editing',
+};
+
+export const WELD_SCHEDULE_HEADER_COLUMN_MAPPING = {
+  'Select All/None': 'select',
+  Position: 'position',
+  Sequence: 'seqNumber',
+  'Production Lot': 'productionLot',
+  'KD Lot': 'kdLotNumber',
+  'Lot Size': 'lotSize',
+  'Production Date': 'productionDate',
+  SPEC: 'productSpecCode',
+  Model: 'modelCode',
+  Type: 'modelType',
+  'Notes': 'notes',
+  'Commentsws': 'comments',
+  'Editing': 'editing',
+};

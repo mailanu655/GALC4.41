@@ -1,0 +1,270 @@
+mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+    padding-left: 0;
+}
+
+.mat-form-field {
+    font-size: 14px !important;
+    width: 100%;
+}
+
+.base-table-container {
+    height: 600px;
+    overflow: auto;
+}
+
+.position-column {
+    width: 50px;
+}
+
+mat-header-cell,
+mat-cell {
+    justify-content: center;
+}
+
+mat-table mat-label,
+.mat-header-cell {
+    color: #0c0b0c;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.mat-sort-header-content {
+    text-align: center !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column !important;
+    justify-content: center;
+}
+
+.mat-row:hover:not(tr), .highlighted  {
+    background-color: #ADD8E6;
+}
+
+.detail-table tr:hover {
+    background-color: #ADD8E6 !important;
+}
+
+.detail-row-expanded {
+    display: flex;
+    height: auto;
+}
+
+.detail-row-collapsed {
+    height: 0;
+}
+
+.element-row td {
+    border-bottom-width: 0;
+}
+
+.element-detail {
+    overflow: hidden;
+    display: flex;
+    width: 100%;
+}
+
+.detail-table {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+}
+
+tr,
+td,
+th {
+    border: 1px #b7b7b773 solid;
+    padding: 4px;
+}
+
+.left-margin-10px {
+    margin-left: 10px;
+}
+
+.left-margin-negative-20px {
+    margin-left: -20px;
+}
+
+.selected-row {
+    background-color: rgba(63, 81, 181, 0.1);
+}
+
+.editing-row {
+    background-color: rgba(33, 129, 86, 0.1);
+}
+
+/* Add styles for the drag preview */
+.drag-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px;
+    border: 1px solid #ccc;
+    background-color: rgba(115, 126, 186, 0.8);
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.preview-row {
+    padding: 4px 8px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+}
+
+.preview-header {
+    font-weight: bold;
+}
+
+.preview-cell {
+    padding: 4px 8px;
+    border: #0c0b0c solid 1px;
+    color: #0f0520;
+    width: 240px;
+}
+
+.fixed-60-width-column.mat-header-cell,
+.fixed-60-width-column.mat-cell {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fixed-80-width-column.mat-header-cell,
+.fixed-80-width-column.mat-cell {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fixed-100-width-column.mat-header-cell,
+.fixed-100-width-column.mat-cell {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fixed-140-width-column.mat-header-cell,
+.fixed-140-width-column.mat-cell {
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fixed-200-width-column.mat-header-cell,
+.fixed-200-width-column.mat-cell {
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.filter {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+svg {
+    vertical-align: bottom;
+}
+
+.toolbar-icon {
+    padding: 0 14px;
+}
+  
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+    padding: 0 8px;
+}
+.mat-toolbar {
+    background-color: #ffffff;
+    color:rgba(0, 0, 0, 0.6);
+}
+
+.remake-row {
+    background-color: rgba(233, 48, 45, 0.353);
+}
+
+.menu-icon-button {
+    margin: 0 auto;
+}
+
+.lot-size-span {
+    padding-right: 30px;
+}
+
+.row-icon {
+    font-size: 16px;
+}
+
+.no-data-result {
+    text-align: center;
+    font-size: xxx-large;
+    font-weight: bold;
+    padding: 222px;
+}
+
+.total-units, .total-units-value {
+    font-size: smaller;
+}
+
+.total-units-value {
+    font-weight: bold;
+}
+
+@media print {
+    /* Hide any other elements you don't want to print */
+    body *:not(.mat-elevation-z8) {
+      visibility: hidden;
+    }
+  
+    /* Position the table to cover the entire page */
+    .mat-elevation-z8 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  
+    /* Custom table styles - adjust these as required */
+    mat-header-cell,
+    mat-cell {
+      padding: 10px;
+      width: 140px;
+      /* border: 1px solid black; */
+    }
+  
+    /* Change font-size or other properties for print */
+    mat-cell {
+      font-size: 12px;
+    }
+
+    .print-hidden {
+        display: none;
+    }
+    ::ng-deep .mat-menu-content {
+        background-color: white;
+      }
+    
+}
+  

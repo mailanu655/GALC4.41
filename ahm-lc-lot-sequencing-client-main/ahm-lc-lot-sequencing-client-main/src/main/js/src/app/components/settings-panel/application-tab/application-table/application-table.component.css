@@ -1,0 +1,77 @@
+.mat-table {
+    overflow: auto;
+    display: block;    
+    /* font-weight: normal;
+    align-self: center;
+    justify-self: center; */
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.mat-row:hover {
+    background-color: #f3f3f3da;
+    
+}
+
+.mat-header-cell-class {
+    font-weight: bold;
+    font-size: medium;  
+    width: auto;
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
+.highlight{
+    background: #f7fbff;
+    font-weight:500;
+} 
+
+.mat-column-url {
+    flex: 0 0 49% !important;
+    word-break: keep-all;
+    word-wrap: normal;
+}
+
+.mat-column-button {
+    flex: 0 0 40px !important;
+}
+
+.editIcon{
+    color: #205081;
+}
+.deleteIcon{
+    color: #205081;
+}
+.searchField{
+    height: fit-content;
+    width: 80%;
+}
+.searchInput{
+    height: fit-content;
+}
+.editClass{
+    width:2px;
+    font-weight: bold;
+    font-size: medium;  
+}
+.deleteClass{
+    width:2px;
+    font-weight: bold;
+    font-size: medium;  
+}
+.mat-column-editButton {    
+    flex: 1 0 43px;
+}
+.mat-column-clientId{    
+    flex: 0 0 8%;
+}
+.mat-column-name{
+    flex:0 0 17%;
+    word-wrap: break-word;
+}
+
+.mat-column-description{
+    flex:0 0 17%;
+    word-wrap: break-word;
+}
+

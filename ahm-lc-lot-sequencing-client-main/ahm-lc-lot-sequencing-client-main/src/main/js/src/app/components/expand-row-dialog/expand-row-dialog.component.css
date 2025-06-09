@@ -1,0 +1,6 @@
+.button-container {
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-around;
+}

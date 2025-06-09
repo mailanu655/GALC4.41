@@ -1,0 +1,22 @@
+<!-- <p class="placeholder" *ngIf="!categoryId">Please select an application</p> -->
+<div cdkDropListGroup *ngIf="categoryId">
+    <div class="applications-container">
+      <h4>Available Applications</h4>
+      <div  cdkDropList
+            [cdkDropListData]="availableApplications"
+            class="applications-list"
+            (cdkDropListDropped)="drop($event, false)">
+        <div class="application-box" *ngFor="let item of availableApplications" [cdkDragData]="item" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+    <div class="applications-container">
+      <h4>Assigned Applications</h4>
+      <div  cdkDropList
+            [cdkDropListData]="assignedApplications"
+            class="applications-list"
+            (cdkDropListDropped)="drop($event, true)">
+        <div class="application-box" *ngFor="let item of assignedApplications" [cdkDragData]="item" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+  </div>

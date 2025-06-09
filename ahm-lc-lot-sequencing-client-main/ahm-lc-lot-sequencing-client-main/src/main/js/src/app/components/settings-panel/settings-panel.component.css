@@ -1,0 +1,7 @@
+::ng-deep .mat-tab-label {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    color: rgb(43, 43, 43) !important;
+    font-weight: 700;
+}

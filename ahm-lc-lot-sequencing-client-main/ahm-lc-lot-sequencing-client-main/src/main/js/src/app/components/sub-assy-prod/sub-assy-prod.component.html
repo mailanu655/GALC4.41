@@ -1,0 +1,74 @@
+<div class="dialog-box">
+    <mat-dialog-content>
+        <div class="sub-content">
+            <div cdkDropList cdkDropListOrientation="horizontal" class="chip-list" (cdkDropListDropped)="drop($event)">
+                <div class="chip-box" *ngFor="let item of list; let i=index"
+                    [cdkDragDisabled]="(item.includes('SEQ_')) ? true : false" cdkDrag>
+                    <div class="chip">
+                        <div class="chip-label">{{item}}</div>
+                        <div class="chip-remove" (click)="remove(item, i)">x</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="form" class="filter-form">
+          
+            <div class="form-2">
+                <div class="mask-sel {{form.get('maskId').value ? 'mask-dis' : ''}}" (click)="setmaskId()">mbpnMaskId
+                </div>
+                <div>
+                    <mat-form-field class="example-form-field">
+                        <input matInput type="text" (keyup.enter)="onEnterUserDefined()" formControlName="userDefined" placeholder="userDefined">
+                    </mat-form-field>
+                </div>
+
+                <div class="mask-sel {{form.get('partName').value ? 'mask-dis' : ''}}" (click)="setPartName()">Partname
+                </div>
+                <div>
+                    <mat-form-field class="example-form-field">
+                        <mat-select id="lineNumber" class="select-field" placeholder="LineNumber" formControlName="lineNumber"
+                            required>
+                            <mat-option *ngFor="let type of  optionsLineNumber" [value]="type">{{type}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="date">
+                <div class="prefix field pr-10">
+                    <div class="form-label">date</div>
+                    <div>
+                        <mat-form-field class="example-form-field">
+                            <mat-select id="sourceProcLocation" class="select-field" placeholder="Select"
+                                formControlName="date" required>
+                                <mat-option *ngFor="let type of  optionsDate" [value]="type">{{type}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="prefix field">
+                    <div class="form-label">year</div>
+                    <div>
+                        <mat-form-field class="example-form-field">
+                            <mat-select id="sourceProcLocation" class="select-field" placeholder="Select"
+                                formControlName="year" required>
+                                <mat-option *ngFor="let type of  optionsYear" [value]="type">{{type}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="prefix field">
+                <div class="form-label">Sequence</div>
+                <div>
+                    <mat-form-field class="example-form-field">
+                        <input matInput type="text" (keyup.enter)="onEnterSequence()" formControlName="Sequence">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <div class="btn-div">
+            <button mat-button class="btn" (click)="add()">Add</button>
+            <button mat-button class="btn" (click)="cancel()">Cancel</button>
+        </div>
+    </mat-dialog-content>
+</div>

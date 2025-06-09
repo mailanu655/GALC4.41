@@ -1,0 +1,25 @@
+.mat-expansion-panel-header-title {
+  font-weight: 600;
+}
+
+::ng-deep .cdk-overlay-pane {
+  min-width: 146px !important;
+}
+
+.download-button {
+  background-color: rgb(70, 80, 106); 
+  color: white; 
+  font: bold; 
+  margin-left: 30px;
+  border-radius: 5px;
+}
+
+.top-container {
+  margin-top: 10px;
+  padding: 10px 0;
+}
+
+.select-field {
+  margin-right: 30px;
+}
+  

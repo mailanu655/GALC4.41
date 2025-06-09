@@ -1,0 +1,88 @@
+.mat-toolbar.mat-primary {
+    background: rgb(33, 79, 131);
+}
+
+.mat-toolbar-custom {
+    height: 40px;
+}
+
+.logo_container{
+    margin-right: 10px;
+}
+
+.logo-icon, .logo-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-icon {
+    width: 30px; 
+    height: 25px; 
+    margin-right: 10px;
+}
+
+.home-button, .home-icon  {
+    color: rgb(255, 255, 255);
+    vertical-align: middle !important;
+}
+
+.home-icon {
+    margin-right: 5px !important;
+    transform: scale(0.9);
+}
+
+.login_button {
+    color: rgb(255, 255, 255);
+    vertical-align: middle;
+    float: right;
+}
+
+::ng-deep button.mat-menu-item {
+    height: 40px;
+    line-height: 35px;
+    font-size: 13px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+button.mat-menu-item:hover {
+    background-color: #2f679e;
+}
+button {
+    color: white;
+    font-size: 20px;
+    background-color: #205081;
+    height: 35px; 
+}
+.mat-icon {
+    color: white;
+}
+
+.favicon {
+    background-color:#205081;
+  }
+
+.header-icon {
+	cursor: pointer;
+	line-height: 37px;
+	padding: 0 37px 0 7px;
+	outline: none;
+	float: right;
+	height: 37px;
+	width: 30px;
+	background-position: center;
+	pointer-events: all;
+  }
+
+.reload-icon{
+    background-image: url('../../../assets/img/Refresh.png');
+	background-repeat: no-repeat;
+}
+.mat-menu-item .mat-icon-no-color, .mat-menu-item-submenu-trigger::after {
+    color: white;
+}
+
+::ng-deep .mat-menu-content {
+    background: #205081;
+    color: white;
+  }

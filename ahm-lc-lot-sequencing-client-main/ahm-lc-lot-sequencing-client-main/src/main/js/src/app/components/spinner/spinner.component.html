@@ -1,0 +1,4 @@
+<div *ngIf="isSpinnerShown" [class]="'spinner'">
+    <mat-spinner [strokeWidth]="1" [diameter]="25"></mat-spinner>
+    <div [class]="'message'">{{ message }}</div>
+</div>

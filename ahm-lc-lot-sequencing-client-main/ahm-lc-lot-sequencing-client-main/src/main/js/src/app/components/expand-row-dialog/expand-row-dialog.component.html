@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Expanded Row Item</h1>
+<div mat-dialog-content>
+  <p>Product ID: {{data.productId}}</p>
+  <p>Stamped Sequence: {{data.stampedSequence}}</p>
+  <p>What's the product's Send/Tracking Status?</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.sendStatus">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="button-container">
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save The Changes</button>
+</div>

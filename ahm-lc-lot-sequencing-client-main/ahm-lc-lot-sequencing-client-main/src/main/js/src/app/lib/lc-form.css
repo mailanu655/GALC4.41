@@ -1,0 +1,74 @@
+input {
+    color: black;
+    padding-left: 5px;
+    text-overflow: ellipsis;
+    width: calc(100% - 5px);
+}
+
+input.state:enabled {
+    background-color: lightblue;
+    color: white;
+    caret-color: white !important;
+}
+
+input:not(disabled).select-only {
+    background-color: lightblue;
+    color: white !important;
+}
+
+input.state:read-only {
+    /*background-color: rgb(0, 255, 50);*/
+    background-color: rgb(0, 235, 0);
+    color: black;
+}
+
+input.state:disabled {
+    /*color: #585858 !important; */
+    background-color: lightgray;
+}
+
+input.ng-touched.ng-invalid {
+    background-color: red;
+    color: white;
+}
+
+.placeholder {
+    /* color: rgb(54, 69, 79); */
+    color: black;
+    /* font-size: 2em; */
+}
+
+mat-card-actions button {
+    background-color: lightgrey;
+    font-weight: 400;
+    height: 2em;
+    margin-left: 10px;
+    font-size: 1.2em;
+    min-width: calc(0.6*10em);
+}
+
+mat-label {
+    color: black;
+}
+
+mat-select {
+    background-color: lightblue;
+    padding-left: 5px;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+    color: white;
+}
+
+::ng-deep .mat-mdc-select-value {
+    color: white;
+}
+
+.mat-mdc-select-disabled {
+    background-color: lightgray;
+    color: black;
+}
+
+.mat-mdc-option {
+    min-height: 2em;
+}

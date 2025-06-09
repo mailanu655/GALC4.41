@@ -1,0 +1,33 @@
+<div class="confirmation-container">
+    <mat-form-field class="full-width">
+        <mat-select placeholder="Select A Behind Lot" [(ngModel)]="selectedBehindLot">
+            <mat-option *ngFor="let behindLot of data.behindLots" [value]="behindLot">
+            {{ behindLot }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>   
+    <div mat-dialog-content class="dialog-content">
+        <em *ngIf="selectedBehindLot">
+            {{ message }}
+        </em>
+
+        <em *ngIf="!selectedBehindLot || selectedBehindLot === data.moveLot">
+            Make sure the selected behind lot is not the same as the current lot {{ data.moveLot }}.
+        </em>
+    </div>   
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button (click)="onConfirmClick()" 
+        [disabled]="!selectedBehindLot || selectedBehindLot === data.moveLot" 
+        tabindex="1">
+        {{ confirmButtonText }}
+      </button>
+      <button
+        mat-raised-button
+        mat-dialog-close
+        tabindex="-1"
+        (click)="onConfirmClick('close')"
+      >
+        {{ cancelButtonText }}
+      </button>
+    </div>
+</div>

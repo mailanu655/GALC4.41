@@ -1,0 +1,7 @@
+.matInput {
+	height: 31.5px;
+	width: 100px;
+	border: 1.5px solid blue;
+	border-radius: 7px;
+	text-align: center;
+}

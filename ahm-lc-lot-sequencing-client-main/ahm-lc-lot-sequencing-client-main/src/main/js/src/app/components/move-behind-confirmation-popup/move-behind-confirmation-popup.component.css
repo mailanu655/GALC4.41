@@ -1,0 +1,29 @@
+.confirmation-container {
+    width: 700px;
+    height: 194px;
+}
+
+.dialog-box {
+    padding: 10px;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.dialog-content {
+    height: 60px;
+}
+
+.dialog-title,
+.dialog-content {
+    text-align: center;
+}
+.dialog-actions {
+    justify-content: space-around;
+    padding: 20px;
+}
+.spacer {
+    flex: 1 1 auto;
+}
+.full-width {
+    width: 100%;
+}

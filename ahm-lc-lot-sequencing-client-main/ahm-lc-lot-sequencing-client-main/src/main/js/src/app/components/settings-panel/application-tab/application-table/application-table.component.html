@@ -1,0 +1,29 @@
+<b>Applications</b> &nbsp;&nbsp;
+<mat-form-field class="searchField">    
+    <mat-icon matPrefix >search</mat-icon><input matInput type="search" class="searchInput" (keyup)="applyFilter($event)" #input>
+</mat-form-field>&nbsp;&nbsp;&nbsp;
+<app-new-application-form (applicationSaved)="refreshApplications()"></app-new-application-form>
+<hr>
+<mat-table #applicationTable [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+        <b><mat-header-cell *matHeaderCellDef mat-sort-header class="mat-header-cell-class">{{ column.header }} </mat-header-cell></b>
+        <mat-cell *matCellDef="let row" > 
+            {{ column.cell(row) }} 
+            <button mat-button  *ngIf="(column.columnDef=='editButton')" (click)="editApplication(row)"><mat-icon class="editIcon">edit</mat-icon></button>
+            <button mat-button  *ngIf="(column.columnDef=='button')" (click)="deleteApplication(row)"><mat-icon class="deleteIcon">delete</mat-icon></button>
+            
+        </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true"></mat-header-row>
+    <mat-row 
+        *matRowDef="let row; columns: getDisplayedColumns();"
+        [ngClass]="{'highlight': selectedRow.name == row.name}"
+        (click)="onRowSelected(row)"> 
+    </mat-row>
+</mat-table>
+<mat-paginator  
+              [length]="dataSource.data.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 15]"              
+              [showFirstLastButtons]="true">
+</mat-paginator>

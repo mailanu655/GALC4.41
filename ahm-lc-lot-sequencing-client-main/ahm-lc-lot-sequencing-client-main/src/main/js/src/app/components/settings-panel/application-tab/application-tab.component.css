@@ -1,0 +1,36 @@
+.application-tab {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.left-panel {
+    display: inline-block;
+    width:78%;
+    padding:20px;
+    background-color: white;
+    /* border-width:1px;
+    border-style:solid;
+    border-color:black; */
+    vertical-align: top;
+}
+
+.right-panel {
+    display: inline-block;
+    /* width: 40%; */
+    padding-top:30px;
+    vertical-align: top;
+    align-content: inherit;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+app-application-table {
+    width: 100%;
+    padding-right: 25px;
+}
+
+app-category-map {
+    width: 100%;
+}

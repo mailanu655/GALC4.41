@@ -1,0 +1,123 @@
+.sub-content {
+    border: 1px solid black;
+    width: 1000px;
+    height: 100px;
+    display: flex;
+    overflow: auto;
+}
+
+.dialog-box {
+  display: flex;
+  max-width: inherit;
+  max-height: inherit;
+}
+
+.chip-list {
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    /* place-content: center space-evenly; */
+    align-items: center;
+}
+
+.chip {
+    cursor: pointer;
+    margin: 10px;
+    background: #00bbff3d;
+    padding: 6px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chip-remove {
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: aliceblue;
+    width: 10px;
+    height: 10px;
+}
+
+.prefix {
+    display: flex;   
+    word-break: break-all;
+}
+
+.field {
+    padding-top: 20px;
+}
+
+.date {
+    display: flex;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.btn-div {
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn {
+    font-weight: bold;
+    border: 1px solid;
+    height: 35px;
+    padding: 0px 30px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #cbdcec57;
+    color: black;
+    margin: 10px 0;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.form-label {
+    width: 150px;
+    text-align: right;
+    padding: 10px 10px 0 0;
+}
+
+.form-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 100px;
+
+}
+
+.mask-sel {
+    font-weight: bold;
+    border: 1px solid;
+    height: 35px;
+    padding: 0px 30px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #cbdcec57;
+    color: black;
+    margin: 10px 0;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.mask-dis {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+

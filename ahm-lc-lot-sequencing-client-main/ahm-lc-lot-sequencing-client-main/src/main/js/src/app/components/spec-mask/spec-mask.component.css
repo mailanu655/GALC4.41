@@ -1,0 +1,27 @@
+table {
+    border-spacing: 1px;
+}
+
+.mask,
+.index {
+    width: 1.2em;
+    background-color: rgb(0, 235, 0);
+    text-align: center;
+}
+
+.mask {
+    font-size: large;
+}
+
+.index {
+    font-size: x-small;
+    line-height: 1em;
+}
+
+.odd {
+    background-color: rgb(0, 235, 0);
+}
+
+.even {
+    background-color: rgb(159, 236, 159);
+}

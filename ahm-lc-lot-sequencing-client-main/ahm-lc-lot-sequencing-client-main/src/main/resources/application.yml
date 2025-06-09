@@ -1,0 +1,94 @@
+project:
+  artifactId: ${project.artifactId}
+  version: ${project.version}
+  
+# Servlet Container
+server:
+  address: 0.0.0.0
+  port: 8080
+  servlet:
+    context-path: 
+
+# Client 
+client:
+  appName: 'Lot Sequencing Client'
+  logoMessage: 'Line Control Lot Sequencing Client'
+  baseUrl: 'http://170.108.47.111:${server.port}'
+  plantUrl: 'http://localhost:9081'
+  helpUrl: 'https://home.hondaweb.com/w1/hondawiki/pages/LotSequencing.aspx'
+  revisionHistoryUrl: 'https://hondaweb.com/hra_wiki/display/GALC/Lot+Sequencing+Release+Notes'
+  feedbackClientUrl: 'http://170.108.47.111:6200/feedback'
+  feedbackBaseUrl: 'http://170.108.47.111:7200'
+  keyCloakUrl: 'http://ahmqxlrincapp01.ham.am.honda.com:9080/auth'
+  keyCloakRealm: 'ahm'
+  keyCloakClientId: 'lc-lotsequence-map'
+  serviceUrl: 'http://lc-lot-sequencing-service-linectrl-lotsequencing-mapdev.apps.ocpnp.ham.am.honda.com'
+  galcUrl: 'http://qpmc1was.ham.am.honda.com:8005'
+  columns: [
+        { columnDef= 'select', header= 'Select All/None', isShown= true },
+        { columnDef= 'position', header= 'Position', isShown= true },
+        { columnDef= 'seqNumber', header= 'Sequence', isShown= true },
+        { columnDef= 'productionLot', header= 'Production Lot', isShown= true },
+        { columnDef= 'kdLotNumber', header= 'KD Lot', isShown= true },
+        { columnDef= 'lotSize', header= 'Lot Size', isShown= true },
+        { columnDef= 'productSpecCode', header= 'SPEC', isShown= false },
+        { columnDef= 'modelCode', header= 'Model', isShown= true },
+        { columnDef= 'modelType', header= 'Type', isShown= true },
+        { columnDef= 'comments', header= 'Comments Options', isShown= true },
+        { columnDef= 'notes', header= 'Notes', isShown= true },
+        { columnDef= 'editing', header= 'Editing', isShown= true },
+      ]
+  isDragable: 'false'
+  count: '5'
+  processLocation: 'AF'
+  isSentToWeldOnEnabled: 'true'
+  productType: 'PREFIX_RAD'
+   
+spring:
+  jackson:
+    serialization:
+      indent_output: true
+  application:
+    name: ${project.artifactId}
+
+logging:
+  config: classpath:logback.xml
+  #config: classpath:logback-ef.xml
+  maxFileSize: 100MB
+  totalSizeCap: 1GB
+  maxHistory: 31
+  path: /home/saikrishna/tl-schedule-maintenance/logs/
+  level:
+    #org.apache.camel: DEBUG
+    com.honda: INFO
+  # Comma separated emails for smtp appender (error msgs)
+  email.from: saikrishna_ramineni@na.honda.com
+  #email.to: lc_admin@ahm.honda.com,lc_support@ahm.honda.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, configprops, loggers, logfile, metrics, httptrace, prometheus, jolokia, hawtio
+      #exclude: env, beans
+
+info:
+  app:
+    artifactId: ${project.artifactId}
+    version: ${project.version}
+    server:
+      address: ${server.address:}
+      port: ${server.port:}
+    logging:
+      config: ${logging.config:}
+      path: ${logging.path:}
+      email:
+        from: ${logging.email.from:}
+        to: ${logging.email.to:}
+      maxFileSize: ${logging.maxFileSize:}
+      totalSizeCap: ${logging.totalSizeCap:}
+      maxHistory: ${logging.maxHistory:}
+    client:
+      url: ${client.url:}
+      appName: ${client.appName:}
+      logoMessage: ${client.logoMessage:}        

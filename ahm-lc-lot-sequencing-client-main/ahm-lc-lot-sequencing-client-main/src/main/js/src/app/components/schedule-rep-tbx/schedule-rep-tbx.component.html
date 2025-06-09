@@ -1,0 +1,16 @@
+<div class="schedule-container">
+    <div class="side-filter">
+        <ng-container>
+            <app-select-filter [selectFilterForm]="selectFilterForm" [filterOptions]="filterOptions"
+                (handleFilter)="handleFilter($event)"></app-select-filter>
+        </ng-container>
+    </div>
+    <div class="table">
+        <ng-container>
+            <app-table-details (resetFilter)="resetFilter()" (displayMessage)="displayMessage($event)" (getRefreshData)="getRefreshData($event)" [dataSource]="dataSource"></app-table-details>
+        </ng-container>
+        <div *ngIf="showMessage" class="message">
+            <label>{{message}}</label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+.spinner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    height: 80px;
+    z-index: 1000;
+}
+
+.message {
+    position: absolute;
+    text-align: center;
+    top: 13%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

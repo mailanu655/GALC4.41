@@ -1,0 +1,26 @@
+<div class="select-filter">
+    <div class="static-header">
+        <label>Select Filter</label>
+    </div>
+    <div class="select-filter-content">
+        <form [formGroup]="selectFilterForm" class="filter-form">
+            <div class="form-field">
+                <div class="field-label"><label>Source Proc Location </label><span>*</span></div>
+                <mat-select id="sourceProcLocation" class="select-field" placeholder="Select"
+                    formControlName="sourceProcLocation" required>
+                    <mat-option *ngFor="let type of  filterOptions[0]" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </div>
+            <div class="form-field">
+                <div class="field-label"><label>Dest Proc Location</label><span>*</span></div>
+                <mat-select id="destProcLocation" class="select-field" placeholder="Select"
+                    formControlName="destProcLocation" required>
+                    <mat-option *ngFor="let type of  filterOptions[1]" [value]="type">{{type}}</mat-option>
+                </mat-select>
+            </div>
+            <div class="filter-btn-div">
+                <button mat-button class="filter-btn" (click)="handleFilter.emit()">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>

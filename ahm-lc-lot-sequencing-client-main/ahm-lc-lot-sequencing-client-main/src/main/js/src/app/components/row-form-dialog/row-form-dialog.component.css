@@ -1,0 +1,9 @@
+.fields-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding: 30px 10px;
+}

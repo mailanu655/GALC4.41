@@ -1,0 +1,20 @@
+<div>
+    <label style="margin-bottom: 0px;">From
+        date</label>&nbsp;
+    <input matInput class="matInput" [matDatepicker]="picker" [(ngModel)]="frmDatePick"
+        (dateChange)="selectFromDate(frmDatePick)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker [startAt]="frmDatePick" #picker></mat-datepicker>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label style="margin-bottom: 0px;">To
+        date</label>&nbsp;
+    <input matInput class="matInput" [matDatepicker]="picker1" [(ngModel)]="toDatePick"
+        (dateChange)="selectToDate(toDatePick)">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker [startAt]="toDatePick" #picker1></mat-datepicker>
+</div>
+<div id="chartDiv" class="chart-container">    
+    <h1 align="center">Application Usage</h1>
+    <canvas id="MyChart">{{ chart }}</canvas>
+
+</div>

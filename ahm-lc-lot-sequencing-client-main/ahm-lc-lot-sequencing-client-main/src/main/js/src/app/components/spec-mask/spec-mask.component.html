@@ -1,0 +1,8 @@
+<table>
+    <tr>
+        <td *ngFor="let item of data" class='index' [ngClass]="item.meta.class" valign="bottom">{{item.meta.text}}</td>
+    </tr>
+    <tr>
+        <td *ngFor="let item of data" class='mask' [ngClass]="item.value.class" valign="bottom">{{item.value.text}}</td>
+    </tr>
+</table>

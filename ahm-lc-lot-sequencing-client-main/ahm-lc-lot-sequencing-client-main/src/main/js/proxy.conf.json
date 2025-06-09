@@ -1,0 +1,12 @@
+{
+    "/schedule": {
+      "target": "http://lc-lot-sequencing-service-linectrl-lotsequencing-mapdev.apps.ocpnp.ham.am.honda.com/schedule",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/schedule": ""
+      },
+      "logLevel": "debug"
+    }
+  }
+  

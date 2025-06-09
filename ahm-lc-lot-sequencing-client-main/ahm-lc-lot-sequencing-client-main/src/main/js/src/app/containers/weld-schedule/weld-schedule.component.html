@@ -1,0 +1,118 @@
+<div>
+  <div class="top-container">
+    <mat-form-field class="select-field">
+      <mat-select
+        [(value)]="selectedPlanCode"
+        (selectionChange)="onSelectPlanCode($event)"
+        placeholder="Select the plan code"
+      >
+        <mat-option [value]="code" *ngFor="let code of plantLots">{{
+          code
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedPlanCode">
+      <mat-select
+        [(value)]="selectedProcessLocation"
+        (selectionChange)="populateDataSource($event)"
+        placeholder="Select the process location"
+      >
+        <mat-option [value]="location" *ngFor="let location of processLocations">{{
+          location
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+    *ngIf="selectedPlanCode && selectedProcessLocation && (isUserInRole('lot_sequence_admin'))"
+      mat-button
+      class="download-button"
+      matTooltip="down load lots"
+      aria-label="download lots"
+      (click)="downloadLots()"
+      aria-disabled="isDownloadInprogress"
+    >
+      Download
+    </button>
+  </div>
+  <spinner
+    [isSpinnerShown]="isDownloadInprogress"
+    [message]="'Downloading...'"
+  ></spinner>
+  <div *ngIf="selectedPlanCode && selectedProcessLocation">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Frozen Lots </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <spinner
+            [isSpinnerShown]="isLoadingFrozenData"
+            [message]="'Loading...'"
+          ></spinner>
+          <basic-table
+            [columns]="frozenColumns"
+            [dataSource]="frozenDataSource"
+            [tableTitle]="'Frozen Lots'"
+            [planCode]="selectedPlanCode"
+            [commentsOptions]="commentsOptions"
+            [productSendStatuses]="productSendStatuses"
+            [selectedProcessLocation]="selectedProcessLocation"
+            (onRefreshTable)="refreshFrozenDataSource($event)"
+            *ngIf="!isLoadingFrozenData"
+          ></basic-table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Unfrozen Lots </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <spinner
+            [isSpinnerShown]="isLoadingAllLotData"
+            [message]="'Loading...'"
+          ></spinner>
+          <basic-table
+            [columns]="unfrozenColumns"
+            [dataSource]="unfrozenLotsDataSource"
+            [tableTitle]="'Unfrozen Lots'"
+            [planCode]="selectedPlanCode"
+            [commentsOptions]="commentsOptions"
+            [productSendStatuses]="productSendStatuses"
+            [selectedProcessLocation]="selectedProcessLocation"
+            (onRefreshTable)="refreshUnfrozenLotsDataSource($event)"
+            *ngIf="!isLoadingAllLotData"
+          ></basic-table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Hold Lots </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <spinner
+            [isSpinnerShown]="isLoadingHoldData"
+            [message]="'Loading...'"
+          ></spinner>
+          <basic-table
+            [columns]="holdColumns"
+            [dataSource]="holdLotsDataSource"
+            [tableTitle]="'Hold Lots'"
+            [planCode]="selectedPlanCode"
+            [commentsOptions]="commentsOptions"
+            [productSendStatuses]="productSendStatuses"
+            (onRefreshTable)="refreshHoldLotsDataSource($event)"
+            *ngIf="!isLoadingHoldData"
+          ></basic-table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

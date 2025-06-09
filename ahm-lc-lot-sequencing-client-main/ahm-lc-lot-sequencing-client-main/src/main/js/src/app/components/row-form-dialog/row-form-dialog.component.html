@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>
+  {{ isEdit ? "Edit the highlighted row" : "Add a new row" }}
+</h1>
+<div mat-dialog-content class="fields-container">
+  <mat-form-field appearance="legacy">
+    <mat-label>Sequence</mat-label>
+    <input
+      matInput
+      placeholder="Sequence"
+      [(ngModel)]="data.seqNumber"
+      disabled
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>KD Lot</mat-label>
+    <input
+      matInput
+      placeholder="KD Lot"
+      [(ngModel)]="data.kdLotNumber"
+      disabled
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Product Lot</mat-label>
+    <input
+      matInput
+      placeholder="KD Lot"
+      [(ngModel)]="data.productionLot"
+      disabled
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy">
+    <mat-label>Lot Size</mat-label>
+    <input
+      matInput
+      placeholder="Lot Size"
+      [(ngModel)]="data.lotSize"
+      type="number"
+      min="1"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>PROD Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      placeholder="Choose a date"
+      [(ngModel)]="selectedProdDate"
+      (dateChange)="onSelectProdDate($event)"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <comments [options]="commentsOptions" [commentsStr]="data.comments" (onAddComments)="setComments($event)"></comments>
+
+  <mat-form-field>
+    <mat-label>Notes</mat-label>
+      <div style="text-align:center;">
+        <textarea
+          matInput
+          placeholder="Notes"
+          [(ngModel)]="data.notes"
+        ></textarea>
+      </div>
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="fields-container">
+  <mat-form-field appearance="outline" floatLabel="always" style="flex-grow: 1;">
+    <mat-label>Product Spec Mask</mat-label>
+    <div style="display: flex; flex-direction: row; align-items: bottom;">
+        <input name="productSpecMask" [(ngModel)]="data.productSpecCode" matInput required maxlength="30" [readonly]="true" [ngClass]="'state'" class="input-small">
+        <mat-icon (click)="setSpecMask()">arrow_drop_down</mat-icon>
+    </div>
+</mat-form-field>
+</div>
+<div mat-dialog-actions class="button-container">
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="onSaveClick()" [disabled]="!data.productSpecCode || !data.lotSize">
+    Save The Changes
+  </button>
+</div>

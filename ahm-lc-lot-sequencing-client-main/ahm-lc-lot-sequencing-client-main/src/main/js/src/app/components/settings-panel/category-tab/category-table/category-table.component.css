@@ -1,0 +1,52 @@
+.mat-table {
+    overflow: auto;
+    display: block;
+    overflow-y: hidden;
+}
+
+.mat-row:hover {
+    background-color: #f3f3f3da;
+}
+
+.highlight{
+    background: #f7fbff;
+    font-weight:500;
+} 
+
+.mat-column-button {
+    flex: 0 0 40px !important;
+}
+.editIcon{
+    color: #205081;
+}
+.deleteIcon{
+    color: #205081;
+}
+.searchField{
+    height: fit-content;
+    width: 80%;
+}
+.searchInput{
+    height: fit-content;
+}
+.mat-column-name{
+    flex:0 0 30%;
+    word-wrap: break-word;
+}
+
+.mat-column-description{
+    flex:0 0 57%;
+   
+}
+.mat-column-editButton {    
+    flex: 1 0 20px;
+  
+}
+
+.mat-header-cell-class {
+    font-weight: bold;
+    font-size: medium;  
+    width: auto;
+    word-break: keep-all;
+    word-wrap: normal;
+}
